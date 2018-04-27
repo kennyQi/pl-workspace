@@ -1,0 +1,60 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageContent">
+
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><span style="padding: 0">现返利比例</span>
+            </li>
+        </ul>
+    </div>
+   <table class="table" width="100%">
+        <thead>
+        <tr>
+            <th>区域</th>
+            <#list running.intervalList as item>
+            	<th>${item.qj}</th>
+            </#list>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+         		返利比例
+            </td>
+            <#list running.intervalList as zks>
+            	<td>${zks.zk}</td>
+            </#list>
+        </tr>
+        </tbody>
+    </table>
+    
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><span style="padding: 0">修改返利比例</span>
+            </li>
+        </ul>
+    </div>
+   <table class="table" width="100%">
+        <thead>
+        <tr>
+            <th>区域</th>
+            <#list modify.intervalList as item>
+            	<th>${item.qj}</th>
+            </#list>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+         		返利比例
+            </td>
+            <#list modify.intervalList as zks>
+            	<td>${zks.zk}</td>
+            </#list>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+

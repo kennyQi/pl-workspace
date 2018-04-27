@@ -1,0 +1,71 @@
+.g-tb{width: 100%;background: #fff;margin-top:10px;}
+.g-tab{background: #f7f7f7;margin-top:20px;width: 100%;overflow: hidden;}
+.g-tab a{width:140px;height:45px;color:#333;font-size:14px;text-align: center;line-height: 45px;display:block;float:left;}
+.g-tab a.on,.g-tab a:hover{color:#fff;background: #00b1eb;}
+
+/*订单结算*/
+.order_set_title{border-bottom:1px solid #cccccc;font-size:20px;text-indent: 20px;height: 58px;line-height: 58px;background: #fff;}
+.order_set_search{padding-top:0px;}
+.order_set_unit{margin-top:13px;}
+.g-search .order_set_btn{margin-left: 265px;}
+.g-search .order_set_btn_down{border:1px solid #ccc;color:#333;background: #fff;}
+.g-search .order_set_btn_down:hover{background:#f7f7f7;}
+
+/*员工管理*/
+.employee-table td{padding:12px 10px;}
+.employee_search{background: #fff;margin-top:20px;overflow: hidden;padding: 15px 0px;
+    cursor: pointer;}
+.employee_btn{border:1px solid #00b1eb;background: #fff;display: block;padding:0px 15px 0px 45px;height:38px;line-height: 38px;
+font-size:14px;color:#009bce;margin-left: 20px;}
+.employee_search .leading{background: url("../images/icon_update.png") left 0px no-repeat;}
+
+.add-employee{background: url("../images/icon_add.png") left 0px no-repeat;cursor: pointer;}
+.employee_btn:hover,.employee_search .leadingOn{border:1px solid #fb9c0c;background-position: left -38px;color:#fb9c0c;}
+.employee_search .search input{float:left;border:1px solid #cccccc;background: #fff;height: 38px;width: 230px;line-height: 38px;padding: 0px 10px;border-right:0px;display: block;}
+.employee_search .search_btn{background: #ff9c00;color:#fff;text-align: center;width:80px;height:38px;line-height: 38px;display:block;border:1px solid #cccccc;
+border-left:0px;margin-right: 20px;}
+.employee_search .upload-input{width:150px;height:40px;position: absolute;left:20px;top:20px;
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    opacity:0;cursor: pointer;}
+.employee_alert_cont{width:460px;background: #fff;margin:0px;}
+.employee_alert_cont .tab{color:#0a5c88;font-size:14px;width:78px;display: inline-block;text-align: right;margin:0px;}
+.employee_alert_cont .input-select{width:80px;}
+.employee_alert_cont .input-selectBox ul{width:113px;}
+.employee_alert_cont .idnum{width:306px;}
+.employee_alert_cont .input-btn{margin: auto;display: block;}
+.employee_alert .title{width: 460px;}
+
+
+/*流程列表*/
+.admin_path{}
+.admin_title{background:#f7f7f7;}
+.admin_title h2{font-size:20px;color:#333333;padding:15px 20px;font-weight: normal;}
+.admin_title .add-employee{margin:10px 10px 0px 0px ;}
+.admin_table{padding:20px 20px 0px 20px;}
+.admin_path .g-page{margin-right:10px;}
+.admin_path .table th{background:#e6e6e6;height:40px;color:#333;}
+.admin_path .table{background:#ccc;}
+.admin_path .table td{padding:13px 10px;}
+.admin_path .table tr:hover td{background:#f7f7f7;}
+
+/*流程编辑*/
+.admin_path_add .admin_table{padding:20px;}
+.admin_path_add .input-btn{background: #ff9c00;color:#fff;width:80px;height:30px;display: inline-block;font-size: 12px;text-align: center;line-height: 30px;
+    cursor: pointer;*display:inline;*zoom:1;}
+.admin_path_add .checkboxList li{float:left;margin:5px 10px 0px 0px;}
+
+/*角色管理*/
+.h_title_tips{padding:15px;line-height:26px;}
+.admin_role_left{width:210px;}
+.admin_role_left td{cursor: pointer;}
+.admin_role_right{width:650px;}
+.admin_role_right .g-search{background: none;padding:0px;margin:0px;}
+.admin_role_right .g-search .input-select{background-color: #fff;}
+.admin_alert{width:300px;}
+.admin_alert .g-search{margin:0px;}
+.admin_alert .g-search .input-text{width: 200px;}
+.admin_alert .g-search .input-btn{display: block;margin:auto;margin-top:20px;}
+.admin_role_left .current a{color:#009bce;background: url("../images/sub_nav_icon.png") no-repeat right -14px;}
+.admin_role_left a{color:#333;padding-right: 20px;}
+.admin_role_left a:hover{color:#009bce;}

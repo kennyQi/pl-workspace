@@ -1,0 +1,182 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+function checkTimeStr(){
+	
+	if($("#createBeginDateStr").val()!="" && $("#createEndDateStr").val()!=""){
+		if($("#createBeginDateStr").val()>$("#createEndDateStr").val()){
+			alert("下单开始时间不能大于下单结束时间!");
+			return false
+		}else{
+			return true;
+		}
+	}else{
+		return true;
+	}
+}
+
+function initText(obj){
+	var searchBar = $(obj).parents("form").find(".searchBar");
+    searchBar.find("input").val("");
+    searchBar.find("select").attr("value",'');
+}
+
+</script>
+
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/order/list" method="get">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<ul class="searchContent" style="overflow: inherit;">
+				<li style="width: 250px;">
+					<label>票务名称：</label><input type="text" id="ticketPolicyName" name="ticketPolicyName" value="${ticketPolicyName}" />
+				</li>
+				
+				<li style="width: 250px;">
+					<label>票务类型：</label>
+					<select name="ticketPolicyType" id="ticketPolicyType" style="max-width: 80px;">
+							<option value="">全部</option>
+							<option value="1" <#if 1 == ticketPolicyType>selected="selected"</#if> >单票订单</option>
+							<option value="2" <#if 2 == ticketPolicyType>selected="selected"</#if> >联票订单</option>
+					</select>
+				</li>
+				
+				<li style="width: 250px;">	
+					<label>经销商：</label>
+					<select name="dealerId" id="dealerId" style="max-width: 80px;">
+						<option value="">全部</option>
+						<#list dealerList as dealer>
+							<option value="${dealer.id}" <#if dealerId==dealer.id> selected="selected"</#if>>${dealer.baseInfo.name}  </option>
+						</#list>
+					</select>
+				</li>
+				
+				<li style="width: 500px;">
+					<label>下单时间：</label>
+					<input type="text" id="createBeginDateStr" name="createBeginDateStr" value="${createBeginDateStr}"	class="date" readonly="true"/>
+					&nbsp;到&nbsp;
+					<input type="text" id="createEndDateStr" name="createEndDateStr" value="${createEndDateStr}" class="date" readonly="true" />
+				</li>
+				
+				<li style="width: 250px;">
+					<label>预定人：</label><input type="text" id="linkMan" name="linkMan" value="${linkMan}" />
+				</li>
+				
+				<li style="width: 250px;">
+					<label>订单编号：</label><input type="text" id="orderId" name="orderId" value="${orderId}" />
+				</li>
+				
+				
+				<li style="width: 250px;">
+					<label>订单状态：</label>
+					<select name="orderStatus" id="orderStatus">
+						<option value="">全部</option>
+						<option value="0"  <#if 0 == orderStatus>selected="selected"</#if>>等待支付</option>
+						<option value="1"  <#if 1 == orderStatus>selected="selected"</#if>>支付成功</option>
+						<option value="2"  <#if 2 == orderStatus>selected="selected"</#if>>出票成功</option>
+						<option value="3"  <#if 3 == orderStatus>selected="selected"</#if>>交易成功</option>
+						<option value="4"  <#if 4 == orderStatus>selected="selected"</#if>>交易关闭</option>
+					</select>
+				</li>
+			</ul>
+			
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit"  onclick="return checkTimeStr()">查询</button>
+							</div>
+						</div>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="return initText(this)">重置</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+	</form>
+</div>
+
+
+<div class="pageContent">
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="170">
+		<thead>
+			<tr>
+				<th width="145px;">订单编号</th>
+				<th width="160px;">票务编号</th>
+				<th width="230px;">票务名称</th>
+				<th width="85px;">票务类型</th>
+				<th width="150px;">经销商结算价</th>
+				<th width="150px;">景区</th>
+				<th width="200px;">经销商</th>
+				<!-- <th width="150px;">经销商订单编号</th> -->
+				<th width="150px;">预定人</th>
+				<th width="150px;">预定人手机号</th>
+				<th width="120px;">售后</th>
+				<th width="80px;">订单状态</th>
+				<!-- <th width="80px;">支付状态</th> -->
+				<th width="150px;">下单时间</th>
+				<th width="180px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as groupTicket>
+			<tr>
+				<td>${groupTicket.ticketOrder.id}</td>
+				<td>${groupTicket.ticketNo}</td>
+				<td><#if groupTicket.ticketPolicySnapshot??>${groupTicket.ticketPolicySnapshot.baseInfo.name!''}</#if></td>
+				<td><#if groupTicket.ticketPolicySnapshot??>
+				<#if groupTicket.ticketPolicySnapshot.type==1>单票
+				<#elseif groupTicket.ticketPolicySnapshot.type==2>联票
+				</#if>
+				</#if></td>
+				<td>${groupTicket.price}</td>
+				<td><#if groupTicket.ticketPolicySnapshot??>${groupTicket.ticketPolicySnapshot.baseInfo.scenicSpotNameStr!''}</#if></td>
+				<td>${groupTicket.ticketOrder.baseInfo.fromDealer.baseInfo.name}</td>
+				<td>${groupTicket.ticketOrder.baseInfo.linkMan}</td>
+				<td>${groupTicket.ticketOrder.baseInfo.telephone}</td>
+				<td>
+				   <#if groupTicket.status.refundCurrent==0>
+				   	  <div style="color:red;">可退款</div>
+				   <#elseif groupTicket.status.refundCurrent==1>
+				      <div style="color:red;">退款成功</div>
+				   <#elseif groupTicket.status.refundCurrent==2>
+				      <div style="color:red;">部分退款成功</div>
+				    <#elseif groupTicket.status.refundCurrent==3>
+				      <div style="color:red;">退款处理中</div>
+				   </#if>
+				</td>
+				<td>
+				<#if groupTicket.status.current==0>
+						等待支付
+					</#if>
+					<#if groupTicket.status.current==1>
+						支付成功
+					</#if>
+					<#if groupTicket.status.current==2>
+						出票成功
+					</#if>
+					<#if groupTicket.status.current==3>
+						交易成功
+					</#if>
+					<#if groupTicket.status.current==4>
+						交易关闭
+					</#if>
+				</td>
+				<td>${groupTicket.ticketOrder.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<td>
+					<a title="查看详情" target="dialog" href="${contextPath}/order/info?groupTicketId=${groupTicket.id}" height="700" width="1150" style="color: blue">查看详情</a>
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+</div>

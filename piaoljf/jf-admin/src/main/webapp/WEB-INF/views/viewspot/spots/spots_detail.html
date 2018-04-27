@@ -1,0 +1,79 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageContent">
+<form method="post" enctype="multipart/form-data" action="${contextPath}/viewspot/order/tocancel" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+	<div class="unit">
+		<label>门票信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<tr>
+					<th style="width: 200px">景点名称</th>
+					<th style="width: 200px">门票名称</th>
+					<th style="width: 150px">门票类型</th>
+					<th style="width: 100px">支付方式</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>${scenicSpotDTO.scenicSpotBaseInfo.name}</td>
+					<td>${policyDTO.name}</td>
+					<td>${policyDTO.ticketName}</td>
+					<td>景点现付</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>
+	<div class="unit">
+		<label>交通指南</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<label>${scenicSpotDTO.scenicSpotGeographyInfo.traffic}</label>
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>
+	<div class="unit">
+		<label>购票须知</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit" id="unit_notice">
+		${policyDTO.notice.buyNotie}
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>
+	<div class="unit">
+		<label>取票地址</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<label>${policyDTO.ticketDelivery}</label>
+	</div>
+</div>
+	<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+	</div>
+</form>
+</div>

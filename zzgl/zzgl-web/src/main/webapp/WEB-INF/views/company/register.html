@@ -1,0 +1,89 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量-会员中心">
+<link rel="stylesheet" href="${contextPath}/resources/css/reg.css">
+<script type="text/javascript" src="${contextPath}/resources/js/Reg.js"></script>
+<link   href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+</@frame.head>
+<@frame.main "default" 6>
+    <!--内容-->
+<div class="reg_bg wd ov">
+    <div class="reg_box wd">
+        <div class="reg ma">
+            <div class="reg_top">
+                <a href="javascript:;" class="transparent_white" name="per" id="personal"><i class="per fl "></i>用户注册</a>
+                <!-- <a href="javascript:;" class="transparent_black" name="com" id="enterprise"><i class="com fl "></i>企业用户注册</a> -->
+               <!--  隐藏域用于存放返回的错误信息 -->
+               <input type="hidden" value="${(pcodeError)!}" id="pcodeError"/>
+               <input type="hidden" value="${(valicodeInvalid)!}" id="valicodeInvalid"/><!-- 验证码无效 -->
+               <input type="hidden" value="${(emailBind)!}" id="emailBind"/><!-- 邮箱存在 -->
+               <input type="hidden" value="${(userNameRepeat)!}" id="userNameRepeat"/><!-- 姓名存在 -->
+               <input type="hidden" value="${(mobileRepeat)!}" id="mobileRepeat"/><!-- 手机号重复 -->
+               <input type="hidden" id="contextPath" value="${contextPath}"/>
+            </div>
+           
+            <div class="reg_personal regs transparent_white" id="G_personal">
+            <form id="formpersonal" action="${contextPath}/user/register/regUser" method="post" >
+				 <input type="hidden" id="SPRING_TOKEN" name="SPRING_TOKEN" value="${SPRING_TOKEN}"/>
+				 <input type="hidden" id="validToken_person" name="validToken" value="${(puserInfo.validToken)!}"/> 
+                <ul class="per_box fl yahei h1 color9">
+                	
+                    <li><span>用户名</span><input type="text" class="userName"  maxlength="20" warm="用户名不能为空"  name="loginName" value="${(puserInfo.loginName)!}"/></li>
+                    <li><span>手机</span><input type="text" class="mobile"  maxlength="11" warm="手机号不能为空" name="mobile" id="mobile_person" value="${(puserInfo.mobile)!}"/><i class="mobileyzm"><a href="javascript:;" class="yzm mobileyzms fr yahei color9 h2" id="J_mo_person" onclick="send(1)">免费获取验证码</a></i></li>
+                    <li><span>手机验证码</span><input type="text"  maxlength="6"  class="check_mobile" warm="验证码不能为空" name="validCode" value="${(puserInfo.validCode)!}"/></li>
+                    <li><span>常用邮箱</span><input type="text" class="email"  maxlength="30" style="width:320px;" warm="邮箱不能为空" name="email" value="${(puserInfo.email)!}"/></li>
+                    <li><span>设置密码</span><input type="password" class="PWD1" id="PWD1" maxlength="20" warm="密码不能为空" name="password" value="${(Password1)!}"/></li>
+                    <li><span>确认密码</span><input type="password" class="PWD2" id="PWD2" maxlength="20" warm="确认密码不能为空" name="pwd2" value="${(Password1)!}"/></li>
+                    <li><span>验证码</span><input type="text"  maxlength="4" class="verification" style="width:163px;" warm="验证码不能为空" name="authcode" value="${(puserInfo.authcode)!}"/>
+                    <img
+                    	id="kaptchaImage"
+						src="${contextPath}/comRegister/captcha-image"
+						class="fl" style="height: 45px;" p_kaptchaImage="p_kaptchaImage"/>
+                    <a kaptchaImagea="kaptchaImagea" class="change fr yahei color9 h3" ><i style="cursor: pointer;">看不清 换一个</i></a></li>
+                    <span class="btns fl agr ov"><i class="fl click" id="deal"></i><a  class="yahei h3 fl" href="${contextPath}/user/registerDeal" target="_black">同意中智票量注册协议</a></span>
+                    <span class="btns fl submit"><a href="javascript:void(0);" class="tc fl yahei" name="submit">提交注册</a></span>
+                </ul>
+                </form>
+            </div>
+            <!-- <div class="reg_company regs transparent_white" id="Q_enterprise">
+            	<form id="reg_enterprise" action="${contextPath}/comRegister/register" method="post" >
+                <ul class="per_box fl yahei h1 color9">
+                 	<input type="hidden" value="${(index)!}" id="index"/>
+                 	<input type="hidden" id="SPRING_TOKEN" name="SPRING_TOKEN" value="${SPRING_TOKEN}"/>
+					<input type="hidden" id="validToken_personq" name="validToken" value="${(userInfo.validToken)!}"/> 
+                    <li><span>用户名</span><input type="text" class="userNames"  maxlength="20" warm="用户名不能为空" name="loginName" value="${(userInfo.loginName)!}"/></li>
+                    <li><span>企业名</span><input type="text" maxlength="20" warm="企业名不能为空" name="name"  value="${(userInfo.name)!}"/></li>
+                    <li><span>手机</span><input type="text" class="mobiles"  maxlength="11" warm="手机号不能为空" id="mobile_persons"  name="mobile" value="${(userInfo.mobile)!}"/><i class="mobileyzms"/><a href="javascript:;" class="yzm mobileyzms fr yahei color9 h2" onclick="send(2)">免费获取验证码</a></i></li>
+                    <li><span>手机验证码</span><input type="text"  maxlength="6" warm="验证码不能为空"  class="check_mobiles" value="${(userInfo.validCode)!}" name="validCode"/></li>
+                    <li><span>常用邮箱</span><input type="text" class="emails"  maxlength="30" warm="邮箱不能为空" style="width:320px;" name="email" value="${(userInfo.email)!}"/></li>
+                    <li><span>设置密码</span><input type="password" class="PWD3" id="PWD3" maxlength="20" warm="密码不能为空" name="password" value="${(Password2)!}"/></li>
+                    <li><span>确认密码</span><input type="password" class="PWD4" id="PWD4"  maxlength="20" warm="确认密码不能为空" value="${(Password2)!}" name="pwd2"/></li>
+                    <li><span>验证码</span><input type="text"  maxlength="4" class="verifications" style="width:163px;" warm="验证码不能为空" name="authcode" value="${(puserInfo.authcode)!}"/>
+					 <img
+                    	id="kaptchaImage"
+						src="${contextPath}/comRegister/captcha-image"
+						class="fl" style="height: 45px;" p_kaptchaImage="p_kaptchaImage"/>
+					<a class="change fr yahei color9 h3" kaptchaImagea="kaptchaImagea" ><i style="cursor: pointer;">看不清 换一个</i></a></li>
+                    <span class="btns fl agr ov"><i class="fl click" id="deal_two"></i><a  class="yahei h3 fl" href="${contextPath}/user/registerDeal" target="_black">同意中智票量注册协议</a></span>
+                    <span class="btns fl submit"><a href="javascript:void(0);" class="tc fl yahei h2" name="submit">提交注册</a></span>
+                </ul>
+                </form>
+            </div> -->
+        </div>
+    </div>
+      <div class="g_f">
+	      <!-- <a href="${contextPath}/aboutPL"  target="_blank">票量简介</a> -->
+	      <a href="${contextPath}/aboutLaw" target="_blank">法律声明</a>
+	      <a href="${contextPath}/aboutContactUs"  target="_blank">网站地图</a>
+	      <a href="${contextPath}/footLink" target="_blank">友情链接</a>
+	      <a href="#">酒店加盟</a>
+	      <a href="${contextPath}/aboutAlliance" target="_blank">网站联盟</a>
+	      <a href="${contextPath}/aboutContactUs" target="_blank">帮助中心</a>
+	      <a href="${contextPath}/aboutComplaint"  target="_blank">投诉建议</a>
+	      <a href="${contextPath}/aboutJob"  target="_blank">诚聘英才</a>
+  	</div>
+</div>
+
+ </@frame.main>  

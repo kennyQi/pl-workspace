@@ -1,0 +1,84 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+	.inputInfo {
+		color: #999;
+	}
+</style>
+<div class="pageContent">
+	<div class="pageFormContent" layoutH="58">
+		<#if puser.fromClient>
+			<p>
+				<label>所属客户端：</label>
+				<span class="inputInfo">${puser.fromClient.name!?html}</span>
+			</p>
+		</#if>
+		<#if puser.authInfo>
+			<div class="divider" />
+			<p>
+				<label>登录名：</label>
+				<span class="inputInfo">${puser.authInfo.loginName!?html}</span>
+			</p>
+		</#if>
+		<#if puser.baseInfo>
+			<div class="divider" />
+			<p>
+				<label>真实姓名：</label>
+				<span class="inputInfo">${puser.baseInfo.name!?html}</span>
+			</p>
+			<p>
+				<label>身份证号：</label>
+				<span class="inputInfo">${puser.baseInfo.idCardNo!?html}</span>
+			</p>
+			<p>
+				<label>性别：</label>
+				<span class="inputInfo"><#if puser.baseInfo.gender == 2>女</#if><#if puser.baseInfo.gender == 1>男</#if></span>
+			</p>
+			<p>
+				<label>生日：</label>
+				<span class="inputInfo">${puser.baseInfo.birthday!?html}</span>
+			</p>
+			<p>
+				<label>注册来源：</label>
+				<span class="inputInfo">${puser.baseInfo.source!?html}</span>
+			</p>
+			<p>
+				<label>注册时间：</label>
+				<span class="inputInfo">${puser.baseInfo.createTime!?html}</span>
+			</p>
+		</#if>
+		<#if puser.contactInfo>
+			<div class="divider" />
+			<p>
+				<label>手机号：</label>
+				<span class="inputInfo">${puser.contactInfo.mobile!?html}</span>
+			</p>
+			<p>
+				<label>Email：</label>
+				<span class="inputInfo">${puser.contactInfo.email!?html}</span>
+			</p>
+			<p>
+				<label>IM：</label>
+				<span class="inputInfo">${puser.contactInfo.im!?html}</span>
+			</p>
+		</#if>
+		<#if puser.status>
+			<div class="divider" />
+			<p>
+				<label>最后登陆验证时间：</label>
+				<span class="inputInfo">${puser.status.lastLoginTime!?html}</span>
+			</p>
+			<p>
+				<label>是否验证过手机：</label>
+				<span class="inputInfo"><#if puser.status.bindMobile>是</#if><#if !puser.status.bindMobile>否</#if></span>
+			</p>
+			<p>
+				<label>是否验证过邮箱：</label>
+				<span class="inputInfo"><#if puser.status.bindEmail>是</#if><#if !puser.status.bindEmail>否</#if></span>
+			</p>
+			<p>
+				<label>是否验证过证件：</label>
+				<span class="inputInfo"><#if puser.status.realPerson>是</#if><#if !puser.status.realPerson>否</#if></span>
+			</p>
+		</#if>
+	</div>
+</div>

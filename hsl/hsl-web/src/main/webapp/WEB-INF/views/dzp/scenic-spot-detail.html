@@ -1,0 +1,253 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "景区详情 - 票量旅游" />
+<@frame.main "default" 5>
+<!--头部-->
+
+<!--锚点-->
+<a name="top"></a>
+
+<!--快速回顶部-->
+<a class="g_totop bg_cmd curp" href="#top"></a>
+
+<!--内容-->
+<link href="${contextPath}/resources/css/dzp/dzp_detail.css" rel="stylesheet" />
+
+	<div class="g_bd disb ov pl">
+     	<div class="m_load  color6 simsun"><label class="color8">您的位置：</label><a href="${contextPath}/dzp" class="color6">电子票</a> > <span  class="color3">${scenicSpot.baseInfo.name!?html}</span></div>
+        <!--头部预览-->
+        <div class="m_prv disb wd12 ma">
+            <div class="m_pic disb wd12">
+            	<!--左侧图片部分-->
+            	<div class="le fl pl" id="scenic_spot_pics" data-pics="${picsJson!?html}">
+                </div>
+                <!--左侧图片部分-->
+				<#assign lv=["","A","AA","AAA","AAAA","AAAAA"] />
+                <div class="detail ri fr pl">
+                    <h3 class="tt bold disb"><span>${scenicSpot.baseInfo.name!?html}</span>
+                                    <span class="tt_icon">
+                                        <label class="icon">${lv[scenicSpot.baseInfo.level]}</label>
+                                        <label class="icon nam">级景区</label>
+                                    </span>
+                    </h3>
+                    <span class="addres Bg disb">
+						<#-- 景区地址 -->
+						<#-- 省（直辖市不显示） -->
+						<#if scenicSpot.baseInfo.province??
+								&& scenicSpot.baseInfo.province.name?index_of("北京") == -1
+								&& scenicSpot.baseInfo.province.name?index_of("上海") == -1
+								&& scenicSpot.baseInfo.province.name?index_of("天津") == -1
+								&& scenicSpot.baseInfo.province.name?index_of("重庆") == -1
+								&& scenicSpot.baseInfo.province.name?index_of("香港") == -1
+								&& scenicSpot.baseInfo.province.name?index_of("澳门") == -1
+						>${scenicSpot.baseInfo.province.name!?html}</#if>
+						<#-- 市 -->
+						<#if scenicSpot.baseInfo.city??>${scenicSpot.baseInfo.city.name!?html}</#if>
+						<#-- 区 -->
+						<#if scenicSpot.baseInfo.area??>${scenicSpot.baseInfo.area.name!?html}</#if>
+						<#-- 街道地址 -->
+						${scenicSpot.baseInfo.street!?html}
+					</span>
+                    <div class="wav disb  pl">
+						<#-- 景区门票最低价 -->
+				   		<span class="price fl"> 门票价格：<label>￥${scenicSpot.priceMin?c}</label> /人起</span>
+						<i class="ic pa Bg"></i>
+                    </div>
+					<#-- 景区简介 -->
+                    <span class="det disb">${scenicSpot.baseInfo.intro!?html}</span>
+                    <!--分享-->
+                    <div class="share pa">
+                        <div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+                    </div>
+                    <!--分享控件结束-->
+                </div>
+            </div>
+        </div>
+        <!--头部预览-->
+        <!--酒店详情-->
+        <div class="g_de wd ov pl" id="needHistory">
+
+            <div class="m_detail wd12 disb ov ma" id="anchor_house" >
+                 <div class="m_subNav wd pa"  id="m_subNav">
+                 	<ul class="nav yahei fl ov">
+                        <li><a rel="anchor_house" href="javascript:;" class="on">门票预订 </a></li>
+                        <li><a rel="anchor_jianjie" href="javascript:;">景点简介</a></li>
+                        <li>
+                        	<span class="bg pa" href="javascript:;" id="subNav_bg">
+                            	<i class="icon pa Bg"></i>
+                        	</span>
+                       	</li>
+                    </ul>
+                     <span class="tips pa">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+                 </div>
+                 <div class="m_chooseTime ov">
+                 	<div class="tips">
+                        在线支付：在线支付成功后，无需取票，游玩时刷手机二维码或二代身份证即可进入景点游玩，省去您排队取票的烦恼，游玩更尽兴。
+                        </div>
+                 </div>
+                 <!--选择门票-->
+                 <div class="m_house">
+                 		<div class="th ov">
+                        	<span class="fl hs mtb">景点门票</span>
+                        	<span class="fl bd mtb">票型</span>
+                        	<span class="fl opr mtb">市场价</span>
+                        	<span class="fl pr mtb">网站价</span>
+                        	<span class="fl yd mtb">&nbsp;</span>
+                        	<span class="fl bt mtb">&nbsp;</span>
+                        </div>
+
+					 	<#-- 景区门票 -->
+					 	<#if scenicSpot.ticketPolicies?size gt 0>
+						<#list scenicSpot.ticketPolicies as policy>
+                        <!--门票框-->
+                        <div class="tr ov">
+                            <div class="hs_word fl">
+                                <span class="fl hs mtr">${policy.baseInfo.name!?html}</span>
+                                <span class="fl bd mtr"><#if policy.type==1>单票<#else>联票</#if></span>
+                                <span class="fl opr mtr">￥${policy.baseInfo.rackRate}</span>
+                                <span class="fl pr mtr">￥<#if policy.type==1>${policy.sellInfo.priceMin}<#else>${policy.baseInfo.playPrice}</#if></span>
+                                <span class="fl yd mtr">
+									<a href="javascript:;" class="btn_ydxz"
+										data-title="${policy.baseInfo.name!?html}"
+										data-notice="${policy.baseInfo.notice!?html}"
+										data-refund-role="<#if
+											policy.sellInfo.returnRule==1>不得退票<#elseif
+											policy.sellInfo.returnRule==2>无条件退票<#elseif
+											policy.sellInfo.returnRule==3>退票收取${policy.sellInfo.returnCost?string('0.00')}%手续费<#elseif
+											policy.sellInfo.returnRule==4>退票收取${policy.sellInfo.returnCost?string('0.00')}元续费</#if>"
+										data-auto-refund="<#if policy.sellInfo.autoMaticRefund>过期退<#else>过期不退</#if>">预订须知</a>
+								</span>
+                                <span class="fl bt mtr"><a href="${contextPath}/dzp/order-edit/${policy.id!}" class="btn fl">预定</a></span>
+                            </div>
+                        </div>
+						</#list>
+						<#else>
+							<div class="tr ov">
+								<div class="hs_word fl">
+									<span class="fl hs mtr">暂无门票信息</span>
+									<span class="fl bd mtr"></span>
+									<span class="fl opr mtr"></span>
+									<span class="fl pr mtr"></span>
+									<span class="fl yd mtr"></span>
+									<span class="fl bt mtr"></span>
+								</div>
+							</div>
+						</#if>
+                 </div>
+                 <!--选择房型-->
+            </div>
+
+            <div class="m_intro wd12 ov ma" id="anchor_jianjie"  >
+            	<div class="title wd ov disb"  >
+                	<h3 class="tt h1 Bg linkC">景点简介</h3>
+                </div>
+                <div class="intro disb ov color3 h3">
+					<#-- 景点简介 -->
+                	<p>${scenicSpot.baseInfo.intro!?html}</p>
+					<#-- 预定须知 -->
+                	<p>${scenicSpot.baseInfo.preNotice!?html}</p>
+					<#-- 交通指南 -->
+                	<p>${scenicSpot.contactInfo.traffic!?html}</p>
+                </div>
+            </div>
+
+        </div>
+
+	</div>
+
+</@frame.main>
+
+<!--页脚-->
+<@frame.end "default">
+
+<!-- 预订须知弹框 -->
+<div class="win_bg" style="display:none;"></div>
+<div class="ydinfo_box" style="display:none;">
+	<div class="btn_close"></div>
+	<h1>预订须知</h1>
+	<div class="title">西湖景区船票</div>
+	<div class="ydxz">
+		<dl>
+			<dt>入园方式：</dt>
+			<dd>凭身份证或者二维码扫描入园</dd>
+		</dl>
+		<dl>
+			<dt>预订说明：</dt>
+			<dd class="notice"></dd>
+		</dl>
+		<dl>
+			<dt>退改说明：</dt>
+			<dd>
+				<span class="refundRole"></span>
+				<span class="autoRefund"></span>
+			</dd>
+		</dl>
+	</div>
+</div>
+
+</@frame.end>
+
+<script src="${contextPath}/resources/js/dzp/albums.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/dzp/dzp_detail.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(function () {
+		// 初始化图片显示
+		var pics = $('#scenic_spot_pics').data('pics');
+		$.each(pics, function (idx, pic) {
+			if (idx >= 5)return;
+			var picHtml = '';
+			if (idx == 0)
+				picHtml += '<span class="picL fl curp ov pl">';
+			else
+				picHtml += '<span class="picR fl">';
+			picHtml += '<img src="' + pic.url + '" class="pic" rel="' + idx + '">';
+			picHtml += '<span class="textTm pa">';
+			picHtml += '<span class="bg pa"></span>';
+			picHtml += '<span class="ct pa">' + (idx == 0 ? '共' + pics.length + '张图片' : pic.name) + '</span>';
+			picHtml += '</span>';
+			picHtml += '</span>';
+			$('#scenic_spot_pics').append(picHtml);
+		});
+
+		$('#scenic_spot_pics .picR .pic').hover(function () {
+			$(this).parent().find('.textTm').show();
+		}, function () {
+			$(this).parent().find('.textTm').hide();
+		});
+		// 图片浮动
+		ply.imgFloat($('#scenic_spot_pics .pic'));
+
+		// 弹出相册
+		$('#scenic_spot_pics .pic').click(function () {
+			var rel = $(this).attr('rel');
+			if ($('#m_albums').length > 0) {
+				$('#m_albums').show().find('.img_list_Img li:eq(' + rel + ')').trigger('click');
+			} else {
+				//相册数据
+				ply.albumShow($('#scenic_spot_pics').data('pics'), rel);
+			}
+		});
+
+		// --------------------------------------------------
+
+		// 预订须知
+		var btnYdxz = $('.btn_ydxz');
+		var winBg = $('.win_bg');
+		var ydinfoBox= $('.ydinfo_box');
+		var btnClose = $('.btn_close');
+		// 弹出预定须知
+		btnYdxz.click(function(){
+			ydinfoBox.find('.title').html($(this).data('title'));
+			ydinfoBox.find('.notice').html($(this).data('notice'));
+			ydinfoBox.find('.refundRole').html($(this).data('refund-role'));
+			ydinfoBox.find('.autoRefund').html($(this).data('auto-refund'));
+			winBg.show();
+			ydinfoBox.show();
+		});
+		// 关闭预定须知
+		btnClose.click(function(){
+			winBg.show().hide();
+			$(this).parent().hide();
+		});
+	});
+</script>

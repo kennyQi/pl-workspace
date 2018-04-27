@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>选择日期</title>
+<!--公共样式部分-->
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/global.css" rel="stylesheet" />
+<script src="js/zepto.min.js" language="javascript"></script>
+<script src="js/frozen.js" language="javascript"></script>
+
+    <link href="css/order_date.css" rel="stylesheet" />
+</head>
+
+<body>
+<!--私有样式-->
+<script src="js/createDate.js" language="javascript"></script>
+    <div class="body dateMobile" id="body">
+    </div>
+
+<!--后台传各日期的价格数据-->
+<select id="dateMoney" style="display:none;">
+    <option value="2015-09-22">¥99999</option>
+    <option value="2015-09-23">¥99999</option>
+    <option value="2015-09-24">¥99999</option>
+    <option value="2015-09-25">¥99999</option>
+    <option value="2015-10-01">¥99999</option>
+    <option value="2015-10-02">¥180</option>
+</select>
+
+
+<div class="numBox">
+    <div class="person">
+        <div class="numChange">
+            成人：
+            <div class="tool">
+                <span class="left">-</span><span class="num" for="adult">1</span><span class="right">+</span>
+            </div>
+        </div>
+        <span class="price">成人价：500</span>
+    </div>
+    <div class="person">
+        <div class="numChange">
+            儿童：
+            <div class="tool">
+                <span class="left">-</span><span class="num" for="children">0</span><span class="right">+</span>
+            </div>
+        </div>
+        <span class="price">儿童价：500</span>
+    </div>
+</div>
+<div class="fixedBtn box">
+    <div class="leftBtn">
+        <span>
+            成人：<label id="adult">1</label>&nbsp;&nbsp;&nbsp;儿童：<label id="children">0</label>
+        </span>
+        <span>
+            游玩日期：<label id="chooseDay"></label>
+        </span>
+    </div>
+    <div class="next-btn">下一步</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.pageFormContent p {
+	height: inherit;
+	line-height: 20px
+}
+</style>
+<div class="pageContent">
+
+	<div class="pageFormContent" layoutH="58">
+		<table style="width: 100% ">
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td><a target="dialog" href="${contextPath}/line/info?type=picture&id=${lineID}&pfid=home" width="700" height="700" style="color: blue">首页</a></td>
+				<#if (picturefolders?size>0)> <#list picturefolders as picturefolder><td><a target="dialog" href="${contextPath}/line/info?type=picture&id=${lineID}&pfid=${picturefolder.id}" width="700" height="700" style="color: blue">Day${picturefolder.days}</a></td></#list> </#if>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+		</table>
+		<br><br>
+		<table style="width: 100% ">
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td><ul><#if (pictures?size>0)><#list pictures as picture><li style="float:left;width: 200px"><img  src="${picture.fdfsFileInfoJSON}" style="height: 100px;width: 190px"><br><br><div style="text-align: center">${picture.name} </div><br></li></#list></#if></ul></td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</div>

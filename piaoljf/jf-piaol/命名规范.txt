@@ -1,0 +1,4 @@
+* 数据层，dao/home
+* 管理层	 service/manager
+* 接口层,特指对外接口，interface 	
+* 安全层  auth

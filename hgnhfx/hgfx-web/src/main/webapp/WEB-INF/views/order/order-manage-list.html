@@ -1,0 +1,178 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as dk>
+<@dk.head "" >
+</@dk.head>
+
+<@dk.main "" "orderList">
+<link  href="css/common.css" type="text/css" rel=stylesheet>
+						<div class="right-content">
+							<div class="right-content-pure">
+								<div class="right-content-title">
+									<span class="tt">
+										<img src="${contextPath}/resources/img/order/wd.png">
+										<span class="tl">订单管理<span>>> 订单列表</span></span>
+									</span>
+									
+								</div>
+								
+								<div class="condition">
+									<div class="condition-wrap">
+										<form action="${contextPath}/orderManage/orderList" method="post" id="myform">
+										<input type="hidden" value="${pageNum?c}" name="pageNum" id="pageNum"/>
+										<input type="hidden" value="${totalPageNum?c}" name="totalPageNum"/>
+										<input id="orderBy" type="hidden" value="${orderBy!'date'}" name="orderBy"/>
+										<input id="orderIndex" type="hidden" value="${orderIndex!'-1'}" name="orderIndex"/>
+										<span class="condition-item">
+											<span class="text">订单编号</span>
+											<input id="cardno" type="text" name="flowNo" value="${mileOrderSqo.flowNo! }">
+										</span>
+										<span class="condition-item">
+											<span class="text">商品名称</span>
+											<div class="product-type">
+												<select name="productId">
+													<option value="">不限</option>
+													<#list proList as item>
+													<option <#if item.product.id == mileOrderSqo.productId>selected="selected"</#if> value=${item.product.id}>${item.product.prodName}</option>
+													</#list>
+												</select>
+												<div class="select-icon">
+													<img src="${contextPath}/resources/img/order/select-a.png">
+												</div>
+											</div>
+										</span>
+										<span class="condition-item">
+											<span class="text">订单状态</span>
+											<div class="product-type">
+												<select name="status">
+													<option value="">全部</option>
+													<option <#if mileOrderSqo.status == 0>selected="selected"</#if> value="0">已付款</option>
+                            						<option <#if mileOrderSqo.status == 1>selected="selected"</#if> value="1">审核中</option>
+                       								<option <#if mileOrderSqo.status == 3>selected="selected"</#if> value="3">已拒绝</option>
+                       								<option <#if mileOrderSqo.status == -1>selected="selected"</#if> value="-1">订单取消</option>
+                       								<option <#if mileOrderSqo.status == 2>selected="selected"</#if> value="2">确认中</option>
+                       								<option <#if mileOrderSqo.status == 6>selected="selected"</#if> value="6">处理中</option>
+                       								<option <#if mileOrderSqo.status == 4>selected="selected"</#if> value="4">订单成功</option>
+                       								<option <#if mileOrderSqo.status == 5>selected="selected"</#if> value="5">订单失败</option>
+												</select>
+												<div class="select-icon">
+													<img src="${contextPath}/resources/img/order/select-a.png">
+												</div>
+											</div>
+										</span>
+										<span class="condition-item">
+											<div class="condition-item-sub">
+												<span class="text">订单生成时间</span>
+												<input readonly="readonly" name="strImportDate" value="${mileOrderSqo.strImportDate! }" class="Wdate"  onfocus="WdatePicker({opposite:false,dateFmt:'yyyy-MM-dd'});" type="text" id="start">
+												<span style="margin-top: 5px;" class="small-gap">-</span>
+												<input readonly="readonly" name="endImportDate" value="${mileOrderSqo.endImportDate! }" class="Wdate"  onfocus="WdatePicker({opposite:false,dateFmt:'yyyy-MM-dd'});" type="text" id="end">
+											</div>
+										</span>
+										
+										<div id="queryBtn" onclick="submitForm()"></div>
+										</form>
+									</div>
+								</div>
+								
+								<div class="table-content">
+									<div class="table-content-wrap">
+										<div class="table-content-title">
+											<span class="text2">查询结果</span>
+											
+											<div class="export" onclick="exportMethod()">导出</div>
+											<div <#if orderBy == 'date'>class="time active"<#else>class="time "</#if> onclick="orderByDate()"><div class="time-a">按订单时间排序<img src="${contextPath}/resources/img/order/v-i2.png"></div></div>
+											<div <#if orderBy == 'amount'>class="amount active"<#else>class="amount "</#if> onclick="orderByAmount()"><div class="amount-a">按数量大小排序<img style="display:none;" src="${contextPath}/resources/img/order/v-i2.png"></div></div>
+										</div>
+										
+										<div  class="table-content-pure">
+											<table>
+												<tr class="thd"><th>订单编号</th><th>商品名称</th><th>账号</th><th>姓名</th><th>数量</th><th>订单提交时间</th><th>订单提交人</th><th>订单状态</th><!-- <th>操作</th> --></tr>
+												<#list pagination.list as item>
+												<tr <#if item_index%2 == 1>class="ta"<#else>class="tb"</#if> >
+													<td>${item.flowCode!}</td>
+													<td> ${(item.productName)!''}</td>
+													<td>${item.csairCard}</td>
+													<td>${item.csairName}</td>
+													<td>${item.num}</td>
+													<td>${(item.importDate?string("yyyy-MM-dd HH:mm"))!""}</td>
+													<td>${item.importUser!'接口'}</td>
+													<td>${item.getStatusName()}</td>
+													<!-- <td class="detail">查看详情</td> -->
+												</tr>
+												</#list>
+											</table>
+										</div>
+									</div>
+								</div>
+								
+								<div class="bottom-links">
+									<span class="right-links">
+										<#if pageNum-1!=0>
+										<span class="first" onclick="jumpPage(1)">首页</span>
+										<span class="prev" onclick="jumpPage(${(pageNum-1)?c})"><<</span>
+										<#else>
+										<span class="first"">首页</span>
+										<span class="prev" ><<</span>
+										</#if>
+										<#list [1,2,3,4,5] as i>
+										<#if (pageNum/5)?ceiling*5+i-5<=totalPageNum>
+										<#if pageNum==(pageNum/5)?ceiling*5+i-5>
+										<span class="item-link active"  onclick="jumpPage(${((pageNum/5)?ceiling*5+i-5)?c})">${((pageNum/5)?ceiling*5+i-5)?c}</span>
+										<#else>
+										<span class="item-link "  onclick="jumpPage(${((pageNum/5)?ceiling*5+i-5)?c})">${((pageNum/5)?ceiling*5+i-5)?c}</span>
+										</#if>
+										</#if>
+										</#list> 
+										<#if pageNum+1<=totalPageNum>
+										<span class="next" onclick="jumpPage(${(pageNum+1)?c})">>></span>
+										<span class="last" onclick="jumpPage(${totalPageNum?c})">尾页</span>
+										<#else>
+										<span class="next" >>></span>
+										<span class="last" onclick="jumpPage(${totalPageNum?c})">尾页</span>
+										</#if>
+									</span>
+								</div>
+							</div>
+						</div>
+				</@dk.main>
+				<@dk.end "">
+</@dk.end>
+<script type="text/javascript">
+//业务Js
+	function submitForm(){
+		$("#pageNum").attr("value",1);
+		//$("#myform").attr("action","${contextPath}/orderManage/orderList")
+		$("#myform").submit();
+	}
+	//分页
+	function jumpPage(pageNum){
+		$("#pageNum").attr("value",pageNum);
+		$("#myform").submit();
+	}
+	//排序
+	function orderByDate(){
+		var orderNum = -1;
+		if($("#orderBy").val() == "date"){
+			orderNum = $("#orderIndex").val();
+			orderNum=orderNum*-1;
+		}
+		$("#orderBy").val("date");
+		$("#orderIndex").val(orderNum);
+		$("#myform").submit();
+	}
+	function orderByAmount(){
+		var orderNum = -1;
+		if($("#orderBy").val() == "amount"){
+			orderNum = $("#orderIndex").val();
+			orderNum=orderNum*-1;
+		}
+		$("#orderBy").val("amount");
+		$("#orderIndex").val(orderNum);
+		$("#myform").submit();
+	}
+	//导出
+	function exportMethod(){
+		var xhref="${contextPath}/orderManage/export?token=${token}&";	
+		window.location.href=xhref+$("#myform").serialize();
+	}
+</script>
+</html>

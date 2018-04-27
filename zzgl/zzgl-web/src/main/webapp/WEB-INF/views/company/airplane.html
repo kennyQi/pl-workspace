@@ -1,0 +1,98 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量-会员中心">
+<link href="${(contextPath)!}/resources/css/member.css" type="text/css" rel="stylesheet" />
+<link href="${(contextPath)!}/resources/css/company/company.css" rel="stylesheet" />
+<#if (((user.baseInfo.type?c)!0)==1)>
+<link href="${(contextPath)!}/resources/css/personal/personal_orderDetails.css" rel="stylesheet" />
+<#elseif (((user.baseInfo.type?c)!0)==2)>
+<link href="${(contextPath)!}/resources/css/company/company_orderDetails.css" rel="stylesheet" />
+</#if>
+
+<script src="${(contextPath)!}/resources/js/company/company.js" language="javascript"></script>
+</@frame.head>
+
+
+<@frame.main "default">
+<div class="g_bd disb yahei">
+	<@frame.top ></@frame.top>
+    <div class="g_cont disb ov">
+		<@frame.nav "订单管理" 0></@frame.nav>
+		    	
+        <div class="m_cont ov fl">
+        <!--右侧呈现页-->
+            <div class="ri">
+                <div class="navigation">
+                    <a href="${contextPath}/company/main">我的账户</a><i>></i><a href="${(contextPath)!}/company/orderManage?sel=1">机票订单</a><i>></i>机票订单详情
+                </div>
+                <span class="rih1 yahei">订单详情</span>
+                <div class="tableBox">
+                   <div class="boxs h3 yahei color3">
+                    <table cellspacing="0" cellpadding=0>
+                        <tr class="tops">
+	                        <td class="trip">行程</td>
+	                        <td class="take">起飞</td>
+	                        <td class="arrive">抵达</td>
+	                        <td class="flight">航班信息</td>
+	                        <td class="position">舱位</td>
+                        </tr>
+                        <tr>
+	                        <td class="trip">${(flightOrderDTO.flightBaseInfo.departAirport)!}(${(flightOrderDTO.flightBaseInfo.departTerm)!})<i class="fly"></i>${(flightOrderDTO.flightBaseInfo.arrivalAirport)!}(${(flightOrderDTO.flightBaseInfo.arrivalTerm)!})</td>
+	                        <td class="take"><i class="no1">${(flightOrderDTO.flightBaseInfo.orgCity)!}</i><b class="no2">${(flightOrderDTO.flightBaseInfo.startTime)?string("yyyy-MM-dd HH:mm")}</b></td>
+	                        <td class="arrive"><i class="no1">${(flightOrderDTO.flightBaseInfo.dstCity)!}</i><b class="no2">${(flightOrderDTO.flightBaseInfo.endTime)?string("yyyy-MM-dd HH:mm")}</b></td>
+	                        <td class="flight"><i class="no1">${(flightOrderDTO.flightBaseInfo.airCompanyName)!}</i><b class="no2">${(flightOrderDTO.flightBaseInfo.flightNO)!}</b></td>
+	                        <td class="position">${(flightOrderDTO.flightBaseInfo.cabinName)!}</td>
+                        </tr>
+                        <tr class="tops">
+                        	<td class="name">旅客姓名</td>
+                        	<td class="documentType">证件类型</td>
+                        	<td class="ID">证件号码</td>
+                        	<td class="orderNo">订单号</td>
+                        	<td class="record">订单状态</td>
+                        </tr>
+                        <tr style="height:50px; line-height:50px;">
+                        		<td class="name">
+                        	 <#list (flightOrderDTO.passengers)!null as passenger>
+                        		 ${(passenger.passengerName)!}  <#if passenger_has_next></br></#if>
+								</#list>
+								</td>
+	                        	<!-- <td class="documentType">${(passenger.cardType)!}</td> -->
+	                        	<td class="documentType">身份证</td>
+	                        	<td class="ID">
+	                        	<#list (flightOrderDTO.passengers)!null as passenger>
+	                        	${(passenger.idNo)!}<#if passenger_has_next></br></#if>
+	                        	</#list>
+	                        	</td>
+	                        	<td class="orderNo">${(flightOrderDTO.orderNO)!}</td>
+	                        	<td class="record"> ${(jpStatusMap[(''+flightOrderDTO.status?c+flightOrderDTO.payStatus?c)!])!}</td>
+							
+                        </tr>
+                        
+                       
+                    </table>
+                   </div>
+                </div>
+                <div class="total h4 yahei color3">
+                    <span class="no3"><i>合计：</i><b style="font-size:16px; color:#00a0e9;">￥ 
+                    ${(flightOrderDTO.flightPriceInfo.payAmount?c)!}
+   		</b></span>
+                    <span class="no4 color6">票面价：<i>${(flightOrderDTO.flightPriceInfo.ibePrice)!}</i> 税款：<i>${(flightOrderDTO.flightPriceInfo.buildFee+flightOrderDTO.flightPriceInfo.oilFee)?c}</i> 优惠卡券：<i>${(couponPrice?c)!}</i>&nbsp;&nbsp;&nbsp;&nbsp;使用余额：<i>
+                    <#if flightOrderDTO.payStatus==27>
+                    	 ${(refundPrice)!'0'}
+                    <#else>
+                    	 ${(balance)!'0'}
+                    </#if>
+                 
+                    </i></span>
+                    <#if ((flightOrderDTO.payStatus?c)!0)==REBACK><span>退款金额：${(flightOrderDTO.flightPriceInfo.returnedPrice?c)!}</span></#if>
+                    <#if (((flightOrderDTO.payStatus?c)!0)==NOPAY)&&(((flightOrderDTO.status?c)!0)==WAIT)><span><a href="${(contextPath)!}/jp/toPayOrderInfo?dealerOrderCode=${(flightOrderDTO.orderNO)!}">点击支付</a></span></#if><#if 1==2>&nbsp;&nbsp;&nbsp;&nbsp;<td><a href="#">申请退票</a></span></#if>
+                    
+                </div>
+            </div>
+        <!--右侧呈现页-->
+        </div>
+    </div>
+</div>
+<!--内容-->
+<@frame.end "default"></@frame.end> 
+</@frame.main>

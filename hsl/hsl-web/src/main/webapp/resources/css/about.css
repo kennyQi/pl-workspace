@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+
+.about_info{ background:#fff; padding:20px}
+.about_info h2{ font-size:18px; margin-bottom:15px; line-height:40px; border-bottom:#74a900 1px solid; color:#74a900; font-family:"微软雅黑"}
+.about_info h3{ font-size:14px; margin-bottom:10px;line-height:40px;}
+.about_info p{ line-height:30px; text-indent:2em}

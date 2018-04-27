@@ -1,0 +1,150 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader page_header_fix">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return dialogSearch(this);" action="${contextPath}/product/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'} " />
+		<div class="searchBar dwz_query_box2">
+			<table class="searchContent" border="0">
+				<tr>
+					<td>商品名称：</td>
+					<td>
+						<input type="text" maxlength="20" name="" value="" />
+					</td>
+					<td>商品编码：</td>
+					<td>
+						<input type="text" maxlength="20" name="" value="" />
+					</td>
+					<td>商品分类：</td>
+					<td>
+						<select name="">
+							<option value=""></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>商品品牌：</td>
+					<td>
+						<select name="">
+							<option value=""></option>
+						</select>
+					</td>
+					<td>sku编码：</td>
+					<td>
+						<input type="text" maxlength="20" name="" value="" />
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			<div class="subBar" style="padding-right: 10px;">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent page_box">
+	<div layoutH="175">
+		<table class="table" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th width=""><input type="checkbox" group="skuIds" class="checkboxCtrl" onchange="changeCheckedStatusAll(this,'skuIds')"/></th>
+					<th width="">商品编号</th>
+					<th width="">商品名称</th>
+					<th width="">商品分类</th>
+					<th width="">商品品牌</th>
+					<th width="">单位</th>
+					<th width="">规格</th>
+					<th width="">sku编码</th>
+					<th width="">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list pagination.list as t>
+				<tr test="${t.id}">
+					<td>
+						<input type="checkbox" name="skuIds" value="${(t.id)!''}" onchange="changeCheckedStatus(this)" />
+					</td>
+					<td>${t.id}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td class="operate_box">
+						<a href="javascript:void(0)" onclick="addPurchaseOrderLine(['${t.id}'])">添加</a>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+	<div class="formBar" style="margin-top: -25px;">
+		<ul>
+			<li>
+				<div class="buttonActive">
+					<div class="buttonContent">
+						<button type="button" onclick="addPurchaseOrderLineBat()">确定</button>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="buttonActive">
+					<div class="buttonContent">
+						<button type="button" class="close">取消</button>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript">
+	function addPurchaseOrderLineBat(){
+		var idArr = new Array();
+		$("[name='skuIds'][checked='checked']").each(function(){
+			idArr.push($(this).val());
+		})
+	    if(idArr.length == 0){
+	        alertMsg.warn("未选择商品");
+	        return;
+	    }
+
+		addPurchaseOrderLine(idArr);
+	}
+	
+	
+
+    function addPurchaseOrderLine(idArr){
+        var data="";
+        for(var i in idArr){
+        	if(i!=0){
+        		data = data+"&";
+        	}
+            data = data + "skuIdList=" +idArr[i] ;
+        }
+        
+        var retData = ut.simpleAjax("${contextPath}/product/add_purchase_order_detail",data);
+        $("#e1425955249321").append(retData);
+
+    }
+	
+    function changeCheckedStatus(e){
+    	var jqe = $(e);
+    	
+    	if(jqe.attr("checked") != null){
+    		jqe.attr("checked","checked");
+    	}else{
+    		jqe.removeAttr("checked");
+    	}
+
+    } 
+</script>

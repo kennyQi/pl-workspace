@@ -1,0 +1,87 @@
+规格名关联
+<br />
+规格不存在，需要关联福利网其他规格名还是新增？
+<br />
+
+<form id="syncForm3">
+<#if !pdbCategoryCreate??>
+<input type="radio" name="specCreateType" checked="checked" value="2" onclick="hideTabs45()"> 
+关联福利网其他规格名称 
+<br />
+<#list specList as t>
+${t.specName}
+<select specId="${t.id}" onchange="changeSelCheck(this)" name="spec">
+	<option value="">请选择</option> <#list pdbSpecList as pdbSpec>
+	<option value="${t.id}:${pdbSpec.id}:${pdbSpec.specName}">${pdbSpec.specName}</option> </#list>
+</select>
+<br>
+</#list>
+</#if>
+<input type="radio" name="specCreateType" value="3" onclick="hideTabs45()"
+<#if pdbCategoryCreate??>
+checked="checked"
+</#if>
+>
+自动新建规格名和规格值
+</form>
+
+<#--<!--
+
+<br />
+<hr />
+关联其他规格值<br/>
+<#list specValList as t>
+${t.specValue}<select specIdValSel="${t.specification.id}">
+	<option>请选择</option>
+</select><br/>
+</#list>
+
+-->
+<br />
+<button onclick="getProductInfoTable()">下一步</button>
+<script type="text/javascript">
+			function changeSpecValOption(e){
+			e = $(e);
+			if(e.val() == ""){
+				$("select[specIdValSel='"+ e.attr("specId")+"']").html("<option>请选择关联规格</option>");
+				return;
+			}
+				var t = "<option>请选择</option>";
+				var v= e.val().split(":");
+				var ot = v[1].split(",");
+				for(var i in ot){
+					t = t+"<option>"+ot[i]+"</option>";
+				}
+				$("select[specIdValSel='"+ e.attr("specId")+"']").html(t);
+			}
+
+	function getProductInfoTable(e){
+		$("#e1433491299711").empty();
+		$("#e1433491299711").append(ut.simpleAjax(contextPath+"/prod_sync/get_prod_table?"+$("#syncForm3").serialize(),null));
+
+
+	}
+	
+	function changeSelCheck(e){
+		e = $(e);
+		var v = e.val().split(":")[1];
+		var c = 0;
+		$("select[specId]").each(function(){
+			if($(this).val().split(":")[1] == v){
+				c =c+1;
+			}
+		})
+
+		if(c>1){
+			alert("该规格已经选择");
+			e.find("option").removeAttr("selected");
+			e.find("option:eq(0)").attr("selected",true);
+		}
+	}
+	
+	function hideTabs45(){
+		$("#pstab4").hide();
+		$("#pstab5").hide();
+	}
+
+</script>

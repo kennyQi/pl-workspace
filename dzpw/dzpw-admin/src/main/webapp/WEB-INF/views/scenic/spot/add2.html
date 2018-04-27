@@ -1,0 +1,337 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'scenic-spot' />
+<#assign pathUrl = (contextPath+'/scenic-spot') />
+
+<style>
+.jq{background:#eee;font-weight:600;}
+.jq span{margin-left:5px;}
+</style>
+<script type="text/javascript" src="resources/js/MyJs.js"></script>
+<script type="text/javascript">
+validateCallbackScenic = function(evt){
+	if(fromHand())
+		return validateCallback(evt,dialogAjaxDone);
+	else
+		return false;
+}
+</script>
+
+<div class="pageContent">
+<form method="post" action="${pathUrl}/addSubmit" class="pageForm required-validate"
+	onsubmit="return validateCallbackScenic(this)">
+	<input type="hidden" name="navTabid" value="${navTabid!}" />
+	<div class="pageFormContent" layoutH="58" id="scenicContent">
+	
+		<!-- 景区基本信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>景区基本信息</span></div>
+		<div class="unit">
+			<label>登录账户：</label>
+			<input type="text" name="adminLoginName" size="64" class="alphanumeric required " placeholder="登录账户名"
+				minlength="4" maxlength="20" value=""/>
+		</div>
+		<div class="unit">
+			<label>登录密码：</label>
+			<input type="password" name="adminPassword" size="64" class="alphanumeric required" placeholder="登录密码不要过于简单"
+				minlength="6" maxlength="20" value=""/>
+		</div>
+		<div class="unit">
+			<label>景区名称：</label>
+			<input type="text" name="name" size="64" class="isSpec required" placeholder="景区名称" maxlength="64" value=""/>
+		</div>
+		<div class="unit">
+			<label>景区简称：</label>
+			<input type="text" name="shortName" size="64" class="isSpec required" placeholder="景区简称" maxlength="64" value=""/>
+		</div>
+		<div class="unit">
+			<label>景区代码：</label>
+			<input type="text" name="code" size="64" class="alphanumeric required" placeholder="景区简写代码" maxlength="64" value=""/>
+		</div>
+		<div class="unit" id="provcityId2">
+			<label>所&nbsp;&nbsp;在&nbsp;&nbsp;地：</label>
+			<input name="provinceId" type="hidden"/>
+			<input id="provinceQoCode" name="province.code" type="hidden"/>
+			<input name="province.name" suggestfields="name"  placeholder="所在省"lookupgroup="province" 
+				readonly="readonly" suggesturl="${contextPath}/baseDate/province" size="27"/>
+			<span>&nbsp;&nbsp;—&nbsp;</span>
+			<input name="cityId" type="hidden" class="required"/>
+			<input name="city.code" type="hidden"/>
+			<input name="city.name" lookupgroup="city" placeholder="所在市" readonly="readonly" size="27"
+				suggestfields="name" suggesturl="${contextPath}/baseDate/city?provinceCode={provinceQoCode}"/>
+		</div>
+		<div class="unit">
+			<label>景区级别：</label>
+			<select class="combox" name="level">
+				<option value="AAAAA级">AAAAA级</option>
+				<option value="AAAA级">AAAA级</option>
+				<option value="AAA级">AAA级</option>
+				<option value="AA级">AA级</option>
+				<option value="A级">A级</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>景区网址：</label>
+			<input type="url" name="webSite" size="64" class="required" placeholder="输入带有HTTP前缀的地址" maxlength="1024" value=""/>
+		</div>
+		<div class="unit">
+			<label>景区介绍：</label>
+			<textarea class="editor required" name="intro" rows="15" cols="90" maxlength="1000"
+			tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+			Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+			Link,Unlink,Hr,Table">
+			</textarea>
+		</div>
+		
+		<!-- 景区联系信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>景区联系信息</span></div>
+		<div class="unit">
+			<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+			<input type="text" name="linkMan" size="64" class="isSpec required" placeholder="联系人" maxlength="64" value=""/>
+		</div>
+		<div class="unit">
+			<label>联系电话：</label>
+			<input type="tel" name="telephone" size="64" class="isInject required phone" placeholder="联系电话" maxlength="12"/>
+		</div>
+		<div class="unit">
+			<label>联系邮箱：</label>
+			<input type="email" name="email" size="64" class="isInject required" placeholder="邮箱地址" maxlength="64" value=""/>
+		</div>
+		<div class="unit">
+			<label>联系&nbsp;Q&nbsp;Q：</label>
+			<input type="text" name="qq" size="64" class="isInject digits required" maxlength="12" placeholder="联系QQ号"/>
+		</div>
+		<div class="unit">
+			<label>公司传真：</label>
+			<input type="text" name="fax" size="64" class="isInject required phone" maxlength="12" placeholder="公司传真"/>
+		</div>
+		<div class="unit">
+			<label>联系地址：</label>
+			<input type="text" name="address" size="64" class="isInject required" maxlength="64" placeholder="联系地址" value=""/>
+		</div>
+		<div class="unit">
+			<label>邮政编码：</label>
+			<input type="text" name="postcode" size="64" class="isInject digits required" minlength="6" maxlength="6"
+				placeholder="邮政编码" value=""/>
+		</div>
+		
+		<!-- 资质信息 -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>资质信息</span></div>
+		<div class="unit">
+			<label>营业执照：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file1" type="file" name="file" data-msg="营业执照" data-imgun="imgun1" size="60" />
+            	<span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的营业执照图片，最大不超过2M</span>
+            </span>
+		</div>
+		<div class="unit" id="imgun1">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="营业执照" title="营业执照"
+				src="resources/image/u39.png"/>
+          	<input class="required" name="businessLicense" type="hidden"/>
+          	<input name="imgId1" type="hidden"/>
+		</div>
+		<div class="unit">
+			<label>税务登记证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file2" type="file" name="file" data-msg="税务登记证" data-imgun="imgun2" size="60" />
+            	<span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的营业执照图片，最大不超过2M</span>
+            </span>
+		</div>
+		<div class="unit" id="imgun2">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="税务登记证" title="税务登记证"
+				src="resources/image/u39.png"/>
+          	<input class="required" name="taxRegistrationCertificate" type="hidden"/>
+          	<input name="imgId2" type="hidden"/>
+		</div>
+		<div class="unit">
+			<label>组织代码证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file3" type="file" name="file" data-msg="组织代码证" data-imgun="imgun3" size="60" />
+            	<span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的营业执照图片，最大不超过2M</span>
+            </span>
+		</div>
+		<div class="unit" id="imgun3">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="组织代码证" title="组织代码证"
+				src="resources/image/u39.png"/>
+          	<input class="required" name="organizationCodeCertificate" type="hidden"/>
+          	<input name="imgId3" type="hidden"/>
+		</div>
+		<div class="unit">
+			<label>法人身份证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file4" type="file" name="file" data-msg="法人身份证" data-imgun="imgun4" size="60" />
+            	<span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的营业执照图片，最大不超过2M</span>
+            </span>
+		</div>
+		<div class="unit" id="imgun4">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="法人身份证" title="法人身份证"
+				src="resources/image/u39.png"/>
+          	<input class="required" name="corporateIDCard" type="hidden"/>
+          	<input name="imgId4" type="hidden"/>
+		</div>
+		
+		<!-- 设备编码  -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>设备编码</span></div>
+		<div class="unit">
+			<span style="color:#333;float:left;height:22px;line-height:22px;font-size:15px;padding-right:5px;" class="deviCla">1</span>
+			<input type="text" name="deviceIds" size="64" maxlength="64" class="isSpec required deviceVal" placeholder="设备编码" value=""/>
+			<p style="font-weight:700;font-size: 22px;padding:0px;color: #333;" onclick="deviceAppend()">﹢</p>
+		</div>
+		
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="buttonActive"><div class="buttonContent">
+					<button type="submit" style="width: 35px;">提交</button>
+				</div></div>
+			</li>
+			<li>
+				<div class="button"><div class="buttonContent">
+					<button type="button" onclick="MyClose('是否取消添加该景区？','monitorDiag')" style="width: 35px;">取消</button>
+				</div></div>
+			</li>
+		</ul>
+	</div>
+</form>
+</div>
+
+<!-- <script src="resources/js/hg-common/upload/ajaxupload.js" type="text/javascript"></script> -->
+<script type="text/javascript">
+	var uploadPath = '${pathUrl}/imgUpload';
+	
+/* 	$(function(){
+		//文件异步上传组件注册
+		$(".upFile").each(function(){
+			var temp = $(this);
+			
+			new AjaxUpload(temp,{
+		        action: uploadPath,
+		        name: "file",
+		        data: {"title":temp.parent().find("input:eq(0)").data("msg")},
+		        responseType: "json",
+		        onSubmit: function(filename,ext){
+		        	//文件后缀检查
+		        	if(!(ext && /^(jpg|jpeg|png|gif)$/.test(ext.toLowerCase()))){
+		        		alertMsg.warn("暂不支持jpg、gif、png、bmp以外的图片！");
+						return false;
+		        	}
+		        },
+		        onComplete: function(filename,da){
+		        	if(da.rs < 1){
+		        		alertMsg.warn("图片上传失败，请稍后重试！");
+						return false;
+		        	}
+		        	//图片显示
+		        	temp.attr("src",da.uri);
+		        	temp.parent().find("input:eq(0)").val(da.uri);
+		        	temp.parent().find("input:eq(1)").val(da.imgId);
+		        }
+			})
+		});
+	}); */
+	//图片上传按钮单击事件
+	$(".upFile").on("change",function(){
+		var temp = $(this);
+		
+		//获取后缀，并校验
+		var ext = temp.val();
+		ext = ext.substring(ext.lastIndexOf(".")+1,ext.length);
+		if(!(ext && /^(jpg|jpeg|png|gif)$/.test(ext.toLowerCase()))){
+    		alertMsg.warn("暂不支持jpg、gif、png、bmp以外的图片！");
+			return false;
+    	}
+		//发起请求
+		$.ajaxFileUpload({
+			url : uploadPath,
+	       	secureuri : false,
+	       	fileElementId : temp.attr("id"),
+	       	dataType : "json",
+	       	data: {"title":temp.data("msg")},
+	      	success: function (da) {
+	        	if(da.rs < 1){
+	        		alertMsg.warn("图片上传失败，请稍后重试！");
+					return false;
+	        	}
+	        	
+	        	//图片显示
+	        	var chs = $("#"+temp.data("imgun"));
+	        	chs.find("img").attr("src",da.uri);
+	        	chs.find("input:eq(0)").val(da.uri);
+	        	chs.find("input:eq(1)").val(da.imgId);
+	        },
+	        error: function (data, status, e) {
+	        	alertMsg.warn("图片上传失败，请稍后重试！");
+	        }
+	    });
+	});
+	
+	var htmlStr = "<div class=\"unit\"><span style=\"color:#333;float:left;height:22px;line-height:22px;font-size:15px;padding-right:"+
+	"5px;\" class=\"deviCla\">$deviNum</span><input type=\"text\" name=\"deviceIds\" size=\"64\" maxlength=\"64\" class=\"isSpec required deviceVal\""+
+	" style=\"float:left;\" placeholder=\"设备编码\" value=\"\"/><p style=\"padding: 0px;\"><span style=\"font-weight: 700;font-size:"+
+	" 22px;padding:0px;color: #333;\" onclick=\"deviceAppend()\">﹢</span><span style=\"font-weight: 700;font-size: 22px;padding:0px;"+
+	"color: #333;\" onclick=\"deviceRemove(this)\">-</span></p></div>";
+	/**设备添加按钮单击事件*/
+	var deviNum = 1;
+	function deviceAppend(){
+		/*var scenicContent = document.getElementById("scenicContent");
+		scenicContent.innerHTML += htmlStr;*/
+		deviNum += 1;
+		$("#scenicContent").append(htmlStr.replace("$deviNum",deviNum));
+	}
+	
+	/**设备删除按钮单击事件*/
+	function deviceRemove(evt){
+		//根据当前元素在列表中的索引，找到之后的元素，然后对数量-1
+		var devicDiv = $(evt).parent().parent();
+		var index = devicDiv.find("span").index(".deviCla");
+		var deviClas = $(".deviCla:gt("+index+")");
+		for(var i = 0,len = deviClas.length;i < len;i++){
+			var temp = $(deviClas[i]);
+			temp.text(parseInt(temp.text())-1);
+		}
+		//设备的全局数量
+		deviNum = parseInt($(".deviCla:last").text()-1);
+		//删除当前元素所在div
+		devicDiv.remove();
+	}
+	
+	
+	/**表单提交之前进行校验*/
+	function fromHand(){
+		//登录密码不能是‘123456’
+		if($("input[name='adminPassword']").val().trim() == "123456"){
+			alertMsg.warn("登录密码不能是‘123456’！");
+			return false;
+		}
+		
+		//所在地 省市ID赋值
+		var inps = $("#provcityId2>input");
+		inps[0].value = inps[1].value;
+		inps[3].value = inps[4].value;
+		
+		//设备唯一性验证
+		//将元素值取出，并排序
+		var array = new Array();
+		var deviceVals = document.querySelectorAll(".deviceVal");
+		for(var i = 0,len = deviceVals.length;i < len;i++){
+			var temp = deviceVals[i].value;
+			if(temp.length < 1){
+				alertMsg.warn("设备编码不能为空！");
+				return false;
+			}
+			array.push(temp);
+		}
+		array = array.sort();
+		//判断前一个值和后一个值是否重复
+		for(var i = 1,len = array.length;i < len;i++){
+			if(array[i-1] == array[i]){
+				alertMsg.warn("设备编码唯一不可重复！");
+				return false;
+			}
+		}
+		return true;
+	}
+</script>

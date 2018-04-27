@@ -1,0 +1,24 @@
+*{padding:0;margin:0;border:0;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+ul li{list-style:none;}
+body{font-size:12px;font-family:'微软雅黑';}
+a,a:hover{text-decoration:none;}
+img{display:block;}
+map area{outline:none;}
+.fl{float:left;}
+.fr{float:right;}
+
+.container{width:100%;height:3850px;background:url(../images/bg.jpg) no-repeat top center;overflow:hidden;position:relative;}
+.btn_go{display:block;width:142px;height:115px;margin:0 auto;margin-top:422px;}
+.content{width:1220px;overflow:hidden;margin:600px auto 0 auto;}
+.cont.cont_01{padding-top:207px;}
+.goodsList{width:1400px;height:378px;margin-top:35px;}
+.goodsList li{float:left;width:290px;margin-right:20px;}
+.cont.cont_02{padding-top:280px;}
+.cont.cont_03{width:1220px;overflow:hidden;margin:0 auto;padding-top:151px;}
+.hot_list{width:1400px;}
+.hot_list li{float:left;margin-right:54px;}
+
+/*侧导航*/
+.sideNav{width:230px;height:418px;background:url(../images/dh.png);position:fixed;top:180px;right:0px;padding-top:50px;}
+.sideNav a.sideNav_a{display:block;width:140px;height:35px;margin:0 0 12px 52px;}
+.sideNav a.fhsy{display:block;width:154px;height:40px;margin:20px 0 0 45px;}

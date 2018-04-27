@@ -1,0 +1,169 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						转账类型：
+						<select id="transType" name="transType" style="width: 100px;">
+							<option value="">全 部 类 型</option>
+							<option value="1" <#if 1 == transType>selected="selected"</#if> >经  销  商>电子票务</option>
+							<option value="2" <#if 2 == transType>selected="selected"</#if> >电子票务>景        区 </option>
+							<option value="3" <#if 3 == transType>selected="selected"</#if> >电子票务>经  销  商 </option>
+						</select>
+					</td>
+					<td>
+						转账时间：
+						<input id="recordDateBegin" type="text" id="recordDateBegin" name="recordDateBegin" value="${recordDateBegin}" class="date" readonly="true" size="10"/>-
+						<input id="recordDateEnd" type="text" id="recordDateEnd" name="recordDateEnd" value="${recordDateEnd}" class="date" readonly="true" size="10"/>
+					</td>
+					<td>
+						是否有返回：
+						<select id="hasResponse" name="hasResponse" style="width: 60px;">
+							<option value="" >全部</option>
+							<option value="1" <#if hasResponse=='1'>selected="selected"</#if> >是</option>
+							<option value="0" <#if hasResponse=='0'>selected="selected"</#if> >否</option>
+						</select>
+					</td>
+					<td>
+						是否成功：
+						<select id="status" name="status" style="width: 60px;">
+							<option value="">全部</option>
+							<option value="1" <#if status=='1'>selected="selected"</#if> >是</option>
+							<option value="2" <#if status=='2'>selected="selected"</#if> >否</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						付款方ID：
+						<input type="text" id="payCstNo" name="payCstNo" value="${payCstNo}" size="10"/>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						收款方ID：
+						<input type="text" id="rcvCstNo" name="rcvCstNo" value="${rcvCstNo}" size="10"/>
+					</td>
+					<td>
+						HJB企业用户操作员ID：
+						<input type="text" id="userId" name="userId" value="${userId}"/>
+					</td>
+					<td>
+						HJB交易订单号：
+						<input type="text" id="hjbOrderNo" name="hjbOrderNo" value="${hjbOrderNo}"/>
+					</td>
+					<td>
+						错误代码：
+						<input type="text" id="errorCode" name="errorCode" value="${errorCode}" size="10"/>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" >查询</button></div></div>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="initText()">重置</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<div class="pageContent">
+
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="" layoutH="85" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="130px;">转账类型</th>
+				<th width="140px;">HJB企业用户操作员ID</th>
+				<th width="90px;">付款方ID</th>
+				<th width="90px;">收款方ID</th>
+				<th width="70px;">金额(元)</th>
+				<th width="240px;">流水号</th>
+				<th width="75px;">是否有返回</th>
+				<th width="65px;">是否成功</th>
+				<th width="135px;">转账时间</th>
+				<th width="165px;">HJB交易订单号</th>
+				<th width="60px;">错误代码</th>
+				<th width="280px;">消息</th>
+			</tr>
+		</thead>
+		<#list pagination.list as x>
+			<tr>
+				<td >
+					<#if x.type==1>经&nbsp;&nbsp;销&nbsp;&nbsp;商&nbsp;&nbsp;>&nbsp;&nbsp;电子票务&nbsp;&nbsp;</#if>
+					<#if x.type==2>电子票务&nbsp; >&nbsp;&nbsp;景&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区&nbsp;&nbsp;</#if>
+					<#if x.type==3>电子票务&nbsp; >&nbsp;&nbsp;经&nbsp;&nbsp;销&nbsp;&nbsp;商&nbsp;&nbsp;</#if>
+				</td>
+				<td >
+					${(x.userId)!'--'}
+				</td>
+				<td >
+					${x.payCstNo}
+				</td>
+				<td >
+					${x.rcvCstNo}
+				</td>
+				<td >
+					${x.trxAmount/100}
+				</td>
+				<td >
+					${x.originalOrderNo}
+				</td>
+				<td >
+					<#if x.hasResponse==true>
+						是
+					</#if>
+					<#if x.hasResponse==false>
+						否
+					</#if>
+				</td>
+				<td >
+					<#if x.status==1>
+						成功
+					<#elseif x.status==2>	
+						失败
+					</#if>
+				</td>
+				<td>
+					${x.recordDate?string("yyyy-MM-dd HH:mm:ss")}
+				</td>
+				<td >
+					${x.hjbOrderNo}
+				</td>
+				<td >
+					${(x.errorCode)!''}
+				</td>
+				<td >
+					${(x.message)!''}
+				</td>
+			</tr>
+		</#list>
+	</table>
+
+</div>
+
+<script type="text/javascript">
+function initText(){
+	   $("#transType").attr("value",'');
+		$("#recordDateBegin").attr("value","");
+		$("#recordDateEnd").attr("value","");
+		$("#hasResponse").attr("value","");
+		$("#status").attr("value","");
+		$("#payCstNo").attr("value","");
+		$("#rcvCstNo").attr("value","");
+		$("#userId").attr("value","");
+		$("#hjbOrderNo").attr("value","");
+		$("#errorCode").attr("value","");
+}
+</script>
+

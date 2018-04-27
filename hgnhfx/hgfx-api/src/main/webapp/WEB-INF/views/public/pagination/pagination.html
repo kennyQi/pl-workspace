@@ -1,0 +1,38 @@
+<div class="bottom-links">
+<span class="right-links">
+	<#if pageNum-1!=0>
+	<span class="first" onclick="jumpPage(1)">首页</span>
+	<span class="prev" onclick="jumpPage(${pageNum-1})"><<</span>
+	<#else>
+	<span class="first"">首页</span>
+	<span class="prev" ><<</span>
+	</#if>
+	<#list [1,2,3,4,5] as i>
+	<#if (pageNum/5)?ceiling*5+i-5<=totalPageNum>
+	<#if pageNum==(pageNum/5)?ceiling*5+i-5>
+	<span class="item-link active"  onclick="jumpPage(${(pageNum/5)?ceiling*5+i-5})">${(pageNum/5)?ceiling*5+i-5}</span>
+	<#else>
+	<span class="item-link "  onclick="jumpPage(${(pageNum/5)?ceiling*5+i-5})">${(pageNum/5)?ceiling*5+i-5}</span>
+	</#if>
+	</#if>
+	</#list> 
+	<#if pageNum+1<=totalPageNum>
+	<span class="next" onclick="jumpPage(${pageNum+1})">>></span>
+	<span class="last" onclick="jumpPage(${totalPageNum})">尾页</span>
+		<#else>
+		<span class="next" >>></span>
+		<span class="last">尾页</span>
+		</#if>
+	</span>
+</div>
+
+<script>
+function submitForm(pageNum){
+	 $("#paginationForm").submit();
+	}
+//分页
+	function jumpPage(pageNum){
+		$("#pageNum").attr("value",pageNum);
+		submitForm(pageNum);
+	}
+</script>

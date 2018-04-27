@@ -1,0 +1,74 @@
+/* CSS Document */
+/*liwei 2015-4-20     allOrder right*/
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+a{ color:#333;}
+.ri{ margin:24px 32px 30px 29px;}
+.ri .rih1{ font-size:20px; line-height:28px; color:#333; margin-right:40px; margin-left:15px;}
+.ri .onc a{ color:#34b0ae;}
+.ri .onc i{ width:110px; height:3px; background:#34b0ae; float:left; position:absolute; margin-top:44px; margin-left:-94px;}
+.ri .oncs a{ color:#34b0ae;}
+.ri .oncs i{ width:110px; height:3px; background:#4bc5c3; float:left; position:absolute; margin-top:44px; margin-left:-94px;}
+.ri .navsbox{width:100%; height:3px; background:#c9e5e9;  margin-top:16px;}
+
+.ri .orderBox{height:122px; float:left; width:100%; background:#fcfcfc;  border-bottom:1px solid #c9e5e9; }
+.ri .orderBox .order{ margin-left:15px; width:100%; }
+.ri .orderBox .order li{ width:235px; float:left; margin-top:20px; height:30px; line-height:30px;}
+.ri .orderBox .order li .selti{ width:70px; color:#555; float:left; text-align:right;}
+.ri .orderBox .order li .slor{ width:118px; height:28px;border:1px solid #dfe8ef;float:left; padding:0 10px; text-align:left; font-size:14px; color:#333;}
+.ri .orderBox .order li .changeTime{ float:left; width:118px; height:28px; padding:0 10px; border:1px solid #dfe8ef; line-height:28px; font-size:14px; text-align:center;}
+.ri .orderBox .order li .sl{ width:138px; height:28px; border:1px solid #dfe8ef; float:left; background:#fff;}
+.ri .orderBox .order li .dd{width:160px;height:30px; float:left; background:url(../images/ic_tr.png) 0 0;}
+.ri .orderBox .order li .optionValue{width:118px; text-align:left; font-size:14px; color:#333; line-height:26px; padding:0 10px;}
+.ri .orderBox .order li .cx{ width:60px; height:30px; float:right; background:#4bc5c3; font-size:14px; text-align:center; line-height:30px; color:#fff;}
+.ri .orderBox .order li .cx:hover{width:60px; height:28px; border-bottom:2px solid #30a3a1; background:#4bc5c3; line-height:28px;}
+
+
+/*下拉列表*/
+.ri .orderBox li .selectNav{ float:left; width:156px; position:absolute; z-index:999; background:#fff; border:2px solid #80d7d6; margin-left:70px; *margin-left:-160px; display:none;}
+.ri .orderBox li .selectNav .l{ float:left; width:136px; height:28px;  margin:0; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.ri .orderBox li .selectNav .l:hover{ background:#80d7d6; color:#fff;}
+/*下拉列表*/
+
+
+.tables{ width:906px; height:132px; float:left; border-left:2px solid #a1e9e8; border-right:1px solid #a1e9e8;border-bottom:5px solid #a1e9e8; margin-top:19px;}
+.tables .tableTop{ height:40px; background:#a1e9e8; line-height:40px; font-size:14px;}
+.tables .tableTop .money{line-height:40px; font-size:14px;}
+.tables li{ text-align:center; line-height:92px; height:92px; font-size:12px; font-family:"微软雅黑"; float:left; width:906px;}
+.tables li span{ float:left;border-right:1px solid #a1e9e8; height:92px;}
+.tables li .order{width:131px;}
+.tables li .order a{color:#0073b6;}
+.tables li .order a:hover{ text-decoration:underline;}
+.tables li .voyage{width:138px;} 
+.tables li .people{width:76px;}
+.tables li .bank{width:110px;}
+.tables li .status{width:102px;}
+.tables li .policy{width:77px;}
+.tables li .policy a{color:#0073b6;}
+.tables li .policy a:hover{ text-decoration:underline;}
+.tables li .money{width:88px; color:#333; font-size:16px;}
+.tables li .place{width:98px;}
+.tables li .operation{width:77px;}
+
+.tables li .voyage .places{ width:138px; float:left; height:20px; line-height:20px; margin-top:15px;}
+.tables li .voyage .places .fly{ width:20px; height:20px; background:url(../images/ic_script.png) 0 -115px; display:inline-block; vertical-align:middle; margin:0 5px;}
+.tables li .voyage .flight{height:20px; display:block; line-height:20px;}
+.tables li .voyage .times{ height:20px; line-height:20px; display:block; margin-top:35px; *margin-top:2px;}
+
+.tables li .place i{width:98px;float:left; height:20px; line-height:20px; }
+.tables li .operation a{color:#0073b6;}
+.tables li .operation a:hover{ text-decoration:underline;}
+
+.noTicket{color:#ff6600;}  /*出票失败*/
+.seePolicy{color:#0073b6;} /*查看政策*/
+
+/*分页导航*/
+.listPageStyle{ float:left; margin-left:359px; padding-bottom:40px; margin-top:40px;}
+/*分页导航*/
+
+
+/*没有订单*/
+.ri .noOrder{ width:165px; height:137px; font-size:14px; font-family:"微软雅黑"; color:#98abbc; margin:0 auto; margin-top:220px;}
+.ri .noOrder span{margin:0 auto;}
+.ri .noOrder .noIcon{width:165px;height:116px; display:block;}
+.ri .noOrder .in{ margin-top:15px; float:left;}
+/*没有订单*/

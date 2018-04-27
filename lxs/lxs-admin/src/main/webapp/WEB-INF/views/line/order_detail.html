@@ -1,0 +1,93 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+
+	<form action="${contextPath}/advertisement/modifyAd" method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+	<table>
+			<tr style="float:left;"> 
+				<td>
+					<input type="hidden" id="id" name="id" value="${ad.id}">
+					<input type="hidden" id="positionId" name="positionId" value="${ad.position.id}">
+					广告位置：
+					<span>${ad.position.baseInfo.name}</span>
+				</td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr style="float:left;"> 
+				<td>
+					广告名称：&nbsp;<input value="${ad.adBaseInfo.title}" type="text" id="title" name="title" size="25" class="required" maxlength="64">&nbsp;&nbsp;<span style="color: red;">限制在64个字以内</span>
+					</div>
+				<td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr style="float:left;">
+				<td>
+					广告链接：&nbsp;<input value="${ad.adBaseInfo.url}" type="text" id="url" name="url" size="25" class="required url" maxlength="500">&nbsp;<span style="color: red;">限制在500个字以内</span>
+				</td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr style="float:left;">
+				<td>
+					优先级：&nbsp;<input value="${ad.adBaseInfo.priority?c}" type="text" id="priority" name="priority" class="required number" min="0" size="25" maxlength="8">&nbsp;<span style="color: red;">限制在8位数字以内
+						<span id="priorityMsg"></span>
+					</span>
+				</td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr>
+				<td>
+					广告图片：
+					<span style="color: red">
+						完成上传图片，再次修改广告位时需要重新上传图片，原图会失效!<br/><br/>
+					</span>
+					<span style="color: red">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						建议上传
+						<#if ad.position.id == "hsl_ad">
+						1920x370
+						</#if>
+						<#if ad.position.id == "hsl_hotFirst">
+						240x340
+						</#if>
+						<#if ad.position.id == "hsl_side">
+						260x75
+						</#if>
+						<#if ad.position.id == "hsl_teamAd">
+						85x40
+						</#if>
+						尺寸jpg、gif、png、bmp或JPG、GIF、PNG、BMP格式，单张图片大小不超过2MB<br/><br/>
+					</span>
+					<span>
+						<img id="imgView" src="${ad.adBaseInfo.imagePath}" width="120" height="120" style="padding-left: 65px;"/>
+					</span>	
+					<span style="padding-left: 60px;">
+						<input id="imgFile" name="file" type="file" onchange="imageAdd.imageUpload(this);" size="60" style="width: 170px;"/><span style="color: red;">*</span>
+						<!-- <input id="imageId" type="hidden" name="imageId" class="required" value="${ad.adBaseInfo.imageId}"/> -->
+						<input id="imageInfo" type="hidden" name="imageInfo" class="required" value="${ad.adBaseInfo.imageInfo}"/>
+						<input id="imagePath" type="hidden" name="imagePath" class="required" value="${ad.adBaseInfo.imagePath}"/>
+						<input id="fileName" type="hidden" name="fileName" class="required" value="${ad.adBaseInfo.fileName}"/>
+					</span>
+					</div>
+					
+				<td>
+			</tr>
+			<tr height="10px;"/> 
+	</table>
+	
+	<div class="">
+		<ul>
+			<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="return checkPosition()">确定修改</button></div></div></li>
+			<li><div class="buttonActive"><div class="buttonContent"><button type="button" class="close">取消修改</button></div></div></li>
+			<#if (ad.adStatus.isShow)?string('true','false') == "true">
+			<li style="float:left;"><input type="checkbox" name="show" id="show" checked="checked"/>立即展示</li>
+			</#if>
+			<#if (ad.adStatus.isShow)?string('true','false') == "false">
+			<li style="float:left;">
+				<input type="checkbox" name="show" id="show"/>立即展示</li>
+			</#if>
+		</ul>
+	</div>
+	
+	</form>
+	
+</div>
+

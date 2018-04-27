@@ -1,0 +1,23 @@
+--                     
+select t.RESERVEINFO_ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001');
+
+
+DELETE from HGFX_RESERVE_RECORD o where o.DISTRIBUTOR_ID in (select t.ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001'));
+
+DELETE from HGFX_PRODUCT_IN_USE o where o.DISTRIBUTOR_ID in (select t.ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001'));
+
+delete from HGFX_IMPORT_HISTORY o where o.DISTRIBUTOR_ID  in (select t.ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001'));
+
+delete from HGFX_DISTRIBUTOR_USER o where  o.DISTRIBUTOR_ID in (select t.ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001'));
+
+delete from HGFX_ORDER o where  o.MER_ID in (select t.ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001'));
+
+DELETE from HGFX_WARN_SMS_RECORD o where o.DISTRIBUTOR_ID  in (select t.ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001'));
+
+
+DELETE from HGFX_ARREARS_RECORD o where o.DISTRIBUTOR_ID  in (select t.ID from HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001'));
+
+delete from  HGFX_DISTRIBUTOR t where t.MER_CODE in('A00000002' ,'A00000001');
+
+
+DELETE from  HGFX_RESERVE_INFO o where o.ID in (   '?','?');

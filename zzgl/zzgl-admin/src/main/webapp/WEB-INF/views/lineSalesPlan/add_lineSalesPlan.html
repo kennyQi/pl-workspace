@@ -1,0 +1,283 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src="${contextPath}/resources/js/trumbowyg/trumbowyg.js"></script>
+<script src="${contextPath}/resources/js/trumbowyg/langs/zh.js"></script>
+<script src="${contextPath}/resources/js/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="${contextPath}/resources/js/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var path = '${contextPath}';
+    function checkPosition(){
+
+        if($("#position2").val()!=$("#positionHide").val() && $("#positionHide").val()!=""){
+            alert('请上传广告图片');
+            return false;
+        }else{
+            return true;
+        }
+    }
+    var imageAdd = {};
+    imageAdd.imageUpload = function (me) {
+        $.ajaxFileUpload({
+            url : path+"/file/imgUpload",
+            secureuri : false,
+            fileElementId : 'line_ad_imgFile',
+            dataType : 'json',
+            data: {
+                maxSize: 20480
+            },
+            success: function (data, status) {
+                console.info(data);
+                if ("success" == data.status) {
+                    $("#addForm #imgView").attr("src", data.imageUrl);
+                    $("#addForm #imagePath").attr("value",data.imageUrl);
+                    $("#addForm #fileName").attr("value",data.imageName);
+                    $("#addForm #imageInfo").attr("value",data.fileInfo);
+                } else {
+                    alertMsg.info(data.msg);
+                }
+            },
+            error: function (data, status, e) {
+                alertMsg.info("上传失败");
+            }
+        });
+    };
+    $("#show").click(function(){
+        if($(this).is(":checked")==true){
+            $("#submitShow").val(2)
+        }else{
+            $("#submitShow").val(1)
+        }
+    })
+    //根据线路日期查询线路价格
+    $("#selectLinePrice").click(function(){
+        var lineId=$(".lineId").val();
+        var travelDate=$("#travelDate").val();
+        if(lineId==""){
+            alertMsg.error("请选择线路");
+            return false;
+        }
+        if(travelDate==""){
+            alertMsg.error("请选择日期");
+            return false;
+        }
+        var travelDate=$("#travelDate").val();
+        var date=new  Date();
+        var dateymd=date.getFullYear()+ "-"+(date.getMonth()+1)+"-"+date.getDay();
+        if(!comptime(dateymd,travelDate)){
+            alertMsg.error("出行日期必须大于当天");
+            return false;
+        }
+        $.ajax({
+            global:false,
+            type:"post",
+            url : path+"/lineSalesPlan/selectLinePrice?lineId="+lineId+"&travelDate="+travelDate+"",
+            dataType : "json",
+            success : function(data) {
+                $("#formerPrice").val(data.linePrice);
+                $("#provideNum").val(data.peopleAmount);
+                $(".hideProvideNum").val(data.peopleAmount);
+                $("#expect").val(data.expect);
+            }
+        })
+    })
+    /**
+     *	比较时间
+     */
+    function comptime(beginTime,endTime) {
+        var beginTimes = beginTime.substring(0, 10).split('-');
+        var endTimes = endTime.substring(0, 10).split('-');
+        //火狐不支持日期中间用"-"隔断，要用"/"替换
+        beginTime = beginTimes[1] + '/' + beginTimes[2] + '/' + beginTimes[0] + ' ' + beginTime.substring(10, 19);
+        endTime = endTimes[1] + '/' + endTimes[2] + '/' + endTimes[0] + ' ' + endTime.substring(10, 19);
+
+        var a = (Date.parse(endTime) - Date.parse(beginTime)) / 3600 / 1000;
+        if (a < 0) {
+            return false;
+        } else if (a > 0) {
+            return true;
+        } else if (a == 0) {
+            return false;
+        }
+    }
+    function custValidateForm(fr){
+        var beginDate=$(".beginDate").val();
+        var endDate=$(".endDate").val();
+        var hideProvideNum=parseInt($(".hideProvideNum").val());
+        var provideNum=parseInt($("#provideNum").val());
+        var expect=$("#expect").val();
+        var travelDate=$("#travelDate").val();
+        var date=new  Date();
+        var dateymd=date.getFullYear()+ "-"+(date.getMonth()+1)+"-"+date.getDay();
+        if(!comptime(dateymd,travelDate)){
+            alertMsg.error("出行日期必须大于当天");
+            return false;
+        }
+        if(expect=="1"){
+            alertMsg.error("所选日期没有对应团期");
+            return false;
+        }
+        if(expect==""){
+            alertMsg.error("请先点击查询价格");
+            return false;
+        }
+        if(!comptime(beginDate,endDate)){
+            alertMsg.error("结束时间不能小于开始时间");
+            return false;
+        }
+        console.info(provideNum);
+        console.info(hideProvideNum);
+        console.info(provideNum>hideProvideNum);
+        if(hideProvideNum==""||provideNum>hideProvideNum){
+            alertMsg.error("团购数量不能大于实际人数");
+            return false;
+        }
+        if(provideNum<1){
+            alertMsg.error("团购数量必须大于0");
+            return false;
+        }
+        return validateCallback(fr, custAjaxDone);
+    }
+    /**
+     * 自定义处理ajax的方法
+     */
+    function custAjaxDone(json){
+
+        DWZ.ajaxDone(json);
+        if (json.statusCode == DWZ.statusCode.ok){
+            if (json.navTabId){ //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+                navTab.reloadFlag(json.navTabId);
+            } else { //重新载入当前navTab页面
+                var $pagerForm = $("#pagerForm", navTab.getCurrentPanel());
+                var args = $pagerForm.size()>0 ? $pagerForm.serializeArray() : {}
+                navTabPageBreak(args, json.rel);
+            }
+
+            if ("closeCurrent" == json.callbackType) {
+                setTimeout(function(){navTab.closeCurrentTab(json.navTabId);}, 100);
+            } else if ("forward" == json.callbackType) {
+                navTab.reload(json.forwardUrl);
+            } else if ("forwardConfirm" == json.callbackType) {
+                alertMsg.confirm(json.confirmMsg || DWZ.msg("forwardConfirmMsg"), {
+                    okCall: function(){
+                        navTab.reload(json.forwardUrl);
+                    }
+                });
+            } else if ("openNew" == json.callbackType) {
+                navTab.openTab(json.navTabId, '${contextPath}/lineSalesPlan/lineSalesList',{title:"线路活动管理", fresh:true, external:false});
+                navTab.closeTab("addLineSalesPlan");
+            } else {
+                navTab.getCurrentPanel().find(":input[initValue]").each(function(){
+                    var initVal = $(this).attr("initValue");
+                    $(this).val(initVal);
+                });
+            }
+        }
+
+
+    }
+</script>
+<div class="pageContent" style="text-align:left;">
+    <form method="post" id="addForm" enctype="multipart/form-data"
+          action="${contextPath}/lineSalesPlan/addLineSales"
+          class="pageForm required-validate" onsubmit="return custValidateForm(this);">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <input type="hidden"  class="lineId" name="lineId"/><!--线路id-->
+                <input type="hidden"  class="hideProvideNum" /><!--发放数量-->
+                <input type="hidden"  id="expect" /><!--//1标识无团期 2有团期-->
+
+                <label>活动类型：</label>
+                <input type="radio" value="1" name="planType" checked="checked"/>拼团&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" value="2" name="planType"/>人气秒杀
+            </div>
+            <div class="unit">
+                <label>活动名称：</label>
+                <input type="text" name="planName" class="required planName"  size="65" id="planName" value="${(dto.baseInfo.planName)!''}"/>&nbsp;&nbsp;
+            </div>
+            <div class="unit">
+                <label>线路名称：</label>
+                <input type="text" name="lineName" class="required lineName"  size="65" id="lineName" readonly="readonly"/>&nbsp;&nbsp;
+                <label>
+                    <a class="button" href="${contextPath}/lineSalesPlan/selectLineName" target="dialog" rel="dlg_page1" mask="true"  title="选择线路(以下线路为全款线路)">
+                        <span>选择线路</span>
+                    </a>
+                </label>
+            </div>
+            <div class="unit" id="isSend">
+                <label>线路类型：</label>
+                <input type="text"  id="lineType" class="readonly required" readonly="true"/>
+            </div>
+            <div class="unit">
+                <label>出行日期：</label>
+                <input type="text" name="travelDate" size="24" id="travelDate"  class="date textInput readonly required " datefmt="yyyy-MM-dd HH:mm:ss" />
+                &nbsp;&nbsp;
+                <label>
+                    <a class="button" href="javaScript:void(0)" id="selectLinePrice">
+                        <span>查询价格</span>
+                    </a>
+                </label>
+            </div>
+            <div class="unit">
+                <label>线路价格：</label>
+                <input type="text"  id="formerPrice" min="1" max="100000" name="originalPrice" maxlength="8" size="10" class="required number numberTwo" />元
+            </div>
+            <div class="unit">
+                <label>团购价格：</label>
+                <input type="text" id="planPrice" min="1" max="100000" name="planPrice"  maxlength="8"  class="required  number  number numberTwo"  size="10" />元 <a style="color:green;"></a>
+            </div>
+            <div class="unit">
+                <label>发放数量：</label>
+                <input type="text" id="provideNum" name="provideNum"  maxlength="4" min="1" max="1000"  class="required provideNum digits"  size="10"/> <a style="color:green;"></a>
+            </div>
+            <div class="unit">
+                <label>优先级：</label>
+                <input type="text" id="priority" name="priority"  maxlength="8" max="100000" class="required priority digits"  size="10"/> <a style="color:green;"></a>
+            </div>
+            <div class="unit">
+                <label>活动开始时间：</label>
+                <input type="text" name="beginDate" size="24"  class="date textInput readonly required beginDate" datefmt="yyyy-MM-dd HH:mm:ss" value="${(couponActivityDTO.useConditionInfo.beginDate?string("yyyy-MM-dd HH:mm:ss"))!''}" />
+                <label>活动结束时间:</label>
+                <input type="text" name="endDate" size="24"  class="date textInput readonly required endDate" datefmt="yyyy-MM-dd HH:mm:ss" value="${(couponActivityDTO.useConditionInfo.endDate?string("yyyy-MM-dd HH:mm:ss"))!''}"/>
+            </div>
+            <div class="unit">
+                <label>*团购图片：</label>
+					<span>
+						<img id="imgView" width="180" height="180" style="padding-left: 0px;"/>
+					</span>
+					<span style="padding-left: 60px;">
+						<input id="line_ad_imgFile" name="file" type="file" onchange="imageAdd.imageUpload(this);" size="60" style="width: 170px;"/><span style="color: red;">*</span>
+                        <br/><br/><span style="color: red;padding-left: 130px;">完成上传图片，再次修改广告位时需要重新上传图片，原图会失效!</span><br/><br/>
+						<span style="color: red;padding-left: 130px;">建议上传710x395尺寸jpg、gif、png、bmp或JPG、GIF、PNG、BMP格式，单张图片大小不超过2MB<br/><br/>
+                        </span>
+						<input id="imageInfo" type="hidden" name="imageUri" class="required"/>
+						<input id="fileName" type="hidden" name="fileName" class="required"/>
+						<!--<input id="imagePath" type="hidden" name="imageUri" class="required"/>-->
+					</span>
+            </div>
+            <div class="unit">
+                <label>抢购规则：</label>
+                <textarea rows="15" cols="75"  class="editor"  name="planRule"> <#--${(couponActivityDTO.baseInfo.ruleIntro)!}--></textarea>
+            </div>
+            <div class="unit">
+                <label>是否展示：</label>
+                <input type="radio" value="2" name="showStatus" checked="checked"/>展示&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" value="1" name="showStatus"/>不展示
+            </div>
+        </div>
+
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive">
+                    <div class="buttonContent">
+                        <button type="submit">提交</button>
+                    </div>
+                </div></li>
+                <li><div class="button">
+                    <div class="buttonContent">
+                        <button type="button" class="close">取消</button>
+                    </div>
+                </div></li>
+            </ul>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,153 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<title>注册汇金宝账户</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<style>
+tr {
+	text-align: right;
+	height: 35px;
+	line-height: 35px;
+}
+
+td {
+	padding: 5px;
+}
+
+/* label { */
+/* 	font-size: 18px; */
+/* 	color: #565656; */
+/* } */
+
+/* a { */
+/* 	color: blue; */
+/* } */
+/* #lience{ */
+/* 	color:blue; */
+/* } */
+
+/* #lience:hover{ */
+/* 	cursor:pointer; */
+/* 	text-decoration: underline; */
+/* } */
+input[type="text"] {
+	width: 160px;
+}
+</style>
+<script>
+	function check_IsCheck() {
+		if ($("#readed").attr("checked") == "checked") {
+			$("#sub").removeAttr("disabled");
+		} else {
+			$("#sub").attr("disabled", "true");
+		}
+	}
+	function register() {
+		var regForm = $("#regForm");
+
+	}
+	function registerDone(json) {
+		if (json.statusCode == "200") {
+			var cstNo=json.cstNo;
+			var operatorNo=json.operatorNo;
+			$.bringBack({cstNo:cstNo, operatorNo:operatorNo});
+		}
+//		if (json.callbackType == "closeCurrent") {
+//			$.pdialog.closeCurrent();
+//		}
+		if (json.statusCode == "300") {
+			alertMsg.error(json.message);
+		}
+		return;
+	}
+</script>
+</head>
+
+<body>
+	<form action="${contextPath}/hjbreg/submitAccount" method="post"
+		id="regForm" onsubmit="return validateCallback(this,registerDone)"
+		class="pageForm">
+		<table style="margin:30px auto;">
+			<tr>
+				<td><label>账户类型：</label></td>
+				<td><input type="text" name="accountType" 
+					value="汇金宝支付平台电子账户"></input></td>
+			</tr>
+			<tr>
+				<td><label>经销商名称：</label></td>
+				<td><input type="text" name="cstName" 
+					class="required textInput" value="${cstName}" /></td>
+			</tr>
+			<tr>
+				<td><label>登录名：</label></td>
+				<td><input type="text" name="loginName"
+					class="required textInput"></input></td>
+			</tr>
+			<tr>
+				<td><label>地址：</label></td>
+				<td><input type="text" name="address" 
+					class="required textInput"
+					value="${address}" />
+				</td>
+			</tr>
+			<tr>
+				<td><label>企业联系邮箱：</label></td>
+				<td><input type="text" name="email" 
+					class="required email textInput"
+					value="${email}" /></td>
+			</tr>
+			
+			<!-- 固定电话和移动电话均属于企业联系电话 -->
+			<tr>
+				<td><label>企业固定电话：</label></td>
+				<td><input type="text" name="phone"
+					value="${telephone}"
+					class="required phone textInput"></input></td>
+			</tr>
+			<tr>
+				<td><label>企业移动电话：</label></td>
+				<td><input type="text" name="mobile" value="${telephone}" class="required phone textInput"></input></td>
+			</tr>
+			<tr>
+				<td><label>操作员姓名：</label></td>
+				<td><input type="text" name="operatorName" 
+					class="required textInput"
+					value="${linkMan}" /></td>
+			</tr>
+			<tr>
+				<td><label>操作员邮箱：</label></td>
+				<td><input type="text" name="operatorEmail" 
+					class="required textInput"
+					value="" /></td>
+			</tr>
+			<tr>
+				<td><label>操作员手机：</label></td>
+				<td><input type="text" name="operatorMobile" 
+					class="required textInput"
+					value="" /></td>
+			</tr>
+			<tr>
+				<td><label>证件号码：</label></td>
+				<td><input type="text" name="ctfNo"
+					class="required textInput"></input></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;"><input
+					type="checkbox" name="readed" id="readed" onclick="check_IsCheck()" />
+					<span>我已阅读</span><span id="lience">《汇金宝支付平台用户协议》</span></td>
+			</tr>
+			<tr>
+				<td><button type="submit" disabled="true" id="sub"
+						onclick="register()">注册</button></td>
+				<td style="text-align:left;"><button class="close">取消</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

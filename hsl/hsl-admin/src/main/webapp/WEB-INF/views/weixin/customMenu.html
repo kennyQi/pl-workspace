@@ -1,0 +1,240 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+		<script type="text/javascript">
+			$(function(){
+				function GetRandomNum(Min,Max) {
+					var Range = Max - Min;
+					var Rand = Math.random();
+					return(Min + Math.round(Rand * Range));
+				}
+				var index = $('tr[first]').size();
+				$('.menu_add').click(function(){
+					index++;
+					var items = $('tr[first]');
+					if(items.size()>= 3){
+						alertMsg.info("最多只能添加3个一级菜单!!");
+						return false;
+					}
+					var menu = '<tr id="menu_'+index+'" class="tbt" first>';
+					menu += '<td><input type="text" name="name"  style="width:220px;" placeholder="一级菜单名称"></td>';
+					menu += '<td>--</td>';
+					menu += '<td><input type="text" name="url" style="width:220px;" placeholder="一级菜单链接"></td>';
+					menu += '<td>' +
+							'<a class="menu_del" href="javascript:;">删除</a><br/>' +
+							'<a class="item_add" href="javascript:;">添加二级菜单</a><br/>' +
+							'</td>';
+					menu += '</tr>';
+					
+					$('.menu').append(menu);
+					
+				});
+				
+				$('.menu').on('click', '.item_add', function () {
+					var tr=	 $(this).parents('tr').eq(0);
+					var idx = tr.attr('id');
+					var items = $('tr[id='+idx+'][second]');
+					if(items.size()>= 5){
+						alertMsg.info("最多只能添加5个二级菜单!!");
+						return false;
+					}
+					
+					var tr=	 $(this).parents('tr').eq(0);
+					var idx = tr.attr('id');
+					var item = '<tr id="'+tr.attr('id')+'" second>';
+					item += '<td>&nbsp;</td>';
+					item += '<td><input type="text" name="name" style="width:220px;" placeholder="二级菜单名称"></td>';
+					item += '<td><input type="text" name="url" style="width:220px;" placeholder="二级菜单链接"></td>';
+					item += '<td>' +
+							'<a class="menu_del" href="javascript:;">删除</a><br/>' +
+							'</td>';
+					item += '</tr>';
+					$('tr[id='+idx+']').last().after(item);
+					tr.find("input[name='url']").val("");
+					tr.find("input[name='url']").attr("disabled","disabled");
+				});
+				
+				$('.menu').on('click', '.menu_del', function() {
+					var tr=	 $(this).parents('tr').eq(0);
+					var isParent = tr.attr("class");
+					var idx = tr.attr('id');
+					var ptr = $(this).parents('tr').eq(0);
+					if(isParent != undefined && isParent == "tbt"){
+						$('tr[id='+tr.attr('id')+']').remove();
+					}else{
+						tr.remove();
+						var items = $('tr[id='+idx+'][second]');
+						if(items.size() == 0){
+							$('tr[id='+tr.attr('id')+']').find("input[name='url']").removeAttr("disabled");
+						}else{
+							$('tr[id='+tr.attr('id')+'][first]').find("input[name='url']").val("");
+							$('tr[id='+tr.attr('id')+'][first]').find("input[name='url']").attr("disabled","disabled");
+						}
+					}
+				});
+			});
+	
+			function saveWxMenu(){
+				
+				var data = {menuItemList:[]};
+				var message = "";
+				$('.menu tr[first]').each(function(){
+					var idx = $(this).attr('id');
+					var index = idx.substr(idx.length-1,1);
+					var items = $('tr[id='+idx+'][second]');
+					var name =$(this).find('input[name=name]').val();
+					if(name ==""){
+						message += "第"+index+"个一级菜单的菜单名称不能为空！";
+						return false;
+					}
+					if(!isCardName(name)){
+						message += "第"+index+"个一级菜单的名称只能是汉字！";
+						return false;
+					}
+					if(name.length>=5){
+						message += "第"+index+"个一级菜单的名称长度不能超过4位！";
+						return false;
+					}
+					var menu = {name:$(this).find('input[name=name]').val()};
+					if(items.size()==0){
+						var url =$(this).find('input[name=url]').val();
+						if(url == ""){
+							message += "第"+index+"个一级菜单的链接不能为空！";
+							return false;
+						}
+						if(!IsURL(url)){
+							message += "第"+index+"个一级菜单的链接格式不正确！";
+							return false;
+						}
+						menu['url'] = $(this).find('input[name=url]').val();
+					}else{
+						menu['sub_button'] = [];
+						$('tr[id='+idx+'][second]').each(function(){
+							var index = idx.substr(idx.length-1,1);
+							var url = $(this).find('input[name=url]').val();
+							var name = $(this).find('input[name=name]').val()
+							if(url == ""){
+								message += "第"+index+"个一级菜单的二级菜单链接不能为空！";
+								return false;
+							}
+							if(!IsURL(url)){
+								message += "第"+index+"个一级菜单的二级菜单链接格式不正确！";
+								return false;
+							}
+							if(name == ""){
+								message += "第"+index+"个一级菜单的二级菜单名称不能为空！";
+								return false;
+							}
+							if(!isCardName(name)){
+								message += "第"+index+"个一级菜单的二级菜单名称只能是汉字！";
+								return false;
+							}
+							if(name.length>=8){
+								message += "第"+index+"个一级菜单的二级菜单名称长度不能超过7位！";
+								return false;
+							}
+							var item = {
+								name:$(this).find('input[name=name]').val(),
+								url:$(this).find('input[name=url]').val()
+							};
+							menu['sub_button'].push(item);
+						});
+					}
+					data.menuItemList.push(menu);
+					
+				});
+				
+				if(message != ""){
+					alertMsg.info(message);
+					return false;
+				}
+				jQuery.ajax({
+					'type' : 'POST',
+					'url' : '${contextPath}/admin/weChat/saveCustomMenu',
+					'contentType' : 'application/command-json',
+					'data' : JSON.stringify(data),
+					'success' : function() {
+						alertMsg.correct("修改成功！！")
+					}
+				}); 
+			}
+			
+		  //验证网站
+		  function IsURL(urlString){
+			 var urlLast = urlString.substring(urlString.length-1);
+			 if(urlLast == "="){
+				 urlString = urlString.substring(urlString.length-1,0);
+			 }
+		     regExp = "^((https|http|ftp|rtsp|mms)://)";
+		     if (urlString.match(regExp)){
+		  	   return true;   
+		     }else{
+		  	   return false;  
+		     }
+		  }
+			  
+		//检验中文
+		  function isCardName(name){
+		  	 
+		     var patrn = /^\s*[\u4e00-\u9fa5]{0,}[\u4e00-\u9fa5.·]{0,15}[\u4e00-\u9fa5]{0,}\s*$/; 
+		     if(!patrn.exec(name)){
+		         return false;
+		     }
+		     return true;
+		  }
+		</script>
+		<style type="text/css">
+			#customMenu tr{width: 300px;height: 50px;}
+			#customMenu td{width: 300px;height: 50px;}
+			#customMenuButton .menu_add{height:31px;width:100px;background-color:blue;color:white;}
+			#customMenuSubmitButton .subButton{height:31px;width:100px;background-color:blue;color:white;}
+			#customMenu a{color:blue;}
+			body{overflow-y: scroll;}
+		</style>
+		
+		<div style = "float:right;" id="customMenuButton">
+		       <input id="menu_add" class="menu_add" type="button" value="增加一级菜单" />
+        </div>
+	    <br/><br/>
+	    <hr/>
+		<div class="pageContent" layouth="70">
+			<table class="menu" border="1px" id="customMenu">
+				<tr>
+					<td>一级菜单</td>
+					<td>二级菜单</td>
+					<td>链接</td>
+					<td>操作</td>
+				</tr>
+				<#if wxMenuCoinfig??>
+					<#list wxMenuCoinfig as buttons>
+						<tr id= "menu_${(buttons_index+1)!}" class="tbt" first>
+							<td ><input type="text" value="${(buttons.name)!}" name="name" style="width:220px;" placeholder="一级菜单名称"></td>
+							<td >--</td>
+							<td >
+							<#if (buttons.sub_button??)>
+								<input type="text" value="${(buttons.url)!}" name="url" style="width:220px;" disabled="disabled" placeholder="一级菜单链接">
+							<#else>
+								<input type="text" value="${(buttons.url)!}" name="url" style="width:220px;"  placeholder="一级菜单链接">
+							</#if>
+							</td>
+							<td >
+								<a class="menu_del" href="javascript:;">删除</a><br/>
+								<a class="item_add" href="javascript:;">添加二级菜单</a><br/>
+							</td>
+						</tr>
+						<#list buttons.sub_button as subutton>
+							<tr id= "menu_${(buttons_index+1)!}" second>
+								<td ></td>
+								<td ><input type="text" value="${(subutton.name)!}" name="name" style="width:220px;" placeholder="二级菜单名称"></td>
+								<td ><input type="text" value="${(subutton.url)!}" name="url" style="width:220px;" placeholder="二级菜单链接"></td>
+								<td>
+									<a class="menu_del" href="javascript:;">删除</a><br/>
+								</td>
+							</tr>
+						</#list>
+					</#list>
+				</#if>
+			</table>
+		</div>
+		 <div style = "float:left;" id="customMenuSubmitButton">
+	       <input type="button" value="保存" onclick="saveWxMenu();" class="subButton">
+	    </div>

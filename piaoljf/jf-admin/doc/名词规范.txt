@@ -1,0 +1,14 @@
+积分			jf
+账户			account
+类型			type
+机构			organ
+交易			trade
+流水			flow
+查询			query
+计算			cal
+规则			rule
+会员级别-普通	nor(mal)	
+会员级别-白银	sil(ver)
+会员级别-金牌	gol(d)
+会员级别-白金	pt
+会员级别-钻石	dia(mond)

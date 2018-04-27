@@ -1,0 +1,68 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css'
+	rel='stylesheet' />
+<div class="pageHeader">
+<form id="myform" method="post" action="${contextPath}/fixedPrice/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+<input type="hidden" name="fpsid" value="${fpsid!''}">
+<input type="hidden" name="pid" value="${pid!''}">
+<input type="hidden" name="did" value="${did!''}">
+<input type="hidden" name="loginname" value="${loginname!''}">
+<input type="hidden" name="qujian" value="" id="qujian">
+<input type="hidden" name="zhekou" value="" id="zhekou">
+<input type="hidden" name="datetype" value="${datetype!''}" id="datetype">
+<input type="hidden" name="fixedPriceIntervalID" value="${fixedPriceIntervalID!''}" >
+</form>
+	<table style="width: 500px;height: 200px;" border="0">
+	<tr>
+	<td style="text-align: center;">商户公司</td><td>${name!''}</td>
+	<td style="width: 20%">
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align: center;">账户ID</td><td>${loginname!''}</td>
+	<td style="width: 20%">
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align: center;">区间</td><td>
+	<select onchange="bian()" id="sel">
+	<option value=":">请选择</option>
+	<#list qujians as qujian>
+	<option value="${qujian.zk}:${qujian.qj}">${qujian.qj}</option>
+	</#list>
+	</select>
+	</td>
+	<td style="width: 20%">
+	</td>
+	</tr>
+	<tr>
+	<td style="text-align: center;">定价</td>
+	<td><div id="dingjia"></div></td>
+	<td style="width: 20%">
+	</td>
+	</tr>
+	<tr>
+	<td style="width: 80%;text-align: center;" colspan="2">
+	<button onclick="sub()">保存</button>
+	</td>
+	<td style="width: 20%">
+	</td>
+	</tr>
+	</table>
+</div>
+<script>
+function bian(){
+	$("#dingjia").html($("#sel").val().split(":")[0]);
+	$("#qujian").attr("value",$("#sel").val().split(":")[1]);
+	$("#zhekou").attr("value",$("#sel").val().split(":")[0]);
+}
+function sub(){
+	if($("#sel").val().split(":")[0]==""){
+		alert("请选择区间！");
+		return false;
+	}
+	$("#myform").submit();
+	
+}
+</script>

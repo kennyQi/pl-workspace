@@ -1,0 +1,107 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	//重置
+	function initText(){
+		$("#ticketPolicyName", navTab.getCurrentPanel()).attr("value",'');
+		$("#scenicSpotStr", navTab.getCurrentPanel()).attr("value","");
+		$("#status", navTab.getCurrentPanel()).attr("value","");
+		$("#createBeginDateStr", navTab.getCurrentPanel()).attr("value","");
+		$("#createEndDateStr", navTab.getCurrentPanel()).attr("value","");
+	}
+	
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this)" action="${contextPath}/groupTicket/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						联票名称：<input type="text" id="ticketPolicyName" name="ticketPolicyName" value="${ticketPolicyName}"/>
+					</td>
+					<td>
+						包含景区：<input type="text" id="scenicSpotStr" name="scenicSpotStr" value="${scenicSpotStr}"/>
+					</td>
+					<td>
+						启用状态：
+						<select id="status" name="status">
+							<option value="">全部</option>
+							<option value="3" <#if status==3 >selected="selected"</#if> > 启用 </option><!-- 上架 -->
+							<option value="4" <#if status==4 >selected="selected"</#if> > 禁用 </option><!-- 下架 -->
+						</select>
+					</td>
+					<td>
+						发布时间：
+						<input type="text" id="createBeginDateStr" name="createBeginDateStr" value="${createBeginDateStr}" class="date" readonly="true"/>&nbsp;到&nbsp;
+						<input type="text" id="createEndDateStr" name="createEndDateStr" value="${createEndDateStr}" class="date" readonly="true"/>
+					</td>
+				</tr>
+			</table>
+			
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkCashStr()">查询</button></div></div>
+					</li>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="button" onclick="initText()">条件重置</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="155" id="table_caiwu">
+		<thead>
+			<tr>
+			    <th width="210px;">产品编号</th>
+				<th width="280px;">联票名称</th>
+				<th width="280px;">包含景区</th>
+				<th width="90px;">库存数量（张）</th>
+				<th width="110px;">发布时间</th>
+				<th width="80px;">启用状态</th>
+				<th width="100px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as policy>
+			<tr>
+				<td>${policy.baseInfo.key}</td>
+				<td>${policy.baseInfo.name}</td>
+				<td>${policy.baseInfo.scenicSpotNameStr}</td>
+				<td>
+					<#if policy.sellInfo.remainingQty == -1>
+						无限
+					<#else>
+						${policy.sellInfo.remainingQty}
+					</#if>
+				</td>
+				<td>${policy.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<td>
+					<#if policy.status.current==0>
+						禁用
+					</#if>
+					<#if policy.status.current==3>
+						启用
+					</#if>
+					<#if policy.status.current==4>
+						禁用
+					</#if>
+				</td>
+				<td>
+					<a target="dialog" href="${contextPath}/groupTicket/info?ticketPolicyId=${policy.id}" mask="true" height="750" width="950" style="color: blue">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+</div>
+

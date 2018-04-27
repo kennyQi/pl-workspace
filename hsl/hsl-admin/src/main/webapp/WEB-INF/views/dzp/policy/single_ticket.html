@@ -1,0 +1,152 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript" src="${contextPath}/resources/js/dzp/single_ticket.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/kindeditor-min.js"></script>
+<input type="hidden" value="${contextPath}" id="contextPath"/>
+<div class="pageContent">
+    <div class="pageFormContent" layoutH="58">
+        <div class="unit">
+            <label>产品编号：</label>
+            ${dzpTicketPolicy.id}
+        </div>
+        <div class="unit">
+            <label>单票名称：</label>
+            ${dzpTicketPolicy.baseInfo.name}
+        </div>
+
+        <div class="unit">
+            <label>连续游玩天数：</label>
+            ${dzpTicketPolicy.useInfo.validDays}
+        </div>
+        <div class="unit">
+            <label>单票介绍：</label>
+                <textarea id="singleTicket_intro_editor" style="width:700px;height:425px;" maxlength="5000" >
+                    ${dzpTicketPolicy.baseInfo.intro}
+                </textarea>
+        </div>
+        <div class="unit">
+            <label>预订须知：</label>
+                <textarea id="singleTicket_buyNotice_editor" style="width:700px;height:425px;" maxlength="5000" >
+                ${(dzpTicketPolicy.baseInfo.notice)!}
+                </textarea>
+        </div>
+        <div class="unit">
+            <label>单票协议：</label>
+                <textarea id="singleTicket_agreement_editor" style="width:700px;height:425px;"  maxlength="5000" >
+                    ${dzpTicketPolicy.baseInfo.saleAgreement}
+                </textarea>
+        </div>
+        <div class="unit">
+            <label>参考市场价：</label>
+            ${(dzpTicketPolicy.baseInfo.rackRate?c)!}元
+        </div>
+        <div class="unit">
+            <label>退票规则：</label>
+            不能退
+        </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button type="button" class="close">关闭页面</button>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    //页面加载完成执行
+    $(document).ready(function(){
+        /**
+         * 单票介绍文本框
+         */
+        var singleTicket_editor;
+        singleTicket_intro_editor = KindEditor.create('#singleTicket_intro_editor',{
+            basePath : '${contextPath}/resources/js/kindeditor/',
+            readonlyMode : true,
+            items : [
+                'source', '|', 'undo', 'redo', '|', 'preview',  'template', 'code', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink', '|'
+            ],
+            uploadJson : '${contextPath}/image/image/upload',
+            afterUpload: function(url,data,name){//上传图片之后的回调函数
+                illustrations.push(JSON.stringify(data.fdfsFileInfo));
+            },
+            afterChange : function() {
+                if(this.count()>65000){
+                    alertMsg.error("内容过长");
+                }else{
+                    this.sync();
+                }
+            }
+        });
+
+        /**
+         * 预订须知
+         */
+        var singleTicket_editor;
+        singleTicket_buyNotice_editor = KindEditor.create('#singleTicket_buyNotice_editor',{
+            basePath : '${contextPath}/resources/js/kindeditor/',
+            readonlyMode : true,
+            items : [
+                'source', '|', 'undo', 'redo', '|', 'preview',  'template', 'code', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink', '|'
+            ],
+            uploadJson : '${contextPath}/image/image/upload',
+            afterUpload: function(url,data,name){//上传图片之后的回调函数
+                illustrations.push(JSON.stringify(data.fdfsFileInfo));
+            },
+            afterChange : function() {
+                if(this.count()>65000){
+                    alertMsg.error("内容过长");
+                }else{
+                    this.sync();
+                }
+            }
+        });
+        /**
+         * 单票协议
+         */
+        var singleTicket_editor;
+        singleTicket_agreement_editor = KindEditor.create('#singleTicket_agreement_editor',{
+            basePath : '${contextPath}/resources/js/kindeditor/',
+            readonlyMode : true,
+            items : [
+                'source', '|', 'undo', 'redo', '|', 'preview',  'template', 'code', 'cut', 'copy', 'paste',
+                'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+                'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+                'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+                'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+                'anchor', 'link', 'unlink', '|'
+            ],
+            uploadJson : '${contextPath}/image/image/upload',
+            afterUpload: function(url,data,name){//上传图片之后的回调函数
+                illustrations.push(JSON.stringify(data.fdfsFileInfo));
+            },
+            afterChange : function() {
+                if(this.count()>65000){
+                    alertMsg.error("内容过长");
+                }else{
+                    this.sync();
+                }
+            }
+        });
+    })
+</script>

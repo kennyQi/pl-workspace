@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>我的卡卷</title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<link rel="stylesheet" href="css/kajuan.css"/>
+
+<!-- javascript -->
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+</head>
+<body class="personal">
+<!-- 页头  -->
+<header class="header">
+  <h1>我的卡卷</h1>
+  <div class="left-head"> <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn"> <span class="inset_shadow"> <span class="head-return"></span> </span> </a> </div>
+  <span id="kajuan_secc"><a href="#">完成</a></span>
+</header>
+<!-- 页头 -->
+
+ 
+<section class="kajuan_info">     
+  <div>
+  <ul>
+    <li>
+      <div class="kalist">
+        <div class="ka_title">50元优惠券</div>
+        <div class="ka_info"><span class="ka_price">满1000送50</span> <span class="ka_time">有效期：2014-08-05</span></div>
+        <div class="ka_sel"><i></i><input type="radio"  name="ka_radio" class="kj"></div>
+       </div>
+    </li>
+    <li>
+      <div class="kalist">
+        <div class="ka_title">50元优惠券</div>
+        <div class="ka_info"><span class="ka_price">满1000送50</span> <span class="ka_time">有效期：2014-08-05</span></div>
+               <div class="ka_sel"><i></i><input type="radio"  name="ka_radio" class="kj"></div>
+ 
+      </div>
+    </li>
+    <li>
+      <div class="kalist">
+        <div class="ka_title">50元优惠券</div>
+        <div class="ka_info"><span class="ka_price">满1000送50</span> <span class="ka_time">有效期：2014-08-05</span></div>
+        <div class="ka_sel"><i></i><input type="radio"  name="ka_radio" class="kj"></div>
+      </div>
+    </li>
+    <li>
+      <div class="kalist">
+        <div class="ka_title">50元优惠券</div>
+        <div class="ka_info"><span class="ka_price">满1000送50</span> <span class="ka_time">有效期：2014-08-05</span></div>
+        <div class="ka_sel"><i></i><input type="radio"  name="ka_radio" class="kj"></div>
+      </div>
+    </li>
+    <li>
+      <div class="kalist ">
+        <div class="ka_title">50元优惠券</div>
+        <div class="ka_info"><span class="ka_price">满1000送50</span> <span class="ka_time">有效期：2014-08-05</span></div>
+        <div class="ka_sel"><i></i><input type="radio"  name="ka_radio" class="kj"></div>
+      </div>
+    </li>
+  </ul>
+  </div>
+</section>
+  <script type="text/javascript">
+ $(".kajuan_info ul li").on("click",function(){
+	 $(this).addClass("hover").siblings().removeClass("hover");
+		$("input[name=ka_radio]").attr("checked",false); 
+		$($(this).find('.kj')[0]).attr("checked",true)
+  	 })
+	 
+ </script>
+</body>
+</html>

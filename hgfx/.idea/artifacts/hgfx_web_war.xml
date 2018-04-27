@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="hgfx-web:war">
+    <output-path>$PROJECT_DIR$/../hgnhfx/hgfx-web/target</output-path>
+    <root id="archive" name="hgfx-web.war">
+      <element id="artifact" artifact-name="hgfx-web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans        
+    	http://www.springframework.org/schema/beans/spring-beans.xsd        
+    	http://code.alibabatech.com/schema/dubbo        
+    	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 
+    <dubbo:application name="${dubbo_application_name}"  />
+ 
+    <dubbo:registry address="redis://127.0.0.1:6379" />
+ 	
+    <dubbo:protocol name="dubbo" port="20884" />
+ 
+    <!-- SPI SERVICE -->
+	<dubbo:service interface="slfx.xl.spi.inter.LineService" ref="lineService" />
+	
+	<dubbo:service interface="slfx.xl.spi.inter.LineDealerService" ref="lineDealerService" timeout="60000" retries="0"/>
+	
+	<dubbo:service interface="slfx.xl.spi.inter.LineSupplierService" ref="lineSupplierService" />
+	
+	<dubbo:service interface="slfx.xl.spi.inter.DayRouteService" ref="dayRouteService" />
+	
+	<dubbo:service interface="slfx.xl.spi.inter.LineOrderService" ref="lineOrderService" />
+	
+	<dubbo:service interface="slfx.xl.spi.inter.DateSalePriceService" ref="xldateSalePriceService" />
+	
+	<dubbo:service interface="slfx.xl.spi.inter.SalePolicyLineService" ref="salePolicyLineService" />
+	
+	<dubbo:service interface="slfx.xl.spi.inter.SalePolicyWorkLogService" ref="salePolicyWorkLogService" />
+	
+	<dubbo:service interface="slfx.xl.spi.inter.LinePictureFolderService" ref="linePictureFolderService" />
+	
+    <dubbo:reference id="albumSpiService" interface="hg.service.image.spi.inter.AlbumService" timeout="60000" retries="0" />
+	<dubbo:reference id="fastdfsSpiService" interface="hg.service.image.spi.inter.FastdfsService" timeout="60000" retries="0" />
+	<dubbo:reference id="imageSpiService" interface="hg.service.image.spi.inter.ImageService" timeout="60000" retries="0" />
+    <dubbo:reference id="imageUseTypeSpiService" interface="hg.service.image.spi.inter.ImageUseTypeService" timeout="60000" retries="0" />
+</beans>

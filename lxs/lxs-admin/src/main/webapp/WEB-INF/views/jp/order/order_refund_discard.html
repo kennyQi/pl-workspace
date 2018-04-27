@@ -1,0 +1,51 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/jp/order/cancel?op=1" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="${(id)!}">
+		<input type="hidden" name="refundType" value="F" />
+		<input type="hidden" name="reason" id="reason" value="" >
+		
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<span>*请选择废票人</span>
+			</div>
+			<div class="unit">
+				<#if (jpOrder.passangers)??>
+					<#list jpOrder.passangers as p>
+						<#if (p.orderRefundLog)??>
+							<input type="checkbox" checked="checked" disabled="disabled"/>${(p.name)!}
+						<#else>
+							<input type="checkbox" name="ticketNumbers" value="${(p.ticket.ticketNo)!}"/>${(p.name)!}
+						</#if>
+					</#list>
+				</#if>
+			</div>
+			<div class="unit">
+				<span>*请选择废票原因</span>
+			</div>
+			<div class="unit">
+				<select name="actionType" id="actionType" class="required" onchange="autoSetResion();" style="width:20%">
+					<#list refundTypes as refundType>
+						<#if refundType??>
+							<option value="${(refundType.actionTypeCode)!}">${(refundType.actionTypeTxt)!}</option>
+						</#if>
+					</#list>
+				</select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+function autoSetResion(){
+	var tempReason = $("#actionType").find("option:selected").text();
+	//alert("tempReason="+tempReason);
+	$("#reason").val(tempReason);
+}
+</script>

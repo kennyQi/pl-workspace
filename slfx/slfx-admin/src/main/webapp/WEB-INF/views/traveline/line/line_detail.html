@@ -1,0 +1,165 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+	.pageFormContent p{height:inherit;line-height:20px}
+</style>
+<div class="pageContent">
+	
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>线路名称：</label>
+				<#if lineDTO?? && lineDTO.baseInfo??>
+					${(lineDTO.baseInfo.name)!''}
+				</#if>
+			</div>
+			<div class="unit">
+				<label>线路编号：</label>
+				<#if lineDTO?? && lineDTO.baseInfo??>
+				${(lineDTO.baseInfo.number)!''}
+				</#if>
+			</div>
+			<div class="unit">
+				<label>推荐指数：</label>
+				<#if lineDTO?? && lineDTO.baseInfo??>
+				${(lineDTO.baseInfo.recommendationLevel)!''}
+				</#if>
+				星
+			</div>
+			<div class="unit">
+				<label>供应商：</label>
+				<#if lineDTO?? && lineDTO.lindSupplier??>
+				${(lineDTO.lindSupplier.name)!''}
+				</#if>
+			</div>
+			<div class="unit">
+				<label>线路类型：</label>
+				<#if lineDTO.baseInfo.type == 1>
+					跟团游
+				<#elseif lineDTO.baseInfo.type == 2>
+					自助游
+				</#if>
+				 - 
+				<#list cityList as city>
+					<#if city.id == lineDTO.baseInfo.cityOfType>
+						${city.name}
+					</#if>
+				</#list>
+			</div>
+			<div class="unit">
+				<label>线路目的地及途径地：</label>
+				<span id="destinationCitySpan" ></span>  
+			</div>
+			<div class="unit">
+				<label>出发地：</label>
+			 	<#list cityList as city>
+					<#if city.id == lineDTO.baseInfo.starting>
+						${city.name}
+					</#if>
+				</#list>
+			</div>
+			
+			<!-- 支付信息 -->
+			<div class="unit">
+				<label>订金支付比例：</label>
+				<#if lineDTO?? && lineDTO.payInfo??>
+				${(lineDTO.payInfo.downPayment)?c}%
+				</#if>
+			</div>
+			<div class="unit">
+				<label>全款支付出发日期前：</label>
+				<#if lineDTO?? && lineDTO.payInfo?? && lineDTO.payInfo.payTotalDaysBeforeStart??>
+				${(lineDTO.payInfo.payTotalDaysBeforeStart)?c}
+				</#if>
+				天
+			</div>
+			<div class="unit">
+				<label>最晚付款时间出发日期前：</label>
+				<#if lineDTO?? && lineDTO.payInfo?? && lineDTO.payInfo.lastPayTotalDaysBeforeStart??>
+				${(lineDTO.payInfo.lastPayTotalDaysBeforeStart)?c}
+				</#if>
+				天
+			</div>
+			<!-- 支付信息 -->
+			
+			<div class="unit"> 
+				<hr style="border:1px dotted;width:96%"/>
+			</div>
+			
+			<div class="unit">
+				<label>线路特色：</label>
+			</div>
+			<div style="margin-left:60px;" height="auto" class="unit">
+			<#if lineDTO?? && lineDTO.baseInfo??>
+			    ${(lineDTO.baseInfo.featureDescription)!''}
+			</#if>
+			</div>
+			
+			<div class="unit">
+				<label>线路优惠：</label>
+			</div>
+			<div style="margin-left:60px;" height="auto" class="unit">
+			<#if lineDTO?? && lineDTO.baseInfo??>
+			    ${(lineDTO.baseInfo.favorableDescription)!''}
+			</#if>
+			</div>
+			
+			<div class="unit">
+				<label>提示信息：</label>
+			</div>
+			<div style="margin-left:60px;" height="auto" class="unit">
+			<#if lineDTO?? && lineDTO.baseInfo??>
+			   ${(lineDTO.baseInfo.noticeDescription)!''}
+			</#if>
+			</div>
+			
+			<div class="unit">
+				<label>交通信息：</label>
+			</div>
+			<div style="margin-left:60px;" height="auto" class="unit">
+			<#if lineDTO?? && lineDTO.baseInfo??>
+			    ${(lineDTO.baseInfo.trafficDescription)!''}
+			</#if>
+			</div>
+			
+			<div class="unit">
+				<label>费用说明：</label>
+			</div>
+			<div style="margin-left:60px;" height="auto" class="unit">
+			<#if lineDTO?? && lineDTO.baseInfo??>
+			    ${(lineDTO.baseInfo.feeDescription)!''}
+			</#if>
+			</div>
+			
+			<div class="unit">
+				<label>预订须知：</label>
+			</div>
+			<div style="margin-left:60px;" height="auto" class="unit">
+			<#if lineDTO?? && lineDTO.baseInfo??>
+			   ${(lineDTO.baseInfo.bookDescription)!''}
+			</#if>
+			</div>
+			
+			<input type="hidden"  id="destinationCity"  value="${(lineDTO.baseInfo.destinationCity)!''}"/>
+		</div>
+		 <div class="formBar">
+			<ul>
+				<button type="button" class="close">关闭</button>
+			</ul>
+		</div>
+</div>
+<script type="text/javascript">
+var  destinationCity = $("#destinationCity").val();//目的地城市和途经城市的id字符串
+var  result = "";
+//查询出发地城市
+if(destinationCity != null && destinationCity != ""){
+	$.post("${contextPath}/traveline/line/queryCity",{'cityCodes':destinationCity},function(data){
+			if (data.length > 0) {  
+	            $.each(data, function (idx, item) { 
+	            	result = result + item.name + " - ";
+	            });
+	            result = result.substring(0, result.length-2);
+	        	//赋值
+	        	document.getElementById("destinationCitySpan").innerHTML = result;
+	        }  
+		},"json");
+}
+</script>

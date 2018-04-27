@@ -1,0 +1,145 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'scenic-spot' />
+<#assign pathUrl = (contextPath+'/scenic-spot') />
+
+<style>
+.jq{background:#eee;font-weight:600;}
+.jq span{margin-left:5px;}
+</style>
+
+<div class="pageContent">
+	<div id="scenicContent" class="pageFormContent" layoutH="58">
+		<!-- 景区基本信息  -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>景区基本信息</span></div>
+		<div class="unit">
+			<label>登录账户：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.superAdmin.adminLoginName)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>登录密码：</label>
+			<input type="password" size="64" readonly="readonly" value="${(scen.superAdmin.adminPassword)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>景区名称：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.baseInfo.name)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>景区简称：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.baseInfo.shortName)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>景区代码：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.baseInfo.code)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>所&nbsp;&nbsp;在&nbsp;&nbsp;地：</label>
+			<input type="text" size="28" readonly="readonly" value="${(scen.baseInfo.province.name)!'-'}"/>
+			<span style="float:left;">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+			<input type="text" size="28" readonly="readonly" value="${(scen.baseInfo.city.name)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>景区级别：</label>
+			<select class="combox">
+				<option ${(scen.baseInfo.level == 'AAAAA级')?string('selected="selected"','')} value="AAAAA级">AAAAA级</option>
+				<option ${(scen.baseInfo.level == 'AAAA级')?string('selected="selected"','')} value="AAAA级">AAAA级</option>
+				<option ${(scen.baseInfo.level == 'AAA级')?string('selected="selected"','')} value="AAA级">AAA级</option>
+				<option ${(scen.baseInfo.level == 'AA级')?string('selected="selected"','')} value="AA级">AA级</option>
+				<option ${(scen.baseInfo.level == 'A级')?string('selected="selected"','')} value="A级">A级</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>景区网址：</label>
+			<input type="url" size="64" readonly="readonly" value="${(scen.baseInfo.webSite)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>景区介绍：</label>
+			<textarea class="editor" rows="15" cols="80" maxlength="1000" 
+			tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+			Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+			Link,Unlink,Hr,Table">
+				${(scen.baseInfo.intro)!'-'}
+			</textarea>
+		</div>
+		
+		<!-- 景区联系信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>景区联系信息</span></div>
+		<div class="unit">
+			<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.contactInfo.linkMan)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>联系电话：</label>
+			<input type="tel" size="64" readonly="readonly" value="${(scen.contactInfo.telephone)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>联系邮箱：</label>
+			<input type="email" size="64" readonly="readonly" value="${(scen.contactInfo.email)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>联系&nbsp;Q&nbsp;Q：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.contactInfo.qq)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>公司传真：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.contactInfo.fax)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>联系地址：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.contactInfo.address)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>邮政编码：</label>
+			<input type="text" size="64" readonly="readonly" value="${(scen.contactInfo.postcode)!'-'}"/>
+		</div>
+		
+		<!-- 资质信息  -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>资质信息</span></div>
+		<div class="unit">
+			<label>营业执照：</label>
+			<img id="imgSrc1" class="img-polaroid" width="80" alt="景区图" title="景区图"
+				src="${(scen.certificateInfo.businessLicense)!'resources/image/u39.png'}"/>
+		</div>
+		<div class="unit">
+			<label>税务登记证：</label>
+			<img id="imgSrc2" class="img-polaroid" width="80" alt="景区图" title="景区图"
+				src="${(scen.certificateInfo.taxRegistrationCertificate)!'resources/image/u39.png'}"/>
+		</div>
+		<div class="unit">
+			<label>组织代码证：</label>
+			<img id="imgSrc3" class="img-polaroid" width="80" alt="景区图" title="景区图"
+				src="${(scen.certificateInfo.organizationCodeCertificate)!'resources/image/u39.png'}"/>
+		</div>
+		<div class="unit">
+			<label>法人身份证：</label>
+			<img id="imgSrc4" class="img-polaroid" width="80" alt="景区图" title="景区图"
+				src="${(scen.certificateInfo.corporateIDCard)!'resources/image/u39.png'}"/>
+		</div>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>景区密钥</span></div>
+		<span>
+			<div class="unit">
+				<span style="color:#333;float:left;height:22px;line-height:22px;font-size:15px;padding-right:5px;" class="deviCla">&nbsp;&nbsp;</span>
+				<input type="text" name="secretKey" size="64" maxlength="64" readonly="readonly"  value="${(scen.superAdmin.secretKey)!""}"/>
+			</div>
+		</span>
+		
+		<!-- 设备编码  -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>设备编码</span></div>
+		<#list scen.devices as devic>
+		<div class="unit">
+			<span style="color:#333;float:left;height:22px;line-height:22px;font-size:15px;padding-right:5px;"
+				class="deviCla">${(devic_index+1)}</span>
+			<input type="text" size="64" readonly="readonly" value="${devic.id}"/>
+		</div>
+		</#list>
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="button"><div class="buttonContent">
+					<button type="button" class="close" style="width: 35px;">返回</button>
+				</div></div>
+			</li>
+		</ul>
+	</div>
+</div>

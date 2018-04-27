@@ -1,0 +1,110 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;人员详情
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/user/useredit" 
+						class="form-horizontal pageForm required-validate" >
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员名称：</label>
+									<div class="col-md-4">
+										<input type="text" name="name" class="form-control isSpec" readonly="readonly" placeholder="人员名称" maxlength="40" value="${(user.name)!''}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员编号：</label>
+									<div class="col-md-4">
+										<input type="text" name="userNO" class="form-control isSpec" readonly="readonly" placeholder="人员编号" maxlength="40" value="${(user.userNO)!''}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">登录名：</label>
+									<div class="col-md-4">
+										<input type="text" name="showLoginName" class="form-control isSpec" readonly="readonly" placeholder="人员登录名" maxlength="40" value="${(user.showLoginName)!''}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">所属部门：</label>
+									<div class="col-md-4">
+										<input type="text" name="name" class="form-control isSpec" readonly="readonly" placeholder="所属部门" maxlength="40" value="${user.departmentName}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">职位：</label>
+									<div class="col-md-4">
+									<#if user.userRoles??>
+										<#list user.userRoles as userRole>
+											<#if (user.userRoles?size<2)>
+												<input type="text" name="name" class="form-control isSpec" readonly="readonly" placeholder="职位" maxlength="40" value="${userRole.role.roleName}"/>
+												<#break>
+											</#if>
+											<#if userRole.role.roleName!="员工">
+												<input type="text" name="name" class="form-control isSpec" readonly="readonly" placeholder="职位" maxlength="40" value="${userRole.role.roleName}"/>
+											</#if>
+										</#list>
+									</#if>
+									
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员性别：</label>
+									<div class="col-md-4">
+									<#if user.gender??>
+									<input type="text" name="name" class="form-control isSpec" readonly="readonly" placeholder="性别" maxlength="40" 
+									value="<#if user.gender==1>男</#if><#if user.gender==0>女</#if>"/>
+									<#else><input type="text" name="idCardNO" class="form-control isSpec" readonly="readonly" placeholder="" maxlength="18" value="男"/></#if>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员身份证：</label>
+									<div class="col-md-4">
+										<input type="text" name="idCardNO" class="form-control isSpec" readonly="readonly" placeholder="人员身份证" maxlength="18" value="${user.idCardNO}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员生日：</label>
+									<div class="col-md-4">
+									<#if user.birthday??>
+										<input type="text" name="birthday" class="form-control" readonly="readonly" placeholder="人员生日" maxlength="19" value="${user.birthday?substring(0,10)}"/>
+									<#else>
+										<input type="text" name="birthday" class="form-control" readonly="readonly" placeholder="人员生日" maxlength="19" value=""/>
+									</#if>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员电话：</label>
+									<div class="col-md-4">
+										<input type="text" name="linkMobile" class="form-control phone" readonly="readonly" placeholder="人员电话" maxlength="40" value="${user.linkMobile}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员邮箱：</label>
+									<div class="col-md-4">
+										<input type="text" name="linkEmail" class="form-control email" readonly="readonly" placeholder="人员邮箱" maxlength="40" value="${user.linkEmail}"/>
+									</div>
+								</div>
+<!-- 								<div class="form-group">
+									<label class="col-md-3 control-label">人员地址：</label>
+									<div class="col-md-4">
+										<input type="text" name="provinceID" class="form-control email" readonly="readonly" placeholder="省份" maxlength="40" value="${user.provinceID}"/>
+										<input type="text" name="cityID" class="form-control email" readonly="readonly" placeholder="城市地区" maxlength="40" value="${user.cityID}"/>
+									</div>
+								</div>
+ -->							</div>
+							<div class="form-actions">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

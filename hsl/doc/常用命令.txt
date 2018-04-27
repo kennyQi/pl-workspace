@@ -1,0 +1,17 @@
+
+# 常用命令
+
+> 删除mongo里日志
+
+// 连接mongo
+mongo <ip:port>
+
+// 切到devlog
+use devlog
+
+// 看有多少条数据
+db.hgLog.find().count()
+
+// 删除 1月之前的日志
+db.hgLog.remove({'createDate':{$lte:ISODate("2016-01-01T00:00:0.000Z")}});
+

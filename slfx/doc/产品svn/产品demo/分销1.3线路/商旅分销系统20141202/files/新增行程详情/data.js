@@ -1,0 +1,4788 @@
+﻿$axure.loadCurrentPage({
+  "url":"新增行程详情.html",
+  "generationDate":new Date(1417661795203.37),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable",
+"temp",
+"rl_date",
+"rl_day"],
+  "page":{
+    "packageId":"f95df3cb826c44f688139905ab931c99",
+    "type":"Axure:Page",
+    "name":"新增行程详情",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"29db88f95a124e149a4e798c6a82cc4c",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":14,
+              "y":10},
+            "size":{
+              "width":880,
+              "height":852}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"86aae7cc855d4cf6bec593c037274f89",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":14,
+                  "y":10},
+                "size":{
+                  "width":880,
+                  "height":852}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/新增行程详情/u0.png"}},
+{
+          "id":"ddedc4e745a84957917c607961e14e97",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fontName":"'Arial Negreta', 'Arial'",
+            "fontSize":"18px",
+            "fontWeight":"700",
+            "foreGroundFill":{
+              "fillType":"solid",
+              "color":0xFF0000FF,
+              "opacity":1},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFE4E4E4},
+            "location":{
+              "x":24,
+              "y":26},
+            "size":{
+              "width":856,
+              "height":40},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d55cac8523b04fa4be773d06e99fc4ce",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontName":"'Arial Negreta', 'Arial'",
+                "fontSize":"18px",
+                "fontWeight":"700",
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF0000FF,
+                  "opacity":1},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE4E4E4},
+                "location":{
+                  "x":24,
+                  "y":26},
+                "size":{
+                  "width":856,
+                  "height":40},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/景点门票-门票查询列表/u86.png"}},
+{
+          "id":"39d0e937bc3c43acb97d821811f5eaea",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":149},
+            "size":{
+              "width":40,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"cf331ccb9f894e7ba681fb49da8e05a0",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":149},
+                "size":{
+                  "width":40,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"52023550295044499beb906727cc62e7",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":178},
+            "size":{
+              "width":40,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"0c1eaaf80fd444ee866a57a4c636d94d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":178},
+                "size":{
+                  "width":40,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"8e356dc6650d483a82cff555bf330e8c",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":94,
+              "y":174},
+            "size":{
+              "width":200,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"0c44a13663484425a3e037166945754d",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":324,
+              "y":178},
+            "size":{
+              "width":40,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"10f250b0214e4bee92ecaf559ce73d42",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":324,
+                  "y":178},
+                "size":{
+                  "width":40,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"99f0bc73ab5b45aab49d45d2f82c7749",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":374,
+              "y":174},
+            "size":{
+              "width":200,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"e84634be71524398811c0cbc4ce4118a",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":594,
+              "y":178},
+            "size":{
+              "width":53,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d91aa0fd33f84276996a757ef41150f8",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":594,
+                  "y":178},
+                "size":{
+                  "width":53,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"42b14f31940746aca49c3e3b5c2541d7",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":658,
+              "y":178},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"8988893418284c49ba19b53819add0e5",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":658,
+                  "y":178},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"a2726d14efe04decb9ef06a03002df52",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":714,
+              "y":178},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"64cef6a1a9614e008ff820fc5fa656cc",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":714,
+                  "y":178},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"b9c9ab21db534c129240c435765f19ac",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":774,
+              "y":178},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"598d364ae4aa4544ad92dbd2a164be8d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":774,
+                  "y":178},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"a01c3618c81547ebaa9a2d807fd0c664",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":830,
+              "y":178},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"5a5b0a789b7f4ed5a5094843841fa292",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":830,
+                  "y":178},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"ac2cdf725e0742aaaed7d1323b41c55d",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":44,
+              "y":216},
+            "size":{
+              "width":99,
+              "height":142},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFF999999}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"41dbc896e13946c4a4546ff2f28ae21f",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "location":{
+                  "x":44,
+                  "y":216},
+                "size":{
+                  "width":99,
+                  "height":142},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/景点维护/u325.png"}},
+{
+          "id":"6c3ed41f048f4363870561dbc90c4d22",
+          "label":"textarea",
+          "type":"textArea",
+          "styleType":"textArea",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":144,
+              "y":246},
+            "size":{
+              "width":707,
+              "height":112}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"b888ff44c046486bb3e4fdffc1780d05",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFF2F2F2},
+            "location":{
+              "x":144,
+              "y":216},
+            "size":{
+              "width":707,
+              "height":30},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFCCCCCC}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"72910e2991e14678a24ee649c7af1dcf",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFF2F2F2},
+                "location":{
+                  "x":144,
+                  "y":216},
+                "size":{
+                  "width":707,
+                  "height":30},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFCCCCCC}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/景点维护/u328.png"}},
+{
+          "id":"b9df2d8cd6ab4e76b8f8194614858848",
+          "label":"textarea button - bold",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fontName":"'Georgia Negreta', 'Georgia'",
+            "fontWeight":"bold",
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFBBCEF2},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "selected":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE6F2FF},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "disabled":{
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999,
+                  "opacity":1}}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":204,
+              "y":220},
+            "size":{
+              "width":22,
+              "height":22},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"1212e597b66e41b1a666d27dde325d1a",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontName":"'Georgia Negreta', 'Georgia'",
+                "fontWeight":"bold",
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFBBCEF2},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "selected":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFE6F2FF},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "disabled":{
+                    "foreGroundFill":{
+                      "fillType":"solid",
+                      "color":0xFF999999,
+                      "opacity":1}}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":204,
+                  "y":220},
+                "size":{
+                  "width":22,
+                  "height":22},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle bold",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - bold = &quot;toggle&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["b9df2d8cd6ab4e76b8f8194614858848"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "selected~":"images/景点维护/textarea_button_-_bold_u330_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_bold_u330_mouseOver.png",
+            "disabled~":"resources/images/transparent.gif"}},
+{
+          "id":"f87e1bc4b7b44cbebeae736e9b51201a",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":274,
+              "y":222},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFCCCCCC}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u332_line.png"}},
+{
+          "id":"974aee91c183466ebfafea392e5bf3be",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":274,
+              "y":222},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFFFF}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u333_line.png"}},
+{
+          "id":"9f69435227f74b70af2459a50e61bb1a",
+          "label":"textarea button - italic",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fontName":"'Georgia Negreta cursiva', 'Georgia'",
+            "fontWeight":"bold",
+            "fontStyle":"italic",
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFBBCEF2},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "selected":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE6F2FF},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "disabled":{
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999,
+                  "opacity":1}}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":228,
+              "y":220},
+            "size":{
+              "width":22,
+              "height":22},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"2b73cd45bbec42d083e0433dfe793786",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontName":"'Georgia Negreta cursiva', 'Georgia'",
+                "fontWeight":"bold",
+                "fontStyle":"italic",
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFBBCEF2},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "selected":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFE6F2FF},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "disabled":{
+                    "foreGroundFill":{
+                      "fillType":"solid",
+                      "color":0xFF999999,
+                      "opacity":1}}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":228,
+                  "y":220},
+                "size":{
+                  "width":22,
+                  "height":22},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle italic",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - italic = &quot;toggle&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["9f69435227f74b70af2459a50e61bb1a"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "selected~":"images/景点维护/textarea_button_-_bold_u330_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_bold_u330_mouseOver.png",
+            "disabled~":"resources/images/transparent.gif"}},
+{
+          "id":"5ebd6bc08b0f4a3b940de2f14a495773",
+          "label":"textarea button - underline",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fontName":"'Georgia Negreta', 'Georgia'",
+            "fontWeight":"bold",
+            "underline":true,
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFBBCEF2},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "selected":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE6F2FF},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "disabled":{
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999,
+                  "opacity":1}}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":252,
+              "y":220},
+            "size":{
+              "width":22,
+              "height":22},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"132f1573de314729b58492df344fff50",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontName":"'Georgia Negreta', 'Georgia'",
+                "fontWeight":"bold",
+                "underline":true,
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFBBCEF2},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "selected":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFE6F2FF},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "disabled":{
+                    "foreGroundFill":{
+                      "fillType":"solid",
+                      "color":0xFF999999,
+                      "opacity":1}}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":252,
+                  "y":220},
+                "size":{
+                  "width":22,
+                  "height":22},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle underline",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - underline = &quot;toggle&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["5ebd6bc08b0f4a3b940de2f14a495773"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "selected~":"images/景点维护/textarea_button_-_bold_u330_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_bold_u330_mouseOver.png",
+            "disabled~":"resources/images/transparent.gif"}},
+{
+          "id":"b594f361ddbb45179dcc46aded6ca277",
+          "label":"textarea button - unordered list",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+}},
+            "location":{
+              "x":284,
+              "y":220},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"f03a5cf5599041f289e1fbeb90a2ef0a",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+}},
+                "location":{
+                  "x":284,
+                  "y":220},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle unordered list",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - unordered list = &quot;toggle&quot;, 与<br> 被选中的 textarea button - ordered list = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["b594f361ddbb45179dcc46aded6ca277"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["dbcd587ec332446f94727f5771fbcff9"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_unordered_list_u338.png",
+            "selected~":"images/景点维护/textarea_button_-_unordered_list_u338_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_unordered_list_u338_mouseOver.png"}},
+{
+          "id":"dbcd587ec332446f94727f5771fbcff9",
+          "label":"textarea button - ordered list",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+}},
+            "location":{
+              "x":308,
+              "y":220},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"cab5afc50d05416ba6647cd17131f616",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+}},
+                "location":{
+                  "x":308,
+                  "y":220},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle ordered list",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - ordered list = &quot;toggle&quot;, 与<br> 被选中的 textarea button - unordered list = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["dbcd587ec332446f94727f5771fbcff9"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["b594f361ddbb45179dcc46aded6ca277"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_ordered_list_u340.png",
+            "selected~":"images/景点维护/textarea_button_-_ordered_list_u340_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_ordered_list_u340_mouseOver.png"}},
+{
+          "id":"c956b422ed044293a800c9f8b8ae1698",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":332,
+              "y":222},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFCCCCCC}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u332_line.png"}},
+{
+          "id":"644f5f3f8ec14cbea42f390f7dacab2c",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":332,
+              "y":222},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFFFF}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u333_line.png"}},
+{
+          "id":"8cf15b83fbcf4620a39871a4acd1323f",
+          "label":"textarea button - outdent",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":342,
+              "y":220},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"413c562646cc46d58a7aa692826be4ec",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":342,
+                  "y":220},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"outdent",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_outdent_u344.png",
+            "selected~":"images/景点维护/textarea_button_-_outdent_u344_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_outdent_u344_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_outdent_u344_disabled.png"}},
+{
+          "id":"8d022279416b4a888d1cb4ca7007c56f",
+          "label":"textarea button - indent",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":366,
+              "y":220},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d3e6d0410ce5467d994f0885cf81acad",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":366,
+                  "y":220},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"indent",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_indent_u346.png",
+            "selected~":"images/景点维护/textarea_button_-_indent_u346_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_indent_u346_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_indent_u346_disabled.png"}},
+{
+          "id":"af9ac6fe84014b9b8c6fa6132dfef0cf",
+          "label":"textarea button - align left",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":400,
+              "y":220},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"a9412ee627d94e978c33f1502d8633bf",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":400,
+                  "y":220},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"set left align",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - align left = &quot;true&quot;, 与<br> 被选中的 textarea button - align right = &quot;false&quot;, 与<br> 被选中的 textarea button - align center = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["af9ac6fe84014b9b8c6fa6132dfef0cf"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"true",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["c5809ef7e21a480d9aa4abb61909c515"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["cbe1d1f090a346f2929b361c8090ab4f"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_align_left_u348.png",
+            "selected~":"images/景点维护/textarea_button_-_align_left_u348_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_align_left_u348_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_align_left_u348_disabled.png"}},
+{
+          "id":"cbe1d1f090a346f2929b361c8090ab4f",
+          "label":"textarea button - align center",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":426,
+              "y":220},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"3b0f6177fe0b4f0b9dd0636c4c6b1f5d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":426,
+                  "y":220},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"set center align",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - align left = &quot;false&quot;, 与<br> 被选中的 textarea button - align right = &quot;false&quot;, 与<br> 被选中的 textarea button - align center = &quot;true&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["af9ac6fe84014b9b8c6fa6132dfef0cf"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["c5809ef7e21a480d9aa4abb61909c515"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["cbe1d1f090a346f2929b361c8090ab4f"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"true",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_align_center_u350.png",
+            "selected~":"images/景点维护/textarea_button_-_align_center_u350_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_align_center_u350_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_align_center_u350_disabled.png"}},
+{
+          "id":"c5809ef7e21a480d9aa4abb61909c515",
+          "label":"textarea button - align right",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":450,
+              "y":220},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"fbd627f053dd4021ad9860f6f121a5b9",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":450,
+                  "y":220},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"set right align",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - align left = &quot;false&quot;, 与<br> 被选中的 textarea button - align right = &quot;true&quot;, 与<br> 被选中的 textarea button - align center = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["af9ac6fe84014b9b8c6fa6132dfef0cf"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["c5809ef7e21a480d9aa4abb61909c515"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"true",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["cbe1d1f090a346f2929b361c8090ab4f"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["6c3ed41f048f4363870561dbc90c4d22"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_align_right_u352.png",
+            "selected~":"images/景点维护/textarea_button_-_align_right_u352_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_align_right_u352_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_align_right_u352_disabled.png"}},
+{
+          "id":"7b38aac19bd04b0ba6c0e1d6ed25a373",
+          "label":"",
+          "type":"horizontalLine",
+          "styleType":"horizontalLine",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":24,
+              "y":447},
+            "size":{
+              "width":851,
+              "height":10},
+            "linePattern":"dotted"},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/新增行程详情/u51_line.png"}},
+{
+          "id":"84b70ac789924497bd01e8c7b1ce8b88",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":774,
+              "y":146},
+            "size":{
+              "width":76,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"071e0ef4b8f74ea3a6f6fa3af73034fd",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":368},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"3060309acb5a4f31aae25e743b32b2f6",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":368},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"b87b8aeebec04914b286e0262b01cbf2",
+          "label":"",
+          "type":"comboBox",
+          "styleType":"comboBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":94,
+              "y":365},
+            "size":{
+              "width":100,
+              "height":22}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"6e08b0818cfc407e83727f212381ad97",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":204,
+              "y":363},
+            "size":{
+              "width":200,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"4f161752241f4804be7991873837f40e",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":414,
+              "y":362},
+            "size":{
+              "width":100,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"892311a8848044ff888f16b673049c29",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":427},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"9da255ea3c3a44c2b534c2cc04e7ac86",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":427},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"9c8b4856c2ff433ebe42828b77fda175",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":94,
+              "y":427},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"6abd7b6e20ae42ad8dbb051949499911",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":94,
+                  "y":427},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"bda57d9693374a4394d0a885d8f7d26d",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":142,
+              "y":427},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"0dcf91ef77824afeb206951d4b25393d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":142,
+                  "y":427},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"026fb28eea724c738db2b700e58c3d5f",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":212,
+              "y":427},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"8ed805d4cd5047a6be37e1a6dc1fa835",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":212,
+                  "y":427},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"2649a6059f52434bb7e86693b60c4d8a",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":322,
+              "y":427},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d114d33620a9429692f4746e09784ff5",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":322,
+                  "y":427},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"9d205d4fd31944a0ada1a5a9a4a52f5f",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":370,
+              "y":427},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"0e8d0f17b9d84dde95bc429e17d37015",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":370,
+                  "y":427},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"faca694a203d4ad7ace88ce178b86742",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":440,
+              "y":427},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d657e3d28aac49cca478bb86f5e74c9e",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":440,
+                  "y":427},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"42fcd14d820b4574b352ca1fbee09cc6",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":550,
+              "y":427},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"58a2f49c956247f4b6cb41c6e8781e71",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":550,
+                  "y":427},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"ca910ee68cf54b9a8b8a27eb2c9d9021",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":598,
+              "y":427},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"46985e6d1e5b4f9bbf23f0632ea201b4",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":598,
+                  "y":427},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"4e60bc53207d4be2a00fecbbd1d85089",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":668,
+              "y":427},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"b0be66b17abd432e8f141d819f0602ff",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":668,
+                  "y":427},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"eb32f8f09a574eb7bea2f2cf9669cd33",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":477},
+            "size":{
+              "width":40,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"4eb4df1b72374c319bb9d57ceb62defe",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":477},
+                "size":{
+                  "width":40,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"7a549c911ccf44c8b0daa86b6f0f6761",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":517},
+            "size":{
+              "width":40,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"8ba890a9c6104b798f83db892bf8bcfa",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":517},
+                "size":{
+                  "width":40,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"dd7b6a20ff764ec8996be78c34a73de2",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":94,
+              "y":513},
+            "size":{
+              "width":200,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"fdae514a0242484e825da75c5e0e9b0c",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":324,
+              "y":517},
+            "size":{
+              "width":40,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"ad6993debedd44d1b48751494200dbc4",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":324,
+                  "y":517},
+                "size":{
+                  "width":40,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"dd063fb3d07049edb6eb81739fff8f9c",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":374,
+              "y":513},
+            "size":{
+              "width":200,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"8223f54444664706a050aa3f45065aca",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":594,
+              "y":517},
+            "size":{
+              "width":53,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"25c3735d09d440d699cc1291f141dbfb",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":594,
+                  "y":517},
+                "size":{
+                  "width":53,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"221fd0cbb50146c0a38fb44529da4d0d",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":658,
+              "y":517},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"a411222799504cebbba7076916cd869d",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":658,
+                  "y":517},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"853160ed7d8f466d9ac131cd8c04caf1",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":714,
+              "y":517},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d1658af8614e4295bb68cf66ff6292c1",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":714,
+                  "y":517},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"22e6296fdb5b42baa14bd31357b4c26c",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":774,
+              "y":517},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"94e038554a794f6e829d2cb4619f7b8a",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":774,
+                  "y":517},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"6a2080866976484699d1d0bf65ced94e",
+          "label":"",
+          "type":"checkbox",
+          "styleType":"checkbox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":840,
+              "y":517},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"f24ab4ae88a649f49b4c0b78a99ecf26",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":840,
+                  "y":517},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"11d7c7226a2b4bd39b6f825618318d96",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":44,
+              "y":555},
+            "size":{
+              "width":99,
+              "height":142},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFF999999}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"06e814d237cf4cf5945c3fa987eeee30",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "location":{
+                  "x":44,
+                  "y":555},
+                "size":{
+                  "width":99,
+                  "height":142},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/景点维护/u325.png"}},
+{
+          "id":"df01e2d1075b46609ac3210bb54c5ac2",
+          "label":"textarea",
+          "type":"textArea",
+          "styleType":"textArea",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":144,
+              "y":585},
+            "size":{
+              "width":707,
+              "height":112}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"a8d798c573f9450187880e75a43ea253",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFF2F2F2},
+            "location":{
+              "x":144,
+              "y":555},
+            "size":{
+              "width":707,
+              "height":30},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFCCCCCC}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"12537e78337a48bdbc5146f144400785",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFF2F2F2},
+                "location":{
+                  "x":144,
+                  "y":555},
+                "size":{
+                  "width":707,
+                  "height":30},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFCCCCCC}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/景点维护/u328.png"}},
+{
+          "id":"103777ec073747ae91d5fbb795126623",
+          "label":"textarea button - bold",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fontName":"'Georgia Negreta', 'Georgia'",
+            "fontWeight":"bold",
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFBBCEF2},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "selected":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE6F2FF},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "disabled":{
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999,
+                  "opacity":1}}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":204,
+              "y":559},
+            "size":{
+              "width":22,
+              "height":22},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"67b2856aa4774eb1bb8ea64c2c814f35",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontName":"'Georgia Negreta', 'Georgia'",
+                "fontWeight":"bold",
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFBBCEF2},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "selected":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFE6F2FF},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "disabled":{
+                    "foreGroundFill":{
+                      "fillType":"solid",
+                      "color":0xFF999999,
+                      "opacity":1}}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":204,
+                  "y":559},
+                "size":{
+                  "width":22,
+                  "height":22},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle bold",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - bold = &quot;toggle&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["103777ec073747ae91d5fbb795126623"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "selected~":"images/景点维护/textarea_button_-_bold_u330_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_bold_u330_mouseOver.png",
+            "disabled~":"resources/images/transparent.gif"}},
+{
+          "id":"ebe6602ed3204e499a9c74dbf10e1855",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":274,
+              "y":561},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFCCCCCC}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u332_line.png"}},
+{
+          "id":"f938c677d79d462ca093fe996fa34b89",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":274,
+              "y":561},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFFFF}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u333_line.png"}},
+{
+          "id":"8072de754eff4972ad71fe862f266bfc",
+          "label":"textarea button - italic",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fontName":"'Georgia Negreta cursiva', 'Georgia'",
+            "fontWeight":"bold",
+            "fontStyle":"italic",
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFBBCEF2},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "selected":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE6F2FF},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "disabled":{
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999,
+                  "opacity":1}}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":228,
+              "y":559},
+            "size":{
+              "width":22,
+              "height":22},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"7565e93f73394fcdb0b904dc32c7a536",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontName":"'Georgia Negreta cursiva', 'Georgia'",
+                "fontWeight":"bold",
+                "fontStyle":"italic",
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFBBCEF2},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "selected":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFE6F2FF},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "disabled":{
+                    "foreGroundFill":{
+                      "fillType":"solid",
+                      "color":0xFF999999,
+                      "opacity":1}}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":228,
+                  "y":559},
+                "size":{
+                  "width":22,
+                  "height":22},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle italic",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - italic = &quot;toggle&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["8072de754eff4972ad71fe862f266bfc"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "selected~":"images/景点维护/textarea_button_-_bold_u330_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_bold_u330_mouseOver.png",
+            "disabled~":"resources/images/transparent.gif"}},
+{
+          "id":"f74aa04647414ee3b49608cb926aca11",
+          "label":"textarea button - underline",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fontName":"'Georgia Negreta', 'Georgia'",
+            "fontWeight":"bold",
+            "underline":true,
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFBBCEF2},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "selected":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE6F2FF},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFF000066}},
+              "disabled":{
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF999999,
+                  "opacity":1}}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":252,
+              "y":559},
+            "size":{
+              "width":22,
+              "height":22},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"413b61fcf1e44113a009d4aea0641041",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fontName":"'Georgia Negreta', 'Georgia'",
+                "fontWeight":"bold",
+                "underline":true,
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFBBCEF2},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "selected":{
+                    "fill":{
+                      "fillType":"solid",
+                      "color":0xFFE6F2FF},
+                    "borderFill":{
+                      "fillType":"solid",
+                      "color":0xFF000066}},
+                  "disabled":{
+                    "foreGroundFill":{
+                      "fillType":"solid",
+                      "color":0xFF999999,
+                      "opacity":1}}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":252,
+                  "y":559},
+                "size":{
+                  "width":22,
+                  "height":22},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle underline",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - underline = &quot;toggle&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["f74aa04647414ee3b49608cb926aca11"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "selected~":"images/景点维护/textarea_button_-_bold_u330_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_bold_u330_mouseOver.png",
+            "disabled~":"resources/images/transparent.gif"}},
+{
+          "id":"d0a7ea648a414392a816a936acf5621b",
+          "label":"textarea button - unordered list",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+}},
+            "location":{
+              "x":284,
+              "y":559},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"f406d0b5070748eaa6369319062eba67",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+}},
+                "location":{
+                  "x":284,
+                  "y":559},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle unordered list",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - unordered list = &quot;toggle&quot;, 与<br> 被选中的 textarea button - ordered list = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["d0a7ea648a414392a816a936acf5621b"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["02e8a8bbaa9544369ad93b87cdfb7f98"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_unordered_list_u338.png",
+            "selected~":"images/景点维护/textarea_button_-_unordered_list_u338_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_unordered_list_u338_mouseOver.png"}},
+{
+          "id":"02e8a8bbaa9544369ad93b87cdfb7f98",
+          "label":"textarea button - ordered list",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+}},
+            "location":{
+              "x":308,
+              "y":559},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d3eb23a34dbc4e629d11749974a9fc71",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+}},
+                "location":{
+                  "x":308,
+                  "y":559},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"toggle ordered list",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - ordered list = &quot;toggle&quot;, 与<br> 被选中的 textarea button - unordered list = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["02e8a8bbaa9544369ad93b87cdfb7f98"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"toggle",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["d0a7ea648a414392a816a936acf5621b"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_ordered_list_u340.png",
+            "selected~":"images/景点维护/textarea_button_-_ordered_list_u340_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_ordered_list_u340_mouseOver.png"}},
+{
+          "id":"3907fda3b898425d85c0ce2d09045722",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":332,
+              "y":561},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFCCCCCC}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u332_line.png"}},
+{
+          "id":"d9849410a65b4a84a521b009727311d8",
+          "label":"",
+          "type":"verticalLine",
+          "styleType":"verticalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":332,
+              "y":561},
+            "size":{
+              "width":10,
+              "height":16},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFFFF}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/景点维护/u333_line.png"}},
+{
+          "id":"0d73dd2a66994f8a8cdeda75982a99b7",
+          "label":"textarea button - outdent",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":342,
+              "y":559},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"32b980efd6d540a7a3da668b4fa9fb88",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":342,
+                  "y":559},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"outdent",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_outdent_u344.png",
+            "selected~":"images/景点维护/textarea_button_-_outdent_u344_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_outdent_u344_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_outdent_u344_disabled.png"}},
+{
+          "id":"bd1f5df5f4014f9296a7a11299efc153",
+          "label":"textarea button - indent",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":366,
+              "y":559},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"403dd4c600c44272866c853e3c138408",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":366,
+                  "y":559},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"indent",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_indent_u346.png",
+            "selected~":"images/景点维护/textarea_button_-_indent_u346_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_indent_u346_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_indent_u346_disabled.png"}},
+{
+          "id":"5d258b4595d44062a1c4892931685a99",
+          "label":"textarea button - align left",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":400,
+              "y":559},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"eb81216e60d3458d81bd048c637250da",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":400,
+                  "y":559},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"set left align",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - align left = &quot;true&quot;, 与<br> 被选中的 textarea button - align right = &quot;false&quot;, 与<br> 被选中的 textarea button - align center = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["5d258b4595d44062a1c4892931685a99"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"true",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["d48d6ceefe7e46e1b47ad30df962f51a"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["b4d4db8f5c3549a880878b86b5c7ad1a"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_align_left_u348.png",
+            "selected~":"images/景点维护/textarea_button_-_align_left_u348_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_align_left_u348_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_align_left_u348_disabled.png"}},
+{
+          "id":"b4d4db8f5c3549a880878b86b5c7ad1a",
+          "label":"textarea button - align center",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":426,
+              "y":559},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"864530167c5445acaf9e53725f75c2e0",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":426,
+                  "y":559},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"set center align",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - align left = &quot;false&quot;, 与<br> 被选中的 textarea button - align right = &quot;false&quot;, 与<br> 被选中的 textarea button - align center = &quot;true&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["5d258b4595d44062a1c4892931685a99"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["d48d6ceefe7e46e1b47ad30df962f51a"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["b4d4db8f5c3549a880878b86b5c7ad1a"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"true",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_align_center_u350.png",
+            "selected~":"images/景点维护/textarea_button_-_align_center_u350_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_align_center_u350_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_align_center_u350_disabled.png"}},
+{
+          "id":"d48d6ceefe7e46e1b47ad30df962f51a",
+          "label":"textarea button - align right",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+},
+              "selected":{
+},
+              "disabled":{
+}},
+            "location":{
+              "x":450,
+              "y":559},
+            "size":{
+              "width":23,
+              "height":23}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"0d3262c45e334eb6b0676440a335a8d0",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+},
+                  "selected":{
+},
+                  "disabled":{
+}},
+                "location":{
+                  "x":450,
+                  "y":559},
+                "size":{
+                  "width":23,
+                  "height":23}},
+              "adaptiveStyles":{
+}}],
+          "interactionMap":{
+            "onClick":{
+              "description":"OnClick",
+              "cases":[{
+                  "description":"set right align",
+                  "isNewIfGroup":false,
+                  "actions":[{
+                      "action":"setFunction",
+                      "description":"设置 被选中的 textarea button - align left = &quot;false&quot;, 与<br> 被选中的 textarea button - align right = &quot;true&quot;, 与<br> 被选中的 textarea button - align center = &quot;false&quot;",
+                      "expr":{
+                        "exprType":"block",
+                        "subExprs":[{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["5d258b4595d44062a1c4892931685a99"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["d48d6ceefe7e46e1b47ad30df962f51a"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"true",
+                                "stos":[]}]},
+{
+                            "exprType":"fcall",
+                            "functionName":"SetCheckState",
+                            "arguments":[{
+                                "exprType":"pathLiteral",
+                                "isThis":false,
+                                "isFocused":false,
+                                "isTarget":false,
+                                "value":["b4d4db8f5c3549a880878b86b5c7ad1a"]},
+{
+                                "exprType":"stringLiteral",
+                                "value":"false",
+                                "stos":[]}]}]}},
+{
+                      "action":"setFocusOnWidget",
+                      "description":"设置焦点在 textarea 上",
+                      "objectPaths":[["df01e2d1075b46609ac3210bb54c5ac2"]]}]}]}},
+          "tabbable":true,
+          "images":{
+            "normal~":"images/景点维护/textarea_button_-_align_right_u352.png",
+            "selected~":"images/景点维护/textarea_button_-_align_right_u352_selected.png",
+            "mouseOver~":"images/景点维护/textarea_button_-_align_right_u352_mouseOver.png",
+            "disabled~":"images/景点维护/textarea_button_-_align_right_u352_disabled.png"}},
+{
+          "id":"850d9cede09b431588530c9b7b8cec17",
+          "label":"",
+          "type":"horizontalLine",
+          "styleType":"horizontalLine",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":24,
+              "y":787},
+            "size":{
+              "width":851,
+              "height":10},
+            "linePattern":"dotted"},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/新增行程详情/u51_line.png"}},
+{
+          "id":"c30b2fb156194513820dc1c2a12efc3f",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":774,
+              "y":471},
+            "size":{
+              "width":76,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"f87d2e9ee59c4c4689bbee328144d4cb",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":707},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"0e2f7891bc034fcaa0eb3e9cf374cd03",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":707},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"0f8fa86a2e214ba8be27051f25232248",
+          "label":"",
+          "type":"comboBox",
+          "styleType":"comboBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":94,
+              "y":705},
+            "size":{
+              "width":100,
+              "height":22}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"95d12ee2676b40f8886757b18ac7d9e5",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":204,
+              "y":703},
+            "size":{
+              "width":200,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"eae3dde1c62046c790e0b7ccfd74b4c7",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":414,
+              "y":701},
+            "size":{
+              "width":100,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"7cf8bc873be84e05bccdf85e44b3a683",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":44,
+              "y":741},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"3242bdd0eaff4756ba3d296529a65784",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":44,
+                  "y":741},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"844358afe0a14913b9edd41200f668dc",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":94,
+              "y":741},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"400a4a38e70546e5b9cc9814e260777f",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":94,
+                  "y":741},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"2d17a8afecf741f5bc043f0acf8755cc",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":142,
+              "y":741},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"a953146bbb7842fd8fb3eb47e3150a28",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":142,
+                  "y":741},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"5d6bb5b6d58542b8a6a3cea4dd28a1a9",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":212,
+              "y":741},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"665c6a17edd3481e94068055b2503859",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":212,
+                  "y":741},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"8192ccc9f42b4bd6b83a6c27c062c31e",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":322,
+              "y":741},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"1d8e5eb3d92740d2b3d5319a3f270f94",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":322,
+                  "y":741},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"e838f6f0b5ee487f833ef3692890994f",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":370,
+              "y":741},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"331d2d9c0b6e419caf73c19bff4b18a3",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":370,
+                  "y":741},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"e33882ea96c746c7955b848b8e281cf9",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":440,
+              "y":741},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"2ab2dbf023e743a98293a6558f8ffae4",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":440,
+                  "y":741},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"0b6227a096f34d42b13629dd3d91aa3e",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":550,
+              "y":741},
+            "size":{
+              "width":27,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"68cb0e08f41d421e83b4c3231b5768b6",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":550,
+                  "y":741},
+                "size":{
+                  "width":27,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"79444b46aff6402ea2e46e1ebefc954e",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":598,
+              "y":741},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"8aed9731115941cdbfddf9a2f5a54d6f",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":598,
+                  "y":741},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"84b413a07c3043aa8eae72e2b2123bb5",
+          "label":"",
+          "type":"radioButton",
+          "styleType":"radioButton",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":668,
+              "y":741},
+            "size":{
+              "width":100,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"9d06a18c2fc249f18239f1a525946167",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":668,
+                  "y":741},
+                "size":{
+                  "width":100,
+                  "height":16}},
+              "adaptiveStyles":{
+}}]},
+{
+          "id":"d0259f483e9947aaac826b4b44833453",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":338,
+              "y":817},
+            "size":{
+              "width":100,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"bca16908086941a49654b66fe1d14214",
+          "label":"",
+          "type":"button",
+          "styleType":"button",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":460,
+              "y":817},
+            "size":{
+              "width":100,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"ce8fe587493e4f5fb58ae5731e49e7e0",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFDDFFD5},
+            "location":{
+              "x":24,
+              "y":76},
+            "size":{
+              "width":856,
+              "height":68},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFA7D093}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"6909e08235bc413485a9d3fa15743d45",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFDDFFD5},
+                "location":{
+                  "x":24,
+                  "y":76},
+                "size":{
+                  "width":856,
+                  "height":68},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFA7D093}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/新增行程详情/u154.png"}},
+{
+          "id":"79a4665ceeeb4711bedd4aeb1fc3e38a",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":30,
+              "y":99},
+            "size":{
+              "width":53,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"e185810209404e3080f55494db5bebf1",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":30,
+                  "y":99},
+                "size":{
+                  "width":53,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"e8c2f2c332b04e6c967cab049f4a5df9",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":94,
+              "y":95},
+            "size":{
+              "width":387,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"ca5af5484c39432c93e7dbc0ec2118bc",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":501,
+              "y":100},
+            "size":{
+              "width":53,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"3b0bbc6d9b7f48e5a50d32aea9175dec",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":501,
+                  "y":100},
+                "size":{
+                  "width":53,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"f79580ac600d49e7ba1f7dea66e492d9",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":563,
+              "y":95},
+            "size":{
+              "width":51,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"e09affc9994d4ccea43f61f89e15a132",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":625,
+              "y":100},
+            "size":{
+              "width":21,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"7ee6442747a34582a4dc6e2431dedd3b",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":625,
+                  "y":100},
+                "size":{
+                  "width":21,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"31c589041a3a41f48cc3a14fb27fbd71",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":661,
+              "y":100},
+            "size":{
+              "width":53,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"52a4899e8d604fc7af2e276f4028f9f9",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":661,
+                  "y":100},
+                "size":{
+                  "width":53,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"8ae1b68a24bb4d2a8b0918b800e8284e",
+          "label":"",
+          "type":"textBox",
+          "styleType":"textBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":725,
+              "y":95},
+            "size":{
+              "width":51,
+              "height":25}},
+          "adaptiveStyles":{
+}},
+{
+          "id":"a357856b5c7e480fafc7c168e10ceac7",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":785,
+              "y":100},
+            "size":{
+              "width":45,
+              "height":16}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"6e6f952fa9f7421090f4634923112e13",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":785,
+                  "y":100},
+                "size":{
+                  "width":45,
+                  "height":16}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"4dca3371355d4b64a970c6f8e0297f2f",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFDFDF},
+            "location":{
+              "x":904,
+              "y":144},
+            "size":{
+              "width":106,
+              "height":34},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFE08989}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"e0155efdb14945a0af9fd57ef7874bfc",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFDFDF},
+                "location":{
+                  "x":904,
+                  "y":144},
+                "size":{
+                  "width":106,
+                  "height":34},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFE08989}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/新增行程详情/u169.png"}},
+{
+          "id":"91f4961d08004f7c86d43c6cefbec1fa",
+          "label":"",
+          "type":"horizontalLine",
+          "styleType":"horizontalLine",
+          "visible":true,
+          "style":{
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "location":{
+              "x":860,
+              "y":154},
+            "size":{
+              "width":44,
+              "height":10},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFF999999}},
+          "adaptiveStyles":{
+},
+          "images":{
+            "start~":"resources/images/transparent.gif",
+            "end~":"resources/images/transparent.gif",
+            "line~":"images/新增行程详情/u171_line.png"}},
+{
+          "id":"ba308d3286c1454d86c81c256f1bfeb8",
+          "label":"link",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "horizontalAlignment":"left",
+            "foreGroundFill":{
+              "fillType":"solid",
+              "color":0xFF004080,
+              "opacity":1},
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "underline":true}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":94,
+              "y":397},
+            "size":{
+              "width":132,
+              "height":13},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"822e7ec449b54d6993dd249e54ba307a",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "horizontalAlignment":"left",
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF004080,
+                  "opacity":1},
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "underline":true}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":94,
+                  "y":397},
+                "size":{
+                  "width":132,
+                  "height":13},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "mouseOver~":"resources/images/transparent.gif"}},
+{
+          "id":"108aa86e93f547a5b28805dc9037eb59",
+          "label":"link",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "horizontalAlignment":"left",
+            "foreGroundFill":{
+              "fillType":"solid",
+              "color":0xFF004080,
+              "opacity":1},
+            "baseStyle":"627587b6038d43cca051c114ac41ad32",
+            "stateStyles":{
+              "mouseOver":{
+                "underline":true}},
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFFFFF},
+            "location":{
+              "x":236,
+              "y":397},
+            "size":{
+              "width":132,
+              "height":13},
+            "borderFill":{
+              "fillType":"solid",
+              "color":0xFFFFFF}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"b7b4f091fb56479a8bd82154ff8cab9b",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "horizontalAlignment":"left",
+                "foreGroundFill":{
+                  "fillType":"solid",
+                  "color":0xFF004080,
+                  "opacity":1},
+                "baseStyle":"627587b6038d43cca051c114ac41ad32",
+                "stateStyles":{
+                  "mouseOver":{
+                    "underline":true}},
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF},
+                "location":{
+                  "x":236,
+                  "y":397},
+                "size":{
+                  "width":132,
+                  "height":13},
+                "borderFill":{
+                  "fillType":"solid",
+                  "color":0xFFFFFF}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif",
+            "mouseOver~":"resources/images/transparent.gif"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "29db88f95a124e149a4e798c6a82cc4c":{
+      "scriptId":"u0"},
+    "86aae7cc855d4cf6bec593c037274f89":{
+      "scriptId":"u1"},
+    "ddedc4e745a84957917c607961e14e97":{
+      "scriptId":"u2"},
+    "d55cac8523b04fa4be773d06e99fc4ce":{
+      "scriptId":"u3"},
+    "39d0e937bc3c43acb97d821811f5eaea":{
+      "scriptId":"u4"},
+    "cf331ccb9f894e7ba681fb49da8e05a0":{
+      "scriptId":"u5"},
+    "52023550295044499beb906727cc62e7":{
+      "scriptId":"u6"},
+    "0c1eaaf80fd444ee866a57a4c636d94d":{
+      "scriptId":"u7"},
+    "8e356dc6650d483a82cff555bf330e8c":{
+      "scriptId":"u8"},
+    "0c44a13663484425a3e037166945754d":{
+      "scriptId":"u9"},
+    "10f250b0214e4bee92ecaf559ce73d42":{
+      "scriptId":"u10"},
+    "99f0bc73ab5b45aab49d45d2f82c7749":{
+      "scriptId":"u11"},
+    "e84634be71524398811c0cbc4ce4118a":{
+      "scriptId":"u12"},
+    "d91aa0fd33f84276996a757ef41150f8":{
+      "scriptId":"u13"},
+    "42b14f31940746aca49c3e3b5c2541d7":{
+      "scriptId":"u14"},
+    "8988893418284c49ba19b53819add0e5":{
+      "scriptId":"u15"},
+    "a2726d14efe04decb9ef06a03002df52":{
+      "scriptId":"u16"},
+    "64cef6a1a9614e008ff820fc5fa656cc":{
+      "scriptId":"u17"},
+    "b9c9ab21db534c129240c435765f19ac":{
+      "scriptId":"u18"},
+    "598d364ae4aa4544ad92dbd2a164be8d":{
+      "scriptId":"u19"},
+    "a01c3618c81547ebaa9a2d807fd0c664":{
+      "scriptId":"u20"},
+    "5a5b0a789b7f4ed5a5094843841fa292":{
+      "scriptId":"u21"},
+    "ac2cdf725e0742aaaed7d1323b41c55d":{
+      "scriptId":"u22"},
+    "41dbc896e13946c4a4546ff2f28ae21f":{
+      "scriptId":"u23"},
+    "6c3ed41f048f4363870561dbc90c4d22":{
+      "scriptId":"u24"},
+    "b888ff44c046486bb3e4fdffc1780d05":{
+      "scriptId":"u25"},
+    "72910e2991e14678a24ee649c7af1dcf":{
+      "scriptId":"u26"},
+    "b9df2d8cd6ab4e76b8f8194614858848":{
+      "scriptId":"u27"},
+    "1212e597b66e41b1a666d27dde325d1a":{
+      "scriptId":"u28"},
+    "f87e1bc4b7b44cbebeae736e9b51201a":{
+      "scriptId":"u29"},
+    "974aee91c183466ebfafea392e5bf3be":{
+      "scriptId":"u30"},
+    "9f69435227f74b70af2459a50e61bb1a":{
+      "scriptId":"u31"},
+    "2b73cd45bbec42d083e0433dfe793786":{
+      "scriptId":"u32"},
+    "5ebd6bc08b0f4a3b940de2f14a495773":{
+      "scriptId":"u33"},
+    "132f1573de314729b58492df344fff50":{
+      "scriptId":"u34"},
+    "b594f361ddbb45179dcc46aded6ca277":{
+      "scriptId":"u35"},
+    "f03a5cf5599041f289e1fbeb90a2ef0a":{
+      "scriptId":"u36"},
+    "dbcd587ec332446f94727f5771fbcff9":{
+      "scriptId":"u37"},
+    "cab5afc50d05416ba6647cd17131f616":{
+      "scriptId":"u38"},
+    "c956b422ed044293a800c9f8b8ae1698":{
+      "scriptId":"u39"},
+    "644f5f3f8ec14cbea42f390f7dacab2c":{
+      "scriptId":"u40"},
+    "8cf15b83fbcf4620a39871a4acd1323f":{
+      "scriptId":"u41"},
+    "413c562646cc46d58a7aa692826be4ec":{
+      "scriptId":"u42"},
+    "8d022279416b4a888d1cb4ca7007c56f":{
+      "scriptId":"u43"},
+    "d3e6d0410ce5467d994f0885cf81acad":{
+      "scriptId":"u44"},
+    "af9ac6fe84014b9b8c6fa6132dfef0cf":{
+      "scriptId":"u45"},
+    "a9412ee627d94e978c33f1502d8633bf":{
+      "scriptId":"u46"},
+    "cbe1d1f090a346f2929b361c8090ab4f":{
+      "scriptId":"u47"},
+    "3b0f6177fe0b4f0b9dd0636c4c6b1f5d":{
+      "scriptId":"u48"},
+    "c5809ef7e21a480d9aa4abb61909c515":{
+      "scriptId":"u49"},
+    "fbd627f053dd4021ad9860f6f121a5b9":{
+      "scriptId":"u50"},
+    "7b38aac19bd04b0ba6c0e1d6ed25a373":{
+      "scriptId":"u51"},
+    "84b70ac789924497bd01e8c7b1ce8b88":{
+      "scriptId":"u52"},
+    "071e0ef4b8f74ea3a6f6fa3af73034fd":{
+      "scriptId":"u53"},
+    "3060309acb5a4f31aae25e743b32b2f6":{
+      "scriptId":"u54"},
+    "b87b8aeebec04914b286e0262b01cbf2":{
+      "scriptId":"u55"},
+    "6e08b0818cfc407e83727f212381ad97":{
+      "scriptId":"u56"},
+    "4f161752241f4804be7991873837f40e":{
+      "scriptId":"u57"},
+    "892311a8848044ff888f16b673049c29":{
+      "scriptId":"u58"},
+    "9da255ea3c3a44c2b534c2cc04e7ac86":{
+      "scriptId":"u59"},
+    "9c8b4856c2ff433ebe42828b77fda175":{
+      "scriptId":"u60"},
+    "6abd7b6e20ae42ad8dbb051949499911":{
+      "scriptId":"u61"},
+    "bda57d9693374a4394d0a885d8f7d26d":{
+      "scriptId":"u62"},
+    "0dcf91ef77824afeb206951d4b25393d":{
+      "scriptId":"u63"},
+    "026fb28eea724c738db2b700e58c3d5f":{
+      "scriptId":"u64"},
+    "8ed805d4cd5047a6be37e1a6dc1fa835":{
+      "scriptId":"u65"},
+    "2649a6059f52434bb7e86693b60c4d8a":{
+      "scriptId":"u66"},
+    "d114d33620a9429692f4746e09784ff5":{
+      "scriptId":"u67"},
+    "9d205d4fd31944a0ada1a5a9a4a52f5f":{
+      "scriptId":"u68"},
+    "0e8d0f17b9d84dde95bc429e17d37015":{
+      "scriptId":"u69"},
+    "faca694a203d4ad7ace88ce178b86742":{
+      "scriptId":"u70"},
+    "d657e3d28aac49cca478bb86f5e74c9e":{
+      "scriptId":"u71"},
+    "42fcd14d820b4574b352ca1fbee09cc6":{
+      "scriptId":"u72"},
+    "58a2f49c956247f4b6cb41c6e8781e71":{
+      "scriptId":"u73"},
+    "ca910ee68cf54b9a8b8a27eb2c9d9021":{
+      "scriptId":"u74"},
+    "46985e6d1e5b4f9bbf23f0632ea201b4":{
+      "scriptId":"u75"},
+    "4e60bc53207d4be2a00fecbbd1d85089":{
+      "scriptId":"u76"},
+    "b0be66b17abd432e8f141d819f0602ff":{
+      "scriptId":"u77"},
+    "eb32f8f09a574eb7bea2f2cf9669cd33":{
+      "scriptId":"u78"},
+    "4eb4df1b72374c319bb9d57ceb62defe":{
+      "scriptId":"u79"},
+    "7a549c911ccf44c8b0daa86b6f0f6761":{
+      "scriptId":"u80"},
+    "8ba890a9c6104b798f83db892bf8bcfa":{
+      "scriptId":"u81"},
+    "dd7b6a20ff764ec8996be78c34a73de2":{
+      "scriptId":"u82"},
+    "fdae514a0242484e825da75c5e0e9b0c":{
+      "scriptId":"u83"},
+    "ad6993debedd44d1b48751494200dbc4":{
+      "scriptId":"u84"},
+    "dd063fb3d07049edb6eb81739fff8f9c":{
+      "scriptId":"u85"},
+    "8223f54444664706a050aa3f45065aca":{
+      "scriptId":"u86"},
+    "25c3735d09d440d699cc1291f141dbfb":{
+      "scriptId":"u87"},
+    "221fd0cbb50146c0a38fb44529da4d0d":{
+      "scriptId":"u88"},
+    "a411222799504cebbba7076916cd869d":{
+      "scriptId":"u89"},
+    "853160ed7d8f466d9ac131cd8c04caf1":{
+      "scriptId":"u90"},
+    "d1658af8614e4295bb68cf66ff6292c1":{
+      "scriptId":"u91"},
+    "22e6296fdb5b42baa14bd31357b4c26c":{
+      "scriptId":"u92"},
+    "94e038554a794f6e829d2cb4619f7b8a":{
+      "scriptId":"u93"},
+    "6a2080866976484699d1d0bf65ced94e":{
+      "scriptId":"u94"},
+    "f24ab4ae88a649f49b4c0b78a99ecf26":{
+      "scriptId":"u95"},
+    "11d7c7226a2b4bd39b6f825618318d96":{
+      "scriptId":"u96"},
+    "06e814d237cf4cf5945c3fa987eeee30":{
+      "scriptId":"u97"},
+    "df01e2d1075b46609ac3210bb54c5ac2":{
+      "scriptId":"u98"},
+    "a8d798c573f9450187880e75a43ea253":{
+      "scriptId":"u99"},
+    "12537e78337a48bdbc5146f144400785":{
+      "scriptId":"u100"},
+    "103777ec073747ae91d5fbb795126623":{
+      "scriptId":"u101"},
+    "67b2856aa4774eb1bb8ea64c2c814f35":{
+      "scriptId":"u102"},
+    "ebe6602ed3204e499a9c74dbf10e1855":{
+      "scriptId":"u103"},
+    "f938c677d79d462ca093fe996fa34b89":{
+      "scriptId":"u104"},
+    "8072de754eff4972ad71fe862f266bfc":{
+      "scriptId":"u105"},
+    "7565e93f73394fcdb0b904dc32c7a536":{
+      "scriptId":"u106"},
+    "f74aa04647414ee3b49608cb926aca11":{
+      "scriptId":"u107"},
+    "413b61fcf1e44113a009d4aea0641041":{
+      "scriptId":"u108"},
+    "d0a7ea648a414392a816a936acf5621b":{
+      "scriptId":"u109"},
+    "f406d0b5070748eaa6369319062eba67":{
+      "scriptId":"u110"},
+    "02e8a8bbaa9544369ad93b87cdfb7f98":{
+      "scriptId":"u111"},
+    "d3eb23a34dbc4e629d11749974a9fc71":{
+      "scriptId":"u112"},
+    "3907fda3b898425d85c0ce2d09045722":{
+      "scriptId":"u113"},
+    "d9849410a65b4a84a521b009727311d8":{
+      "scriptId":"u114"},
+    "0d73dd2a66994f8a8cdeda75982a99b7":{
+      "scriptId":"u115"},
+    "32b980efd6d540a7a3da668b4fa9fb88":{
+      "scriptId":"u116"},
+    "bd1f5df5f4014f9296a7a11299efc153":{
+      "scriptId":"u117"},
+    "403dd4c600c44272866c853e3c138408":{
+      "scriptId":"u118"},
+    "5d258b4595d44062a1c4892931685a99":{
+      "scriptId":"u119"},
+    "eb81216e60d3458d81bd048c637250da":{
+      "scriptId":"u120"},
+    "b4d4db8f5c3549a880878b86b5c7ad1a":{
+      "scriptId":"u121"},
+    "864530167c5445acaf9e53725f75c2e0":{
+      "scriptId":"u122"},
+    "d48d6ceefe7e46e1b47ad30df962f51a":{
+      "scriptId":"u123"},
+    "0d3262c45e334eb6b0676440a335a8d0":{
+      "scriptId":"u124"},
+    "850d9cede09b431588530c9b7b8cec17":{
+      "scriptId":"u125"},
+    "c30b2fb156194513820dc1c2a12efc3f":{
+      "scriptId":"u126"},
+    "f87d2e9ee59c4c4689bbee328144d4cb":{
+      "scriptId":"u127"},
+    "0e2f7891bc034fcaa0eb3e9cf374cd03":{
+      "scriptId":"u128"},
+    "0f8fa86a2e214ba8be27051f25232248":{
+      "scriptId":"u129"},
+    "95d12ee2676b40f8886757b18ac7d9e5":{
+      "scriptId":"u130"},
+    "eae3dde1c62046c790e0b7ccfd74b4c7":{
+      "scriptId":"u131"},
+    "7cf8bc873be84e05bccdf85e44b3a683":{
+      "scriptId":"u132"},
+    "3242bdd0eaff4756ba3d296529a65784":{
+      "scriptId":"u133"},
+    "844358afe0a14913b9edd41200f668dc":{
+      "scriptId":"u134"},
+    "400a4a38e70546e5b9cc9814e260777f":{
+      "scriptId":"u135"},
+    "2d17a8afecf741f5bc043f0acf8755cc":{
+      "scriptId":"u136"},
+    "a953146bbb7842fd8fb3eb47e3150a28":{
+      "scriptId":"u137"},
+    "5d6bb5b6d58542b8a6a3cea4dd28a1a9":{
+      "scriptId":"u138"},
+    "665c6a17edd3481e94068055b2503859":{
+      "scriptId":"u139"},
+    "8192ccc9f42b4bd6b83a6c27c062c31e":{
+      "scriptId":"u140"},
+    "1d8e5eb3d92740d2b3d5319a3f270f94":{
+      "scriptId":"u141"},
+    "e838f6f0b5ee487f833ef3692890994f":{
+      "scriptId":"u142"},
+    "331d2d9c0b6e419caf73c19bff4b18a3":{
+      "scriptId":"u143"},
+    "e33882ea96c746c7955b848b8e281cf9":{
+      "scriptId":"u144"},
+    "2ab2dbf023e743a98293a6558f8ffae4":{
+      "scriptId":"u145"},
+    "0b6227a096f34d42b13629dd3d91aa3e":{
+      "scriptId":"u146"},
+    "68cb0e08f41d421e83b4c3231b5768b6":{
+      "scriptId":"u147"},
+    "79444b46aff6402ea2e46e1ebefc954e":{
+      "scriptId":"u148"},
+    "8aed9731115941cdbfddf9a2f5a54d6f":{
+      "scriptId":"u149"},
+    "84b413a07c3043aa8eae72e2b2123bb5":{
+      "scriptId":"u150"},
+    "9d06a18c2fc249f18239f1a525946167":{
+      "scriptId":"u151"},
+    "d0259f483e9947aaac826b4b44833453":{
+      "scriptId":"u152"},
+    "bca16908086941a49654b66fe1d14214":{
+      "scriptId":"u153"},
+    "ce8fe587493e4f5fb58ae5731e49e7e0":{
+      "scriptId":"u154"},
+    "6909e08235bc413485a9d3fa15743d45":{
+      "scriptId":"u155"},
+    "79a4665ceeeb4711bedd4aeb1fc3e38a":{
+      "scriptId":"u156"},
+    "e185810209404e3080f55494db5bebf1":{
+      "scriptId":"u157"},
+    "e8c2f2c332b04e6c967cab049f4a5df9":{
+      "scriptId":"u158"},
+    "ca5af5484c39432c93e7dbc0ec2118bc":{
+      "scriptId":"u159"},
+    "3b0bbc6d9b7f48e5a50d32aea9175dec":{
+      "scriptId":"u160"},
+    "f79580ac600d49e7ba1f7dea66e492d9":{
+      "scriptId":"u161"},
+    "e09affc9994d4ccea43f61f89e15a132":{
+      "scriptId":"u162"},
+    "7ee6442747a34582a4dc6e2431dedd3b":{
+      "scriptId":"u163"},
+    "31c589041a3a41f48cc3a14fb27fbd71":{
+      "scriptId":"u164"},
+    "52a4899e8d604fc7af2e276f4028f9f9":{
+      "scriptId":"u165"},
+    "8ae1b68a24bb4d2a8b0918b800e8284e":{
+      "scriptId":"u166"},
+    "a357856b5c7e480fafc7c168e10ceac7":{
+      "scriptId":"u167"},
+    "6e6f952fa9f7421090f4634923112e13":{
+      "scriptId":"u168"},
+    "4dca3371355d4b64a970c6f8e0297f2f":{
+      "scriptId":"u169"},
+    "e0155efdb14945a0af9fd57ef7874bfc":{
+      "scriptId":"u170"},
+    "91f4961d08004f7c86d43c6cefbec1fa":{
+      "scriptId":"u171"},
+    "ba308d3286c1454d86c81c256f1bfeb8":{
+      "scriptId":"u172"},
+    "822e7ec449b54d6993dd249e54ba307a":{
+      "scriptId":"u173"},
+    "108aa86e93f547a5b28805dc9037eb59":{
+      "scriptId":"u174"},
+    "b7b4f091fb56479a8bd82154ff8cab9b":{
+      "scriptId":"u175"}}});

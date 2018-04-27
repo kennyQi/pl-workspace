@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-机票</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+</head>
+
+
+
+<body>
+
+
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1 on">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav3">酒&nbsp;店</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav5">周边游</a>
+        <a href="#" title="" class="h1 yahei nav6">跟团游</a>
+        <a href="#" title="" class="h1 yahei nav7">自由行</a>
+        <a href="#" title="" class="h1 yahei nav8">团&nbsp;购</a>
+        <a href="#" title="" class="h1 yahei nav9">说走就走</a>
+        <a href="#" title="" class="h1 yahei nav10 last">合作专区</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="#top">
+    </a>
+<!--头部-->
+
+<!--内容-->
+<link href="css/fly.css" rel="stylesheet" />
+<script src="js/fly.js" language="javascript"></script>
+
+<div class="g_bd">
+    <div class="m_search disb ov">
+        <div class="m_select disb pl">
+            <div class="select_cont pl">
+                <span class="pl fl disb ov">
+                    <label class="pa time_tt h2 color8">出发城市</label>
+                    <input class="laydate-icon input time" value="" name="layTime" id="citySelect_from" >
+                    <label class="pa icon1 Bg "></label>
+                </span>
+                <span class="fl change Bg" id="changeCity"></span>
+                <span class="pl fl disb ov">
+                    <label class="pa time_tt h2 color8">到达城市</label>
+                    <input value=""  class="laydate-icon input time"  name="layTime" id="citySelect_to"  >
+                    <label class="pa icon2 Bg "></label>
+                </span>
+                <span class="pl fl disb ov day">
+                    <label class="pa time_tt h2 color8">出发日期</label>
+                    <input value=""  class="laydate-icon input time " onClick="laydate()" name="layTime" id="search_time"  >
+                    <label class="pa icon3 Bg "></label>
+                </span>
+                <span class="s_btn h1 yahei Bg curp pa" id="search">搜&nbsp;索</span>
+            </div>
+        </div>
+
+        <script src="laydate/laydate.js" language="javascript"></script>
+        <script>
+            ;!function(){
+                laydate.skin('dahong');
+                laydate({
+                    elem: '#demo',
+                    istime: true,
+                    min:laydate.now()
+                })
+            }();
+        </script>
+    </div>
+    <div class="g_cont ov disb">
+        <div class="m_left fl ov">
+            <h4 class="m_title disb">开始您的旅程吧，享受更超值的机票</h4>
+            <div class="m_date">
+                <div class="turn_l fl curp"  id="day_before"><i class="icon Bg fl"></i></div>
+                <!--放置时间参数-->
+                <input type="hidden" rel="0" id="day_rel" day="" loadDay=""><!--loadDay页面加载时的时间参数，day是js校验用参数-->
+                <ul class="day fl" id="chooseDay">
+                    <li rel="">
+                        <a href="javascript:;" class="on">
+                        </a>
+                    </li>
+                    <li rel="">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                    <li rel="">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                    <li rel="">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                    <li rel="">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                    <li rel="">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                    <li rel="">
+                        <a href="javascript:;">
+                        </a>
+                    </li>
+                </ul>
+                <div class="turn_r fl curp" id="day_after"><i class="icon Bg fl"></i></div>
+            </div>
+            <div class="m_tiao disb">
+                <label class="fl lab">筛选条件：</label>
+                <div class="m_html_sel fl pl"><label>起飞时间</label>
+                   <div class="op pa ov">
+                       <span value="全部">全部</span>
+                       <span value="上午">上午(6:00-12:00)</span>
+                       <span value="下午">下午(12:00-18:00)</span>
+                       <span value="晚上">晚上(18:00-24:00)</span>
+                   </div>
+                    <i class="icon Bg pa"></i>
+                </div>
+                <div class="m_html_sel fl pl"><label>航空公司</label>
+                    <div class="op pa ov">
+                        <span value="全部">全部</span>
+                        <span value="深圳航空">深圳航空</span>
+                        <span value="东方航空">东方航空</span>
+                        <span value="国际航空">国际航空</span>
+                        <span value="南方航空">南方航空</span>
+                    </div>
+                    <i class="icon Bg pa"></i>
+                </div>
+            </div>
+            <div class="m_list disb ov" id="m_list">
+                <div class="fly_box ov">
+                    <div class="found">
+                        <span class="company pl">
+                            <label class="fly_bg fl icon fly_3U"></label>
+                            <label class="i fl">东方航空<b>MU9107</b></label>
+                            <label class="c fl">机型：333</label>
+                        </span>
+                        <span class="time">
+                            <label class="i">21:30</label>
+                            <label class="c">虹桥机场T2</label>
+                        </span>
+                        <span class="cross">
+                            <label class="t fl">直飞</label>
+                            <label class="Bg icon fl"></label>
+                            <span class="tim pl fl">
+                                <label class="z Bg pa"></label>
+                                <label class="x">行程时间</label>
+                                <label class="ti">2小时15分钟</label>
+                            </span>
+                        </span>
+                        <span class="time">
+                            <label class="i">21:30</label>
+                            <label class="c">虹桥机场T2</label>
+                        </span>
+                        <span class="other">机建+燃油<br/>￥50+￥0
+                        </span>
+                        <span class="price pl">
+                            <label class="i">
+                                <i>¥</i>&nbsp;830&nbsp;&nbsp;<e>起</e>
+                            </label>
+                            <label class="look_detail curp">查看详情</label>
+
+                            <i class="xiab Bg pa"></i>
+                        </span>
+                    </div>
+                    <ul class="ticket">
+                        <li>
+                            <span class="type Bg"></span>
+                            <span class="name">经济舱</span>
+                            <span class="off">99折</span>
+                            <span class="tips">退改签</span>
+                            <span class="price"><i>¥</i>1220</span>
+                            <a href="#" class="sub">预定</a>
+                        </li>
+                        <li>
+                            <span class="type Bg sw"></span>
+                            <span class="name">商务舱</span>
+                            <span class="off">99折</span>
+                            <span class="tips">退改签</span>
+                            <span class="price"><i>¥</i>1220</span>
+                            <a href="#" class="sub">预定</a>
+                        </li>
+                        <li>
+                            <span class="type Bg td"></span>
+                            <span class="name">头等舱</span>
+                            <span class="off">99折</span>
+                            <span class="tips">退改签</span>
+                            <span class="price"><i>¥</i>1220</span>
+                            <a href="#" class="sub">预定</a>
+                        </li>
+
+                        <li>
+                            <span class="toggle">收起<i class="Bg"></i></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fly_none" style="display:none;">
+                    暂无航班信息！
+                </div>
+                <div class="fly_load" style="display:none;">
+                 </div>
+            </div>
+            <div class="m_page disb">
+                <a href="javascript:" class="turn fr" id="nextDay">后一天航班&gt;&gt;</a>
+                <a href="javascript:" class="turn fr" id="preDay">&lt;&lt;前一天航班</a>
+            </div>
+        </div>
+        <div class="m_right fr ov">
+            <div class="pinc">
+                <input type="text" placeholder="游玩城市" class="city disb" />
+                <a href="#" class="search disb" >搜索景点</a>
+                <h4 class="jd disb">热门景点</h4>
+                <div class="hotLink disb">
+                    <a href="#">雷峰塔</a>&nbsp;&nbsp;
+                    <a href="#">三清山金沙索道</a>&nbsp;&nbsp;
+                    <a href="#">洛阳灵</a>&nbsp;&nbsp;
+                    <a href="#">少林景区（少林寺)</a>&nbsp;&nbsp;
+                    <a href="#">山寺</a>&nbsp;&nbsp;
+                    <a href="#">青龙</a>&nbsp;&nbsp;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/city.js" language="javascript"></script>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">票量简介</a>
+                	<a href="#" title="" class="simsun h4">法律声明</a>
+                	<a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">友情链接</a>
+                	<a href="#" title="" class="simsun h4">酒店加盟</a>
+                	<a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">帮助中心</a>
+                	<a href="#" title="" class="simsun h4">投诉建议</a>
+                	<a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class=" disb h2 yahei yj">意见反馈</span>
+                    <span class=" disb h2 yahei kf">客服电话</span>
+                    <label class="yahei abt color6  disb">0571-23288385</label>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <div class="special"></div>
+</div>
+<!--页脚-->
+</body>
+</html>

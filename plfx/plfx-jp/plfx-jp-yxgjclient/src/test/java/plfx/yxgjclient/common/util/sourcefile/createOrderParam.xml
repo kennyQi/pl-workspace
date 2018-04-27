@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<createOrderParams>
+	<userName>Ply365365</userName>
+	<signUserName></signUserName>
+	<serviceName></serviceName>
+	<passengerInfos>
+		<passengerInfo>
+			<passengerName>Guo/tianxiang</passengerName>
+			<passengerType>1</passengerType>
+			<idType>1</idType>
+			<idNo>46846496479448</idNo>
+			<issueCountry>CHN</issueCountry>
+			<expiryDate>2018-12-12</expiryDate>
+			<nationality>CN</nationality>
+			<birthday>1990-10-12</birthday>
+			<sex>1</sex>
+			<telephone>11111111111</telephone>
+			<resiAddr>American,fds,fds,fg</resiAddr>
+			<resiPost>41454546</resiPost>
+			<dstAddr>China,dfd,fyrt,rt</dstAddr>
+			<dstPost>456464666</dstPost>
+		</passengerInfo>
+	</passengerInfos>
+	<contacterInfo>
+		<contactName>TIANXIANG</contactName>
+		<contactPhone>88888888888</contactPhone>
+		<contactMailAdd>leiqingyign@qq.com</contactMailAdd>
+		<contactAddress></contactAddress>
+		<sendToAddress></sendToAddress>
+	</contacterInfo>
+	<extOrderId>PLLV201507241053</extOrderId>
+	<encryptString>98f0d1287046c3730a4dd6ee1a897958b686614a0d2c4d96495fafb6b1c65b2b9c2042b362bd0412ec2475eec9a62429ced74af449e08adff3476e6ece2ae623aa9f5af9fa4d73f6ef842ba30af28d1fa889b076107e2ae1763ea36c65aef460eed1a95befba269e904213e391e85222290b213430540c9b97abf753c7969cfd60ab5027f4b7ca9e8e144812779ab22110c0c69d3ecce64627293a4c6845ac2d877db99f9504fef2d108f43833ff12a4732c37fec0b565514d145a11467862e46891e672191268bbfa579e6949f5a4846dd949f55e5f2a76ed5f6603a69f9532fde195b239bc934ccc961ffb94e53ac6ccc46ea1835b7083f71bdc45eb35838b714aa228500ae42a1aff7e71524d373d95a9e954f80b688cea351f3e52195ed611d8c9c67cd4ea104c2b8d9806cdd7ff897f2b77ce6d0101de621a591c38acf9efb60696752c7f56d08697c3e6c2224ed7fa778d446e0e93e88e757be250dd5d2d35ad7d55d048854b305938890e73fd290b213430540c9b97abf753c7969cfd1e2b90a0e6194924b109512afb52d34ac572ddaf12782dc21b27112726427e62f1535795df5ac78ce8f98dd32473a94ba039741cf6ed440af64ad50aa611547c60020ad7c0a5c0ccf6525b28d88a50b4e4a3303237143298257ff902138f4f9b22d17dd29ea3d1422ff14a39e958e91030fd435b6549d15eea07ffdabbe09bd86a61a34855100ed218a61efacb8fbc478d47b7d4b42fd762663600afd021aa86371f99ec381798e9a8ad65fe011a4b6933684dfc473c783f7dac2a8697fed512115999c8677f0c38fc161486cb96df8dcfcc08b644ea7ceef5e6cd1712fe8980d97940f9a4d72c5e68ded0ad49e70fa6f49c8157eab85dc92ab6148be53314897431f6a27b4b653f398c2828e48c59d499657e03c5ee4741a2e8465a905e5e9401a5f7a79534305c6272440e838823d416bd01f68a1a04c1056c70cf4d640e231816f9bc7eea442c21d5ebabed4840f0da54f57173a55481e3a9c9787663cd5580f63f2f24147550ab070d69b50adde4bbce9362dfe7f117595fe774a4557bd03eb28c2cdf38f57f7a44c3ca33c853644feb318f45924d635284dcc700c11dafb0240e9bd5a1ec584a813be04fc01e4dc25581591e93468eb0f8dcdb62816a17889b1e73aae4a4129e6d08764b92b83947adf980adc12c6d3a40c528e2cd4866
+	</encryptString>
+	<auditNotifyUrl>http://www.ply365.com
+	</auditNotifyUrl>
+</createOrderParams>

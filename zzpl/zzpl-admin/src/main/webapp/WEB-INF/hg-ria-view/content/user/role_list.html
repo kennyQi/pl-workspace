@@ -1,0 +1,71 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-red-sunglo bold uppercase">角色列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/role/add" class="btn btn-default btn-sm" target="hgTab"> 添加角色
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							角色名称：
+							<input class="form-control input-small input-inline" name="roleName" id="name">
+						</label>
+					</div>
+					<div class="col-md-4 text-right" style="float: right;">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#roleGrid" data-ref-param="{roleName: $('#name').val()}"> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<!-- <th class="table-checkbox"><input type="checkbox" group="projectIds"
+								class="checkboxCtrl"/></th> -->
+							<th>角色名称</th>
+							<th>角色简介</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="roleGrid" target="grid" data-url="${contextPath}/role/roleList">
+						<tr class="odd gradeX" onclick="getDetail('{id}')">
+							<!-- <td>
+								<input type="checkbox" name="projectIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td> -->
+							<td>
+								{roleName}
+							</td>
+							<td>
+								{description}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/role/del?roleID={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/role/edit?roleID={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function getDetail(roleID){
+	$.hgtab.open("${contextPath}/role/detail?roleID="+roleID+"","detail","角色详情",false);
+}
+
+</script>

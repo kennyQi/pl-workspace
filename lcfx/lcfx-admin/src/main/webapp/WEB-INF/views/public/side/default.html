@@ -1,0 +1,221 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> <#assign dbg=0 />
+<div class="accordion" fillSpace="sidebar" fi="load2">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>设置
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<!-- 临时菜单方便测试 -->
+			<#--
+			<!--
+
+			<li><a>===========test</a></li>
+			<li><a href="${contextPath}/test/tree" target="navTab" rel="">dwz tree test</a></li>
+			<li><a href="${contextPath}/test/address" target="navTab" rel="">地址多级</a></li>
+			<li><a href="${contextPath}/test/service" target="navTab" rel="">service test</a></li>
+			<li><a href="${contextPath}/test/to_ajaxupload" target="navTab" rel="">ajax upload</a></li>
+			<li><a href="${contextPath}/test/to_upload" target="navTab" rel="">upload</a></li>
+			<li><a href="${contextPath}/test/html_util" target="navTab" rel="">html处理</a></li>
+			<li><a href="${contextPath}/test/html_util2" target="navTab" rel="">html处理2</a></li>
+			<li><a>===========test</a></li>
+-->
+<#--<!--
+
+<#if system_configedit>
+			<li><a href="${contextPath}/system_config/edit" target="navTab" rel="system_config_edit">系统参数</a>
+			</li>
+			</#if>
+			
+<#if attentionlist>
+			<li><a href="${contextPath}/attention/list" target="navTab" rel="attention_list">注意事项</a>
+			</li>
+			</#if>
+			
+			
+<#if payment_methodlist>
+			<li><a href="${contextPath}/payment_method/list" target="navTab" rel="payment_method_list">结款方式</a>
+			</li>
+			</#if>
+			<li><a href="${contextPath}/system_config/edit" target="navTab" rel="system_config_edit">系统参数</a>
+			</li>
+			</#if>
+-->
+			
+			<li><a href="${contextPath}/mileOrder/list" target="navTab" rel="mileOrder">里程订单管理</a>
+			</li> 
+			
+			<li><a href="${contextPath}/distributor/list" target="navTab" rel="distributor">分销商管理</a>
+			</li> 
+			<li><a href="${contextPath}/czfile/getCzFile" target="navTab" rel="czFileQuery">南航数据包管理</a>
+			</li>
+			
+			<#if perm >
+			<li><a>权限管理</a>
+				<ul>
+					<#if authpermindex >
+					<li><a href="${contextPath}/auth/perm/index" target="navTab" rel="authPerm">资源管理</a>
+					</li> </#if> <#if authrolelist >
+					<li><a href="${contextPath}/auth/role/list" target="navTab" rel="authRole">角色管理</a>
+					</li> </#if> <#if systemoperatorlist >
+					<li><a href="${contextPath}/system/operator/list" target="navTab" rel="operator">员工管理</a>
+					</li> </#if>
+				</ul></li> </#if>
+				
+				
+			<li><a>系统管理</a>
+				<ul>
+				
+				<#--<!--
+
+					<li><a href="${contextPath}/auth/perm/index" target="navTab" rel="authPerm">里程兑换数据包管理</a>
+					</li> 
+-->
+					<li>
+					<a href="${contextPath}/system/operator/to_change_password" target="navTab" rel="change_password"  >修改密码</a>
+					</li> 
+				</ul></li>
+			
+			<!-- 
+			<li><a href="JavaScript:;" target="navTab" rel="aaa">--------------</a>
+			</li> 
+			<li><a href="${contextPath}/prod_sync/list" target="navTab" rel="prod_sync_list">商品资料同步</a>
+			</li> 
+			
+			<#if productlist>
+				<li><a href="${contextPath}/product/list" target="navTab" rel="product_list">商品管理</a>
+				</li> 
+			</#if>
+			<#if unitlist>
+					<li><a href="${contextPath}/unit/list" target="navTab" rel="unit_list">计量单位</a>
+					</li> 
+			</#if>
+			
+			
+			
+			
+			 <#if categorylist>
+			<li><a href="${contextPath}/category/list" target="navTab" rel="category_list">商品分类管理</a>
+			</li> </#if> <#if brandlist>
+			<li><a href="${contextPath}/brand/list" target="navTab" rel="brand_list">商品品牌管理</a>
+			</li> </#if> <#if specificationlist>
+			<li><a href="${contextPath}/specification/list" target="navTab" rel="specification_list">商品规格管理</a>
+			</li> </#if> <#if supplierlist>
+			<li><a href="${contextPath}/supplier/list" target="navTab" rel="supplier_list">供应商管理</a>
+			</li> </#if> <#if supplierprioritylist>
+			<li><a href="${contextPath}/supplier/priority/list" target="navTab" rel="sp_list">供应商优先级管理</a>
+			</li> </#if> <#if warehouselist>
+			<li><a href="${contextPath}/warehouse/list" target="navTab" rel="warehouse_list">仓库管理</a>
+			</li> </#if> <#if warehousetypelist>
+			<li><a href="${contextPath}/warehouse/type/list" target="navTab" rel="warehouse_type_list">仓库类型</a>
+			</li> </#if>
+			
+				
+				
+				<#if projectlist>
+			<li><a href="${contextPath}/project/list" target="navTab" rel="project_list">项目管理</a>
+			</li> </#if> <#if loglist>
+			<li><a href="${contextPath}/log/list" target="navTab" rel="log_list">日志管理</a>
+			</li> </#if>
+			
+			 -->
+			<#--<!--
+
+			<li><a href="#">====v2.0====</a>
+			</li>
+			<li><a>采购管理</a>
+				<ul>
+					<li><a href="${contextPath}/purchase_order/list" target="navTab" rel="purchase_order_list">采购单管理</a>
+					</li>
+				</ul></li>
+			<li><a>入库管理</a>
+				<ul>
+					<li><a href="${contextPath}/warehousing_notice/list" target="navTab" rel="warehousing_notice_list">入库通知管理</a>
+					</li>
+					
+					<li><a href="JavaScript:;" target="navTab" rel="">入库质检管理</a></li>
+					<li><a href="${contextPath}/warehousing_order/list" target="navTab" rel="warehousing_order_list">入库单管理</a>
+					</li>
+				</ul></li>
+			<li><a>库存管理</a>
+				<ul>
+					<li><a href="${contextPath}/inventory/list" target="navTab" rel="inventory_list">库存查询</a>
+					</li>
+				</ul>
+				</li>
+				
+-->
+		</ul>
+	</div>
+	<!-- 
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>商品管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/product/list" target="navTab" rel="product_list">商品管理</a></li>
+			<li><a href="${contextPath}/category/list" target="navTab" rel="category_list">商品分类管理</a></li>
+			<li><a href="${contextPath}/brand/list" target="navTab" rel="brand_list">商品品牌管理</a></li>
+			<li><a href="${contextPath}/specification/list" target="navTab" rel="specification_list">商品規格管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>供应商管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/supplier/list" target="navTab" rel="supplier_list">供应商管理</a></li>
+			<li><a href="${contextPath}/supplier/priority/list" target="navTab" rel="sp_list">供应商优先级管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>仓库管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/warehouse/list" target="navTab" rel="warehouse_list">仓库管理</a></li>
+			<li><a href="${contextPath}/warehouse/type/list" target="navTab" rel="warehouse_type_list">仓库类型</a></li>
+		</ul>
+	</div>
+
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>项目管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/project/list" target="navTab" rel="project_list">项目管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>用户管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/auth/perm/index" target="navTab" rel="authPerm">资源管理</a></li>
+			<li><a href="${contextPath}/auth/role/list" target="navTab" rel="authRole">角色管理</a></li>
+			<li><a href="${contextPath}/system/operator/list" target="navTab" rel="operator">员工管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>日志管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/log/list" target="navTab" rel="log_list">日志管理</a></li>
+		</ul>
+	</div>
+	 -->
+</div>

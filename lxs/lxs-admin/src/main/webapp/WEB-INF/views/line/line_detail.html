@@ -1,0 +1,199 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.pageFormContent p {
+	height: inherit;
+	line-height: 20px
+}
+</style>
+<div class="pageContent">
+
+	<div class="pageFormContent" layoutH="58">
+		<table style="width: 100%;TABLE-LAYOUT: fixed; ">
+			<tr height="40px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">线路名称：</td>
+				<td style="width: 75%" colspan="3">${line.baseInfo.name}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>线路编号：</td>
+				<td>${line.baseInfo.number} </td>
+				<td style="width: 25%">推荐指数：</td>
+				<td style="width: 25%">${line.baseInfo.recommendationLevel} 星</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>线路类型：</td>
+				<td> <#if line.baseInfo.type == 1> 跟团游 <#elseif	line.baseInfo.type == 2> 自助游 </#if></td>
+				<td>线路目的地及途径地：</td>
+				<td>${line.baseInfo.destinationCity}</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td>&nbsp;</td>
+				<td>出发地：</td>
+				<td>${line.baseInfo.starting}</td>
+				<td>订金支付比例：</td>
+				<td> ${line.payInfo.downPayment}% </td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td>&nbsp;</td>
+				<td>全款支付出发日期前：</td>
+				<td>${line.payInfo.payTotalDaysBeforeStart} 天</td>
+				<td>最晚付款时间出发日期前：</td>
+				<td>${line.payInfo.lastPayTotalDaysBeforeStart} 天</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>预定须知：</strong></td><td colspan="3"><p><span>${line.baseInfo.bookDescription}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>优惠活动：</strong></td><td colspan="3"><p><span>${line.baseInfo.favorableDescription}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>线路特色：</strong></td><td colspan="3"><p><span>${line.baseInfo.featureDescription}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>费用说明：</strong></td><td colspan="3"><p><span>${line.baseInfo.feeDescription}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>提示信息：</strong></td><td colspan="3"><p><span>${line.baseInfo.noticeDescription}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>交通信息：</strong></td><td colspan="3"><p><span>${line.baseInfo.trafficDescription}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			
+			
+		</table><!-- 
+		<div class="unit">
+			<label></label>
+
+		</div>
+		<div class="unit">
+			<label></label>
+		</div>
+		<div class="unit">
+			<label></label>
+		</div>
+		<div class="unit">
+			<label></label> 
+		</div>
+		<div class="unit">
+			<label></label> 
+		</div>
+		<div class="unit">
+			<label></label> 
+		</div>
+		<div class="unit">
+			<label></label>
+		</div>
+
+		支付信息
+		<div class="unit">
+			<label></label> 
+		</div>
+		<div class="unit">
+			<label></label> 
+		</div>
+		<div class="unit">
+			<label></label> 
+		</div>
+		支付信息
+
+		<div class="unit">
+			<hr style="border:1px dotted;width:96%" />
+		</div>
+
+		<div class="unit">
+			<label>线路特色：</label>
+		</div>
+		<div style="margin-left:60px;" height="auto" class="unit"><#if
+			line?? && line.baseInfo??> ${(line.baseInfo.featureDescription)!''}
+			</#if></div>
+
+		<div class="unit">
+			<label>线路优惠：</label>
+		</div>
+		<div style="margin-left:60px;" height="auto" class="unit"><#if
+			line?? && line.baseInfo??> ${(line.baseInfo.favorableDescription)!''}
+			</#if></div>
+
+		<div class="unit">
+			<label>提示信息：</label>
+		</div>
+		<div style="margin-left:60px;" height="auto" class="unit"><#if
+			line?? && line.baseInfo??> ${(line.baseInfo.noticeDescription)!''}
+			</#if></div>
+
+		<div class="unit">
+			<label>交通信息：</label>
+		</div>
+		<div style="margin-left:60px;" height="auto" class="unit"><#if
+			line?? && line.baseInfo??> ${(line.baseInfo.trafficDescription)!''}
+			</#if></div>
+
+		<div class="unit">
+			<label>费用说明：</label>
+		</div>
+		<div style="margin-left:60px;" height="auto" class="unit"><#if
+			line?? && line.baseInfo??> ${(line.baseInfo.feeDescription)!''}
+			</#if></div>
+
+		<div class="unit">
+			<label>预订须知：</label>
+		</div>
+		<div style="margin-left:60px;" height="auto" class="unit"><#if
+			line?? && line.baseInfo??> ${(line.baseInfo.bookDescription)!''}
+			</#if></div>
+
+		<input type="hidden" id="destinationCity"
+			value="${(line.baseInfo.destinationCity)!''}" /> -->
+	</div>
+	<!-- <div class="formBar">
+			<ul>
+				<button type="button" class="close">关闭</button>
+			</ul>
+		</div> -->
+</div>
+<!-- 
+<script type="text/javascript">
+var  destinationCity = $("#destinationCity").val();//目的地城市和途经城市的id字符串
+var  result = "";
+//查询出发地城市
+if(destinationCity != null && destinationCity != ""){
+	$.post("${contextPath}/traveline/line/queryCity",{'cityCodes':destinationCity},function(data){
+			if (data.length > 0) {  
+	            $.each(data, function (idx, item) { 
+	            	result = result + item.name + " - ";
+	            });
+	            result = result.substring(0, result.length-2);
+	        	//赋值
+	        	document.getElementById("destinationCitySpan").innerHTML = result;
+	        }  
+		},"json");
+}
+</script> -->

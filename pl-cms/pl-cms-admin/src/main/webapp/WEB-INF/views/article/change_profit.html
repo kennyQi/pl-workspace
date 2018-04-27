@@ -1,0 +1,87 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/product/bankdeposit/changeprofit_submit"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, dialogAjaxDone)">
+
+		<input type="hidden" name="productId" value="${product.id}" />
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>所属银行：</label> 
+				<#list banks as b> 
+					<#if product.bank.id == b.id> ${b.fullName}</#if> 
+				</#list>
+			</div>
+
+			<div class="unit">
+				<label>存款类型：</label> 
+					<#list types as	t>
+						<#if product.type == t.key> ${t.value} </#if>
+					 </#list>
+			</div>
+			<div class="unit">
+				<label>存款天数：</label> 
+				${product.baseInfo.investDays}天
+			</div>
+			<div class="unit">
+				<label>最低存款金额：</label> 	
+				${product.baseInfo.startAmount}元
+			</div>
+			<div class="unit">
+				<label>现行利息：</label> 
+				${product.profitInfo.interest}%
+			</div>
+			
+			<div class="unit">
+				<label>调息：</label> 
+				<label><input class="cal" type="radio" name="add" value="true"/>加息<input class="cal" type="radio" name="add" value="false"/>降息</label>
+				<input id="changeAmount" class="cal" type="text" name="changeAmount" size="10" class="required" />%
+			</div>
+			<div class="unit">
+				<label>调整后利息：</label> 
+				<span id="newInterestView"></span>%
+				<input id="newInterest" type="hidden" name="newInterest" value="">
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+
+<script type="text/javascript">
+$(".cal").change(function(){
+	cal();
+});
+
+function cal() {
+	var newInterest;
+	var add = $("input:radio:checked").val();
+	if(add == 'true') {
+		newInterest = Number(${product.profitInfo.interest}).add(Number($("#changeAmount").val()));
+	} else {
+		newInterest = Number(${product.profitInfo.interest}).sub(Number($("#changeAmount").val()));
+	}
+	$("#newInterestView").empty();
+	$("#newInterestView").append(newInterest);
+	$("#newInterest").attr("value", newInterest);
+}
+</script>

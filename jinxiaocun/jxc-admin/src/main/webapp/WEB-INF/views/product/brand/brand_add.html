@@ -1,0 +1,56 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+function trimInput(e){
+	e.value=(trim(e.value));
+}
+</script>
+<div class="pageContent">
+
+	<form method="post" action="${contextPath}/brand/create" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>品牌编号：</dt>
+					<dd>
+						<input name="" type="text" readonly />系统自动生成
+					</dd>
+				</dl>
+				<dl>
+					<dt>中文名：</dt>
+					<dd>
+						<input name="chineseName" type="text" class="required" onchange="this.value=(trim(this.value))" maxlength="50" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>英文名：</dt>
+					<dd>
+						<input name="englishName" type="text" onchange="this.value=(trim(this.value))" maxlength="60"  />
+					</dd>
+				</dl>
+				<dl>
+					<dt>品牌简介：</dt>
+					<dd>
+						<textarea name="remark" cols="60" rows="4" maxlength="250"></textarea>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar" >
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div></li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

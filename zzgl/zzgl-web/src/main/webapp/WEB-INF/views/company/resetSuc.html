@@ -1,0 +1,33 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量-会员中心">
+<link href="${contextPath}/resources/css/reg_success.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default">
+
+<div class="reg_bg wd ov">
+    <div class="reg_box wd">
+        <div class="reg_pwd ma transparent_white">
+            <span class="suc fl"><i></i><span class="yahei fl">密码修改成功</span></span>
+            <span class="prompt fl yahei color6 h2">
+                <p>
+                 <a style="" href="${contextPath}/user/login">  跳转登陆页面</a><br/>
+                   如需帮助请拨打客服热线：400-660-6660<br/>
+                </p>
+            </span>
+        </div>
+    </div>
+     <div class="g_f">
+     <!-- <a href="${contextPath}/aboutPL"  target="_blank">票量简介</a> -->
+     <a href="${contextPath}/aboutLaw" target="_blank">法律声明</a>
+     <a href="${contextPath}/aboutContactUs"  target="_blank">网站地图</a>
+     <a href="${contextPath}/footLink" target="_blank">友情链接</a>
+     <a href="#">酒店加盟</a>
+     <a href="${contextPath}/aboutAlliance" target="_blank">网站联盟</a>
+     <a href="${contextPath}/aboutContactUs" target="_blank"帮助中心</a>
+     <a href="${contextPath}/aboutComplaint"  target="_blank">投诉建议</a>
+     <a href="${contextPath}/aboutJob"  target="_blank">诚聘英才</a>
+	</div>
+</div>
+</@frame.main> 
+ 

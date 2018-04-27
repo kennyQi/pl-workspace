@@ -1,0 +1,99 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">操作员列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/hg/auth/staff/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="staffIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a>
+					<a href="${contextPath}/hg/auth/staff/add" class="btn btn-default btn-sm" target="hgTab"> <i
+						class="fa fa-plus"></i> 添加
+					</a>
+					<a href="${contextPath}/hg/auth/staff/resetPwd" 
+						class="btn btn-default btn-sm" title="确定重置密码？" target="selectedTodo" rel="staffIds"> <i
+						class="fa fa-edit"></i> 重置密码
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							操作员姓名：
+							<input class="form-control input-small input-inline" name="realName" id="realName">
+						</label>
+					</div>
+					<div class="col-md-4">
+						<label>
+							登录名：
+							<input class="form-control input-small input-inline" name="loginName" id="loginName">
+						</label>
+					</div>
+					<div class="col-md-4 text-right">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#staffGrid" data-ref-param="{realName: $('#realName').val(), loginName: $('#loginName').val()}"><i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" group="staffIds"
+								class="checkboxCtrl"/></th>
+							<th>姓名</th>
+							<th>登录名</th>
+							<th>是否启用</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="staffGrid" target="grid" data-url="${contextPath}/hg/auth/staff/stafflist"
+						data-setData="function(record) {
+							var result = this.result;
+							if (result) {
+								var condition = result.condition;
+								var enable = record.authUser.enable;
+								for (var i in condition) {
+									var item = condition[i];
+									if (item.key == enable) {
+										record.enableCn = item.value;
+										break;
+									}
+								}
+							}
+						}">
+						<tr class="odd gradeX">
+							<td>
+								<input type="checkbox" name="staffIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td>
+							<td>
+								{info.realName}
+							</td>
+							<td>
+								{authUser.loginName}
+							</td>
+							<td>
+								{enableCn}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/hg/auth/staff/del?staffIds={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/auth/staff/edit?id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

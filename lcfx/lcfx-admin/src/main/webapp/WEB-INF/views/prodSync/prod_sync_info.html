@@ -1,0 +1,9 @@
+<div>
+<#list info as t>
+${t}<br>
+</#list>
+</div>
+<#if syncFinish??>
+<button onclick="exportSyncLog()">导出同步日志</button>
+<script type="text/javascript">stopGetSyncInfo();</script>
+</#if>

@@ -1,0 +1,40 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/service/adjustAccountJF" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="100">
+			<div class="unit">
+				<label>账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;:</label>
+				<input type="text" name="account" size="64" maxlength="64" class="required"/>
+			</div>
+			 <div class="unit">
+				<label>调整账户:</label>
+			  <select class="combox" name="accountType">
+					<option value="">请选择</option>
+					<option value="piaol__consume" >票豆</option>
+					<option value="piaol__grow" >成长值</option>
+				</select>
+			</div>
+			 <div class="unit">
+				<label>调整分值:</label>
+				<input type="text" name="score" size="64" maxlength="64" class="required"/>
+			</div>
+			
+			 <div class="unit">
+				<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;:</label>
+				  <textarea name="description"  cols="61"></textarea>
+			</div>
+			<div class="unit">
+			</div>
+			<div class="unit">
+			</div>
+			<div class="unit">
+			</div>
+		<div style="margin-left: 200px;" >
+			<ul>
+				<li><div class="buttonActive" style="margin-right: 100px;"><div class="buttonContent"><button type="submit"  >调整</button></div></div></li>
+				<li> <div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+		</div>
+	</form>
+</div>

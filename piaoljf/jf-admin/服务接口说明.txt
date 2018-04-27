@@ -1,0 +1,97 @@
+* calcommitjf：计算并入账
+http://localhost:8080/jf-admin/service/calcommitjf?data=xxx&time=xxx&sign=xxx
+data:为类PiaolTrade的json格式 (PiaolTrade先给你源码，后期改为maven时再用依赖)
+返回 “已提交，请稍后查询。”
+
+ex:
+http://localhost:8080/jf-admin/service/calcommitjf?data={"date":"20141202","tradeName":"sign","user":"tom","level":"silver"}&time=1418117345924&sign=10a4bd604113d4fb67c2cf19851bda2f
+//http://localhost:8080/jf-admin/service/calcommitjf?data={"date":"20140110","tradeName":"sign","user":"tom","level":"nor"}
+其中data为 {"date":"20140110","tradeName":"sign","user":"tom","level":"nor"} 
+time为系统的毫秒时间
+sign为 date+time+passK(约定的密码)经过MD5加密之后得到的字符串。
+
+
+* caljf：单纯计算
+http://localhost:8080/jf-admin/service/caljf?data=xxx
+data:为类PiaolTrade的json格式
+返回 Collection<CalResult>的json格式
+
+ex:
+http://localhost:8080/jf-admin/service/caljf?data={"date":"20140110","tradeName":"sign","user":"tom","level":"nor"}&time=1418181542315&sign=5a14c9b1ef5b538c2fb03dbc79bb4ba8
+http://localhost:8080/jf-admin/service/caljf?data={"date":"20140110","tradeName":"sign","user":"tom","level":"nor"}
+其中data为 {"date":"20140110","tradeName":"sign","user":"tom","level":"nor"} 
+
+
+* queryjf:查询积分
+    http://localhost:8080/jf-admin/service/queryjf?pageNum=1&numPerPage=20&code=xiaoying&time=1418174498791&sign=11d16c360f87663f3914bc677963c58f
+	//http://localhost:8080/jf-admin/service/queryjf?pageNum=1&numPerPage=20&code=xiaoying
+	其中code为查找的用户名
+	time为当前系统的毫秒时间
+	sign为 code + time + passK(约定的密码) 经过MD5加密之后得到的字符串
+	return :Pagination的json格式
+	
+	
+	接受方，解析：JSON.parseObject(jsonResult,Pagination.class);	
+	
+* queryflow:查询积分流水
+    http://localhost:8080/jf-admin/service/queryflow?pageNum=1&numPerPage=20&code=xiaoying&startDate=2014-11-01&endDate=2014-12-08&time=1418176198240&sign=12dd518141e19b83032ce17e579490f7
+	//http://localhost:8080/jf-admin/service/queryflow?pageNum=1&numPerPage=20&code=xiaoying&startDate=2014-11-01&endDate=2014-12-08
+	日期格式为 yyyy-MM-dd
+其中   code为需要查找的用户名
+    startDate为流水数据开始事件   endDate为流水数据结束时间
+    time为系统当前时间的毫秒记时时间
+    sign为   code + startDate + endDate + time + passK(约定的密码) 经过MD5加密之后得到的字符串
+	return :Pagination的json格式
+	接受方，解析：JSON.parseObject(jsonResult,Pagination.class);
+		
+* adjustjf 积分调整（积分值为负表示扣减）,适用于获得积分的撤销或消耗积分的撤销。其中获得积分的撤销可能导致出现余额出现负值。
+	data:Collection<AdjustBean>的json格式
+	例如data为：[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"piaol__grow","jf":-100,"remark":"兑奖了","userCode":"xlj"}]
+	返回：已提交，请稍后查询。
+	
+	ex:
+	//http://localhost:8080/jf-admin/service/adjustjf?data=[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"piaol__grow","jf":100,"remark":"duij","userCode":"xlj"}]
+	http://localhost:8080/jf-admin/service/adjustjf?data=[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"piaol__grow","jf":100,"remark":"duij","userCode":"xlj"}]&time=1418179422679&sign=d60685badb9f245260b642f9e2eef74f
+其中   data如上。
+    time为系统当前时间的毫秒记时时间
+    sign为   data + time + passk(约定的密码) 经过MD5加密之后得到的字符串
+
+* exchangejf 积分兑换（积分值为负表示扣减），不允许兑换后余额为负
+	data:Collection<AdjustBean>的json格式
+	例如data为：[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"piaol__grow","jf":-100,"remark":"兑奖了","userCode":"xlj"}]
+	返回：已提交，请稍后查询。
+	
+	ex:
+	//http://localhost:8080/jf-admin/service/exchangejf?data=[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"piaol__grow","jf":-100,"remark":"duij","userCode":"xlj"}]
+	http://localhost:8080/jf-admin/service/exchangejf?data=[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"piaol__grow","jf":-100,"remark":"duij","userCode":"xlj"}]&time=1418180169663&sign=2a737ab370f653f77e15fde778afbd84
+其中    data如上，
+    time为系统当前时间的毫秒记时时间
+    sign为    data + time + passK(约定的系统密码) 经过MD5加密之后得到的字符串  
+
+
+* (已删除)uncommitjf 撤销积分获得明细
+	http://localhost:8080/jf-admin/service/uncommitjf?flowid=<获得明细id>
+* (已删除)unexchangejf 撤销积分消耗明细
+	http://localhost:8080/jf-admin/service/unexchangejf?flowid=<获得明细id>
+
+=====================将票量积分作为积分提供者，配合汇积分测试，提供的几个接口
+* transferout/transferin 积分转出转入，转入时积分积分值为正，转出为负，不允许兑换后余额为负
+	data:Collection<AdjustBean>的json格式
+	例如data为：[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"piaol__grow","jf":-100,"remark":"兑奖了","userCode":"xlj"}]
+	返回：已提交，请稍后查询。
+	
+	ex:
+	 /service/transferout?data=[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"9a9__consume","jf":-100,"remark":" ","userCode":"xlj"}]
+	 /service/transferin?data=[{"@type":"hgtech.jfaccount.AdjustBean","accountTypeId":"9a9__consume","jf":100,"remark":" ","userCode":"xlj"}]&time=1418180169663&sign=2a737ab370f653f77e15fde778afbd84
+其中    data如上，
+    time为系统当前时间的毫秒记时时间
+    sign为    data + time + passK(约定的系统密码) 经过MD5加密之后得到的字符串  
+
+* 发送用户短信验证码
+/service/user/sendSms?phone=15305153869&user=xinglj
+* 校验用户短信验证码
+/service/user/checkSms?phone=15305153869&user=xinglj&code=8888
+======================
+	
+	
+				

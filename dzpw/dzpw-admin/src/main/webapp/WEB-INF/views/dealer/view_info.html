@@ -1,0 +1,156 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+</style>
+
+<script type="text/javascript">
+
+function checkEmail(){
+	var e = $("#email2").val();
+	alert(e);
+}
+
+</script>
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="58">
+	
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>基本信息</span></div>
+		<div class="unit">
+			<label>经销商名称：</label>
+			<input  name="dealerName"  value="${(dealer.baseInfo.name)!''}" disabled="disabled"/>
+		</div>
+		<div class="unit">
+			<label>登录账号：</label>
+			<input type="text" value="${(dealer.clientInfo.adminLoginName)!''}" disabled="disabled"/>
+		</div>
+		<div class="unit">
+			<label>经销商代码：</label>
+			<input  name="key"  value="${(dealer.clientInfo.key)!''}" disabled="disabled"/>
+		</div>
+		<#--
+		<div class="unit">
+			<label>经销商密钥：</label>
+			<input name="secretKey"  value="${(dealer.clientInfo.secretKey)!''}" disabled="disabled"/>
+		</div>
+		-->
+		<div class="unit">
+			<label>经销商简介：</label>
+			<textarea name="intro" rows="5" cols="50"  disabled="disabled">${(dealer.baseInfo.intro)!''}</textarea>
+		</div>
+		<div class="unit">
+			<label>企业logo：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="企业logo" title="企业logo" src="${(dealer.certificateInfo.dealerLogo)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		
+		<!-- 资质信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>资质信息</span></div>
+		<div class="unit">
+			<label>营业执照：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="营业执照" title="营业执照" src="${(dealer.certificateInfo.businessLicense)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<div class="unit">
+			<label>税务登记证：</label>
+			<span>
+				<img class="img-polaroid" width="80" alt="税务登记证" title="税务登记证" src="${(dealer.certificateInfo.taxRegistrationCertificate)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<div class="unit">
+			<label>组织代码证：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="组织代码证" title="组织代码证" src="${(dealer.certificateInfo.organizationCodeCertificate)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<div class="unit">
+			<label>法人身份证：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="法人身份证" title="法人身份证" src="${(dealer.certificateInfo.corporateIDCard)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<!-- 资质信息   -->
+		
+		
+		<!-- 联系信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>联系信息</span></div>
+		<div class="unit">
+			<label>联&nbsp;&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;人：</label>
+			<input name="linkMan"  value="${(dealer.baseInfo.linkMan)!''}" disabled="disabled"/>
+		</div>
+		<div class="unit">
+			<label>手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
+			<input name="telephone" class="required phone" value="${(dealer.baseInfo.telephone)!''}" disabled="disabled"/>
+		</div>
+		<div class="unit">
+			<label>联&nbsp;系&nbsp;邮&nbsp;箱：</label>
+			<input id="email2" name="email" class="isInject required email" value="${(dealer.baseInfo.email)!''}" disabled="disabled"/>
+		</div>
+		<div class="unit">
+			<label>联系地址：</label>
+				<input name="province.name" placeholder="所在省" disabled="disabled" value="${dealer.baseInfo.province.name}" size="10"/>
+			<span>></span>
+				<input id="cityQoCode" name="city.code" type="hidden"/>
+				<input name="city.name" placeholder="所在市" size="12" disabled="disabled" value="${dealer.baseInfo.city.name}" />
+			<span>></span>
+				<input name="area.code" type="hidden"/>
+				<input name="area.name" placeholder="所在区" size="25" disabled="disabled" value="${dealer.baseInfo.area.name}" />
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+			<textarea id="address" name="address"  rows="4" cols="55" disabled="disabled">${(dealer.baseInfo.address)}</textarea>
+		</div>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>经销商网址</span></div>
+		<div class="unit">
+			<label>经销商网址：</label>
+			<input type="url" name="dealerUrl"  size="64" maxlength="1024" placeholder="输入带有HTTP前缀的地址" value="${(dealer.clientInfo.dealerWebsite)!''}" disabled="disabled"/>
+		</div>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>消息推送</span></div>
+		<div class="unit">
+			<label>是否使用消息推送：</label>
+			 <#if dealer.clientInfo.publishAble?? && dealer.clientInfo.publishAble>
+			 开启
+			 <#else>
+			 关闭
+			 </#if>
+		</div>
+		<div class="unit">
+			<label>消息推送网址：</label>
+			<input disabled="disabled" size="64" value="${(dealer.clientInfo.publishUrl)!''}"/>
+		</div>
+		
+		<#--
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>经销商结算信息</span></div>
+		<div class="unit">
+			<label>账户类型：</label>
+			<select name="accountType"  disabled="disabled">
+				<option value="1" <#if dealer.accountInfo.accountType==1>selected="selected"</#if> >汇金宝支付平台账户</option>
+				<option value="2" <#if dealer.accountInfo.accountType==2>selected="selected"</#if> >支付宝账户</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>手续费率：</label>
+			<input name="settlementFee" disabled="disabled" value="${((dealer.accountInfo.settlementFee)!'')?c}"/> 元/张
+		</div>
+		
+		<div class="unit">
+			<label>操作员编号：</label>
+			<input id="operatorNo"  name="operatorNo" disabled="disabled" value="${(dealer.accountInfo.operatorNo)!''}"/>
+		</div>
+		 <div class="unit">
+			<label>预付款金额：</label>
+			<input id="advancePayment"  name="advancePayment" disabled="disabled" value="${(dealer.accountInfo.advancePayment)!''}"/> 元
+		</div>
+		<div class="unit">
+			<label>警戒阀值：</label>
+			剩余<input id="warnBalance"  name="warnBalance" size="16" disabled="disabled" value="${(dealer.accountInfo.warnBalance)!''}" />元提醒
+		</div> -->
+
+</div>
+</div>

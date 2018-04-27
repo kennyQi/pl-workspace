@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+	<context:component-scan base-package="slfx,hg" />
+	
+	<!-- 强制SPRING使用CGLIB动态代理，不使用JDK代理。 -->	
+	<aop:config proxy-target-class="true" />
+	
+	<bean id="lineConfigurerListener" class="slfx.xl.app.listener.LineConfigurerListener" />
+	
+	<bean id="propertyConfigurer1" class="hg.common.component.RemoteConfigurer">
+		<property name="remoteConfigUrl" value="http://192.168.2.85:9999/cc-admin/property-config/map" />
+		<property name="projectId" value="SLFX_XL" />
+		<property name="environmentName" value="SLFX-XL-DEV" />
+		<property name="loadConfigTimeOut" value="30000" />
+		<property name="listener" ref="lineConfigurerListener" />
+	</bean>
+	
+	<bean id="hgLogger" class="hg.log.util.HgLogger">
+		<constructor-arg name="projectId" value="slfx:slfx-xl-application:war:1.3-SNAPSHOT" />
+		<constructor-arg name="envId" value="SLFX-XL-DEV" />
+		<constructor-arg name="logRepository" ref="logRepository"/>
+	</bean>
+	
+	<bean id="applicationConfig" class="slfx.xl.app.common.ApplicationConfig">
+		<property name="imageHost" value="${image_host}" />
+		<property name="authId" value="${sys_auth_id}" />
+		<property name="authName" value="${sys_auth_name}" />
+	</bean>
+
+	<!-- AOP -->
+	<bean id="serviceAspectBean" class="slfx.xl.app.component.aop.ServiceAspect" >
+ 		<property name="serviceAopHglog" value="${service_aop_hglog}" /> 
+	</bean>
+	<aop:config>
+		<aop:aspect id="serviceAspect" ref="serviceAspectBean">
+			<aop:pointcut id="service" expression="execution(* slfx.xl.app.service..*.*(..)) 
+				|| execution(* hg.common.component.BaseServiceImpl.*(..)) 
+				|| execution(* hg.system.service..*.*(..))" />
+			<aop:around pointcut-ref="service" method="doAround" />
+		</aop:aspect>
+	</aop:config>
+	
+	<import resource="classpath:spring/spring-hibernate-common-test.xml" />
+	<import resource="classpath:spring/spring-redis.xml" />
+	<import resource="classpath:spring/spring-mongodb.xml" />
+ 	<!-- 
+ 	 -->
+ 	<import resource="classpath:spring/dubbo-provider.xml" />
+ 	<import resource="classpath:spring/dubbo-consumer.xml" />
+ 	
+ 	<import resource="classpath:spring/amqp-producer.xml" />
+ 	<import resource="classpath:spring/amqp-consumer.xml" />
+</beans>

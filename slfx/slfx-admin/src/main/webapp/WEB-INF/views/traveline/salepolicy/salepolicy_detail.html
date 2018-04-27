@@ -1,0 +1,94 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/salepolicy/release" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="policyId" value="${salePolicyLineDTO.id}"/>
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>政策名称</label>
+				${(salePolicyLineDTO.salePolicyLineName)!''}
+			</div>
+			<div class="unit">
+				<label>适用线路</label>
+				<#list salePolicyLineDTO.lineList as line>
+					${line.baseInfo.name}；&nbsp;&nbsp;&nbsp;
+				</#list>
+			</div>
+			<div class="unit">
+				<label>适用经销商</label>
+				${(salePolicyLineDTO.lineDealer.name)!'全站'}
+			</div>
+			<div class="unit">
+				<label>适用时间</label>
+				${(salePolicyLineDTO.startDate?string('yyyy-MM-dd'))!''}  ——  ${(salePolicyLineDTO.endDate?string('yyyy-MM-dd'))!''}
+			</div>
+			<div class="unit">
+				<label>适用人员类型</label>
+				<#if salePolicyPriceTypeMap??>
+                    <#list salePolicyPriceTypeMap?keys as itemKey>
+		               <#if itemKey == salePolicyLineDTO.priceType>
+		               		${salePolicyPriceTypeMap[itemKey]}
+		               </#if>
+		       		</#list>
+                </#if>
+			</div>
+			<div class="unit">
+				<label>价格政策</label>
+				           <#if  (salePolicyLineDTO.rise == true) && (salePolicyLineDTO.unit == 1)>
+				                                                      增加${(salePolicyLineDTO.improvePrice)?c}%
+							</#if>
+							<#if  (salePolicyLineDTO.rise == true) && (salePolicyLineDTO.unit == 2)>
+								      增加${(salePolicyLineDTO.improvePrice)?c}元
+							</#if>
+							<#if  (salePolicyLineDTO.rise == false) && (salePolicyLineDTO.unit == 1)>
+								      减少${(salePolicyLineDTO.improvePrice)?c}%
+							</#if>
+							<#if  (salePolicyLineDTO.rise == false) && (salePolicyLineDTO.unit == 2)>
+								减少${(salePolicyLineDTO.improvePrice)?c}%元
+							</#if>
+			</div>
+			<div class="unit">
+				<label>备注</label>
+				<div style="word-wrap:break-word;">${(salePolicyLineDTO.description)!''}</div>
+			</div>
+			<div class="unit"> 
+				<hr style="border:1px dotted;width:96%"/>
+			</div>
+			<fieldset>
+				<legend>操作日志</legend>
+				<div class="unit">
+						<table class="table">
+	      					<thead>
+	            				<tr>
+					                  <th width="150" align="center">时间</th>
+					                  <th width="100" align="center">操作</th>
+					                  <th width="100" align="center">操作人</th>
+					                  <th width="500">操作信息</th>
+	            				</tr>
+	      					</thead>
+	      					<tbody>
+	      					<#list salePolicyWorkLogList as logList>	
+					            <tr>
+					                  <td>${(logList.logDate?datetime)!''}</td>
+					                  <td>${(logList.salePolicyLogName)!''}</td>
+					                  <td>${(logList.salePolicyWorkerName)!''}</td>
+					                  <td>${(logList.salePolicyLogInfoName)!''}</td>
+					            </tr>
+					        </#list>
+	      					</tbody>
+						</table>
+				</div>
+			</fieldset>
+		</div>
+		<div class="formBar">
+			<ul>
+				 <#if salePolicyLineDTO.salePolicyLineStatus.salePolicyLineStatus == 1>
+				 	 <li><div class="buttonActive"><div class="buttonContent"><button type="submit" >发布</button></div></div></li>
+				 </#if>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+
+</script>

@@ -1,0 +1,44 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-red-sunglo bold uppercase">成本中心列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/costCenter/add" class="btn btn-default btn-sm" target="hgTab"> 
+					 添加成本中心
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>成本中心</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="companyGrid" target="grid" data-url="${contextPath}/costCenter/costcenterlist">
+						<tr class="odd gradeX">
+							<td >
+								{costCenterName}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/costCenter/del?costCenterID={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/costCenter/edit?costCenterID={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

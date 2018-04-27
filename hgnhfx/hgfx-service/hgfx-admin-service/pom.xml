@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>hgfx</groupId>
+		<artifactId>hgfx-service</artifactId>
+		<version>0.5-SNAPSHOT</version>
+	</parent>
+	<artifactId>hgfx-admin-service</artifactId>
+	<name>${project.artifactId}</name>
+	<packaging>war</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>hgfx</groupId>
+			<artifactId>hgfx-admin-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hg.framework</groupId>
+			<artifactId>hg-framework-service-component</artifactId>
+		</dependency>
+
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+
+		<!-- dubbox -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.esotericsoftware.kryo</groupId>
+			<artifactId>kryo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.javakaffee</groupId>
+			<artifactId>kryo-serializers</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>de.ruedigermoeller</groupId>
+			<artifactId>fst</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+		</dependency>
+
+		<!-- junit test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<!-- Mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+
+		<!-- excel -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+			</dependency>
+
+			<dependency>
+				<groupId>net.sourceforge.jexcelapi</groupId>
+				<artifactId>jxl</artifactId>
+			</dependency>
+
+
+		<!-- fastdfs 客户端 -->
+		<dependency>
+			<groupId>fastdfs</groupId>
+			<artifactId>fastdfs-java-client</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.18.1-GA</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>jdbc</groupId>
+		  <artifactId>ojdbc</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>logback.xml</include>
+					<include>jdbc.properties</include>
+					<include>redis.properties</include>
+					<include>spring/spring-dubbo-provider.xml</include>
+					<include>spring/spring-redis.xml</include>
+					<include>spring/spring-hibernate-common.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.svn</exclude>
+					<exclude>**/Thumbs.db</exclude>
+					<exclude>**/.gitkeep</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+	
+	<profiles>
+	
+		<profile>
+			<id>DEV</id>
+			<properties>
+				<mongoDBName>hgfxAdminService</mongoDBName>
+				<tableName>log</tableName>
+				<logLevel>ERROR</logLevel>
+				<mongoDBAddress>192.168.2.214:27017</mongoDBAddress>
+				<jdbc_driver_name>oracle.jdbc.OracleDriver</jdbc_driver_name>
+				<jdbc_url>jdbc:oracle:thin:@192.168.2.32:1521:orcl</jdbc_url>
+				<db_username>hgfx_dev</db_username>
+				<db_password>hgfx_dev</db_password>
+				<jdbc_other_url>jdbc:oracle:thin:@192.168.2.32:1521:orcl</jdbc_other_url>
+				<db_other_username>hgfx_dev</db_other_username>
+				<db_other_password>hgfx_dev</db_other_password>
+				<dubbo_registry>zookeeper://localhost:2181?group=dev</dubbo_registry>
+				<redis1Ip>192.168.2.211</redis1Ip>
+				<redis1Port>6379</redis1Port>
+				<redis2Ip>192.168.2.211</redis2Ip>
+				<redis2Port>6379</redis2Port>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		
+		
+		<profile>
+			<id>TEST</id>
+			<properties>
+				<mongoDBName>hgfxAdminService</mongoDBName>
+				<tableName>log</tableName>
+				<logLevel>ERROR</logLevel>
+				<mongoDBAddress>192.168.7.13:21000</mongoDBAddress>
+				<jdbc_driver_name>oracle.jdbc.OracleDriver</jdbc_driver_name>
+				<jdbc_url>jdbc:oracle:thin:@192.168.7.11:1521:devdb</jdbc_url>
+				<db_username>lcfx_test</db_username>
+				<db_password>lcfx_test</db_password>
+				<jdbc_other_url>jdbc:oracle:thin:@192.168.7.11:1521:devdb</jdbc_other_url>
+				<db_other_username>lcfx_test</db_other_username>
+				<db_other_password>lcfx_test</db_other_password>
+				<dubbo_registry>zookeeper://192.168.7.14:2181?group=hgfx_test</dubbo_registry>
+				<redis1Ip>192.168.7.14</redis1Ip>
+				<redis1Port>6379</redis1Port>
+				<redis2Ip>192.168.7.14</redis2Ip>
+				<redis2Port>6379</redis2Port>
+			</properties>
+		</profile>
+		
+	
+		<profile>
+			<id>RELEASE</id>
+			<properties>
+				<mongoDBName>hgfxAdminService</mongoDBName>
+				<tableName>log</tableName>
+				<logLevel>ERROR</logLevel>
+				<mongoDBAddress>172.18.1.12:27017</mongoDBAddress>
+				<jdbc_driver_name>oracle.jdbc.OracleDriver</jdbc_driver_name>
+<!-- 				<jdbc_url>jdbc:oracle:thin:@172.18.88.81:1521:hg365db1</jdbc_url> -->
+				<jdbc_url> jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.88.85)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = HG365DB)))</jdbc_url>
+				<db_username>hgfx_release</db_username>
+				<db_password>hgfx_release</db_password>
+<!-- 				<jdbc_other_url>jdbc:oracle:thin:@172.18.88.81:1521:hg365db1</jdbc_other_url> -->
+				<jdbc_other_url> jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 172.18.88.85)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = HG365DB)))</jdbc_other_url>
+				<db_other_username>hgfx_release</db_other_username>
+				<db_other_password>hgfx_release</db_other_password>
+				<dubbo_registry>zookeeper://172.18.1.15:2181?group=hgfx_release</dubbo_registry>
+				<redis1Ip>172.18.1.14</redis1Ip>
+				<redis1Port>6379</redis1Port>
+				<redis2Ip>172.18.1.24</redis2Ip>
+				<redis2Port>6379</redis2Port>
+			</properties>
+		</profile>
+	</profiles>
+
+</project>

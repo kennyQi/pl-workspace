@@ -1,0 +1,361 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.hauto div{height: inherit!important;}
+#airPortData{
+
+width: 134px;
+position: fixed;
+z-index: 9;
+background-color: #E7EFF0;
+max-height: 300px;
+border: 1px solid #514343;
+overflow-y: auto;
+overflow-x: hidden;
+}
+#airPortData li{
+line-height: 25px;
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #B8D0D6;
+
+padding-left:10px;
+}
+#airPortData li:hover{
+background-color: #B0C1C8;
+}
+</style>
+<script>
+<#--airlineCompanys=${airlineCompanys}-->
+</script>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/gjjp/finance/report" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						下单时间：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(gjjpOrderQo.createDateBegin?string('yyyy-MM-dd'))!''}" class="date"/>
+						至
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(gjjpOrderQo.createDateEnd?string('yyyy-MM-dd'))!''}" class="date"/>
+					</td>
+					
+					<td>订单状态</td>
+					<td>
+						
+                          <select name="orderStatus" id="orderStatus">
+							<option value="">全部状态</option>
+							 <#list orderStatusMap?keys as key>
+								<option value="${key}" <#if gjjpOrderQo.orderStatus == key> selected="selected"</#if>>${orderStatusMap[key]}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					<td>支付状态</td>
+					<td>
+						
+                          <select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							 <#list orderPayStatusMap?keys as key>
+								<option value="${key}" <#if gjjpOrderQo.payStatus== key>selected="selected"</#if>>${orderPayStatusMap[key]}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					
+				</tr>
+				<tr>
+<!-- 					<td>
+						出发机场:
+					</td>
+					<td>
+						<select name="orgCountry" id="orgCountry">
+							<option value="">选择</option>
+--><#--							<#list countries as country>
+								<option value="${(country.id)!''}" >${country.simpleName!?html}</option>
+						     </#list>
+--><!-- 						</select>
+						
+						&nbsp;&nbsp;&nbsp;抵达机场:
+						&nbsp;&nbsp;&nbsp;
+						<select name="dstCountry" id="dstCountry">
+							<option value="">选择</option>
+<#--							 <#list countries as country>
+								<option value="${(country.id)!''}" >${country.simpleName!?html}</option>
+						     </#list>
+--><!--  						</select>
+					</td>
+					<td>
+						航空公司：
+					</td>
+					<td>
+						<input type="text" id="airCompName" class="airCompGroup" style="display: none;"/>
+						<input type="hidden" name="airCompName" value="" id="airCompNameVal"/>
+						<ul id="airPortData" class="airCompGroup"></ul>
+					</td>
+-->
+					<td>
+						供应商名称：
+					</td>
+					<td>
+						<select name="fromSupplierQo.code">
+						<option value="">请选择</option>
+						<#if supplierDtoList ??>
+                            <#list supplierDtoList as supplier>
+                                <option 
+                                    <#if gjjpOrderQo.fromSupplierQo?? && supplier.code == gjjpOrderQo.fromSupplierQo.code>
+                                        selected="selected"
+                                    </#if>
+                                value="${(supplier.code)!''}">${(supplier.name)!''}</option>
+                            </#list>
+                        </#if>
+						
+						</select>
+					</td>
+					<td>
+						下单人：
+					</td>
+					<td>
+						<input type="text" name="contactName" value="${(gjjpOrderQo.contactName)!''}" />
+					</td>
+					
+					<td>
+						订单类别：
+					</td>
+					<td>
+						<select  name="isException">
+							<option value="">全部订单</option>
+                            <option value="1" <#if isException==1>selected="selected"</#if>>异常订单</option>
+                            <option value="0" <#if isException==0>selected="selected"</#if>>普通订单</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="reset" onclick="javascript:document.getElementById('pagerForm').reset()">重置</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="exportReport()">导出</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210" id="table_caiwu">
+		<thead>
+			<tr>
+ 				<th width="30">序号</th>
+				<th width="60">订单类别</th>
+				<th width="80">平台订单号</th>
+				<th width="80">经销商订单号</th>
+				<th width = "80">供应商订单号</th>
+				<th width = "60">航空公司</th>
+				<th width = "60">出发地</th>
+				<th width = "60">目的地</th>
+				<th width = "50">订单总金额</th>
+				<th width = "50">支付供应商金额</th>
+				<th width = "70">返点/佣金</th>
+				<th width = "60">调整金额</th>
+				<th width = "60">订单状态</th>
+				<th width = "60">支付状态</th>
+				<th width = "150">下单时间</th>
+				<th width = "60">合计</th>
+			</tr>
+		</thead>
+			<#assign index=1 />
+			<#assign totalPayAmount=0 />
+			<#assign totalPlatPolicyPirce=0 />
+			<#assign totalAdjust=0 />
+		<tbody>
+			
+			<#list pagination.list as gjjpOrder >
+			<tr>
+				<td>${index}</td>
+				<!-- 订单类型 -->
+				<td>
+				<#if gjjpOrder.exceptionInfo??>
+					<#if gjjpOrder.exceptionInfo.exceptionOrder>
+						异常订单
+					</#if>
+					<#if !gjjpOrder.exceptionInfo.exceptionOrder>
+						普通订单
+					</#if>
+				</#if>
+				
+				</td>
+				<td>
+					${(gjjpOrder.id)!''}
+				</td>
+				<!-- 经销商订单号 -->
+				<td>
+					${(gjjpOrder.baseInfo.dealerOrderId)!''}
+				</td>
+				<!-- 供应商订单号 -->
+				<td>
+					${(gjjpOrder.baseInfo.supplierOrderId)!''}
+				</td>
+				<!-- 航空公司 -->
+				<td>
+					<!-- 去程 -->
+					<#if gjjpOrder.segmentInfo.takeoffFlights??>
+						<#assign currentAirCode=''/>
+						<#list gjjpOrder.segmentInfo.takeoffFlights as cabin>
+							<#-- 承运方航空公司 -->
+							<#if !(currentAirCode==cabin.carriageAirline)>
+								<p>${dataTransService.getAirLineNameByCode(cabin.carriageAirline)!''}</p>
+							</#if>
+							<#assign currentAirCode=cabin.carriageAirline/>
+						</#list>
+					</#if>
+				</td>
+				
+				<td>
+					${dataTransService.getAirportName(gjjpOrder.segmentInfo.orgCity)!''}
+				</td>
+				<td>
+					${dataTransService.getAirportName(gjjpOrder.segmentInfo.dstCity)!''}
+				</td>
+				<!-- 订单总金额 -->
+				<td>
+					<#if (gjjpOrder?? && gjjpOrder.payInfo?? &&gjjpOrder.payInfo.totalPrice??)>
+						${(gjjpOrder.payInfo.totalPrice)!?c}
+					</#if>
+				</td>
+				<!-- 支付供应商金额 -->
+				<td>
+					<#if gjjpOrder.payInfo.supplierTotalPrice??>
+						${gjjpOrder.payInfo.supplierTotalPrice?string('0.00')}
+					</#if>
+				</td>
+				<!-- 返点/佣金 -->
+				<td>
+					<#if gjjpOrder.payInfo.supplierDisc??>
+						${(gjjpOrder.payInfo.supplierDisc)?string('0.00')}
+					</#if>
+						/
+					<#if gjjpOrder.payInfo.commAmount??>
+						${(gjjpOrder.payInfo.commAmount)?string('0.00')}
+					</#if>
+				</td>
+				<!-- 调整金额 -->
+				<td>
+					<#if gjjpOrder.exceptionInfo?? && gjjpOrder.exceptionInfo.exceptionOrder>
+						<#if gjjpOrder.exceptionInfo.adjustAmount ??>
+							${gjjpOrder.exceptionInfo.adjustAmount?string('0.00')}
+						</#if>
+					</#if>
+				</td>
+				<!-- 订单状态 -->
+				<td>
+					 <#list orderStatusMap?keys as key>
+						<#if gjjpOrder.status.currentValue== key>${orderStatusMap[key]}</#if>
+				     </#list>
+				</td>
+				<!-- 支付状态 -->
+				<td>
+					 <#list orderPayStatusMap?keys as key>
+						<#if gjjpOrder.payInfo.status== key>${orderPayStatusMap[key]}</#if> 
+				     </#list>
+				</td>
+				<td class="hauto">
+					${(gjjpOrder.baseInfo.createDate)!''}
+				</td>
+				<!-- 合计 -->
+					<#assign index=index + 1 />
+	<#--				<#if JPOrderDTO.userPayAmount ??>
+						<#assign totalPayAmount=totalPayAmount + JPOrderDTO.userPayAmount />
+					</#if>
+					<#if JPOrderDTO.platPolicyPirce ??>
+						<#assign totalPlatPolicyPirce=totalPlatPolicyPirce + JPOrderDTO.commAmount />
+					</#if>
+					<#if EXCEPTION_TYPE == platformOrderQO.type && JPOrderDTO.adjust ??>
+						<#assign totalAdjust=totalAdjust + JPOrderDTO.adjust />
+					</#if>
+-->				<td>
+				${totalPayAmount?string('0.00')}
+				</td>
+			</tr>
+				
+			</#list>
+
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+
+function exportReport(){
+	document.forms[0].action="${contextPath}/gjjp/finance/export.csv";
+	document.forms[0].submit();
+	document.forms[0].action="${contextPath}/gjjp/finance/report";
+}
+function listAirport(keyWord){
+	var lis="";
+	var airComId;
+	var airComName
+	$("#airPortData").show();
+	$airlineCompanys.each(function(){
+		airComId=$(this)[0].id;
+		airComName=$(this)[0].name;
+		//console.info(airComId);
+		if(airComName.indexOf(keyWord)>-1){
+			lis=lis+"<li val='"+airComId+"'>"+airComName+"</li>"
+		}
+	});
+	$("#airPortData").html(lis);
+	
+}
+var airComCurVal="";
+//转为jquery对象
+//var $airlineCompanys=$(airlineCompanys);
+$(function(){
+	//绑定点击事件
+	$("#airPortData li").live("click",function(){
+		//获得选中机场值
+		var selectAirComVal=$(this).attr("val");
+		var selectAirComName=$(this).text();
+		//console.info("selectAirComVal:"+selectAirComVal+","+selectAirComName);
+		$("#airCompNameVal").val(selectAirComVal);
+		$("#airCompName").val(selectAirComName);
+		$("#airPortData").hide();
+	});
+	
+	$("#airCompName").bind("keyup",function onAirCompNameChg(){
+		if($("#airCompName").val()!=airComCurVal){
+			listAirport($("#airCompName").val());
+		}
+		airComCurVal=$("#airCompName").val();
+	});
+	//失去焦点隐藏
+	$("#airCompName").bind("blur",function(){
+		$("#airPortData").delay(100).hide(1);
+	});
+});
+
+</script>

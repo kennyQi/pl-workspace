@@ -1,0 +1,66 @@
+/* CSS Document */
+/*liwei 2015-4-23     company_orderLineDetails right*/
+.ri{ margin:24px 32px 30px 29px;}
+.ri .navigation{ width:900px; height:30px; float:left; border:1px solid #dfe8ef; background:#fcfcfc; padding-left:10px; font-size:12px;}
+.ri .navigation a{  color:#0073b6; font-family:"微软雅黑"; line-height:30px;}
+.ri .navigation a:hover{ text-decoration:underline;}
+.ri .navigation i{ margin:0 5px;}
+.ri .rih1{ float:left; font-size:20px; line-height:28px; color:#333; margin-right:40px; margin-top:26px;}
+/* CSS Document */
+/*trwei 2015-4-20     orderDetails right*/
+.ri{ margin:24px 32px 30px 29px;}
+.ri .navigation{ width:900px; height:30px; float:left; border:1px solid #dfe8ef; background:#fcfcfc; padding-left:10px; font-size:12px;}
+.ri .navigation a{  color:#0073b6; font-family:"微软雅黑"; line-height:30px;}
+.ri .navigation a:hover{ text-decoration:undertext;}
+.ri .navigation i{ margin:0 5px;}
+.ri .rih1{ float:left; font-size:20px; text-height:28px; color:#333; margin-right:40px; margin-top:26px;}
+
+.ri .tableBox{float:left; width:910px; margin-top:16px;}
+.ri .tableBox table{ width:906px;  border-left:2px solid #bce9fd; border-right:1px solid #bce9fd; border-bottom:5px solid #bce9fd; text-align:center; }
+.ri .tableBox table .tops{ height:40px; background:#bce9fd; text-height:40px; font-size:14px;}
+.ri .tableBox table tr{ width:906px; font-size:12px; color:#333;text-align:center;}
+.ri .tableBox table tr td{  border-right:1px solid #bce9fd; }
+.ri .tableBox table tr .trip{ width:180px ;height:50px; overflow:hidden;}
+.ri .tableBox table tr.tops .trip{ width:180px ;height:40px; overflow:hidden;}
+.ri .tableBox table tr.tops td{height:40px; overflow:hidden;}
+.ri .tableBox table tr .take{ width:180px; height:71px; overflow:hidden;}
+.ri .tableBox table tr .arrive{width:180px; height:71px; overflow:hidden;}
+.ri .tableBox table tr .ftrght{ width:180px; height:71px; overflow:hidden;}
+.ri .tableBox table tr .position{ width:181px; height:71px; overflow:hidden;}
+.ri .tableBox table tr .name{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox table tr .documentType{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox table tr .ID{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox table tr .orderNo{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox table tr .record{width:181px; height:50px; overflow:hidden;}
+.takeTicket .titles{padding:20px 0px 10px 0px;display:block;}
+.bd{font-weight:bold;}
+.ri .tableBox table tr .fly{ width:20px; height:20px; background:url(../../images/company/ic_script.png) 0 -115px; display:inline-block; vertical-align:middle; margin:0 5px;}
+.ri .tableBox table tr .no1{   line-height:20px; height:20px;display:block }
+.ri .tableBox table tr .no2{ line-height:20px;  height:20px;display:block}
+
+.ri .total{ clear:both; width:220px; margin:0 auto; padding-top:32px; *padding-top:40px;}
+.ri .total span{display:block; text-align:center; margin-top:8px;}
+
+
+
+
+
+.g_bd .g_cont .m_cont{padding-bottom:40px;}
+
+
+
+.hotelD{width:100%;overflow:hidden;padding:20px 0px;}
+.hotelD .title{color:#0073b6;font-size:20px;font-weight:normal;line-height:35px;}
+.hotelD .address{font-size:12px;line-height:20px;}
+.hotelD .address i{color:#9A9A9A;}
+.hotelD .status{font-size:12px;color:#9a9a9a;line-height:24px;padding:20px 0px;}
+.hotelD .status .on{font-size:12px;color:orange;line-height:24px;}
+.hotelD .word{padding:10px 0px;overflow:hidden;}
+.hotelD .word span{float:left;display:block;width:180px;font-size:12px;}
+.hotelD .cross{overflow:hidden;height:20px;}
+.hotelD .cross span{display:block;float:left;}
+.hotelD .cross .h{height:2px;width:20px;background:#00A0E9;margin-top:9px;}
+.hotelD .cross .icon{height:8px;width:8px;background:url(../../images/company/company_icon.png);margin-top:5px;}
+.hotelD .cross .lin{height:2px;width:170px;background:#00A0E9;margin-top:8px;}
+.hotelD .cross .la{height:13px;width:19px;background:url(../../images/company/company_icon4.png) no-repeat;}
+.hotelD .cross .off{background:#d0d0d0;}

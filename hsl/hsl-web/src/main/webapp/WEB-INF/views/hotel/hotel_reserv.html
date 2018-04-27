@@ -1,0 +1,285 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "酒店预定">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/hotel/hotel_reserv.js"></script>
+<script src="${contextPath}/resources/js/laydate/laydate.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/hotel/hotel_reserv.css" rel="stylesheet" />
+<script type="text/javascript" src="${contextPath}/resources/js/hotel/hotel_reservOne.js"></script>
+<style>
+.selectNav li{cursor:pointer}
+</style>
+<!--日期插件-->
+</@frame.head>
+<body>
+<@frame.main "default" 5>
+<body>
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+<div class="content-box">
+    <div class="content">
+        <div class="left">
+            <span class="left-img">
+            <#list (hotelDTO.images)!null as image>
+           		<#if image.isCoverImage=='true'>
+           			<#list (image.locations)!null as loc>
+           				<#if loc_index==0>
+           					 <img src="${(loc.url)!}">
+           				</#if>
+           			</#list>
+           			<#break>
+           		</#if>
+           	</#list>
+           
+            </span>
+            <div class="information">
+                <span class="hotelName">${(hotelDTO.detail.hotelName)!}<br/>
+               	 <label style="float: left">
+                		 <!--星星-->
+                    	 <#if hotelDTO.detail.category??>
+                             <#if hotelDTO.detail.category==3>
+                              <i class="l1"></i>
+                              <i class="l1"></i>
+                              <i class="l1"></i>
+                             <#elseif hotelDTO.detail.category==4>
+                              <i class="l1"></i>
+                              <i class="l1"></i>
+                              <i class="l1"></i>
+                              <i class="l1"></i>
+                             <#elseif hotelDTO.detail.category==5>
+                              <i class="l1"></i>
+                           	  <i class="l1"></i>
+                              <i class="l1"></i>
+                              <i class="l1"></i>
+                              <i class="l1"></i>
+                            </#if>
+                          </#if>
+                        <!--星星-->
+                  </label> 
+                </span>
+                <span class="money">￥<i id="totalRateOne">${(hotelDTO.rooms[0].ratePlans[0].totalRate)?c}</span>
+                <p class="address"><i></i>${(hotelDTO.detail.address)!}</p>
+            </div>
+            <div class="type">
+                <ul>
+                    <li><span class="project">房 型</span><span class="situation">${(hotelDTO.rooms[0].name)}</span></li>
+                    <li><span class="project">床 型</span><span class="situation">${(hotelDTO.rooms[0].bedType)!}</span></li>
+                    <li><span class="project">早 餐</span><span class="situation">
+                    <#if hotelDTO.valueAdds?size gt 0>
+                    <#if hotelDTO.valueAdds[0].typeCode=="01">
+                    	有早餐
+                    </#if>
+                    <#else>
+                    	无早餐	
+                    </#if>
+                    </span></li>
+                    <li><span class="project">宽 带</span><span class="situation">
+                    	<#if hotelDTO.rooms[0].broadnetAccess==0>
+                    		无
+                    	</#if>
+                    	<#if hotelDTO.rooms[0].broadnetAccess==1>
+                    		有宽带
+                    	</#if>
+                    	<#if hotelDTO.rooms[0].broadnetAccess==2>
+                    		有wifi
+                    	</#if>
+                    </span></li>
+                    <li style="border-bottom:0;"><span class="project">面 积</span><span class="situation">
+                    <#if (hotelDTO.rooms[0].area??)>
+                    	${(hotelDTO.rooms[0].area)!}平方米
+                    </#if>
+                    </span></li>
+                </ul>
+            </div>
+            <div class="reminder leftGeneral">
+                <div>
+                    <span>温馨提示</span>
+                    <p style="font-weight:bold;">
+                    <#if (hotelDTO.rooms[0].comments)?length gt 200>
+                    ${(hotelDTO.rooms[0].comments)?substring(0,200)}...
+                    <#else>
+                     ${(hotelDTO.rooms[0].comments)!}
+                    </#if>
+                    </p>
+                </div>
+            </div>
+            <div class="additional leftGeneral">
+                <div>
+                    <span>附加服务</span>
+                    <p>
+                     <#if hotelDTO.valueAdds?size gt 0>
+                    ${(hotelDTO.valueAdds[0].description)?substring(5,(hotelDTO.valueAdds[0].description)?length)}
+                     <#else>
+                     	无附加服务
+                    </#if>
+                    </p>
+                </div>
+            </div>
+            <div class="problem leftGeneral">
+                <div>
+                    <span>预订过程中常见问题</span>
+                    <p>如您再预订过程中遇到问题，<br/>请拨打<i style="font-size:14px; font-weight:bold;">4009-333-333</i>(免长途费)</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <ul class="process">
+                <li><div><i class="conduct1 generals1"></i><span class="conduct2 generals2"><i>1</i></span><span class="conduct3 generals3">填写订单</span></div><i class="triangle"></i></li>
+                <li><div><i class="unfinished1 generals1"></i><span class="unfinished2 generals2"><i>2</i></span><span class="unfinished3 generals3">预订成功</span></div><i class="triangle" style="display:none"></i></li>
+                <li><div><i class="unfinished1 generals1"></i><span class="unfinished2 generals2"><i>3</i></span><span class="unfinished3 generals3">确认短信</span></div><i class="triangle" style="display:none"></i></li>
+                <li><div><i class="unfinished1 generals1"></i><span class="unfinished2 generals2"><i>4</i></span><span class="unfinished3 generals3">开心入住</span></div><i class="triangle" style="display:none"></i></li>
+            </ul>
+            <div class="orderInformation">
+               
+                <div class="seniorRoom">
+                    <span class="rightTitle">${(hotelDTO.rooms[0].name)}</span>
+                    <ul class="housing ">
+                        <li><span class="housingName roomNum">房间数量：</span><span class="numText"><a class="min" href="javascript:;">-</a><input type="text" id="num" name="roomNumber" readonly value="1"><a class="add" href="javascript:;">+</a></span></li>
+                        <li><span class="housingName" style="margin-top:5px;">入住时间：</span><span class="numTextRight">
+                        <input class="laydate-icon input Bg time time1 changeTime"  onClick="laydate()" name="layTime" id="arrivalTime"/>
+						</span></li>
+                        <li><span class="housingName" style="margin-top:5px;">退房时间：</span><span class="numTextRight">
+                        <input  class="laydate-icon input Bg time ime2 changeTime" onClick="laydate()" name="layTime" id="departureTime" />
+                        <li ><span class="housingName" style="margin-top:10px;">房费总计：</span><span class="numTextRight"><span class="money">￥<i id="totalRateTwo" data-old="${(hotelDTO.rooms[0].ratePlans[0].totalRate)?c}">${(hotelDTO.rooms[0].ratePlans[0].totalRate)?c}</i></span></span></li>
+                        <li>
+                        <span class="housingName">付款方式：</span><span class="numTextRight"><span class="fk">酒店前台付款</span></span>
+                        </li>
+                        <li>
+                            <span class="numTextRight" style="margin-top:-15px; margin-bottom:30px;">
+                            <ul class="payment" style="margin-left:77px;" id="payment">
+                           
+                            </ul>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="booking">
+                    <span class="rightTitle" style="*margin-top:30px;">入住信息</span>
+                    <ul class="bookingInf" id="tourists"> 
+                        <li><span class="inf"><i>*</i>客人一姓名：</span><input type="text" name="guestName" id="guestName"  style="width:240px;padding:0 8px 0 8px;"><i class="guestName names"></i></li>
+                    </ul>
+                    <ul class="bookingInf" id="roomSave">
+                        <li><span class="ts">（一间房间需填一名入住人姓名）</span></li>
+                        <li style="margin-top:11px;"><span class="inf"><i>*</i>联系姓名：</span><input type="" name="guestName" id="relationName"  style="width:240px;padding:0 8px 0 8px;"><i class="guestName names"></i></li>
+                        
+                        <li style="margin-top:11px;"><span class="inf"><i>*</i>联系手机：</span><input type="" name="" id="relationMobile"  style="width:240px;padding:0 8px 0 8px;" maxlength="11"><i class="relationMobile names"></i></li>
+                      
+                        <li><span class="inf">Email：</span><input type="" name="" id="relationEmail"  style="width:240px;padding:0 8px 0 8px;"><i class="relationEmail"></i></li>
+                      
+                        <i id="inf"><li ><span class="inf">房间保留时间：</span>
+	                        <span class="radios"><i class="radio radioOn" id="radio1"></i>
+	                        <span class="times">${(jDHotelDetailQO.arrivalDate)?string('M月d日')}${(hotelDTO.guaranteeRules[0].startTime)!}之前</span></span></li>
+	                        <li style="margin-top:0px;"><span class="inf"></span>
+	                        <span class="radios"><i class="radio" id="radio2"></i>
+	                        <span class="times">${(jDHotelDetailQO.arrivalDate)?string('M月d日')} ${(hotelDTO.guaranteeRules[0].startTime)!}之后<span style="margin-left:48px;">需要信用卡担保房费<i style="color:#ff6600;">￥<i id="grarantee" style="color:#ff6600;">0</i></i>
+	                        </span></span></span></li>
+                        <li style="margin-top:-6px;"><span class="inf"></span><span class="ts2">（通常酒店14点办理入住，早到可能需要等待）</span></li>
+                        </i>
+                    </ul>
+                </div>
+                <div class="guarantee">
+                    <span class="rightTitle">担保信息</span>
+                    <div class="conditions">
+                        <span>${(hotelDTO.guaranteeRules[0].description)!}</span>
+                    </div>
+                    
+                    <ul class="credit">
+                        <li><span class="inf"><i>*</i>信用卡号：</span><span class="creditRight"><input type="" name="" id="blockId" value="" style="width:240px;padding:0 8px 0 8px;"><span class="ts3">输入全部信用卡号码</span></span></li>
+                        <li><span class="inf"><i>*</i>持卡人姓名：</span><span class="creditRight"><input type="" name="" id="holderName" value="" style="width:240px;padding:0 8px 0 8px;"><span class="ts3">请输入持卡人姓名</span></span></li>
+                         <li><span class="inf"><i>*</i>有效期：</span><span class="creditRight"><span class="select" style="width:128px;">
+                         <span class="optionValue" id="selectNavYear">请选择</span><i class="option"></i> 
+                        <ul class="selectNav selectNavYear" id="selectNav" style="display:none; *margin-left:-52px;">
+                        
+                        </ul>
+                        
+                        </span><span class="select" style="width:85px; margin-left:10px;"><span class="optionValue" id="selectNavMonth">请选择</span><i class="option"></i>
+                        <ul class="selectNav" id="selectNav" style="display:none; width:100px; *margin-left:-25px;">
+                          	<li class="m">1月</li>
+                            <li class="m">2月</li>
+                            <li class="m">3月</li>
+                            <li class="m">4月</li>
+                            <li class="m">5月</li>
+                            <li class="m">6月</li>
+                            <li class="m">7月</li>
+                            <li class="m">8月</li>
+                            <li class="m">9月</li>
+                            <li class="m">10月</li>
+                            <li class="m">11月</li>
+                            <li class="m">12月</li>
+                        </ul>
+                        </span><span class="ts3">只接受有效期为当前月份之后的信用卡</span></span></li>
+                        <li><span class="inf"><i>*</i>证件类型：</span><span class="creditRight"><span class="select" style="width:240px;"><span class="optionValue">身份证</span><i class="option"></i>
+                        <ul class="selectNav" id="selectNav" style="display:none; width:256px; *margin-left:-47px;">
+                            <li class="l">身份证</li>
+                        </ul>
+                        </span><span class="ts3">申请信用卡时的证件类型</span></span></li>
+                        <li><span class="inf"><i>*</i>证件号码：</span><span class="creditRight"><input type="" name="" id="idNo" value="" style="width:240px;padding:0 8px 0 8px;"><span class="ts3">申请信用卡时填写的证件号码</span></span></li>
+                        <li id="cvv"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="complete">
+                <span>注：如需发票，请从酒店前台索取</span><br/>
+                <input type="button" id="save" name="" value="完成预定" style="cursor:pointer">
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="guaranteeType" value="${(hotelDTO.guaranteeRules[0].guaranteeType)!}"/>
+    <input type="hidden" id="amount" value="${(hotelDTO.guaranteeRules[0].amount)!}"/>
+    <input type="hidden" id="guaranteeMoney" value="0"/><!-- 判断是否需要保证金  0需要1不需要-->
+    <input type="hidden" id="blocktf" value="0"/><!-- 判断信用卡是否可用 0可用1不可用-->
+    <form action="${contextPath}/jd/creteOrder" id="creteOrder" method="post">
+    	<input type="hidden" name="token" id="token" value="${(token)!}"/>
+    	<input type="hidden" name="hotelName" id="hotelName" value="${(hotelDTO.detail.hotelName)!}"/><!-- 酒店名称 -->
+    	<input type="hidden" name="hotelNO" id="hotelNO" value="${(hotelDTO.hotelId)!}"/><!-- 酒店编号 -->
+    	<input type="hidden" name="roomName" id="roomName" value="${(hotelDTO.rooms[0].name)!}"/><!-- 房间名称 -->
+    	<input type="hidden" name="ratePlanName" id="ratePlanName" value="${(hotelDTO.rooms[0].ratePlans[0].ratePlanName)!}"/><!-- 价格政策名称 -->
+    	<input type="hidden" name="totalPrices" id="totalPrices"/><!-- 总价 -->
+    	<input type="hidden" name="arrivalTimes" id="arrivalTimes"/><!-- 入住时间 -->
+    	<input type="hidden" name="departureTimes" id="departureTimes"/><!-- 退房时间 -->
+    	<input type="hidden" name="orderCreateDTO.hotelId" value="${(hotelDTO.hotelId)!}"/><!-- 酒店编号 -->
+    	<input type="hidden" name="orderCreateDTO.roomTypeId"  value="${(hotelDTO.rooms[0].ratePlans[0].roomTypeId)!}"/><!-- 房型编号 -->
+    	<input type="hidden" name="orderCreateDTO.ratePlanId"  value="${(hotelDTO.rooms[0].ratePlans[0].ratePlanId)?c}"/><!-- 产品编号 -->
+    	<input type="hidden" name="orderCreateDTO.numberOfRooms" id="numberOfRooms"/><!-- 房间数量-->
+    	<input type="hidden" name="orderCreateDTO.NumberOfCustomers" id="NumberOfCustomers"/><!-- 入住人数-->
+    	<input type="hidden" name="earliestArrivalTime" id="earliestArrivalTime"/><!-- 最早到店时间-->
+    	<input type="hidden" name="latestArrivalTime" id="latestArrivalTime"/><!-- 最晚到店时间-->
+    	<input type="hidden" name="guaranteeOrCharged" id="guaranteeOrCharged"/><!-- 是否担保-->
+    	<!-- -------------------联系人信息---------------------- -->
+    	<input type="hidden" name="orderCreateDTO.contact.phone" id="contactPhone"/>
+    	<input type="hidden" name="orderCreateDTO.contact.mobile" id="contactMobile"/>
+    	<input type="hidden" name="orderCreateDTO.contact.email" id="contactEmail"/>
+    	<input type="hidden" name="orderCreateDTO.contact.name" id="contactName"/>
+    	<!-- -------------------客人信息---------------------- -->
+    	<input type="hidden" name="customersName" id="customersName"/><!-- 客人姓名 -->
+    	<input type="hidden" name="isGuaranteeOrCharged" id="isGuaranteeOrCharged" value="0"/> <!-- 0不担保1表示担保 -->
+    	<!-- ------------------信用卡信息---------------------- -->
+    	<div id="creditCard">
+    	<input type="hidden" name="orderCreateDTO.creditCard.number" id="hidenumber" class="blockNews"/>
+    	<input type="hidden" name="orderCreateDTO.creditCard.cvv" id="hidecvv" class="blockNews" value=""/>
+    	<input type="hidden" name="orderCreateDTO.creditCard.expirationYear" id="hideexpirationYear" class="blockNews"/>
+    	<input type="hidden" name="orderCreateDTO.creditCard.expirationMonth" id="hideexpirationMonth" class="blockNews"/>
+    	<input type="hidden" name="orderCreateDTO.creditCard.holderName" id="hideholderName" class="blockNews"/>
+    	<!-- <input type="hidden" name="orderCreateDTO.creditCard.idType" value="hideIdentityCard" class="blockNews"/> -->
+    	<input type="hidden" name="orderCreateDTO.creditCard.idNo" id="hideidNo" class="blockNews"/>
+    	</div>
+    </form>
+</div>
+<!--内容-->
+
+<!--页脚-->
+ <@frame.end "default"> </@frame.end>
+</@frame.main>
+<!--页脚-->
+</body>
+</html>

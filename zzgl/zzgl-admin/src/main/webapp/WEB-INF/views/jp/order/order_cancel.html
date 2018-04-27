@@ -1,0 +1,27 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/jp/order/cancel" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="id" value="${(id)!}">
+			<div class="unit">
+				<span></span>
+			</div>
+			<div class="unit">
+				 <label>乘客</label>
+			   <#if (jpOrder.passengers?size > 0)>
+			   	 <#list jpOrder.passengers as psg>
+			   	  <input type="checkbox" value="${psg.passengerName}" name="jpOrderPassengerNames" />${psg.passengerName}
+			     </#list>
+			   <#else>
+			                 没有可以取消订单的乘客
+			   </#if>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

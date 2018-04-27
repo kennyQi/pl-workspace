@@ -1,0 +1,115 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;手动出票
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/tasklistwait/manaulVote" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" value="${taskListWaitDto.id}" name="tasklistWaitID"/>
+							<input type="hidden" value="N" name="opinion" />
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">出票渠道：</label>
+									<div class="col-md-4">
+										<!--  <input type="text"  value="" name="flightNO" class="form-control required isSpec" /> -->
+										 <select id="chooseExecutorType" name="ticketChannel" onchange="getExecutor()" class="form-control" >
+											<option value="2">去哪</option>
+											<option value="3">携程</option>
+											<option value="99">其他</option>
+										</select>
+									</div>
+								</div>
+										<span id="myspan">
+										
+										</span>
+						
+								<div class="form-group">
+									<label class="col-md-3 control-label">票号：</label>
+									<div class="col-md-4">
+										<input type="text"  value="" name="airID" class="form-control required isSpec" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">供应商价：</label>
+									<div class="col-md-4">
+										<input type="text"  value="" name="totalPrice" class="form-control required number" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">企业支付价：</label>
+									<div class="col-md-4">
+										<input type="text"  value="" name="platTotalPrice" class="form-control required number" />
+									</div>
+								</div>
+								<!-- <div class="form-group">
+									<label class="col-md-3 control-label">起飞时间：</label>
+										<div class="col-md-4">
+									<input type="date"  value="" name="startData" class="form-control required" />
+									</div>
+								</div> -->
+								<!-- <div class="form-group">
+									<label class="col-md-3 control-label">出票人：</label>
+									<div class="col-md-4">
+										${user.name}
+									</div>
+								</div> -->
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn yellow" target="submit">提交</a>
+									<a class="btn yellow" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function getExecutor(){
+	if($("#chooseExecutorType").val()=="99"){
+		var html_str = "<div class='form-group'><label class='col-md-3 control-label'>渠道名称：</label><div class='col-md-4'><input type='text' value='' name='ticketChannelName' class='form-control required isSpec'/></div></div>";
+		$("#myspan").html(html_str);
+	}else{
+		var html_str = "";
+		$("#myspan").html(html_str);
+	}
+	//选择‘请选择’
+	/* if($("#chooseExecutorType").val()=="0"){
+		var html_str = "<option value='nothing'>--请选择--</option>";
+		$("#executor").html(html_str);
+	}else {
+		//选择其他值 发送ajax请求
+		$.ajax({     
+	        url: "${contextPath}/workflow/chooseExecutor?chooseExecutorType="+$("#chooseExecutorType").val(),
+	        type: "POST",
+	        dataType: "json",
+	        success: function(data, textStatus){
+				var html_str = "<option value='0'>--请选择--</option>";
+	        	if($("#chooseExecutorType").val()=="2"){
+		            var users = JSON.parse(data);
+					for(var i = 0;i<users.length;i++){
+						html_str+="<option value='"+users[i].id+"'>"+users[i].roleName+"</option>";
+					}
+	        	}else if($("#chooseExecutorType").val()=="4"){
+	        		var users = JSON.parse(data);
+	        		for(var i = 0;i<users.length;i++){
+						html_str+="<option value='"+users[i].userFlagkey+"'>"+users[i].userFlagval+"</option>";
+					}
+	        	}
+				$("#executor").html(html_str);
+	        }
+	    });
+	} */
+}
+</script>

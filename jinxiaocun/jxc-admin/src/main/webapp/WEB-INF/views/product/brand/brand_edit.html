@@ -1,0 +1,55 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	
+</script>
+<div class="pageContent">
+	<form method="post" action="${contextPath}/brand/update" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+
+		<div class="pageFormContent" layoutH="60">
+		<input value="${brand.id}" type="hidden" name="brandId"> 
+			<div class="bill">
+				<dl>
+					<dt>品牌编号：</dt>
+					<dd>
+						<input name="brandCode" type="text"  value="${brand.brandCode}" readonly />系统自动生成
+						<input name="createDate" type="hidden"  value="${brand.createDate}" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>中文名：</dt>
+					<dd>
+						<input name="chineseName" type="text" class="required" value="${brand.chineseName}" onchange="this.value=(trim(this.value))" maxlength="50" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>英文名：</dt>
+					<dd>
+						<input name="englishName" type="text" value="${brand.englishName}" onchange="this.value=(trim(this.value))" maxlength="60" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>品牌简介：</dt>
+					<dd>
+						<textarea name="remark" cols="100" rows="10" value="" maxlength="250">${brand.remark}</textarea>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div></li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

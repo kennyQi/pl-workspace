@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wxmenu>
+
+	<!-- 配置说明：系统URL用${system}代替 -->
+	
+	<p_menu sub="true" name="预订">
+		<s_menu name="订机票" type="view" url="${system}/jp/init"/>
+		<!-- <s_menu name="订门票" type="view" url="${system}/mp/init" />
+		<s_menu name="订线路" type="view" url="${system}/line/list" /> -->
+	</p_menu>
+	<p_menu sub="false" name="我的订单" type="view" url="${system}/user/jpos" />
+	<p_menu sub="false" name="我的账户" type="view" url="${system}/user/center" />
+
+</wxmenu>

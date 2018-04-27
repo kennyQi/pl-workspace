@@ -1,0 +1,88 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageContent">
+<form method="post" enctype="multipart/form-data" action="${contextPath}/hotspot/create" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="38" >
+	<p>
+		<label>景点名称</label>
+	</p>
+	<p>
+		<input name="spotsname" id="spotsname" type="text" />
+		<table id="searchresult" style="display: none;">  
+	</p>
+	<p>
+		<label><input type="checkbox" id="view" name="view">立即展示</label>
+	</p>
+	<p>
+	</p>
+	<p>
+	</p>	
+	
+	<div class="formBar">
+		<ul>
+			<li><div class="buttonActive"><div class="buttonContent"><button type="submit" id="submit">保存</button></li>
+			<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消添加</button></li>
+		</ul>
+	</div>
+	</div>
+</form>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#spotsname").keyup(function(evt){
+        var k = window.event ? evt.keyCode : evt.which;  
+        //输入框的id为txt_search，这里监听输入框的keyup事件  
+        //不为空 && 不为上箭头或下箭头或回车  
+        if($("#spotsname").val()!="" && k != 38 && k != 40 && k != 13){
+        	$.post("${contextPath}/hotspot/match",{'spotname':$("#spotsname").val()},function(data){
+
+                if (data!=null && data.length > 0) {  
+                    var layer = "";  
+                    $.each(data, function (idx, item) { 
+                        layer += "<tr><td>" + item.name + "</td></tr>";  
+                    });  
+					
+                    //将结果添加到div中      
+                    $("#searchresult").empty();  
+                    $("#searchresult").append(layer);  
+                    $("#searchresult").show(); 
+
+
+                    	$("#searchresult tbody tr td").click(function(){                		
+                		$("#spotsname").val($(this).text());
+                	    $("#searchresult").hide();
+                    });  
+
+                } else {  
+                    alert("没有匹配的景点");
+                }  
+        	},"json"); 
+
+        }                
+
+	
+});
+	
+    $("#searchresult").bind("mouseleave", function () {  
+        $("#searchresult").empty();  
+        $("#searchresult").css("display", "none");  
+    });  
+
+
+	
+});
+
+
+$("#view").blur(function(){
+
+	if($("#view").attr("checked")){
+		$("#view").val("view");
+	}else{
+		$("#view").val("no");
+	}
+
+});
+
+ 
+</script>

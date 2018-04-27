@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<string xmlns="http://openapi.yeego.net/"><?xml version="1.0" encoding="UTF-8"?>
+	<YeeGo.QueryOrder_1_0>
+		<ErrorCode>0</ErrorCode>
+		<ErrorMsg></ErrorMsg>
+		<Status>DZ</Status>
+		<YeeGoStatus>TP</YeeGoStatus>
+		<PolicyId>56233089</PolicyId>
+		<PlatCode>B5</PlatCode>
+		<PlatIntCode>002</PlatIntCode>
+		<PlatOrderNo>112014091644511254</PlatOrderNo>
+		<OrderNo>4091617286101</OrderNo>
+		<Pnr>HWKRKT</Pnr>
+		<BalanceMoney>962.00</BalanceMoney>
+		<Fare>900.00</Fare>
+		<TaxAmount>110.00</TaxAmount>
+		<CommAmount></CommAmount>
+		<PayType></PayType>
+		<PayMoney>962.00</PayMoney>
+		<PayAccount></PayAccount>
+		<TradeNo>2014091666850151</TradeNo>
+		<NewPnr></NewPnr>
+		<Flights>
+			<Flight>
+				<Carrier>SC</Carrier>
+				<FlightNo>4886</FlightNo>
+				<BoardPoint>HGH</BoardPoint>
+				<OffPoint>XMN</OffPoint>
+				<ClassCode>Y</ClassCode>
+				<DepartureDate>2014-09-23</DepartureDate>
+				<DepartureTime>13:50</DepartureTime>
+				<ArrivalDate>2014-09-23</ArrivalDate>
+				<ArrivalTime>15:30</ArrivalTime>
+				<ActionCode>HK</ActionCode>
+			</Flight>
+		</Flights>
+		<Tickets>
+			<Ticket>
+				<Name>TAN/DENG</Name>
+				<TicketNo>3242354613276</TicketNo>
+				<CardNo>42108119901212603X</CardNo>
+				<Conjunction></Conjunction>
+			</Ticket>
+		</Tickets>
+	</YeeGo.QueryOrder_1_0>
+</string>

@@ -1,0 +1,313 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'traveline-folder' />
+<#assign pathUrl =(contextPath+'/traveline-folder') />
+
+<style>
+.myTabsButton {
+	position: relative;
+	float: right;
+	margin-right: -4px;
+	margin-top: -28px;
+}
+.myTabsButton button {
+	width: 70px;
+}
+.myPageContent {
+	margin-top: 20px;
+}
+.myPageLabel {
+	font-weight: 700;
+}
+.myUnit {
+	margin: 7px 8px;
+	border: 1px solid #b8d0d6;
+	display: inline-block
+}
+.myLabel {
+	padding-left: 4px;
+}
+.myInput{
+	width:13px;margin:7px 1px 10px 15px;vertical-align:middle;
+}
+.pages span {
+	margin-left: 15px;
+}
+</style>
+<script type="text/javascript" src="resources/js/MyJs.js"></script>
+<script type="text/javascript">
+validateCallbackLine = function(evt){
+	if(fromHand())
+		return validateCallback(evt,dialogAjaxDone);
+	else
+		return false;
+}
+</script>
+
+<input type="hidden" id="lineId" name="lineId" value="${lineId!}" />
+<div id="linePicDialog">
+<div class="tabs">
+	<!-- 选项栏 -->
+	<div class="tabsHeader">
+		<div class="tabsHeaderContent">
+			<ul>
+			<#list folderList as folder>
+				<li ${(folder_index == 0)?string('class="selected"','')} onclick="getTabsIndex(this);">
+					<a href="#">
+						<span>${folder.name}</span>
+					</a>
+				</li>
+			</#list>
+			</ul>
+			<div class="button myTabsButton myFloat">
+				<div class="buttonContent">
+					<button style = "width:100px;" type="button" onclick="newFolder();">新建文件夹</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 选线卡内容 -->
+	<div class="tabsContent" style="height:298px;">
+	<#list folderList as folder>
+		<div class="myTabsBody">
+			<div class="pageContent" style="width:760px;">
+				<div class="panelBar">
+					<ul class="toolBar">
+						<li>
+							<a class="delete" href="#" onclick="delImage();">
+								<span>批量删除</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="imgContext" layoutH="245">
+				<input name="folderId" type="hidden" value="${folder.id}"/>
+				<#list folder.pictureList as picture>
+					<div class="unit myUnit">
+						<img class="img-polaroid" width="160" height="120" alt="${picture.name}" title="${picture.name}"
+							src="${(picture.site)!'resources/image/nopic.png'}"/>
+						<p style="height:25px;line-height:20px;">
+							<input class="checkboxCtrl" type="checkbox" name="pictureIds" class="myInput" value="${picture.id}" />
+							<label class="myLabel">${picture.name}</label>
+						</p>
+						<div class="imgIdContext">
+							<input name="names" type="hidden" value=""/>
+							<input name="imgNames" type="hidden" value=""/>
+							<input name="imgFlags" type="hidden" value=""/>
+						</div>
+					</div>
+				</#list>
+				</div>
+				<div class="panelBar hover">
+					<div class="pages" style="float:right;">
+						<span>
+							<button type="button" class="checkboxCtrl" group="pictureIds">全选</button>
+						</span>
+						<span>
+							<button type="button" class="checkboxCtrl" group="pictureIds" selectType="invert">反选</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</#list>
+	</div>
+
+	<!-- 选线卡底部 -->
+	<div class="tabsFooter">
+		<div class="tabsFooterContent"></div>
+	</div>
+</div>
+
+<div class="pageContent myPageContent">
+	<form method="post" action="${pathUrl}/savePictureSubmit" class="pageForm required-validate"
+		onsubmit="return validateCallbackLine(this);">
+		<input type="hidden" name="navTabid" value="${navTabid!}" />
+		<div class="pageFormContent" style="background:#EAF1FD;">
+			<label class="myPageLabel">上传图片</label>
+			<div class="unit">
+				<span class="u-upload">
+					<input id="file123" type="file" name="file" size="60" onchange="imgUpload(this);"/>
+					<!-- <input id="uploadFlag" type="hidden" class="required" value=""/>  是否上传图片标识 -->
+					<span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的图片，最大不超过2M</span>
+				</span>
+				<span id="hiddContent"></span>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit" style="width:35px;">确定</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" onclick="MyClose('是否取消维护图片？','monitorDiag')" style="width:35px;">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+</div>
+
+<script type="text/javascript">
+	var tabsIndex = 0;							//选项卡索引
+	var uploadPath = '${pathUrl}/imgUpload';	//图片上传地址
+	var groupURL = '/group0/';
+	var headHtml = '<li class="selected" onclick="getTabsIndex(this);"><a href="#"><span>$name</span></a></li>';
+	var imgHtml = '<div class="unit myUnit"><img class="img-polaroid" width="160" height="120" alt="$name" title="$name" src="$uri"/>'+
+		'<p style="height:25px;line-height:20px;"><input class="checkboxCtrl" type="checkbox" name="pictureIds" class="myInput" value="0"/>'+
+		'<label class="myLabel">$name</label></p><div class="imgIdContext"><input name="names" type="hidden" value="$name"/><input name="'+
+		'imgNames" type="hidden" value="$imgName"/><input name="imgFlags" type="hidden" value="$imgFlag"/></div></div>';
+	var divHtml = '<div class="myTabsBody"><div class="pageContent" style="width:760px;"><div class="panelBar"><ul class="toolBar"><li>'+
+		'<a class="delete" href="#" onclick="delImage();"><span>批量删除</span></a></li></ul></div><div class="imgContext" layoutH="245">'+
+		'<input name="folderId" type="hidden" value="$folderId"/></div><div class="panelBar hover"><div class="pages" style="float:right;"'+
+		'><span><button type="button" class="checkboxCtrl" group="pictureIds">全选</button></span><span><button type="button" class="'+
+		'checkboxCtrl" group="pictureIds" selectType="invert">反选</button></span></div></div></div></div>';
+		
+	/** 新建文件夹按钮单击事件 */
+	function newFolder(){
+		var lineId = $("#lineId").val();
+		//发起请求
+		$.ajax({
+			url:"${pathUrl}/saveFolderSubmit",
+			type:"POST",
+			cache: false,
+			async: false,
+		    dataType:"json",
+		    data:{"lineId":lineId.trim()},
+			success:function(da){
+				if(da.rs < 1){
+					alertMsg.error(da.msg);
+					return;
+				}
+				
+				//追加选项卡栏
+				$(".tabsHeaderContent ul").append(headHtml.replace(/\$name/g,da.name));
+				
+				//追加选项卡内容
+				$(".tabsContent").append(divHtml.replace("$folderId",da.folderId));
+				
+				initUI($("#linePicDialog"));
+				//提示
+				alertMsg.info("文件夹新建成功");
+			}
+		});
+		$(".tabsHeaderContent li:last-child").click();
+	}
+	
+	/** 图片删除按钮单击事件 */
+	function delImage(){
+		var checks = getImgContext().find("input:checked");
+    	if(checks.length < 1){
+    		alertMsg.warn("请选择图片！");
+    		return;
+    	}
+    	
+    	//函数变量
+		var formFun = function(){
+    		var temp = null;
+			for(var i = 0,len = checks.length;i < len;i++){
+				temp = $(checks[i]).parent().parent();
+				temp.css("display","none");
+				temp.find("input[name='imgFlags']").val("-");//更新操作标识
+			}
+		}
+		//确定框
+		alertMsg.confirm("确定要删除图片？",{okCall: formFun});
+	}
+	
+	/** 图片上传按钮单击事件 */
+	function imgUpload(evt){
+		var temp = $(evt);
+		//获取后缀，并校验
+		var vall = temp.val();
+		var fileName = vall.substr(vall.lastIndexOf("\\")+1);
+		var ext = vall.substr(vall.lastIndexOf(".")+1);
+		if(!(ext && /^(jpg|jpeg|png|gif)$/.test(ext.toLowerCase()))){
+    		alertMsg.warn("暂不支持jpg、gif、png、bmp以外的图片！");
+			return false;
+    	}
+		//发起请求
+		$.ajaxFileUpload({
+			url : uploadPath,
+	       	secureuri : false,
+	       	fileElementId : temp.attr("id"),
+	       	dataType : "json",
+	      	success: function (da) {
+	        	if(da.rs < 1){
+	        		alertMsg.warn("图片上传失败："+da.msg);
+					return false;
+	        	}
+	        	
+	        	//$("#uploadFlag").val("123");
+	        	//追加表单隐藏域
+	        	//$("#imgIdContext").append(hiddHtml.replace("$name",title).replace("$uri",da.uri).replace("$imgId",da.imgId));
+	        	//图片显示
+	        	var imgContext = getImgContext();
+	        	if(undefined != imgContext){
+	        		imgContext.append(
+	        			imgHtml.replace(/\$name/g,fileName)
+	        				.replace(/\$imgName/g,da.imgName)
+	        				.replace(/\$imgFlag/g,"+")
+	        				.replace(/\$uri/g,groupURL+da.imgName)
+	        			);
+	        	}
+	        },
+	        error: function (data, status, e) {
+	        	alertMsg.warn("图片上传失败，请稍后重试！");
+	        	$("#uploadFlag").val("");
+	        }
+	    });
+	}
+	
+	/**提交表单之前的处理*/
+	function fromHand(){
+		var imgContext = getImgContext();
+		try {
+			var folderId = imgContext.find("input[name='folderId']");
+			var names = imgContext.find("input[name='names']");
+			var imgNames = imgContext.find("input[name='imgNames']");
+			var pictureIds = imgContext.find("input[name='pictureIds']");
+			var imgFlags = imgContext.find("input[name='imgFlags']");
+			
+			var hiddContent = $("#hiddContent");
+			//清空
+			hiddContent.html("");
+			//赋值隐藏域，并追加
+			hiddContent.append(folderId.clone());
+			if(undefined != names)
+				hiddContent.append(names.clone());
+			if(undefined != imgNames)
+				hiddContent.append(imgNames.clone());
+			if(undefined != pictureIds){
+				$(pictureIds).each(function(){
+					hiddContent.append('<input name="pictureIds" type="hidden" value="'+$(this).val()+'"/>');
+				});
+			}
+			if(undefined != imgFlags)
+				hiddContent.append(imgFlags.clone());
+			//返回标识
+			return true;
+		} catch (e) {
+			alertMsg.correct(e.name+"++++"+e.message);
+			return false;
+		}
+	}
+	
+	/** 获取当前选项卡的索引 */
+	function getTabsIndex(evt){
+		tabsIndex = $(evt).index(".tabsHeaderContent li");
+	}
+	
+	/** 获取当前的图片容器 */
+	function getImgContext(){
+		return $(".myTabsBody:eq("+tabsIndex+") .imgContext");
+	}
+</script>

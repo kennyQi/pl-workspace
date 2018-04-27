@@ -1,0 +1,464 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商户注册</title>
+	<link type="text/css" href="${contextPath}/resources/css/common.css" rel="stylesheet">
+    <link type="text/css" href="${contextPath}/resources/css/login.css" rel="stylesheet">
+	<script src="${contextPath}/resources/commonFile/jquery-1.12.0.min.js"></script>
+</head>
+<style>
+	
+</style>
+<script >
+	/*
+	* 倒计时初始化方法----开始
+	*/
+	function daojishi(second){
+		var t=document.getElementById("code"); 
+		$(t).html("重新获取 ("+second+")");
+		 t.style.cssText+="background-color:#cccccc;border-top: 1px solid #cccccc;" 
+         +"  border-bottom: 1px solid #cccccc;  border-right: 1px solid #cccccc;"; 
+         var timer = setInterval(function(){
+        	 second=second-1;
+	         $(t).html("重新获取 ("+second+")");
+         },1000);
+         setTimeout(function(){ 
+            t.style.cssText+="background-color:#4799ef;border-top: 1px solid #4799ef;" 
+         +"  border-bottom: 1px solid #4799ef;  border-right: 1px solid #4799ef;";
+         clearInterval(timer);
+         $(t).html("重新获取");
+         },second*1000); 
+	}
+	
+	/*
+	* 倒计时初始化方法----结束
+	*/
+	
+	
+	/*
+	* 短信发送
+	*/
+	function sendSMS(){
+		var reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+		if(!reg.test($("#cellNumber").val())){
+			$(".yellow-tip").text("输入正确手机号");
+			warning5();
+			return false;
+		}
+		var path = "${contextPath}";
+		$.ajax({
+		    type: "POST",
+		    url: path+"/register/sendSMS",
+		    data: "cellNumber="+$("#cellNumber").val(),
+		    dataType : 'json',
+			success : function(data, status) {
+				if ("success" == data.status) {
+					warningRemove5();
+					//倒计时效果
+					daojishi(60);
+				} else {
+					if(data.msg=="1"){
+						$(".yellow-tip").text("请输入手机号码");
+						warning5();
+					}else if(data.msg=="2"){
+						$(".yellow-tip").text("该手机号已绑定，请用其他用手机号");
+						warning5();
+					}else if(data.msg=="3"){
+						$(".yellow-tip").text("短信已发送");
+						flag=2;
+						warning5();
+						//倒计时效果
+						daojishi(data.sec);
+					}
+				}
+			},
+			error : function(data, status, e) {
+				alert("系统繁忙");
+			}
+		});
+	}
+	/*
+	* 阅读并同意
+	*/
+	function agree(){
+		$("#theSelect").attr("checked","checked");
+		closeWin();
+	}
+	/*
+	* 提交表单
+	*/
+	function sub(){
+		var reg = /^[a-zA-Z](?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9]*$/;
+		if($("#login").val().length<3||$("#login").val().length>20||!reg.test($("#login").val())){
+			$(".yellow-tip").text("账号请填写以字母开头的3~20位字母数字组合");
+			warning5();
+			$("#yellow-tip-type").attr("value", "login")
+			return false;
+		}
+		
+		if($("#password").val().length==0){
+			$(".yellow-tip").text("请输入密码");
+			warning5();
+			$("#yellow-tip-type").attr("value", "password")
+			return false;
+		}
+		
+		reg=/^[a-zA-Z\u4e00-\u9fa5]+$/;
+		if($("#realName").val().length>50||!reg.test($("#realName").val())){
+			$(".yellow-tip").text("请输入正确的姓名");
+			warning5();
+			$("#yellow-tip-type").attr("value", "realName")
+			return false;
+		}
+		reg=/^[0-9a-zA-Z\u4e00-\u9fa5]+$/;
+		if($("#corpName").val().length>50||!reg.test($("#corpName").val())){
+			$(".yellow-tip").text("请填写公司名称");
+			warning5();
+			$("#yellow-tip-type").attr("value", "corpName")
+			return false;
+		}
+		reg = /(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/;
+		if(!reg.test($("#url").val())){
+			$(".yellow-tip").text("请填写公司网址");
+			warning5();
+			$("#yellow-tip-type").attr("value", "url")
+			return false;
+		}
+		reg = /^0?1[3|4|5|8][0-9]\d{8}$/;
+		if(!reg.test($("#cellNumber").val())){
+			$(".yellow-tip").text("请填写联系人手机号码");
+			warning5();
+			$("#yellow-tip-type").attr("value", "cellNumber")
+			return false;
+		}
+		
+		if($("#validateCode").val().length==0){
+			$(".yellow-tip").text("请输入验证码");
+			warning5();
+			$("#yellow-tip-type").attr("value", "validateCode")
+			return false;
+		}
+		
+		var path = "${contextPath}";
+		$.ajax({
+		    type: "POST",
+		    url: path+"/register/reg",
+		    data: "login="+$("#login").val()+"&password="+$("#password").val()+"&realName="+$("#realName").val()+"&corpName="+$("#corpName").val()+"&url="+$("#url").val()+"&cellNumber="+$("#cellNumber").val()+"&validateCode="+$("#validateCode").val()+"&theSelect="+$("#theSelect").is(':checked'),
+		    dataType : 'json',
+			success : function(data, status) {
+				if ("success" == data.status) {
+					warningRemove5();
+					alert("注册成功");
+					window.location.href=path+"/login";
+				} else {
+					if(data.msg=="0"){
+						$(".yellow-tip").text("注册信息不完整");
+						warning5();
+						$("#yellow-tip-type").attr("value", "0")
+					}else if(data.msg=="1"){
+						$(".yellow-tip").text("该账号已注册，请用其他用户名注册");
+						warning5();
+						$("#yellow-tip-type").attr("value", "login")
+					}else if(data.msg=="2"){
+						$(".yellow-tip").text("该手机号已绑定，请用其他用手机号");
+						warning5();
+						$("#yellow-tip-type").attr("value", "cellNumber")
+					}else if(data.msg=="3"){
+						$(".yellow-tip").text("验证码错误");
+						warning5();
+						$("#yellow-tip-type").attr("value", "validateCode")
+					}else if(data.msg=="4"){
+						$(".yellow-tip").text("请阅读用户使用协议");
+						warning5();
+						$("#yellow-tip-type").attr("value", "protocol")
+					}else if(data.msg=="5"){
+						$(".yellow-tip").text("请获取验证码");
+						warning5();
+						$("#yellow-tip-type").attr("value", "validateCode")
+					}else if(data.msg=="6"){
+						$(".yellow-tip").text("验证码已过期");
+						warning5();
+						$("#yellow-tip-type").attr("value", "validateCode")
+					}else if(data.msg=="7"){
+						$(".yellow-tip").text("请填写由8~20位由字母/数字/符号(除空格)组成的密码");
+						warning5();
+						$("#yellow-tip-type").attr("value", "password")
+					}
+				}
+			},
+			error : function(data, status, e) {
+				alert("系统繁忙");
+			}
+		});
+	}
+	function closeWin(){
+		$("#winPane").hide();
+		$("#win").hide();
+	}
+	
+	function showWin(){
+		$("#winPane").show();
+		$("#win").show();
+	}
+
+	function warning1(){
+		//$(".test-code").find(".test-code-abc").find(".test-code-ab")
+		//.addClass("warnning");
+		$(".tip-show-a").show();
+	}
+	
+	function warningRemove1(){
+		$(".test-code").find(".test-code-abc").find(".test-code-ab")
+		.removeClass("warnning");
+		$(".tip-show-a").hide();
+	}
+	
+	function warning2(){
+		$(".password1").addClass("warnning");
+		$(".tip-show-a").css({"right":0,top:"-366px"}).find("span").text("密码不能为空");
+		$(".tip-show-a").show();
+		$(".test-code").hide();
+		$(".password1").css({"margin-bottom":"25px"});
+	}
+	
+	function warningRemove2(){
+		$(".password1").removeClass("warnning");
+		$(".tip-show-a").css({"right":"174px"}).find("span").text("验证码错误");
+		$(".tip-show-a").hide();
+		$(".test-code").show();
+		$(".password1").css({"margin-bottom":"0px"});
+	}
+	
+	function warning3(){
+		$(".login")
+		.addClass("warnning");
+		$(".tip-show-b").show();
+		$(".test-code").hide();
+	}
+	
+	function warningRemove3(){
+		$(".login")
+		.removeClass("warnning");
+		$(".tip-show-b").hide();
+		$(".test-code").hide();
+	}
+	
+	function warning5(){
+		$(".yellow-tip").show();
+		$(".test-code").hide();
+	}
+	
+	function warningRemove5(){
+		$(".yellow-tip").hide();
+		$(".test-code").hide();
+	}
+	$(function(){
+		//验证码错误提示
+		warning1();
+		//验证码错误提示取消
+		warningRemove1();
+		
+		//密码不能为空提示
+		warning2();
+		
+		//密码不能为空提示取消
+		warningRemove2();
+		
+		//请输入正确格式的电子邮件
+		warning3();
+		
+		//请输入正确格式的电子邮件取消
+		warningRemove3();
+		
+		//账号或密码输入错误提示
+		//warning5();
+		
+		//账号或密码输入错误提示取消
+		//warningRemove5();
+	});
+	
+	
+	
+	$(function(){
+		
+		document.getElementById("login").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("login").onblur=function(){
+			if ("login" == $("#yellow-tip-type").val() && $("#login").val().length>0)
+				$(".yellow-tip").hide();
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		document.getElementById("password").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("password").onblur=function(){
+			if ("password" == $("#yellow-tip-type").val() && $("#password").val().length>0)
+				$(".yellow-tip").hide();
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		
+		document.getElementById("realName").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("realName").onblur=function(){
+			if ("realName" == $("#yellow-tip-type").val() && $("#realName").val().length>0)
+				$(".yellow-tip").hide();
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		
+		document.getElementById("corpName").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("corpName").onblur=function(){
+			if ("corpName" == $("#yellow-tip-type").val() && $("#corpName").val().length>0)
+				$(".yellow-tip").hide();
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		
+		document.getElementById("url").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("url").onblur=function(){
+			if ("url" == $("#yellow-tip-type").val() && $("#url").val().length>0)
+				$(".yellow-tip").hide();
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		
+		document.getElementById("cellNumber").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("cellNumber").onblur=function(){
+			if ("cellNumber" == $("#yellow-tip-type").val() && $("#cellNumber").val().length>0)
+				$(".yellow-tip").hide();
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		
+		document.getElementById("validateCode").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("validateCode").onblur=function(){
+			if ("validateCode" == $("#yellow-tip-type").val() && $("#validateCode").val().length>0)
+				$(".yellow-tip").hide();
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+	});
+	
+</script>
+<body>
+<style>
+#login_id{  margin-right: 18px;}
+.tip span.active{ color: #4799ef;  padding-bottom: 2px;  display: inline-block;   line-height: 40px; cursor:pointer;border-bottom:3px solid  #4799ef;}
+#reg_id{cursor:pointer;}
+</style>
+	<div id="top">
+		<div class="top-wrap">
+			<div class="top-wrap-pure">
+				<div class="tip-show-b"><img src="${contextPath}/resources/img/login-tip/red-warning.png"><span >请输入正确格式的电子邮件</span></div>
+				<p class="tip" style="margin:34px 0 44px 0;"><span id="login_id"><a href="${contextPath}/login">登录</a></span><span  class="active" id="reg_id">注册</span></p>
+				<form action="${contextPath}/register/reg" method="post" id="register">
+					<div class="login">
+						<img src="${contextPath}/resources/img/login/mail.png">
+						<input type="text" id="login" placeholder="您的登录账号" >
+						
+						<div class="yellow-tip">账号或密码输入错误</div>
+						<input type="hidden" id="yellow-tip-type">
+					</div>
+					<div class="password password1" style="margin:18px 0 0 0;">
+						<img src="${contextPath}/resources/img/login/lock.png">
+						<input type="password" id="password" placeholder="由8~20位字母/数字/符号(除空格)组成" onblur="removeTip(password)">
+					</div>
+					<div class="password realName" style="margin:18px 0 0 0;">
+						<img src="${contextPath}/resources/img/reg/gn1.png">
+						<input type="text" id="realName" placeholder="您（联系人）的真实姓名">
+					</div>
+					<div class="password corpName" style="margin:18px 0 0 0;">
+						<img src="${contextPath}/resources/img/reg/gn2.png">
+						<input type="text" id="corpName" placeholder="您的公司名称">
+					</div>
+					<div class="password url" style="margin:18px 0 0 0;">
+						<img src="${contextPath}/resources/img/reg/gn3.png">
+						<input type="text" id="url" placeholder="您的公司网站地址">
+					</div>
+					<div class="password cellNumber" style="margin:18px 0 0 0;">
+						<img src="${contextPath}/resources/img/forget-password/tel.png">
+						<input type="text" id="cellNumber" placeholder="您（联系人）的手机号码" onchange="warningRemove5();">
+					</div>
+					<div class="password validateCode" style="margin:18px 0 0 0;">
+						<img src="${contextPath}/resources/img/forget-password/code.png">
+						<input type="text" id="validateCode" placeholder="短信验证码">
+						<div id="butdiv">
+						<div id="code" onclick="sendSMS();">获取验证码</div>
+						</div>
+					</div>
+					
+					
+					<div class="test-code" style="margin:18px 0 26px 0;display:none;">
+						<div class="test-code-abc">
+							<div class="test-code-ab ">
+								<input type="text" id="test_code_b" class="test-code-a" placeholder="输入右侧图形验证码">
+							</div>
+							
+						</div>
+						
+						<div class="test-code-b"></div>
+						<a href="javascript:void(0);"><div class="test-code-c"></div></a>
+					</div>
+					<div class="select" style="  padding-top: 22px;">
+						<input class="select-ab"  type="checkbox" id="theSelect" checked="checked">
+						<span class="select-a" style="color:#454545">我已阅读并同意<a href="javascript:void(0);"><span id="protocol" onclick="showWin();">《用户使用协议》</span></a></span>
+						<!-- <a href="javascript:void(0);"><span class="select-b" style="color:#4799ef">忘记密码？</span></a> -->
+					</div>
+					<a href="javascript:void(0);" onclick="sub()"><div  style="margin:22px 0 55px 0;" class="reg-btn"><div class="tip-show-a"><img src="${contextPath}/resources/img/login-tip/red-warning.png"><span >验证码错误</span></div></div></a>
+				</form>
+			</div>
+		</div>
+		
+		<div class="top-gap" >
+			<div class="top-gap-line" style="display:none;"></div>
+		</div>
+		<p  style="margin:26px 0 140px 0;visibility:hidden;"><span>没有账号，<a href="javascript:void(0);"><span class="reg">马上注册！</span></a></span></p>
+	</div>
+	
+	<div id="winPane"></div>
+	<div id="win">
+		<div class="win-m">
+			<div class="m-ier">
+				<div class="m-e-ier">
+					<p>里程兑换平台会员服务条款</p>
+					<div class="m-e-l-ier">
+					里程兑换平台是浙江汇购科技股份有限公司（以下简称“浙江汇购”）旗下网站，这里所提供的各项服务的所有权和运作权均归浙江汇购所有，感谢您的浏览、访问和使用。 <br/>
+<h3 style="text-align: center;">重要须知</h3>
+里程兑换平台在此特别提醒您，在您使用服务前请确实仔细阅读本协议（未成年人审阅时应得到法定监护人的陪同），如果您对本协议的任何条款及/或将来随时修改、补充的条款有异议，您可以选择不使用里程兑换平台提供的服务；当您点选同意键或定制、使用、接受里程兑换平台服务时即视为您已仔细阅读本条款，同意接受本服务条款的所有规范包括接受里程兑换平台对服务条款随时所做的任何修改，并愿受其拘束。用户直接或通过各类方式（如站外API、RSS引用等）间接使用里程兑换平台服务和数据的行为，都将被视作已无条件接受本声明所涉全部内容。  <br/>
+这些服务条款一旦发生变更，里程兑换平台将在网页上公布修改内容。修改后的服务条款一旦在网页上公布即有效代替原来的服务条款，您可随时登陆兑换平台查阅最新版服务条款。用户如果不同意修改后的本协议的任何条款，可以主动取消已经获得各项服务，并立即停止访问及使用我网站。如果用户继续选择访问及使用里程兑换平台网站，则视为用户已经完全接受本协议及其修改。<br/>
+<h3>一、服务内容</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;1、用户在相关业务开展过程中，根据其会员(包括员工，下同)忠诚度奖励计划方案，奖励给会员一定额度的里程。现委托里程兑换平台为其提供奖励积分的发放运营工作，统一使用乙方“汇积分”，并由乙方提供“汇积分”兑换里程服务。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;2、用户提供的注册资料，用户同意：（1）提供合法、真实、准确、详尽的资料；（2）如有变动，及时更新会员资料。如果用户提供的注册资料不合法、不真实、不准确、不详尽的，用户需承担因此引起的相应责任及后果，并且浙江汇购保留终止用户使用里程兑换平台各项服务的权利。<br/>
+<h3>二、服务变更、中断或终止</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;1、鉴于网络服务的特殊性，用户同意里程兑换平台有权随时变更、中断或终止部分或全部的网络服务。如变更、中断或终止网络服务，里程兑换平台会尽可能提前进行公告通知用户，无需对任何用户或任何第三方承担任何责任。 <br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;2、用户应理解，里程兑换平台需要定期或不定期地对提供网络服务的平台（如互联网网站、移动网络等）或相关的设备进行检修或者维护，如因此类情况而造成网络服务在合理时间内的中断，里程兑换平台无需为此承担任何责任，但应尽可能事先进行通告。  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;3、用户违反本协议中规定的使用规则，里程兑换平台有权随时中断或终止向用户提供本协议项下的网络服务而无需对用户或任何第三方承担任何责任。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;4、用户对本协议的修改有异议，或对里程兑换平台的服务不满，可以行使如下权利：     （1）停止使用里程兑换平台的网络服务；（2）通过客服等渠道告知里程兑换平台停止对其服务。结束服务后，用户使用里程兑换平台服务的权利立即终止。在此情况下，里程兑换平台没有义务传送任何未处理的信息或未完成的服务给用户或任何无直接关系的第三方。<br/>
+<h3>三、注册信息和隐私保护</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;1、用户一旦注册成功，便成为里程兑换平台的合法用户，将得到一个独立帐号。里程兑换平台帐号（即里程兑换平台用户ID）的所有权归浙江汇购，用户完成注册申请手续后，获得里程兑换平台帐号的使用权。用户应提供及时、详尽及准确的个人资料，并不断更新注册资料，符合及时、详尽准确的要求。用户应采取合理措施维护其密码和帐号的安全。用户对利用该密码和帐号所进行的一切活动负全部责任；由该账号产生的活动所导致的任何损失或损害由用户承担，里程兑换平台不承担任何责任。 <br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;2、用户不应将其帐号、密码转让或出借予他人使用。如用户发现其帐号遭他人非法使用，应立即通知里程兑换平台。因用户的保管疏忽导致帐号、密码遭他人非法使用或黑客行为，里程兑换平台不承担任何责任。<br/>
+<h3>四、用户行为</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;用户应遵守以下法律及法规《中华人民共和国保守国家秘密法》、《中华人民共和国著作权法》、《中华人民共和国计算机信息系统安全保护条例》、《计算机软件保护条例》、《互联网电子公告服务管理规定》、《信息网络传播权保护条例》等有关计算机及互联网规定的法律、法规。在任何情况下，里程兑换平台合理地认为用户的行为可能违反上述法律、法规，可以在任何时候，不经事先通知终止向该用户提供服务。<br/>
+<h3>五、知识产权及其他权利说明</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;1、里程兑换平台的一切版权、商标权、专利权、商业秘密等知识产权，均受中华人民共和国著作权法、商标法、专利法、反不正当竞争法和相应的国际条约以及其他知识产权法律法规的保护，除涉及第三方授权的软件或技术外，里程兑换平台享有上述知识产权。<br/>     2、未经里程兑换平台书面同意，用户不得为任何营利性或非营利性的目的利用、转让平台使用权。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;3、未经里程兑换平台书面同意，用户不得自行或委托他人对平台进行反项工程、反向编译或反汇编。<br/>
+<h3>六、免责说明</h3>
+&nbsp;&nbsp;&nbsp;&nbsp;1、里程兑换平台不担保网络服务一定能满足用户的要求，也不担保网络服务不会中断，对网络服务的及时性、安全性、准确性也都不作担保。 <br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;2、对于因电信系统或互联网网络故障、计算机故障或病毒、信息损坏或丢失、计算机系统问题或其它任何不可抗力原因而产生损失，里程兑换平台不承担任何责任，但将尽力减少因此而给用户造成的损失和影响。<br/>
+					
+					</div>
+					
+					<span id="close" onclick="closeWin();"></span>
+				</div>
+			</div>
+		</div>
+		<div id="agree" onclick="agree();">同意并继续</div>
+	</div>
+</body>
+</html>

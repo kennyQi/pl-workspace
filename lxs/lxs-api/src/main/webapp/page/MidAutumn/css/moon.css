@@ -1,0 +1,35 @@
+a,img{display: block;}
+
+.hd{
+	width:100%;
+	position: relative;
+}
+.hd_img{
+	position: absolute;
+	bottom:0px;
+	left:0px;
+}
+.hd img,.title img,.cont img,.more img{
+	width:100%;
+	height:auto;
+}
+.hd .s_img_1{
+	width:50%;
+	height:auto;
+	position: absolute;
+	right:0;
+	top:63%;
+}
+.hd .s_img_2{
+	width:50%;
+	height:auto;
+	position: absolute;
+	right:0;
+	bottom:5%;
+}
+.cont{
+	width:100%;
+	min-height:100px;
+	overflow: hidden;
+	margin-top:-12px;
+}

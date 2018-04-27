@@ -1,0 +1,187 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "景点详细信息">
+
+<link href="${(contextPath)!}/resources/css/jd_detail.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" "3">
+	<div class="g_bd disb ov pl">
+     	<div class="m_load  color6 simsun"><label class="color8">您的位置：</label><a href="${(contextPath)!}/mp/list" class="color6">景点列表</a> > <span  class="color3">景点详细</span></div>
+        <!--头部预览-->
+        <div class="m_prv disb wd12 ma">
+            <div class="m_pic disb wd12">
+            	<!--左侧图片部分-->
+            	<div class="le fl pl" id="hotel_img">
+                	<span class="picL fl curp ov pl">
+                    	<img src="${(pssd.scenicSpotBaseInfo.image)!}" class="pic" rel="0">
+                    	<span class="textTm pa">
+                        	<span class="bg pa"></span>
+                        	<span class="ct pl h3 fr">共
+                        	 <#if pssd??&&(pssd.images)??>
+                        		${(pssd.images)?size}
+                        	 </#if> 
+                        	张图片</span>
+                        </span>
+                   
+                  
+                	 
+                   	</span>
+                	<#if pssd??&&(pssd.images)??>
+                  	<#list pssd.images as image>
+                  	<#if (image_index > 3)> <#break /></#if>
+                	<span class="picR fl">
+	                    	<img src="${(image.url)!}" class="pic" rel="2" imgurl="${(image.url)!}">
+	                    	<span class="textTm pa">
+	                        	<span class="bg pa"></span>
+	                        	<span class="ct pa">${(image.albumId)!}</span>
+	                        </span>
+                	 </span>
+	                 </#list>
+	                </#if>      
+                   	
+                   	
+                	
+                </div>
+                <!--左侧图片部分-->
+                <div class="detail ri fr pl">
+                    <h3 class="tt bold disb"><span>${(pssd.scenicSpotBaseInfo.name)!}</span>
+                                    <span class="tt_icon">
+                                        <label class="icon">${(pssd.scenicSpotBaseInfo.grade)!}</label>
+                                        <label class="icon nam">级景区</label>
+                                    </span>
+                    </h3>
+                    <span class="addres Bg disb">${(pssd.scenicSpotBaseInfo.alias)!}</span>
+                    <div class="wav disb  pl">
+                       <span class="price fl"> 门票价格：<label>￥${(pssd.bookInfoDTO.amountAdvice)!}</label> /人起</span>
+                        <i class="ic pa Bg"></i>
+                    </div>
+                    <span class="det disb">${(pssd.scenicSpotBaseInfo.intro)!}</span>
+                    <!--分享-->
+                    <div class="share pa">
+                        <div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+                    </div>
+                    <!--分享控件结束-->
+                </div>
+            </div>
+        </div>
+        <!--头部预览-->
+        <!--酒店详情-->
+        <div class="g_de wd ov pl" id="needHistory">
+
+            <div class="m_detail wd12 disb ov ma" id="anchor_house" >
+                 <div class="m_subNav wd pa"  id="m_subNav">
+                 	<ul class="nav yahei fl ov">
+                        <li><a rel="anchor_house" href="javascript:;" class="on">门票预订                </a></li>
+                        <li><a rel="anchor_server" href="javascript:;">购票须知</a></li>
+                        <li><a rel="anchor_jianjie" href="javascript:;">景点简介</a></li>
+                        <li>
+                        	<span class="bg pa" href="javascript:;" id="subNav_bg">
+                            	<i class="icon pa Bg"></i>
+                        	</span>
+                       	</li>
+                    </ul>
+                     <span class="tips pa">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+                 </div>
+                 <div class="m_chooseTime ov">
+                 	<div class="tips">景点现付：无需提前在线付款，订单提交成功后，游玩时到景点售票窗口付款取票，确保您的资金安全，出游安排更自由，轻松！<br/>
+                        在线支付：在线支付成功后，无需取票，游玩时刷手机二维码或二代身份证即可进入景点游玩，省去您排队取票的烦恼，游玩更尽兴。
+                        </div>
+                 </div>
+                 <!--选择门票-->
+                 <div class="m_house">
+                 		<div class="th ov">
+                        	<span class="fl hs mtb">景点门票</span>
+                        	<span class="fl bd mtb">票型</span>
+                        	<span class="fl bf mtb">市场价</span>
+                        	<span class="fl wf mtb">网站价</span>
+                        	<span class="fl pr mtb">支付方式</span>
+                        	<span class="fl bt mtb">&nbsp;</span>
+                        </div>
+                        <#if plist??&&(plist?size>0)>
+                        <#list (plist)!null as policy>
+                        <!--门票框-->
+                        <div class="tr ov">
+                             <div class="hs_word fl">
+                                <span class="fl hs mtr">${(policy.name)!}</span>
+                                <span class="fl bd mtr">${(policy.ticketName)!}</span>
+                                <span class="fl bf mtr">¥${(policy.retailPrice)!}</span>
+                                <span class="fl wf mtr">￥${(policy.tcPrice)!}</span>
+                                <span class="fl pr mtr">景区现付 </span>
+                                <span class="fl bt mtr"><a href="${(contextPath)!}/mp/scart?id=${(policy.policyId)!}&price=${(policy.tcPrice)!}" class="btn fl">预定</a></span>
+                            </div>
+
+                        </div>
+					  </#list>
+                     </#if>
+                 </div>
+                 <!--选择房型-->
+            </div>
+            
+            <div class="m_intro wd12 ov ma" id="anchor_server" >
+            	<div class="title wd ov disb">
+                	<h3 class="tt h2 Bg linkC">购票须知</h3>
+                </div>
+                <div class="server wd ov disb">
+                	<table border="0" cellspacing="0" cellpadding="0" class="server_tb">
+                	<#list (plist[0].noticeTypes[0].noticeItems)!null as noticeItems>
+                      <tr class="fir">
+                        <td class="t">${(noticeItems_index+1)!}.${(noticeItems.name)!}</td>
+                        <td class="con">${(noticeItems.content)!}</td>
+                      </tr>
+                      </#list>
+						
+                    </table>
+                </div>
+
+            </div>
+            <div class="m_intro wd12 ov ma" id="anchor_jianjie"  >
+            	<div class="title wd ov disb"  >
+                	<h3 class="tt h1 Bg linkC">景点简介</h3>
+                </div>
+                <div class="intro disb ov color3 h3">
+                	${(pssd.detail)!}
+                </div>
+            </div>
+
+        </div>	
+        <!--酒店详情-->
+    
+     
+	</div>
+       <input type="hidden" name="images_json" id="images_json" value='${(images_json)!}'>
+ <!--弹出相册-->
+
+ <!--弹出相册-->
+<script src="${(contextPath)!}/resources/js/jd_detail.js" language="javascript"></script>
+<script src="${(contextPath)!}/resources/js/albums.js" language="javascript"></script>
+<script>
+    //建立cookie 浏览历史
+    $(function(){
+        (function(){
+            var $detail=$(".m_detail");
+            var histTop=$detail.offset().top;
+            var hideTop=$(".gd_foot ").offset().top;
+            var bodyWidth=$detail.width();
+            var time=1;//天数
+            ply.history.start({
+                url:"index.html?q=11072",
+                title:"标题2",
+                price:"价格",
+                img:"images/img1.jpg",
+                cookieName:"cookie"
+                ,hideHeight:hideTop
+                ,top:histTop//固定高度
+                ,bodyWidth:bodyWidth//固定左右位置
+                ,expires:1//过期时间
+            });
+        })();
+    });
+
+
+
+</script>
+<!--内容-->
+
+
+</@frame.main>
+<@frame.end "default"></@frame.end>	

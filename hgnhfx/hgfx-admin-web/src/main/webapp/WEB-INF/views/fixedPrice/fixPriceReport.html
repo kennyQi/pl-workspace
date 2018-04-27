@@ -1,0 +1,98 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/fixedPriceReport/view" method="post">
+<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+	<table style="width: 100%;" border="0">
+		<tr height="30px;">
+			<td style="width: 5%;text-align: right;">商品名称</td>
+			<td style="width: 10%;">&nbsp;&nbsp;&nbsp;&nbsp;<select name="prodId" style="width: 100px;">
+			<#list products as product>
+			<option value="${product.id!''}">${product.prodName!''}</option>
+			</#list></select>
+			</td>
+			<td style="width: 5%;text-align: right;">商户名称</td>
+			<td style="width: 10%;">&nbsp;&nbsp;&nbsp;&nbsp;<select name="distributorID" style="width: 100px;">
+			<option value="">全部</option>
+			<#list distributors as distributor>
+			<#if (distributorID)??&&distributorID==distributor.id>
+			<option selected="selected" value="${distributor.id!''}">${distributor.name!''}</option>
+			<#else>
+			<option value="${distributor.id!''}">${distributor.name!''}</option>
+			</#if>
+			</#list></select>
+			</td>
+			<td style="width: 15%;"></td>
+			<td style="width: 15%;"></td>
+		</tr>
+		<tr height="30px;">
+			<td style="width: 5%;text-align: right;">查询时间</td>
+			<td colspan="4">&nbsp;&nbsp;&nbsp
+			<input id="startDate" type="text" name="startDate" value="${startDate! }"dateFmt="yyyy-MM" class="date textInput readonly" mindate="2000-01-15" maxdate="2216-12-15" readonly="true" placeholder="月份">
+			<!-- -
+			<input id=endDate type="text" name="endDate" value="${endDate! }" class="date textInput readonly" mindate="2000-01-15" maxdate="2216-12-15" readonly="true" placeholder="结束时间"></td> -->
+			<td><button onclick="return sub();" style="width: 75px;">查询</button></td>
+		</tr>
+	</table>
+</form>
+</div>
+<div class="pageContent">
+	<#include "/public/pagination/pagination.html">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><span style="padding: 0">查询结果</span></li>
+			<li><a class="add" href="#" onclick="return exportt();" ><span>导出</span>
+            </a>
+            </li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="15%">商户ID</th>
+				<th width="15%">商户公司名称</th>
+				<th width="10%">渠道商</th>
+				<th width="10%">商品名称</th>
+				<th width="10%">月实际消费里程数</th>
+				<th width="10%">月实际消费对应折扣</th>
+				<th width="10%">目标里程数</th>
+				<th width="10%">目标折扣</th>
+				<th width="10%">创建时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list fixedPriceReports as fixedPriceReport>
+			<tr>
+				<td>${fixedPriceReport.distributorId!''}</td>
+				<td>${fixedPriceReport.distributorName!''}</td>
+				<td>${fixedPriceReport.channelName!''}</td>
+				<td>${fixedPriceReport.prodName!''}</td>
+				<td>${fixedPriceReport.consumeNum!''}</td>
+				<td>${fixedPriceReport.factPercent!''}</td>
+				<td>${fixedPriceReport.targetInterval!''}</td>
+				<td>${fixedPriceReport.currentPercent!''}</td>
+				<td>${(fixedPriceReport.createDate?string("yyyy-MM-dd"))!''}</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+</div>
+<script>
+function sub(){
+	/* if(($("#endDate").val()!=""&&$("#startDate").val()=="")||($("#endDate").val()==""&&$("#startDate").val()!="")){
+		alert("请选择正确时间段");
+		return false;
+	}else if($("#endDate").val()!=""&&$("#startDate").val()!=""){
+		if(($("#endDate").val().split('-')[0]+$("#endDate").val().split('-')[1]+$("#endDate").val().split('-')[2])*1<($("#startDate").val().split('-')[0]+$("#startDate").val().split('-')[1]+$("#startDate").val().split('-')[2])*1){
+			alert("请选择正确时间段");
+			return false;
+		}
+	} */
+	return true;
+}
+function exportt(){
+	var parmStr = $("#pagerForm",navTab.getCurrentPanel()).serialize();
+	var url = "${contextPath}/fixedPriceReport/exportt?"+parmStr;
+	window.location.href=url;
+}
+</script>

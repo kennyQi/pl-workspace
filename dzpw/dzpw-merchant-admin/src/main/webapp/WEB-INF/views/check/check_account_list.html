@@ -1,0 +1,136 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/checkAccount/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						<label>查询时间：</label>
+						<input type="text" id="orderDateBegin" name="orderDateBegin" value="${(reconciliationOrderQo.orderDateBegin?string('yyyy-MM-dd'))!''}"
+							class="date" readonly="true"/>-
+						<input type="text" id="orderDateEnd" name="orderDateEnd" value="${(reconciliationOrderQo.orderDateEnd?string('yyyy-MM-dd'))!''}"
+							class="date" readonly="true" />
+					</td>
+				</tr>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit"  onclick="return checkTimeStr()">查询</button>
+							</div>
+						</div>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="initText()">重置</button>
+							</div>
+						</div>
+						<div class="buttonActive">
+							<div class="buttonContent">	<a class="icon" href="${contextPath}/checkAccount/excel_download" target="dwzExport" title="实要导出这些记录吗?"><span>导出EXCEL</span></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</table>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<#include "/public/pagination/pagination.html">
+
+	<table class="table" width="100%" layoutH="160">
+		<thead>
+			<tr>
+				<th width="50">门票编号</th>
+				<th width="50">票务名称</th>
+				<th width="50">下单日期</th>
+				<th width="40">应收金额</th>
+				<th width="40">实收金额</th>
+				<th width="50">景点名称</th>
+				<th width="40">实际结算金额</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as reconciliationOrderVo>
+			<tr>
+				<td>
+					${reconciliationOrderVo.ticketNo!?html}
+				</td>
+				<td>
+					${reconciliationOrderVo.policyName!?html}
+				</td>
+				<td>
+					${reconciliationOrderVo.orderDate?string("yyyy-MM-dd HH:mm:ss")}
+				</td>
+				<td>
+					${reconciliationOrderVo.price!?html}
+				</td>
+				<td>
+					${reconciliationOrderVo.paidAmount!?html}
+				</td>
+				<td>
+					${reconciliationOrderVo.scenicSpotName!?html}
+				</td>
+				<td>
+					${reconciliationOrderVo.settlementAmount!?html}
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+ 
+<!--  	<table class="table" width="100%"> -->
+<!--  		<tr style="background-color:#F2F2F2;text-align: center;" height="30"> -->
+<!--  			<td width="30">票号</td> -->
+<!--  			<td width="30">入园日期</td> -->
+<!--  			<td width="30">应付金额</td> -->
+<!--  			<td width="30">实付金额</td> -->
+<!--  			<td width="30">实际结算金额</td> -->
+<!--  		</tr> -->
+ 		<!-- 以下遍历输出 -->
+<!--  		<tr height="30" style="text-align: center;"> -->
+<!--  			<td>201405110026778023</td> -->
+<!--  			<td>20140511 12：30：00</td> -->
+<!--  			<td>3000.00</td> -->
+<!--  			<td>3000.00</td> -->
+<!--  			<td>3000.00</td> -->
+<!--  		</tr> -->
+<!--  		<tr height="30" style="text-align: center;"> -->
+<!--  			<td>201405110026778023</td> -->
+<!--  			<td>20140511 12：30：00</td> -->
+<!--  			<td>3000.00</td> -->
+<!--  			<td>3000.00</td> -->
+<!--  			<td>3000.00</td> -->
+<!--  		</tr> -->
+<!--  	</table> -->
+</div>
+
+<script type="text/javascript">
+   function checkTimeStr(){
+	   
+	   if($("#orderDateBegin", navTab.getCurrentPanel()).val()=="" && $("#orderDateEnd", navTab.getCurrentPanel()).val()==""){
+		   alert("请输入查询时间范围!");
+           return false
+	   }
+	   
+       if($("#orderDateBegin", navTab.getCurrentPanel()).val()>$("#orderDateEnd", navTab.getCurrentPanel()).val() && $("#orderDateEnd", navTab.getCurrentPanel()).val()!=""){
+           alert("查询开始时间不能大于查询结束时间!");
+           return false
+       }else{
+           return true;
+       }
+   }
+   
+   function initText(){
+       $("#orderDateBegin", navTab.getCurrentPanel()).attr("value","");
+       $("#orderDateEnd", navTab.getCurrentPanel()).attr("value","");
+       $("#scenicSpotId", navTab.getCurrentPanel()).attr("value","");
+   }
+</script>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>订单详情</title>
+<!--公共样式部分-->
+    <script src="js/zepto.min.js" language="javascript"></script>
+    <script src="js/frozen.js" language="javascript"></script>
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/global.css" rel="stylesheet" />
+
+<link href="css/order_pay.css" rel="stylesheet" />
+</head>
+<body>
+<div class="content">
+    <h1 class="trip_title">房山十渡东湖港、 碧波园BBQ自助烧烤Q自助烧烤一日一日</h1>
+    <div class="trip_date">
+        <span class="chooseDate"><i class="iconfont">&#xf0042;</i>
+            出游日期：2015-12-15</span>
+        <span>
+            <i class="iconfont">&#xe614;</i>
+            <label>成人数： 2人</label>
+            <label>儿童数：1人</label>
+        </span>
+        <span>
+            <i class="iconfont">&#xe634;</i>
+            <label>成人价：￥300</label>
+            <label>儿童价：￥201</label>
+        </span>
+    </div>
+    <div class="trip_date">
+        <span class="chooseDate"><i class="iconfont4">&#xe724;</i>
+            订单编号：ply2015071310152000001</span>
+        <span>
+            <i class="iconfont4">&#xe6fb;</i>
+            下单时间：2015/12/12   10:40:01
+        </span>
+    </div>
+    <a href="order.html">
+    <div class="trip_member">
+        <div class="box title">
+            <h2>游玩人信息</h2>
+        </div>
+        <ul class="pList pl">
+            <li class="box" left="0" id="box">
+                <div class="left">
+                    <span class="type">待支付订金</span>
+                    <span class="t">成人1</span>
+                    <span>姓   名： 胡佳明</span>
+                    <span>手机号：13956785622</span>
+                    <span>身份证：330183199008032245</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+        </a>
+    <div class="order">
+        <form id="order">
+        <div class="box title">
+            <h2>联系人信息：</h2>
+        </div>
+        <div class="input"><i class="iconfont">&#xe614;</i><span>姓&nbsp;&nbsp;&nbsp;&nbsp;名:</span><label>胡家庙</label></div>
+        <div class="input"><i class="iconfont">&#xe60b;</i><span>手机号:</span><label>15864541111</label></div>
+        <div class="input"><i class="iconfont">&#xe6c6;</i><span>邮&nbsp;&nbsp;&nbsp;&nbsp;箱:</span><label>sss@qqq.com</label></div>
+
+        <div class="law"><label class="choose on">
+            <i class="iconfont gou">&#xe68a;</i>
+            <i class="iconfont">&#xe643;</i>
+        </label><a href="#">已阅读并同意《票量旅游协议》</a></div>
+            </form>
+    </div>
+</div>
+
+<div class="order_modal" style="display: none;">
+    <div class="modal_cont">
+    <h2>订单明细<label id="modal_close"></label></h2>
+    <div class="de">
+        <span class="l">儿童价：</span><label class="r">￥80 x 3</label>
+    </div>
+    <div class="de">
+        <span class="l">优惠券减免：</span><label class="r">-￥80</label></div>
+    <div class="de">
+        <span class="l">预定金(10%)：</span><label class="r">￥80</label></div>
+    <div class="de">
+        <span class="l">尾款(90%)：</span><label class="r">￥80</label></div>
+        </div>
+</div>
+<div class="fixedBtn box">
+    <div class="leftBtn" id="order_detail">订单详情：1800元&nbsp;&nbsp;详情<i class="iconfont">&#xe642;</i></div>
+    <div class="next-btn">提交订单</div>
+</div>
+
+<script>
+
+    //详情
+    $("#order_detail").click(function(){
+        $(".order_modal").show();
+    });
+
+    $(".order_modal #modal_close").click(function(){
+        setTimeout(function(){
+            $(".order_modal").hide();
+        },368);
+    });
+</script>
+</body>
+</html>

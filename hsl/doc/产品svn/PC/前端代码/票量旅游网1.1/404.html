@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<link href="css/gb.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+.container{ width:100%; background:#fff; margin-bottom:0}
+.c404{ width:1000px; margin:0 auto; background:#fff;}
+.c404 p{ position:relative}
+.c404 p a{ position:absolute; float:left; width:170px; height:30px; bottom:100px; right:320px; text-indent:-9999px}
+#footer{ margin-top:inherit}
+</style>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#" class="sel">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+      <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+         <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <div class="container" id="container">
+   <div class="c404">
+   <p>
+   <img src="img/404.png" />
+   <a href="/">返回首页</a>
+   </p>
+   </div>  
+ 
+  </div>
+   <div id="footer" class="mt20">
+    <div class="fooerBD">
+      <div class="L about">
+        <dl>
+          <dt><a href="#">关于我们</a></dt>
+          <dd><a href="about/link.html">网站简介</a><a href="about/mfsm.html">法律规定</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">加盟合作</a></dt>
+          <dd><a href="about/link.html">友情链接</a><a href="about/sitemap.html">网站联盟</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">联系我们</a></dt>
+          <dd><a href="about/contact.html">联系我们</a><a href="about/rsjy.html">投诉建议</a><a href="about/jobs.html">诚聘英才</a></dd>
+        </dl>
+      </div>
+      <div class="L w260">
+        <div class="hot_phone">
+          <p><i class="tel"></i>24小时客服热线：4008-117-117</p>
+          <p><i class="tel"></i>境外游客紧急联络电话：4008-117-117</p>
+          <p><i class="QQ"></i>在线客服：QQ1</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="T_top"> <a href="#">Top</a> </div>
+</div>
+<script type="text/javascript" src="js/index.js"></script>
+<script src="lib/time/yui-min.js"></script> 
+<script src="lib/city/city.js"></script> 
+<script src="js/gb.js"></script> 
+<script type="text/javascript">
+YUI({
+     modules: {
+        'trip-calendar': {
+            fullpath: 'lib/time/trip-calendar.js',
+            type    : 'js',
+            requires: ['trip-calendar-css']
+        },
+        'trip-calendar-css': {
+            fullpath: 'lib/time/trip-calendar.css',
+            type    : 'css'
+        }
+    }
+}).use('trip-calendar', function(Y) {
+    
+    var oCal = new Y.TripCalendar({
+        minDate         : new Date,     //最小时间限制
+        triggerNode     : '#J_DepDate', //第一个触节点
+        finalTriggerNode: '#J_EndDate'  //最后一个触发节点
+    });
+     
+});
+</script> 
+<script type="text/javascript" src="js/jquery.flexslider-min.js"></script> 
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.flexslider').flexslider({
+		directionNav: false,
+		pauseOnAction: false
+	});
+});
+</script> 
+</body>
+</html>

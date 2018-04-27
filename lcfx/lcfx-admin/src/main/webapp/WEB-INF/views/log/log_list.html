@@ -1,0 +1,156 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+$(document).ready(function(){
+	checkDate("createDateBegin");
+	checkDate("createDateEnd");
+
+});
+function checkDate(inputId){
+	if($("#"+inputId).val() != ""){
+		$("#"+inputId).attr("name",inputId)
+	}else{
+		$("#"+inputId).attr("name","")
+	}
+}
+function exportExcel(){
+	checkDate("createDateBegin");
+	checkDate("createDateEnd");
+	var parmStr = $("#pagerForm",navTab.getCurrentPanel()).serialize();
+	var url = "${contextPath}/log/export?"+parmStr;
+	window.location.href=url;
+}
+function querySubmit(){
+	checkDate("createDateBegin");
+	checkDate("createDateEnd");
+}
+</script>
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/log/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'}" />
+		<div class="searchBar dwz_query_box">
+			<table class="searchContent">
+				<tr>
+
+					
+					<td class="label">开始时间：</td>
+					<td class="datespan">
+						<input name="" id="createDateBegin" type="text" class="date" readonly="readonly"  datefmt="yyyy-MM-dd HH:mm" value="<#if (pagination.condition.createDateBegin)??>${(pagination.condition.createDateBegin)?string("yyyy-MM-dd HH:mm")}</#if>"/>
+					</td>
+					
+					<td class="label">结束时间：</td>
+					<td>
+						<input name="" id="createDateEnd" type="text" class="date" readonly="readonly"  datefmt="yyyy-MM-dd HH:mm"  value="<#if (pagination.condition.createDateEnd)??>${(pagination.condition.createDateEnd)?string("yyyy-MM-dd HH:mm") }</#if>" />
+					</td>
+					
+				</tr>
+				<tr>
+					<td class="label">用户名/姓名：</td>
+					<td>
+						<input name="name" type="text"  value="${(pagination.condition.name)!}" onchange="this.value=fixBug1427248526943(this.value)" />
+					</td>
+					<td class="label">日志内容：</td>
+					<td>
+						<input name="content" type="text"  value="${(pagination.condition.content)!}" onchange="this.value=fixBug1427248526943(this.value)"/>
+					</td>
+					
+					<td class="label">用户类型：</td>
+					<td>
+						<select name="userType" class="combox">
+							<option value="">全部</option>
+							<#list roles as r>
+				
+								<option value="${r.displayName}"
+								<#if (pagination.condition.userType)??>
+									<#if (pagination.condition.userType == r.displayName)>
+										selected="selected"
+									</#if>		
+								</#if>
+								>${r.displayName}</option>
+							</#list>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" onclick="querySubmit()">查询</button>
+							</div>
+						</div>
+					</li>
+				<#if logexport>
+					<li>
+						<div class="buttonActive">
+							<a onclick="exportExcel()"><span>导出</span></a>
+						</div>
+					</li>
+					</#if>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+<!--  
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a href="${contextPath}/orderChangeGood/toAdd" class="add" target="navtab">
+					<span>qy</span>
+				</a>
+			</li>
+			<li>
+				<a href="${contextPath}/orderChangeGood/toAdd" class="add" target="navtab">
+					<span>jy</span>
+				</a>
+			</li>
+			<li>
+				<a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="${contextPath}/orderChangeGood/delete" class="delete">
+					<span>shanChu</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	-->
+	<div layoutH="130">
+		<table class="table" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th width=""><input type="checkbox" group="ids" class="checkboxCtrl" /></th>
+					<th width="">时间</th>
+					<th width="">用户名</th>
+					<th width="">姓名</th>
+					<th width="">用户类型</th>
+					<th width="">操作记录</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<#list pagination.list as t>
+				<tr>
+					<td><input type="checkbox" name="ids"  /></td>
+					<td>${(t.createDate)!?string("yyyy-MM-dd HH:mm:ss")}</td>
+					<td>${t.operatorAccount}</td>
+					<td>${t.operatorName}</td>
+					<td>${t.operatorType}</td>
+					<td>${t.content}</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+</div>
+
+<script type="text/javascript">
+
+function fixBug1427248526943(v){
+    v=v.replace(/\(/g,"");
+    v=v.replace(/\)/g,"");
+
+    return trim(v);
+}
+</script>

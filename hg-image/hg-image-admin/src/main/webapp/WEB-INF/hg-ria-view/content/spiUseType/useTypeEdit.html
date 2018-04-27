@@ -1,0 +1,243 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	var useTypeEdit = {};
+
+	jQuery(function($) {
+
+		useTypeEdit.init = function() {
+			useTypeEdit.specKeyHtmlTemp = $('#specKeyTemp').html();
+			$('#specKeyTemp').remove();
+		};
+
+		useTypeEdit.addSpecKey = function() {
+			var $newHtml = $(useTypeEdit.specKeyHtmlTemp);
+			$('#specKeyArea').append($newHtml);
+
+			initUI($newHtml);
+		};
+
+		useTypeEdit.checkedSpecKey = function(json) {
+			var $target = $(json.target);
+			$target.parent().parent().parent().addClass('checked');
+		};
+
+		useTypeEdit.uncheckedSpecKey = function(json) {
+			var $target = $(json.target);
+			$target.parent().parent().parent().removeClass('checked');
+		};
+
+		useTypeEdit.removeSpecKey = function() {
+			$('#specKeyArea').children().each(function() {
+				if ($(this).hasClass('checked'))
+					$(this).remove();
+			});
+		};
+
+		useTypeEdit.validateCallback = function(form, callback, confirmMsg) {
+			var $form = $(form);
+			if (!$form.valid()) {
+				return false;
+			}
+
+			var data = $form.serializeArray();
+			var _imageSpecKeysJson = new Array();
+			$('#specKeyArea').children()
+					.each(
+							function() {
+								var _imageSpecKey = {};
+								_imageSpecKey.key = $(
+										'input[name="_imageSpecKeys.key"]',
+										this).val();
+								_imageSpecKey.remark = $(
+										'input[name="_imageSpecKeys.remark"]',
+										this).val();
+								_imageSpecKey.width = $(
+										'input[name="_imageSpecKeys.width"]',
+										this).val();
+								_imageSpecKey.height = $(
+										'input[name="_imageSpecKeys.height"]',
+										this).val();
+
+								_imageSpecKeysJson.push(_imageSpecKey);
+							});
+
+			data.push({
+				name : 'imageSpecKeysJson',
+				value : $.toJSON(_imageSpecKeysJson)
+			});
+			var _submitFn = function() {
+				$.ajax({
+					type : form.method || 'POST',
+					url : $form.attr("action"),
+					data : data,
+					dataType : "json",
+					cache : false,
+					success : callback || HG.ajaxDone,
+					error : HG.ajaxError
+				});
+			}
+
+			if (confirmMsg) {
+				HG.confirm(HG.word("confirm"), confirmMsg, function() {
+					if (_submitFn)
+						_submitFn();
+				});
+			} else {
+				_submitFn();
+			}
+
+			return false;
+		}
+
+		useTypeEdit.init();
+
+	});
+</script>
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-gift"></i>用途添加
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse"> </a> <a
+								href="#portlet-config" data-toggle="modal" class="config"> </a>
+							<a href="javascript:;" class="reload"> </a> <a
+								href="javascript:;" class="remove"> </a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post"
+							action="${contextPath}/hg/spiUseType/spiUseType/update"
+							class="form-horizontal pageForm required-validate"
+							onsubmit="return useTypeEdit.validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="imageSpecKeyUseTypeId"
+								value="${imageSpecKeyUseType.id}" />
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">用途id：</label>
+									<div class="col-md-4">
+										${imageSpecKeyUseType.id}
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">用途名称：</label>
+									<div class="col-md-4">
+										<input type="text" name="title"
+											value="${imageSpecKeyUseType.title}"
+											class="form-control required isSpec" placeholder="用途名称"
+											minlength="2" maxlength="64" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">用途备注：</label>
+									<div class="col-md-4">
+										<input type="text" name="remark"
+											value="${imageSpecKeyUseType.remark}" class="form-control"
+											placeholder="备注" maxlength="100" />
+									</div>
+								</div>
+								<hr />
+								<div id="specKeyArea">
+									<div id="specKeyTemp" style="display: none;">
+										<div class="form-group">
+											<!-- <label class="col-md-1 control-label"></label> -->
+											<label class="col-md-1 control-label"><input
+												type="checkbox" class="checkboxes" target="checkbox"
+												data-checked="useTypeEdit.checkedSpecKey"
+												data-unchecked="useTypeEdit.uncheckedSpecKey" />名称：</label>
+											<div class="col-md-2">
+												<input type="text" name="_imageSpecKeys.key"
+													class="form-control required isSpec" placeholder="名称"
+													maxlength="50" />
+											</div>
+											<label class="col-md-1 control-label">备注：</label>
+											<div class="col-md-2">
+												<input type="text" name="_imageSpecKeys.remark"
+													class="form-control" placeholder="备注" maxlength="100" />
+											</div>
+											<label class="col-md-1 control-label">宽度：</label>
+											<div class="col-md-2">
+												<div class="input-group">
+													<input type="text" name="_imageSpecKeys.width"
+														class="form-control" placeholder="宽度" /> <span
+														class="input-group-addon">px</span>
+												</div>
+											</div>
+											<label class="col-md-1 control-label">高度：</label>
+											<div class="col-md-2">
+												<div class="input-group">
+													<input type="text" name="_imageSpecKeys.height"
+														class="form-control" placeholder="高度" /> <span
+														class="input-group-addon">px</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<#list imageSpecKeyUseType.imageSpecKeys as imageSpecKey>
+									<div class="form-group">
+										<!-- <label class="col-md-1 control-label"></label> -->
+										<label class="col-md-1 control-label"><input
+											type="checkbox" class="checkboxes" target="checkbox"
+											data-checked="useTypeEdit.checkedSpecKey"
+											data-unchecked="useTypeEdit.uncheckedSpecKey" />规格名称：</label>
+										<div class="col-md-2">
+											<input type="text" name="_imageSpecKeys.key"
+												class="form-control required isSpec" placeholder="名称"
+												maxlength="50" value="${imageSpecKey.key}" />
+										</div>
+										<label class="col-md-1 control-label">备注：</label>
+										<div class="col-md-2">
+											<input type="text" name="_imageSpecKeys.remark"
+												value="${imageSpecKey.remark}" class="form-control"
+												placeholder="备注" maxlength="100" />
+										</div>
+										<label class="col-md-1 control-label">宽度：</label>
+										<div class="col-md-2">
+											<div class="input-group">
+												<input type="text" name="_imageSpecKeys.width"
+													value="${imageSpecKey.width?c}" class="form-control"
+													placeholder="宽度" /> <span class="input-group-addon">px</span>
+											</div>
+										</div>
+										<label class="col-md-1 control-label">高度：</label>
+										<div class="col-md-2">
+											<div class="input-group">
+												<input type="text" name="_imageSpecKeys.height"
+													value="${imageSpecKey.height?c}" class="form-control"
+													placeholder="高度" /> <span class="input-group-addon">px</span>
+											</div>
+										</div>
+									</div>
+									</#list>
+								</div>
+								<div class="form-group">
+									<div class="btn-set col-md-2">
+										<a href="#" class="btn btn-default btn-sm"
+											onclick="useTypeEdit.removeSpecKey();"> <i
+											class="fa fa-minus"></i> 删除规格
+										</a>
+									</div>
+									<div class="btn-set col-md-9">
+										<a class="btn btn-default btn-sm"
+											onclick="useTypeEdit.addSpecKey();"><i class="fa fa-plus"></i>
+											添加规格</a>
+									</div>
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-12">
+									<a class="btn green" target="submit">提交</a> <a class="btn blue"
+										target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

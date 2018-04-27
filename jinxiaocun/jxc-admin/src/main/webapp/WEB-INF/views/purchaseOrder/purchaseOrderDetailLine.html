@@ -1,0 +1,35 @@
+<#list orderDetailList as t>
+<tr>
+	<td>${(t.productCode)!}</td>
+	<td>
+		${(t.skuCode)!}
+		<input type="text"  name="" value="${(t.skuCode)!}" skuCode />
+	</td>
+	<td>${(t.productName)!}</td>
+	<td>${(t.specificationsName)!}</td>
+	<td>
+		<input type="text" maxlength="20" name="" value="${t_index}" quantity />
+	</td>
+	<td>${(t.unit)!}</td>
+	<td>
+		<input type="text" maxlength="20" name="" value="" unitPrice />
+	</td>
+	<td>
+		<select name="" taxRate>
+			<option value="0.03">3%</option>
+			<option value="0.13">13%</option>
+			<option value="0.17">17%</option>
+			<option value="0">0%</option>
+		</select>
+	</td>
+	<td></td>
+	<td>
+		<input type="text" maxlength="20" name="" value="" tatalPrice />
+	</td>
+	<td></td>
+	<td>
+		<input type="text" maxlength="20" name="" value="" logisticCost />
+	</td>
+	<td></td>
+</tr>
+</#list>

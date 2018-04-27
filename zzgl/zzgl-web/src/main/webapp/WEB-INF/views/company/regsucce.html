@@ -1,0 +1,89 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量-注册成功">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/reg_success.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(function(){
+		$(":input").focus(function(){
+			  $(this).addClass("focus");
+			  if($(this).val() ==this.defaultValue){  
+                  $(this).val("");           
+			  } 
+		}).blur(function(){
+			 $(this).removeClass("focus");
+			 if ($(this).val() == '') {
+                $(this).val(this.defaultValue);
+             }
+		});
+    });
+    function sendMail(){
+    	if($("#token").val()==""){
+    		var o=document.getElementById("send_email");
+			o.setAttribute("disabled", true);
+    		$.ajax({
+ 		       type: "POST",
+ 		       url: "${contextPath}/user/sendMail?email=${usereamil!}",
+ 		       contentType: "application/x-www-form-urlencoded; charset=utf-8",
+ 		       dataType:"text",
+ 		       success: function(data) {
+	 		    	 $("#token").val(data);
+	 		    	 o.removeAttribute("disabled");
+	 		   },
+	 		   error: function(result) {
+	 			   	  alert("邮件发送失败!");
+		 			  o.removeAttribute("disabled");			
+			   }
+	 		});
+    	}else{
+    		alert("已经重新发送过激活邮件！");
+    	}
+    }
+ </script>
+</@frame.head>
+<@frame.main "default" 6>
+
+
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+
+<div class="reg_bg wd ov">
+    <div class="reg_box wd">
+        <div class="reg_success ma transparent_white">
+            <span class="suc fl"><i></i><span class="yahei fl">注册成功</span></span>
+            <span class="color6 yahei h2 tc succes_ts">激活链接已经发送到您的邮箱<i style="color:#00a0e9;">${usereamil!}</i>,请在24小时内进入邮箱点击用户注册激活链接完成注册！</span>
+            <span class="email fl"><a href="${contextPath}/redirctToMail?mail=${usereamil!}"  class="yahei h2 fl">进入邮箱</a></span>
+            <span class="prompt fl yahei color6 h3">
+                <p>收不到邮件？<br/>
+                   请到您的垃圾邮件或广告邮件目录找找看，<br/>
+                   或点击  <a href="javascript:;" onclick="sendMail()" id="send_email">重新发送激活邮件</a><br/>
+                   如果仍然无法收到邮件，请您更换一个邮箱进行注册！<br/>
+                </p>
+            </span>
+        </div>
+    </div>
+
+    <div class="g_f">
+	    <!--   <a href="${contextPath}/aboutPL"  target="_blank">票量简介</a> -->
+	      <a href="${contextPath}/aboutLaw" target="_blank">法律声明</a>
+	      <a href="${contextPath}/aboutContactUs"  target="_blank">网站地图</a>
+	      <a href="${contextPath}/footLink" target="_blank">友情链接</a>
+	      <a href="#">酒店加盟</a>
+	      <a href="${contextPath}/aboutAlliance" target="_blank">网站联盟</a>
+	      <a href="${contextPath}/aboutContactUs" target="_blank"帮助中心</a>
+	      <a href="${contextPath}/aboutComplaint"  target="_blank">投诉建议</a>
+	      <a href="${contextPath}/aboutJob"  target="_blank">诚聘英才</a>
+  	</div>
+</div>
+
+ </@frame.main>  
+

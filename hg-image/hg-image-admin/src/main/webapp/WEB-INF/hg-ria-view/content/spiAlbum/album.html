@@ -1,0 +1,93 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">相册列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/hg/spiAlbum/spiAlbum/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="albumIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a>
+					<a href="${contextPath}/hg/spiAlbum/spiAlbum/add" org-href="${contextPath}/hg/spiAlbum/spiAlbum/add" 
+						class="btn btn-default btn-sm" target="hgTab" id="addBtn"> <i
+						class="fa fa-plus"></i> 添加
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							相册标题：
+							<input class="form-control input-small input-inline" name="title" id="title">
+						</label>
+					</div>
+					<div class="col-md-6">
+						<label class="control-label col-md-5" 
+							style="height:32px; line-height:32px;">用途：</label>
+						<div class="col-md-7">
+							<select class="form-control select2me" target="dropDown" name="useType" id="useType" data-live-search="true">
+								<option value="">所有用途</option>
+								<#list useTypeList as useType>
+									<option value="${useType.id!0}">${useType.title!?html}</option>
+								</#list>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-2 text-right">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#albumGrid" data-ref-param="{title: $('#title').val(),
+								 useType: $('#useType').val()}"><i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" group="albumIds"
+								class="checkboxCtrl"/></th>
+							<th>相册标题</th>
+							<th>所有者id</th>
+							<th>相册路径</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="albumGrid" target="grid" data-url="${contextPath}/hg/spiAlbum/spiAlbum/albumlist">
+						<tr class="odd gradeX">
+							<td>
+								<input type="checkbox" name="albumIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td>
+							<td>
+								{title}
+							</td>
+							<td>
+								{ownerId}
+							</td>
+							<td>
+								{waypath}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/hg/spiAlbum/spiAlbum/del?albumIds={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/spiAlbum/spiAlbum/edit?id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/spiAlbum/spiImage/view?albumQo.id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 查看图片
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

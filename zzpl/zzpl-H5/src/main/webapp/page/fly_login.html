@@ -1,0 +1,82 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>登录页面</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/flyLogin.css" rel="stylesheet" />
+  <script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js" language="javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    // 密码可见/不可见切换
+    var $pwd_flag = $('.pwd_flag');
+    var flag = true;
+    $pwd_flag.on('click',function(){
+      if(flag){
+        $('.pwd_flag img').eq(0).hide();
+        $('.pwd_flag img').eq(1).show();
+        flag = false;
+        $('input[name="password"]').attr('type','text');  
+      }else{
+        $('.pwd_flag img').eq(1).hide();
+        $('.pwd_flag img').eq(0).show();
+        flag = true;
+        $('input[name="password"]').attr('type','password');  
+      }
+    });
+    if("${message}"){
+    	alertMsg("${message}")
+    }
+    function alertMsg(msg){
+        var html=' <div class="alertMsg"> <span>'+msg+'</span> </div>';
+        $(".alertMsg").remove();
+        $("body").append(html);
+        var that=$(".alertMsg");
+        setTimeout(function(){
+            that.remove();
+        },2500);
+    }
+  })
+</script>
+</head>
+<body style="background:url(${contextPath}/resources/images/login_bg.jpg);background-size:cover;">
+<section class="content">
+  <section class="cont_inner">
+    <img class="icon_img" src="${contextPath}/resources/images/icon.png" width="100px">
+    <section class="login_form">
+      <form action="${contextPath}/login/check" method="post">
+        <div class="login_input">
+          <dl>
+            <dt><img src="${contextPath}/resources/images/client_icon.png"></dt>
+            <dd>
+              <input type="text" name="companyNO" placeholder="公司编号">
+            </dd>
+          </dl>
+          <dl>
+            <dt><img src="${contextPath}/resources/images/user_icon.png"></dt>
+            <dd>
+              <input type="text" name="loginName" placeholder="用户名">
+            </dd>
+          </dl>
+          <dl>
+            <dt><img src="${contextPath}/resources/images/pwd_icon.png"></dt>
+            <dd>
+              <input type="password" name="password" placeholder="密码">
+              <span class="pwd_flag">
+                <img src="${contextPath}/resources/images/switch_off.png">
+                <img src="${contextPath}/resources/images/switch_on.png">
+              </span>
+            </dd>
+          </dl>
+        </div>
+        <input type="submit" class="btn_login" value="登录">
+      </form>
+      <a href="${contextPath}/login/fPwd_1" class="a_forgetPwd">忘记密码？</a>
+    </section>
+  </section>
+</section>
+</body>
+</html>

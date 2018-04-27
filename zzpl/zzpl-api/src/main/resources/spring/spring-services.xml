@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+
+	<bean id="serviceContext" class="zzpl.app.service.local.util.ServiceContext">
+		<property name="serviceMap">
+			<map>
+				<entry key="default" value-ref="DefaultService" />
+				<!--                                  国内机票                                                      -->
+				<!-- 国内机票预订 -->
+				<entry key="BookGNFlightService" value-ref="BookGNFlightService" />
+				<!-- 国内机票审批 -->
+				<entry key="ApprovalGNFlightService" value-ref="ApprovalGNFlightService" />
+				<!-- 国内机票取消 -->
+				<entry key="CancelGNTicketService" value-ref="CancelGNTicketService" />
+				<!-- 国内机票预订 -->
+				<entry key="BookGJFlightService" value-ref="BookGJFlightService" />
+				<!--                                  国际机票                                                      -->
+				<!-- 国际机票审批 -->
+				<entry key="ApprovalGJFlightService" value-ref="ApprovalGJFlightService" />
+				<!-- 提交国内机票取消 -->
+				<entry key="ConfirmCancelGNTicketService" value-ref="ConfirmCancelGNTicketService" />
+				<!-- 国际机票取消 -->
+				<entry key="CancelGJTicketService" value-ref="CancelGJTicketService" />
+				<!-- 国际机票支付 -->
+				<!-- <entry key="PayGNFlightTicketService" value-ref="PayGNFlightTicketService" /> -->
+			</map>
+		</property>
+	</bean>
+</beans>

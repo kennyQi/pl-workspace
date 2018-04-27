@@ -1,0 +1,133 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+	name="viewport" />
+<title>账户验证</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/findPwd.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js"
+	language="javascript"></script>
+
+
+<script type="text/javascript">
+	function summitForm1() {
+ 		  if(checkbh()&&checkzh()&&checkYzm()){
+ 			 var html="<div class='loading_bg'></div>";
+ 			$("body").append(html);
+			$("#form1").submit();
+ 		  }
+		/*
+		 //document.getElementById("form1").submit();
+			$.post("${contextPath}/login/fPwd_20",
+					$("#form1").serialize(),
+					function(data) {
+						 if (data.success == true) {
+							if (data.message) {
+								alertMsg(data.message)
+							} else {
+								window.location.href = "${contextPath}/login/fPwd_21"
+							}
+
+						} 
+
+					}, "json");
+		} 
+ 
+		 */
+	}
+
+		 if("${message}"){
+		    	alertMsg("${message}")
+		    }
+	function alertMsg(msg) {
+		alert(msg);
+	}
+
+	function checkbh() {
+		var mynamediv = document.getElementById("bh");
+		var str;
+		if (mynamediv) {
+			str = mynamediv.value;
+		}
+		if (str.length == 0) {
+			alertMsg("公司编号不为空！");
+			return false;
+		}
+
+		return true;
+
+	}
+
+	function checkzh() {
+		var str = document.getElementById('zh').value.trim();
+		if (str!=null&&str!=''&&str.length != 0) {
+			return true;
+		} else {
+			alertMsg("帐号不为空！");
+			return false;
+		}
+	}
+	
+	function checkYzm(){
+		var mynamediv = document.getElementById("validCode");
+		var str;
+		if (mynamediv) {
+			str = mynamediv.value;
+		}
+		if (str.length == 0) {
+			alertMsg("验证码不为空！");
+			return false;
+		}
+
+		return true;
+	}
+</script>
+
+</head>
+
+<body>
+	<div class="bg1_header">
+		<header class="header box">
+			<a href="${contextPath}/login" class="back_iconfont iconfont">&#xe606;</a>
+			<h1>账户验证</h1>
+		</header>
+	</div>
+	<section class="content_form">
+		<form id="form1" method="post" action="${contextPath}/login/getResetPasswordSMSValid">
+			<div class="input_wrap input_wrap_1">
+				<dl>
+					<dt>公司编号</dt>
+					<dd>
+						<input type="text" placeholder="请输入公司编号" name="bh" id="bh">
+					</dd>
+				</dl>
+				<dl>
+					<dt>账号</dt>
+					<dd>
+						<input type="text" placeholder="请输入账号" name="zh" id="zh">
+					</dd>
+				</dl>
+				<dl>
+					<dt>验证码</dt>
+					<dd>
+						<input type="text" placeholder="请输入验证码" name="validCode"
+							id="validCode"> <span><img
+							src="${contextPath}/login/valid-code-image.jpg"
+							class="valide_code" height="40"
+							onclick="$(this).attr('src', '${contextPath}/login/valid-code-image.jpg?'+new Date());" /></span>
+					</dd>
+				</dl>
+			</div>
+			<div class="btn_wrap">
+				<input type="button" class="btn_submit" value="下一步，验证身份"
+					onclick=" summitForm1()">
+			</div>
+		</form>
+	</section>
+</body>
+</html>

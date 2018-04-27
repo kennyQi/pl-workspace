@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>意见反馈</title>
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/global.css" rel="stylesheet" />
+<link href="css/person.css" rel="stylesheet" />
+  <script src="js/libs/jquery-2.1.4.min.js" language="javascript"></script>
+</head>
+
+<body style="background:#eeeeee;">
+<div class="bg2_header">
+  <header class="header box">
+      <a href="javascript:history.back()" class="back_iconfont iconfont">&#xe606;</a>
+      <h1>意见反馈</h1>
+  </header>
+</div>
+<section class="content cont_feedback"> 
+  <form id="form">
+    <textarea placeholder="请输入您的反馈意见" id="feedCont"></textarea>
+    <input type="text" placeholder="联系方式（邮箱/手机）" id="connect">
+    <div class="btn_wrap">
+      <input type="submit" class="btn_submit" value="提交">
+    </div>
+  </form>
+</section>
+<script>
+$(".btn_submit").click(function(e){
+  e.preventDefault();
+  var feed=$("#feedCont");
+  var connect=$("#connect");
+  if(feed.val()==""){
+    alertMsg("请填写意见");
+    feed.focus();
+    return;
+  }
+  if(connect.val()==""){
+    alertMsg("请填写联系方式");
+    connect.focus();
+    return;
+  }
+  $("#form").submit();
+
+});
+function alertMsg(msg){
+  var html=' <div class="alertMsg"> <span>'+msg+'</span> </div>';
+  $(".alertMsg").remove();
+  $("body").append(html);
+  var that=$(".alertMsg");
+  setTimeout(function(){
+    that.remove();
+  },2500);
+}
+
+</script>
+</body>
+</html>

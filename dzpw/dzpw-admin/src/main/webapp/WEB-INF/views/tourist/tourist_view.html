@@ -1,0 +1,65 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.jq{background:#eee;font-weight:600;}
+.jq span{margin-left:5px;}
+</style>
+
+<div class="pageContent">
+	<div id="scenicContent" class="pageFormContent" layoutH="58">
+		<!-- 景区基本信息  -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>1.基本信息</span></div>
+			<div class="unit">
+				<label>证件号码：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.idNo!?html}"/>
+			</div>
+			<div class="unit">
+				<label>证件类型：</label>
+				<input type="text" size="32" readonly="readonly" value="<#if tourist.idType == 1>身份证</#if><#if tourist.idType == 2>护照</#if><#if tourist.idType == 3>军官证</#if><#if tourist.idType == 4>其他</#if>"/>
+			</div>
+			<div class="unit">
+				<label>姓名：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.name!?html}"/>
+			</div><!-- 
+			<div class="unit">
+				<label>性别：</label>
+				<input type="text" size="32" readonly="readonly" value="<#if tourist.gender == 1>男</#if><#if tourist.gender == 2>女</#if>"/>
+			</div> -->
+			<div class="unit">
+				<label>户籍地址：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.address!?html}"/>
+			</div>
+			<div class="unit">
+				<label>民族：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.nation!?html}"/>
+			</div>
+			<div class="unit">
+				<label>出生：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.birthday?string("yyyy.MM.dd")}"/>
+			</div>
+			<div class="unit">
+				<label>手机：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.telephone!?html}"/>
+			</div>
+			<!-- 景区联系信息   -->
+			<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>2.消费信息</span></div>
+			<div class="unit">
+				<label>首次购买时间：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.firstBuyDate?string("yyyy-MM-dd HH:mm")}"/>
+			</div>
+			<div class="unit">
+				<label>购买次数：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.buyTimes!?html}"/>
+			</div>
+			<div class="unit">
+				<label>购买金额：</label>
+				<input type="text" size="32" readonly="readonly" value="${tourist.buyAmountTotal!?html}"/>
+			</div>
+		</div>
+			
+		<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">返回列表</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,159 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent sortDrag" selector="h1" layoutH="42">
+<#if detail.flightSnapshotJSON ?? >
+	<#assign jsonStr>
+		${(detail.flightSnapshotJSON)!''}
+	</#assign>
+	<#assign json=jsonStr?eval />
+</#if>
+   <div class="panel collapse" defH="120">
+       <h1>订单信息</h1>
+       <div>
+           <table class="" width="98%">
+               <thead style="background-color: gray;">
+                   <tr style="text-align: center;" height="20px;">
+                       <th width="60">订单状态</th>
+                       <th width="40">PNR</th>
+                       <th width="120">平台订单号</th>
+                       <th width="120">供应商订单号</th>
+                       <th width="120">经销商订单号</th>
+                       <th width="70">支付金额</th>
+                       <th width="70">返点/佣金</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr style="text-align: center;" height="30px;">
+                       <td>
+                       		<#if detail?? && detail.orderStatus ?? && detail.orderStatus.status??>
+									<#assign status2=detail.orderStatus.status+'' />
+									${STATUS_MAP[status2]} 
+								</#if>
+                       </td>
+                       <td>${(detail.pnr)!''}</td>
+                       <td >${(detail.orderNo)!''}</td>
+                       <td >${(detail.yeeXingOrderId)!''}</td>
+                       <td >${(detail.dealerOrderCode)!''}</td>
+                       <td>
+                      <#if detail.orderStatus.payStatus == '38' || detail.orderStatus.payStatus == '39' || detail.orderStatus.payStatus == '40'>
+						${(detail.userPayAmount?string('0.00'))!''}
+				     <#else>
+						0.00
+				     </#if> 
+                      </td> 
+                      <td> <#if detail ?? && detail.disc?? && detail.commAmount??>
+						${(detail.disc)?c}/${(detail.commAmount)?c}
+					</#if></td>
+                   </tr>
+               </tbody>
+           </table>
+           <span>
+               政策备注:<br/><br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<#if detail.memo??>${(detail.memo)!''}</#if>
+           </span>
+       </div>
+   </div>
+ 
+   <div class="panel collapse" defH="220">
+       <h1>机票信息</h1>
+       <div>
+           <table class="" width="98%">
+               <thead style="background-color: gray;">
+                   <tr style="text-align: center;" height="20px;">
+                       <th width="60" >行程</th>
+                       <th width="60">起飞</th>
+                       <th width="60">抵达    </th>
+                       <th width="60">航班信息</th>
+                       <th width="50" >舱位</th>
+                   </tr>
+               </thead>
+                <tr style="text-align: center;" height="30px;">
+                       <td>${(detail.startCityName)!''} -
+								${(detail.endCityName)!''} <br /> ${(json.orgCity)!''} -
+								${(json.dstCity)!''}
+
+							</td>
+							<td>${(detail.departureTime)!''} <br />
+                            ${(detail.startCityName)!''}
+							</td>
+							<td>${(detail.endTime)!''} <br />
+                             ${(detail.endCityName)!''}
+                                                                            
+							</td>
+							<td>${(detail.airCompName)!''} <br /> ${(detail.flightNo)!''}
+
+							</td>
+							<td>${(detail.classCode)!''}<br /> ${(detail.cabinName)!''}</td>
+                   </tr>
+               </tbody>
+           </table>
+           <br/>
+           <table class="" width="98%">
+               <thead style="background-color: gray;">
+                   <tr  height="20px;">
+                       <th width="60" >旅客姓名</th>
+                       <th width="60">证件类型</th>
+                       <th width="60">证件号码</th>
+                       <th width="60">票号</th>
+                       <th width="60">票面价</th>
+                       <th width="60">税费(机建燃油)</th>
+                       <th width="60">单张合计</th>
+                       <th width="60">退座记录</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <#if detail?? && detail.passengerList ??> 
+							<#list detail.passengerList as passenger>
+								<tr>
+									<td>${(passenger.name)!''}</td>
+									<td>
+									<#if DOCUMENT_TYPE_MAP??>
+						                   <#list DOCUMENT_TYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.idType>
+						                       		${DOCUMENT_TYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td>${(passenger.idNo)!''}</td>
+									<td>${(passenger.ticket.ticketNo)!''}</td>
+									<td>${((detail.ibePrice)?string('0.00'))!''}</td>
+									<td>${(detail.buildFee)+(detail.oilFee)}</td>
+									<td>${(detail.userPayAmount?string('0.00'))!''}</td>
+								</tr>
+							</#list>
+						</#if>
+               </tbody>
+           </table>
+       </div>
+   </div>
+   
+   <div class="panel close collapse" defH="220">
+   	   <h1>操作日志</h1>
+   	   <div>
+   	   <table class="" width="98%">
+	   	   <thead style="background-color: gray;">
+	                   <tr style="text-align: center;" height="20px;">
+	                       <th width="115" >时间</th>
+	                       <th width="100">操作</th>
+	                       <th width="120">操作人</th>
+	                       <th width="200">操作信息</th>
+	                   </tr>
+	       </thead>
+   	   	   <tbody>
+   	   	     <#list LOGS as log>
+					<tr style="text-align: center;" height="20px;">
+						<td>
+							<#if log.logDate ??>
+						 		${log.logDate!?string("yyyy-MM-dd HH:mm:ss")} 
+						 	</#if>
+						 </td>
+						<td>${log.logName}</td>
+						<td>${log.logWorker}</td>
+						<td>${log.logInfo}</td>
+					</tr>
+					</#list>
+   	   	   </tbody>
+   	   </table>
+   	   </div>
+   </div>
+</div>

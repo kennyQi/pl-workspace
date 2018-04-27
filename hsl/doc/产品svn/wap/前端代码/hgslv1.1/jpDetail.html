@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<!-- 页面样式表 -->
+<link rel="Stylesheet" href="css/fbase.css">
+<link rel="stylesheet" href="css/orderView.1.0.css" />
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script src="js/fly.js"></script>
+
+</head>
+<body style="position:relative;width:100%;overflow-y:hidden;">
+<div id="contentWrap" style="position:absolute;width:100%;">
+    <!-- 公共页头  -->
+    <header class="header">
+        <h1>订单详情</h1>
+        <div class="left-head">
+            <a id="goBack" href="success.html" class="tc_back head-btn">
+                <span class="inset_shadow">
+                    <span class="head-return"></span>
+                </span>
+            </a>
+        </div>
+    </header>
+
+    <!-- 页面内容块 -->
+    <div id="order-box">
+        <h5 class="f-tip" style="line-height: 17px; font-size: 12px;">订单状态：出票完成</h5>
+        <div class="o-item o-detail" style="padding: 0;">
+            <div style="padding: 10px 10px 0 10px; border-bottom: 1px solid #ccc;">
+                 <dl class="pr-t fn-clear mlr10">
+                    <span style="font-size:20px; line-height: 30px;color:#F60">北京—杭州</span><span style="font-size: 13px;">（单程）</span>
+                </dl>
+                 <dl class="pr-t fn-clear mlr10">
+                    <dt>航班信息：</dt>
+                    <dd style="color:#333;">南方航空CZ6412</dd>
+                </dl>
+                    <dl class="fn-clear">
+                      <dt>起飞日期：</dt>
+                        <dd>2014-07-26  周日</dd>
+                    </dl>
+                    <dl class="fn-clear">
+                        <dt>起降机场：</dt>
+                        <dd>北京首都机场T3（06:50）<br>上海虹桥机场T2（09:05）</dd>
+                    </dl> 
+                    <dl class="fn-clear">
+                      <dt>飞行时间：</dt>
+                        <dd>2小时</dd>
+                    </dl>
+                      <dl class="fn-clear">
+                      <dt>舱位信息：</dt>
+                        <dd>经济舱</dd>
+                    </dl>   
+                      <dl class="fn-clear">
+                      <dt>里程信息：</dt>
+                        <dd>841公里</dd>
+                    </dl>          
+            </div>
+            <div class="o-info fn-hide" style="display: block;">
+                <div class="i-item">
+                <dl class="pr-t fn-clear mlr10">
+                  <dt>订单总价：</dt>
+                        <dd>
+                            <span class="f60">¥640</span> 
+                        </dd>
+                        <dd>
+                            <span style="font-size:13px;">(票价¥450+机建燃油税¥170+保险费¥20)</span>  
+                        </dd>
+                </dl>
+                  <dl class="fn-clear">
+                      <dt>订单编号：</dt>
+                        <dd>ebb140612190512843</dd>
+                    </dl> 
+                    <dl class="fn-clear">
+                      <dt>代理商：</dt>
+                        <dd>汇购商旅平台</dd>
+                    </dl>          
+            </div> 
+            <div class="i-item per-list">
+                    <dl class="fn-clear">
+                        <dt>登机人：</dt>
+                        <dd>项少龙（成人票)</dd>
+                        <dt>身份证:</dt>
+                        <dd>410103196408090236</dd>
+                        <dt>机票号：</dt><dd>781-2475972229</dd>
+                    </dl>
+            </div>
+                <div class="i-item per-list">
+                    <dl class="fn-clear">
+                        <dt>联系人：</dt>
+                        <dd>项少龙</dd>
+                        <dt>手机号：</dt><dd>12475972229</dd>
+                    </dl>
+                </div>  
+            </div> 
+                      
+        </div> 
+        <div class="bankbox">    
+            <div class="banklist">
+               <p>联系客服</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 弹窗 -->
+<div id="windows" class="click">
+    <div class="fix click">
+        <div class="top">
+            <ul>
+                <li>是否拨打客服电话</li>
+                <li>400-186-566</li>
+            </ul>
+        </div>
+        <div class="cancel">取 消</div>
+    </div>
+</div>
+
+<div id="loading" style="display:none;">
+    <div class="ui-loader">
+        <div class="load_container">
+            <span class="loading"></span><span class="loadFont">正在进入安全支付环境,<br>
+                您的支付信息将加密后传输</span>
+        </div>
+    </div>
+    <div class="h-bg">
+    </div>
+</div>
+
+</body>
+</html>

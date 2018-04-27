@@ -1,0 +1,25 @@
+<table style="width: 100%;" border=1>
+	<tr>
+		<td>序号</td>
+		<td>商品编号</td>
+		<td>商品名称</td>
+		<td>商城商品分类</td>
+		<td>商城商品品牌</td>
+		<td>创建时间</td>
+		<td>商城所属供应商</td>
+	</tr>
+	<#list prodList as p>
+	<tr>
+		<td>${(p_index)!}</td>
+		<td>${(p.productCode)!}</td>
+		<td>${(p.productName)!}</td>
+		<td>${(p.productCategory.name)!}</td>
+		<td>${(p.productBrand.chineseName)!}</td>
+		<td>${(p.createDate)!}</td>
+		<td>${(p.remark)!}</td>
+	</tr>
+	</#list>
+</table>
+<script type="text/javascript">
+$("#pstab4").show();
+</script>

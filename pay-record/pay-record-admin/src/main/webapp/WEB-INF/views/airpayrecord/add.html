@@ -1,0 +1,180 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/payRecord/air/add" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>项目来源标识</label>
+					 <select name="fromProjectCode" id="fromProjectCode">
+						
+							<#if PAY_RECORD_PROJECT_TYPE_MAP??>
+		                    <#list PAY_RECORD_PROJECT_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${PAY_RECORD_PROJECT_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+			</div>
+			<div class="unit">
+				<label>来源项目IP</label>
+				<input type="text" id="fromProjectIP" name="fromProjectIP" size="20" maxlength="32" />
+			</div>
+			
+			<div class="unit">
+				<label>平台订单号</label>
+				<input type="text" id="number" name="platOrderNo" size="20" maxlength="32"  />
+			</div>
+			
+			<div class="unit">
+				<label>经销商订单号</label>
+				<input type="text" id="number" name="dealerOrderNo" size="20" maxlength="32"  />
+			</div>
+			
+			
+			<div class="unit">
+				<label>供应商订单号</label>
+				<input type="text" id="number" name="supplierNo" size="20" maxlength="32"  />
+			</div>
+			
+			<div class="unit">
+				<label>订购人</label>
+				<input type="text" id="number" name="booker" size="20" maxlength="32" />
+			</div>
+			<div class="unit">
+				<label>乘机人(多个用|隔开)</label>
+				<input type="text" id="number" name="passengers" size="20" maxlength="1000"  />
+			</div>
+			<div class="unit">
+				<label>出发地</label>
+				<input type="text" id="number" name="startCity" size="20" maxlength="32"/>
+			</div>
+			<div class="unit">
+				<label>目的地</label>
+				<input type="text" id="number" name="destCity" size="20" maxlength="32"  />
+			</div>
+			<div class="unit">
+				<label>航空公司</label>
+				<input type="text" id="number" name="airCompName" size="20" maxlength="64"/>
+			</div>
+			<div class="unit">
+				<label>航班号</label>
+				<input type="text" id="number" name="flightNo" size="20" maxlength="8"  />
+			</div>
+			
+			<div class="unit">
+				<label>舱位代码</label>
+				<input type="text" id="number" name="classCode" size="20" maxlength="6" />
+			</div>
+			<div class="unit">
+				<label>舱位名称</label>
+				<input type="text" id="number" name="cabinName" size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>支付方式</label>
+				 <select name="payPlatform" id="payPlatform">
+				 <#list PAYMENT_TYPE?keys as itemKey>
+		               <option value="${itemKey}">
+	                         ${PAYMENT_TYPE[itemKey]}
+	                   </option> 
+		            </#list>
+		           </select>
+			</div>
+			
+			<div class="unit">
+				<label>付款帐号</label>
+				<input type="text" id="number" name="payAccountNo" size="20" maxlength="64"  class="required"/>
+			</div>
+			<div class="unit">
+				<label>支付流水号</label>
+				<input type="text" id="number" name="paySerialNumber" size="20" maxlength="32"  class="number required"/>
+			</div>
+			<div class="unit">
+				<label>支付时间</label>
+				<input type="text" readonly="readonly" name="payTime"  class="date"/>
+			</div>
+			<div class="unit">
+				<label>订单总金额</label>
+				<input type="text"  name="orderPrice"   class="number required"  size="20" maxlength="20"/>
+			</div>
+			<div class="unit">
+				<label>收入</label>
+				<input type="text" id="number" name="incomeMoney" size="20" maxlength="20"  class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>支出</label>
+				<input type="text" id="number" name="payMoney" size="20" maxlength="20"  class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>返点/折扣</label>
+				<input type="text" id="number" name="rebate" size="20" maxlength="20" class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>佣金</label>
+				<input type="text" id="number" name="brokerage" size="20" maxlength="20" class="number required" />
+			</div>
+			
+			<div class="unit">
+				<label>订单状态</label>
+				 <select name="orderStatus" id="orderStatus">
+							
+							 <#list statusList as status>
+								<option value="${(status.key)!''}">${status.value!?html}</option>
+						     </#list>
+				</select>
+			</div>
+			<div class="unit">
+				<label>支付状态</label>
+				 <select name="payStatus" id="payStatus">
+							
+							 <#list orderPayStatusList as status>
+								<option value="${(status.key)!''}">${status.value!?html}</option>
+						     </#list>
+						</select>
+			</div>
+			
+			<div class="unit">
+				<label>记录类型</label>
+				 <select name="recordType" id="recordType">
+						  
+							<#if PAY_RECORD_TYPE_MAP??>
+		                    <#list PAY_RECORD_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${PAY_RECORD_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+			     </select>
+			</div>
+			<div class="unit">
+				<label>来源客户端类型 </label>
+				 <select name="fromClientType" id="fromClientType">
+							<#if FROM_CLIENT_TYPE??>
+		                    <#list FROM_CLIENT_TYPE?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${FROM_CLIENT_TYPE[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+				</select>
+			</div>
+			<div class="unit">
+				<label>备注</label>
+				<textarea rows="6" cols="60"  class="editor" name="remarks"></textarea>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" id="checkData" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+
+$("#downPayment").blur(function(){
+
+});
+</script>

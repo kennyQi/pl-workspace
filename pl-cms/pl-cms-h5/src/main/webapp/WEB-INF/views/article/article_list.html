@@ -1,0 +1,49 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>${title}</title>
+<link href="${contextPath}/resources/css/list.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="g_bd">
+	<input id="fileUploadPath" type="hidden" value="${fileUploadPath}"/>
+	<input id="contextPath" type="hidden" value="${contextPath}"/>
+	<input id="channelId" type="hidden" value="${qo.showChannelId}"/>
+   <ul class="new_list">
+   		<#list pagination.list as article>
+   			<li><a href="${contextPath}/article/details/${article.id}?showChannelId=${qo.showChannelId}">
+	        	<span class="picBox fl"><img src="${fileUploadPath}${(article.baseInfo.titleImage.urlMaps['MIDDLE'])!''}" class="fl" /></span>
+	            <article class="tt fr">
+	            	<h2>
+	            			<#if article.baseInfo.title?length gt 14>
+								${article.baseInfo.title?substring(0,15)}...
+							<#else>
+								${article.baseInfo.title}
+							</#if>
+	            	</h2>
+	                <span class="paT">${(article.createDate)!}</span>
+	            </article>
+	        	</a>
+        	</li>
+   		</#list>
+   </ul>
+   <section class="m_load" style="display: none">
+            <span class="pl"><i></i>正在加载...</span>
+   </section>
+</div>
+
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${contextPath}/resources/js/list.js"></script>
+<script type="text/javascript">
+var pageNo=${pagination.pageNo},pageSize=${pagination.pageSize};
+/* var pullUpEl = document.getElementById('pullUp');	
+var pullUpOffset = pullUpEl.offsetHeight; */
+
+</script>
+</body>
+</html>

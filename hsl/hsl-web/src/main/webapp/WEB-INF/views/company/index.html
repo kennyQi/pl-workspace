@@ -1,0 +1,56 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "企业中心首页">
+<#if ((user.baseInfo.type?c)!0)==1>
+<link href="${(contextPath)!}/resources/css/company/company_home.css" rel="stylesheet" />
+<#elseif (((user.baseInfo.type?c)!0)==2)>
+<link href="${(contextPath)!}/resources/css/personal/personal_home.css" rel="stylesheet" />
+</#if>
+</@frame.head>
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<@frame.top></@frame.top>
+	<div class="g_cont disb ov">
+		<@frame.nav "首页" 0></@frame.nav>
+		<div class="m_cont ov fl">
+			<!--右侧呈现页-->
+			<ul class="top_navs fl yahei color3 h2">
+				<li><i class="order icons fl"></i><span class="fl titles">所有订单：
+						未付款（${(noPay)!}）</span><br />
+				<a class="allOrder linkC h3 yahei fl"
+					href="${(contextPath)!}/company/orderManage?sel=5">查看全部订单</a></li>
+				<li><i class="coupons icons fl"></i><span class="fl titles"
+					style="margin-top:44px">您的卡券： <i style="font-size:20px">${(couponNum)!}</i>张
+				</span>
+				<a class="allOrder linkC h3 yahei fl" href="${(contextPath)!}/company/couponList?tab=1">查看全部卡券</a></li>
+			</ul>
+			<#if ((user.baseInfo.type?c)!0)==2>
+			<div class="ri fl">
+				<h1 class="rih1 yahei color3 fl">
+					差旅管理<a href="${(contextPath)!}/company/travelManage"
+						class="color6 h3 linkC">查看差旅管理</a>
+				</h1>
+				<div class="navsbox fl"></div>
+			</div>
+			<div class="ri fl">
+				<h1 class="rih1 yahei color3 fl">
+					下属公司<a href="${(contextPath)!}/company/organizeManage"
+						class="color6 h3 linkC">新增子公司</a>
+				</h1>
+				<div class="navsbox fl"></div>
+			</div>
+			</#if>
+			<ul class="company fl color3 yahei h3">
+				<#list companyList as company>
+				<li><span class="companyName">${(company.companyName)!}
+						<a
+						href="${(contextPath)!}/company/organizeManage?id=${(company.id)!}">查看部门员工通讯录</a>
+					</p></li> </#list>
+			</ul>
+			<!--右侧呈现页-->
+		</div>
+	</div>
+</div>
+<!--内容-->
+<@frame.end "default"> </@frame.end>
+</@frame.main>

@@ -1,0 +1,102 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/viewspot/order/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="" />
+		<input type="hidden" name="numPerPage" value="" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">
+						供应商：
+					</td>
+					<td style="text-align: left">
+						<select name="supplierId">
+							<option value="">全部</option>
+							<option value="1">同城</option>
+							<option value="2">携程</option>
+						</select>					
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						景点名称：
+					</td>
+					<td><input type="text" name="scenicSpotsName" value=""></td>
+					<td>
+						省市区：
+						<select name="province">
+							<option value="">全部</option>
+							<option value="1">浙江</option>
+							<option value="2">河南</option>
+						</select>
+						<select name="city">
+							<option value="">全部</option>
+							<option value="1">杭州</option>
+							<option value="2">郑州</option>
+						</select>
+						<select name="area">
+							<option value="">全部</option>
+							<option value="1">滨江区</option>
+							<option value="2">中原区</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210" >
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids"
+					class="checkboxCtrl">
+				</th>
+ 				<th width="50">供应商平台</th>
+				<th width = "50">景点名称</th>
+				<th width = "50">门票名称</th>
+				<th width = "50">价格日历</th>
+				<th width = "50">省</th>
+				<th width = "50">市</th>
+				<th width = "50">区</th>
+				<th width="40">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				<td><input name="ids" value="" type="checkbox">
+				</td>
+				<td>同城</td>
+				<td></td>
+				<td></td>
+				<td><a href="${contextPath}/viewspot/spots/calendar" target="dialog">查看价格日历</a></td>
+				<td>浙江省</td>
+				<td>杭州市</td>
+				<td>滨江区</td>
+				<td><a  target="dialog"
+					href="${contextPath}/viewspot/spots/detail?id=" width="900" height="700">查看详情</a></td>
+			</tr>
+
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

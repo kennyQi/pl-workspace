@@ -1,0 +1,242 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>查看详情</title>
+<link href="${contextPath}/resources/hg-ria/new-web/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/hg-ria/new-web/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/common.js" language="javascript"></script>
+    <script src="${contextPath}/resources/hg-ria/new-web/laydate/laydate.js" language="javascript"></script>
+
+</head>
+<body>
+<!--头部-->
+<div class="head">
+    <div class="head-cont">
+        <a href="${contextPath}/home" class="logo fl">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/logo.jpg" />
+        </a>
+        <ul class="fl nav">
+            <li class="fl"><a href="${contextPath}/home">首页</a></li>
+            <li class="fl"><a href="${contextPath}/CLGLYBookFlight/view">机票</a></li>
+        </ul>
+        <div class="user fr">
+            <span class="out fr"><a href="${contextPath}/logout">
+					退出</a></span>
+            <span class="name fr">${(user.name)!''}</span>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<!--头部-->
+<!--内容-->
+<div class="g-bd"><div class="g-nav fl">
+<!--     <div class="nav_model fr">
+        <div class="nav_title tc">出差审批<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="${contextPath}/tasklistwait/view">订单审批</a><label></label></li>
+            <li><a  href="${contextPath}/cosaof/view">订单结算</a><label></label></li>
+            <li><a href="${contextPath}/CLGLYBookFlight/company">公司列表</a><label></label></li>
+            <li><a href="${contextPath}/CLGLYBookFlight/orders">我的订单</a><label></label></li>
+        </ul>
+    </div> 
+     <div class="nav_model fr">
+        <div class="nav_title tc">公司设置<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="company_Info.html">公司介绍</a><label></label></li>
+            <li><a href="company_set.html">设置公司信息</a><label></label></li>
+            <li><a href="company_costCenter.html">成本中心</a><label></label></li>
+            <li><a href="company_group.html">组织架构</a><label></label></li>
+        </ul>
+    </div>
+   <div class="nav_model fr">
+        <div class="nav_title tc">系统设置<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="employee_manage.html">员工管理</a><label></label></li>
+            <li><a href="admin_role.html">角色管理</a><label></label></li>
+            <li><a href="admin_path.html">审批流程</a><label></label></li>
+            <li><a href="admin_company.html">公司管理</a><label></label></li>
+        </ul>
+    </div> 
+    <div class="nav_model fr">
+        <div class="nav_title tc">个人设置<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="${contextPath}/user/toEditPasswd">修改密码</a><label></label></li>
+        </ul>
+    </div>--> 
+</div>
+    <!--左侧内容-->
+    <link href="${contextPath}/resources/hg-ria/new-web/css/fly_detailOrder.css" rel="stylesheet" />
+    <div class="r_content fr">
+        <div class="g-cont">
+            <!--位置-->
+            <div class="g-load">
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;您所在位置 ></label>
+                <a href="${contextPath}/CLGLYBookFlight/orders">代购订单</a> >
+                <a href="#">订单详情</a>
+            </div>
+            <!--位置结束-->
+        </div>
+        <div class="detail_order">
+          <div class="order_hd">
+            <span class="c_name">${company.companyName}</span>
+            订单编号：<span class="order_id">${flightOrder.orderNO}</span>&nbsp;&nbsp;&nbsp;
+            订单状态：<span class="order_id">${statusMSG}</span>
+          </div>
+          <h2 class="sub_title">出差人员基本信息</h2>
+          <table class="business_personnelInfo">
+          <#list passengers as passenger>
+            <tr>
+                <td>姓名：<span class="name">${passenger.passengerName}</span></td>
+                <td>手机号：<span class="tel">${passenger.telephone}</span></td>
+            </tr>
+            <tr>
+                <td>成本中心：<span class="costCenter">${costCenter.costCenterName}</span></td>
+            	<td>订票人：<span class="tel">${(user.name)!''}</span></td>
+            </tr>
+           </#list>
+          </table>
+          <p class="ps">备注说明：<span class="ps_content">${flightOrder.note}</span></p>
+          <h2 class="sub_title">联系人信息</h2>
+          <table class="linkmanInfo">
+            <tr>
+                <td>姓名:<span class="link_name">${flightOrder.linkName}</span></td>
+                <td>手机号：<span class="link_tel">${flightOrder.linkTelephone}</span></td>
+            </tr>
+          </table>
+          <h2 class="sub_title">计划机票信息</h2>
+          <table class="plan_airTicketInfo">
+            <tr>
+                <th style="width:208px;">航班信息</th>
+                <th style="width:242px;">起降时间</th>
+                <th style="width:290px;" colspan="2">起降机场</th>
+                <th style="width:119px;">票号</th>
+            </tr>
+            <tr>
+                <td>${flightOrder.airCompanyName}${flightOrder.flightNO}${flightOrder.planeType}</td>
+                <td>
+                    <p>${flightOrder.startTime?string("yyyy-MM-dd HH:mm")}</p>
+                    <p>${flightOrder.endTime?string("yyyy-MM-dd HH:mm")}</p>
+                </td>
+                <td colspan="2">
+                    <p>${flightOrder.departAirport}${flightOrder.departTerm}</p>
+                    <p>${flightOrder.arrivalAirport}${flightOrder.arrivalTerm}</p>
+                </td>
+                <td><#list passengers as passenger>${passenger.airID}
+                	</#list>
+                </td>
+            </tr>
+            <tr>
+            	<th style="width:119px;">舱位信息</th>
+                <th>票价</th>
+                <th>机建燃油</th>
+                <th style="width:143px;">实际支付</th>
+                <th>机票成本</th>
+            </tr>
+            <tr>
+            	 <td>${flightOrder.cabinName}${flightOrder.cabinCode}</td>
+                <td>￥${flightOrder.ibePrice}</td>
+                <td>￥${flightOrder.buildFee+flightOrder.oilFee}</td>
+                <td class="fc">￥${flightOrder.platTotalPrice}</td>
+                <td class="fc"><#if (flightOrder.totalPrice>0)>￥${flightOrder.totalPrice}<#else></#if></td>
+            </tr>
+          </table>
+          <div class="tp_wrap">
+          	<#if flightOrder.payStatus == 100&&flightOrder.status != 105>
+            	<button class="btn_tp" id="toPay">去支付</button>
+            <#elseif flightOrder.status == 102>
+            	<button class="btn_tp" id="btn_tp">退&nbsp;票</button>
+           	<#elseif flightOrder.status == 111>
+           		<button class="btn_tp" id="btn_tp">退&nbsp;票</button>
+            <#elseif flightOrder.status == 104>
+                	<button class="btn_tp" id="btn_tp">退&nbsp;票</button>
+             </#if>
+          </div>
+        </div>
+    </div>
+    <!--右侧内容结束-->
+</div>
+<!--内容-->
+
+<!--弹出层-->
+<div class="alertBg" style="display: none;" id="alertBg" ></div>
+<div class="alertWarm" id="alertWarm" style="display: none;">
+    <div class="a-icon {type}"></div>
+    <div class="a-tips">{msg}</div>
+    <div class="a-btn" onclick="ply.alertWarmClose()">确定</div>
+</div>
+<div class="alert employee_alert" style="display: none;" id="alert_form">
+    <!--弹出框内容-->
+    <div class="title">申请退票
+        <label onclick="ply.alertBoxClose('form')">x</label></div>
+    <div class="employee_alert_cont g-search">
+        <form action="${contextPath}/CLGLYBookFlight/refundTicket?orderID=${flightOrder.id}" method="post">
+           <div class="unit">
+              <label class="tab">请选择退票原因:</label>
+              <div class="input-selectBox pl">
+                  <input type="hidden" value="0" readonly="true"  name="refundType"/>
+                  <span class="input-select">请选择退票原因</span>
+                  <ul class="pa">
+                      <li data="0">请选择退票原因</li>
+                      <li data="1">当日作废</li>
+                      <li data="2">自愿退票</li>
+                      <li data="3">非自愿退票</li>
+                      <li data="4">差错退款</li>
+                      <li data="5">其他</li>
+                  </ul>
+              </div>
+              </div>
+              
+           <div class="unit">
+              <label class="tab">请填写退票原因:</label>
+              <input class="input-text" type="text" name="refundMemo"  placeholder="不限" validate="true" for="退票原因"/>
+           </div>
+            <div class="unit tc errorMsg">
+            </div>
+            <div class="unit">
+                <span class="input-btn btn-submit" id="addEmployee">提交</span>
+            </div>
+        </form>
+    </div>
+    <!--弹出框内容-->
+</div>
+<!--弹出层-->
+
+<style>
+    .employee_alert_cont .tab{width: 150px;vertical-align:top;}
+    .employee_alert_cont .input-select{width: 160px;}
+    .employee_alert_cont .input-text{width: 184px;height: 100px;}
+    .employee_alert_cont .input-selectBox ul{width: 193px;}
+</style>
+<script>
+	$("#btn_tp").click(function(){
+		ply.alertBox("form");
+	});
+	$("#toPay").click(function(){
+		window.location.href="${contextPath}/CLGLYBookFlight/toPay?orderID=${flightOrder.id}";
+	});
+</script>
+<!--页脚-->
+<div class="gd_foot">
+    <div class="foot">
+        <div class="l fl">
+            <a href="#">关于智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">联系智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">智行荣誉</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">帮助中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">意见与建议</a>
+        </div>
+        <div class="r fr">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/foot_logo.png" />
+        </div>
+    </div>
+</div>
+<!--页脚-->
+</body>
+</html>

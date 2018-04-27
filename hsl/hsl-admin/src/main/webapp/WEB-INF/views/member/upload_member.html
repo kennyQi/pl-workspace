@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	var uploadPath = '${contextPath}/member/user/upload';	//图片上传地址
+	/** 文件上传按钮单击事件 */
+	function fileUpload(evt){
+		var temp = $(evt);
+		//获取后缀，并校验
+		var vall = temp.val();
+		var fileName = vall.substr(vall.lastIndexOf("\\")+1);
+		var ext = vall.substr(vall.lastIndexOf(".")+1);
+		if(!(ext && /^(xls)$/.test(ext.toLowerCase()))){
+    		alertMsg.warn("暂不支持xls以外的文件！");
+			return false;
+    	}
+		//发起请求
+		$.ajaxFileUpload({
+			url : uploadPath,
+	       	secureuri : false,
+	       	fileElementId : temp.attr("id"),
+	       	dataType : "json",
+	      	success: function (da,status) {
+	      		if(da.msg=="success"){
+	      			alertMsg.info("用户导入成功");
+	      		}else{
+	      			alertMsg.warn("用户导入失败："+da.detial+",出错在：第"+da.row+"行，第"+da.col+"列");
+	      		}
+	        },
+	        error: function (data, status, e) {
+	        	alertMsg.warn("文件上传失败，请稍后重试！");
+	        	$("#uploadFlag").val("");
+	        }
+	    });
+	}
+</script>
+<div class="pageContent" style="text-align:left;">
+	<form method="post" id="addForm" enctype="multipart/form-data" action="${contextPath}/member/user/upload" >
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>*用户文件：</label> 
+					<input id="file123" type="file" name="file" size="60" onchange="fileUpload(this);"/>
+					<p style="color: red;">目前只能支持后缀名为.xls的文件</p>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,3 @@
+修改budild。xml中模版类名，
+运行build.xml
+README文件中写模版名称，将README打进jar中。

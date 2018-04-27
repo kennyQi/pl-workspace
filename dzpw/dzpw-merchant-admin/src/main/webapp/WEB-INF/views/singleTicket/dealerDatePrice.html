@@ -1,0 +1,250 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script src="${contextPath}/resources/js/calendar-widget/jquery.calendar-widget.js" type="text/javascript" charset="utf-8"></script>
+
+<style>
+	#dealerDatePrice td,th{border-left:1px solid #999;border-bottom:1px solid #999;width:90px;padding:10px 0;text-align:center}
+	#dealerDatePrice table{border-right:1px solid #999;border-top:1px solid #999}th{background:#666;color:#fff}.other-month{background:#eee}
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	var map2 = {};
+	
+	/************/
+	var priceStr = $('.dpriceStr').val();
+	//解析后台返回经销商价格价格日历  放入map
+	//格式：20150312:100;20150313:101
+	var priceArr = priceStr.split(";");
+	for(var p in priceArr){
+		var priceArr2 = priceArr[p].split(":");
+		if(priceArr2.length==2)
+			map2["d_"+priceArr2[0]] = priceArr2[1];
+	}
+	/************/
+	
+	var date=new Date();
+	//当前年份
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	
+	var show = function(){
+		$('#dealerDatePrice').calendarWidget({month:m-1,year:y,cid:'d_'});//cid 日历input id的自定义前缀
+	}
+	
+	var save = function(){
+		$('.date-price').each(function(){
+			if($(this).attr('id').indexOf('d_')>-1){
+				var price = $(this).val();
+				if(price.trim().length>0){
+					map2[$(this).attr('id')] = $(this).val();
+				}else{
+					delete map2[$(this).attr('id')];
+				}
+			}
+		});
+	}
+	
+	var read = function(){
+		$('.date-price').each(function(){
+			if($(this).attr('id').indexOf('d_')>-1){
+				$(this).val(map2[$(this).attr('id')]);
+			}
+		});
+	}
+	
+	
+	//date开始日期 DATE  days天数
+	var newDay = function(dd, days){
+
+		dd.setDate(dd.getDate()+days);
+		var mm = dd.getMonth()+1;
+		var d = dd.getDate();
+		
+		if(mm<=9)
+			mm="0"+mm
+		if(d<=9)
+			d="0"+d;
+		
+		return dd.getFullYear()+""+mm+""+d;
+	}
+	
+	
+	//上个月
+	$('#preMonthBtn2').click(function(){
+		console.info('pre2');
+		if(--m<=0){
+			y--;
+			m=12;
+		}
+		
+		save();
+		console.info('pre2');
+		show();
+		read();
+	});
+	
+	//下个月
+	$('#nextMonthBtn2').click(function(){
+		if(++m>=13){
+			y++;
+			m=1;
+		}
+		
+		save();
+		show();
+		read();
+	});
+	
+	//保存经销商价格日历
+	$('#dealerDatePriceBtn').click(function(){
+		
+		save();
+		//去除ID前缀
+		var s = '';
+		for(var key in map2){
+			console.info(key+"   "+map2[key]);
+			s += key.replace('d_','')+':'+map2[key]+';';
+		}
+		
+		//保存经销商价格日历
+		$.ajax({
+			type: "post",
+			url: path+"/singleTicket/dealerDatePrice/save",
+			cache:false,
+			dataType:"json",
+			data:{"ticketPolicyId":$("#t_btn").val(), "dealerId":$("#d_btn").val(), "priceStr": s, "dealerName":$("#name_btn").val(), "type":$("#type_btn").val()},
+			success:function(data){
+				if(data.status==-1){
+					alertMsg.error("价格日历金额格式错误");
+				}
+				if(data.status==0){
+					alertMsg.error(data.msg);
+				}
+				if(data.status==1){
+					$.pdialog.closeCurrent();
+					
+					var insert = true;
+					//判断修改原有价格日历 还是新增
+					$(".cl").each(function(){
+						if($(this).val()==data.dealerId){
+							insert = false;
+						}
+					});
+	
+					if(insert){
+						$("#dtable tr:eq(0)").after("<tr height=\"30px;\">"+
+	                               "<td align=\"center\">"+data.dealerName+"<input type=\"hidden\" class=\"cl\" value=\""+data.dealerId+"\"></td>"+
+	                               "<td align=\"center\"><a onclick=\"ajaxDelTr(this, '"+data.dealerDatePriceId+"')\" href=\"javascript:void(0)\">删除日历</a>&nbsp;&nbsp;&nbsp;"+
+	                               "<a href=\"javascript:void(0)\" onclick=\"$.pdialog.open('${contextPath}/singleTicket/editDealerDatePrice?type=0&dealerId="+data.dealerId+"&ticketPolicyId="+data.ticketPolicyId+"&dealerName="+data.dealerName+"&priceId="+data.dealerDatePriceId+"', '"+data.dealerDatePriceId+"', '修改价格日历',{width:700,height:530});void(0);\" width=\"700\" height=\"530\">修改</a>"+
+	                               "</td>"+
+	                             "</tr>");
+					}
+					
+					//经销商价格日历行数>1 显示列表
+					if($("#dtable tr").length>1){
+						$("#dtable").show();
+					}
+				}
+			}
+		})
+	})
+	
+	
+	//批量添加价格
+	$("#addDealerRmb").click(function(){
+	 	
+		var bDate4rmb = $('#beginDate4rmb', $.pdialog.getCurrent()).val();
+		var eDate4rmb = $('#endDate4rmb', $.pdialog.getCurrent()).val();
+		var rmb = $('#rmb', $.pdialog.getCurrent()).val();
+		
+		if(bDate4rmb=='' || eDate4rmb==''){
+			alert("起止日期不能为空");
+			return;
+		}
+		
+		if(rmb==''){
+			alert("价格不能为空");
+			return;
+		}
+		
+		var s = /^(([1-9]{1}[\d]*)|([0]{1}))(\.[\d]{1,2})?$/;
+		
+		if(!s.test(rmb)){
+			alert("价格格式错误");
+			return;
+		}
+		
+		//开始日期
+		var bd = new Date(Date.parse(bDate4rmb.replace(/-/g, "/")));
+		//结束日期
+		var ed = new Date(Date.parse(eDate4rmb.replace(/-/g, "/")));
+		if(bd > ed){
+			alert("起始日期需小于截止日期");
+			return;
+		}
+		
+		//间隔天数
+		var dnum = parseInt(Math.abs(ed-bd)/1000/60/60/24);
+		dnum = dnum+1;
+		
+		//起始当天日期价格
+		map2["d_"+newDay(bd, 0)] = rmb;
+		
+		//设置起始日期第二天开始时间范围内的价格  写入MAP
+		for(var t=1; t<dnum; t++){
+			var s = newDay(bd, 1);
+			map2["d_"+s] = rmb;
+		}
+		
+		read();
+	})
+	
+	
+	
+	show();
+	read();
+});
+</script>
+
+
+<div class="pageContent" style="padding-left: 20px">
+
+    <div class="pageFormContent" layoutH="58" id="singleTicketContent">
+    
+    	<input id="t_btn" type="hidden" value="${ticketPolicyId}"/>
+    	<input id="d_btn" type="hidden" value="${dealerId}"/>
+    	<input id="name_btn" type="hidden" value="${dealerName}"/>
+    	
+    	<input type="hidden" class="dpriceStr" value="${dpriceStr}">
+    	<input type="hidden" id="type_btn" value="${type}">
+    
+		<input id="preMonthBtn2" type="button" value="上个月"/>
+		<input id="nextMonthBtn2" type="button" value="下个月"/>
+		<#if type==0>
+		    <input type="button" id="addDealerRmb" value="添加"/>
+   		</#if>
+		
+		</br>
+		</br>
+		
+		<div style="overflow: hidden;">
+		<#if type==0>
+		    <ul>
+		      	<li><label style="width: 75px;">设置日期：从</label><input type="text" id="beginDate4rmb" style="width: 80px;" class="date textInput readonly"/><label style="width: 18px;">&nbsp;到&nbsp;</label><input type="text" id="endDate4rmb" style="width: 80px;" class="date textInput readonly" readonly="true"/></li>
+		    	<li><label style="width: 61px;">设置价格：</label><input type="text" id="rmb" maxlength="9" style="width: 80px;" /><label style="width: 18px;">元</label></li>
+		    </ul>
+   		</#if>
+		</div>
+		<br/>
+		
+		<div id="dealerDatePrice" />
+	</div>
+    <#if type==0>
+	    <div style="padding-top: 10px">
+			<input id="dealerDatePriceBtn" type="button" value="保存" >
+		</div>
+    </#if>
+</div>

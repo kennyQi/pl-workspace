@@ -1,0 +1,166 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>资料编辑</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/person.css" rel="stylesheet" />
+  <script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js" language="javascript"></script>
+<script type="text/javascript">
+  $(function(){
+    // 性别选择
+    var $input_sex = $('input[name="sex"]');
+    $input_sex.on('click',function(){
+      if($(this).hasClass('isSex')){
+        $(this).val('女').removeClass('isSex');
+      }else{
+        $(this).val('男').addClass('isSex');
+      }
+    });
+
+    function alertMsg(msg){
+      var html=' <div class="alertMsg"> <span>'+msg+'</span> </div>';
+      $(".alertMsg").remove();
+      $("body").append(html);
+      var that=$(".alertMsg");
+      setTimeout(function(){
+        that.remove();
+      },2500);
+    }
+  })
+</script>
+<script type="text/javascript">
+function summitForm1(){
+	
+	if(checkrealname()&&IsEmail()&&IsPhone()){ $.post("editPerson",$("#form1").serialize(), function(data) {
+ 		if(data.success) {
+ 			alertMsg(data.message)
+ 	}}, "json");}
+}
+
+function alertMsg(msg){
+    var html=' <div class="alertMsg"> <span>'+msg+'</span> </div>';
+    $(".alertMsg").remove();
+    $("body").append(html);
+    var that=$(".alertMsg");
+    setTimeout(function(){
+      that.remove();
+    },2500);}
+    
+ 
+    
+    
+    function checkrealname() {
+		var  mynamediv= document.getElementById("name");
+		var str;
+		if (mynamediv) {
+
+			str = mynamediv.value;
+		}
+		
+		if(str.length==0){alertMsg("姓名不为空！");return false;}
+		var Expression = /[^\u4E00-\u9FA5]/;
+		var objExp = new RegExp(Expression);
+
+		if (objExp.test(str) == true) {
+			alertMsg("姓名格式有误，请输入汉字")
+			return false;
+
+		} else {
+			return true;
+		}
+
+	}
+    
+    
+    function IsEmail()     
+    {     
+            var str = document.getElementById('linkEmail').value.trim();    
+            if(str.length!=0){    
+            reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;    
+            if(!reg.test(str)){    
+            	alertMsg("邮箱格式不正确!");//请将“字符串类型”要换成你要验证的那个属性名称！    
+            	return false;
+            }else{ return true; }  
+          }else{alertMsg("邮箱不为空！");return false;}  
+    }
+    
+    function IsPhone()     
+    {     
+            var str = document.getElementById('linkMobile').value.trim();    
+            if(str.length!=0){    
+            reg=   /^0?1[3|4|5|7|8][0-9]\d{8}$/;    
+            if(!reg.test(str)){    
+            	alertMsg("手机格式不正确!");//请将“字符串类型”要换成你要验证的那个属性名称！    
+            	return false;
+            }  else{return true }
+           
+            } else{alertMsg("手机号不为空！");return false;}
+    }
+    
+  
+</script>
+</head>
+
+<body>
+<form action="${contextPath}/user/editPerson" method="post" id="form1" >
+<div class="bg2_header">
+  <header class="header box">
+      <a href="${contextPath}/user/view" class="a_btn iconfont">返回</a>
+      <h1>资料编辑</h1>
+      <a href="javascript:summitForm1();" class="a_btn iconfont" >保存</a>
+  </header>
+</div>
+<section class="content cont_editInfo">
+  <div class="userPic_wrap">
+  <#if !(user.image)??>
+    <img src="${contextPath}/resources/images/no_userPic.png" width="60px" height="60px">
+  <#else>
+  <#if user.image?substring(0,4)=="http">
+  	<img src="${user.image}" width="60px" height="60px">
+  <#else>
+      <img src="http://${user.image}" width="60px" height="60px">
+  </#if>
+  </#if>
+  </div>
+  <div class="eInfo_list">
+    <dl>
+      <dt>姓名</dt>
+      <dd>
+        <input type="text" name="name" id="name"  value="${user.name}" placeholder="请输入姓名">
+      </dd>
+    </dl>
+    <dl>
+      <dt>性别</dt>
+      <dd>
+      <#if user.gender==1>
+				 <input type="text" name="sex"  value="男" readonly="readonly">
+				<#else>
+				 <input type="text" name="sex"  value="女" readonly="readonly">
+				</#if>
+				
+				
+       
+        <i class="setting_icon iconfont">&#xe606;</i>
+      </dd>
+    </dl>
+    <dl>
+      <dt>手机</dt>
+      <dd>
+        <input type="text" id="linkMobile"  name="linkMobile" placeholder="请输入手机号码" value="${user.linkMobile}" >
+      </dd>
+    </dl>
+    <dl>
+      <dt>邮箱</dt>
+      <dd>
+        <input type="text" name="linkEmail" id="linkEmail"  placeholder="请输入邮箱地址" value="${user.linkEmail}" >
+     
+      </dd>
+    </dl>
+  </div>
+</section></form>
+</body>
+</html>

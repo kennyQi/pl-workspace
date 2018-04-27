@@ -1,0 +1,1209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/scenery.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+ 	$("#select1 dd").click(function () {
+		$(this).addClass("selected").siblings().removeClass("selected");
+		if ($(this).hasClass("select-all")) {
+			$("#selectA").remove();
+		} else {
+			var copyThisA = $(this).clone();
+			if ($("#selectA").length > 0) {
+				$("#selectA a").html($(this).text());
+ 			} else {
+				$(".select-result dl").append(copyThisA.attr("id", "selectA"));
+				$("#city").show();
+				$("#attr_b").hide();
+				return false
+			}
+		}
+	});
+	
+	$("#select2 dd").click(function () {
+		$(this).addClass("selected").siblings().removeClass("selected");
+		if ($(this).hasClass("select-all")) {
+			$("#selectB").remove();
+		} else {
+			var copyThisB = $(this).clone();
+			if ($("#selectB").length > 0) {
+				$("#selectB a").html($(this).text());
+ 			} else {
+				$(".select-result dl").append(copyThisB.attr("id", "selectB"));
+				return false
+ 			}
+		}
+	});
+	
+	$("#select3 dd").click(function () {
+		$(this).addClass("selected").siblings().removeClass("selected");
+		if ($(this).hasClass("select-all")) {
+			$("#selectC").remove();
+		} else {
+			var copyThisC = $(this).clone();
+			if ($("#selectC").length > 0) {
+				$("#selectC a").html($(this).text());
+ 			} else {
+				$(".select-result dl").append(copyThisC.attr("id", "selectC"));
+				$("#attr_b").hide();
+				return false
+			}
+		}
+	});
+	$("#select4 dd").click(function () {
+		$(this).addClass("selected").siblings().removeClass("selected");
+		if ($(this).hasClass("select-all")) {
+			$("#selectD").remove();
+		} else {
+			var copyThisC = $(this).clone();
+			if ($("#selectD").length > 0) {
+				$("#selectD a").html($(this).text());
+ 			} else {
+				$(".select-result dl").append(copyThisC.attr("id", "selectD"));
+				$("#attr_b").hide();
+				return false
+			}
+		}
+	});	
+	$("#selectA").live("click", function () {
+		$(this).remove();
+		$("#select1 .select-all").addClass("selected").siblings().removeClass("selected");
+		$("#city").hide();
+	});
+	
+	$("#selectB").live("click", function () {
+		$(this).remove();
+		$("#select2 .select-all").addClass("selected").siblings().removeClass("selected");
+	});
+	
+	$("#selectC").live("click", function () {
+		$(this).remove();
+		$("#select3 .select-all").addClass("selected").siblings().removeClass("selected");
+	});
+	$("#selectD").live("click", function () {
+		$(this).remove();
+		$("#select4 .select-all").addClass("selected").siblings().removeClass("selected");
+	});	
+	$(".select dd").live("click", function () {
+		if ($(".select-result dd").length > 1) {
+ 			$("#attr_b").hide();
+		} else {
+			$("#attr_b").show();
+ 		}
+	});
+	
+$("#Mclose").click(function(){
+ 		$("#selectA,#selectB,#selectC,#selectD").remove();
+		$("#select1 .select-all,#select2 .select-all,#select3 .select-all,#select4 .select-all").addClass("selected").siblings().removeClass("selected");
+		$("#attr_b").show();
+ 	})	
+   });
+ 
+ </script>
+
+</head>
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <div class="container" id="container">
+    <div id="searchbar" class="mt20 clearfix">
+      <div class="searchbd">
+        <div class="search_name">景点门票</div>
+        <form action="" id="searchform">
+          <input type="text"  class="w500 txt" />
+          <div class="bth">
+            <input type="submit" value="搜索" />
+          </div>
+        </form>
+        <div class="L searchhot w420"> <strong>热门景点:</strong><a href="#">横店影视城</a> <a href="#">东钱湖乐园</a> <a href="#">横店影视城</a> <a href="#">东钱湖乐园</a> <a href="#">横店影视城</a> <a href="#">东钱湖乐园</a><a href="#">横店影视城</a> <a href="#">东钱湖乐园</a><a href="#">横店影视城</a> <a href="#">东钱湖乐园</a></div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="current mt20 clearfix"><strong>当前位置：</strong><a href="#">景点门票</a>&gt;<a href="#">景点门票</a>&gt;<a href="#">景点门票</a>&gt;<a href="#">景点门票</a></div>
+      <form action="" id="J_NavAttrsForm" class="clearfix">
+       <ul class="select">
+      <li class="select-result" id="selerct">
+			<dl class="L navw">
+				<dt>已选条件：</dt>
+				<dd class="select-no" id="attr_b">暂时没有选择过滤条件</dd>
+ 			</dl>
+      <div id="Mclose">清除条件</div>
+ 		</li>
+		<li class="select-list">
+			 <dl id="select1">
+				<dt>省级：</dt>
+				<div class="city_id"><dd class="select-all selected"><a href="#">全部</a></dd>
+				<dd><a href="#">浙江(21)</a></dd>
+				<dd><a href="#">安徽(21)</a></dd>
+				<dd><a href="#">福建(21)</a></dd>
+				<dd><a href="#">北京(21)</a></dd>
+				<dd><a href="#">上海(21)</a></dd>
+				<dd><a href="#">广西(21)</a></dd>
+				<dd><a href="#">贵州(21)</a></dd>
+        <dd><a href="#">贵州(21)</a></dd>
+        <dd><a href="#">浙江(21)</a></dd>
+				<dd><a href="#">安徽(21)</a></dd>
+				<dd><a href="#">福建(21)</a></dd>
+				<dd><a href="#">北京(21)</a></dd>
+				<dd><a href="#">上海(21)</a></dd>
+				<dd><a href="#">广西(21)</a></dd>
+				<dd><a href="#">贵州(21)</a></dd>
+        <dd><a href="#">贵州(21)</a></dd>
+        <dd><a href="#">浙江(21)</a></dd>
+				<dd><a href="#">安徽(21)</a></dd>
+				<dd><a href="#">福建(21)</a></dd>
+				<dd><a href="#">北京(21)</a></dd>
+				<dd><a href="#">上海(21)</a></dd>
+				<dd><a href="#">广西(21)</a></dd>
+				<dd><a href="#">贵州(21)</a></dd>
+        <dd><a href="#">贵州(21)</a></dd></div>
+       <span id="more">更多</span>
+ 			</dl>
+		</li>
+ 		<li class="select-list" id="city" style="display:none">
+			<dl id="select2">
+				<dt>市级：</dt>
+				<dd class="select-all selected"><a href="#">全部</a></dd>
+				<dd><a href="#">杭州</a></dd>
+        <dd><a href="#">杭州</a></dd>
+        <dd><a href="#">杭州</a></dd>
+        <dd><a href="#">杭州</a></dd>
+ 			</dl>
+		</li>
+		<li class="select-list">
+     <dl id="select3">
+            <dt>门票价格：</dt>
+            <dd class="select-all selected"><a href="#">全部</a></dd>
+            <dd><a href="#" cate="4">￥0-￥50</a></dd>
+            <dd><a href="#" cate="4">￥50-￥100</a></dd>
+            <dd><a href="#" cate="4">￥100-￥1000</a></dd>
+            <dd><a href="#" cate="4">￥1000-￥10000</a></dd>
+            </dd>
+            </dl>
+    			<dl >
+ 			</dl>
+		</li>
+    
+    <li class="select-list">
+      <dl id="select4">
+            <dt>景点级别：</dt>
+            <dd class="select-all selected"><a href="#">全部</a></dd>
+            <dd><a href="#" cate="5">A</a></dd>
+            <dd><a href="#" cate="5">AA</a></dd>
+            <dd><a href="#" cate="5" class="sel">AAA</a></dd>
+            <dd><a href="#" cate="5">AAAA</a></dd>
+            <dd><a href="#" cate="5">AAAAA</a></dd>
+            </dl>
+    			<dl >
+ 			</dl>
+		</li>
+		
+	</ul>
+       </form>
+      
+      <!--景点列表-->
+      <div class="column L">
+        <div class="columnNav"> <span>排序：</span>
+          <div class="sort">
+            <select>
+              <option>默认排序</option>
+              <option>价格从高到低</option>
+              <option>价格从低到高</option>
+              <option>级别从高到低</option>
+              <option>级别从低到高</option>
+              <option>点评数量</option>
+            </select>
+          </div>
+          <div class="c_sale">
+            <label class="c_s1 ">
+              <input type="checkbox" />
+              <i></i>
+              </label>
+            <label class="c_s1 c_s2">
+              <input type="checkbox" />
+              <i></i></label>
+            <label class="c_s1 c_s3">
+              <input type="checkbox" />
+              <i></i></label>
+            <label class="c_s1 c_s4">
+              <input type="checkbox" />
+              <i></i></label>
+          </div>
+          <div class="navPage R"><a href="#" class="Prev"><i></i>上一页</a> <a href="#" class="next">下一页<i></i></a></div>
+        </div>
+        <div id="spot">
+          <div class="spot_p">
+            <div class="spot_img">
+            <div class="spot_P_name">
+                <div class="spot_p_title">
+                  <h2><a href="#">香港迪士尼乐园</a></h2>
+                </div>
+                <div class="spot_p_about">
+                  <p>香港大于山香港迪士尼乐园度假村</p>
+                </div>
+                <div class="spot_p_map">
+                  <p><a href="#"><i></i>查看地图</a></p>
+                </div>
+                <div class="spot_p_star s s4"><i></i></div>
+                <div class="spot_p_effect"><b>游客印象：</b><a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a></div>
+              </div>
+             </div>
+            <div class="spot_P_img"><a href="#"><img src="../temp/220x160.jpg" /></a></div>
+            <div class="spot_p_list clearfix ">
+              <div class="s_p_title sl">景点门票</div>
+              <div class="s_p_style sl">票型</div>
+              <div class="s_p_price sl">市场价</div>
+              <div class="s_p_wprice sl">网站价</div>
+              <div class="s_p_pay sl">支付方式</div>
+              <div class="s_p_operation sl">操作</div>
+            </div>
+            <div class="spot_info ">
+              <p>为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</p>
+              <div class="all_p_list">
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              </div>
+              <div class="s_p_more"><span>查看所有门票类型(5)<i></i></span></div>
+            </div>
+          </div>
+          <div class="spot_p">
+            <div class="spot_img">
+            <div class="spot_P_name">
+                <div class="spot_p_title">
+                  <h2><a href="#">香港迪士尼乐园</a></h2>
+                </div>
+                <div class="spot_p_about">
+                  <p>香港大于山香港迪士尼乐园度假村</p>
+                </div>
+                <div class="spot_p_map">
+                  <p><a href="#"><i></i>查看地图</a></p>
+                </div>
+                <div class="spot_p_star s s4"><i></i></div>
+                <div class="spot_p_effect"><b>游客印象：</b><a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a></div>
+              </div>
+             </div>
+            <div class="spot_P_img"><a href="#"><img src="../temp/220x160.jpg" /></a></div>
+            <div class="spot_p_list clearfix ">
+              <div class="s_p_title sl">景点门票</div>
+              <div class="s_p_style sl">票型</div>
+              <div class="s_p_price sl">市场价</div>
+              <div class="s_p_wprice sl">网站价</div>
+              <div class="s_p_pay sl">支付方式</div>
+              <div class="s_p_operation sl">操作</div>
+            </div>
+            <div class="spot_info ">
+              <p>为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</p>
+              <div class="all_p_list">
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              </div>
+              <div class="s_p_more"><span>查看所有门票类型(5)<i></i></span></div>
+            </div>
+          </div>
+          <div class="spot_p">
+            <div class="spot_img">
+            <div class="spot_P_name">
+                <div class="spot_p_title">
+                  <h2><a href="#">香港迪士尼乐园</a></h2>
+                </div>
+                <div class="spot_p_about">
+                  <p>香港大于山香港迪士尼乐园度假村</p>
+                </div>
+                <div class="spot_p_map">
+                  <p><a href="#"><i></i>查看地图</a></p>
+                </div>
+                <div class="spot_p_star s s4"><i></i></div>
+                <div class="spot_p_effect"><b>游客印象：</b><a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a></div>
+              </div>
+             </div>
+            <div class="spot_P_img"><a href="#"><img src="../temp/220x160.jpg" /></a></div>
+            <div class="spot_p_list clearfix ">
+              <div class="s_p_title sl">景点门票</div>
+              <div class="s_p_style sl">票型</div>
+              <div class="s_p_price sl">市场价</div>
+              <div class="s_p_wprice sl">网站价</div>
+              <div class="s_p_pay sl">支付方式</div>
+              <div class="s_p_operation sl">操作</div>
+            </div>
+            <div class="spot_info ">
+              <p>为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</p>
+              <div class="all_p_list">
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              </div>
+              <div class="s_p_more"><span>查看所有门票类型(5)<i></i></span></div>
+            </div>
+          </div>
+          <div class="spot_p">
+            <div class="spot_img">
+            <div class="spot_P_name">
+                <div class="spot_p_title">
+                  <h2><a href="#">香港迪士尼乐园</a></h2>
+                </div>
+                <div class="spot_p_about">
+                  <p>香港大于山香港迪士尼乐园度假村</p>
+                </div>
+                <div class="spot_p_map">
+                  <p><a href="#"><i></i>查看地图</a></p>
+                </div>
+                <div class="spot_p_star s s4"><i></i></div>
+                <div class="spot_p_effect"><b>游客印象：</b><a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a></div>
+              </div>
+             </div>
+            <div class="spot_P_img"><a href="#"><img src="../temp/220x160.jpg" /></a></div>
+            <div class="spot_p_list clearfix ">
+              <div class="s_p_title sl">景点门票</div>
+              <div class="s_p_style sl">票型</div>
+              <div class="s_p_price sl">市场价</div>
+              <div class="s_p_wprice sl">网站价</div>
+              <div class="s_p_pay sl">支付方式</div>
+              <div class="s_p_operation sl">操作</div>
+            </div>
+            <div class="spot_info ">
+              <p>为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</p>
+              <div class="all_p_list">
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              </div>
+              <div class="s_p_more"><span>查看所有门票类型(5)<i></i></span></div>
+            </div>
+          </div>
+          <div class="spot_p">
+            <div class="spot_img">
+            <div class="spot_P_name">
+                <div class="spot_p_title">
+                  <h2><a href="#">香港迪士尼乐园</a></h2>
+                </div>
+                <div class="spot_p_about">
+                  <p>香港大于山香港迪士尼乐园度假村</p>
+                </div>
+                <div class="spot_p_map">
+                  <p><a href="#"><i></i>查看地图</a></p>
+                </div>
+                <div class="spot_p_star s s4"><i></i></div>
+                <div class="spot_p_effect"><b>游客印象：</b><a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a></div>
+              </div>
+             </div>
+            <div class="spot_P_img"><a href="#"><img src="../temp/220x160.jpg" /></a></div>
+            <div class="spot_p_list clearfix ">
+              <div class="s_p_title sl">景点门票</div>
+              <div class="s_p_style sl">票型</div>
+              <div class="s_p_price sl">市场价</div>
+              <div class="s_p_wprice sl">网站价</div>
+              <div class="s_p_pay sl">支付方式</div>
+              <div class="s_p_operation sl">操作</div>
+            </div>
+            <div class="spot_info ">
+              <p>为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</p>
+              <div class="all_p_list">
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              </div>
+              <div class="s_p_more"><span>查看所有门票类型(5)<i></i></span></div>
+            </div>
+          </div>
+          <div class="spot_p">
+            <div class="spot_img">
+            <div class="spot_P_name">
+                <div class="spot_p_title">
+                  <h2><a href="#">香港迪士尼乐园</a></h2>
+                </div>
+                <div class="spot_p_about">
+                  <p>香港大于山香港迪士尼乐园度假村</p>
+                </div>
+                <div class="spot_p_map">
+                  <p><a href="#"><i></i>查看地图</a></p>
+                </div>
+                <div class="spot_p_star s s4"><i></i></div>
+                <div class="spot_p_effect"><b>游客印象：</b><a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a></div>
+              </div>
+             </div>
+            <div class="spot_P_img"><a href="#"><img src="../temp/220x160.jpg" /></a></div>
+            <div class="spot_p_list clearfix ">
+              <div class="s_p_title sl">景点门票</div>
+              <div class="s_p_style sl">票型</div>
+              <div class="s_p_price sl">市场价</div>
+              <div class="s_p_wprice sl">网站价</div>
+              <div class="s_p_pay sl">支付方式</div>
+              <div class="s_p_operation sl">操作</div>
+            </div>
+            <div class="spot_info ">
+              <p>为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</p>
+              <div class="all_p_list">
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              <div class="s_p_list">
+                <div class="s_p_title sl">香港迪士尼乐园1日游（8点前预订）</div>
+                <div class="s_p_style sl">[老人票]</div>
+                <div class="s_p_price sl"><span>¥500</span></div>
+                <div class="s_p_wprice sl"><span>￥100</span></div>
+                <div class="s_p_pay sl"><span>在线支付</span></div>
+                <div class="s_p_operation sl">
+                  <div class="bth bth1"><a href="#">预订</a></div>
+                </div>
+              </div>
+              </div>
+              <div class="s_p_more"><span>查看所有门票类型(5)<i></i></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="page">  <div class="navPage R"><a href="#" class="Prev"><i></i>上一页</a> <a href="#" class="next">下一页<i></i></a></div></div>
+      </div>
+      <div class="sidebar R">
+        <div class="tese f20 sr box_t">
+          <h2>特色服务</h2>
+          <ul>
+            <li class="t t1"> <span></span>
+              <div class="t_info">
+                <p><strong>价格保证</strong></p>
+                <p>同类产品，保证低价</p>
+              </div>
+            </li>
+            <li class="t t2"> <span></span>
+              <div class="t_info">
+                <p><strong>退订保障</strong></p>
+                <p>因特殊情况影响出行，保证退订</p>
+              </div>
+            </li>
+            <li class="t t3"> <span></span>
+              <div class="t_info">
+                <p><strong>救援保障</strong></p>
+                <p>旅途中遇意外情况，保证救援</p>
+              </div>
+            </li>
+            <li class="t t4"> <span></span>
+              <div class="t_info">
+                <p><strong>7X24小时服务</strong></p>
+                <p>快速响应，全年无休</p>
+              </div>
+            </li>
+            <li class="t t5"> <span></span>
+              <div class="t_info">
+                <p><strong>退订保障</strong></p>
+                <p>因特殊情况影响出行，保证退订</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="history hp f20 sr box_t">
+          <h2>您的浏览记录</h2>
+          <ul>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          </ul>
+        </div>
+        <div class="ranking hp f20 sr box_t">
+          <h2>您的浏览记录</h2>
+          <ul>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+            <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer" class="mt20">
+    <div class="fooerBD">
+      <div class="L about">
+        <dl>
+          <dt><a href="#">关于我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">加盟合作</a></dt>
+          <dd><a href="#">友情链接</a><a href="#">网站联盟</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">联系我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+        </dl>
+      </div>
+      <div class="L w260">
+        <div class="hot_phone">
+          <p><i class="tel"></i>24小时客服热线：4008-117-117</p>
+          <p><i class="tel"></i>境外游客紧急联络电话：4008-117-117</p>
+          <p><i class="QQ"></i>在线客服：QQ1</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="T_top"> <a href="#">Top</a> </div>
+</div>
+<script src="../js/gb.js"></script>
+
+<script type="text/jscript">
+$("#Mclose").click(function(){
+	$("#select1").toggleClass("sel")
+ 	})
+  $("#attr dl dd a").click(function(){
+	  $(this).addClass("sel").siblings().removeClass("sel")
+	 });
+	 
+$("#more").on("click",function(){
+	$(".city_id").toggleClass("h")
+ 	});	 
+	
+$('#spot').on('click', '.s_p_more', function(){
+	if($(this).prev('.all_p_list').hasClass('h')){
+		//关闭
+		$('#spot .s_p_more').prev('.all_p_list').removeClass('h');
+	}else{
+		//打开
+		$('#spot .s_p_more').prev('.all_p_list').removeClass('h');
+		$(this).prev('.all_p_list').addClass('h');
+	}
+});
+   </script>
+ 
+  
+ </body>
+</html>

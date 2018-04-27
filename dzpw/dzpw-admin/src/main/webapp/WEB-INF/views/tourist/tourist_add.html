@@ -1,0 +1,79 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+.jq{background:#eee;font-weight:600;}
+.jq span{margin-left:5px;}
+.addSpan{vertical-align:sub;}
+</style>
+
+<div class="pageContent">
+<form method="post" class="pageForm required-validate" action="${contextPath}/tourist/add"
+	onsubmit="return validateCallback(this,dialogAjaxDone);">
+	<div class="pageFormContent" layoutH="58">
+	
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>1.基本信息</span></div>
+			<div class="unit">
+				<label>姓名：</label>
+				<input type="text" size="32" name="name"/>
+			</div>
+			<div class="unit">
+				<label>证件类型：</label>
+				<select name="idType" class="combox">
+					<option value="">未选择</option>
+					<option value="1">身份证</option>
+					<option value="2">护照</option>
+					<option value="3">军官证</option>
+					<option value="4">其他</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>证件号码：</label>
+				<input type="text" size="32" name="idNo"/>
+			</div>
+			
+			
+			<div class="unit">
+				<label>性别：</label>
+				<select name="gender" class="combox">
+					<option value="">未选择</option>
+					<option value="1">男</option>
+					<option value="2">女</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label>户籍地址：</label>
+				<input type="text" size="32" name="address"/>
+			</div>
+			<div class="unit">
+				<label>民族：</label>
+				<input type="text" size="32" name="nation"/>
+			</div>
+			<div class="unit">
+				<label>出生：</label>
+				<input type="text" class="date" size="32" name="birthday"/>
+			</div>
+			<div class="unit">
+				<label>年龄：</label>
+				<input type="text" size="32" name="age" />
+			</div>
+			<div class="unit">
+				<label>手机：</label>
+				<input type="text" size="32" name="telephone"/>
+			</div>
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="buttonActive"><div class="buttonContent">
+					<button type="submit" style="width: 35px;">提交</button>
+				</div></div>
+			</li>
+			<li>
+				<div class="button"><div class="buttonContent">
+					<button type="button" class="close" style="width: 35px;">取消</button>
+				</div></div>
+			</li>
+		</ul>
+	</div>
+</form>
+</div>

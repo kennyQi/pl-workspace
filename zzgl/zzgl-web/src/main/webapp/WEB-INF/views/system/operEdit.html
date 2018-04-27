@@ -1,0 +1,55 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+
+	<form method="post" action="${contextPath}/system/operator/update" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			
+			<input type="hidden" name="id" value="${staff.id}" />
+			<input type="hidden" name="authUser.version" value="${staff.authUser.version}" />
+			<input type="hidden" name="authUser.enable" value="${staff.authUser.enable}" />
+			
+			<div class="unit">
+				<label>姓名：</label>
+				<input type="text" name="info.realName" size="64" maxlength="64" class="required" value="${staff.info.realName!?html}" />
+			</div>
+			<div class="unit">
+				<label>登录名：</label>
+				<input readonly="readonly" type="text" name="authUser.loginName" size="64" class="required" minlength="5" maxlength="64" value="${staff.authUser.loginName!?html}" />
+			</div>
+			<div class="unit">
+				<label>电话：</label>
+				<input type="text" name="info.tel" size="64" maxlength="32" value="${staff.info.tel!?html}" />
+			</div>
+			<div class="unit">
+				<label>手机：</label>
+				<input type="text" name="info.mobile" size="64" maxlength="32" value="${staff.info.mobile!?html}" />
+			</div>
+			<div class="unit">
+				<label>Email：</label>
+				<input type="text" name="info.email" size="64" maxlength="64" value="${staff.info.email!?html}" />
+			</div>
+			<div class="unit">
+				<label>角色：</label>
+				<#list authRoleList as role>
+					<#assign hasRoleb = false >
+					<#list hasRoleName as roleName>
+						<#if role.roleName == roleName>
+							<#assign hasRoleb = true >
+							<#break>
+						</#if>
+					</#list>
+				<label><input name="roleIds" type="checkbox" value="${role.id}" <#if hasRoleb>checked="checked"</#if> /> ${role.displayName!'-'?html}</label>
+				</#list>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

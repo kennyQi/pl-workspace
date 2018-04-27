@@ -1,0 +1,203 @@
+	*{
+		margin:0px;
+		padding:0px;
+	}
+
+	.wrapper{
+		width:100%;
+		  padding-bottom: 30px;
+		border:1px solid #cccccc;
+		position:fixed;
+		font-family:"微软雅黑";
+	}
+	
+	.w-title{
+		height: 52px;
+	    line-height: 73px;
+	    border-bottom: 1px dashed #CCCCCC;
+	    font-size: 18px;
+	    width: 94%;
+	    margin: 0px auto;
+	    text-indent: 30px;
+	}
+	
+	.c-title{
+		height: 30px;
+		width: 94%;
+		margin: 0px auto;
+		margin-top: 10px;
+		text-indent: 18px;
+		line-height: 30px;
+		  background: #ddd;
+	}
+	
+	.progress{
+		list-style:none;
+		width: 85%;
+		height: 16px;
+		margin-top: 88px;
+		padding-left: 15%;
+		margin-bottom: 42px;
+		
+	}
+	
+	.progress li{
+		display:block;
+		float:left;
+		position:relative;
+		font-size: 12px;
+		width:33%;
+		height:4px;
+		border-bottom:1px solid #009933;
+	}
+	
+	.cpl1{
+		background:url(../../resources/image/mileOrderView/complete1.png) no-repeat;
+		width:270px;
+		height:14px;
+	}
+	
+	.cpl2{
+		background:url(../../resources/image/mileOrderView/complete2.png) no-repeat;
+		width:256px;
+		height:18px;
+	}
+	
+	.cpl-con{
+		position:absolute;
+		  text-align: center;
+	}
+	
+	.cpl-con1{
+		left: -18%;
+        top: -50px;
+	}
+	
+	.cpl-con2{
+		top: -46px;
+        left: -14%;
+	}
+	
+	.cpl-con3{
+		right: -14%;
+        top: -46px;
+	}
+	
+	.cpl-con4{
+		right: 0;
+        top: -46px;
+	}
+	
+	.tab-title{
+		text-align:center;
+		  margin-bottom: 10px;
+	}
+	
+	.tab-title span{
+		color:#cccccc;
+	}
+	
+	.tab{
+		width: 94%;
+		margin:0px auto;
+		table-layout:fixed;
+		border-collapse:collapse;
+	}
+	
+	.tab td{
+		text-align: center;
+		
+		font-size: 12px;
+		letter-spacing: 1px;
+	}
+	
+	.tab1 td{
+		line-height: 40px;
+		border-top:1px solid #cccccc;
+		border-left:1px solid #cccccc;
+		border-bottom:1px solid #cccccc;
+	}
+	
+	.tab1{
+		border-right:1px solid #cccccc;
+		  background-color: #f0f0f0;
+		  color:#666666;
+	}
+	
+	.tab2{
+		border-left:1px solid #cccccc;
+		border-right:1px solid #cccccc;
+		border-bottom:1px solid #cccccc;
+		color:#333333;
+	}
+	
+	.tab2 td{
+		padding-top:20px;
+		padding-bottom:20px;
+	}
+	
+	.s-pic{
+		width: 68px;
+	    height: 66px;
+	    background: url(../../resources/image/mileOrderView/sc.png) no-repeat;
+	    position: absolute;
+	    top: -20px;
+	    left: -62%;
+	}
+	
+	.f-pic{
+		width: 85px;
+	    height: 88px;
+	    background: url(../../resources/image/mileOrderView/fal.png) no-repeat;
+	    position: absolute;
+	    top: -20px;
+	    left: -62%;
+	}
+	
+	.yuan{
+		width:14px;
+		height:14px;
+		background: url(../../resources/image/mileOrderView/yuan.png) no-repeat;
+		position: absolute;
+	}
+	
+	.yuan1{
+		top: -2px;
+	}
+	
+	.yuan2{
+		top: -2px;
+	}
+	
+	.yuan3{
+		top: -2px;
+		right: 0px;
+	}
+	
+	.yuan4{
+		top: -2px;
+		right: 0px;
+	}
+	
+	.s-pic-text{
+		position: absolute;
+		left: -55%;
+        top: 50px;
+	}
+	
+	.sh{
+		  padding-left: 3%;
+  margin-top: 20px;
+	}
+	
+	.sh-1 .a{
+		font-size: 12px;
+  letter-spacing: 1px;
+    color: #666666;
+	}
+	
+	.sh-1 .b{
+		font-size: 12px;
+  letter-spacing: 1px;
+    color: #333333;
+	}

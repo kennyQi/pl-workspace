@@ -1,0 +1,22 @@
+.content_wrap{width:100%;min-width:1110px;height:600px;background:url(../images/content_bg.jpg) no-repeat center;margin:14px auto 38px auto;*margin-top:34px;position:relative;}
+/*.bg_img img{width:100%;height:auto;}*/
+.statement{width: 1103px;height: 70px;background: url(../images/statement1.png) no-repeat center;position:absolute;bottom:-27px;left:50%;margin-left:-551px;}
+.content_box{width:1110px;height:100%;position:absolute;top:0px;left:50%;margin-left:-550px;}
+.content{padding:40px 0 0 40px;}
+.index_title{font-size:30px;font-weight:normal;color:#fff;letter-spacing:3px;}
+.content_inner{width:420px;height:352px;padding:5px;background:url(../images/form_bg1.png);position:relative;}
+.content_inner .tit{height:46px;line-height:46px;background:#02b2eb;padding-left:20px;color:#fff;font-size:16px;font-weight:normal;}
+.content_inner .form_box{width:100%;height:306px;background:#fff;position:relative;}
+.form_box dl{padding-top:8px;padding-left:20px;}
+.form_box dt{font-size:14px;color:#1b6b94;line-height:25px;padding-left:45px;}
+.form_box dd{vertical-align: middle;}
+.form_box dd i{display:block;float:left;margin-right:5px;width:40px;height:40px;background-image:url(../images/ydjp_icon.png);background-repeat:no-repeat;}
+.form_box dd i.start{background-position:0px 0px;}
+.form_box dd i.end{background-position:0px -75px;}
+.form_box dd i.s_date{background-position:0px -150px;}
+.form_box .text_input{width:280px;padding-left:10px;height:38px;line-height:20px;padding-top:10px\9;height:28px\9;*padding-top:10px;*height:28px;border:1px solid #d0d0d0;font-size:16px;color:#1b6b94;vertical-align:middle;}
+.form_box .btn_search{width: 100%;height:61px;margin-top:26px;border:0;background-color:#9ace45;background-image:url(../images/fly_search.png);background-repeat:no-repeat;background-position:center;color:#fff;font-size: 18px;padding-left: 32px;cursor: pointer;}
+.form_box .btn_search:hover{background-color:#a6da50;}
+.form_box .se_icon_wrap{width:36px;height:78px;border:1px solid #eceef1;border-left:none;position:absolute;top:52px;right:26px;}
+.form_box .se_icon_wrap .se_icon{width:28px;height:25px;margin-left:23px;margin-top:28px;background:url(../images/se_icon.png);}
+.form_box .se_icon_wrap .se_icon:hover{background:url(../images/se_icon_hover.png);cursor:pointer;}

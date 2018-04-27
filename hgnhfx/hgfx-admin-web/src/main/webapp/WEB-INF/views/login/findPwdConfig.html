@@ -1,0 +1,59 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+	
+	function showConfig(){
+		$("#two",navTab.getCurrentPanel()).show();
+		$("#one",navTab.getCurrentPanel()).hide();
+	}
+	
+	function confirmSaveConfig(){
+		if (confirm("是否要保存修改？")){
+			
+			if ($("#findPwdTimes").val()==""){
+				$("#two",navTab.getCurrentPanel()).hide();
+				$("#one",navTab.getCurrentPanel()).show();
+				return;
+			}
+			
+			$('#pagerFormConfig').submit();
+		}
+	}
+</script>
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="58">
+	
+	<form  id="pagerFormConfig" ref="pagerFormConfig" class="pageForm required-validate" method="post" 
+		action="${contextPath}/findpwdtimes/modify" onsubmit="return validateCallback(this, navTabAjaxDone);">
+		
+	<div class="jq unit" style="padding:8px 5px;margin-bottom:10px;"><span style="color: gray">忘记密码页面，发送短信次数</span></div>
+	
+	
+	<div id="one">
+		<div class="unit">
+			<label>每日找回密码次数限制</label>
+			<label>${findPwdTimes}&nbsp;&nbsp;&nbsp;次</label>
+		</div>
+		
+		<div class="unit" style="padding: 15px 1px;">
+			<input type="button" value="&nbsp;修&nbsp;改&nbsp;" onclick="showConfig()"/>
+		</div>
+	</div>
+	
+	<div id="two" style="display:none;">
+		<div class="unit">
+			<label>每日找回密码次数限制</label>
+			<input id="findPwdTimes" name="findPwdTimes" maxlength="2" size="10">&nbsp;&nbsp;&nbsp;次
+		</div>
+		
+		<div class="unit" style="padding: 15px 1px;">
+			<input type="button" onclick="confirmSaveConfig()" value="&nbsp;保&nbsp;存&nbsp;"/>
+		</div>
+	</div>
+	
+	</form>
+</div>
+
+
+

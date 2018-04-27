@@ -1,0 +1,238 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+	name="viewport" />
+<title>联系人</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<script data-main="${contextPath}/resources/js/fly_connect"
+	src="${contextPath}/resources/js/require.min.js" async="async">
+	
+</script>
+<script type="text/javascript">
+	var request_path = "${contextPath}";
+</script>
+
+
+<script type="text/javascript">
+function changeval(){
+	$("#costCenterName").val($("#costoption option:selected").text());
+}
+	function summitForm1() {
+		if (checkrealname() && checkid()&&IsPhone()) {
+			var html="<div class='loading_bg'></div>";
+			$("body").append(html);
+			$("#costCenterName").val($("#costoption option:selected").text());
+			$.post(document.getElementById("form1").action, $("#form1").serialize(), function(data) {
+				if (data.success) {
+					alertMsg(data.message)
+					window.location.href = window.location.href;
+				}else{
+					alertMsg(data.message)
+				}
+			}, "json");
+		}
+
+	}
+
+	function alertMsg(msg) {
+		var html = ' <div class="alertMsg"> <span>' + msg + '</span> </div>';
+		$(".alertMsg").remove();
+		$("body").append(html);
+		var that = $(".alertMsg");
+		setTimeout(function() {
+			that.remove();
+		}, 2500);
+	}
+
+	function checkid(){
+		var str = document.getElementById("idno").value;
+		if (str.length != 0) {
+			reg=   /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
+			if (!reg.test(str)) {
+				//如果通过该验证，说明身份证格式正确，但准确性还需计算
+				  if(str==18){
+					   var idCardWi=new Array( 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ); //将前17位加权因子保存在数组里
+					   var idCardY=new Array( 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ); //这是除以11后，可能产生的11位余数、验证码，也保存成数组
+					   var idCardWiSum=0; //用来保存前17位各自乖以加权因子后的总和
+					   for(var i=0;i<17;i++){
+					    idCardWiSum+=idCard.substring(i,i+1)*idCardWi[i];
+					   }
+
+					   var idCardMod=idCardWiSum%11;//计算出校验码所在数组的位置
+					   var idCardLast=idCard.substring(17);//得到最后一位身份证号码
+
+				  	 //如果等于2，则说明校验码是10，身份证号码最后一位应该是X
+				   	if(idCardMod==2){
+				    	if(idCardLast=="X"||idCardLast=="x"){
+				    		return true
+				    	}else{
+				    		alertMsg("身份证号码错误！");
+				    		return false
+				    	}
+				  	 }else{
+				   	 //用计算出的验证码与最后一位身份证号码匹配，如果一致，说明通过，否则是无效的身份证号码
+				    	if(idCardLast==idCardY[idCardMod]){
+				    		return true
+				    	}else{
+				    		alertMsg("身份证号码错误！");
+				    		return false
+				    	}
+				   	}
+				  } else{
+					  alertMsg("身份证号码错误！");
+			    	return false
+				  }
+			} else {
+				return true
+			}
+
+		} else {
+			alertMsg("身份证不为空！");
+			return false;
+		}
+
+		 
+	}
+	function checkrealname() {
+		var mynamediv = document.getElementById("name");
+		var str;
+		if (mynamediv) {
+
+			str = mynamediv.value;
+		}
+
+		if (str.length == 0) {
+			alertMsg("姓名不为空！");
+			return false;
+		}
+		var Expression = /[^\u4E00-\u9FA5]/;
+		var objExp = new RegExp(Expression);
+
+		if (objExp.test(str) == true) {
+			alertMsg("姓名格式有误，请输入汉字")
+			return false;
+
+		} else {
+			return true;
+		}
+
+	}
+
+	function IsPhone() {
+		var str = document.getElementById('phone').value.trim();
+		if (str.length != 0) {
+			reg=   /^0?1[3|4|5|7|8][0-9]\d{8}$/;
+			if (!reg.test(str)) {
+				alertMsg("手机格式不正确!");//请将“字符串类型”要换成你要验证的那个属性名称！    
+				return false;
+			} else {
+				return true
+			}
+
+		} else {
+			alertMsg("手机号不为空！");
+			return false;
+		}
+	}
+	
+	
+</script>
+
+</head>
+
+<body>
+	<link href="${contextPath}/resources/css/fly_reserve.css"
+		rel="stylesheet" />
+
+	<div id="connect" style="-webkit-transform: translateX(0px); ">
+		<header class="header box">
+			<a href="javascript:history.back()" class="l iconfont"
+				style="color:#fff;font-size:20px;">&#xe606;</a>
+			<h1>乘机人</h1>
+			<a href="javascript:" class="r" style="color:#fff;"></a>
+		</header>
+		<div class="addConnect">
+			<span class="addNew">+新增联系人</span>
+		</div>
+		<div id="buyOthers" style="display: none;">${userDTO.buyOthers}</div>
+		<div id="connectList">
+			<#list users as user>
+
+
+			<div class="connectBox box">
+				<div class="passengerDetail">
+				<span class="costID" style="display: none">${user.costCenterID}</span>
+					<span class="phone" style="display: none">${user.telephone}</span>
+					<span class="myid" style="display: none">${user.id}</span> <span
+						class="name">${user.passengerName}</span> <span class="group"
+						data-value="${user.costCenterID}">${user.costCenterName}</span> <span
+						class="cardDetail">身份证 <i>${user.idNO}</i></span> <label
+						class="editor"><img
+						src="${contextPath}/resources/images/reserveOrder.png" alt="" /></label>
+				</div>
+			</div>
+
+
+			</#list>
+
+
+			<!-- <div class="connectBox box">
+            <span class="choose chooseOn"></span>
+            <div class="passengerDetail">
+                <span class="name">测试</span>
+                <span class="group">开发中心</span>
+                <span class="cardDetail">身份证 330327111911193033</span>
+                <label class="editor"><img src="images/reserveOrder.png" alt=""/></label>
+            </div>
+        </div>-->
+		</div>
+	</div>
+	<form action="${contextPath}/user/addConnectUser" method="post"
+		id="form1">
+		<div id="editor" style="display: none;">
+			<header class="header box" style="z-index: 20">
+				<a href="javascript:" class="l iconfont editorBack"
+					style="color:#fff;font-size:20px;">&#xe606;</a>
+				<h1>编辑乘机人</h1>
+				<a href="javascript:summitForm1()" class="r" style="color:#fff;">完成</a>
+			</header>
+			<div id="editorConnect">
+				<label class="box connectInput name"><input class="inputfor"
+					data-name="name" name="passengerName" type="text" placeholder="姓名"
+					id="name" /> </label> <label class="box connectInput cardNo"><input
+					class="cardDetail" data-name="cardDetail" type="text"
+					placeholder="身份证" name="idNO" id="idno" /> </label> <label class="box connectInput"><input
+					class="inputfor" data-name="phone" type="text" placeholder="手机号码"
+					name="telephone" id="phone" /> </label> <label
+					class="box connectInput center">
+					
+					 <select class="inputfor" value="0" id="costoption"
+					data-name="group" name="costCenterID"   onchange="changeval()">
+						
+						<#list costCenterDTOs as dto  >
+                	<option value="${dto.id}" >${dto.costCenterName}</option>
+                	
+				</#list>
+                <!-- 	<option selected="selected">hahahahah</option>   -->
+				
+				</select> <i class="iconfont">&#xe606;</i>
+				</label> <label><input class="inputfor" data-name="myid"name="myid" type="hidden" id="myid" />
+					<input class="inputfor" data-name="costid" type="hidden" id="thecostid" /> 
+					 <input class="inputfor"   name="costCenterName" type="hidden" id="costCenterName"  />
+					  </label>
+					
+					
+					
+				
+			</div>
+		</div>
+
+
+	</form>
+</body>
+</html>

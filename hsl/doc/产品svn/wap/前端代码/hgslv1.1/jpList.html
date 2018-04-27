@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- meta信息，可维护 -->
+	<meta charset="UTF-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<!-- 公共样式 -->
+	<link rel="stylesheet" href="css/base.2.0.css" />
+	<!-- 页面样式表 -->
+	<!--<link rel="Stylesheet" href="css/main.css">
+	-->
+	<link rel="Stylesheet" href="css/fbase.css">
+	<link rel="Stylesheet" href="css/flight.css">
+	<link rel="stylesheet" href="css/hgsl_fly.css">
+
+
+	<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<script src="js/fly.js"></script>
+	<script>
+	$(function(){
+		//默认值
+    $("#city1_tab").show();
+    $("#city2_tab").hide();
+    $($(".tab_title")[0]).addClass("active");
+	})
+	</script>
+</head>
+<body id="jplist">
+	<!-- 公共页头  -->
+	<header class="header">
+		<h1 class="small">
+			<span class="city">北京 — 上海</span>
+			<br/>
+			（
+			<span class="date">2014-07-26</span>
+			）
+		</h1>
+		<div class="left-head">
+			<a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+				<span class="inset_shadow">
+					<span class="head-return"></span>
+				</span>
+			</a>
+		</div>
+		<div class="right-head">
+			<p>共<span>55</span>条结果</p>
+		</div>
+	</header>
+
+	<section>
+		<!-- 页面内容块 -->
+			<ul class="tab_by">
+				<li data-type="time" class="bytime hover">
+					时间 <em >↑</em>
+					<!--向下箭头就用我哦<em>↓</em>
+				-->
+				</li>
+				<li data-type="price" class="byprice">
+					价格 <em>↑</em>
+				</li>
+			</ul>
+		<div class="list">
+			<ul class="f_list_tab js_flight_item" data-key="0">
+				<li class="f_info"> <i><strong>23:10</strong>
+						-01:15</i> 
+					首都-虹桥
+					<p>海航 HU7603 &nbsp;738中</p>
+				</li>
+				<li class="f_price"> <dfn>¥</dfn> <strong>390</strong>
+					<p>
+						经济舱
+						<em class="f_num">&gt;9张</em>
+					</p>
+				</li>
+				<li class="flight-listfold js_subswitch"></li>
+			</ul>
+			<!--展开详情-->
+			<ul class="f_detail js_sublist" style="display: block;">
+				<li >
+					<span class="xq_info">
+						经济舱
+						<em>&gt;9张</em>
+						<em></em>
+					</span>
+					<span class="xq_price"> <dfn>¥</dfn>
+						<strong>390</strong>
+					</span>
+				</li>
+				<li >
+					<span class="xq_info">
+						经济舱
+						<em>&gt;9张</em>
+						<em>4折</em>
+					</span>
+					<span class="xq_price">
+						<dfn>¥</dfn>
+						<strong>450</strong>
+					</span>
+				</li>
+			</ul>
+		</div>
+		<div class="list">
+			<ul class="f_list_tab js_flight_item" data-key="0">
+				<li class="f_info"> <i><strong>23:10</strong>
+						-01:15</i> 
+					首都-虹桥
+					<p>海航 HU7603 &nbsp;738中</p>
+				</li>
+				<li class="f_price"> <dfn>¥</dfn> <strong>390</strong>
+					<p>
+						经济舱
+						<em class="f_num">&gt;9张</em>
+					</p>
+				</li>
+				<li class="flight-listfold js_subswitch"></li>
+			</ul>
+			<!--展开详情-->
+			<ul class="f_detail js_sublist" style="display: block;">
+				<li >
+					<span class="xq_info">
+						经济舱
+						<em>&gt;9张</em>
+						<em></em>
+					</span>
+					<span class="xq_price"> <dfn>¥</dfn>
+						<strong>390</strong>
+					</span>
+				</li>
+				<li >
+					<span class="xq_info">
+						经济舱
+						<em>&gt;9张</em>
+						<em>4折</em>
+					</span>
+					<span class="xq_price">
+						<dfn>¥</dfn>
+						<strong>450</strong>
+					</span>
+				</li>
+			</ul>
+		</div>
+	</section>
+</body>
+</html>

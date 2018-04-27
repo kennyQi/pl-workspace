@@ -1,0 +1,233 @@
+package zzpl.pojo.dto.user;
+
+import java.util.Date;
+import java.util.List;
+
+import zzpl.pojo.dto.BaseDTO;
+
+
+@SuppressWarnings("serial")
+public class UserDTO extends BaseDTO {
+
+	/**
+	 * 真实姓名
+	 */
+	private String name;
+
+	/**
+	 * 身份证号
+	 */
+	private String idCardNO;
+
+	/**
+	 * 性别
+	 */
+	private Integer gender;
+
+	/**
+	 * 生日
+	 */
+	private Date birthday;
+
+	/**
+	 * 头像
+	 */
+	private String image;
+
+	/**
+	 * 省份id
+	 */
+	private String provinceID;
+
+	/**
+	 * 城市id
+	 */
+	private String cityID;
+
+	/**
+	 * 公司ID
+	 */
+	private String companyID;
+
+	/**
+	 * 公司名称
+	 */
+	private String companyName;
+
+	/**
+	 * 部门ID
+	 */
+	private String departmentID;
+
+	/**
+	 * 部门名称
+	 */
+	private String departmentName;
+
+	/**
+	 * 联系电话
+	 */
+	private String linkMobile;
+
+	/**
+	 * 联系邮箱
+	 */
+	private String linkEmail;
+	
+	/**
+	 * 状态
+	 */
+	private Integer status;
+
+	/**
+	 * 注册时间
+	 */
+	private Date createTime;
+
+	/**
+	 * 用户状态
+	 */
+	private Integer activated;
+
+	/**
+	 * 关联角色信息
+	 */
+	private List<UserRoleDTO> userRoleDTOs;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getIdCardNO() {
+		return idCardNO;
+	}
+
+	public void setIdCardNO(String idCardNO) {
+		this.idCardNO = idCardNO;
+	}
+
+	public Integer getGender() {
+		return gender;
+	}
+
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getProvinceID() {
+		return provinceID;
+	}
+
+	public void setProvinceID(String provinceID) {
+		this.provinceID = provinceID;
+	}
+
+	public String getCityID() {
+		return cityID;
+	}
+
+	public void setCityID(String cityID) {
+		this.cityID = cityID;
+	}
+
+	public String getCompanyID() {
+		return companyID;
+	}
+
+	public void setCompanyID(String companyID) {
+		this.companyID = companyID;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getDepartmentID() {
+		return departmentID;
+	}
+
+	public void setDepartmentID(String departmentID) {
+		this.departmentID = departmentID;
+	}
+
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
+	public String getLinkMobile() {
+		return linkMobile;
+	}
+
+	public void setLinkMobile(String linkMobile) {
+		this.linkMobile = linkMobile;
+	}
+
+	public String getLinkEmail() {
+		return linkEmail;
+	}
+
+	public void setLinkEmail(String linkEmail) {
+		this.linkEmail = linkEmail;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Integer getActivated() {
+		return activated;
+	}
+
+	public void setActivated(Integer activated) {
+		this.activated = activated;
+	}
+
+	public List<UserRoleDTO> getUserRoleDTOs() {
+		return userRoleDTOs;
+	}
+
+	public void setUserRoleDTOs(List<UserRoleDTO> userRoleDTOs) {
+		this.userRoleDTOs = userRoleDTOs;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+}

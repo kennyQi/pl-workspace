@@ -1,0 +1,75 @@
+ <#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	
+</script>
+<div class="pageContent">
+	<form method="post" action="${contextPath}/warehouse/type/create" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)" >
+
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>仓库类型名称：</dt>
+					<dd>
+						<input name="name" type="text" class="required" maxlength="20"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>物流操作员：</dt>
+					<dd>
+						<input name="operator" type="text" maxlength="20" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>保价比例：</dt>
+					<dd>
+						<input name="insuredRate" type="text" class="number" />&nbsp;‰
+					</dd>
+
+				</dl>
+				<dl>
+					<dt>接口开启：</dt>
+					<dd>
+					<select name="using">
+						<option value="false">关闭</option>
+						<option value="true">开启</option>
+					</select>
+					</dd>
+				</dl>
+				<dl>
+					<dt>渠道商ID：</dt>
+					<dd>
+						<input name="channelId" type="text" onchange="value=value.replace(/[\W]/g,'')" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>物流接口地址：</dt>
+					<dd>
+						<input name="portUrl" type="text" maxlength="100" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>物流加密串：</dt>
+					<dd>
+					<input name="key" type="text" maxlength="64"/>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div></li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

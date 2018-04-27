@@ -1,0 +1,17 @@
+ /*简单reset*/
+* {
+	margin: 0;
+	padding: 0;
+	font-family:"microsoft yahei";
+}
+/*必须，关系到单个page能否全屏显示*/
+
+html,
+body {
+}
+
+img{border:none;width:100%;}    
+
+input,select{outline:0;}
+
+a{text-decoration:none;}

@@ -1,0 +1,112 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<title>智行差旅管理系统</title>
+<#include "/include/meta_include.html" /> 
+<#include "/include/css_include.html" /> 
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body>
+<script src="${contextPath}/resources/hg-ria/new-web/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/common.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/login.js" language="javascript"></script>
+<link href="${contextPath}/resources/hg-ria/new-web/css/login.css" rel="stylesheet" />
+<link href="${contextPath}/resources/hg-ria/new-web/css/common.css" rel="stylesheet" type="text/css"/>
+<!--轮播图部分-->
+<div class="g_carousel ov pl disb" id="carousel">
+    <div class="img_list pa">
+        <!--图片宽度最少1200-->
+        <a href="javascript:" style="background-image:url(${contextPath}/resources/hg-ria/new-web/images/login_img.jpg)" class="turn"></a>
+        <a href="javascript:" style="background-image:url(${contextPath}/resources/hg-ria/new-web/images/login_img.jpg)" class="turn"></a>
+        <a href="javascript:" style="background-image:url(${contextPath}/resources/hg-ria/new-web/images/login_img.jpg)" class="turn"></a>
+    </div>
+    <div class="m_select pl diab">
+    	<div class="m_ewm pa"><img src="${contextPath}/resources/hg-ria/new-web/images/ewm.png" /></div>
+        <ul class="icon pa">
+        </ul>
+        <div class="loginBox pa">
+            <div class="loginBox_bg pa"></div>
+            <div class="inputList">
+                <!-- <form class="login-form" action="http://baidu.com" method="post" id="myform"> -->
+                <form class="login-form" action="${contextPath}/login/check" method="post" id="myform">
+                	<span class="fl us inputBox" >
+                    		<input type="text" placeholder="公司编号"  name="companyNO"  id="companyNO"/>
+                	</span>
+                    <span class="fr tips" for="companyNO"><label></label></span>
+                	<span class="fl us inputBox" >
+                    	<input type="text" placeholder="账号"  name="loginName"  id="loginName"  notEmpety='true'/>
+                	</span>
+                    <span class="fr tips"  for="loginName"><label></label></span>
+                	<span class="fl pwd inputBox" >
+                    	<input type="password" placeholder="密码"  name="password"  id="password"  notEmpety='true'/>
+                    </span>
+                    <span class="fr tips"  for="password"><label></label></span>
+                	<span class="fl cp inputBox" >
+                    	<input type="text" placeholder="验证码" name="validcode" id="validcode"  notEmpety='true' />
+                    </span><img src="${contextPath}/login/valid-code-image.jpg" width="87" height="40" class="yzmImg" onclick="$(this).attr('src', '${contextPath}/login/valid-code-image.jpg?'+new Date());" />
+                    <span class="fr tips"  for="validcode"><label>${message}</label></span>
+                    <div style="clear:both"></div>
+                   <!--  <a href="#" class="forgat">忘记密码?</a> -->
+                    <button class="login-submit" onclick="return tosubmit()">登录</button>
+                    
+                </form>
+            </div>
+        </div>
+        <!-- <div class="login_foot pa">
+            <a href="#" target="_blank">票量简介</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">法律声明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">网站地图</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">友情链接</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">酒店加盟</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">网站联盟</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">帮助中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">投诉建议</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" target="_blank">诚聘英才</a>
+        </div> -->
+    </div>
+</div>
+<!--轮播图部分-->
+<script>
+function tosubmit(){
+	/* if($("#loginName").val()==""){
+		return false;
+	}
+	if($("#password").val()==""){
+		return false;
+	}
+	if($("#validcode").val()==""){
+		return false;
+	} */
+	 var flag=true;
+     $("#myform").find("[notEmpety='true']").each(function(){
+         if(flag) {
+             if ($(this).val() == "") {
+                 $("[for='"+this.id+"']").find(" label").html("&nbsp;"+$(this).attr("placeholder") + "不能为空！&nbsp;");
+                 flag=false;
+             }else{
+            	 $("[for='"+this.id+"']").find(" label").html("");
+             }
+         }
+     });
+     return flag;
+	//$("#myform").submit();
+	/* if(document.getElementById("loginName").value=="")
+		return false;
+	if(document.getElementById("password").value=="")
+		return false;
+	if(document.getElementById("validcode").value=="")
+		return false;
+	document.getElementById("myform").submit(); */
+}
+</script>
+</body>
+
+<!-- END BODY -->
+</html>

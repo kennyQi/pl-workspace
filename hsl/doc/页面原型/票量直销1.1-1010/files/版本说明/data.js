@@ -1,0 +1,115 @@
+﻿$axure.loadCurrentPage({
+  "url":"版本说明.html",
+  "generationDate":new Date(1412918632980.41),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable",
+"temp"],
+  "page":{
+    "packageId":"6145c58e1b8949739244cd66dd1a0b58",
+    "type":"Axure:Page",
+    "name":"版本说明",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"e2ac75f2e60045b08543078abc1d5a00",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"buttonShape",
+          "visible":true,
+          "style":{
+            "fill":{
+              "fillType":"solid",
+              "color":0xFFE4E4E4},
+            "location":{
+              "x":10,
+              "y":10},
+            "size":{
+              "width":890,
+              "height":30}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"96b24d0c718643eeb4590b6ab752b436",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "fill":{
+                  "fillType":"solid",
+                  "color":0xFFE4E4E4},
+                "location":{
+                  "x":10,
+                  "y":10},
+                "size":{
+                  "width":890,
+                  "height":30}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/版本说明/u0.png"}},
+{
+          "id":"d0835087703b4081ab158ae69d2ed44f",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":10,
+              "y":50},
+            "size":{
+              "width":770,
+              "height":32}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"85614e0e0b35403ead677242787c718e",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":10,
+                  "y":50},
+                "size":{
+                  "width":770,
+                  "height":32}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "e2ac75f2e60045b08543078abc1d5a00":{
+      "scriptId":"u0"},
+    "96b24d0c718643eeb4590b6ab752b436":{
+      "scriptId":"u1"},
+    "d0835087703b4081ab158ae69d2ed44f":{
+      "scriptId":"u2"},
+    "85614e0e0b35403ead677242787c718e":{
+      "scriptId":"u3"}}});

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+	
+	<!-- 支付宝配置 -->
+	<bean id="alipay" class="hg.payment.domain.model.channel.alipay.AlipayPayChannel">
+		<property name="name" value="支付宝" />
+		<property name="fullName" value="支付宝即时支付平台" />
+		<property name="type" value="1" />
+		<property name="serviceName" value="create_direct_pay_by_user"/>
+		<property name="inputCharset" value="utf-8"/>
+		<property name="logPath" value="D:\\"/>
+		<property name="notifyUrl" value="http\://115.238.43.242\:7011/payment-application/alipay/notify"/>
+		<property name="returnUrl" value="http\://192.168.10.91\:7011/payment-application/alipay/return"/>
+		<property name="alipayUrl" value="https://mapi.alipay.com/gateway.do?"/>
+		<property name="alipayVerifyUrl" value="https://mapi.alipay.com/gateway.do?service=notify_verify&amp;"/>
+		
+		<property name="refundServiceName" value="refund_fastpay_by_platform_nopwd"/>
+		<property name="refundNotifyUrl" value="http://115.238.43.242:7011/create_direct_pay_by_user-JAVA-UTF-8/refund_notify.jsp"/>
+	</bean>
+	
+	<!-- 汇金宝支付配置 -->
+	<bean id="hjbPay" class="hg.payment.domain.model.channel.hjbPay.HJBPayChannel">
+	   <property name="name" value="汇金宝" />
+	   <property name="fullName" value="汇金宝支付平台" />
+	   <property name="type" value="3" />
+	   <property name="version" value="6.0.1"></property>
+	   <property name="signatureAlgorithm" value="MD5"></property>
+	   <property name="returnUrl" value="http://192.168.10.91:7011/payment-application/hjb/return"></property>
+	   <property name="notifyAddr" value="http://192.168.10.91:7011/payment-application/hjb/notify"></property>
+	   <property name="currency" value="CNY"></property>
+	   <property name="hjbUrl" value="http://192.168.39.32:8288/payManage/CashierPay"></property>
+	</bean>
+</beans>

@@ -1,0 +1,118 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> <@frame.head "中智票量-会员中心">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/forget.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/forget.js" language="javascript"></script>
+</@frame.head> <@frame.main "default" 6>
+<!--内容-->
+
+<div class="g_bd">
+    <div class="g_ct">
+        <div class="m_inpt">
+       
+            <div class="hd">忘记密码</div>
+            <div class="inp_li inp_fir">
+                <label class="fl lab">找回方式：</label>
+                <span class="fl">
+                    <label class="check check_on fl curp" id="mobile"></label>
+                    <span class="fl find_way">手机找回</span>
+                </span>
+                <span class="fl">
+                    <label class="check fl curp" id="email"></label>
+                    <span class="fl find_way">邮箱找回</span>
+                </span>
+            </div>
+             <form action="${contextPath}/comRegister/forgetPwd/reset" id="dp_form" method="post">
+            <div class="inp_li">
+            <input type="hidden" id="validTokenMo" name="validToken" value="${validToken!''}"/>
+            <input type="hidden" name="type" value="1"/>
+                <label class="fl lab">手机号：</label>
+                <span class="fl">
+                    <input class="enter numb" type="text" placeholder="请输入您的手机号找回密码" name="mobile" id="mobile" maxlength="11" mark="phone"/>
+                </span>
+                <span class="send_btn fl curp" id="sendYzm" >点击发送验证码</span>
+            </div>
+            <div class="inp_li">
+                <label class="fl lab">验证码：</label>
+                <span class="fl">
+                    <input class="enter" type="text" placeholder="输入验证码"  name="token" maxlength="6" mark="yzm"/>
+                </span>
+            </div>
+            <div class="inp_li">
+                <label class="fl lab">新密码：</label>
+                <span class="fl">
+                    <input class="enter" type="password"   name="newPwd" mark="pwd" maxlength="20"/>
+                </span>
+            </div>
+            <div class="inp_li">
+                <label class="fl lab">确认密码：</label>
+                <span class="fl">
+                    <input class="enter" type="password"   name="pdw2"  mark="pwd1" maxlength="20"/>
+                </span>
+            </div>
+            <div class="inp_li">
+                <span class="submit fl curp" onclick="submits(1)" >保&nbsp;存</span>
+            </div>
+           </form>
+           <!-- 邮箱 -->
+             <form action="${contextPath}/comRegister/forgetPwd/reset" id="yx_form" method="post" style="display:none">
+            <div class="inp_li">
+            <input type="hidden" id="validTokenEm" name="validToken" />
+            <input type="hidden" name="type" value="2"/>
+                <label class="fl lab">邮箱：</label>
+                <span class="fl">
+                    <input class="enter numb email" type="text" placeholder="请输入您的邮箱找回密码" name="mobile" id="email"  mark="email"/>
+                </span>
+                <span class="send_btn fl curp" id="sendEm" >点击发送验证码</span>
+            </div>
+            <div class="inp_li">
+                <label class="fl lab">验证码：</label>
+                <span class="fl">
+                    <input class="enter yzm" type="text" placeholder="输入验证码"  name="token" maxlength="6" mark="yzm1"/>
+                </span>
+            </div>
+            <div class="inp_li">
+                <label class="fl lab">新密码：</label>
+                <span class="fl">
+                    <input class="enter pwd" type="password"   name="newPwd" mark="pwd3" maxlength="20"/>
+                </span>
+            </div>
+            <div class="inp_li">
+                <label class="fl lab">确认密码：</label>
+                <span class="fl">
+                    <input class="enter pwd1" type="password"   name="pdw2"  mark="pwd4" maxlength="20"/>
+                </span>
+            </div>
+            <div class="inp_li">
+                <span class="submit fl curp"  onclick="submits(2)">保&nbsp;存</span>
+            </div>
+           </form>
+        </div>
+
+    </div>
+    <input type="hidden" id="contextPath" value="${contextPath}"/>
+    <input type="hidden" id="mobileError" value="${(mobileError)!}"/>
+    <input type="hidden" id="mobileCode" value="${(mobileCode)!}"/>
+    <input type="hidden" id="index" value="${(index)!}"/>
+    <div class="g_f">
+     <!-- <a href="${contextPath}/aboutPL"  target="_blank">票量简介</a> -->
+     <a href="${contextPath}/aboutLaw" target="_blank">法律声明</a>
+     <a href="${contextPath}/aboutContactUs"  target="_blank">网站地图</a>
+     <a href="${contextPath}/footLink" target="_blank">友情链接</a>
+     <a href="#">酒店加盟</a>
+     <a href="${contextPath}/aboutAlliance" target="_blank">网站联盟</a>
+     <a href="${contextPath}/aboutContactUs" target="_blank"帮助中心</a>
+     <a href="${contextPath}/aboutComplaint"  target="_blank">投诉建议</a>
+     <a href="${contextPath}/aboutJob"  target="_blank">诚聘英才</a>
+	</div>
+</div>
+
+
+<!--内容-->
+<script type="text/javascript">
+
+</script>
+<!--end content-->
+</@frame.main> 

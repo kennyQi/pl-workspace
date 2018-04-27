@@ -1,0 +1,40 @@
+/*公共*/
+body{padding:0;margin:0;}
+img{display:block;border:none;}
+a,a:hover{text-decoration: none;}
+
+/*头部*/
+.hd{width:100%;max-width:1920px;min-width:1400px;height:1035px;background:url(../images/hd_bg.jpg) no-repeat center; margin:0 auto;}
+
+/*内容*/
+.cont_1{width:100%;max-width:1920px;min-width:1400px;height:787px;background:url(../images/cont_1_bg.jpg) no-repeat center; margin:0 auto;}
+.detail_cont{width:1400px;min-width:1400px;margin:0 auto;position:relative;}
+.detail_cont .all{position:absolute;z-index:10;}
+.detail_cont .all.all_1{width:400px;height:256px;top:306px;left:354px;}
+.detail_cont .all.all_2{width:178px;height:438px;top:130px;left:680px;}
+.detail_cont .all.all_3{width:136px;height:196px;top:68px;left:640px;}
+.detail_cont a{display:block;}
+.detail_cont_1{height:787px;}
+#img_11{position: absolute;top:96px;left:-20px;}
+#img_12{position: absolute;top:96px;left:671px;}
+#img_13{position: absolute;top:406px;left:800px;}
+#img_14{position: absolute;top:424px;left:8px;}
+.cont_2{width:100%;max-width:1920px;min-width:1400px;height:587px;background:url(../images/cont_2_bg.jpg) no-repeat center; margin:0 auto;}
+.detail_cont_2{height:587px;}
+#img_21{position: absolute;top:63px;left:935px;}
+#img_22{position: absolute;top:96px;left:350px;}
+#img_23{position: absolute;top:65px;left:12px;}
+.cont_3{width:100%;max-width:1920px;min-width:1400px;height:834px;background:url(../images/cont_3_bg.jpg) no-repeat center; margin:0 auto;}
+.detail_cont_3{height:834px;}
+#img_31{position: absolute;top:88px;left:150px;}
+#img_32{position: absolute;top:259px;left:456px;}
+#img_33{position: absolute;top:60px;left:942px;}
+.more{position:absolute;bottom:68px;left:50%;margin-left:-154px;width:308px;height:68px;line-height:68px;border:1px solid #0066cc;text-align:center;font-size:36px;font-weight:'宋体';color:#0066cc;}
+.red_packet{width:100%;max-width:1920px;min-width:1400px;height:1724px;background:url(../images/red_packet.jpg) no-repeat center; margin:0 auto;position:relative;}
+.red_packet a.register{display:block;width:250px;height:46px;position:absolute;top:600px;left:50%;margin-left:-168px;}
+.red_packet a.change{display:block;width:412px;height:120px;position:absolute;top:1104px;left:50%;margin-left:-206px;}
+/*侧导航*/
+.side_nav{position:fixed;top:316px;right:0px;width:174px;height:345px;background:url('../images/side_nav.png') no-repeat center;}
+.side_nav a.f1{display:block;width:129px;height:50px;position:absolute;top:157px;left:21px;}
+.side_nav a.f2{display:block;width:129px;height:50px;position:absolute;top:235px;left:21px;}
+.side_nav a.to_top{display:block;width:129px;height:36px;position:absolute;top:302px;left:21px;}

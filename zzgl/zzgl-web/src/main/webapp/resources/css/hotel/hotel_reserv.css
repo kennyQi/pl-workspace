@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+input{ font-family:"微软雅黑";}
+.content-box{ width:100%; background:url(../../images/hotel_bg.png); overflow:hidden;}
+.content{ width:1200px; min-height:978px; margin:0 auto; margin-top:20px;}
+/*左侧部分*/
+.content .left{width:269px; height:1010px; float:left; border:1px solid #e7ebee; font-family:"微软雅黑"; background:#f8fbff;}
+.connet .left .left-img img{ display:block;}
+.information{ margin-left:20px; margin-right:24px;}
+.left .hotelName{font-size:14px; font-weight:bold; float:left; margin-top:10px;}
+.left .hotelName i{ width:65px; height:10px; float:right; background:url(../../images/scheduleScript.png) 0 -101px; margin-left:10px; margin-top:4px; *margin-top:-15px; *margin-left:-133px;}
+.left .hotelName i.l1{width:13px;}
+.left .hotelName i.l2{width:26px;}
+.left .hotelName i.l3{width:39px;}
+.left .hotelName i.l4{width:52px;}
+.left .money{ font-weight:bold; font-size:20px; color:#ff6600; float:left;width:100%; margin-top:5px; margin-bottom:9px;}
+.left .address{ clear:both; font-size:12px; color:#666; line-height:24px;}
+.left .address i{ width:15px; height:19px; background:url(../../images/scheduleScript.png) 0 -115px; display:inline-block; margin-right:6px;}
+.left .type{border-top:1px solid #e7ebee; margin-top:12px;}
+.left .type ul{ margin:10px 24px 10px 20px; font-size:12px; line-height:40px; color:#333;}
+.left .type ul li{ width:225px; height:40px; border-bottom:1px solid #e7ebee;}
+.left .type ul .situation{ float:right; color#666; width:115px; text-align:left; *margin-top:-40px; color:#666;}
+.left .reminder{border-top:1px solid #e7ebee;}
+.left .leftGeneral div{margin:15px 24px 20px 20px; line-height:24px;}
+.left .leftGeneral span{ font-size:14px;}
+.left .leftGeneral p{ font-size:12px; color:#666;}
+.left .additional{border-top:1px solid #e7ebee;}
+.left .problem{border-top:1px solid #e7ebee;}
+/*左侧部分*/
+.selectNavYear{height:200px;overflow-y:auto;}
+.content .right .guarantee .credit li .selectNavYear .y{width:103px;}
+/*右侧部分*/
+.content .right{ width:929px; float:right; font-family:"微软雅黑"; background:#FFFFFF; margin-bottom:70px;}
+.right .process{ height:100px; border-bottom:1px solid #e7ebee; background:#f8fbff; margin-bottom:26px;}
+.right .process li{ float:left; width:232px; height:100px;}
+.right .process li div{ width:115px; height:32px; margin:0 auto; margin-top:34px;}
+.generals1{width:5px; height:10px;float:left; margin:10px 12px 12px 0;}
+.generals2{width:32px; height:32px;  float:left;}
+.generals2 i{float:left; margin-top:7px; margin-left:12px;}
+.generals3{font-size:14px;font-weight:bold; float:left; margin:9px 0 7px 10px;}
+
+.process li .conduct1{  background:url(../../images/scheduleScript.png) 0 -71px; } 
+.process li .conduct2{ background:url(../../images/scheduleScript.png) 0 -34px;}
+.process li .conduct2 i{ color:#FFF; font-size:12px;}
+.process li .conduct3{  color:#0184df; }
+.process li .unfinished1{ background:url(../../images/scheduleScript.png) 0 -87px; } 
+.process li .unfinished2{ background:url(../../images/scheduleScript.png) 0 0; }
+.process li .unfinished2 i{color:#999; font-size:12px;}
+.process li .unfinished3{ color:#ccc; font-weight:normal;}
+.process li .triangle{ width:14px; height:8px; float:left; background:url(../../images/scheduleScript.png) 0 -135px; margin-left:-89px; margin-top:27px;}
+
+.right .orderInformation{ width:889px; margin-left:20px;}
+.right .seniorRoom{ width:100%; float:left;}
+.rightTitle{font-size:16px; color:#333; padding-bottom:5px; border-bottom:2px solid #e7ebee; display:block; padding-left:11px;}
+.right .seniorRoom .housing{float:left; width:627px; margin-left:60px; font-size:14px; font-family:"微软雅黑"; margin-top:10px;}
+.right .seniorRoom .housing li{ width:750px; float:left; margin-top:10px;}
+.right .seniorRoom .housing li .housingName{ float:left; width:70px; margin-top:2px; margin-right:7px; color:#333; font-family:"微软雅黑";}
+.right .seniorRoom .housing li .numText{ float:left; border:1px solid #e7ebee; width:79px;}
+.right .seniorRoom .housing li .numText input{width:33px; height:23px; float:left; border:0; text-align:center;  line-height:23px;}
+.right .seniorRoom .housing li .numText .min{ float:left; height:23px; width:22px; line-height:23px; text-align:center; border-right:1px solid #e7ebee; color:#ddd;}
+.right .seniorRoom .housing li .numText .add{ float:right; height:23px; width:22px;  line-height:23px; text-align:center;border-left:1px solid #e7ebee; color:#777;}
+.right .seniorRoom .housing li .numTextRight{ float:left;}
+.right .seniorRoom .housing li .numTextRight .changeTime{ width:114px; height:30px; border:0; border-radius:5px; background:url(../../images/scheduleScript.png) 0 -147px; padding-left:6px; font-size:14px; color:#333; line-height:30px;}
+.right .seniorRoom .housing li .numTextRight .money{font-size:20px; color:#ff6600; line-height:37px;}
+.right .seniorRoom .housing li .numTextRight .fk{ float:left; margin-top:2px; font-size:14px; font-family:"微软雅黑"; color:#333;}
+.right .seniorRoom .housing li .numTextRight .payment{ float:left; margin-top:10px;}
+.right .seniorRoom .housing li .numTextRight .payment .paymentLi{ float:left; margin-top:0; width:126px; height:70px; text-align:center;}
+.right .seniorRoom .housing li .numTextRight .payment .paymentLi .paymentTime{ float:left; width:124px; height:33px; line-height:33px; border:1px solid #e7ebee; color:#033333;}
+.right .seniorRoom .housing li .numTextRight .payment .paymentLi .paymentBottom{ float:left; width:124px; height:33px; line-height:33px; border:1px solid #e7ebee; color:#666;}
+.right .seniorRoom .housing li .numTextRight .payment .paymentLi .paymentBottom i{color:#ff6600; font-size:16px; margin-right:8px;}
+
+.right .booking{ clear:both; float:none;}
+.right .booking .bookingInf{ margin-top:10px;}
+.right .booking .bookingInf li{ float:left; display:block; width:627px; height:30px; margin-left:36px; margin-top:10px;}
+.right .booking .bookingInf li .inf{ float:left; margin-top:4px; width:100px; text-align:right; font-size:14px; font-family:"微软雅黑"; margin-right:4px; color:#333;}
+.right .booking .bookingInf li i{color:#00a0e9; margin-right:4px;}
+.right .booking .bookingInf li input{ float:left; width:240px; height:30px; border:0; border-radius:5px; font-size:14px; line-height:30px; background:#f2f2f2; font-family:"微软雅黑"; color:#333;}
+.right .booking .bookingInf .ts{float:left; font-size:12px; color:#888; margin-left:170px; margin-top:0px;}
+.right .booking .bookingInf .radios{ float:left;}
+.right .booking .bookingInf .radios .radio{float:left; width:16px; height:16px; display:inline-block;  background:url(../images/payScript.png) 16px -157px; margin-top:6px;}
+.right .booking .bookingInf .radios .times{ float:left; font-family:"微软雅黑"; font-size:14px; color:#333; margin-top:5px;}
+.right .booking .bookingInf .ts2{font-size:12px; color:#888; margin-left:15px;}
+.right .booking .bookingInf .radios .radioOn{background:url(../images/payScript.png) 0 -157px}
+
+.right .guarantee{ clear:both; float:left; width:100%; margin-top:19px; display:none;}
+.right .guarantee .conditions{ float:left; width:858px; height:58px; border-radius:5px; border:1px solid #e4f2f9; background:#f6fcff; margin-top:20px;}
+.right .guarantee .conditions span{ float:left; font-family:"微软雅黑"; font-size:12px; height:21px; color:#88a4cc; margin-left:21px; margin-right:21px; margin-top:8px; line-height:24px;}
+.right .guarantee .credit{ margin-top:10px; float:left;}
+.right .guarantee .credit li{float:left; display:block; width:627px; height:30px; margin-left:36px; margin-top:10px;}
+.right .guarantee .credit li .inf{ float:left; margin-top:4px; width:100px; text-align:right; font-size:14px; font-family:"微软雅黑"; margin-right:4px; color:#333;}
+.right .guarantee .credit li i{color:#00a0e9; margin-right:4px;}
+.right .guarantee .credit li .creditRight{ float:left;}
+.right .guarantee .credit li .creditRight input{float:left; width:240px; height:30px; border:0; border-radius:5px; font-size:14px; line-height:30px; background:#f2f2f2; font-family:"微软雅黑"; color:#333;}
+.right .guarantee .credit li .creditRight .ts3{ float:left; font-size:12px; font-family:"微软雅黑"; color:#888; margin-top:6px; margin-left:10px;}
+.right .guarantee .credit li .creditRight .select{ float:left; height:30px; border-radius:5px; background:#f2f2f2;line-height:30px; padding:0 8px 0 8px; font-size:14px; font-family:"微软雅黑"; color:#333;} 
+.right .guarantee .credit li .creditRight .select i{float:right; width:10px; height:15px; background:url(../images/payScript.png) 0 -105px; position:relative; display:inline-block; margin-top:13px; *margin-top:-17px;}
+.right .guarantee .credit li .selectNav{width:144px; background:#f2f2f2; float:left; position:absolute; z-index:10; *margin-top:25px; margin-left:-8px;}
+.right .guarantee .credit li .selectNav .y{ width:136px; margin:0;  padding-left:8px;}
+.right .guarantee .credit li .selectNav .m{ width:92px; margin:0; padding-left:8px;}
+.right .guarantee .credit li .selectNav .l{ width:248px; margin:0; padding-left:8px;}
+.right .guarantee .credit li .selectNav li:hover{background:#e5e5e5;}
+
+
+
+.right .complete{ clear:both; float:left; margin-top:60px; height:152px; width:100%; background:#f8fbff; text-align:center; font-size:14px; color:#666;}
+.right .complete span{ display:inline-block; margin-top:30px; margin-bottom:20px; font-size:14px;}
+.right .complete input{ width:160px; height:36px; border:0; background:#55bfef; color:#FFF; border-bottom:3px solid #00a0e9; font-family:"微软雅黑";}
+
+
+/*右侧部分*/
+

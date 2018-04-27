@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/* CSS Document */
+.low_calendar {
+	overflow: hidden;
+	margin: 10px 10px 0;
+	border: 1px solid #c8d2dc
+}
+.low_calendar h1 {
+	width: 100%;
+	background: #95c0eb;
+	font-size: 18px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	color: #fff;
+	font-weight: 700
+}
+.calGrid table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0
+}
+.calGrid table th {
+	background-color: #fff;
+	border-left: 1px solid #whiteSmoke;
+	font-size: 12px;
+	height: 25px;
+	line-height: 25px;
+	text-align: center;
+	vertical-align: middle;
+	color: #999;
+	background: whiteSmoke
+}
+.calGrid table td {
+	width: 12%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+	font-weight: 700;
+	background: #fff;
+	text-align: center;
+	color: #005bb5;
+	border-bottom: 1px solid #c8d2dc;
+	border-left: 1px solid #c8d2dc
+}
+.calGrid table td span {
+	display: block;
+	font-size: 10px;
+	line-height: 20px;
+	color: #f60;
+	height: 20px;
+	margin-top: -15px
+}
+.calGrid table tr td.disable {
+	color: #b9b9b9
+}
+.calGrid table td:first-child {
+	border-left: 0
+}
+.calGrid table tr:last-child td {
+	border-bottom: 0
+}
+.calGrid table td.holiday {
+	font-size: 12px
+}
+.calGrid table th.week_day, .calGrid table td.week_day {
+	color: #f60
+}
+.calGrid table td.curr {
+	font-size: 16px;
+	color: #fff;
+	background: #4aa5ff;
+	-moz-box-shadow: 0 2px 2px #4aa5ff inset;
+	-webkit-box-shadow: 0 2px 2px #4aa5ff inset;
+	box-shadow: 0 2px 2px #4aa5ff dcdeeb
+}

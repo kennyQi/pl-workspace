@@ -1,0 +1,64 @@
+.change-select.active{color:#329bfa;}
+
+body{background-color:#f0f0f0;}
+
+#y_center{width:1200px;margin:0 auto;}
+
+#x_left_pane{width:232px;float:left;  margin-top: 46px;}
+
+#right_pane{width:944px;float:right;background-color:#fff;}
+
+.left_e{width:100%;position:relative;  background-color:#fff;padding-top: 20px;}
+
+.left_e ul li{font-size:16px;}
+.left_e ul li.gt1{color:#454545; text-align:center;line-height:52px;cursor:pointer;}
+.left_e ul li.gt1.gt2{color:#807f7f;}
+.left_e ul li.gt1.selected{color:#329bfa;background-color:#f9f9f9;}
+.left_e ul li.gt1.border{border-bottom:1px solid #f4f4f4;}
+
+.left_wrap{overflow:hidden;margin-top:26px;  margin-bottom: 78px;}
+
+.brd{position:absolute;top:-46px;left:0;width:236px;height:63px;background:url(../img/index/brd.png) no-repeat;}
+
+#right_wrap_1{width:868px;margin:0 auto;}
+
+.r_item_title{line-height:54px;color:#454545;font-size:18px;border-bottom:1px solid #e8e8e8;}
+
+.r_item_body{position:relative;width:100%;height:250px;}
+.r_item_body.r_item_body1{background:url(../img/index/rd1.jpg) no-repeat;background-position:32px 34px;}
+.r_item_body.r_item_body2{background:url(../img/index/rd2.jpg) no-repeat;background-position:32px 34px;}
+.r_item_body.r_item_body3{background:url(../img/index/rd3.jpg) no-repeat;background-position:54px 54px;height:588px;  margin-top: 12px;}
+.r_item_content{width:468px;color:#807f7f;font-size:14px;position:absolute;  top: 76px;  left: 290px;}
+
+.ep{width:234px;position:absolute;color:#807f7f;font-size:12px;  top: 404px;}
+.ep p{text-align:center;}
+
+#rp1{position:absolute;color:#807f7f;font-size:12px;  left: 286px;
+  top: 26px;}
+  
+#ep1{  left: 30px;}
+#ep2{  left: 320px;}
+#ep3{  left: 606px;}  
+  
+.connection{display:none;}
+.wx-sk{
+	
+	  float: right;
+  color: #c1c0c0;
+  font-size: 14px;
+  margin-top: -42px;
+} 
+.wx-sk img{
+	  width: 116px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.stop{
+	  clear: both;
+}
+.deve-body .connection-tel{  float: left;
+  width: 19px;}
+#bottomP{height:auto;  padding-bottom: 138px;}
+

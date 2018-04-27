@@ -1,0 +1,57 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/session/list" method="get">
+		<div class="searchBar">
+			<ul class="searchContent">
+				<li>
+					<label>用户名：</label>
+					<input name="user" value="${dto.user}">
+				</li>
+			</ul>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" >查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th>用户名</th>
+				<th>规则号</th>
+				<th>属性</th>
+				<th>属性值</th>
+			</tr>
+		</thead>
+        <tbody>
+			<#list list as p>
+			<tr>
+				<td>${p.user!?html}</td>
+				<td>${p.rule!?html}</td>
+				<td>${p.propName!?html}</td>
+				<td>${p.propValue!?html}</td>
+ 
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+ 
+</div>
+ 

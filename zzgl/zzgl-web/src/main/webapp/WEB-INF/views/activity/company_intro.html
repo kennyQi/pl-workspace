@@ -1,0 +1,222 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>关于票量</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/index.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/intro.css" rel="stylesheet" />
+<link href='${contextPath}/resources/css/swipe_style.css' rel='stylesheet'/>
+<script src="${contextPath}/resources/js/swipe.js" language="javascript"></script>
+<style type="text/css">
+	.gd_foot .m_nav_c .right li .abt a{font-size: 22px;margin-top:11px}
+</style>
+</head>
+<body>
+<!--头部-->
+<!--锚点-->
+<div class="gd_fixed">
+<div class="gd_head">
+	<a href="${contextPath}/home" class="logo fl" title="票量旅游网">
+    	<img src="${contextPath}/resources/images/logo.png" alt="票量旅游网">
+    </a>
+    <ul class="intro_nav fr ov">
+        <li class="fl on"><a href="javascript:" hrefname="jztx">家族体系</a></li>
+        <li class="fl"><a href="javascript:" hrefname="slzs">实力展示</a></li>
+        <li class="fl"><a href="javascript:" hrefname="jsbf">坚实步伐</a></li>
+    </ul>
+    <script>
+        $(".intro_nav li").each(function (i,e){
+            $(this).click(function(){
+                $("html,body").animate({scrollTop:$("[name='"+$(this).find("a").attr("hrefname")+"']").offset().top-89},350);
+                $(".intro_nav li").removeClass("on").eq(i).addClass("on");
+            });
+        });
+    </script>
+</div>
+    </div>
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+<!--内容-->
+<a name="jztx"  style="height:0px;margin:0px;"></a>
+<div class="g_bd">
+    <div class="cont1 ov">
+            <div class="auto_title">
+                <span class="t">家族体系</span>
+                <span class="big_t">公司简介</span>
+                <span class="icon">&nbsp;</span>
+            </div>
+    </div>
+
+    <div class="lunbo1 ov">
+
+        <div id='mySwipe' style='margin:0 auto' class='swipe'>
+            <div class='swipe-wrap'>
+                <div><img src="${contextPath}/resources/images/intro_carsoul1.png" /></div>
+                <div><img src="${contextPath}/resources/images/intro_carsoul2.png" /></div>
+                <div><img src="${contextPath}/resources/images/intro_carsoul3.png" /></div>
+                <div><img src="${contextPath}/resources/images/intro_carsoul4.png" /></div>
+            </div>
+        </div>
+        <ul class="lunbo1_icon">
+            <li class="on">&nbsp;</li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+        </ul>
+        <script>
+            var move=true;
+            var lunbo1_icon_q=0;
+            $(".lunbo1_icon li").each(function(i){
+                $(this).mouseover(function(){
+                    $(".lunbo1_icon li").removeClass("on").eq(i).addClass("on");
+                    mySwipe.slide(i);
+                    lunbo1_icon_q=i;
+                });
+            });
+            function lunbo1Time(){
+                    setTimeout(function(){
+                        if(move){
+                            lunbo1_icon_q++;
+                            lunbo1_icon_q = lunbo1_icon_q == $(".lunbo1_icon li").length ? 0 : lunbo1_icon_q;
+                            $(".lunbo1_icon li").eq(lunbo1_icon_q).trigger("mouseover");
+                        }
+                        lunbo1Time();
+                    },5000);
+            }
+            lunbo1Time();
+
+            var elem = document.getElementById('mySwipe');
+            window.mySwipe = Swipe(elem);
+        </script>
+    </div>
+    <div class="cont2 ov">
+        <div class="auto_title">
+            <span class="t">家族体系</span>
+            <span class="big_t">组织架构</span>
+            <span class="icon">&nbsp;</span>
+        </div>
+    </div>
+    <div class="orgin">
+        <img src="${contextPath}/resources/images/intro_img3.png">
+    </div>
+
+    <a name="slzs" style="height:0px;margin:0px;"></a>
+    <div class="power ov">
+        <div class="auto_title">
+            <span class="t">实力展示</span>
+            <span class="big_t">竞争优势</span>
+            <span class="icon">&nbsp;</span>
+        </div>
+        <div class="jzys ov pl">
+            <div class="jzys_list c1">
+                <img src="${contextPath}/resources/images/intro_jzsl_1.jpg"/>
+                <img src="${contextPath}/resources/images/intro_jzsl_1_1.png"/>
+            </div>
+            <div class="jzys_list c2">
+                <img src="${contextPath}/resources/images/intro_jzsl_2.jpg"/>
+                <img src="${contextPath}/resources/images/intro_jzsl_2_1.png"/>
+                <</div>
+            <div class="jzys_list c3">
+                <img src="${contextPath}/resources/images/intro_jzsl_3.jpg"/>
+                <img src="${contextPath}/resources/images/intro_jzsl_3_1.png"/>
+                <</div>
+        </div>
+    </div>
+    <script>
+        $(".jzys .jzys_list").hover(function(){
+                $(this).stop().animate({"top":-620},185);
+        },function(){
+                $(this).stop().animate({"top": 0}, 185);
+        });
+    </script>
+
+    <div class="lunbo2 ov">
+        <div class="pl_xt">
+            <h4>“好票量”电子票务系统</h4>
+            “好票量”电子票务系统是集票务管理、票务分销、票务核销分析系统、票务清算于一体的新一代<br/>
+            电子票务管理系统。 是连接景区、分销商以及游客的公正、权威、可信的服务平台.
+        </div>
+        <div id='mySwipe2' style='margin:0 auto;height:589px;' class='swipe swipe2'>
+            <div class='swipe-wrap'>
+                <div><img src="${contextPath}/resources/images/intro_dzpw1.png" /></div>
+                <div><img src="${contextPath}/resources/images/intro_dzpw2.png" /></div>
+            </div>
+        </div>
+        <ul class="lunbo2_icon">
+            <li class="on">&nbsp;</li>
+            <li>&nbsp;</li>
+        </ul>
+        <script>
+            var lunbo2_icon_q=0;
+            $(".lunbo2_icon li").each(function(i){
+                $(this).mouseover(function(){
+                    $(".lunbo2_icon li").removeClass("on").eq(i).addClass("on");
+                    mySwipe1.slide(i);
+                    lunbo2_icon_q=i;
+                });
+            });
+            function lunbo2Time(){
+                setTimeout(function(){
+                    if(move) {
+                        lunbo2_icon_q++;
+                        lunbo2_icon_q = lunbo2_icon_q == $(".lunbo2_icon li").length ? 0 : lunbo2_icon_q;
+                        $(".lunbo2_icon li").eq(lunbo2_icon_q).trigger("mouseover");
+                    }
+                    lunbo2Time();
+                },5000);
+            }
+            lunbo2Time();
+
+            var elem = document.getElementById('mySwipe2');
+            window.mySwipe1 = Swipe(elem);
+        </script>
+    </div>
+    <div class="lunbo3">
+        <div id='mySwipe3' style='margin:0 auto;height:799px;' class='swipe swipe2'>
+            <div class='swipe-wrap'>
+                <div><img src="${contextPath}/resources/images/intro_ssgs.jpg" /></div>
+                <div><img src="${contextPath}/resources/images/intro_ssgs2.jpg" /></div>
+            </div>
+        </div>
+        <div class="control pl">
+            <div class="c_left pa" onclick="mySwipe2.prev()"></div>
+            <div class="c_right pa" onclick="mySwipe2.next()"></div>
+        </div>
+        <script>
+            var elem = document.getElementById('mySwipe3');
+            window.mySwipe2 = Swipe(elem);
+            $(".swipe").hover(function(){
+                move=false;
+            },function(){
+                move=true;
+            });
+        </script>
+
+    </div>
+    <a name="jsbf" style="height:0px;margin:0px;"></a>
+    <div class="cont3 ov">
+        <div class="auto_title">
+            <span class="t">坚实步伐</span>
+            <span class="big_t">大事记</span>
+            <span class="icon">&nbsp;</span>
+        </div>
+    </div>
+    <div class="gssj">
+        <img src="${contextPath}/resources/images/intro_img7.png" />
+    </div>
+
+
+</div>
+<!--内容-->
+ <@frame.end "default"> </@frame.end>
+</body>
+</html>

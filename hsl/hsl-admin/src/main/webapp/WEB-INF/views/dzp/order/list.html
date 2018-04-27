@@ -1,0 +1,128 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+
+    <form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+          action="${contextPath}/dzp/order/list" method="post">
+
+        <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+        <input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td style="text-align: left">票务名称：	</td>
+                    <td style="text-align: left"><input name="ticketPolicyName" value="${qo.ticketPolicyName}"/></td>
+
+                    <td style="text-align: left">票务类型：</td>
+                    <td style="text-align: left">
+                        <select name="ticketPolicyType">
+                            <option>--请选择类型--</option>
+                            <option value="1" <#if qo.ticketPolicyType == 1>selected="selected"</#if>>单票</option>
+                            <option value="2"<#if qo.ticketPolicyType == 2>selected="selected"</#if>>联票</option>
+                        </select>
+                    </td>
+
+                    <td style="text-align: left">下单时间：</td>
+                    <td style="text-align: left"><input type="text" name="orderDateBegin" value="" class="date" readonly="readonly" value="${qo.orderDateBegin}"/>-<input type="text" name="orderDateEnd" value="${qo.orderDateEnd}" class="date" readonly="readonly" /></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left">预定人：</td>
+                    <td style="text-align: left"><input name="linkMan" value="${qo.linkMan}"/></td>
+
+                    <td style="text-align: left">景区：</td>
+                    <td style="text-align: left">
+                        <select name="scenicSpotId">
+                            <option value="">--请选择景区--</option>
+                            <#list dzpScenicSpots as scenicSpot>
+                                <option value="${scenicSpot.id}" <#if qo.scenicSpotId == scenicSpot.id>selected="selected"</#if>>${scenicSpot.baseInfo.name}</option>
+                            </#list>
+                        </select>
+                    </td>
+
+                    <td style="text-align: left">登机人：</td>
+                    <td style="text-align: left"><input name="" value=""/></td>
+                </tr>
+                <tr>
+
+                    <td style="text-align: left">订单编号：	</td>
+                    <td style="text-align: left"><input name="orderNo" value="${qo.orderNo}"/></td>
+
+                    <td style="text-align: left">订单状态：</td>
+                    <td style="text-align: left">
+                        <select name="orderStatus">
+                            <option>--请选择状态--</option>
+                            <#list dzpTicketOrderStatusMap?keys as statusKey>
+                                <option value="${statusKey}" <#if qo.orderStatus == statusKey>selected="selected"</#if>>${dzpTicketOrderStatusMap[statusKey]}</option>
+                            </#list>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">查询</button>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="163" >
+        <thead>
+            <tr>
+                <th width="">订单编号</th>
+                <th width="">票务编号</th>
+                <th width="">票务名称</th>
+                <th width="">票务类型</th>
+                <th width="">订单总价</th>
+                <th width="">游玩人数量</th>
+                <th width="">景区</th>
+                <th width="">预定人</th>
+                <th width="">预定人手机号</th>
+                <th width="">订单状态</th>
+                <th width="">下单时间</th>
+                <th width="">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <#if orders??>
+                <#list orders as order>
+                    <tr>
+                        <td>${order.baseInfo.orderNo}</td>
+                        <td>${order.baseInfo.dzpwOrderNo}</td>
+                        <td>${order.ticketPolicy.baseInfo.name}</td>
+                        <td>
+                            <#if (order.ticketPolicy.type == 1)>
+                                单票
+                            </#if>
+                            <#if (order.ticketPolicy.type == 2)>
+                                联票
+                            </#if>
+                        </td>
+                        <td>500</td>
+                        <td>${order.ticketPolicy.baseInfo.scenicSpotNameStr}</td>
+                        <td>${order.baseInfo.linkMan}</td>
+                        <td>${order.baseInfo.linkMobile}</td>
+                        <td>${order.status.current}</td>
+                        <td>${order.baseInfo.orderDate}</td>
+                        <td>
+                            <a>查看详情</a>
+                            <a href ="${contextPath}/dzp/order/settlement-detail?orderNo=${(order.baseInfo.orderNo)!}" target="dialog" max="true" style="color: blue">结算明细</a>
+                        </td>
+                    </tr>
+                </#list>
+            </#if>
+        </tbody>
+    </table>
+    <#include "/public/pagination/pagination.html">
+</div>

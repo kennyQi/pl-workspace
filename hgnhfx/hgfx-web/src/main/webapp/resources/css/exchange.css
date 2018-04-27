@@ -1,0 +1,295 @@
+/* @xianfei @date:2016/7/26 16:11pm to exchange platform css  start*/
+
+/* common start */
+* {
+	font-family: "microsoft yahei";
+	font-size: 14px;
+}
+.hr1 {
+	border-top: 2px solid #E8E8E8;
+	margin-bottom: 41px;
+}
+.hr2{
+	    border-top: 1px dashed #82D0FF;
+    border-bottom: none;
+    margin-left: 44px;
+
+}
+a{
+	    text-decoration: none;
+}
+/* common end  */
+
+/* contactUs start */
+#content{
+	    margin-top: 4px;
+}
+#head {
+	width: 100%;
+	background-color: #fff;
+	/**box-shadow: 0px 15px 10px -15px #ccc;*/
+	-webkit-box-shadow: 0px 15px 10px -15px #ccc;
+	-moz-box-shadow: 0px 15px 10px -15px #ccc;
+}
+.ct_title {
+	font-weight: bold;
+	margin-top: 35px;
+	margin-bottom: 29px;
+}
+.cont {
+	margin-left: 20%;
+	overflow: hidden;
+	margin-bottom: 200px;
+}
+.head-tp {
+	width: 1200px;
+	margin: auto;
+	line-height: 80px;
+	height: 80px;
+}
+.logo {
+	width: 88px;
+	margin-top: 14px;
+	display: inline-block;
+	float: left;
+}
+.change {
+	display: block;
+	height: 100%;
+	line-height: 80px;
+	float: left;
+}
+#login {
+	float: right;
+	padding: 0px 22px;
+	height: 42px;
+	line-height: 42px;
+	margin-right: 8px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+#login.l_t, #come.l_t {
+	color: #fff;
+	background-color: #00a0ff;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+#come {
+	float: right;
+	padding: 0px 22px;
+	height: 42px;
+	line-height: 42px;
+	margin-right: 8px;
+	margin-top: 20px;
+	cursor: pointer;
+}
+.change-select.selected {
+	background: url(../img/down.png) no-repeat;
+	background-position: 62px 26px;
+}
+.change-select {
+	cursor: pointer;
+	font-size: 16px;
+	color: #454545;
+	display: inline-block;
+	height: 100%;
+	padding-right: 27px;
+	margin-left: 54px;
+}
+#bottomP {
+	height: auto;
+}
+#bottomP {
+	position: relative;
+	background-color: #404040;
+}
+.inner-wrap {
+	padding-top: 28px;
+	width: 1200px;
+	margin: 0 auto;
+}
+.connection {
+	display: block;
+}
+.connection {
+	display:none;
+	position: relative;
+	margin-top: 30px;
+}
+#drawus {
+	line-height: 56px;
+}
+#word {
+	color: #329bfa;
+	font-size: 16px;
+}
+#believe {
+	color: #fff;
+	font-size: 14px;
+	margin: 8px 0 3px 0;
+}
+#believeInEn {
+	color: #a2a1a1;
+	font-size: 10px;
+}
+.connection-ul li {
+	list-style: none;
+	float: left;
+	color: #a2a1a1;
+	margin-right: 164px;
+}
+.connection-ul .deve-title {
+	font-size: 16px;
+}
+.deve-body .connection-qq {
+	float: left;
+	width: 19px;
+}
+.connection-ul .deve-body {
+	font-size: 14px;
+	margin-top: 18px;
+}
+.deve-body .connection-tel {
+	float: left;
+	width: 19px;
+}
+.connection-ul .deve-title {
+	font-size: 16px;
+}
+.wx-sk {
+	float: right;
+	color: #c1c0c0;
+	font-size: 14px;
+	margin-top: -42px;
+}
+.stop {
+	clear: both;
+}
+#drawus .sol {
+	border-top: 1px solid #5c5c5c;
+	margin-top: 46px;
+	width: 98%;
+	overflow: hidden;
+	color: #a2a1a1;
+	font-size: 14px;
+}
+#drawus .draw-l {
+	visibility:hidden;
+	margin-top: 16px;
+	float: left;
+	margin-left: -30px;
+}
+.draw-l .draw-ul {
+	position: relative;
+}
+ul li {
+	list-style: none;
+}
+#drawus a {
+	color: #a2a1a1;
+}
+#drawus .draw-r {
+	float: right;
+	position: static;
+	top: 0;
+}
+.li-line-left {
+	position: absolute;
+	left: 0;
+	top: 6px;
+	width: 3px;
+	height: 16px;
+	border-left: 1px solid #888787;
+}
+.draw-l .draw-ul li {
+	position: relative;
+	float: left;
+	font-size: 14px;
+	color: #a2a1a1;
+	height: 26px;
+	line-height: 26px;
+	width: 120px;
+	text-align: center;
+}
+.wx-sk img {
+	width: 116px;
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 6px;
+}
+.gt1 {
+	color: #fff;
+	margin-left: 10px;
+	background-color: #83CFFF;
+	-moz-border-radius: 27px;
+	-webkit-border-radius: 27px;
+	border-radius: 27px;
+	padding: 4px;
+	padding-left: 13px;
+	padding-right: 13px;
+}
+.gt2 {
+	margin-left: 13px;
+}
+#lct {
+	display: inline-block;
+	float: left;
+	margin-left: 24px;
+}
+#rct {
+	display: inline-block;
+	margin-left: 40%;
+}
+.p1 {
+	margin-bottom: 30px;
+}
+.p2 {
+	margin-bottom: 19px;
+}
+.p3 {
+	margin-left: 40px;
+}
+
+/* contactUs end */
+
+/* cooperationFlow start */
+#body{
+	background-image: url("../img/bg1.png");
+	background-repeat: no-repeat;
+    padding-top: 35px;
+    padding-bottom: 100px;
+}
+.bt1{
+	font-weight: bold;
+    margin-bottom: 29px;
+    margin-left: 20%;
+}
+.busi{
+    background-image: url("../img/bg2.png");
+    background-repeat: no-repeat;
+    display: block;
+    margin: 0 auto;
+    width: 1003px;
+    height: 589px;
+    padding-top: 48px;
+}
+.bs1{
+    background-color: #fff;
+    color: #807f7f;
+    font-size: 16px;
+    margin-left: 111px;
+    margin-bottom: 24px;
+    margin-right: 25px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    padding: 28px;
+}
+.bs_ct{
+       margin-left: 24px;
+    line-height: 40px;
+}
+/* cooperationFlow end  */
+
+/* @xianfei @date:2016/7/26 16:11pm to exchange platform css end*/

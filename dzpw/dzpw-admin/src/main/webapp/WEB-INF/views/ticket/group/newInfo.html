@@ -1,0 +1,131 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+</style>
+
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="20">
+	<div id="stepOne">
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>基本信息</span></div>
+		<div class="unit">
+			<label>产品编号：</label>
+			<input type="text" value="${policy.baseInfo.key}" />
+		</div>
+		
+		<div class="unit">
+			<label>联票名称：</label>
+			<input type="text" name="name" size="64" maxlength="64" value="${policy.baseInfo.name}"/>
+		</div>
+		
+		<div class="unit">
+			<label>联票介绍：</label>
+			<textarea id="intro" class="editor required" data-meg="联票介绍" name="intro" rows="10" cols="68" 
+					  tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,
+					         Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+				${policy.baseInfo.intro}
+			</textarea>
+			<input type="hidden" id="hiddenIntro" name="hiddenIntro" />
+		</div>
+		
+		<div class="unit">
+			<label>预订须知：</label>
+			<textarea id="notice" class="editor required" data-meg="预订须知" name="notice" rows="10" cols="68" 
+					  tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,
+					         Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+				${policy.baseInfo.notice}
+			</textarea>
+		</div>
+		
+		<div class="unit">
+			<label>联票协议：</label>
+			<textarea id="saleAgreement" class="editor required" data-meg="售卖协议" name="saleAgreement" rows="10" cols="68" 
+					  tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,
+					         Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+				${policy.baseInfo.saleAgreement}
+			</textarea>
+		</div>
+		
+		<!-- 价格、库存与有效期 -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>价格、库存与有效期</span></div>
+		<div >
+			<label>联票景区：</label>
+		</div>
+		<div class="unit"  style="padding-left: 130px; margin-top: -24px;">
+			<table id="table1" border="1">
+				<thead>
+					<tr height="25px;">
+						<th align="center" width="210px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">景区</th>
+						<th align="center" width="65px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">结算价(元)</th>
+						<th align="center" width="90px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">游玩理财价(元)</th>
+						<th align="center" width="90px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">市场票面价(元)</th>
+						<th align="center" width="90px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">可连续游玩天数</th>
+					</tr>
+				</thead>
+				<tbody>
+				<#assign salePrice = 0>
+				<#list policy.singleTicketPolicies as sp>
+				<tr height="25px;" >
+					<td>${sp.baseInfo.name}</td>
+					<td align="center">${sp.baseInfo.settlementPrice?string('0.00')}</td>
+					<td align="center">${sp.baseInfo.playPrice?string('0.00')}</td>
+					<#assign salePrice = salePrice + sp.baseInfo.playPrice> 
+					<td align="center">${sp.baseInfo.rackRate?string('0.00')}</td>
+					<td align="center">${sp.useInfo.validDays}</td>
+				</tr>
+				</#list>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="unit">
+			<label>销售价格：</label>
+			<input type="text" value="${salePrice?string('0.00')}"/>&nbsp;元
+		</div>
+		
+		<div class="unit">
+			<label>市场价格：</label>
+			<input type="text" name="rackRate" maxlength="10" value="${policy.baseInfo.rackRate?string('0.00')}"/>&nbsp;元
+		</div>
+		
+		<div class="unit">
+			<label>库存数量：</label>
+			<input id="remainingQty" name="remainingQty" value="${(policy.sellInfo.remainingQty)?c}"/>
+		</div>
+		
+		<div class="unit">
+			<label>联票有效期：</label>
+			<#if policy.useInfo.validUseDateType==2>
+				<span>
+					&nbsp;自出票后<input id="validDays" size="6" value="${policy.useInfo.validDays}">	&nbsp;天有效
+				</span>
+			</#if>
+		</div>
+		
+		<div class="unit">
+			<label>退票规则：</label>
+		</div>
+		<div class="unit"  style="padding-left: 130px; margin-top: -26px;">
+			<span>不得退票</span>
+		</div>
+		
+		<div class="unit">
+			<label>过期退：</label>
+			<input type="checkBox" name="autoMaticRefund" value="1" class="addSpan" checked="checked" disabled="disabled"/>&nbsp;支持
+		</div>
+		
+		
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close" style="width: 35px;">取消</button>
+					</div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+</div>

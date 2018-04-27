@@ -1,0 +1,605 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/line/add" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>线路名称</label>
+				<input type="text" id="name" name="baseInfoDTO.name" size="40" maxlength="64"  class="required" />
+			</div>
+			<div class="unit">
+				<label>线路编号</label>
+				<input type="text" id="number" name="baseInfoDTO.number" size="20" maxlength="20"  class="required"/>
+			</div>
+			<div class="unit">
+				<label>推荐指数</label>
+				<select name="baseInfoDTO.recommendationLevel">
+				<option value="">--请选择--</option>
+					<#if RECOMMAND_MAP??>
+		                   <#list RECOMMAND_MAP?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${RECOMMAND_MAP[itemKey]}</option>
+		                   </#list>
+		             </#if>
+                </select>
+			</div>
+			<div class="unit">
+				<label>供应商</label>
+				<select name="lineSupplierID" class="required">
+				<option value="">--请选择--</option>
+					<#if supplierList??>
+		                   <#list supplierList as supplier>
+		                       <option value="${supplier.id}">
+		                        ${supplier.name}</option>
+		                   </#list>
+		              </#if>
+                </select>
+			</div>
+			<div class="unit">
+			
+				<label>线路类别</label>
+				<select name="baseInfoDTO.type" class="required">
+				<option value="">--请选择--</option>
+				<#if TYPE_MAP??>
+                    <#list TYPE_MAP?keys as itemKey>
+                        <option value="${itemKey}">
+                         ${TYPE_MAP[itemKey]}</option>
+                    </#list>
+                </#if>
+                </select>
+                <select  id="domesticLine_add" name ="baseInfoDTO.typeGrade">
+							<option value="">--请选择--</option>
+							<option value="1">国内线</option>
+							<option value="2">国外线</option> 
+				</select>
+				<select id="domestic_province_add" style="display:none" ></select>
+				<select name="baseInfoDTO.cityOfType"  id="domestic_city_add" style="display:none" class="required"></select>
+             </div>
+<!--              <div class="unit"> -->
+<!--                 <select  id="domesticLine_add"> -->
+<!-- 							<option value="">--请选择--</option> -->
+<!-- 							<option value="1" >国内线</option> -->
+							<!-- <option>国外线</option> -->
+<!-- 				</select> -->
+				
+<!-- 			</div> -->
+<!-- 			<div class="unit"> -->
+<!-- 				<select id="domestic_province_add" style="display:none" ></select> -->
+<!-- 			</div> -->
+<!-- 			<div class="unit"> -->
+<!-- 				<select name="baseInfoDTO.cityOfType"  id="domestic_city_add" style="display:none" class="required"></select> -->
+<!-- 			</div> -->
+			<div class="unit">
+				<label>线路目的地及途径地</label>
+				<select  id="destCity_add">
+							<option value="">--请选择--</option>
+							<option value="1" >国内线</option>
+							<option value="2" >国外线</option> 
+				</select>
+				<select  id="dest_province" style="display:none">
+					<option value="">--请选择省--</option>
+					<#list provinceList as province>
+						<option value="${province.code}">${province.name}</option>
+					</#list>
+				</select>   
+				<select  id="dest_city" style="display:none">
+					<option value="">--请选择市--</option>
+					<#list cityList as city>
+						<option value="${city.code}">${city.name}</option>
+					</#list>							
+				</select>
+				<button type="button" onclick="addDest();">增加</button>
+			</div>
+			<div class="unit">
+				<div id="content" ></div>
+			</div>
+			<div class="unit">
+				<label>出发地</label>
+				<select  id="startCity_add" name ="baseInfoDTO.startGrade">
+							<option value="">--请选择--</option>
+							<option value="1" >国内线</option>
+							<option value ="2">国外线</option>
+				</select>
+				<select id="start_province_add" style="display:none"> 
+					<option value="">--请选择省--</option>
+					<#list provinceList as province>
+						<option value="${province.code}">${province.name}</option>
+					</#list>
+				</select>
+				<select name="baseInfoDTO.starting"  id="start_city_add" style="display:none">
+					<option value="">--请选择市--</option>
+					<#list cityList as city>
+						<option value="${city.code}">${city.name}</option>
+					</#list>							
+				</select>
+			</div>
+			
+			<!-- 支付信息 -->
+			<div class="unit">
+				<label>订金支付比例</label>
+				<input type="text" name="payInfoDTO.downPayment" size="10" class="number required" max="100" min="0"  id="downPayment"/>%
+			</div>
+			<div class="unit">
+				<label>全款支付出发日期前</label>
+				<input type="text" id="payTotalDaysBeforeStart" name="payInfoDTO.payTotalDaysBeforeStart" size="10" class="digits  required"/>天
+			</div>
+			<div class="unit">
+				<label>最晚付款时间出发日期前</label>
+				<input type="text" id="lastPayTotalDaysBeforeStart" name="payInfoDTO.lastPayTotalDaysBeforeStart" size="10"  class="digits   required"/>天
+			</div>
+			<!-- 支付信息 -->
+			
+			<div class="unit">
+				<label>线路特色</label>
+				<textarea rows="6" cols="60"  class="editor" name="baseInfoDTO.featureDescription"></textarea>
+			</div>
+			<div class="unit">
+				<label>线路优惠</label>
+				<textarea rows="6" cols="60"  class="editor" name="baseInfoDTO.favorableDescription"></textarea>
+			</div>
+			<div class="unit">
+				<label>提示信息</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.noticeDescription"></textarea>
+			</div>
+			<div class="unit">
+				<label>交通信息</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.trafficDescription"></textarea>
+			</div>
+			<div class="unit">
+				<label>费用说明</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.feeDescription"></textarea>
+			</div>
+			<div class="unit">
+				<label>预订须知</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.bookDescription"></textarea>
+			</div>
+			
+			<input type="hidden" name="destCityIds" id="destCityIds"/>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" id="checkData" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<<script type="text/javascript">
+
+
+
+var destIndex = 0;
+
+
+
+
+function addDest(){
+	var cityID = $("#dest_city").val();
+	if(cityID == ""){
+		alert("请先选择城市");
+		return ;
+	}
+	var cityName = $("#dest_city").find("option:selected").text();
+	var s = document.getElementById("content").getElementsByTagName("input");
+	
+	for(var i = 0; i < s.length; i++){
+		if(s[i].value == cityID){
+			alert("目的地及途径地已经添加");
+			return ;
+		}
+	}
+	addElementNew(cityID,cityName);
+}
+
+
+//添加途经地DIV
+function addElementNew(cityID,cityName){
+
+    var newElementFontColor = "#4876FF";
+    var cancle_img_margin_right = "5px";
+    var dest_name_span_margin_right = "5px";
+    var dest_name_span_margin_left = "2px";
+    var dest_name_span_margin_bottom = "5px";
+    var dest_name_div_margin_right = "10px";
+    var cancleImgSrc = "resources/image/mp/u233.png"
+    var borderStyle = "1px solid #63B8FF";
+    
+   
+   var nameSpan = document.createElement("span");
+   nameSpan.innerHTML =  cityName;
+   nameSpan.style.marginRight = dest_name_span_margin_right;
+   nameSpan.style.marginLeft = dest_name_span_margin_left;
+   
+   
+   var cancleImg = document.createElement("img");
+   cancleImg.src = cancleImgSrc;
+   cancleImg.style.marginRight = cancle_img_margin_right;
+   cancleImg.id = "cancle" + cityID  ;
+   cancleImg.onclick = function(){
+      removeElementNew(this.id);
+   };
+   
+   var destNameDiv = document.createElement("div");
+   destNameDiv.style.cssFloat = "left";
+   destNameDiv.style.border = borderStyle;
+   destNameDiv.style.paddingBottom = dest_name_span_margin_bottom;
+   destNameDiv.style.marginRight = dest_name_div_margin_right;
+   destNameDiv.style.marginBottom = dest_name_span_margin_bottom;
+   
+   destNameDiv.appendChild(nameSpan);
+   destNameDiv.appendChild(cancleImg);
+   
+   
+   var allDiv = document.createElement("div");
+   allDiv.id = "name" + cityID;
+   allDiv.style.color = newElementFontColor;
+   
+   allDiv.appendChild(destNameDiv);
+   
+   document.getElementById("content").appendChild(allDiv);
+   
+   
+   var cityInput = document.createElement("input");
+   cityInput.name = "baseInfoDTO.destinationCity";
+   cityInput.value = cityID;
+   cityInput.id = "city" + cityID;
+   cityInput.type = "hidden";
+   
+   	
+   destIndex = destIndex + 1;
+   document.getElementById("content").appendChild(cityInput);
+}
+
+//删除 已选途经地DIV
+function removeElementNew(cancleId){
+	
+   var destIndex = cancleId.replace("cancle","");
+   var labelNew = document.getElementById("name" + destIndex);
+   if(labelNew != null){
+     labelNew.parentNode.removeChild(labelNew);
+   }
+   var destCityId = document.getElementById("city" + destIndex);
+   if(destCityId != null){
+	   destCityId.parentNode.removeChild(destCityId);
+   }
+}
+
+//当线路类型下拉框选择“国内线”时，联动出省市下拉框
+$("#domesticLine_add").change(function(){
+    var selectOption = $("#domesticLine_add").val();	
+	if(selectOption == 1){
+		 $.post("${contextPath}/traveline/line/searchProvince",function(data){
+				if (data.length > 0) {  
+		            var layer = "<option value=''>--请选择省--</option>";  
+		            var initCity = "<option value=''>--请选择市--</option>";
+		            $.each(data, function (idx, item) {  
+		                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+		            });
+		            
+					$("#domestic_province_add").empty();
+					$("#domestic_province_add").append(layer);
+					$("#domestic_city_add").empty();
+					$("#domestic_city_add").append(initCity);
+					
+					//展现省市下拉框
+					$("#domestic_province_add").show();
+					$("#domestic_city_add").show();
+		        }  
+		},"json"); 
+		//线路目的地及途径地  自动设置为国内线
+		//删除原来的添加的
+// 		$("#destCity_add option:eq(2)").remove();
+		
+// 		$("#destCity_add").append("<option value='1'>国内线</option>");
+//		默认选中此项
+// 		$("#destCity_add option:eq(1)").attr("selected","selected");
+	}else{
+		 $.post("${contextPath}/traveline/line/searchCountry",function(data){
+				if (data.length > 0) {  
+		            var layer = "<option value=''>--请选择国家--</option>";  
+		            var initCity = "<option value=''>--请选择城市--</option>";
+		            $.each(data, function (idx, item) {  
+		                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+		            });
+		            
+					$("#domestic_province_add").empty();
+					$("#domestic_province_add").append(layer);
+					$("#domestic_city_add").empty();
+					$("#domestic_city_add").append(initCity);
+					
+					//展现省市下拉框
+					$("#domestic_province_add").show();
+					$("#domestic_city_add").show();
+		        }  
+		},"json"); 
+//		线路目的地及途径地  自动设置为国外线
+//		删除原来的添加的
+// 		$("#destCity_add option:eq(1)").remove();
+// 		$("#destCity_add").append("<option value='2'>国外线</option>");
+//		默认选中此项
+// 		$("#destCity_add option:eq(2)").attr("selected","selected");
+	}
+});
+
+$("#domestic_province_add").change(function(){
+	var selectOption3 = $("#domesticLine_add").val();
+	if(selectOption3 == 1){
+		var  provinceID = $("#domestic_province_add").val();
+		$.post("${contextPath}/traveline/line/searchCity",{'province':provinceID},function(data){
+	 		if (data.length > 0) {  
+	             var layer = "<option value=''>--请选择市--</option>";  
+	             $.each(data, function (idx, item) {  
+	            	 layer += "<option value="+item.code + ">"+ item.name + "</option>";
+	             });
+	             
+	            $("#domestic_city_add").empty();
+	  			$("#domestic_city_add").append(layer);
+	         }  
+	 	},"json");
+	}else{
+		var  countryCode = $("#domestic_province_add").val();
+		$.post("${contextPath}/traveline/line/searchCountryCity",{'countryCode':countryCode},function(data){
+	 		if (data.length > 0) {  
+	             var layer = "<option value=''>--请选择市--</option>";  
+	             $.each(data, function (idx, item) {  
+	            	 layer += "<option value="+item.code + ">"+ item.name + "</option>";
+	             });
+	             
+	            $("#domestic_city_add").empty();
+	  			$("#domestic_city_add").append(layer);
+	         }  
+	 	},"json");
+	}
+	
+ }); 
+
+
+//当线路目的地及途径地下拉框选择“国内线”时，联动出省市下拉框
+$("#destCity_add").change(function(){
+	var selectOption1 = $("#destCity_add").val();	
+	$("#dest_province").show();
+	$("#dest_city").show();
+	if(selectOption1 == 1){
+		 $.post("${contextPath}/traveline/line/searchProvince",function(data){
+				if (data.length > 0) {  
+		            var layer = "<option value=''>--请选择省--</option>";  
+		            var initCity = "<option value=''>--请选择市--</option>";
+		            $.each(data, function (idx, item) {  
+		                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+		            });
+		            
+					$("#dest_province").empty();
+					$("#dest_province").append(layer);
+					$("#dest_city").empty();
+					$("#dest_city").append(initCity);
+		        }  
+		},"json"); 
+	}else{
+		 $.post("${contextPath}/traveline/line/searchCountry",function(data){
+				if (data.length > 0) {  
+		            var layer = "<option value=''>--请选择国家--</option>";  
+		            var initCity = "<option value=''>--请选择城市--</option>";
+		            $.each(data, function (idx, item) {  
+		                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+		            });
+		            
+					$("#dest_province").empty();
+					$("#dest_province").append(layer);
+					$("#dest_city").empty();
+					$("#dest_city").append(initCity);
+		        }  
+		},"json"); 	
+	}	
+});
+
+$("#dest_province").change(function(){
+	var selectOption4 = $("#destCity_add").val();
+	if(selectOption4 == 1){
+		var  provinceID = $("#dest_province").val();
+		$.post("${contextPath}/traveline/line/searchCity",{'province':provinceID},function(data){
+	 		if (data.length > 0) {  
+	             var layer = "<option value=''>--请选择市--</option>";  
+	             $.each(data, function (idx, item) {  
+	            	 layer += "<option value="+item.code + ">"+ item.name + "</option>";
+	             });
+	             
+	            $("#dest_city").empty();
+	  			$("#dest_city").append(layer);
+	         }  
+	 	},"json");
+	}else{
+		var  countryCode = $("#dest_province").val();
+		$.post("${contextPath}/traveline/line/searchCountryCity",{'countryCode':countryCode},function(data){
+	 		if (data.length > 0) {  
+	             var layer = "<option value=''>--请选择市--</option>";  
+	             $.each(data, function (idx, item) {  
+	            	 layer += "<option value="+item.code + ">"+ item.name + "</option>";
+	             });
+	             
+	            $("#dest_city").empty();
+	  			$("#dest_city").append(layer);
+	         }  
+	 	},"json");
+	}
+	
+ }); 
+
+//当出发地下拉框选择“国内线”时，联动出省市下拉框
+$("#startCity_add").change(function(){
+	var selectOption2 = $("#startCity_add").val();
+	$("#start_province_add").show();
+	$("#start_city_add").show();
+	if(selectOption2 == 1){
+		 $.post("${contextPath}/traveline/line/searchProvince",function(data){
+				if (data.length > 0) {  
+		            var layer = "<option value=''>--请选择省--</option>";  
+		            var initCity = "<option value=''>--请选择市--</option>";
+		            $.each(data, function (idx, item) {  
+		                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+		            });
+		            
+					$("#start_province_add").empty();
+					$("#start_province_add").append(layer);
+					$("#start_city_add").empty();
+					$("#start_city_add").append(initCity);
+		        }  
+		},"json"); 
+	}else{
+		 $.post("${contextPath}/traveline/line/searchCountry",function(data){
+				if (data.length > 0) {  
+		            var layer = "<option value=''>--请选择国家--</option>";  
+		            var initCity = "<option value=''>--请选择城市--</option>";
+		            $.each(data, function (idx, item) {  
+		                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+		            });
+		            
+					$("#start_province_add").empty();
+					$("#start_province_add").append(layer);
+					$("#start_city_add").empty();
+					$("#start_city_add").append(initCity);
+					
+		        }  
+		},"json"); 
+		
+	}		
+});
+
+$("#start_province_add").change(function(){
+	var selectOption5 = $("#startCity_add").val();
+	if(selectOption5 == 1){
+		var  provinceID = $("#start_province_add").val();
+		$.post("${contextPath}/traveline/line/searchCity",{'province':provinceID},function(data){
+	 		if (data.length > 0) {  
+	             var layer = "<option value=''>--请选择市--</option>";  
+	             $.each(data, function (idx, item) {  
+	            	 layer += "<option value="+item.code + ">"+ item.name + "</option>";
+	             });
+	             
+	            $("#start_city_add").empty();
+	  			$("#start_city_add").append(layer);
+	         }  
+	 	},"json");
+	}else{
+		var  countryCode = $("#start_province_add").val();
+		$.post("${contextPath}/traveline/line/searchCountryCity",{'countryCode':countryCode},function(data){
+	 		if (data.length > 0) {  
+	             var layer = "<option value=''>--请选择市--</option>";  
+	             $.each(data, function (idx, item) {  
+	            	 layer += "<option value="+item.code + ">"+ item.name + "</option>";
+	             });
+	             
+	            $("#start_city_add").empty();
+	  			$("#start_city_add").append(layer);
+	         }  
+	 	},"json");
+	}
+	
+ }); 
+
+$("#name").blur(function(){
+	var name = $(this).val();
+	if(name != ""){
+		$.post("${contextPath}/traveline/line/uniqueName",{'name':name},function(data){
+			if (data.length > 0) {  
+	 			alert(data);
+	 			$("#name").focus();
+	         }  
+	 	},"json");
+	}
+});
+$("#number").blur(function(){
+	var number = $(this).val();
+	if(number != ""){
+		$.post("${contextPath}/traveline/line/uniqueNumber",{'number':number},function(data){
+	 		if (data.length > 0) {  
+	 			alert(data);
+	 			$("#number").focus();
+	         }  
+	 	},"json");
+	}
+});
+
+//取消回车键能提交表单的功能
+document.onkeydown = function(event_e){  
+ if(window.event) {  
+     event_e = window.event;  
+ }  
+ var int_keycode = event_e.charCode||event_e.keyCode;  
+ if(int_keycode =='13') {  //13是回车键
+     return false;  
+ }  
+}
+
+$("#checkData").click(function(){
+	
+	var domesticLine_add = $("#domesticLine_add").val();
+	var  domestic_province_add = $("#domestic_province_add").val();
+	var  domestic_city_add = $("#domestic_city_add").val();
+	var destCity_add = $("#destCity_add").val();
+	var dest_province = $("#dest_province").val();
+	
+	var dest_city = $("#dest_city").val();
+	
+	
+	var startCity_add = $("#startCity_add").val();
+	
+	
+	var start_province_add = $("#start_province_add").val();
+	
+	
+	var start_city_add = $("#start_city_add").val();
+
+	
+	var inputlen = document.getElementById("content").getElementsByTagName("input").length;
+	   
+	if(domesticLine_add == ""){
+		alert("请选择国内线或国外线");
+		return false;
+	}
+	if(domestic_province_add == ""){
+		alert("请选择线路类型中的省或国家");
+		return false;
+	}
+	if(domestic_city_add == ""){
+		alert("请选择线路类型中的城市");
+		return false;
+	}
+	if(destCity_add == "" ||dest_province == "" || dest_city == ""){
+		alert("线路目的地及途径地不能为空");
+		return false;
+	}
+	if(inputlen == 0){
+	    alert("请点击添加线路目的地及途径地");
+		return false;
+	}
+	if(startCity_add == "" || start_province_add == "" || start_city_add == ""){
+		alert("出发地不能为空");
+		return false;
+	}
+	var downPayment = $("#downPayment").val();
+	
+	if(downPayment < 1){	 
+	  alert("定价比例不能低于1%");
+	  return false;
+	}
+	
+	var payTotalDaysBeforeStart = $("#payTotalDaysBeforeStart").val();
+	var lastPayTotalDaysBeforeStart = $("#lastPayTotalDaysBeforeStart").val();
+	if(parseInt(payTotalDaysBeforeStart,10) < parseInt(lastPayTotalDaysBeforeStart,10)){
+		alert("全款付款时间不能小于最晚付款时间 ");
+		return false;
+	}
+});
+
+$("#downPayment").blur(function(){
+	var downPayment = $("#downPayment").val();
+	if(downPayment < 1){	 
+	  alert("定价比例不能低于1%");
+	  return false;
+	}
+	return true;
+});
+
+
+</script>

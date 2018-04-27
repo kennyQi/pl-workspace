@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-电子票</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+</head>
+
+<body>
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav6">线&nbsp;路</a>
+        <a href="#" title="" class="h1 yahei nav7 on">电子票</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="#top">
+    </a>
+<!--头部-->
+
+<!--内容-->
+<link href="css/dzp.css" rel="stylesheet" />
+
+<script src="js/dzp_win.js" language="javascript"></script>
+	<div class="g_bd disb ov p">
+        <!--轮播图部分-->
+        <div class="g_carousel ov pa disb" id="carousel">
+            <div class="img_list pa">
+                <!--图片宽度最少1200-->
+                <a href="#" style="background-image:url(images/jd_bn1.jpg)" class="turn"></a>
+                <a href="#" style="background-image:url(images/jd_bn2.jpg)" class="turn"></a>
+                <a href="#" style="background-image:url(images/jd_bn3.jpg)" class="turn"></a>
+            </div>
+            <div class="m_carousel_p pl ov diab">
+                <ul class="icon pa">
+                </ul></div>
+        </div>
+
+        <!--轮播图部分-->
+    	<!--条件筛选部分-->
+    	<div class="m_search disb pl">
+        	<div class="disb m_search_c ">
+            	<!-- <div class="load  color6 simsun"><label class="color8">您的位置：</label><a href="#" class="color6">电子票</a></div> -->
+                <div style="height:61px"></div>
+                
+                <!--搜索框-->
+                <div class="m_select disb pl">
+                	<div class="select_bg pa"></div>
+                	<div class="select_cont pl ov">
+                        <div class="input_box disb">
+                            <div class="left_bd fl"></div>
+                            <div class="input fl">
+                                <label class="fl">景点门票</label>
+                                <input type="text" class="fl" />
+                            </div>
+                            <a href="#" class="btn fl"></a>
+                        </div>
+                        <div class="hot_box disb yahei">热门景点：<a href="#">雷峰塔</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">三清山金沙索道</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="#">洛阳灵山寺</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">少林景区（少林寺）</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">青龙山慈云寺</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">东林寺</a></div>
+                    </div>
+                </div>
+                
+
+                <!--搜索框-->
+            </div>
+        </div>
+
+        <!--搜索框-->
+        <div class="m_search disb m_search_jd">
+            <div class="disb m_search_c ">
+            <!--左侧筛选-->
+            <div class="left disb">
+                <ul class="left_all fl disb">
+                    <!--省级-->
+                    <li class="left_all_box1 left_all_box3">
+                        <dl class="pl left_choose yahei disb  " >
+                            <dt class="h3 fl">省<i>订单</i>级:</dt>
+                            <dd class="nor on"><a href="javascript:">全部</a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd><a href="javascript:">河北 </a></dd>
+                            <dd class="more Bg cur pa"><a href="javascript:">更多</a></dd>
+                        </dl>
+                    </li>
+
+                    <!--市级-->
+                    <li class="left_all_box1">
+                        <dl class=" pl left_choose yahei disb HousePrice" id="price">
+                            <dt class="h3 fl">市<i>订单</i>级:</dt>
+                            <dd class="nor on"><a href="javascript:">全部</a></dd>
+                            <dd rel="0"><a href="javascript:">保定</a></dd>
+                            <dd rel="1"><a href="javascript:">沧州</a></dd>
+                            <dd rel="2"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                            <dd rel="3"><a href="javascript:">沧州</a></dd>
+                            <dd rel="4"><a href="javascript:">沧州</a></dd>
+                            <dd rel="5"><a href="javascript:">沧州</a></dd>
+                        </dl>
+                    </li>
+                    <!--价格-->
+                    <li class="left_all_box1">
+                        <dl class=" pl left_choose yahei disb" id="hotalstar">
+                            <dt class="h3 fl">门票价格:</dt>
+                            <dd class="nor on"><a href="javascript:">全部</a></dd>
+                            <dd><a href="javascript:">￥0-￥50  </a></dd>
+                            <dd><a href="javascript:">￥50-￥100 </a></dd>
+                            <dd><a href="javascript:">￥100-￥1000</a></dd>
+                            <dd><a href="javascript:">￥1000-￥10000</a></dd>
+                        </dl>
+                    </li>
+
+                    <!--级别-->
+                    <li class="left_all_box1 left_all_box3" >
+                        <dl class="pl left_choose yahei disb brand" id="brand">
+                            <dt class="h3 fl">景点级别:</dt>
+                            <dd class="nor on"><a href="javascript:">全部</a></dd>
+                            <dd><a href="javascript:">AAAAA</a></dd>
+                            <dd><a href="javascript:">AAAA</a></dd>
+                            <dd><a href="javascript:">AAA</a></dd>
+                            <dd><a href="javascript:">AA</a></dd>
+                            <dd><a href="javascript:">A</a></dd>
+
+                        </dl>
+                    </li>
+                </ul>
+                <div class="m_cond ov">
+                    <div class="m_condBox disb" id="condition">
+                        <h2 class="tt h3 color3 fl">筛选条件：</h2>
+                        <label class="clear fl curp">清除条件</label>
+                    </div>
+                </div>
+            </div>
+            <!--左侧筛选-->
+
+            </div>
+        </div>
+
+        <!--搜索框-->
+    	<!--条件筛选部分-->
+        
+        <!--排序部分-->
+        	<div class="m_sort yahei pl ov">
+            	<div class="m_sort_box disb">
+                	<!--<span class="total color3 disb">共1204条信息</span>-->
+                    <a href="#" class="cmd color6 h2 cmdon curp firs">默认排序</a>
+                    <a href="#" class="cmd color6 h2 curp">价格</a>
+                    <a href="#" class="color6 h2 curp next c_page ">&lt;&lt;上一页</a>
+                    <a href="#" class="color6 h2 curp c_page">下一页&gt;&gt;</a>
+                    <span class="icon_list">
+                    	<span class="icon_list_box">
+                        	<span class="check check_on Bg"></span>
+                    		<label class="icon Bg q"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg f"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg c"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg l"></label>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        <!--排序部分-->
+
+        <!--列表部分-->
+        	<div class="g_list pl ov">
+                <div class="m_list ov">
+            		<!--产品列表框-->
+                    <div class="m_list_box ov">
+                        <div class="hotel disb ov">
+                        	<span class="pic pl fl">
+                            	<img src="images/jd_img.jpg" alt="" >
+                            </span>
+                            <div class="detail fl">
+                            	<h3 class="tt bold disb"><a href="#">上海金海岸大酒店</a>
+                                    <span class="tt_icon">
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                    </span>
+                               	</h3>
+                                <span class="addres Bg disb">上海 静安区 南阳路170号( 南京西路商业区 静安寺地区 近西康路）</span>
+                                <span class="det disb">★孙思邈隐居地；拥有能和我国四大名窟媲美的摩崖造像拥有能和我国四大名窟媲美的摩崖造像</span>
+                                <span class="tips disb">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+
+                            </div>
+                            <div class="price fl">
+                                <div class="pr">
+                                    ￥155<i class="up">起</i>
+                                </div>
+                                <a class="look_detail disb" href="#">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="house disb">
+                        	<table class="tb" cellspacing="0" cellpadding="0">
+                            	<tr class="tt">
+                                	<th class="ho">景点门票</th>
+                                	<th class="bd">票型</th>
+                                	<th class="bf">市场价</th>
+                                	<th class="wf">网站价</th>
+                                	<th class="pr"></th>
+                                	<th class="bt">&nbsp;</th>
+                                </tr>
+                            	<tr>
+                                	<td>豪华景观双人</td>
+                                	<td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                	<td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                	<td>
+                                    	<a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>联票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>联票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr class="last">
+                                	<td colspan="6">&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+            		<!--产品列表框-->
+                    <div class="m_list_box ov">
+                        <div class="hotel disb ov">
+                        	<span class="pic pl fl">
+                            	<img src="images/jd_img.jpg" alt="" >
+                            </span>
+                            <div class="detail fl">
+                                <h3 class="tt bold disb"><a href="#">上海金海岸大酒店</a>
+                                    <span class="tt_icon">
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                    </span>
+                                </h3>
+                                <span class="addres Bg disb">上海 静安区 南阳路170号( 南京西路商业区 静安寺地区 近西康路）</span>
+                                <span class="det disb">★孙思邈隐居地；拥有能和我国四大名窟媲美的摩崖造像拥有能和我国四大名窟媲美的摩崖造像</span>
+                                <span class="tips disb">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+
+                            </div>
+                            <div class="price fl">
+                                <div class="pr">
+                                    ￥155<i class="up">起</i>
+                                </div>
+                                <a class="look_detail disb" href="#">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="house disb">
+                            <table class="tb" cellspacing="0" cellpadding="0">
+                                <tr class="tt">
+                                    <th class="ho">景点门票</th>
+                                    <th class="bd">票型</th>
+                                    <th class="bf">市场价</th>
+                                    <th class="wf">网站价</th>
+                                    <th class="pr"></th>
+                                    <th class="bt">&nbsp;</th>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>联票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>联票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr class="last">
+                                    <td colspan="6">&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="m_list_box ov">
+                        <div class="hotel disb ov">
+                        	<span class="pic pl fl">
+                            	<img src="images/jd_img.jpg" alt="" >
+                            </span>
+                            <div class="detail fl">
+                                <h3 class="tt bold disb"><a href="#">上海金海岸大酒店</a>
+                                    <span class="tt_icon">
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                    </span>
+                                </h3>
+                                <span class="addres Bg disb">上海 静安区 南阳路170号( 南京西路商业区 静安寺地区 近西康路）</span>
+                                <span class="det disb">★孙思邈隐居地；拥有能和我国四大名窟媲美的摩崖造像拥有能和我国四大名窟媲美的摩崖造像</span>
+                                <span class="tips disb">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+
+                            </div>
+                            <div class="price fl">
+                                <div class="pr">
+                                    ￥155<i class="up">起</i>
+                                </div>
+                                <a class="look_detail disb" href="#">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="house disb">
+                            <table class="tb" cellspacing="0" cellpadding="0">
+                                <tr class="tt">
+                                    <th class="ho">景点门票</th>
+                                    <th class="bd">票型</th>
+                                    <th class="bf">市场价</th>
+                                    <th class="wf">网站价</th>
+                                    <th class="pr">支付方式</th>
+                                    <th class="bt">&nbsp;</th>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">暂无门票信息
+                                    </td>
+                                </tr>
+
+                                <tr class="last">
+                                    <td colspan="6">&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="m_list_box ov">
+                        <div class="hotel disb ov">
+                        	<span class="pic pl fl">
+                            	<img src="images/jd_img.jpg" alt="" >
+                            </span>
+                            <div class="detail fl">
+                                <h3 class="tt bold disb"><a href="#">上海金海岸大酒店</a>
+                                    <span class="tt_icon">
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                    </span>
+                                </h3>
+                                <span class="addres Bg disb">上海 静安区 南阳路170号( 南京西路商业区 静安寺地区 近西康路）</span>
+                                <span class="det disb">★孙思邈隐居地；拥有能和我国四大名窟媲美的摩崖造像拥有能和我国四大名窟媲美的摩崖造像</span>
+                                <span class="tips disb">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+
+                            </div>
+                            <div class="price fl">
+                                <div class="pr">
+                                    ￥155<i class="up">起</i>
+                                </div>
+                                <a class="look_detail disb" href="#">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="house disb">
+                            <table class="tb" cellspacing="0" cellpadding="0">
+                                <tr class="tt">
+                                    <th class="ho">景点门票</th>
+                                    <th class="bd">票型</th>
+                                    <th class="bf">市场价</th>
+                                    <th class="wf">网站价</th>
+                                    <th class="pr"></th>
+                                    <th class="bt">&nbsp;</th>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>联票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr class="last">
+                                    <td colspan="6">&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="m_list_box ov">
+                        <div class="hotel disb ov">
+                        	<span class="pic pl fl">
+                            	<img src="images/jd_img.jpg" alt="" >
+                            </span>
+                            <div class="detail fl">
+                                <h3 class="tt bold disb"><a href="#">上海金海岸大酒店</a>
+                                    <span class="tt_icon">
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                    </span>
+                                </h3>
+                                <span class="addres Bg disb">上海 静安区 南阳路170号( 南京西路商业区 静安寺地区 近西康路）</span>
+                                <span class="det disb">★孙思邈隐居地；拥有能和我国四大名窟媲美的摩崖造像拥有能和我国四大名窟媲美的摩崖造像</span>
+                                <span class="tips disb">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+
+                            </div>
+                            <div class="price fl">
+                                <div class="pr">
+                                    ￥155<i class="up">起</i>
+                                </div>
+                                <a class="look_detail disb" href="#">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="house disb">
+                            <table class="tb" cellspacing="0" cellpadding="0">
+                                <tr class="tt">
+                                    <th class="ho">景点门票</th>
+                                    <th class="bd">票型</th>
+                                    <th class="bf">市场价</th>
+                                    <th class="wf">网站价</th>
+                                    <th class="pr"></th>
+                                    <th class="bt">&nbsp;</th>
+                                </tr>
+                                <tr>
+                                    <td>豪华景观双人</td>
+                                    <td>单票</td>
+                                    <td class="old_p">￥1,150</td>
+                                    <td class="p">￥1,150</td>
+                                    <td>
+                                        <a href="javascript:;" class="btn_ydxz">预订须知</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="rever">预订</a>
+                                    </td>
+                                </tr>
+                                <tr class="last">
+                                    <td colspan="6">&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+               
+               
+            </div>
+        <!--列表部分-->
+        <!--页脚翻页-->
+        	<div class="g_page ov disb">
+            	<a href="#" class="up"><</a>
+            	<span class="on">1</span>
+            	<a href="#">2</a>
+            	<a href="#">3</a>
+            	<a href="#">4</a>
+            	<a href="#">...</a>
+            	<a href="#">10</a>
+            	<a href="#" class="down">></a>
+            </div>
+        <!--页脚翻页-->
+        <!--底部图片位置-->
+        	<div class="g_adimg disb ov">
+            	<a href="#"><img src="images/list_ad3.jpg" class="fl"></a><!--图片尺寸291*160-->
+            	<a href="#"><img src="images/list_ad4.jpg" class="fl"></a>
+            	<a href="#"><img src="images/list_ad5.jpg" class="fl"></a>
+            	<a href="#"><img src="images/list_ad6.jpg" class="fl last"></a>
+            </div>
+        <!--底部图片位置-->
+	</div>
+    
+<script src="js/jd.js" language="javascript"></script>
+
+<script>
+    //建立cookie 浏览历史
+
+    $(function(){
+        (function(){
+            var $detail=$(".m_detail");
+            var histTop=$detail.offset().top;
+            var hideTop=$(".gd_foot ").offset().top;
+            var bodyWidth=$detail.width();
+            var time=1;//天数
+            ply.history.start({
+                url:"index.html?q=11072",
+                title:"标题2",
+                price:"价格",
+                img:"images/img1.jpg",
+                cookieName:"cookie"
+                ,hideHeight:hideTop
+                ,top:histTop//固定高度
+                ,bodyWidth:bodyWidth//固定左右位置
+                ,expires:1//过期时间
+            });
+        })();
+    });
+
+
+
+</script>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">票量简介</a>
+                	<a href="#" title="" class="simsun h4">法律声明</a>
+                	<a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">友情链接</a>
+                	<a href="#" title="" class="simsun h4">酒店加盟</a>
+                	<a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">帮助中心</a>
+                	<a href="#" title="" class="simsun h4">投诉建议</a>
+                	<a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class=" disb h2 yahei yj">意见反馈</span>
+                    <span class=" disb h2 yahei kf">客服电话</span>
+                    <label class="yahei abt color6  disb">0571-23288385</label>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <!-- <div class="special"></div> -->
+</div>
+<!--页脚-->
+
+<!-- 预订须知弹框 -->
+<div class="win_bg" style="display:none;"></div>
+<div class="ydinfo_box" style="display:none;">
+    <div class="btn_close"></div>
+    <h1>预订须知</h1>
+    <div class="title">西湖景区船票</div>
+    <div class="ydxz">
+        <dl>
+            <dt>入园方式：</dt>
+            <dd>凭身份证或者二维码扫描入园；</dd>
+        </dl>
+        <dl>
+            <dt>预订说明：</dt>
+            <dd>预订须知内容预订须知内容预订须知内容预订须知须知内容预订须知内容预订须知容预订须知内容预订须知须知内容预订须知内容预订须知内容预订须知内容须知须知内容预订须知内容预订须知</dd>
+        </dl>
+        <dl>
+            <dt>退改说明：</dt>
+            <dd>
+                <span>不得退票</span>
+                <span>过期退</span>
+            </dd>
+        </dl>
+    </div>
+</div>   
+</body>
+</html>

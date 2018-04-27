@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+
+	<bean id="actionContext" class="zzpl.api.controller.ActionContext">
+		<property name="actionMap">
+			<map>
+				<entry key="default" value-ref="DefaultAction" />
+				<!-- 登录接口 -->
+				<entry key="Login" value-ref="LoginAction" />
+				<entry key="QueryUser" value-ref="QueryUserAction" />
+				<entry key="ModifyUser" value-ref="ModifyUserAction" />
+				<entry key="ChangePassword" value-ref="ChangePasswordAction" />
+				<entry key="QueryCostCenter" value-ref="QueryCostCenterAction" />
+				<entry key="GetResetPasswordSMSValid" value-ref="GetResetPasswordSMSValidAction" />
+				<entry key="CheckSMSValid" value-ref="CheckSMSValidAction" />
+				<entry key="ResetPassword" value-ref="ResetPasswordAction" />
+				<entry key="AddFrequentFlyer" value-ref="AddFrequentFlyerAction" />
+				<entry key="QueryFrequentFlyer" value-ref="QueryFrequentFlyerAction" />
+				<entry key="ModifyFrequentFlyer" value-ref="ModifyFrequentFlyerAction" />
+				<entry key="DeleteFrequentFlyer" value-ref="DeleteFrequentFlyerAction" />
+				<!--                                  国内机票                                                      -->
+				<!-- 国内航班查询 -->
+				<entry key="QueryGNFlight" value-ref="QueryGNFlightAction" />
+				<!-- 国内舱位查询 -->
+				<entry key="QueryGNCabin" value-ref="QueryGNCabinAction" />
+				<!-- 国内机票下单 -->
+				<entry key="BookGNFlight" value-ref="BookGNFlightAction" />
+				<!-- 多人国内机票下单 -->
+				<!-- <entry key="TeamBookGNFlight" value-ref="TeamBookGNFlightAction" /> -->
+				<!-- 取消国内订单 -->
+				<entry key="CancelGNTicket" value-ref="CancelGNTicketAction" />
+				<!--                                  国际机票                                                      -->
+				<!-- 国际航班查询 -->
+				<entry key="QueryGJFlight" value-ref="QueryGJFlightAction" />
+				<!-- 国际舱位查询 -->
+				<entry key="QueryGJCabin" value-ref="QueryGJCabinAction" />
+				<!-- 国际机票下单 -->
+				<entry key="BookGJFlight" value-ref="BookGJFlightAction" />
+				<!-- 取消国际订单 -->
+				<entry key="CancelGJTicket" value-ref="CancelGJTicketAction" />
+				<!--                                  订单                                                      -->
+				<!-- 获取机票订单列表 -->
+				<entry key="GetFlightOrderList" value-ref="GetFlightOrderListAction" /> 
+				<!-- 获取机票订单详情 -->
+				<entry key="GetFlightOrderInfo" value-ref="GetFlightOrderInfoAction" />
+				<!-- 支付获取价格 -->
+				<entry key="GetGNFlightOrderTotalPrice" value-ref="GetGNFlightOrderTotalPriceAction" />
+				<!--                                  流程                                                      -->
+				<!-- 流程查询 -->
+				<entry key="QueryWorkflow" value-ref="QueryWorkflowAction" />
+				<!-- 执行人查询 -->
+				<entry key="ChooseExecutor" value-ref="ChooseExecutorAction" />
+				<!-- 查询下一步环节 -->
+				<entry key="ChooseStep" value-ref="ChooseStepAction" />
+			</map>
+		</property>
+	</bean>
+</beans>

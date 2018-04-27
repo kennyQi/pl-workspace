@@ -1,0 +1,155 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "旅游线路">
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript"  src="${(contextPath)!}/resources/js/common.js"></script>
+<script type="text/javascript"  src="${(contextPath)!}/resources/js/pay_card.js"></script>
+<link href="${(contextPath)!}/resources/css/common.css"  rel="stylesheet"/>
+<link href="${(contextPath)!}/resources/css/reseve.css" rel="stylesheet" />
+<link href="${(contextPath)!}/resources/css/pay.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" 4>
+<body>
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+	<input type="hidden"  value="${(contextPath)}" id="contextPath"/>
+		   	  <input type="hidden" id="daijinquan" value="0"/><!-- 代金券金额 -->
+		   	  <input type="hidden" id=xianjinquan" value="0"/><!-- 现金券金额 -->
+<div class="g_body">
+<!--支付进程-->
+<div class="g_step disb">
+	<ul>
+    	<li class="m_move">
+        	<h3 class="h3Complete">填写订单</h3>
+            <span class="iconComplete"></span>
+      </li>
+    	<li class="m_move">
+        	<h3 class="h3">支付订金</h3>
+            <span class="icon">2</span>
+      </li>
+    	<li class="m_move">
+        	<h3 >确认名单</h3>
+            <span >3</span>
+      </li>
+    	<li class="m_move">
+        	<h3 >支付尾款</h3>
+            <span >4</span>
+      </li>
+    	<li class="m_move m_move_last">
+        	<h3>预订成功</h3>
+            <span>5</span>
+      </li>
+  </ul>
+</div>
+<!--支付进程-->
+<!--订单详情-->
+<div class="m_order">
+    <div class="orderTitle yahei">旅游产品订单详情</div>
+</div>
+<div class="details">
+         <ul class="message">
+            <li><span class="name">产品名称：</span><span class="theme">${(lineOrderDto.lineSnapshot.lineName)!}</span></li>
+            <li><span class="name">出发城市：</span><span>${cityMap[(lineOrderDto.lineSnapshot.starting)!]}</span></li>
+            <li><span class="name">出发日期：</span><span>${(lineOrderDto.baseInfo.travelDate)?date}</span></li>
+            <li><span class="name">行程天数：</span><span>${(lineOrderDto.lineSnapshot.line.routeInfo.routeDays)!}天</span></li>
+            <li><span class="name">人数：</span><span>${(lineOrderDto.baseInfo.adultNo)!}成人</span><span class="children">${(lineOrderDto.baseInfo.childNo)!}儿童</span></li>
+            <li><span class="name">联系人：</span><span>${(lineOrderDto.linkInfo.linkName)!}</span></li>
+            <li><span class="name">手机：</span><span>${(lineOrderDto.linkInfo.linkMobile)!}</span></li>
+            <#-- <li><span class="name">邮箱：</span><span>${(lineOrderDto.linkInfo.email)!}</span></li> -->
+        </ul>
+    </div>
+<!--订单详情-->
+
+<!--订单详情-->
+<div class="m_order yhxx">
+    <div class="orderTitle yahei">使用优惠券</div>
+</div>
+<div class="details ov kqhide">
+	 <div class="fly_pay_box fl">
+                    <div class="yahei h3 color6 fly_sale"><span>账户里可使用卡券<i id="position"></i>张</span></div>
+                    <div class="fly_use fly_saleSel yahei h3 color6 fl"><i></i>使用</div>
+                    <ul class="fly_sales fl yahei h4 color6" style="display:none;">
+                    <i class="Triangle"></i>
+                        <li id="options"><i class="Vouchers" id="use"></i><span>使用代金券</span>
+                        <span type="text" class="texta select yahei h4 color3 companySelect fl" id="optionValue">请选择现金券</span>
+                        <ul class="selectNav" for="optionValue" id="useCondition">
+                        </ul>
+                        <span class="fly_payTs yahei h4 color9" style="margin-left:10px;"><!-- 订单满1000可使用 有效期：2016-02-25 --></span>
+                        </li>
+                        <!-- <li><i class="Vouchers"></i><span>使用500元现金券</span><span class="fly_payTs yahei h4 color9">订单满1000可使用 有效期：2016-02-25</span></li>
+                        <li><i class="Vouchers"></i><span>使用100元现金券</span><span class="fly_payTs yahei h4 color9">订单满1000可使用 有效期：2016-02-25</span></li>
+                        <li><i class="Vouchers"></i><span>使用50元现金券</span><span class="fly_payTs yahei h4 color9">订单满1000可使用 有效期：2016-02-25</span></li> -->
+                        <i id="cashcoupon"></i>
+                    </ul>
+                    <div class="fly_noUse fly_saleSel yahei h3 color6 fl" ><i class="fly_pay_cli" id="nouse"></i>不使用</div>
+                    
+                </div>
+                      
+</div>
+<!--订单详情-->
+<!--支付详情-->
+<div class="pay">
+    <div class="payTitle yahei">支付详情<div class="detailed"><span class="category">订单总金额：<strong><span id="money"><span id="moneyLogo">￥</span>${(lineOrderDto.baseInfo.salePrice)?c}</span></span>
+    </strong> <span class="category">优惠卡券：<strong><span id="money"><span id="moneyLogo">￥</span><label>0.00</label></span></span>
+    </strong> <span class="category">本次应付总金额：<strong><span id="moneys"  class="tom">
+    <span id="moneyLogo">￥</span><i class="payAmount">
+            <#if identifying==1>
+                ${(lineOrderDto.baseInfo.bargainMoney)?c}
+                <#else>
+                    ${(balance)?c}
+            </#if>
+	</i></span></span></strong></div>
+</div></div>
+<div class="payfor">
+    <div class="payBox">
+        <span class="paytitle fl">选择付款方式</span>
+        <span id="need" class="radio curp  radio_on"></span>
+        <span class="alipay fl"></span>
+        <div class="clearing fr"><span class="moneyLogo fr tom"><i class="yahei h1">￥</i><i class="yue" id="payMoney">
+            <#if identifying==1>
+            ${(lineOrderDto.baseInfo.bargainMoney)?c}
+            <#else>
+                ${(balance)?c}
+        </#if>
+        </i></span><span class="category fr">支付金额：</span></div>
+    </div>
+    <ul class="clause">
+        <li><span id="checkbox" class="checkbox yesChoice"></span><span class="tiaokuan">服务条款</span></li>
+        <li><span class="button"><a class="yahei h3 save" style="cursor:pointer">确认无误，前往支付</a></span></li>
+    </ul>
+</div>
+<form action="${contextPath}/line/pay" method="post" id="myform">
+	<input type="hidden" class="dealerOrderId" name="dealerOrderId" value="${(lineOrderDto.baseInfo.dealerOrderNo)!}" id="dealerOrderId"/>
+	<input type="hidden" class="shouldmoneys" name="shouldmoneys"  id="shouldmoneys"/>
+	<input type="hidden" class="useCouponIDs" name="useCouponIDs"  id="useCouponIDs"/>
+    <input type="hidden" id="identifying" name="identifying" value="${(identifying)!}"/>
+</form>
+<!--支付详情-->
+</div>
+<!--页脚-->
+<div class="detailPage">
+ <@frame.end "default"> </@frame.end>
+</@frame.main>
+<!--页脚-->
+<script>
+//修改服务条款
+	/* $("#need").click(function(){     
+		$(this).toggleClass("radio_on");//服务条款
+	});
+	$("#checkbox").click(function(){     //服务条款
+		$(this).toggleClass("yesChoice");
+	}); */
+	
+	
+	/* $(".save").click(function(){
+		$("#myform").submit();
+	}) */
+	
+</script>
+</body>
+</html>

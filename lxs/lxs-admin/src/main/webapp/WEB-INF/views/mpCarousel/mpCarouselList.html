@@ -1,0 +1,81 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css'
+	rel='stylesheet' />
+<div class="pageHeader">
+
+	<form id="pagerForm" rel="pagerForm"
+		onsubmit="return navTabSearch(this);"
+		action="${contextPath}/mpCarousel/carouselList" method="post">
+		<div class="searchBar">
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<#if (pagination?size>=10)>
+	 							<div class="buttonContent">
+	 								<a  onclick="alertMsg.info('最多上传10张!')"><span>新增轮播</span></a>					
+								</div>
+							<#else>
+	 							<div class="buttonContent">
+	 								<a  href="${contextPath}/mpCarousel/addCarouselView" target="navTab"
+										rel="imageAction"><span>新增轮播</span></a>					
+								</div>
+ 							</#if>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="150">
+		<thead>
+			<tr>
+				<th width="100">图片</th>
+				<th width="100">跳转</th>
+				<th width="100">备注说明</th>
+				<th width="100">启用状态</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		  <#list pagination as car>
+			<tr>
+				<td width="100">
+					<span>
+						<img id="imgView" src="${car.imageURL}" width="100" height="100" />
+					</span>	
+				</td>
+				<td width="200" style="text-align: left">
+				<#if car.carouselType==2><strong style="color: blue;">线路:&nbsp;</strong><#elseif car.carouselType==3><strong style="color: blue;">门票:&nbsp;</strong><#else><strong style="color: blue;">链接:&nbsp;</strong></#if>
+					${car.linename}
+				</td>
+				<td width="300" style="text-align: left">
+					${car.note}
+				</td>
+				<td width="100">
+					<#if car.status==1>
+ 						已启用	
+					<#else>
+ 						已禁用 
+ 					</#if>
+				</td>
+				<td width="200">
+					<#if car.status==1>
+ 						<span><a href="${contextPath}/mpCarousel/modifyCarouselStatus?id=${(car.id)}&isUse=true" target="ajaxTodo" style="color:blue;" >禁用</a></span>
+					<#else>
+					<span><a href="${contextPath}/mpCarousel/modifyCarouselStatus?id=${(car.id)}&isUse=false" target="ajaxTodo" style="color:blue;" >启用</a></span>
+ 					</#if>
+					&nbsp;&nbsp;
+					<span><a href="${contextPath}/mpCarousel/editCarouselView?id=${(car.id)}" target="navTab"
+							rel="imageAction" style="color:blue;" >修改</a></span>
+					&nbsp;&nbsp;
+					<span><a href="${contextPath}/mpCarousel/deleteCarousel?id=${(car.id)}" target="ajaxTodo" title="确定要删除该轮播图片吗？删除后将不可恢复" style="color:blue;">删除</a></span>
+				</td>
+			</tr>
+		  </#list>
+		</tbody>
+	</table>
+</div>

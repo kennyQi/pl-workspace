@@ -1,0 +1,207 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-red-sunglo bold uppercase">结算中心列表</span>
+				</div>
+				<div class="actions">
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+				<table style="width: 100%" border="0">
+						<tr>
+							<td style="width: 3%"></td>
+							<td style="width: 38%">
+								<table border="0" style="width: 100%">
+									<tr>
+										<td style="width: 150px">结算状态：</td>
+										<td><select class="form-control input-small input-inline" name="cosaofStatus" id="status">
+												<option value="">全部</option>
+												<option value="1">已结算</option>
+												<option value="-1">未结算</option>
+											</select>
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td style="width: 6%"></td>
+							<td style="width: 38%">
+								<table border="0" style="width: 100%">
+									<tr>
+										<td style="width: 150px">下单时间：</td>
+										<td><input type="date" name="startDate"
+											value="" class="form-control required"
+											placeholder="格式：1980-01-01" maxlength="10"
+											id="startDate" /></td>
+										<td><input type="date" name="endDate"
+											value="" class="form-control required"
+											placeholder="格式：1980-01-01" maxlength="10" id="endDate" /></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+						<td style="width: 3%"></td>
+							<td style="width: 38%">
+								<#if role != "success">
+								<table border="0" style="width: 100%">
+									<tr>
+										<td style="width: 150px">部门：</td>
+										<td>
+											<select class="form-control input-small input-inline" name="departmentID" id="departmentID">
+												<option value="">全部</option>
+												<#list departments as department>
+												<option value="${department.id}">${department.departmentName}</option>
+												</#list>
+											</select>
+										</td>
+									</tr>
+								</table>
+								</#if>
+							</td>
+							<td style="width: 6%"></td>
+							<td style="width: 38%">
+								<table border="0" style="width: 100%;height: 100%">
+									<tr>
+										<td style="width: 110px"></td>
+										<td></td>
+									</tr>
+								</table>
+							</td>
+							<td style="width: 10%"></td>
+						</tr>
+					</table>
+					
+					<div class="col-md-4 text-right" style="float: right;">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#cosaofGrid" data-ref-param="{status:$('#status').val(),departmentID:$('#departmentID').val(),startDate:$('#startDate').val(),endDate:$('#endDate').val()}" onclick="checkTime();" id="check">
+							<i class="fa fa-search"></i> 查询 </button>
+							<a class="btn btn-sm yellow filter-submit margin-bottom" onclick="cosaofExcel();"> 导出列表 </a>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<!-- <th class="table-checkbox"><input type="checkbox" group="projectIds"
+								class="checkboxCtrl"/></th> -->
+							<th>订单编号</th>
+							<th>公司名称</th>
+							<th>乘机人</th>
+							<th>航程</th>
+							<th>票号</th>
+							<th>下单时间</th>
+							<th>成本中心</th>
+							<th>支付价</th>
+							<th>退款金额</th>
+							<!-- <th>申请人支付金额</th>
+							<th>申请人退款金额</th> -->
+							<th>企业结算价</th>
+							<#if role == "success">
+								<th>供应商价</th>
+							</#if>
+							<th>出票状态</th>
+							<th>结算状态</th>
+							<th>订票人</th>
+							<#if role == "success">
+								<th class="text-center">操作</th>
+							</#if>
+						</tr>
+					</thead>
+					<tbody id="cosaofGrid" target="grid" data-url="${contextPath}/cosaof/cosaoflist">
+						<tr class="odd gradeX" >
+							<td>
+								{orderNO}
+							</td>
+							<td>
+								{companyName}
+							</td>
+							<td>
+								{passengerName}
+							</td>
+							<td>
+								{voyage}
+							</td>
+							<td>
+								{airID}
+							</td>
+							<td>
+								{createTime}
+							</td>
+							<td>
+								{costCenterName}
+							</td>
+							<td>
+								{platTotalPrice}
+							</td>
+							<td>
+								{refundPrice}
+							</td>
+							<!-- <td>
+								{userPayPrice}
+							</td>
+							<td>
+								{userRefundPrice}
+							</td> -->
+							<td>
+								{casaofPrice}
+							</td>
+							<#if role == "success">
+								<td>
+									{totalPrice}{failed}
+								</td>
+							</#if>
+							<td>
+								{oStatus}
+							</td>
+							<td>
+								{status}
+							</td>
+							<td>
+								{userName}
+							</td>
+							<#if role == "success">
+								<td class="text-center">
+									<a title="确认结算吗？" href="${contextPath}/cosaof/setting?id={id}"
+										class="btn default btn-xs red" target="ajaxTodo">
+										结算
+									</a>
+									<a class="btn default btn-xs blue" href="${contextPath}/view/orderDetail?orderID={orderID}&orderType={orderType}"
+										 target="hgTab">
+										 订单详情
+									</a>
+								</td>
+							</#if>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function checkTime(){
+	 $("#check").attr("data-ref-param","");
+	 var startDate=$("#startDate").val();  
+	 var endDate=$("#endDate").val();  
+	 var d1 = new Date(startDate.replace(/\-/g, "\/"));  
+	 var d2 = new Date(endDate.replace(/\-/g, "\/"));  
+	  
+	  if(startDate!=""&&endDate!=""&&d1 > d2)  
+	 {  
+	  alert("开始时间不能大于结束时间！");  
+	  return;  
+	 }
+	  
+	 $("#check").attr("data-ref-param","{status:$('#status').val(),departmentID:$('#departmentID').val(),startDate:$('#startDate').val(),endDate:$('#endDate').val()}");
+}
+
+function cosaofExcel(){
+	var status = $("#status").val();
+	var startDate=$("#startDate").val();  
+	var endDate=$("#endDate").val();  
+	window.location.href="${contextPath}/cosaof/getCosaofExcel?startDate="+startDate+"&endDate="+endDate+"&status="+status;
+}
+</script>

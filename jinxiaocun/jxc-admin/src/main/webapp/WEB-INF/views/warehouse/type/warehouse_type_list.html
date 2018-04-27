@@ -1,0 +1,47 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/warehouse/type/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+	</form>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/warehouse/type/to_add" lookupgroup="orgLookup" mask="true" width="900" height="650"><span>新增</span> </a></li>
+		</ul>
+	</div>
+	<div>
+		<table class="table" cellpadding="0" cellspacing="0" width="100%" layoutH="75">
+			<thead>
+				<tr>
+					<th width=""><input type="checkbox" group="ids" class="checkboxCtrl" />
+					</th>
+					<th width="">仓库类型</th>
+					<th width="">渠道商id</th>
+					<th width="">物流接口地址</th>
+					<th width="">物流加密串</th>
+					<th width="">物流操作员</th>
+					<th width="">保价比例</th>
+					<th width="">接口开启</th>
+
+					<th width="">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list pagination.list as t>
+				<tr>
+					<td><input type="checkbox" name="ids" value="${(t.id)!''}" />
+					</td>
+					<td>${t.name}</td>
+					<td>${t.channelId}</td>
+					<td>${t.portUrl}</td>
+					<td>${t.key}</td>
+					<td>${t.operator}</td>
+					<td><#if t.insuredRate??>${t.insuredRate}‰</#if></td>
+					<td><#if (t.using)> 开启<#else> 关闭</#if></td>
+					<td class="a_button2"><a target="dialog" href="${contextPath}/warehouse/type/edit?id=${(t.id)!''}" mask="true" width="900" height="650">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp; <a title="确认删除？" target="ajaxTodo" href="${contextPath}/warehouse/type/delete?warehouseTypeId=${(t.id)!''}">删除</a></td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+</div>

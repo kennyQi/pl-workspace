@@ -1,0 +1,80 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;公司详情
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/company/companyedit"
+							class="form-horizontal pageForm required-validate"
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="id" value="${(company.id)!''}" />
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">公司ID：</label>
+									<div class="col-md-4">
+										<input type="text" name="companyID" class="form-control"
+											value="${(company.companyID)!''}" readonly="readonly" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">公司名称：</label>
+									<div class="col-md-4">
+										<input type="text" name="companyName" class="form-control "
+											value="${(company.companyName)!''}" readonly="readonly" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">公司简介：</label>
+									<div class="col-md-4">
+										<textarea name="description" class="form-control"
+											readonly="readonly">${(company.description)!''}</textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">管理员账号：</label>
+									<div class="col-md-4">
+										<input type="text" name="loginName" class="form-control"
+											value="${(loginName)!''}" readonly="readonly" />
+									</div>
+								</div>
+								<hr>
+								<#assign flag="1"/> <#if (departments?size>0)> <#list
+								departments as department> <#if (flag==1)>
+								<div class="form-group">
+									<label class="col-md-3 control-label">所有部门：</label>
+									<div class="col-md-4">
+										<input type="text" name="departmentName" class="form-control"
+											value="${(department.departmentName)!''}" readonly="readonly" />
+									</div>
+								</div>
+								<#assign flag="0"/> <#else>
+								<div class="form-group" style="margin-top: -15px;">
+									<label class="col-md-3 control-label">&nbsp;</label>
+									<div class="col-md-4">
+										<input type="text" name="departmentName" class="form-control"
+											value="${(department.departmentName)!''}" readonly="readonly" />
+									</div>
+								</div>
+								</#if> </#list><#else> 
+								<div class="form-group">
+									<label class="col-md-3 control-label">所有部门：</label>
+									<div class="col-md-4">
+										<input type="text" name="departmentName" class="form-control"
+											value="无部门" readonly="readonly" />
+									</div>
+								</div></#if>
+							</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

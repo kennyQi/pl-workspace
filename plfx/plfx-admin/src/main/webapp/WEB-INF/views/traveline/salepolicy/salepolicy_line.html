@@ -1,0 +1,233 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm"  onsubmit="return  divSearch(this,'jbsxBox');"
+		action="${contextPath}/traveline/salepolicy/toLine" method="post" class="pageForm required-validate">
+		
+	    <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<input type="hidden" name="lineNames" id="lineName" value="${(lineNames)!''}"/>
+		<input type="hidden" name="lineIds" id="lineId" value="${(lineIds)!''}"/>
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						请填写线路名称：
+					</td>
+					<td>
+						<input name="lineName" value="${(lineQO.lineName)!''}"/>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					 <li><div class="buttonActive"><div class="buttonContent"><button type="submit" >查询</button></div></div></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			   <button type="button" group="ids" class="checkboxCtrl">全选	</button>		
+		   </li>
+		   <li>
+			   <button type="button" group="ids" class="checkboxCtrl"  selectType="invert">反选	</button>
+		  </li>
+		  <li>
+		      <button type="button"  onClick="addLine();">添加</button>
+		  </li>
+		</ul>
+	</div>  
+	<table class="table" width="100%" layoutH="210">
+		<thead>
+			<tr>
+				<th style="width:24px;"   align="center"></th>
+				<th style="width:300px;" align="center">线路名称</th>
+			</tr>
+		</thead>
+		<tbody>
+		   <#list pagination.list as lineDTO>	
+				<tr>
+					<td><input name="ids" value="{id:'${lineDTO.id}'}" type="checkbox" data-name="${lineDTO.baseInfo.name}"  data-id="${lineDTO.id}"></td>
+					<td align="center">${lineDTO.baseInfo.name}</td>
+			   </tr>
+		  </#list>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span> <select class="combox" name="numPerPage"
+				onchange="dialogPageBreak({numPerPage:this.value},'jbsxBox')">
+				<option value="10" <#if pagination.pageSize==10>selected="selected"</#if>>10</option>
+				<option value="20" <#if pagination.pageSize==20>selected="selected"</#if>>20</option>
+				<option value="50" <#if pagination.pageSize==50>selected="selected"</#if>>50</option>
+				<option value="100" <#if pagination.pageSize==100>selected="selected"</#if>>100</option>
+				<option value="200" <#if pagination.pageSize==200>selected="selected"</#if>>200</option>
+			</select> <span>条，共${pagination.totalCount}条</span>
+		</div>
+		<div class="pagination" rel="jbsxBox" targetType="dialog" totalCount="${pagination.totalCount?c}" numPerPage="${pagination.pageSize?c}" pageNumShown="10" currentPage="${pagination.pageNo?c}"  ></div>
+	</div>
+</div>
+<script type="text/javascript">
+
+//点击添加时将选中的checkbox的线路id值和name值传递到新增价格政策页面
+function  addLine(){
+	var resName = "";
+	var resId = "";
+	$("input[type='checkbox']:checked").each(function(){
+		var  name = $(this).attr("data-name");//获取线路名称
+		var  id = $(this).attr("data-id");//获取线路id
+		var ids = $("#selectedLineID").val();
+		var resId = "";
+		if(ids.indexOf(id)<0){
+			addLineInfo(name,id);//遍历一次调用一次addLineInfo
+			resId = ids+","+id;
+			console.log("addLine:"+id);
+			/* if(resId.length > 0){
+				resId = resId.substring(1, resId.length);
+			}  */
+			$("#selectedLineID").val(resId);
+		}
+	});
+	$("#selectedLine").show();
+	
+	//添加完已选线路之后，将已选中状态的去除选中状态
+	$("input[type='checkbox']").each(function(){
+		 if($(this).attr("checked")){
+			 $(this).removeAttr("checked");
+		 }
+	})
+}
+
+//点击翻页判断是否需要提示以及是否添加已选线路
+function dwzPageBreak(options){
+	//1.首先第一步：判断是否需要弹出提示
+	      var  confirm = false;
+	      $("input[type='checkbox']").each(function(){
+	    	    if($(this).attr("checked")){
+	    	    	confirm = true;
+	    	    	return false;
+	    	    }else{
+	    	    	confirm = false;
+	    	    	return true;
+	    	    }
+	      });
+	//2.提示
+	      if(confirm){
+	    	  alertMsg.confirm("您选择的内容还未进行添加,请确认后在进行操作", {
+	    		  				okCall: function(){//2.1提示之后点确认之后则添加同时翻到第二页
+	    		  					addLine();
+	    		  					nextPage(options);
+	    		  				},
+	    		  				 cancelCall:function() {//2.2提示之后点关闭则直接翻到第二页
+	    		  					 nextPage(options);
+	    		  				 },
+	    		  				 okName:"直接添加已选内容",
+	    		  				 cancelName:"关闭"
+	    		  		   }
+	    	  );
+	      }
+	//3.不提示则直接翻页，也不添加
+	if(!confirm){
+		nextPage(options);
+	}
+}
+
+//分页方法
+function nextPage(options){
+	var op = $.extend({ targetType:"navTab", rel:"", data:{pageNum:"", numPerPage:"", orderField:"", orderDirection:""}, callback:null}, options);
+	var $parent = op.targetType == "dialog" ? $.pdialog.getCurrent() : navTab.getCurrentPanel();
+
+	if (op.rel) {
+		var $box = $parent.find("#" + op.rel);
+		var form = _getPagerForm($box, op.data);
+		if (form) {
+			$box.ajaxUrl({
+				type:"POST", url:$(form).attr("action"), data: $(form).serializeArray(), callback:function(){
+					$box.find("[layoutH]").layoutH();
+				}
+			});
+		}
+	} else {
+		var form = _getPagerForm($parent, op.data);
+		var params = $(form).serializeArray();
+		
+		if (op.targetType == "dialog") {
+			if (form) $.pdialog.reload($(form).attr("action"), {data: params, callback: op.callback});
+		} else {
+			if (form) navTab.reload($(form).attr("action"), {data: params, callback: op.callback});
+		}
+	}
+}
+
+/**
+ * 添加选中的线路名称信息
+ */
+function addLineInfo(lineName,lineId){ 
+	var newElementFontColor = "#4876FF";
+    var cancle_img_margin_right = "5px";
+    var line_name_span_margin_right = "5px";
+    var line_name_span_margin_left = "2px";
+    var line_name_span_margin_bottom = "5px";
+    var line_name_div_margin_right = "10px";
+    var cancleImgSrc = "resources/image/mp/u233.png"
+    var borderStyle = "1px solid #63B8FF";
+    
+    var name = lineName; //线路名称
+	var id = lineId; //线路id
+    
+   var nameSpan = document.createElement("span");
+   nameSpan.innerHTML =  name;
+   nameSpan.style.marginRight = line_name_span_margin_right;
+   nameSpan.style.marginLeft = line_name_span_margin_left;
+   var cancleImg = document.createElement("img");
+   cancleImg.src = cancleImgSrc;
+   cancleImg.style.marginRight = cancle_img_margin_right;
+   cancleImg.id = "cancle" + id 
+   console.log(cancleImg.id);
+   cancleImg.onclick = function(){
+      removeElementNew(this.id);
+   };
+   
+   var lineNameDiv = document.createElement("div");
+   lineNameDiv.style.cssFloat = "left";
+   lineNameDiv.style.border = borderStyle;
+   lineNameDiv.style.paddingBottom = line_name_span_margin_bottom;
+   lineNameDiv.style.marginRight = line_name_div_margin_right;
+   lineNameDiv.style.marginBottom = line_name_span_margin_bottom;
+   lineNameDiv.id = "lineSelect"+ id;
+   
+   
+   lineNameDiv.appendChild(nameSpan);
+   lineNameDiv.appendChild(cancleImg);
+   
+   
+   var lineDiv =  document.getElementById("line1");
+   lineDiv.style.color = newElementFontColor;
+   lineDiv.appendChild(lineNameDiv);
+   
+   lineDiv.appendChild(lineNameDiv);
+}
+
+/**
+ * 删除线路名称显示DIV
+ */
+function removeElementNew(cancleId){
+	
+   var index = cancleId.replace("cancle","");
+   var labelNew = document.getElementById("lineSelect"+index);
+   var resId =$("#selectedLineID").val(resId)
+   if(labelNew != null){
+     labelNew.parentNode.removeChild(labelNew);
+     resId = resId.replace(","+index,"");
+     console.log("resId:"+resId);
+     $("#selectedLineID").val(resId);
+   }
+}
+</script>

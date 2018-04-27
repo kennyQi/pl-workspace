@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		   http://www.springframework.org/schema/context
+		   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		   http://www.springframework.org/schema/mvc
+		   http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="writeAcceptCharset" value="false"/>
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
+				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>application/command-json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 静态资源 -->
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
+	<mvc:resources mapping="/page/**" location="/page/"/>
+	<!-- 专题 -->
+	<mvc:resources mapping="/topic/**" location="/topic/"/>
+
+	<mvc:annotation-driven/>
+
+	<context:component-scan base-package="hsl.web.controller"/>
+
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+
+	<bean id="mappingJacksonHttpMessageConverter"
+		  class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		  p:defaultEncoding="utf-8">
+		<property name="maxInMemorySize" value="0"/>
+		<!-- 设置上传文件的最大尺寸为2MB -->
+		<property name="maxUploadSize" value="20480000"/>
+	</bean>
+
+	<!-- FreeMarker视图解析 在这里配置后缀名ftl和视图解析器。。 -->
+	<bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="classpath:freemarker.properties"/>
+	</bean>
+
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="freemarkerSettings" ref="freemarkerConfiguration"/>
+		<property name="templateLoaderPath" value="/WEB-INF/views/"/>
+		<property name="freemarkerVariables">
+			<map>
+				<entry key="xml_escape" value-ref="fmXmlEscape"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+
+	<bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+		<property name="viewNames" value="*.html"/>
+		<property name="contentType" value="text/html;charset=utf-8"/>
+		<property name="cache" value="true"/>
+		<property name="prefix" value=""/>
+		<property name="suffix" value=""/>
+		<property name="order" value="2"/>
+		<property name="exposeSpringMacroHelpers" value="true"/>
+	</bean>
+
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 多个拦截器,顺序执行 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="hsl.web.interceptor.TokenInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<!-- 如果不配置或/*,将拦截所有的Controller -->
+			<!-- 个人中心 -->
+			<mvc:mapping path="/company/**"/>
+			<!-- 门票 -->
+			<mvc:mapping path="/mp/scart"/>
+			<mvc:mapping path="/mp/success"/>
+			<!-- 易购机票（已废弃） -->
+			<mvc:mapping path="/jp/price"/>
+			<mvc:mapping path="/jp/createOrder"/>
+			<mvc:mapping path="/jp/getCouponUsed"/>
+			<mvc:mapping path="/jp/toPayOrderInfo"/>
+			<mvc:mapping path="/jp/payOrder"/>
+			<!-- 线路 -->
+			<mvc:mapping path="/line/reseve"/>
+			<mvc:mapping path="/line/commandUser"/>
+			<mvc:mapping path="/line/payBalance"/>
+			<!-- 酒店 -->
+			<mvc:mapping path="/jd/bookHotel"/>
+			<!-- 易行机票 -->
+			<mvc:mapping path="/yxjp/flight-order"/>
+			<mvc:mapping path="/yxjp/pay-order-pag"/>
+			<mvc:mapping path="/yxjp/create-jporder"/>
+			<mvc:mapping path="/yxjp/pay-order"/>
+			<!-- 电子票 -->
+			<mvc:mapping path="/dzp/order-edit/*"/>
+			<bean class="hsl.web.interceptor.SessionInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<!-- end拦截器 -->
+
+</beans>

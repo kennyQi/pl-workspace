@@ -1,0 +1,50 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'mail-template' />
+<#assign pathUrl = (contextPath+'/mail-template') />
+
+<div class="pageContent">
+	<form method="post" action="${pathUrl}/addSubmit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="navTabid" value="${navTabid}" />
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>模板名称：</label>
+				<input type="text" name="name" size="64" class="required" maxlength="64" value=""/>
+			</div>
+			<div class="unit">
+				<label>模板内容：</label>
+				<textarea class="editor required" name="content" rows="15" cols="80" 
+				tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Paste,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,Strikethrough,FontColor,BackColor,|,
+					Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+					您好：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+					——————————————————————<br>
+				</textarea>
+			</div>
+			<div class="unit">
+				<label>是否默认：</label>
+				<select class="combox" name="defAble" >
+					<option value="true">默认</option>
+					<option value="false">不默认</option>
+				</select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

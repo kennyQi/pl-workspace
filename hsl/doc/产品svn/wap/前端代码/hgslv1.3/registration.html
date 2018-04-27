@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<!--页面样式-->
+<link rel="stylesheet" href="css/hgsl_base.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body> 
+<!-- 页头  -->
+<header class="header">
+  <h1>免费注册</h1>
+  <div class="left-head"> <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn"> <span class="inset_shadow"> <span class="head-return"></span> </span> </a> </div>
+</header>
+
+<!--页面内容-->
+  <div  page="login" class="login">
+    <form action="" class="listForm" method="">
+      <input name="" type="hidden" value="">        
+      <input name="" type="hidden" value="">
+        <article class="circle_b bottom_c radius" id="payInfo">
+            <section class="secure selectBank" style="position: relative;">
+                <span class="LoginName_info"></span>
+                <span class="fRight">
+                    <input class="registration"  name="LoginName" id="name" placeholder="请输入11位有效手机" type="text" maxlength="11" value="">
+                </span>
+            </section>
+            <section class="secure selectBank LoginName_dic" style="position: relative;">
+                <span class="LoginName_edir"></span>
+                <span class="fRight">
+                    <input class="registration"  name="Passwd" id="passdata" placeholder="请输入短信验证码" type="password">
+                    <input id="btn" type="button" value="重新获取（60）"></input>
+                </span>
+            </section>
+            <section style="position: relative;">
+                <span class="password"></span>
+                <span class="fRight">
+                    <input class="registration"  name="Passwd" id="pass" placeholder="密码" type="password">
+                </span>
+            </section>
+        </article>
+        <div class="col_div">
+            <a href="registration_v.html" class="btn btn-green radius" id="btn_click">注册</a>
+        </div>
+    </form>
+  </div>
+
+<script type="text/javascript" src="js/showtip.js"></script>
+<script type="text/javascript">
+    $("#btn_click").click(function(){                          
+       var name = $("#name").val();
+        var passdata = $("#passdata").val();
+        var namereg =/^1(1|2|3|4|5|6|7|8|9)\d{9}$/;  
+        var pass = $("#pass").val();
+        var passreg = /^[0-9a-zA-Z]\d{5,19}$/; 
+         if($("#name").val()=='')
+        {
+             showTip('请填写手机号','好的');
+              return false
+        }
+        else if(!namereg.test($("#name").val()))
+        {
+             showTip('手机号错误','好的');
+              return false
+        }
+        else{ } 
+
+        if(passdata.length=""){
+            showTip('请输入短信验证码','好的');
+             return false
+        }
+        else{}        
+
+       if($("#pass").val()=='')
+        {
+             showTip('请输入你的密码','好的');
+             return false
+        }
+        else if(!passreg.test($("#pass").val()))
+        {
+            showTip('密码不对','好的');
+            return false
+        }
+        else
+        {  } 
+      
+        $("#listForm").submit()     
+    });
+      var wait=60;
+    function time(o) {
+            if (wait == 0) {
+                o.removeAttribute("disabled");            
+                o.value="免费获取验证码";
+                wait = 60;
+            } else { // www.jbxue.com
+                o.setAttribute("disabled", true);
+                o.value="重新发送(" + wait + ")";
+                wait--;
+                setTimeout(function() {
+                    time(o)
+                },
+                1000)
+            }
+        }
+     $("#btn").click(
+            function(){
+              time(this);
+            })
+</script>
+
+</body>
+</html>

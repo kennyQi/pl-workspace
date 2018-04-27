@@ -1,0 +1,540 @@
+﻿<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> 
+<@frame.head "中智票量 -首页">
+
+<!--内容-->
+<link href="${contextPath}/resources/css/index.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/index.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/laydate.js" language="javascript"></script>
+</@frame.head>
+<@frame.main "default" "1">
+<div class="g_bd">
+	<!--轮播图部分-->
+	<div class="g_carousel ov pl disb" id="carousel">
+        <div class="img_list pa">
+        <!--图片宽度最少1200-->
+           <!--  <a href="#" style="background-image:url(${contextPath}/resources/images/index_banne1.jpg)" class="turn"></a>
+            <a href="#" style="background-image:url(${contextPath}/resources/images/index_img1.jpg)" class="turn"></a>
+            <a href="#" style="background-image:url(${contextPath}/resources/images/index_img2.jpg)" class="turn"></a> -->
+            <#if adList??>
+            	<#list adList as lunboAd>
+            		 <a href="${(lunboAd.adBaseInfo.url)!}" style="background-image:url(${(lunboAd.adBaseInfo.imagePath)!})" class="turn"></a>
+            	</#list>
+            
+            </#if>
+        </div>
+        <div class="m_select pl diab">
+        	
+                <ul class="icon pa">
+                </ul>
+                <div class="select_box pa ">
+                
+                	<div class="select_items fl disb">
+                        <div class="tab disb ov" id="select_tab">
+                            <span class="yahei h1 first fl on curp" id="jp">机票</span>
+                          <!-- span class="yahei h1 fl curp" id="hotel">酒店</span>  -->
+                           <!--  <span class="yahei h1 fl curp" id="jd">景点</span> -->
+                            <span class="yahei h1 last fl curp" id="xl">线路</span>
+                            <label class="line fl"></label>
+                        </div>
+                        <div class="tab_box disb">
+                        <form action="${contextPath}/jp/main" name="jpSearchForm" id="jpSearchForm" method="get">
+                        	<span class="labe fl dis h3 yahei">出发城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon" id="citySelect_from" name="orgCity" placeholder="请输入您的出发地名称">
+                        	<span class="labe fl dis h3 yahei">到达城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon" id="citySelect_to" name="dstCity" placeholder="请输入您的目的地名称">
+                        	<span class="labe fl dis h3 yahei">出发日期:</span>
+                            <input placeholder="时间/日期" class="cityinput time_input yahei fl indexIcon" id="startTime"  name="startDate">
+							</form>
+                        </div>
+                         <div class="tab_box disb" style="display:none;">
+                        	<form action="${contextPath}/line/list" name="lineSearchForm" id="lineSearchForm" method="post">
+                        	<span class="labe fl dis h3 yahei">出发城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon line_input" id="citySelect_line_from" name="startCityName" placeholder="请输入您的出发地名称">
+                        	<span class="labe fl dis h3 yahei">到达城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon line_input" id="citySelect_line_to" name="endCity" placeholder="请输入您的目的地名称">
+                            </form>
+                        </div>
+                     <!--    <div class="tab_box disb" style="display:none;">
+                       		<form action="${contextPath}/jd/list"  id="hotelSearchForm" method="post">
+	                       		<span  class="labe fl dis h3 yahei">城市名称:</span>
+	                            <input type="text" class="cityinput yahei fl indexIcon" id="hotel_city" name="cityId" placeholder="城市名称" value="杭州">
+	                        	<span  class="labe fl dis h3 yahei">入住日期:</span>
+								<input type="text" class="cityinput time_input yahei fl indexIcon" id="hotel_in" placeholder="入住日期" name="arrivalTime">
+	                        	<span  class="labe fl dis h3 yahei">离店日期:</span>
+	                            <input class="cityinput time_input yahei fl indexIcon" id="hotel_out"  name="departureTime" placeholder="离店日期"> 
+                          	 </form>
+                        </div> -->
+                        <div class="tab_box disb" style="display:none;margin:0px 0px 0px 100px;">
+		                        <script type="text/javascript">
+							   agoda_ad_client = "1730787_42027";
+							   agoda_ad_width = 728;
+							   agoda_ad_height = 90;
+							</script>
+							<script type="text/javascript" src="//banner.agoda.com/js/show_ads.js"></script>
+                        </div>
+                        <!-- <div class="tab_box disb" style="display:none;">
+                        	<form action="${contextPath}/mp/list" name="scenicSearchForm" id="scenicSearchForm" method="post">
+	                        	<span class="labe fl dis h3 yahei">景点名称:</span>
+	                            <input type="text" class="cityinput yahei fl indexIcon jd_input"  name="content" placeholder="景点名称搜索">
+                            </form>
+                        </div> -->
+                     </div>
+                     <a href="#" class="select_btn fl di ov yahei h2" onclick="save()">搜&nbsp;索</a>
+                    
+                </div>
+        </div>
+    </div>
+	<!--轮播图部分-->
+    <div class="g_cont disb ov pl">
+    	<!--右部导航-->
+        	<div class="m_airNav pa" id="m_airNav">
+            	<span class="up pa indexIcon curp"></span>
+                	<div class="lin">
+                	<a href="javascript:;" rel="anchor_thzq" class="on">特惠专区</a>
+                	<!-- <a href="javascript:;" rel="anchor_jd">景点</a> -->
+                	<a href="javascript:;" rel="anchor_zby">周边游</a>
+                	<a href="javascript:;" rel="anchor_gty">跟团游</a>
+                    </div>
+            	<span class="down pa indexIcon curp"></span>
+            </div>
+    	<!--右部导航-->
+        <!--公告-->   	
+		<div class="m_notice disb ov">
+        	<span class="title pl fl yahei bold">公告
+            	<i class="icon indexIcon pa"></i>
+            </span>
+            <div class="text_carousel fl ov pl" id="text_carousl" rel="0">
+            	<div class="group pa">
+                  <!--   <MARQUEE onmouseover=this.stop() style="WIDTH: 100%; HEIGHT:20px" onmouseout=this.start() scrollAmount=2 direction=left> -->
+                    <MARQUEE  style="WIDTH: 100%; HEIGHT:20px"  scrollAmount=2 direction=left>
+                    <#list noticeDTOs as notice>
+					<span class="news"><a href="${(contextPath)!}/noticeDetails?id=${(notice.id)!'#'}"style="color:white" target="_blank">${notice.baseInfo.title}</a></span>
+					</#list></MARQUEE>
+                </div>
+            </div>
+            <a href="#" class="more yahei"></a>
+        </div> 
+        <!--公告-->   	
+        <!--标题-->
+        <div class="m_title disb ov" id="anchor_thzq">
+        	<h2 class="t yahei fl normal">特惠专区</h2>
+            <label class="en yahei h3  fl">Preferential Area</label>
+            <a href="${contextPath}/line/list" class="more yahei fr" target="_blank">查看更多 》</a>
+        </div>
+        <!--标题-->
+        
+        <!--特惠专区-->
+        <div class="m_prefe diab ov">
+        	<!--专区的一个容器-->
+        	<#list (prelist)!null as prelist>
+        	<#if ( prelist_index>3)><#break></#if>
+        	<div class="prefe_box pl fl">
+            	<a href="${(prelist.adBaseInfo.url)!}" target="_blank">
+               		<img src="${(prelist.adBaseInfo.imagePath)!}" width="600px">
+                    <div class="flag pa indexIcon">
+                    	<span class="time disb yahei bold">${(prelist.startDate?string("dd"))!''}<label class="h4">/${(prelist.startDate?string("MM"))!''}月</label></span>
+                        <span class="trip disb h4">自助游</span>
+                    </div>
+                    <div class="masking pa">
+                    	<div class="masking_bg pa"></div>
+                    	<div class="masking_cont pa">
+                        	<span class="tt h1 yahei">                           
+                            	 <#if (prelist.adBaseInfo.title)?length gt 4>
+                            	<label class="address">${(prelist.adBaseInfo.title?substring(0,4))}</label>
+                            	<label class="">
+                            	 <#if (prelist.adBaseInfo.title)?length gt 17>
+                            	${(prelist.adBaseInfo.title?substring(4,17))}</label>
+                            	<#else>
+                            	${(prelist.adBaseInfo.title?substring(4))}</label>
+                            	</#if>
+                            	<#else>
+                            	<label class="address">${(prelist.adBaseInfo.title)!}</label>
+                            	</#if>
+                            	
+                            </span>
+                            <span class="price fr h1 yahei">
+                            	<label class="old_price">原价：<i>${(prelist.price)!}/人起</i></label>
+                            	<label class="price_t">即时特价</label>
+                                <label class="price_num">
+                                	￥<i class="num">${(prelist.specPrice)!}</i>/人起
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        	</#list>
+        </div>
+        <!--景点栏目-->
+        <!-- <div class="m_title disb ov"  id="anchor_jd">
+        	<h2 class="t yahei fl normal">景 点</h2>
+            <label class="en yahei h3  fl">Attractions</label>
+            <a class="more yahei fr" href="${contextPath}/mp/list" target="_blank">查看更多  》</a>
+            <span class="link_group fr ov" id="jd_carsoul">
+            <#list (mpProgramaContentList)! as mppro>
+            <a href="javascript:;" class="link yahei attractions" name="${mppro.id}">${(mppro.content)!}</a>
+            </#list>
+            </span>
+        </div> -->
+      <!--景点轮播-->
+      <!--   <div class="m_carousel disb pl">
+        	<div class="m_carou_bg pa"></div>
+        	<div class="m_carou_bg pa m_carou_bg2"></div>
+            <div class="m_carou_box disb pl" id="m_carousel">
+            	<span class="pa left indexIcon curp"></span>
+                <div class="list pa">
+              <#if maps??>
+               <#list maps?keys as key>
+        			景点轮播容器
+                	<div class="list_box">
+                	 <#if (maps[key])>
+                	<#list (maps[key]) as ztly>
+                	<#if ( ztly_index) gte 1><#break></#if>
+                    	<div class="base pl fl">
+                        	<a href="${(ztly.adBaseInfo.url)!'#'}" target="_blank">
+                            	<img src="${(ztly.adBaseInfo.imagePath)!}" alt="">
+                                <span class="pa t_box yahei">
+                                	<i class="bg pa"></i>
+                                	<label class="title yahei disb pl">
+                                	<#if (ztly.adBaseInfo.title)?length gt 6>
+                                	${(ztly.adBaseInfo.title)?substring(0,6)}...
+                                	<#else>
+                                	${(ztly.adBaseInfo.title)!}
+                                	</#if>
+                                	</label>
+                                	
+                                	
+                                    <label class="price"><i>￥: </i><i class="n">${(ztly.specPrice?c)!}</i>起</label>
+                                </span>
+                            </a>
+                        </div>
+                        </#list>
+                        <div class="rightBase fl ov">
+                        <#list  (maps[key]) as ztly>
+                       <#if ((ztly_index) > 0) && (4>( ztly_index))>
+                        
+                        	<div class="normal_box pl fl yahei">
+                                <a href="${(ztly.adBaseInfo.url)!'#'}" target="_blank">
+                                    <img src="${(ztly.adBaseInfo.imagePath)!}" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">	
+                                   <#if (ztly.adBaseInfo.title)?length gt 6>
+                                	${(ztly.adBaseInfo.title)?substring(0,6)}...
+                                	<#else>
+                                	${(ztly.adBaseInfo.title)!}
+                                	</#if>
+                                	</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">${(ztly.specPrice?c)!}</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        </#if>
+                        </#list>
+                        </div>
+                        <div class="rightBase fl ov">
+                         <#list  (maps[key]) as ztly>
+                       <#if ((ztly_index) > 3) && (8>(ztly_index))>
+                        	<div class="normal_box pl fl yahei">
+                                <a href="${(ztly.adBaseInfo.url)!'#'}" target="_blank">
+                                    <img src="${(ztly.adBaseInfo.imagePath)!}" alt="${(ztly.adBaseInfo.fileName)!}">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+	                                    <label class="t fl">
+										<#if (ztly.adBaseInfo.title)?length gt 6>
+	                                	${(ztly.adBaseInfo.title)?substring(0,6)}...
+	                                	<#else>
+	                                	${(ztly.adBaseInfo.title)!}
+	                                	</#if>
+										</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">${(ztly.specPrice?c)!}</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            </#if>
+                            </#list>
+                        </div>
+                       
+                    </#if> 
+                    </div>
+                      
+                     </#list>
+
+                  </#if>
+                </div>
+            	<span class="pa right indexIcon curp"></span>
+            </div>
+        </div> -->
+        <!--景点轮播-->
+        
+         <!--周边游栏目-->
+        <div class="m_title disb ov" id="anchor_zby">
+        	<h2 class="t yahei fl normal">周边游</h2>
+            <label class="en yahei h3  fl"> Tour around</label>
+            <a  class="more yahei fr" href="${contextPath}/line/list" target="_blank">查看更多 》</a>
+            <span class="link_group fr ov">
+            	
+            	<#if zbyProgramaContentList??>
+            		<#list zbyProgramaContentList as zbyContent>
+            			<a  class="link yahei tourPro" name="${(zbyContent.id)!}" id="tourPro" style="cursor:pointer;">${zbyContent.content}</a>
+            		</#list>
+            	</#if>
+            </span>
+        </div>
+       <!--周边游广告-->
+        <div class="m_closeTrip disb ov" id="tourlist">
+        <div id="tour">
+            <#if zbyList??>
+            	<#list zbyList as zbyAd>
+            		<#if zbyList?size==(zbyAd_index+1)>
+            			 <div class="m_closeTrip_box m_closeTrip_box_last fl ov disb yahei">
+            		<#else>
+            		
+            			<div class="m_closeTrip_box fl ov disb yahei">
+            		</#if>
+		            	<a href="${(zbyAd.adBaseInfo.url)!}" target="_blank">
+		                	<img src="${(zbyAd.adBaseInfo.imagePath)!}" alt="">
+		                    <h2 class="h2 tt c${(zbyAd_index+1)!}">
+
+		                    <!--26个字  -->
+		                     <#if (zbyAd.adBaseInfo.title)?length gt 26>
+		                    ${(zbyAd.adBaseInfo.title)?substring(0,24)}....
+		                    <#else>
+		                    ${(zbyAd.adBaseInfo.title)!}
+		                    </#if>
+		                     </h2>
+		                    <span class="price c${(zbyAd_index+1)!} b${(zbyAd_index+1)!} disb">￥<i>${zbyAd.price}</i>起/人
+		                    </span>
+		                </a>
+		                <a href="${(zbyAd.adBaseInfo.url)!}" class="more disb color9">more></a>
+		            </div>
+            	</#list>
+            </#if>
+           
+        </div>   
+        </div>
+        <!--跟团游栏目-->
+        <div class="m_title disb ov" id="anchor_gty">
+        	<h2 class="t yahei fl normal">跟团游</h2>
+            <label class="en yahei h3  fl">Travel with the group</label>
+            <a  class="more yahei fr" href="${contextPath}/line/list" target="_blank">查看更多 》</a>
+            <span class="link_group fr ov">
+            	<#if gtyProgramaContentList??>
+            		<#list gtyProgramaContentList as gtyContent>
+            			<a  class="link yahei  travel" name="${(gtyContent.id)!}" style="cursor:pointer;">
+            				${(gtyContent.content)!}
+            			</a>
+            		
+            		</#list>
+            	</#if>
+            </span>
+        </div>
+        
+        <!--跟团游广告-->
+        <div class="m_follow ov pl" id="m_follow">
+        <div id="travel">
+        	<#if gtyList??>
+            	<#list gtyList as gtyAd>
+		             <div class="m_follow_box pa">
+		            	<div class="tips fl c1">
+		            		<h3 class="fl" >
+		            	<#if (gtyAd.adBaseInfo.title)?length gt 14>
+
+		            		${(gtyAd.adBaseInfo.title)?substring(0,14)}
+		            	<#else>
+		            	    ${(gtyAd.adBaseInfo.title)!}
+		            	</#if>
+		            		</h3>
+		                    <i class="pa">￥${gtyAd.price}</i>
+		                </div>
+		            	<a href="${(gtyAd.adBaseInfo.url)!}" target="_blank">
+		                <img src="${(gtyAd.adBaseInfo.imagePath)!}" alt="" class="fl">
+		                </a>
+		            </div>
+            	</#list>
+            </#if>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</@frame.main>
+<@frame.end "default"></@frame.end>	
+<script src="${contextPath}/resources/js/lib/city/city.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/lib/city/citySmall.js" language="javascript"></script>	
+<script type="text/javascript">
+$(function(){
+	/* 跟团游  ajax事件*/
+	$(".travel").click(function(){
+		$(".travel").removeClass("on");
+		$(this).addClass("on");
+		var id=$(this).attr("name");
+		$("#m_follow").empty();
+		$.ajax({type:"post",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			url : "${contextPath}/selecttravel?id="+id,
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				var text="<div class='travel'> ";
+				data=data.list;
+				$("#travel").remove();
+				$.each(data,function(i,bt){
+					var title=bt.adBaseInfo.title;
+					if(title.length>10){
+						title=title.substring(0,10)+"...";
+					}
+					text+="  <div class='m_follow_box pa'><div class='tips fl c1'> <h3 class='fl' >"+title+"</h3>"
+                    +"<i class='pa'>￥"+bt.price+"</i>  </div>"
+                    +"<a href='"+bt.adBaseInfo.url+"' target='_blank'>"
+	                +"<img src='"+bt.adBaseInfo.imagePath+"' alt='' class='fl'>"
+	                +"</a> </div>";
+				})
+				text+="</div>";
+				$("#m_follow").append(text);
+				var m_follow={
+						that:$("#m_follow"),
+						action:function(){
+							//初始化
+							var $tips=this.that.find(".tips")
+								,boxWid=this.that.width()
+								,wid=this.that.find(".tips").innerWidth()
+								,$box=this.that.find(".m_follow_box")
+								,len=$box.length
+								;
+							//hover事件
+							$tips.each(function(i,e){
+								$(this).addClass("c"+(i%3+1));
+								$(this).mouseover(function(e){
+									for(var q=0;q<len;q++){
+										if(q<=i){
+											//if(!($box.is(":animated"))){
+												$box.eq(q).stop().animate({"left":q*wid},300);
+											//}
+										}else{
+											
+											//if(!($box.is(":animated"))){
+											$box.eq(q).stop().animate({"left":(boxWid-(len-q)*wid)},300);
+											//}
+										}
+									}
+								});
+							});
+								
+							$tips.eq(0).trigger("mouseover");
+							
+						}
+					}
+					m_follow.action();
+			}
+			
+		})
+		
+	})
+	/* 周边游 ajax事件 */
+	$(".tourPro").bind("click",function(){
+		$(".tourPro").removeClass("on");
+		$(this).addClass("on");
+		var id=$(this).attr("name");
+		$("#tourlist").empty();
+		$.ajax({type:"post",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			url : "${contextPath}/selecttour?id="+id,
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				
+				data=data.list;
+				$("#tour").remove();
+				var text="<div id='tour'>";
+				$.each(data,function(i,bt){
+					var title=bt.adBaseInfo.title;
+					if(title.length>26){
+						title=title.substring(0,24)+"....";
+					}
+					if(i<4){
+					text+="<div class='m_closeTrip_box fl ov disb yahei'>"
+						+"<a href='"+bt.adBaseInfo.url+"' target='_blank'>"
+	                	+"<img src='"+bt.adBaseInfo.imagePath+"' alt=''>"
+	                    +"<h2 class='h2 tt c"+(i+1)+"'>"+title+"</h2>"
+	                    +"<span class='price c"+(i+1)+" b"+(i+1)+" disb'>￥<i>"+bt.price+"</i>起/人  </span>  </a>"
+	                	+"<a  class='more disb color9' href='"+bt.adBaseInfo.url+"'>more></a>"
+		                +"</div>";
+					}else{
+					text+="<div class='m_closeTrip_box m_closeTrip_box_last fl ov disb yahei'>"
+						+"<a href='"+bt.adBaseInfo.url+"' target='_blank'>"
+	                	+"<img src='"+bt.adBaseInfo.imagePath+"' alt=''>"
+	                    +"<h2 class='h2 tt c"+(i+1)+"'>"+title+"</h2>"
+	                    +"<span class='price c"+(i+1)+" b"+(i+1)+" disb'>￥<i>"+bt.price+"</i>起/人  </span>  </a>"
+	                	+"<a  class='more disb color9' href='"+bt.adBaseInfo.url+"'>more></a>"
+		                +"</div>";
+					}
+					
+				})
+				text+="</div>";
+				$("#tourlist").append(text);
+			}
+			
+		})
+		
+	})
+})
+/* 提交表单 */
+function save(){
+	if($("#jp").hasClass("on")){
+		var msg=true;
+		if($("[name='from']").val()==""||$("[name='from']").val()=="城市名"){
+			alert("请输入出发城市")
+			msg=false;
+			return;
+		}
+		if($("[name='to']").val()==""||$("[name='to']").val()=="城市名"){
+			alert("请输入到达城市")
+			msg=false;	
+			return;
+		}
+		if($("[name='time']").val()==""){
+			alert("请输入出发日期")
+			msg=false;
+			return;
+		}
+		if(msg==true){
+			$("#jpSearchForm").submit();
+		}
+	}else if($("#jd").hasClass("on")){
+		$("#scenicSearchForm").submit();
+	}else if($("#xl").hasClass("on")){
+		$("#lineSearchForm").submit();
+	}
+	else if($("#hotel").hasClass("on")){
+		var msg=true;
+		if($("[name='cityId']").val()==""){
+			alert("请输入城市名称")
+			msg=false;
+			return;
+		}
+		if($("[name='arrivalTime']").val()==""){
+			alert("请输入入住日期")
+			msg=false;	
+			return;
+		}
+		if($("[name='departureTime']").val()==""){
+			alert("请输入离店日期")
+			msg=false;
+			return;
+		}
+		if(msg==true){
+			$("#hotelSearchForm").submit();
+		}
+	}
+	
+}
+</script>
+<!--内容-->
+

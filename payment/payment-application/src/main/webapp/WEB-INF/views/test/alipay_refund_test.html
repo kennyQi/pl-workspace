@@ -1,0 +1,91 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/alipayorder/refund">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>支付宝partner：</label>
+				<input type="text" name="partner" size="40" maxlength="60" value="2088701074577516" />(必填)
+			</div>
+			<div class="unit">
+				<label>支付宝keys：</label>
+				<input type="text" name="keys" size="40" maxlength="60" value="gfu3gpkuiam1idh45do66ay0se4a83jv" />(必填)
+			</div>
+			<div class="unit">
+				<label>客户端密钥：</label>
+				<input type="text" name="clientKeys" size="40" maxlength="60" value="e10adc3949ba59abbe56e057f20f883e" />(必填)
+			</div>
+			
+			
+			
+			<div class="unit">
+				<label>退款订单一：</label>
+			</div>
+			<div class="unit">
+				<label>客户端编号：</label>
+				<input type="text" name="alipayRefundRequestDTOList[0].paymentClientId" size="40" maxlength="60" value="425078243aae407da092aaf3d4ab255b" />(必填)
+			</div>
+			<div class="unit">
+				<label>商城订单编号：</label>
+				<input type="text" name="alipayRefundRequestDTOList[0].tradeNo" size="40" maxlength="60" value="" />(必填)
+			</div>
+			<div class="unit">
+				<label>退款金额：</label>
+				<input type="text" name="alipayRefundRequestDTOList[0].amount" size="40" maxlength="60" value="" />(必填)
+			</div>
+			<div class="unit">
+				<label>退款理由：</label>
+				<input type="text" name="alipayRefundRequestDTOList[0].refundMessage" size="40" maxlength="60" value="" />
+			</div>
+			
+			<div class="unit">
+				<label>退款订单二：</label>
+			</div>
+			<div class="unit">
+				<label>客户端编号：</label>
+				<input type="text" name="alipayRefundRequestDTOList[1].paymentClientId" size="40" maxlength="60" value="425078243aae407da092aaf3d4ab255b" />(必填)
+			</div>
+			<div class="unit">
+				<label>商城订单编号：</label>
+				<input type="text" name="alipayRefundRequestDTOList[1].tradeNo" size="40" maxlength="60" value="" />(必填)
+			</div>
+			<div class="unit">
+				<label>退款金额：</label>
+				<input type="text" name="alipayRefundRequestDTOList[1].amount" size="40" maxlength="60" value="" />(必填)
+			</div>
+			<div class="unit">
+				<label>退款理由：</label>
+				<input type="text" name="alipayRefundRequestDTOList[1].refundMessage" size="40" maxlength="60" value="" />
+			</div>
+			
+			<div class="unit">
+				<label>退款订单三：</label>
+			</div>
+			<div class="unit">
+				<label>客户端编号：</label>
+				<input type="text" name="alipayRefundRequestDTOList[2].paymentClientId" size="40" maxlength="60" value="425078243aae407da092aaf3d4ab255b" />(必填)
+			</div>
+			<div class="unit">
+				<label>商城订单编号：</label>
+				<input type="text" name="alipayRefundRequestDTOList[2].tradeNo" size="40" maxlength="60" value="" />(必填)
+			</div>
+			<div class="unit">
+				<label>退款金额：</label>
+				<input type="text" name="alipayRefundRequestDTOList[2].amount" size="40" maxlength="60" value="" />(必填)
+			</div>
+			<div class="unit">
+				<label>退款理由：</label>
+				<input type="text" name="alipayRefundRequestDTOList[2].refundMessage" size="40" maxlength="60" value="" />
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" >提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+

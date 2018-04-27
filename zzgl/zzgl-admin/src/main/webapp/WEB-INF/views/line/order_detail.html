@@ -1,0 +1,398 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.bidl .t_dl{height:auto!important;padding:10px 0;width:100%}
+.bidl .t_dl dt{height:auto!important}
+.bidl .t_dl dd{width:60%;height:auto!important} 
+.bidl p{width:auto}
+.bidl h2{padding:5px 0;width:100%; border-bottom:#ddd 1px solid}
+.bidl h6{clear: both;}
+.dltb{}
+.dltb table{ margin-bottom:15px;}
+.dltb table tr th{ line-height:30px; background:#F5F5F5}
+.dltb table tr td{ line-height:30px; }
+.right_utp{ float:right; width:400px;padding:10px 0  25px 0}
+.right_utp dl dt{ float:left;width:auto}
+.right_utp dl dd{ float:left; width:auto!important}
+.right_utp dl dd p{ float:left; position:relative; position:0!important}
+.right_utp dl dd p strong{ font-size:30px; font-family:Tahoma, Geneva, sans-serif; color:#f30}
+.right_utp dl dd p span{ position:absolute;top:0;left:130px}
+.right_utp dl dd p span em{ font-style:normal; width:200px; line-height:20px;float: left;}
+</style>
+<div class="pageContent">
+	<form method="post" action="demo/common/ajaxDone.html" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+
+       <div class="pageFormContent bill" layoutH="70">
+          <div class="bill bidl">
+               <h2>订单详情</h2>
+              <div class="dltb">
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <th height="30">线路编号</th>
+                          <th height="30">经销商订单号</th>
+                          <th height="30">线路名称</th>
+                          <th height="30">成人人数</th>
+                          <th height="30">儿童人数</th>
+                          <th height="30">订单总金额</th>
+                          <th height="30">使用余额</th>
+                       </tr>
+						<tr>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.lineSnapshot?? && lineOrderDTO.lineSnapshot.line??>
+								${(lineOrderDTO.lineSnapshot.line.baseInfo.number)!''}
+							</#if>
+							</td>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo??>
+								${(lineOrderDTO.baseInfo.dealerOrderNo)!''}
+							</#if>
+							</td>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.lineSnapshot?? && lineOrderDTO.lineSnapshot.line?? && lineOrderDTO.lineSnapshot.line.baseInfo??>
+								${(lineOrderDTO.lineSnapshot.line.baseInfo.name)!''}
+							</#if>
+							</td>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo??>
+								${(lineOrderDTO.baseInfo.adultNo)!''}
+							</#if>
+							</td>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo??>
+								${(lineOrderDTO.baseInfo.childNo)!''}
+							</#if>
+							</td>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo??>
+								${(lineOrderDTO.baseInfo.salePrice)!''}
+							</#if>
+							</td>	
+							<td>
+							<#if balance??>
+								${(balance)!}
+							</#if>
+							</td>						
+						</tr>
+					</table>
+	                <table cellpadding="0" cellspacing="0" width="100%">
+	                      <tr>
+	                          <th height="30">下单时间</th>
+	                          <th height="30">出游时间</th>
+	                          <th height="30">出发地</th>
+	                          <th height="30"></th>
+	                          <th height="30"></th>
+	                          <th height="30"></th>
+	                          <th height="30"></th>
+	                       </tr>
+							<tr>
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.createDate??>
+									${(lineOrderDTO.baseInfo.createDate)?string("yyyy-MM-dd HH:mm:ss")}
+								</#if>
+								</td>
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.createDate??>
+									${(lineOrderDTO.baseInfo.travelDate)?string("yyyy-MM-dd HH:mm:ss")}
+								</#if>
+								</td>
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.lineSnapshot?? && lineOrderDTO.lineSnapshot.starting??>
+								    <#list cityList as city>
+				                        <#if city.code == lineOrderDTO.lineSnapshot.starting>
+				                               ${city.name}    
+				                        </#if>
+				                    </#list>
+				                </#if>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+					</table>
+              </div>
+           </div>
+           
+          <div class="bill bidl">
+               <h2>价格信息</h2>
+              <div class="dltb">
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <th height="30">原价</th>
+                          <th height="30">成人价格</th>
+                          <th height="30">成人人数</th>
+                          <th height="30">儿童价格</th>
+                          <th height="30">儿童人数</th>
+                          <th height="30"></th>
+                          <th height="30"></th>
+                       </tr>
+						<tr>
+							<td>
+							
+							</td>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.supplierAdultUnitPrice??>
+								${(lineOrderDTO.baseInfo.supplierAdultUnitPrice)?string('0.00')}
+							</#if>
+							</td>						
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.adultNo??>
+								${(lineOrderDTO.baseInfo.adultNo)!''}
+							</#if>
+							</td>						
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.supplierUnitChildPrice??>
+								${(lineOrderDTO.baseInfo.supplierUnitChildPrice)?string('0.00')}
+							</#if>
+							</td>						
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.childNo??>
+								${(lineOrderDTO.baseInfo.childNo)!''}
+							</#if>
+							</td>				
+							<td></td>					
+							<td></td>
+						</tr>
+					</table>
+	                <table cellpadding="0" cellspacing="0" width="100%">
+	                      <tr>
+	                          <th height="30">供应价</th>
+	                          <th height="30">成人价格</th>
+	                          <th height="30">成人人数</th>
+	                          <th height="30">儿童价格</th>
+	                          <th height="30">儿童人数</th>
+	                          <th height="30">供应商</th>
+	                          <th height="30"></th>
+	                       </tr>
+							<tr>
+								<td>
+								
+								</td>
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.adultUnitPrice??>
+									${(lineOrderDTO.baseInfo.adultUnitPrice)?string('0.00')}
+								</#if>
+								</td>						
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.adultNo??>
+									${(lineOrderDTO.baseInfo.adultNo)!''}
+								</#if>
+								</td>						
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.childUnitPrice??>
+									${(lineOrderDTO.baseInfo.childUnitPrice)?string('0.00')}
+								</#if>
+								</td>						
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.childNo??>
+									${(lineOrderDTO.baseInfo.childNo)!''}
+								</#if>
+								</td>				
+								<td>
+								<#if lineOrderDTO?? && lineOrderDTO.lineSnapshot?? && lineOrderDTO.lineSnapshot.line?? && lineOrderDTO.lineSnapshot.line.lindSupplier??>
+									${(lineOrderDTO.lineSnapshot.line.lindSupplier.name)!''}
+								</#if>
+								</td>				
+								<td></td>
+							</tr>
+					</table>
+              </div>
+          </div>
+           
+          <div class="bill bidl">
+               <h2>出游信息</h2>
+              <div class="dltb">
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <th height="30">游玩人姓名</th>
+                          <th height="30">游玩人手机</th>
+                          <th height="30">游玩人类别</th>
+                          <th height="30">游玩人证件类型</th>
+                          <th height="30">游玩人证件号</th>
+                          <th height="30">游玩人订单状态</th>
+                          <th height="30">游玩人支付状态</th>
+                          <th height="30"></th>
+                       </tr>
+                       <#if lineOrderDTO??&&lineOrderDTO.travelers??>
+							<#list lineOrderDTO.travelers as traveler>
+								<tr>
+									<td>
+									<#if traveler?? && traveler.name??>
+										${(traveler.name)!''}
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.mobile??>
+										${(traveler.mobile)!''}
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.type??>
+				                       <#if  traveler.type?c ==1>
+				                       		成人
+				                       	<#elseif traveler.type?c ==2>
+				                       		儿童
+				                       </#if>
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.idType??>
+										
+				                       <#if traveler.idType?c == 1>
+				                       		身份证
+				                       </#if>
+						                   
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.idNo??>
+										${(traveler.idNo)!''}
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.lineOrderStatus??>
+										<#if orderStatusList??>
+						                   <#list orderStatusList as os>
+						                       <#if os.key == traveler.lineOrderStatus.orderStatus?c>
+						                       		${os.value}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.lineOrderStatus??>
+										<#if payStatusList??>
+						                   <#list payStatusList as ps>
+						                       <#if ps.key == traveler.lineOrderStatus.payStatus?c>
+						                       		${ps.value}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</#if>							
+									</td>
+								</tr>
+							</#list>
+						</#if>
+						
+					</table>
+              </div>
+           </div>
+           
+          <div class="bill bidl">
+               <h2>联系人信息</h2>
+              <div class="dltb">
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <th height="30">联系人姓名</th>
+                          <th height="30">联系人手机</th>
+                          
+                       </tr>
+						<tr>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.linkInfo??>
+								${(lineOrderDTO.linkInfo.linkName)!''}
+							</#if>
+							</td>
+							<td>
+							<#if lineOrderDTO?? && lineOrderDTO.linkInfo??>
+								${(lineOrderDTO.linkInfo.linkMobile)!''}
+							</#if>
+							</td>
+							
+						</tr>
+					</table>
+              </div>
+          </div>
+          <div class="bill bidl">
+          	<h2>卡券使用信息</h2>
+          	<div class="dltb">
+          		 <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <th height="30">卡券名称</th>
+                          <th height="30">分类</th>
+                          <th height="30">卡券面额（元）</th>
+                          <th height="30">支付金额（元）</th>
+                          <th height="30">明细</th>
+                          
+                       </tr>
+                       <#list couponList!null as coupon>
+						<tr>
+							<td>
+							<#if coupon?? && coupon.baseInfo??&&coupon.baseInfo.couponActivity??&&coupon.baseInfo.couponActivity.baseInfo??>
+								${(coupon.baseInfo.couponActivity.baseInfo.name)!''}
+							</#if>
+							</td>
+							<td>
+							<#if coupon?? && coupon.baseInfo??&&coupon.baseInfo.couponActivity??&&coupon.baseInfo.couponActivity.baseInfo??>
+								${(couponTypeMap[coupon.baseInfo.couponActivity.baseInfo.couponType?c])!}
+							</#if>
+							</td>
+							<td>
+							<#if coupon?? && coupon.baseInfo??&&coupon.baseInfo.couponActivity??&&coupon.baseInfo.couponActivity.baseInfo??>
+								${(coupon.baseInfo.couponActivity.baseInfo.faceValue)!''}
+							</#if>
+							</td>
+							<td>
+								<#if coupon?? && coupon.consumeOrder??>
+									${(coupon.consumeOrder.payPrice)!0}
+								</#if>
+							</td>
+							<td>
+								<#if coupon?? && coupon.consumeOrder??>
+									${(coupon.consumeOrder.detail)!''}
+								</#if>
+							</td>
+							
+						</tr>
+						</#list>
+					</table>
+          	</div>
+          </div>
+           
+       </div>
+	
+	   <div class="formBar">
+			<ul>
+				<#assign buttonFlag = true>
+				<#if lineOrderDTO??&&lineOrderDTO.travelerList??>
+					<#list lineOrderDTO.travelerList as traveler>
+						<#if traveler.lineOrderStatus.payStatus?c == "3101">
+							<#assign buttonFlag = false>
+						</#if>
+					</#list>
+				</#if>
+				
+				</a>
+				<button type="button" class="close">
+					关闭
+				</button>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+var  destCityIds = $("#destCityIds").val();//出发城市id
+var  destinationCity = $("#arriveCityIds").val();//目的地城市和途经城市的id字符串
+var  cityCodes = destCityIds+","+destinationCity;//出发城市以及目的地城市和途经城市的id
+var  startingCity = "";
+var  result = [];
+//查询出发地城市
+if(destCityIds != null && destCityIds != ""){
+	$.post("${contextPath}/line/queryCity",{'cityCodes':cityCodes},function(data){
+			if (data.length > 0) {  
+	            $.each(data, function (idx, item) { 
+	            	var code = item.code;
+	            	 if(code == destCityIds){
+	            		 startingCity = item.name;
+	            	 }else{
+	            		result.push(item.name);
+	            	 }
+	            });
+	            
+	        	//赋值
+	        	$("#startcity").val(startingCity);
+	        	$("#destinationCity").val(result);
+	        }  
+		},"json");
+}
+</script>

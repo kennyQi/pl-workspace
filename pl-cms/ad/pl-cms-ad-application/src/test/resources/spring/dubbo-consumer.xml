@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="jqlm-spi-comsumer-dev"  />
+ 
+    <!-- 使用multicast广播注册中心暴露发现服务地址 -->
+    <dubbo:registry address="redis://127.0.0.1:6379"/>
+ 
+    <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+    
+    <!-- =============景区联盟spi接口============== -->
+    <!-- 栏目频道_spi接口实现 -->
+    <dubbo:reference id="spiContentServiceImpl" interface="hg.jqlm.spi.inter.SpiContentService" timeout="30000" />
+    <!-- 景区_spi接口实现-->
+    <dubbo:reference id="spiScenicSpotServiceImpl" interface="hg.jqlm.spi.inter.SpiScenicSpotService" timeout="30000" />
+    <!-- 用户接口实现 -->
+    <dubbo:reference id="spiUserLocalServiceImpl" interface="hg.jqlm.spi.inter.SpiUserService" timeout="30000"/>
+	
+</beans>

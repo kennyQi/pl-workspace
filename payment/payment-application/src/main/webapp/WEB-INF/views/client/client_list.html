@@ -1,0 +1,116 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/client/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent" style="text-align:left;">
+			  <tr>
+		    	<td>名称: <input type="text" name="name" value="${qo.name}"/></td>
+		    	<td>是否有效: 
+		    	  <select name = "valid" >
+		    	     <#if qo.valid ??>
+		    	     	<#if (qo.valid)?string('true','false') == "true">
+			            	<option value=""  >全部</option>
+		            		<option value="1"  selected="selected">是</option>
+			                <option value="0"  >否</option>
+			            <#elseif (qo.valid)?string('true','false') == "false">
+			            	<option value=""  >全部</option>
+			            	<option value="1" >是</option>
+			                <option value="0"  selected="selected">否</option>
+		    	       </#if>
+		    	     <#else>
+			    	        <option value=""  selected="selected">全部</option>
+			    	        <option value="1"  >是</option>
+				            <option value="0"  >否</option>
+			            
+		    	     </#if>
+		    	  	
+			      </select>
+		    	</td>
+		    	<td>可用渠道 :
+		    	  <select name = "validPayChannel" >
+		    	    <option value="" <#if qo.validPayChannel == null> selected="selected"</#if>> 全部</option>
+			        <#list paychannellist as paychannel>
+						<option value=${paychannel.type} <#if qo.validPayChannel == paychannel.type> selected="selected"</#if>> ${paychannel.name}</option>
+					</#list>
+			      </select>
+		    	</td>
+		      </tr>
+		   </table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/client/toAdd"
+				   lookupgroup="orgLookup" mask="true"><span>添加</span>
+			</a>
+			</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids"
+					class="checkboxCtrl">
+				</th>
+				<th width="80">ID</th>
+				<th width="80">名称</th>
+				<th width="50">是否有效</th>
+				<th width="50">密钥</th>
+				<th width="100">可用支付渠道</th>
+				<th width="100">商城消息地址</th>
+				<th width="100">商城重定向地址</th>
+				<th width="100">商城域名</th>
+				<th width="100">备注</th>
+				<th width="40">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as client>
+			<tr>
+				<td><input name="ids" value="${client.id}" type="checkbox">
+				</td>
+				<td>${client.id}</td>
+				<td>${client.name!'-'?html}</td>
+				<td><#if client.valid==true>是<#else>否</#if></td>
+				<td>${client.secretKey}</td>
+				<td>
+					<#list client.validPayChannelSet as channel>
+					    ${channel.name} 
+					</#list>
+				</td>
+				<td>${client.clientMessageURL}</td>
+				<td>${client.clientReturnURL}</td>
+				<td>${client.clientShopURL}</td>
+				<td>${client.remark!'-'?html}</td>
+				<td>
+					<a title="编辑" lookupgroup="orgLookup" mask="true" href="${contextPath}/client/toEdit?id=${client.id}"
+					>编辑</a>
+					<a title="启用" target="ajaxTodo" href="${contextPath}/client/start?id=${client.id}"
+					>启用</a>
+					<a title="禁用"  target="ajaxTodo" href="${contextPath}/client/stop?id=${client.id}"
+					>禁用</a>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	
+	<#include "/public/pagination/pagination.html">
+</div>

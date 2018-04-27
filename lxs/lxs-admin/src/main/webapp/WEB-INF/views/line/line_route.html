@@ -1,0 +1,81 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.pageFormContent p {
+	height: inherit;
+	line-height: 20px
+}
+</style>
+<div class="pageContent">
+
+	<div class="pageFormContent" layoutH="58">
+		<table style="width: 100%;TABLE-LAYOUT: fixed; ">
+			<tr height="40px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">行程名称：</td>
+				<td style="width: 75%" colspan="3">${line.routeInfo.routeName}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>购物时长：</td>
+				<td>${line.routeInfo.shoppingTimeHour}小时</td>
+				<td style="width: 25%">行程天数：</td>
+				<td style="width: 20%"> ${line.routeInfo.routeDays}天</td>
+				<td>&nbsp;</td>
+			</tr>
+			<#if (routes?size>0)> <#list routes as route>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr height="15px;">
+				<td colspan="6">&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td><strong>DAY:${route.days} </strong></td>
+				<td></td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>出发地：</td>
+				<td>${route.starting} </td>
+				<td>目的地：</td>
+				<td>${route.destination}</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td style="vertical-align: top;">行程安排：</td>
+				<td colspan="3">${route.schedulingDescription}</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>交通方式：</td>
+				<td>
+				<#if (route.vehicle??)>
+				<#list route.vehicle?split(",") as vehiclecode>
+				<#if (vehiclecode==1)>飞机</#if><#if (vehiclecode==2)>大巴</#if><#if (vehiclecode==3)>轮船</#if><#if (vehiclecode==4)>火车</#if><#if (vehiclecode==5)>自行前往</#if>
+				</#list>
+				</#if>
+				</td>
+				<td>住宿：</td>
+				<td>${route.hotelInfoJson}</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>餐饮：</td>
+				<td colspan="3">早餐(<#if (route.includeBreakfast)>包含<#else>自理</#if>) 午餐(<#if (route.includeLunch)>包含<#else>自理</#if>) 晚餐(<#if (route.includeDinner)>包含<#else>自理</#if>)</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="15px;">
+				<td colspan="6">&nbsp;</td>
+			</tr>
+			</#list> </#if>
+		</table>
+	</div>
+</div>

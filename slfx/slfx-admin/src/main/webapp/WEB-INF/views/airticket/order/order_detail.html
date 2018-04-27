@@ -1,0 +1,268 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.bidl .t_dl{height:auto!important;padding:10px 0;width:100%}
+.bidl .t_dl dt{height:auto!important}
+.bidl .t_dl dd{width:60%;height:auto!important} 
+.bidl p{width:auto}
+.bidl h2{padding:5px 0;width:100%; border-bottom:#ddd 1px solid}
+.bidl h6{clear: both;}
+.dltb{}
+.dltb table{ margin-bottom:15px}
+.dltb table tr th{ line-height:30px; background:#D1D1D1}
+.dltb table tr td{ line-height:30px; }
+.right_utp{ float:right; width:400px;padding:10px 0  25px 0}
+.right_utp dl dt{ float:left;width:auto}
+.right_utp dl dd{ float:left; width:auto!important}
+.right_utp dl dd p{ float:left; position:relative; position:0!important}
+.right_utp dl dd p strong{ font-size:30px; font-family:Tahoma, Geneva, sans-serif; color:#f30}
+.right_utp dl dd p span{ position:absolute;top:0;left:130px}
+.right_utp dl dd p span em{ font-style:normal; width:200px; line-height:20px;float: left;}
+</style>
+<div class="pageContent">
+	<form method="post" action="demo/common/ajaxDone.html" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+       	<#if orderDetail.flightSnapshotJSON ?? >
+			<#assign jsonStr>
+				${(orderDetail.flightSnapshotJSON)!''}
+			</#assign>
+			<#assign json=jsonStr?eval />
+		</#if>
+       
+       <div class="pageFormContent bill" layoutH="56">
+          <div class="bill bidl">
+               <h2>订单信息</h2>
+              <div class="dltb">
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <th height="30">状态</th>
+                          <th height="30">PNR</th>
+                          <th height="30">平台订单号</th>
+                          <th height="30">易购订单号</th>
+                          <th height="30">供应商订单号</th>
+                          <th height="30">订单总金额</th>
+                          <th height="30">商家信息</th>
+                       </tr>
+						<tr>
+							<td>
+								<#if orderDetail.orderStatus ?? && orderDetail.orderStatus.status??>
+									<#assign status2=orderDetail.orderStatus.status+'' />
+									${STATUS_MAP[status2]} 
+								</#if>
+							</td>
+							<td>${orderDetail.pnr}</td>
+							<td>${(orderDetail.orderNo)!''}</td>
+							<td>${orderDetail.ygOrderNo}</td>
+							<td>${(orderDetail.supplierOrderNo)!''}</td>
+							<td>${orderDetail.userPayAmount?string('0.00')}</td>
+							<td>${(orderDetail.agencyName)!''}
+							</td>
+						</tr>
+					</table>
+              </div>
+              <div class="right_utp"  style="float:right">
+                  <dl>
+                  <dd>
+                  <p>
+                  <span>
+                  <em>废票时间  
+						<#if orderDetail.wastWorkTime??>
+							${orderDetail.wastWorkTime?string("yyyy-MM-dd HH:mm:ss")}
+						</#if>
+				   </em><br />
+                  <em>退票时间 ${(orderDetail.refundWorkTime)!''}</em><br />
+                  <em>工作时间 ${(orderDetail.workTime)!''}</em>
+                    </span>
+					</p>
+                   
+                  </dd>
+                  </dl>
+                  </div>
+              <dl class="t_dl"><dt>政策备注：</dt>
+              	<dd>
+              		<p>${(json.policyRemark)!''}</p>
+              	</dd></dl>
+               <h6></h6>
+              <h2>机票信息</h2>
+              <div class="dltb">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th>行程</th>
+							<th>起飞</th>
+							<th>抵达</th>
+							<th>航班信息</th>
+							<th>舱位</th>
+						</tr>
+						<tr>
+							<td>${(orderDetail.startCityName)!''} -
+								${(orderDetail.endCityName)!''} <br /> ${(json.startPort)!''} -
+								${(json.endPort)!''}
+
+							</td>
+							<td>${(json.startDate)!''} ${(json.startTime)!''} <br />
+								${(json.startPortName)!''}
+							</td>
+							<td>${(json.endDate)!''} ${(json.endTime)!''} <br />
+								${(json.endPortName)!''}
+							</td>
+							<td>${(json.airCompName)!''} <br /> ${(json.flightNo)!''}
+
+							</td>
+							<td>${(json.classCode)!''}</td>
+						</tr>
+					</table>
+
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th>旅客姓名</th>
+							<th>类型</th>
+							<th>证件号码</th>
+							<th>票号</th>
+							<th>退废记录</th>
+						</tr>
+						<tr>
+						<#if orderDetail.passangerList ??> 
+							<#list orderDetail.passangerList as passenger>
+								<tr>
+									<td>${(passenger.name)!''}</td>
+									<td>${(passenger.cardType)!''}</td>
+									<td>${(passenger.cardNo)!''}</td>
+									<td>${(passenger.ticket.ticketNo)!''}</td>
+									<td>${(passenger.ticket.refund)!''}</td>
+									<td></td>
+								</tr>
+							</#list>
+						</#if>
+                      	</tr>
+						
+                  </table>
+					<div class="right_utp" style="float:right;height:80px">
+						<dl>
+							<dt>单张合计：</dt>
+							<dd>
+								<p>
+									<strong>${orderDetail.oneUserPayAmount?string('0.00')} </strong> 
+									<span> 
+										<em>票面价：${(orderDetail.oneTktAmount)?string('0.00')}</em><br /> 
+										<em>税款：${(orderDetail.oneTktTax)!?string('0.00')}</em><br /> 
+										<em>分销政策：${(orderDetail.onePlatPolicyPirce)!?string('0.00')}</em>
+										<#if orderDetail.serviceCharge ??> 
+										<em>支付宝手续费：${(orderDetail.serviceCharge)!?string('0.00')}</em><br /> 
+										</#if>
+										<#if orderDetail.disparity ??> 
+										<em>进十差价/退废佣金：${(orderDetail.disparity)!?string('0.00')}</em>
+										</#if>
+									</span>
+								</p>
+
+							</dd>
+						</dl>
+					</div>
+				</div>
+              <h6></h6>
+              <h2>支付信息</h2>
+				<div class="dltb">
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<th>订单总金额</th>
+							<th>机票数量</th>
+							<th>供应商原价（单）</th>
+							<th>分销加价金额（单）</th>
+							<th>返点/佣金</th>
+							<th>支付供应商金额</th>
+						</tr>
+						<tr>
+							<td>${orderDetail.userPayAmount?string('0.00')}</td>
+							<td>
+								${orderDetail.passangerCount!''}
+							</td>
+							<td>
+								<#if orderDetail ?? && orderDetail.userPayAmount?? && orderDetail.suppPrice??>
+									${(orderDetail.oneTktAmount + orderDetail.oneTktTax)?string('0.00')}
+								</#if>
+							</td>
+							<td>
+								${(orderDetail.onePlatPolicyPirce)!?string('0.00')}
+							</td>
+							<td>
+								<#if orderDetail ?? && orderDetail.commRate?? && orderDetail.commAmount??>
+									${orderDetail.commRate?string('0.00')}/${orderDetail.commAmount?string('0.00')}
+								</#if>
+							</td>
+							<td>
+								${orderDetail.suppPrice?string('0.00')}
+							</td>
+						</tr>
+					</table>
+				</div>
+				<#if orderDetail.type=='1'>
+					<div class="unit">
+						<label>异常订单信息</label>
+					</div>
+					<div class="unit">
+						<hr />
+					</div>
+					<div class="unit">
+						<table>
+	
+	
+							<tbody>
+								<td>调整金额：${orderDetail.adjustAmount?string('0.00')}</td>
+								<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td>调整凭证：${orderDetail.voucherPicture}</td>
+							</tbody>
+							<tbody>
+								<td colspan="3">调整原因：${orderDetail.adjustReason}</td>
+							</tbody>
+						</table>
+					</div>
+				</#if>
+
+				<h6></h6>
+				<h2>操作日志</h2>
+				<div class="dltb">
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<th height="30">时间</th>
+							<th height="30">操作</th>
+							<th height="30">操作人</th>
+							<th height="30">操作信息</th>
+						</tr>
+						<tr><#list LOGS as log>
+						<tr>
+							<td><#if log.logDate ??>
+								${log.logDate!?string("yyyy-MM-dd HH:mm:ss")} </#if></td>
+							<td>${log.logName}</td>
+							<td>${log.logWorker}</td>
+							<td>${log.logInfo}
+							</td>
+						</tr>
+						</#list>
+						</tr>
+
+					</table>
+				</div>
+				<h6></h6>
+			</div>
+       </div>
+	    <div class="formBar">
+			<ul>
+				<#if orderDetail.orderStatus.status == PAY_WAIT>
+					<li><a class="button" target="dialog" href="${contextPath}/airtkt/order/tocancel?id=${(orderDetail.id)!''}&dealerOrderCode=${(orderDetail.dealerOrderCode)!''}"><span>取消订单</span></a></li>
+				</#if>
+				<#if TICKET_SUCC == status2> 
+					<#if IS_WAST_WORK_TIME == "true">
+						<li><a class="button" target="dialog" href="${contextPath}/airtkt/order/toRefundTicket?refundType=F&platCode=${(orderDetail.platCode)!''}&id=${(orderDetail.id)!''}&pnr=${(orderDetail.pnr)!''}"><span>申请废票</span></a></li>
+					<#else>
+						<li><a class="button" target="dialog" href="${contextPath}/airtkt/order/toRefundTicket?refundType=T&platCode=${(orderDetail.platCode)!''}&id=${(orderDetail.id)!''}&pnr=${(orderDetail.pnr)!''}"><span>申请退票</span></a></li>
+					</#if>
+				</#if>
+
+				<button type="button" class="close">关闭</button>
+			</ul>
+		</div>
+	</form>
+</div>
+<script>
+    var a_ckwl_id = "a_" + $("#hidState").val();
+    var a_ckwl_obj = $("#" + a_ckwl_id);
+    a_ckwl_obj.show();
+</script>

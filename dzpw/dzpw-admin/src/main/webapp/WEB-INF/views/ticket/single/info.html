@@ -1,0 +1,119 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+</style>
+
+<script type="text/javascript">
+
+function openDatePrice(ticketPolicyId){
+	$.pdialog.open('${contextPath}/ticket-single/datePrice/page?ticketPolicyId='+ticketPolicyId, 'editDialog', '查看价格日历',{width:700,height:700,mask:true});
+}
+
+</script>
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="20">
+	
+	<#if ticketPolicy?? && !ticketPolicy.status.removed>
+	
+	<div>
+	
+		<!-- 景区基本信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>基本信息</span></div>
+		
+		<div class="unit">
+			<label>产品编号：</label>
+			<p>${ticketPolicy.baseInfo.key}</p>
+		</div>
+		
+		<div class="unit">
+			<label>单票名称：</label>
+			<p>${ticketPolicy.baseInfo.name}</p>
+		</div>
+		
+		<div class="unit">
+			<label>单票介绍：</label>
+			<textarea id="intro" class="editor" name="intro" rows="15" cols="90" maxlength="1000"
+							tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+							Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+							Link,Unlink,Hr,Table">
+					${ticketPolicy.baseInfo.intro}
+			</textarea>
+		</div>
+		
+		<div class="unit">
+			<label>预定须知：</label>
+			<textarea id="notice" class="editor" name="notice" rows="15" cols="90" maxlength="1000"
+							tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+							Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+							Link,Unlink,Hr,Table">
+					${ticketPolicy.baseInfo.notice}
+			</textarea>
+		</div>
+		
+		<div class="unit">
+			<label>单票协议：</label>
+			<textarea id="saleAgreement" class="editor" name="saleAgreement" rows="15" cols="90" maxlength="1000" data-meg="售卖协议"
+					  tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,
+					         Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+				${ticketPolicy.baseInfo.saleAgreement}
+			</textarea>
+		</div>
+		
+		<!-- 价格、库存与有效期   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>价格、库存与有效期</span></div>
+		
+		<div class="unit">
+			<label>市&nbsp;场&nbsp;价&nbsp;格：</label>
+			<input size="9" value="${(ticketPolicy.baseInfo.rackRate)?c}"/> 元
+		</div>
+		
+		<div class="unit">
+			<label>库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存：</label>
+			<input size="9" value="${(ticketPolicy.sellInfo.remainingQty)?c}"/> 张
+		</div>
+		
+		<div class="unit">
+			<label>退&nbsp;票&nbsp;规&nbsp;则：</label>
+			<p>
+				<#if ticketPolicy.sellInfo.returnRule==1 >
+					不得退票
+				<#elseif ticketPolicy.sellInfo.returnRule==3 >
+					无条件退票收取${ticketPolicy.sellInfo.returnCost}%手续费
+				<#elseif ticketPolicy.sellInfo.returnRule==4 >
+					无条件退票收取${ticketPolicy.sellInfo.returnCost}元手续费
+				</#if>
+			</p>
+		</div>
+		
+		<div class="unit">
+			<label>过期退：</label>
+			<input type="checkBox" name="autoMaticRefund" value="1" class="addSpan" <#if ticketPolicy.sellInfo.autoMaticRefund=true>checked="checked"</#if> disabled="disabled"/>&nbsp;支持
+		</div>
+	
+		<div class="unit">
+			<label>连续游玩天数：</label>
+			<input maxlength="3" size="5" class="addSpan" value="${ticketPolicy.useInfo.validDays}" disabled="disabled"/>&nbsp;天
+		</div>
+	
+	</div>
+
+	<#else>
+		该门票已被删除
+	</#if>
+	
+	<div class="formBar">
+			<ul>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close" style="width: 35px;">取消</button>	</div></div>
+				</li>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="button" style="width: 90px;" onclick="openDatePrice('${ticketPolicy.id}')">查看价格日历</button>
+					</div></div>
+				</li>
+			</ul>
+	</div>
+</div>
+</div>

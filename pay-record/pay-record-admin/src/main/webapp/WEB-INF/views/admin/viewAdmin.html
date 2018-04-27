@@ -1,0 +1,58 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as dk> 
+<@dk.head "- 查看管理员信息">
+</@dk.head>
+<@dk.defaultFrame "" "admin" "admin" "" "default" "adminBack" "admin" >
+			<!--start: .add-app-content -->
+			<div class="main add-app-content">
+			<p class="fr"><a class="edit-link" href="${contextPath}/admin/edit/${admin.id}"><i class="icon i-edit"></i>编辑</a><a class="edit-link" href="${contextPath}/admin/list" ><span>返回列表</span></a></td></p>
+				
+			<form id="mainform"  method="post">
+                <table class="add-app-table">
+                    <tbody>
+                        <tr>
+                            <th class="rowhead">
+                                    <span class="star">  </span> 名称：
+                            </th>
+                            <td>
+                                 ${admin.name!''}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="rowhead">
+                                    <span class="star">  </span> 端口号：
+                            </th>
+                            <td>
+                                 ${admin.dkUser.dkcode}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="rowhead">
+                                      <span class="star">  </span>邮箱：
+                            </th>
+                            <td>
+                            	${admin.dkUser.email}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="rowhead">
+                                      <span class="star">  </span>角色：
+                            </th>
+                            <td>
+                            	<#list admin.adminRoleSet as adminRole>
+                            	<p>
+		                         ${adminRole.name!''}
+								</p>
+		                       </#list>                            	
+                            </td>
+                        </tr>                        
+                    </tbody>
+                </table>
+				</form>
+			</div><!--end: add-app-content -->
+			
+</@dk.defaultFrame>
+
+<@dk.end>
+
+</@dk.end>

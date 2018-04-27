@@ -1,0 +1,23 @@
+
+<style>
+.formtable {
+	background: none repeat scroll 0 0 #FAFAFA;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.formtable td.left {
+	text-align: right;
+	width: 19%;
+}
+
+.formtable td {
+	border: 1px solid #CDD5DE;
+	padding: 4px 0 4px 5px;
+}
+
+.formtable td.right {
+	text-align: left;
+	width: 31%;
+}
+</style>

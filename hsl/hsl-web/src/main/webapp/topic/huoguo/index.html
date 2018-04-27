@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>票量直销--暖冬特惠</title>
+    <link href="css/nd.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <!-- 妈妈做的菜 -->
+        <div class="cont cont1">
+          <img src="images/01.png" usemap="#Map">
+          <map name="Map">
+            <area shape="rect" coords="3,170,551,531" href="http://www.ply365.com/line/detail?id=08ebd77278794fd5b322cb1841fa7231" target="_blank">
+            <area shape="rect" coords="630,311,1182,672" href="http://www.ply365.com/line/detail?id=bf31845a0aa24430b4ff7ad3582b8163" target="_blank">
+          </map>
+        </div>
+        <!-- 农家小屋 -->
+        <div class="cont cont2">
+          <img src="images/02.png" usemap="#Map2">
+          <map name="Map2">
+            <area shape="rect" coords="3,107,551,467" href="http://www.ply365.com/line/detail?id=d06e0d06106b43bf8901a10c3f7a3e24" target="_blank">
+            <area shape="rect" coords="631,257,1182,617" href="http://www.ply365.com/line/detail?id=fb886230926a4d82be2c2b6c32c08515" target="_blank">
+          </map>
+        </div>
+        <!-- 农家周边游 -->
+        <div class="cont cont3">
+          <img src="images/03.jpg" usemap="#Map3">
+          <map name="Map3">
+            <area shape="rect" coords="3,245,551,605" href="http://www.ply365.com/line/detail?id=3c2c8be5da4846e78ffd7cc997d99caa" target="_blank">
+            <area shape="rect" coords="631,104,1183,465" href="http://www.ply365.com/line/detail?id=831e846abbe14950b68ff27301139887" target="_blank">
+            <area shape="rect" coords="631,494,1180,853" href="http://www.ply365.com/line/detail?id=69c4ead9be144956bcaa2ee019ed5942" target="_blank">
+            <area shape="rect" coords="631,894,1181,1254" href="http://www.ply365.com/line/detail?id=f7500377d62f4718a886d0c0367f29bb" target="_blank">
+            <area shape="rect" coords="125,1505,562,1753" href="https://www.ply365.com/topic/jipiao/" target="_blank">
+            <area shape="rect" coords="639,1506,1078,1753" href="http://www.ply365.com/topic/bingxue/" target="_blank">
+          </map>
+        </div>
+      </div>
+    </div>
+    <!-- 侧导航 -->
+    <div class="sideNav">
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+      <a href="javascript:;"></a>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        var $startp = $('.nav_list li');
+        var $line_box = $('.line_box');
+        $startp.click(function(){
+          var n =$(this).index();
+          $(this).addClass('active').siblings().removeClass('active');
+          $line_box.eq(n).show().siblings().hide();
+        });
+        // 侧导航
+        var $a_cont = $('.sideNav a');
+        $a_cont.eq(0).click(function(){
+          $('html,body').animate({scrollTop:620},300);
+        });
+        $a_cont.eq(1).click(function(){
+          $('html,body').animate({scrollTop:1350},300);
+        });
+        $a_cont.eq(2).click(function(){
+          $('html,body').animate({scrollTop:2110},300);
+        });
+        $a_cont.eq(3).click(function(){
+          $('html,body').animate({scrollTop:3450},300);
+        });
+      })
+    </script>
+    <!-- 飘雪 -->
+    <script src="js/snowfall.jquery.js"></script> 
+    <script>
+        $(document).snowfall('clear');
+        $(document).snowfall({
+            image: "images/huaban.png",
+            flakeCount:300,
+            minSize: 5,
+            maxSize: 40
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- meta信息，可维护 -->
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="css/base.2.0.css" />
+    <link rel="stylesheet" type="text/css" href="css/ticket.css">
+
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="js/ticket.js"></script>
+    <script type="text/javascript" src="js/iscroll.js"></script>
+    <script type="text/javascript" src="js/reflash.js"></script>
+
+
+
+</head>
+<body>
+    <!-- 公共页头  -->
+    <header class="header" style="position:absolute;z-index:9999;width:100%;">
+        <h1>景点门票</h1>
+        <div class="left-head">
+            <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+                <span class="inset_shadow">
+                    <span class="head-return"></span>
+                </span>
+            </a>
+        </div>
+    </header>
+    <!-- 页面内容 -->
+    <div id="wrapper">
+        <div class="content ticket" id="scroll">
+        <!--start 门票列表-->
+            <div id="pullDown">
+                <span class="pullDownIcon"></span><span class="pullDownLabel"></span>
+            </div>
+            <div class="list_tour">
+
+                <div class="search" style="margin-top:50px;">
+                    <input name="" type="text" value="" placeholder="请输入城市名／景点名／主题">
+                    <a href="javascript:;"></a>
+                </div>
+                <ul class="tab">
+                    <li class="active">热 门</li>
+                    <li >价 格</li>
+                </ul>
+                <div class="list" id="addlist">
+                    <dl>
+                        <a href="ticketDetails.html">
+                            <dt>
+                                <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg"></dt>
+                            <dd>
+                                <span>&yen; 25.00起</span>
+                                嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖
+                            </dd>
+                            <dd>浙江省嘉兴市南湖区海盐塘路188号(近南溪西路)</dd>
+                        </a>
+                    </dl>
+                    <dl>
+                        <a href="ticketDetails.html">
+                            <dt>
+                                <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg"></dt>
+                            <dd>
+                                <span>&yen; 25.00起</span>
+                                嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖
+                            </dd>
+                            <dd>浙江省嘉兴市南湖区海盐塘路188号(近南溪西路)</dd>
+                        </a>
+                    </dl>
+                    <dl>
+                        <a href="ticketDetails.html">
+                            <dt>
+                                <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg"></dt>
+                            <dd>
+                                <span>&yen; 25.00起</span>
+                                嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖
+                            </dd>
+                            <dd>浙江省嘉兴市南湖区海盐塘路188号(近南溪西路)</dd>
+                        </a>
+                    </dl>
+                    <dl>
+                        <a href="#">
+                            <dt>
+                                <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg"></dt>
+                            <dd>
+                                <span>&yen; 25.00起</span>
+                                嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖
+                            </dd>
+                            <dd>浙江省嘉兴市南湖区海盐塘路188号(近南溪西路)</dd>
+                        </a>
+                    </dl>
+                    <dl>
+                        <a href="#">
+                            <dt>
+                                <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg"></dt>
+                            <dd>
+                                <span>&yen; 25.00起</span>
+                                嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖
+                            </dd>
+                            <dd>浙江省嘉兴市南湖区海盐塘路188号(近南溪西路)</dd>
+                        </a>
+                    </dl>
+                </div>
+                <div id="pullUp">
+                    <span class="pullUpIcon"></span><span class="pullUpLabel">上划加载更多。。。</span>
+                </div>
+            </div>
+        <!--end 门票列表--> 
+        </div>
+    </div>
+
+    <!--模板-->
+    <div id="temp" style="display:none;">
+        <dl>
+            <a href="ticketDetails.html">
+                <dt>
+                    <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg"></dt>
+                <dd>
+                    <span>&yen; 25.00起</span>
+                    嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖嘉兴南湖
+                </dd>
+                <dd>浙江省嘉兴市南湖区海盐塘路188号(近南溪西路)</dd>
+            </a>
+        </dl>
+    </div>
+
+</body>
+</html>

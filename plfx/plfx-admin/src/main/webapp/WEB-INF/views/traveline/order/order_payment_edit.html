@@ -1,0 +1,93 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+       <form method="post" enctype="multipart/form-data" action="#" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<a id="orderDetail" target="dialog"  href="${contextPath}/traveline/order/detail?id=${lineOrderDTO.id!''}" width="800" height="1000" style="color: blue; display: none;">
+			订单详情
+		</a>
+		<a  id="orderList" href="${contextPath}/traveline/order/list" target="navTab" rel="lineorder" style="color: blue; display: none;">
+			线路订单
+		</a>
+			 
+		<div class="pageFormContent" layoutH="58">
+		     <#if lineOrderDTO.travelers??>
+		     <#list lineOrderDTO.travelers as traveler>
+		     <#if traveler.id==travelerId>
+		      <input type="hidden" name="singleBargainMoney" id="singleBargainMoney"   value="${traveler.singleBargainMoney}"/>
+		     <input type="hidden" name="travelerId" id="travelerId" value="${travelerId}"/>
+		     <input type="hidden" name="lineOrderId" id="lineOrderId" value="${lineOrderDTO.id!''}"/>
+			<div class="unit">
+				<label>游玩人姓名：</label>
+				${traveler.name}
+			</div>
+			<div class="unit">
+				<label>单人总金额：</label>
+			    <input type="text" id="singleSalePrice" name="singleSalePrice" size="40" maxlength="40" value="${(traveler.singleSalePrice)?c}" class="number required" min="0"/>元
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<textarea id="remark" name="remark" cols="60" rows="2" >${traveler.remark}</textarea>
+			</div>	
+			</#if>
+			</#list>
+			</#if>
+		</div>
+		<div class="formBar">
+			<ul>
+			   
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="modify();">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+		</form>
+</div>
+<script type="text/javascript">
+//取消回车键能提交表单的功能
+document.onkeydown = function(event_e){  
+ if(window.event) {  
+     event_e = window.event;  
+ }  
+ var int_keycode = event_e.charCode||event_e.keyCode;  
+ if(int_keycode =='13') {  //13是回车键
+     return false;  
+ }  
+}
+
+
+function modify(){
+	var re = /^[0-9]+([.][0-9]+){0,1}$/;//正则 验证只能输入数字和小数
+	var lineOrderId = $("#lineOrderId").val();
+	var travelerId = $("#travelerId").val();
+	var singleSalePrice = $("#singleSalePrice").val();
+	var remark = $("#remark").val();
+	var singleBargainMoney = $("#singleBargainMoney").val();
+	if(singleBargainMoney*1 > singleSalePrice*1){
+		alert("修改单人全款不能小于定金");
+		return;
+	}
+	if(singleSalePrice == undefined || singleSalePrice=="" || singleSalePrice == null || singleSalePrice < 0 || !re.test(singleSalePrice)){//修改金额不能为空或不是整数
+			return;
+	}else{
+		if(confirm("确认修改单人全款?")){
+			$.ajax({
+				   type: "POST",
+				   url:  "${contextPath}/traveline/order/modifyPayment",
+				   dataType: "json",
+				   cache: false,
+				   data: {lineOrderId:lineOrderId,travelerId:travelerId,singleSalePrice:singleSalePrice,remark:remark},
+				   success: function(msg){
+					   if(msg.status == "1"){
+							document.getElementById("orderDetail").click(); //修改后刷订单新详情界面
+							document.getElementById("orderList").click();//修改后刷订单列表界面
+							$.pdialog.closeCurrent();//关闭当前活动层
+						}else{
+							alert(msg.message);
+						}
+				   }
+			});
+		}
+		
+	}
+	
+}
+
+</script>

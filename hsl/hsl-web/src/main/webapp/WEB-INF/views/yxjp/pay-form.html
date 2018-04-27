@@ -1,0 +1,15 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#import "/public/frame/default.html" as frame />
+<@frame.head "票量旅游网 - 支付">
+<link href="${contextPath}/resources/css/fly_success.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+</@frame.head>
+<@frame.main "default" 2>
+<!--内容-->
+${payForm}
+<!--内容-->
+</@frame.main>
+<@frame.end "default"></@frame.end>

@@ -1,0 +1,128 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+<!--
+	function hideTemplate() {
+		var el = $("[htmltemplate]");
+		el.each(function() {
+			$(this).hide();
+
+		});
+	}
+	$(document).ready(function() {
+		//		hideTemplate();
+
+		cd = getCurrentDiv("asdasd");
+
+		$(document).keydown(function(a) {
+			dbp(a)
+
+			return ("aaa");
+		});
+		//		dbp(maxSize);
+
+	});
+
+	function appendHtmlData(target, template, data) {
+		var t = $("#" + target);
+		var html = getHtmlTemplate(template);
+		dbp(html);
+		html = replaceValInJson(data, html);
+		t.append(html);
+	}
+
+	function getHtmlTemplate(templateId) {
+		return $("[htmltemplate='" + templateId + "']").html();
+	}
+
+	function replaceValInJson(json, html) {
+		dbp(json);
+		for (key in json) {
+			eval("var re = /@\\{" + key + "\\}/g");
+			html = html.replace(re, json[key]);
+		}
+		return html;
+	}
+	function replaceVal(k, v, string) {
+		eval("var re = /@\\{" + k + "\\}/g");
+		dbp(string);
+		dbp(re);
+		string = string.replace(re, v);
+		dbp(string);
+		return string;
+	}
+	function getRmtVal(json, inElementId) {
+		var inElement;
+		if (inElementId != null) {
+			inElement = $("#" + inElementId);
+			if (inElement.length < 1) {
+				alert("warn:getRmtVal()@inElementId!=null but inElement !exist");
+			}
+		}
+		for (key in json) {
+			dbp(json[key]);
+
+			var e;
+			if (inElement != null && inElement.length > 0) {
+				e = inElement.find("[rval='" + key + "']");
+			} else {
+				e = $("[rval='" + key + "']");
+			}
+
+			dbp(e);
+			if (e.length > 0) {
+				e.removeAttr("rval");
+				e.val(json[key]);
+				e.html(json[key]);
+			}
+		}
+	}
+	
+
+	
+	function getddd() {
+
+		$.ajax({
+			url : "${contextPath}/test/get_data_html",
+			cache : false,
+			type : "post",
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				
+				location.href="${contextPath}/test/get_data_html";
+			},
+			error : function() {
+
+				alert('error');
+			}
+			
+		})
+			
+			
+	}
+	
+	
+	function aaa(){
+		return null;
+	}
+	
+	function getHtml1(){
+		var html = ajaxGetHtml("${contextPath}/test/get_data_html","aa=11&bb=2&cc=1&cc=3");
+		if(html!=null){
+			
+			$("#data_div").append(html);
+		}
+	}
+	
+	var b = getHtml1;
+//	b();
+
+
+//-->
+</script>
+<div id="asdasd">
+	<div id="data_div"></div>
+	
+	<input type="button" onclick="getddd()" value="get data">
+	<input type="button" onclick="getHtml1()" value="get html">
+</div>

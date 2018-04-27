@@ -1,0 +1,30 @@
+html,body{ padding:0px; margin:0px;} img{ border:none;}
+.content{
+height:800px;
+width:100%; 
+text-align:center;
+margin:-10px 0px 0px 0px;
+padding:0px;
+float:left;
+background: url(../image/bg_cont.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='image/bg_cont.jpg', sizingMethod='scale');
+-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='image/bg_cont.jpg', sizingMethod='scale')";
+}
+.qx{
+color:#000;
+font-size:28px;
+margin:600px auto 0px;
+}
+.black a{
+text-decoration:none; 
+width:400px;
+margin:0 auto;
+hide-focus: expression(this.hideFocus=true);
+outline: none;
+cursor:pointer;
+}
+.black{margin-top:30px;}

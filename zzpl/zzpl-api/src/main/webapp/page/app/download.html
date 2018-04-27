@@ -1,0 +1,49 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <title></title>
+</head>
+<style>
+    *{padding:0px;margin:0px;}
+    body,html{width:100%;height:100%;}
+    .wx{background: #7f7f7f;height: 100%;}
+    .normal{background:url("${contextPath}/resources/img/normal.jpg") no-repeat bottom center #02B2ED;background-size:cover;height: 100%;padding-top: 10px;}
+    .normal img{margin: auto;display: block;}
+    .normal img.btn{margin-top:25px;}
+
+</style>
+<#if APPName??>
+<body onload="download()">
+<#else>
+<body>
+</#if>
+<div class="normal" id="fi" style="display: none;">
+    <img src="${contextPath}/resources/img/btn.png" alt="" width="240px" />
+	<#if APPName??>
+    	<a href="${contextPath}/upload/${APPName}" ><img src="${contextPath}/resources/img/btn2.png" alt="" width="165px" class="btn" id="download" /></a>
+    <#else>
+    	<a href="#"><img src="${contextPath}/resources/img/btn2.png" alt="" width="165px" class="btn" /></a>
+    </#if>
+</div>
+<div class="wx" id="se"  style="display: none;">
+    <img src="${contextPath}/resources/img/wx.png" alt="" width="100%" />
+</div>
+<script >
+	    var userAgentInfo = navigator.userAgent;
+	    if(userAgentInfo.indexOf("MicroMessenger")!=-1){
+	        document.getElementById("se").style.display="block";
+	
+	    }else{
+	        document.getElementById("fi").style.display="block";
+	    }
+    function download(){
+    	if(userAgentInfo.indexOf("MicroMessenger")==-1){
+    		document.getElementById("download").click();
+	    }
+    }
+</script>
+</body>
+</html>

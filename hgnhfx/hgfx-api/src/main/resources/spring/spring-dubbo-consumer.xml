@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="demo-consumer" owner="programmer" organization="dubbox"/>
+
+ 	 <dubbo:registry address="${dubbo_registry}"/> 
+	
+	<dubbo:reference id="adminConfigSPIService" interface="hg.demo.member.common.spi.AdminConfigSPI" timeout="60000" retries="0" />
+	
+	<dubbo:reference id="departmentService" interface="hg.demo.member.common.spi.DepartmentSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="authPermSPIService" interface="hg.demo.member.common.spi.AuthPermSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="staffService" interface="hg.demo.member.common.spi.StaffSPI" timeout="60000" retries="0"/>
+	<dubbo:reference id="securityService" interface="hg.demo.member.common.spi.SecuritySPI" timeout="60000" retries="0"/>
+
+	<dubbo:reference id="authRoleSPIService" interface="hg.demo.member.common.spi.AuthRoleSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="parameterSPIService" interface="hg.demo.member.common.spi.ParameterSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="distributorService" interface="hg.fx.spi.DistributorSPI" timeout="60000" retries="0" />
+
+	<dubbo:reference id="importHistoryService" interface="hg.fx.spi.ImportHistorySPI" timeout="60000" retries="0" />
+	<dubbo:reference id="channelService" interface="hg.fx.spi.ChannelSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="distributorUserService" interface="hg.fx.spi.DistributorUserSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="operationLogService" interface="hg.fx.spi.OperationLogSPI" timeout="60000" retries="0" />
+	
+	<dubbo:reference id="mileOrderService" interface="hg.fx.spi.MileOrderSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="czFileSPI" interface="hg.fx.spi.CzFileSPI" timeout="60000" retries="0"/>
+	<dubbo:reference id="smsCodeRecordService" interface="hg.fx.spi.SmsCodeRecordSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="abnormalRuleService" interface="hg.fx.spi.AbnormalRuleSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="productSPIService" interface="hg.fx.spi.ProductSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="reserveRecordSPIService" interface="hg.fx.spi.ReserveRecordSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="arrearsRecordSPIService" interface="hg.fx.spi.ArrearsRecordSPI" timeout="60000" retries="0" />
+	<dubbo:reference id="productInUseService" interface="hg.fx.spi.ProductInUseSPI" timeout="60000" retries="0" />
+	
+</beans>

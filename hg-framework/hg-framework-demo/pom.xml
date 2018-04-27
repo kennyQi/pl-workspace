@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>hg.framework</groupId>
+		<artifactId>hg-framework-parent</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>hg-framework-demo</artifactId>
+	<name>${project.artifactId}</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>hg-framework-demo-service</module>
+		<module>hg-framework-demo-web</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<!-- 加入maven deploy插件，当在deploy时，忽略这些module-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,12 @@
+body .page-header.navbar{height:96px;min-height:96px;}
+body .page-header.navbar .page-logo .logo-default{margin-top:0px;}
+body.page-header-fixed .page-container{margin-top:96px;}
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle > .username{margin-top:27px;}
+.page-header.navbar .top-menu .navbar-nav > li.dropdown > .dropdown-toggle:last-child{margin-top:25px;}
+.page-sidebar-menu li aspan{color:#333;}
+.page-sidebar-menu li a:hover span{color:#fff;}
+
+li.current{background:#00b1eb;}
+li.current span{color:#fff;}
+body .page-header.navbar .page-logo{padding-left:0px;}
+body .page-sidebar{position:fixed;}

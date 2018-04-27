@@ -1,0 +1,98 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/resources/js/kindeditor/themes/default/default.css" />
+<script type="text/javascript"
+	src="${contextPath}/resources/js/kindeditor/kindeditor.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/resources/js/kindeditor/lang/zh_CN.js"></script>
+<div class="pageContent">
+	<form method="post" id="myForm" enctype="multipart/form-data"
+		action="${contextPath}/contribution/check"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, navTabAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value='${contribution.id!""}' name="contributionId" />
+			<input type="hidden" value='' id="check_status" name="checkStatus" />
+			<div class="unit">
+				<label>标题：</label>${(contribution.baseInfo.title)!""}
+			</div>
+			<div class="unit">
+				<label>作者：</label> ${(contribution.baseInfo.author)!""}
+			</div>
+			<div class="unit">
+				<label>联系方式：</label> ${(contribution.mobile)!""}
+			</div>
+			<div class="unit">
+				<label>投稿正文：</label>
+				<textarea name="content"  style="width:500px;height:225px;" readonly="readonly">${(contribution.baseInfo.content)!""}</textarea>
+			</div>
+			<div class="unit">
+				<label>审核记录：</label>
+								
+				<table class="list" >
+					<thead>
+						<tr>
+							<th width="80px">序号</th>
+							<th width="80px">审核结果</th>
+							<th width="200px">审核说明</th>
+							<th width="180px">审核时间</th>
+						</tr>
+					</thead>
+					<tbody>
+					<#list contributionRecords as c>
+						<tr >
+							<td>${(c_index)!""}</td>
+							<td><#if c.checkStatus>审核通过 <#else>审核不通过</#if></td>
+							<td>${c.remark!""}</td>
+							<td>${(c.createDate)!""}</td>
+						</tr>
+						</#list>
+					</tbody>
+				</table>
+					
+			</div>
+
+			<div class="unit">
+				<label>审核说明：</label>
+				<textarea name="remark"  style="width:500px;height:225px;"></textarea>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="button" onclick="approve()">审核通过</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="button" onclick="disapprove()">审核不通过</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+		function approve(){
+			$("#check_status").val("true");
+			$("#myForm").submit();
+		}
+		function disapprove(){
+			$("#check_status").val("false");
+			$("#myForm").submit();
+		}
+	</script>
+</div>
+

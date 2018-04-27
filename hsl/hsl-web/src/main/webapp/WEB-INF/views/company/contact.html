@@ -1,0 +1,53 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "编辑联系人">
+<link href="${(contextPath)!}/resources/css/company/company_cardCoupons.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+
+<div class="g_cont disb ov">
+	<@frame.nav "修改密码" 5></@frame.nav>
+<div class="m_cont ov fl">
+
+	<div class="m_cont ov fl">
+		<!--右侧呈现页-->
+		<h1 class="rih1 yahei normal">编辑联系人</h1>
+		<div class="navsbox"></div>
+		<form id="form1" action="${contextPath}/company/person/sava-contact" method="post" onsubmit="return valiEditPersonForm(this)">
+			<div class="changeBox color6 h3 yahei" >
+				<ul>
+					<li>
+						<span>姓名:</span>
+						<input class="input_p" type="text" name="name" />
+					</li>
+					<li>
+						<span>联系电话:</span>
+						<input class="input_p" type="text" name="mobile"/>
+					</li>
+					<li>
+						<span>证件类型:</span>
+						身份证
+					</li>
+					<li>
+						<span>证件号码:</span>
+						<input class="input_p" type="text" name="idNo" />
+					</li>
+				</ul>
+				<a class="yes" href="javascript:"  onclick="javascript:$('#form1').submit();" id="s_submit">确 定</a>
+			</div>
+		</form>
+	</div>
+	<!--右侧呈现页-->
+
+
+</div>
+
+</div>
+</div>
+
+</@frame.main>
+<@frame.end "default"> </@frame.end>
+</@frame.main>

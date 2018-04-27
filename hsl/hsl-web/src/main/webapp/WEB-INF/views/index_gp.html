@@ -1,0 +1,35 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>票量旅游-注册有礼</title>
+<link href="${contextPath}/resources/css/gb.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+#gb_wrap{ width:1000%; background:url(${contextPath}/resources/images/gb_bg.jpg) no-repeat top center;}
+body{ background:#ff3e55}
+.banner{ background:url(${contextPath}/resources/images/banner_bg.jpg) no-repeat top center; width:100%}
+.w960{ width:960px; margin:0 auto}
+#gb_wrap{ background:url(${contextPath}/resources/images/gb_bg.jpg) no-repeat top center;width:100%; overflow:hidden; height:1267px}
+.p_info p img{ display:block; overflow:hidden}
+</style>
+</head>
+
+<body>
+  <div class="gp_warp">
+    <div class="banner">
+      <div class="bnaner_hd w960"><img src="${contextPath}/resources/images/banner_01.jpg"></div>
+    </div>
+   </div>
+<div id="gb_wrap">
+   <div class="p_info w960">
+   <p><img src="${contextPath}/resources/images/im_01.jpg"><img src="${contextPath}/resources/images/im_02.jpg"><img src="${contextPath}/resources/images/im_03.jpg"><img src="${contextPath}/resources/images/im_04.jpg" usemap="#Map">
+     <map name="Map">
+       <area shape="rect" coords="363,137,599,193" href="${contextPath}/user/register" target="_blank">
+     </map>
+     <img src="${contextPath}/resources/images/im_05.jpg" >
+    </p>
+   </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/warehousing_order/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'}" />
+		<div class="searchBar dwz_query_box2">
+			<table class="searchContent" border="0">
+				<tr>
+					<td>制单时间：</td>
+					<td colspan="3" class="datespan"><input name="" id="createDateBegin" type="text" class="date" readonly="readonly" onclick="setday(this);" datefmt="yyyy-MM-dd HH:mm" value="<#if (pagination.condition.createDateBegin)??>${(pagination.condition.createDateBegin)?date}</#if>" /> 至 <input name="" id="createDateEnd" type="text" class="date" readonly="readonly" onclick="setday(this);" datefmt="yyyy-MM-dd HH:mm"
+							value="<#if (pagination.condition.createDateEnd)??>${(pagination.condition.createDateEnd)?date}</#if>" />
+					</td>
+					<td>采购单状态：</td>
+					<td><select>
+							<option value="">全部</option>
+					</select>
+					</td>
+					<td>项目名称：</td>
+					<td><select>
+							<option value="">全部</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>销售单号：</td>
+					<td><input type="text">
+					</td>
+					<td>物流单号：</td>
+					<td><input type="text"></td>
+					<td>采购单号：</td>
+					<td><input type="text">
+					</td>
+					<td>供应商：</td>
+					<td><select>
+							<option value="">全部</option>
+					</select>
+					</td>
+				</tr>
+				<tr>
+					<td>是否生成入库单：</td>
+					<td><select>
+							<option value="">是</option>
+							<option value="">是</option>
+					</select></td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" onclick="querySubmit()">查询</button>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="buttonActive">
+							<a onclick="exportExcel()">
+								<span>重置</span>
+							</a>
+						</div></li>
+						
+						
+					<li>
+						<div class="buttonActive">
+							<a onclick="exportExcel()">
+								<span>导出</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a title="确实要删除选中项?" target="selectedTodo" rel="idList" href="${contextPath}/warehousing_order/remove" class="delete">
+					<span>删除</span>
+				</a>
+			</li>
+			<li><a class="add" href="${contextPath}/warehousing_order/to_add" target="dialog"  width="1000" height="620" mask="true" >
+					<span>新增</span>
+				</a></li>
+		</ul>
+	</div>
+
+
+
+	<div layoutH="130">
+		<table class="table" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th><input type="checkbox" group="idList" class="checkboxCtrl" /></th>
+					<th>采购单号</th>
+					<th>入库仓库</th>
+					<th>供应商</th>
+					<th>数量</th>
+					<th>含税总金额</th>
+					<th>不含税总金额</th>
+					<th>项目名称</th>
+					<th>制单人</th>
+					<th>制单时间</th>
+					<th>采购单状态</th>
+					<th>是否生成入库单</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+			<#list pagination.list as t>
+					
+				<tr>
+					<td><input type="checkbox" name="idList" value="${(t.id)}"/>${(t.id)}</td>
+					
+					<td>${(t.purchaseOrderCode)!}</td>
+					<td>${(t.warehouseName)!}</td>
+					<td>${(t.supplierName)!}</td>
+					<td>${(t.totalQuantity)!}</td>
+					<td>${(t.totalPriceTax)!}</td>
+					<td>${(t.totalPriceNoTax)!}</td>
+					<td>${(t.projectName)!}</td>
+					<td>${(t.orderFounder)!}</td>
+					<td>${(t.createDate)!}</td>
+					<td>${(t.status)!}</td>
+					<td></td>
+					<td class="operate_box">
+					<a  href="${contextPath}/warehousing_order/to_view?id=${(t.id)}" target="dialog"  width="1000" height="620" mask="true" >查看</a>
+					<a  href="${contextPath}/warehousing_order/to_check?id=${(t.id)}" target="dialog"  width="1000" height="620" mask="true" >审核</a>
+					<a  href="${contextPath}/warehousing_order/edit?id=${(t.id)}" target="dialog"  width="1000" height="620" mask="true" >编辑</a>
+					<a>删除</a>
+					</td>
+				</tr>
+</#list>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+</div>

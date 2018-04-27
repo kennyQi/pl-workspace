@@ -1,0 +1,182 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+		
+			<div class="unit">
+				<h2>订单信息 </h2>
+			</div>
+			<div class="unit">
+				<hr/>
+			</div>
+			<div class="unit">
+				<table class="table" width="100%">
+					<thead>
+						<th width="10%">订单状态</th>
+						<th width="10%">支付状态</th>
+						<th width="10%">退费金额</th>
+						<th width="10%">PNR</th>
+						<th width="30%">订单号</th>
+						<th width="20%">支付金额</th>
+						<th width="30%">商家信息</th>
+		 			</thead>
+					<tbody>
+						<td>${(statusMap[(jpOrder.status)?c])!}</td>
+						<td>${(payMap[(jpOrder.payStatus)?c])!}</td>
+						<td>${(jpOrder.returnedPrice?c)!}<#if (jpOrder.returnedPrice)??>元</#if></td>
+						<td>${(jpOrder.pnr)!}</td>
+						<td>${(jpOrder.dealerOrderCode)!}</td>
+						<td>${(jpOrder.payAmount?string('0.00'))!}</td>
+						<td>${(jpOrder.agencyName)!}</td>
+					</tbody>
+				</table>
+			</div>
+			<br/>
+			<div  class="unit">
+				<table class="table" width="100%">
+					<tbody>
+						<td>废票时间&nbsp;&nbsp;${(jpOrder.wastWorkTime?string('yyyy-MM-dd HH:mm'))!}</td>
+						<td>退票时间&nbsp;&nbsp;${(jpOrder.refundWorkTime)!}</td>
+						<td>工作时间&nbsp;&nbsp;${(jpOrder.workTime)!}</td>
+					</tbody>
+				</table>
+			</div>
+			<br/>
+			<div class="unit">
+				<span>政策备注：</span>
+			</div>
+			<div class="unit">
+				<textarea disabled="disabled" style="width:50%;height:75px">${(jpOrder.flightDTO.policyRemark)!}</textarea>
+			</div>
+			<br/>
+			<br/>
+			<br/>
+			<div class="unit">
+				<h2>机票信息</h2>
+			</div>
+			<div class="unit">
+				<hr/>
+			</div>
+			<div class="unit">
+				<table class="table" width="100%">
+					<thead>
+						<th width="20%">行程</th>
+						<th width="30%">起飞</th>
+						<th width="30%">抵达</th>
+						<th width="10%">航班信息</th>
+						<th width="10%">舱位</th>
+		 			</thead>
+		 			
+					<tbody>
+						<td>
+							${(jpOrder.flightDTO.startCity)!}&nbsp;&nbsp;-&nbsp;&nbsp;${(jpOrder.flightDTO.endCity)!}
+							<br/>
+							${(jpOrder.flightDTO.startPort)!}&nbsp;&nbsp;-&nbsp;&nbsp;${(jpOrder.flightDTO.endPort)!}
+						</td>
+						<td>
+							${(jpOrder.flightDTO.startDate)!}&nbsp;&nbsp;${(jpOrder.flightDTO.startTime)!}
+							<br/>
+							${(jpOrder.flightDTO.startPortName)!}
+						</td>
+						<td>
+							${(jpOrder.flightDTO.endDate)!}&nbsp;&nbsp;${(jpOrder.flightDTO.endTime)!}
+							<br/>
+							${(jpOrder.flightDTO.endPortName)!}
+						</td>
+						<td>
+							${(jpOrder.flightDTO.airCompName)!}
+							<br/>
+							${(jpOrder.flightDTO.flightNo)!}
+						</td>
+						<td>${(jpOrder.classCode)!}</td>
+					</tbody>
+				</table>
+				
+				<br/>
+				<table class="table" width="100%">
+					<thead>
+						<th width="20%">旅客姓名</th>
+						<th width="20%">类型</th>
+						<th width="20%">证件号码</th>
+						<th width="20%">票号</th>
+						<th width="20%">退废记录</th>
+		 			</thead>
+		 			
+					<tbody>
+					
+						<#if (jpOrder.passangers)??>
+							<#list jpOrder.passangers as p>
+							<tr>
+								<td>${(p.name)!}</td>
+								<td>${(p.cardType)!}</td>
+								<td>${(p.cardNo)!}</td>
+								<td>${(p.ticket.ticketNo)!}</td>
+								<td>${(statusMap[(p.orderRefundLog.status)?c])!'无'}</td>
+							</tr>
+							</#list>
+						</#if>
+					</tbody>
+				</table>
+				<br/>
+				<div>
+					<table class="table" width="100%">
+						<tbody>
+							<td>单张合计：${(jpOrder.payAmount?string('0.00'))!}</td>
+							<td>票面价：<#if (jpOrder.ticketPrice)??>${((jpOrder.ticketPrice)?string('0.00'))!}</#if></td>
+							<td>税款：<#if (jpOrder.singleTaxAmount)??>${((jpOrder.singleTaxAmount)?string('0.00'))!}</#if></td>
+							<td>卡券额：${(couponPrice?string('0.00'))!}元</td>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<br/>
+			<br/>
+			<br/>
+		<!-- 	<div class="unit">
+				<h2>操作日志</h2>
+			</div>
+			<div class="unit">
+				<hr/>
+			</div>
+			<div class="unit">
+				<table class="table" width="100%">
+					<thead>
+						<th width="25%">时间</th>
+						<th width="25%">操作</th>
+						<th width="25%">操作人</th>
+						<th width="25%">操作信息</th>
+		 			</thead>
+		 			
+					<tbody>
+						<#if (jpOrder.orderOperationLogs)??>
+							<#list jpOrder.orderOperationLogs as pl>
+								<tr>
+									<td>${(pl.createDate?string('yyyy-mm-dd HH:mm:ss'))!}</td>
+									<td>${(statusMap[(pl.status)?c])!}</td>
+									<td>${(pl.name)!}</td>
+									<td>${(pl.context)!}</td>
+								</tr>
+							</#list>
+						</#if>
+					</tbody>
+				</table>
+			</div> -->
+		</div>
+		<div class="formBar">
+				<ul>
+					<#if (jpOrder.status)??>
+						<#if jpOrder.status == TICKET_SUCC>
+							<#if IS_WAST_WORK_TIME??>
+								<li><a class="button" target="dialog" href="${contextPath}/jp/order/toRefundDiscard?id=${(jpOrder.id)!}" max="true"><span>申请废票</span></a></li>
+							<#else>
+								<li><a class="button" target="dialog" href="${contextPath}/jp/order/toRefundBack?id=${(jpOrder.id)!}" max="true"><span>申请退票</span></a></li>
+							</#if>
+						<#elseif (jpOrder.payStatus == NOPAY&&jpOrder.status==PAYWAIT)>
+							<li><a class="button" target="dialog" href="${contextPath}/jp/order/toCancel?id=${(jpOrder.id)!}" max="true"><span>取消订单</span></a></li>
+						</#if>
+					</#if>
+					<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+				</ul>
+		</div>
+	</form>
+</div>

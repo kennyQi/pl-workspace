@@ -1,0 +1,97 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent" >
+	<form method="post" id="form1"  enctype="multipart/form-data" action="${contextPath}/service/batchAdjustJF"    >
+		<div class="pageFormContent" layoutH=58>
+		<div class="unit">
+			  <ul style="float:right;margin-right:100px;">
+			    <li><a href="${contextPath}/service/download"><img src="/jf-admin/resources/image/001.jpg"></a></li>
+			    <li><a href="${contextPath}/service/download" style="color: blue;">下载批量调整模板.csv</a></li>
+			  </ul>
+		</div>
+		<div class="unit">
+			  <label>调整批次号:</label>
+			   <input type="text"  id="batchNo" name="batchNo"  id="jfsequence_num"  size="30" class="required"  />
+			</div>
+		   <div class="unit">
+			  <label>调&nbsp;整&nbsp;账&nbsp;户&nbsp;:</label>
+			  <select class="required" class="combox" name="accountType" id="accountType">
+					<option value="">请选择</option>
+					<#list ruleTypeList as t>
+					  <option value="${t.me.code}">${t.me.name}</option>
+					</#list>
+				</select>
+			</div>
+			 <div class="unit">
+				<label>上&nbsp;传&nbsp;文&nbsp;件&nbsp;:</label>
+				<input type="file" id="file"  onchange="setfileName(this);" name="file"  size="30"   class="required"/>
+				<!-- <input type="Text"  id="file_name"   name="name"  size="30"   readonly="readonly"/>  -->
+			</div>
+			 <div class="unit">
+				<label>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;:</label>
+				  <textarea id="description" name="description"  cols="61"></textarea>
+			</div>
+	      <#if resultMSG ??>
+			<div  class="unit" >
+			 <label style="color:red;">提示信息: </label>
+			  <label style="color:red;">您上传的文件中存在不符合规则的信息!</label>
+			</div>
+			<div  class="unit" >
+			  <label style="color:red;"> 不符合规格的列有： </label>
+			  <label style="color:red;">${resultMSG}请您检查文件重新上传!</label>
+			</div>
+		</#if>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="check();">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" id="closetemplate" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript"> 
+function check()
+{
+ 
+	flag=true;
+	f=$("#form1");
+	if(flag)
+	{
+	  var $form = $(f);
+	  console.info("flag");
+	  flag= $form.valid();
+	  console.info(flag);
+	 //flag = validateCallback(f, dialogAjaxDone);
+	}
+	if(flag){
+		console.info($("#description").val());
+		$.ajaxFileUpload({
+			url : $form.attr('action')+"?"+$form.serialize(),
+	       	secureuri : false,
+	       	fileElementId :"file",
+	       	dataType : 'json',
+	       /* 	data: {
+	       		batchNo:$("#batchNo").val(),
+	       		accountType:$("#accountType").val(),
+	       		description:$("#description").val()
+	       	}, */
+	      	success: dialogAjaxDone,
+	        error: function (data, status, e) {
+	        	alertMsg.info("上传失败");
+	        }
+	    });	
+	}
+}
+function setfileName(obj)
+{
+  var fname = obj.value;
+  var f=/^.+(\.csv)$/i;
+  if(f.test(fname)){
+     //$("#file_name").val(fname);
+  }else{
+     alert("上传的文件名格式不对!");
+     $(obj).val("");
+  }
+}
+</script>

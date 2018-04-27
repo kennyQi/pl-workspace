@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/category/create" class="pageForm required-validate nowrap"  onsubmit="return validateCallback(this, dialogAjaxDone)" >
+
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>上级分类：</dt>
+					<dd>
+						<input name="parentCategoryId" value="${(category.id)!}" type="hidden" /> <input  name="categoryName" type="text" readonly value="${(category.name)!}" /> <a class="btnLook"
+							href="${contextPath}/category/lookup?inputName='parentCategoryId'&findUsing=1" lookupGroup rel="categoryLookup" width="367" height="600">查找带回</a>
+
+					</dd>
+				</dl>
+				<dl>
+					<dt>分类名称：</dt>
+					<dd>
+						<input name="name" type="text" class="required"  minlength="1" maxlength="10" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>分类编号：</dt>
+					<dd>
+						<div class="unit">
+							<input name="" type="text" readonly />
+						</div>
+					</dd>
+				</dl>
+				<dl>
+					<dt>启用</dt>
+					<dd>
+						<input type="radio" name="using" id="using" value="true" checked="checked" /> 启用 <input type="radio" name="using" id="using" value="false" /> 禁用
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div></li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

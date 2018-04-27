@@ -1,0 +1,306 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageHeader rechargeCode" style="text-align:left;">
+	<form method="post" rel="pagerForm"  id="pagerForm"  action="${contextPath}/balance/toRechargeCode" class="pageForm required-validate"  onsubmit="return navTabSearch(this);">
+		<input type="hidden" name="validToken" id="validToken" value="" />
+		<input type="hidden" name="pageNum" value="<#if pagination??>${pagination.pageNo?c}</#if>" />
+		<input type="hidden" name="numPerPage" value="<#if pagination??>${pagination.pageSize?c}</#if>" />
+		<input type="hidden" name="isQuery" id="isQuery" value="${(isQuery)!}"/>
+		<input type="hidden" name="recordId" id="recordId" value="${(recordId)!}" />
+		
+		<div class="pageFormContent" >
+			<div class="unit">
+				<label>*选择公司：</label>
+				<select name="companyId" class="required" id="companyId">
+					<option value="">选择公司</option>
+					<#list companyList as company>
+						<option value="${(company.id)!}">${(company.companyName)!}</option>
+					</#list>
+				</select>
+			</div>
+			
+			<div class="unit">
+				<label>*对接人：</label>
+				<input type="text" name="dockingPerson" id="dockingPerson" size="30"   class="required textInput" maxlength="40 " value=""/>
+			</div>
+			
+			<div class="unit">
+				<label>*对接人电话：</label>
+				<input type="text" name="dockingPersonTel" size="30"  id="dockingPersonTel" class="required phone textInput" maxlength="20 " value=""/>
+			</div>
+			<div class="unit">
+				<label>*充值码金额：</label>
+				<input type="text" name="payCodeMoney" id="payCodeMoney" class="required number" min="1" maxlength="40" value=""/>
+				
+			</div>
+			
+			<div class="unit">
+				<label>*发放数量：</label>
+				<input type="text" name="payCodeNum" id="payCodeNum" class="required digits" min="1" maxlength="40" value=""/>
+			</div>
+			<div class="unit">
+				<label>*发码人：</label>
+				<input type="text" name="granterName" id="granterName" size="30"   class="required textInput" maxlength="40 " value=""/>
+			</div>
+			
+			<div class="unit">
+				<label>*发码人电话：</label>
+				<input type="text" name="granterTel" id="granterTel" size="30"   class="required phone textInput" maxlength="20 " value=""/>
+				<i class="mobileyzms"><a class="button"   id="tel_btn" ><span style="font-style:normal;" id="sendC">发送验证码</span></a></i>
+			</div>
+			<div class="unit">
+				<label>*验证码：</label>
+				<input type="text" name="validCode" id="validCode" size="30"   class="required" maxlength="20 " value=""/>
+			</div>
+			<div class="unit"></div>
+			<div class="unit">
+				<button type="button" class="geneCodes">生成兑换码</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			
+		</div>
+		
+	</form>
+	
+	
+ </div>
+<div  id="pageContent" class="pageContent">	
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			<input type="hidden" id="exist" value="${(exist)!}"/>
+			<button type="button" id="export" class="rechargeCodeExport">导出</button>
+			</li>
+		</ul>
+	</div>
+	<table  class="table" width="100%" layoutH="410">
+		<thead>
+			<tr>
+ 				<th width="20%">序号</th>
+				<th width="80%">兑换码</th>
+			</tr>
+		</thead>
+		<tbody id="payCodeList">
+			<#if pagination??>
+				<#list pagination.list!null as payCode>
+					<tr>
+						<td>${payCode_index+1}</td>
+						<td>${(payCode.code)!}</td>
+					</tr>
+				</#list>
+			</#if>
+		</tbody>
+	</table>
+	
+	<#include "/public/pagination/pagination.html">
+
+	
+</div>
+<script type="text/javascript">
+var pattern = /^1[3|4|5|8][0-9]\d{8}$/;
+/**
+ *发送验证码
+ */
+var ajaxCanSend=true;
+$("#sendC").on("click",function(){
+	
+	var that=$(this);
+	var mobile=$("#granterTel").val();
+	
+	if(mobile==""){
+		alertMsg.error("请输入发码人手机号");
+		return false;
+	}else if(!pattern.test(mobile)){
+		alertMsg.error("发码人手机号错误");
+		return false;
+	}else{ 
+		 if(!ajaxCanSend)return;
+		 ajaxCanSend=false;
+		$.ajax({
+			type: "POST",
+			url: "${contextPath}/balance/sendCode?scene=5&mobile="+mobile,
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			dataType:"json",
+			success: function(result) {
+				if(result.status=="success"){
+					$("#validToken").val(result.validToken);
+					var wait = 60;
+					function time(){
+						if (wait == 0) {
+							
+							that.closest(".pageHeader").find("#tel_btn span").html("发送验证码");
+							wait = 60;
+							ajaxCanSend=true;
+						} else {
+							
+							that.closest(".pageHeader").find("#tel_btn span").html("重新发送("+wait+")");
+							wait--;
+							setTimeout(function() {
+								time();
+							},
+							1000)
+						}
+					}
+					time();
+				}else{
+					ajaxCanSend=true;
+					alertMsg.error("验证码发送失败");
+	
+				}
+			},error:function(result) {
+				ajaxCanSend=true;
+				alertMsg.error("验证码发送失败");
+				
+			}
+		});
+	  }
+});
+
+
+
+//查看兑换码之前，校验手机验证码是否正确
+$(".geneCodes").on("click",function(){
+	 var validToken=$("#validToken").val();
+	 var validCode=$("#validCode").val();
+	 
+	if(checkCodeForm()==true){
+		 $.ajax({
+			type: "POST",
+			url: "${contextPath}/balance/checkValidCode?validToken="+validToken+"&validCode="+validCode,
+			contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			dataType:"json",
+			success: function(result) {
+				if(result.status=="success"){
+					var companyId=$("#companyId").val();
+					//if(checkCodeForm()==true){
+						//手机码验证成功后 生成兑换码
+						 $.ajax({
+							type: "POST",
+							url: "${contextPath}/balance/rechargeCode?companyId="+companyId,
+							contentType: "application/x-www-form-urlencoded; charset=utf-8",
+							dataType:"json",
+							data:$(".rechargeCode #pagerForm").serialize(),
+							success: function(result) {
+								if(result.status=="success"){
+									
+									//提交表单
+									$("#recordId").val(result.recordId);
+									$("#isQuery").val("yes");
+									
+									$(".rechargeCode #pagerForm").submit();
+								}else if(result.status == "error"){
+									alertMsg.error("兑换码生成失败");
+								}
+							},error:function(result) {
+								alertMsg.error("操作失败");
+								
+							}
+					});
+						
+					//}
+					
+					
+				}else if(result.status == "error"){
+					alertMsg.error("手机验证码错误");
+				}
+			},error:function(result) {
+				alertMsg.error("操作失败");
+				
+			}
+		});
+	 }
+});
+
+//表单输入域校验
+ function checkCodeForm(){
+	 if($("#companyId").val()==""){
+		 alertMsg.error("请选择公司");
+		 return false;
+	 }
+	 //对接人
+	 if($("#dockingPerson").val()==""){
+		 alertMsg.error("对接人不能为空");
+		 return false;
+	 }
+	 //对接人电话
+	 if($("#dockingPersonTel").val()==""){
+		 alertMsg.error("对接人电话不能为空");
+		 return false;
+	 }
+	
+	 
+	if (!pattern.test($("#dockingPersonTel").val())) {
+			alertMsg.error("对接人电话格式有误");
+			return false;
+	}
+	//充值码金额
+	 if($("#payCodeMoney").val()==""){
+		 alertMsg.error("充值码金额不能为空");
+		 return false;
+	 }
+	
+	//充值码金额不能超过10000
+	 var payCodeMoney=parseFloat($("#payCodeMoney").val());
+	 if(payCodeMoney>10000){
+		 alertMsg.error("充值码金额不能超过10000");
+		 return false;
+	 }
+	 //充值码金额小数点不能超过两位
+	 var code=$("#payCodeMoney").val().split(".")[1];
+	 if(code!=undefined&&code.length>2){
+		 alertMsg.error("充值码金额小数点不多于两位");
+		 return false;
+		 
+	 }
+		 
+	//发放数量
+	 if($("#payCodeNum").val()==""){
+		 alertMsg.error("发放数量不能为空");
+		 return false;
+	 }
+	//发放数量不能超过10000张
+	var payCodeNum=parseInt($("#payCodeNum").val());
+	if(payCodeNum>1000){
+		 alertMsg.error("发放数量不能超过1000张");
+		 return false;
+	}
+	
+	 //发码人
+	 if($("#granterName").val()==""){
+		 alertMsg.error("发码人不能为空");
+		 return false;
+	 }
+	 
+	 //发码人手机号
+	 
+	 if($("#granterTel").val()==""){
+		 alertMsg.error("发码人电话不能为空");
+		 return false;
+	 }
+	if (!pattern.test($("#granterTel").val())) {
+ 		alertMsg.error("发码人电话格式有误");
+ 		return false;
+	}
+	//手机验证码
+	var validCode=$("#validCode").val();
+	if(validCode==""){
+		alertMsg.error("请输入手机验证码");
+ 		return false;
+	} 
+	 return true;
+		
+ }
+//导出兑换码
+$(".rechargeCodeExport").on("click",function(){
+	var recordId=$("#recordId").val();
+
+	if($(".pageContent #exist").val()=="yes"){
+		location.href = "${contextPath}/balance/export?payCodeRecordId="+recordId;
+	}else{
+		alertMsg.error("没有兑换码导出");
+	}
+	
+});
+
+
+</script>

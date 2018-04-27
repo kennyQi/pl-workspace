@@ -1,0 +1,136 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'lineIndexAdS' />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+	<form  id="pagerForm" class="listQueryForm" rel="pagerForm" onsubmit="return navTabSearch(this);" 
+	action="${contextPath}/lineIndexAd/zbyList" 
+	method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo?c)!5}"/>
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!1}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					
+					<td style="text-align: left">
+						栏目内容：
+					</td>
+					<td>
+					<select name="contentId" >
+						<option value="">全部</option>
+						<#list programaContentDTOList as programaContentDTO>
+							<option value="${programaContentDTO.id}" 
+							<#if programaContentDTO.id==lineIndexAdQO.contentId>
+									selected="selected"
+							</#if>
+							>${programaContentDTO.content}</option>
+						</#list>
+					</select>
+					</td>
+					<td style="text-align: left">
+						广告状态：
+					</td>
+					<td>
+					<select name="show" >
+						<option value="1">显示</option>
+						
+						<option value="2"
+						 <#if lineIndexAdQO.show==2> selected="selected" </#if>
+						 >隐藏</option>
+						
+					</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<a href="${contextPath}/lineIndexAd/addLineIndexAd?positionId=${positionId}&lineType=${lineType}&programaId=${programaId}"
+								 target="dialog" title="添加线路首页广告" mask="true" width="750" height="700"><span>添加</span></a>
+											
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+			<div class="panelBar">
+				<ul class="toolBar">
+				  <li>
+				  	  <a title="确实要删除这些吗？" target="selectedTodo" postType="string" rel="ids"  href="${contextPath}/lineIndexAd/deleteMore" class="delete"><span>删除</span></a>
+				  </li>
+				</ul>
+			</div>
+	<table class="table" width="100%" layoutH="136" >
+		<thead>
+			<tr>
+				<th width="100">
+					<input type="checkbox" group="ids"  class="checkboxCtrl">
+				</th>
+				<th width="100">广告标题</th>
+				<th width="100">创建时间</th>
+				<th width="100">排序</th>
+ 				<th width="100">线路价格</th>
+ 				<th width="100">线路类型</th>
+				<th width="100">所属栏目</th>
+				<th width="100">广告缩略图</th>
+				<th width="200">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#if pagination.list??>
+			<#list pagination.list as lineIndexAd>
+				<tr>
+					<td><input name="ids" value="${(lineIndexAd.id)!}" type="checkbox"></td>
+					<td>${(lineIndexAd.adBaseInfo.title)!}</td>
+					<td>${(lineIndexAd.adBaseInfo.createTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
+					<td>${(lineIndexAd.adBaseInfo.priority)!}</td>
+					<td>${(lineIndexAd.price)?c}</td>
+					<td>
+					<#if lineIndexAd.lineType==1>
+						国内游
+					<#elseif lineIndexAd.lineType==2>
+						乡村游
+					</#if>
+					</td>
+					<td>
+					<#if lineIndexAd.programaContent??>
+						${lineIndexAd.programaContent.content}
+					</#if>
+					</td>
+					<td><image width="100" height="100" src="${(lineIndexAd.adBaseInfo.imagePath)!}"/></td>
+					<td>
+						
+						<#if lineIndexAdQO.show==2>
+							<a target="ajaxTodo"  href="${contextPath}/lineIndexAd/displayOrHide?adId=${(lineIndexAd.adId)!}&show=true" style="color:blue">显示</a>&nbsp;&nbsp;&nbsp;
+						<#else>
+						<a target="ajaxTodo"  href="${contextPath}/lineIndexAd/displayOrHide?adId=${(lineIndexAd.adId)!}&show=false" style="color:blue">隐藏</a>&nbsp;&nbsp;&nbsp;
+						</#if>
+						<a target="ajaxTodo" title="确定要删除吗？" href="${contextPath}/lineIndexAd/delete?id=${(lineIndexAd.id)!}" style="color:blue">删除</a>&nbsp;&nbsp;&nbsp;
+						<a target="dialog" href="${contextPath}/lineIndexAd/modifyLineIndexAd?id=${(lineIndexAd.id)!}&positionId=${positionId}&lineType=${lineType}&programaId=${programaId}"
+						 style="color:blue" width="750" height="700" mask="true">修改</a>
+					</td>
+					
+				</tr>
+			</#list>
+			</#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

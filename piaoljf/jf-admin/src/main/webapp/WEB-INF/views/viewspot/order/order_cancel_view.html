@@ -1,0 +1,17 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form method="post" enctype="multipart/form-data"
+			action=""
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, dialogAjaxDone)">
+			<div class="pageFormContent" layoutH="58">
+				<div class="unit">
+					<span>取消原因</span><span>${mpOrderDTO.cancelRemark}</span>
+				</div>
+			</div>
+			<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">确定</button></div></div></li>
+			</ul>
+		</div>
+		</form>

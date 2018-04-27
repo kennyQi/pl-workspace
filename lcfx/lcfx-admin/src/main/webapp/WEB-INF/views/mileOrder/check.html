@@ -1,0 +1,194 @@
+<link href="${contextPath}/resources/css/mileOrderView.css" rel="stylesheet" type="text/css" media="screen" />
+	<div class="wrapper" style="border: none; position: initial;">
+		<div class="c-title">
+<#if mileOrder.status == 200>
+待审核
+<#elseif mileOrder.status == 201>
+审核通过
+<#elseif mileOrder.status == 202>
+审核不通过
+<#elseif mileOrder.status == 203>
+提交南航
+<#elseif mileOrder.status == 204>
+南航成功
+<#elseif mileOrder.status == 205>
+南航失败
+</#if>
+		</div>
+		
+<#if mileOrder.status == 200>
+<ul class="progress">
+			<li style="border-bottom:1px solid #cdcdcd;">
+				<div class="yuan yuan1"></div>
+				<div class="cpl-con cpl-con1">
+					<div class="a">导入订单</div>
+					<div class="b">${(mileOrder.importDate)!}</div>
+					<div class="s-pic"></div>
+					<div class="s-pic-text" style="font-size:18px;">审核中...</div>
+				</div>
+			</li>
+			<li style="border-bottom:1px solid #cdcdcd;">
+				<div class="yuan yuan2"><img src="${contextPath}/resources/image/mileOrderView/huis.png"></div>
+				<div class="yuan yuan3"><img src="${contextPath}/resources/image/mileOrderView/huis.png"></div>
+				<div class="cpl-con cpl-con2" style="left: -3%;">
+					<div class="a">审核订单</div>
+					<div class="b"></div>
+			  </div>
+				<div class="cpl-con cpl-con3" style="right: -8%;">
+					<div class="a">提交到南航处理</div>
+					<div class="b"></div>
+			  </div>
+			</li>
+			<li style="border-bottom:1px solid #cdcdcd;">
+				<div class="yuan yuan4"><img src="${contextPath}/resources/image/mileOrderView/huis.png"></div>
+				<div class="cpl-con cpl-con4">
+					<div class="a">南航处理完成，转账成功</div>
+					<div class="b"></div>
+			  </div>
+			</li>
+		</ul>
+<#elseif mileOrder.status == 201>
+		<ul class="progress">
+			<li>
+				<div class="yuan yuan1"></div>
+				<div class="cpl-con cpl-con1">
+					<div class="a">导入订单</div>
+					<div class="b">${(mileOrder.importDate)!}</div>
+					<div class="s-pic" style="background:url(${contextPath}/resources/image/mileOrderView/zzcl_bott.png) no-repeat;"></div>
+					<div class="s-pic-text">处理中...</div>
+				</div>
+			</li>
+			<li style="border-color:#ccc;">
+				<div class="yuan yuan2"></div>
+				<div class="yuan yuan3" style="background:url(${contextPath}/resources/image/mileOrderView/unfinish_03.png) no-repeat;"></div>
+				<div class="cpl-con cpl-con2">
+					<div class="a">审核订单</div>
+					<div class="b">${(mileOrder.checkDate)!}</div>
+				</div>
+				<div class="cpl-con cpl-con3">
+					<div class="a">提交到南航处理</div>
+					<div class="b"></div>
+				</div>
+			</li>
+			<li style="border-color:#ccc;">
+				<div class="yuan yuan4" style="background:url(${contextPath}/resources/image/mileOrderView/unfinish_03.png) no-repeat;"></div>
+				<div class="cpl-con cpl-con4">
+					<div class="a">南航处理完成，转账成功<br>（预计5个工作日到账，节假日顺延）</div>
+					<div class="b"></div>
+				</div>
+			</li>
+		</ul><#elseif mileOrder.status == 202>
+审核不通过
+<#elseif mileOrder.status == 203>
+<ul class="progress">
+			<li>
+				<div class="yuan yuan1"></div>
+				<div class="cpl-con cpl-con1">
+					<div class="a">导入订单</div>
+					<div class="b">${(mileOrder.importDate)!}</div>
+					<div class="s-pic" style="background:url(${contextPath}/resources/image/mileOrderView/zzcl_bott.png) no-repeat;"></div>
+					<div class="s-pic-text">处理中...</div>
+				</div>
+			</li>
+			<li style="border-color:#009933;">
+				<div class="yuan yuan2"></div>
+				<div class="yuan yuan3"    ></div>
+				<div class="cpl-con cpl-con2">
+					<div class="a">审核订单</div>
+					<div class="b">${(mileOrder.checkDate)!}</div>
+				</div>
+				<div class="cpl-con cpl-con3">
+					<div class="a" >提交到南航处理</div>
+					<div class="b">${(mileOrder.toCsairDate)!}</div>
+				</div>
+			</li>
+			<li style="border-color:#ccc;">
+				<div class="yuan yuan4" style="background:url(${contextPath}/resources/image/mileOrderView/unfinish_03.png) no-repeat;"></div>
+				<div class="cpl-con cpl-con4">
+					<div class="a">南航处理完成，转账成功<br>（预计5个工作日到账，节假日顺延）</div>
+					<div class="b"></div>
+				</div>
+			</li>
+		</ul><#elseif mileOrder.status == 204>
+<ul class="progress">
+			<li>
+				<div class="yuan yuan1"></div>
+				<div class="cpl-con cpl-con1">
+					<div class="a">导入订单</div>
+					<div class="b">${(mileOrder.importDate)!}</div>
+					<div class="s-pic" style="background:url(${contextPath}/resources/image/mileOrderView/sc.png) no-repeat;"></div>
+					<div class="s-pic-text">处理成功</div>
+				</div>
+			</li>
+			<li style="border-color:#009933;">
+				<div class="yuan yuan2"></div>
+				<div class="yuan yuan3"  ></div>
+				<div class="cpl-con cpl-con2">
+					<div class="a">审核订单</div>
+					<div class="b">${(mileOrder.checkDate)!}</div>
+				</div>
+				<div class="cpl-con cpl-con3">
+					<div class="a">提交到南航处理</div>
+					<div class="b">${(mileOrder.toCsairDate)!}</div>
+				</div>
+			</li>
+			<li style="border-color:#009933;">
+				<div class="yuan yuan4"   ></div>
+				<div class="cpl-con cpl-con4">
+					<div class="a">南航处理完成，转账成功<br>${(mileOrder.csairReturnDate)!}</div>
+					<div class="b"></div>
+				</div>
+			</li>
+		</ul><#elseif mileOrder.status == 205>
+<ul class="progress">
+			<li>
+				<div class="yuan yuan1"></div>
+				<div class="cpl-con cpl-con1">
+					<div class="a">导入订单</div>
+					<div class="b">${(mileOrder.importDate)!}</div>
+					<div class="s-pic" style="background:url(${contextPath}/resources/image/mileOrderView/fal.png) no-repeat;"></div>
+					<div class="s-pic-text">处理失败</div>
+				</div>
+			</li>
+			<li style="border-color:#009933;">
+				<div class="yuan yuan2"></div>
+				<div class="yuan yuan3"  ></div>
+				<div class="cpl-con cpl-con2">
+					<div class="a">审核订单</div>
+					<div class="b">${(mileOrder.checkDate)!}</div>
+				</div>
+				<div class="cpl-con cpl-con3">
+					<div class="a">提交到南航处理</div>
+					<div class="b">${(mileOrder.toCsairDate)!}</div>
+				</div>
+			</li>
+			<li style="border-color:#009933;">
+				<div class="yuan yuan4"   ></div>
+				<div class="cpl-con cpl-con4">
+					<div class="a">${(mileOrder.csairInfo)!}<br>${(mileOrder.csairReturnDate)!}</div>
+					<div class="b"></div>
+				</div>
+			</li>
+		</ul></#if>
+		
+		
+		<div class="tab-title"><span>对方信息：</span>${(mileOrder.csairName)!}（南航：${(mileOrder.csairCard)!}）</div>
+		<table class="tab">
+			<tr class="tab1"><td>分销商</td><td style="  width: 20%;">分销商订单号</td><td>支付时间</td><td  style="  width: 22%;">系统流水号</td><td style="  width: 10%;">南航里程</td></tr>
+			<tr class="tab2"><td>${(mileOrder.distributor.name)!}</td><td style="word-break: break-word;">${(mileOrder.orderCode)!}</td><td>${(mileOrder.payDate)!}</td><td>${(mileOrder.flowCode)!}</td><td>${(mileOrder.count)!}</td></tr>
+		</table>
+		
+		
+		
+		
+		<#if mileOrder.status == 201 || mileOrder.status == 203 || mileOrder.status == 204 || mileOrder.status == 205> 
+		<div class="c-title" style="margin-top: 20px;">审核记录</div>
+		<div class="sh">
+			<div class="sh-1"><span class="a">审核人：</span><span class="b">${(mileOrder.checkPerson.displayName)!}</span></div>
+			<div class="sh-1"><span class="a">审核时间：</span><span class="b">${(mileOrder.checkDate)!}</span></div>
+			<div class="sh-1"><span class="a">审核意见：</span><span class="b">同意</span></div>
+		</div>
+		</#if>
+		
+    </div>
+

@@ -1,0 +1,62 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader" style="display: none;">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/rebate/checklist" method="post">
+	
+	<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+    <input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+</div>
+
+<div class="pageContent">
+<#include "/public/pagination/pagination.html">
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="9%">用户名</th>
+            <th width="18%">商户公司</th>
+            <th width="8%">商品名称</th>
+            <th width="4%">返利比例修改</th>
+            <th width="6%">申请提交人</th>
+           	<th width="6%">申请时间</th>
+            <th width="4%">状态</th>
+            <th width="19%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list pagination.list as rebate>
+     		<tr>
+	     		<td >${rebate.loginName}</td>
+	            <td >${rebate.distributorName}</td>
+	            <td >${rebate.productName}</td>
+	            <td > 
+					<a title="查看" lookupgroup="orgLookup" mask="false" href="${contextPath}/rebate/info?id=${rebate.id}"  style="color: #0066CC;">查看</a>
+				</td>
+	            <td >${rebate.applyUserName}</td>
+	            <td >${rebate.applyDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+	            <td >
+	            	<#if rebate.checkStatus ==0>
+	            		待审核
+	            	</#if>
+	            	<#if rebate.checkStatus ==1> 
+	            		已通过 
+	            	</#if>
+	            	<#if rebate.checkStatus ==2> 
+	            		已拒绝
+	            	</#if>
+	            </td>
+	            <td>
+	            	<#if rebate.checkStatus ==0>
+	            		<a style="color: #0066CC;" href="${contextPath}/rebate/checkpass?id=${rebate.id}" target="ajaxTodo" title="确定通过？">通过</a>&nbsp;&nbsp;&nbsp;
+	            		<a style="color: #0066CC;" href="${contextPath}/rebate/checkrefuse?id=${rebate.id}" target="ajaxTodo" title="确定拒绝？">拒绝</a>
+	            	<#else>
+	            		-
+	            	</#if>
+	            </td>
+     		</tr>
+     	</#list>
+        </tbody>
+    </table>
+
+</div>
+
+

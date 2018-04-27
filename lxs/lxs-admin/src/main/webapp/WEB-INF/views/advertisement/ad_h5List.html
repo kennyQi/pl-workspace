@@ -1,0 +1,142 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" 
+		action="${contextPath}/advertisement/h5List" method="post">
+		
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo?c)!5}"/>
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!1}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<input type="hidden" id="qo_positionId" value=${hslAdQO.positionId!}/>
+				<tr>
+					<td style="text-align: left">
+						广告名称：
+					</td>
+					<td><input type="text" name="title" value="${hslAdQO.title!}" ></td>
+					<td style="text-align: left">
+						广告位置：
+					</td>
+					<td>
+						<select  name="positionId" id="h5PositionId" onchange="changePosition(this)">
+							<#list positions as position>
+								<option value="${position.id!}" 
+								<#if hslAdQO.positionId == "${position.id}">selected="selected"</#if>
+								>${position.baseInfo.name}</option>
+							</#list>
+						</select>
+					</td>
+					<td style="text-align: left">
+						广告状态：
+					</td>
+					<td style="text-align: left">
+						<select name="isShow">
+							
+							<#if hslAdQO.isShow ??>
+					    		<#if (hslAdQO.isShow)?string('true','false') == "true">
+					            	<option value="">全部</option>
+				            		<option value="true" selected="selected">显示</option>
+					                <option value="false">隐藏</option>
+				                 <#elseif (hslAdQO.isShow)?string('true','false') == "false">
+					            	<option value="">全部</option>
+					            	<option value="true">显示</option>
+					                <option value="false" selected="selected">隐藏</option>
+				    	       </#if>
+				    	       <#else>
+					    	        <option value="" selected="selected">全部</option>
+					    	        <option value="true">显示</option>
+					                <option value="false">隐藏</option>
+					            </#if>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<a href="" target="navTab"
+				rel="addH5AD" id="addH5Ad"><span>发布广告</span></a>					
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li class=""><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" href="${contextPath}/advertisement/deleteH5Ads" class="delete"><span>批量删除</span>
+			</a>
+			</li>
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="136" >
+		<thead>
+			<tr>
+				<th width="100">
+					<input type="checkbox" group="ids"  class="checkboxCtrl">
+				</th>
+ 				<th width="100">广告名称</th>
+ 				<th width="100">广告位置</th>
+				<th width ="100">广告状态</th>
+				<th width ="100">优先级</th>
+				<th width ="300">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as ad>
+			<tr>
+				<td width="100">
+					<input type="checkbox" name="ids" value="${ad.id}">
+				</td>
+ 				<td width="100">${(ad.adBaseInfo.title)!}</td>
+ 				<td width="100">${(ad.position.baseInfo.name)!}</td>
+ 				<#if ad.adStatus.isShow>
+ 					<td width = "100">显示</td>
+ 				<#else>
+ 					<td width = "100">隐藏</td>
+ 				</#if>
+				<td width = "100">${(ad.adBaseInfo.priority)?c}</td>
+				<td width = "300">
+					<#if ad.adStatus.isShow>
+ 						<span><a href="${contextPath}/advertisement/modifyH5AdStatus?id=${(ad.id)}&isShow=false" target="ajaxTodo" style="color:blue;">隐藏</a></span>
+					<#else>
+ 						<span><a href="${contextPath}/advertisement/modifyH5AdStatus?id=${(ad.id)}&isShow=true" target="ajaxTodo" style="color:blue;">显示</a></span>
+ 					</#if>
+					&nbsp;&nbsp;
+					<span><a href="${contextPath}/advertisement/editH5Ad?id=${(ad.id)}" lookupgroup="orgLookup" mask="true" style="color:blue;">修改</a></span>
+					&nbsp;&nbsp;
+					<span><a href="${contextPath}/advertisement/deleteH5Ad?adId=${(ad.id)}&positionId=${ad.position.id}&imageId=${ad.adBaseInfo.imageId}" target="ajaxTodo" title="确定要删除该广告吗？删除后将不可恢复" style="color:blue;">删除</a></span></td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+jQuery(function(){
+	var obj = document.getElementById("h5PositionId");
+	$("#addH5Ad").attr("href","${contextPath}/advertisement/addH5AdView?positionId="+obj.value);
+});
+
+function changePosition(obj){
+	$("#addH5Ad").attr("href","${contextPath}/advertisement/addH5AdView?positionId="+obj.value);
+}
+</script>

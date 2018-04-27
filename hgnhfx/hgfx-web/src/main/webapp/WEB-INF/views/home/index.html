@@ -1,0 +1,17 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> 
+<@frame.head "首页">
+</@frame.head>
+<@frame.main "default" "default">
+<script>
+$(function(){
+	window.location.href="${contextPath}/orderManage/orderList";
+});
+</script>
+
+<div id="container">
+			
+		</div>
+</@frame.main>
+<@frame.end "">
+</@frame.end>

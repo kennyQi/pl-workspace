@@ -1,0 +1,135 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hz="http://www.hazelcast.com/schema/spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                http://www.hazelcast.com/schema/spring 
+                http://www.hazelcast.com/schema/spring/hazelcast-spring-3.1.xsd ">
+
+	<hz:hazelcast id="hz">
+		<hz:config>
+			<hz:group name="${group_name}" password="${group_password}" />
+			<hz:network port="${network_port}" port-auto-increment="true">
+				<hz:join>
+					<hz:multicast enabled="${multicast_enabled}"
+						multicast-group="${multicast_group}" multicast-port="${multicast_port}" />
+					<hz:tcp-ip enabled="${tcp_ip_enabled}">
+						<hz:members>${tcp_ip_members}</hz:members>
+					</hz:tcp-ip>
+				</hz:join>
+			</hz:network>
+
+			<hz:map name="cache_balance_trade_create" time-to-live-seconds="1800" 
+				max-idle-seconds="1800" eviction-policy="NONE">
+				<hz:indexes>
+					<hz:index attribute="tradeCode" />
+				</hz:indexes>
+			</hz:map>
+			 
+			<!-- 用于存放银行基础数据信息 -->
+			<hz:map name="cache_bank" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="0" eviction-policy="LRU" max-size="300000"
+				eviction-percentage="25" />
+	
+			<hz:map name="cache_business_account" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="0" eviction-policy="LRU" max-size="10000"
+				eviction-percentage="10" />
+				 
+			<hz:map name="cache_fund_trade_recharge" backup-count="1" time-to-live-seconds="86400"
+				max-idle-seconds="7200" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_fund_trade_withdrawal" backup-count="1" time-to-live-seconds="86400"
+				max-idle-seconds="7200" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_fund_trade_person_recharge" backup-count="1" time-to-live-seconds="86400"
+				max-idle-seconds="7200" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_fund_trade_person_withdrawal" backup-count="1" time-to-live-seconds="86400"
+				max-idle-seconds="7200" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_fund_trade_person_transfer" backup-count="1" time-to-live-seconds="86400"
+				max-idle-seconds="7200" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_person_fund_trades" backup-count="1" time-to-live-seconds="86400"
+				max-idle-seconds="7200" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_person_fund_trades_status" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="7200" eviction-policy="LFU" max-size="100000"
+				eviction-percentage="10" />
+	
+			<!-- kvConfig对象缓存 -->
+			<hz:map name="kv_config" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="0" eviction-policy="LRU" max-size="1000"
+				eviction-percentage="10" />
+			<!-- key_data缓存 -->
+			<hz:map name="key_data" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="0" eviction-policy="LRU" max-size="1000"
+				eviction-percentage="10" />
+				 
+			<!-- 说明，这个key值对应的是手机端唯一表示TID,和对应的查询类名class,和用户ID组成的唯一定位 -->
+			<hz:map name="cache_mobile_id" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="0" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<!-- 用于存放手机tokenMap,2小时自动清空 -->
+			<hz:map name="cache_mobile_token" backup-count="1" time-to-live-seconds="7200"
+				max-idle-seconds="0" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_payoff" backup-count="1" time-to-live-seconds="86400"
+				max-idle-seconds="7200" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_person" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="86400" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<!-- 缓存注册用户的信息 -->
+			<hz:map name="cache_person_register" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="86400" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<!-- 缓存EXCEL表格的用户信息 -->
+			<hz:map name="cache_prefix_person_excel_info" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="86400" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_business_account_position_info" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="86400" eviction-policy="LRU" max-size="10000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_person_position_info" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="86400" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="10" />
+				
+			<hz:map name="cache_sms_send_time" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="3600" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="25" />
+				
+			<hz:map name="cache_user" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="86400" eviction-policy="LRU" max-size="100000"
+				eviction-percentage="25" />
+				
+			<!-- 
+				默认配置 - 属性说明
+				name					:	MAP的所在HZ的KEY名
+				backup-count			:	备份的节点数量
+				time-to-live-seconds	:	MAP中ENTRY的存活时间
+				max-idle-seconds		:	MAP中ENTRY的最大闲置时间
+				eviction-policy			:	回收策略(NONE:无/LRU:最近被使用的不回收/LFU:频繁使用的不回收)
+				max-size				:	MAP中ENTRY的最大数量，超过了按回收策略回收
+				eviction-percentage		:	一次回收的百分比
+			 -->
+			<hz:map name="default" backup-count="1" time-to-live-seconds="0"
+				max-idle-seconds="0" eviction-policy="LRU" max-size="50000"
+				eviction-percentage="50" />
+			
+		</hz:config>
+	</hz:hazelcast>
+	
+</beans>

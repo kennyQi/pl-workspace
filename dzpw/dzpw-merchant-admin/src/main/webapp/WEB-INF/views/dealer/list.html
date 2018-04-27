@@ -1,0 +1,140 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	function checkCashStr(){
+		
+		/* if($("#beginCashStr").val()!="" && $("#endCashStr").val()!=""){
+			if($("#beginTimeStr").val()>$("#endTimeStr").val()){
+				alert("添加开始时间不能大于添加结束时间!");
+				return false
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}*/
+	} 
+	
+	function initText(){
+		$("#name").attr("value",'');
+		$("#beginCashStr").attr("value","");
+		$("#endCashStr").attr("value","");
+		$("#status").attr("value","");
+	}
+
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="checkCashStr();return navTabSearch(this);" action="${contextPath}/dealer/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>经销商名称：</td>
+					<td><input type="text" id="name" name="name" value="${name}" size="25"/></td>
+					
+					<td>经销商代码：</td>
+					<td><input type="text" id="key" name="key" value="${key}" size="25"></td>
+					<#--
+					<td>
+						押金范围：
+						<input type="text" id="pledgeAmountMin" name="pledgeAmountMin" value="${(pledgeAmountMin)!''}"  size="25"/>&nbsp;至&nbsp;
+						<input type="text" id="pledgeAmountMax" name="pledgeAmountMax" value="${(pledgeAmountMax)!''}"  size="25" />
+					</td>
+					 -->
+					<td>启用状态：</td>
+					<td>
+						<select id="status" name="status">
+							<option value="">全部</option>
+							<option value="1" <#if status==1 >selected="selected"</#if> > 启用 </option>
+							<option value="0" <#if status==0 >selected="selected"</#if> > 禁用 </option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>联系人：</td>
+					<td><input type="text" id="linkMan" name="linkMan" value="${linkMan}" size="25" /></td>
+					
+					<td>联系电话：</td>
+					<td><input type="text" id="telephone" name="telephone" value="${telephone}" size="25"/></td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkCashStr()">查询</button></div></div>
+					</li>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="button" onclick="formReSet(this)">重置</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+<!--	<div class="panelBar"><ul class="toolBar">
+		<li><a class="add" href="${contextPath}/dealer/toAdd" target="dialog" rel="addDealer" mask="true" width="850" height="800"><span>添加经销商</span></a></li>
+		<li>&nbsp;</li> 
+		<li><a title="确认启用这些吗？" class="edit" href="${pathUrl}/change1?navTabid=${navTabid}" target="selectedTodo" rel="scenicSpotId"><span>批量启用</span></a></li>
+		<li>&nbsp;</li>
+		<li><a title="确认禁用这些吗？" class="icon" href="${pathUrl}/change2?navTabid=${navTabid}" target="selectedTodo" rel="scenicSpotId"><span>批量禁用</span></a></li>
+		<li>&nbsp;</li>
+		<li><a title="确认删除这些吗？" class="delete" href="${pathUrl}/delete?navTabid=${navTabid}" target="selectedTodo" rel="scenicSpotId"><span>批量删除</span></a></li>
+ 	</ul></div>
+ 	-->
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="155" id="table_caiwu">
+		<thead>
+			<tr>
+			    <th width="200px;">经销商代码</th>
+				<th width="200px;">经销商名称</th>
+				<th width="150px;">联系人</th>
+				<th width="150px;">联系电话</th>
+				<th width="200px;">联系邮箱</th>
+				<#--
+				<th width="150px;">押金（￥）</th>
+				-->
+				<th width="100px;">启用状态</th>
+				<th width="180px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as dealer>
+			<tr>
+				<td>${(dealer.clientInfo.key)!'-'}</td>
+				<td>${(dealer.baseInfo.name)!'-'}</td>
+				<td>${(dealer.baseInfo.linkMan)!'-'}</td>
+				<td>${(dealer.baseInfo.telephone)!'-'}</td>
+				<td>${(dealer.baseInfo.email)!'-'}</td>
+				<td>
+					<#assign setting = dealer.setting />
+					<#if !setting.useable>
+						已禁用
+					</#if>
+					<#if setting.useable>
+						已启用
+					</#if>
+				</td>
+				<td>
+				    <a target="dialog" href="${contextPath}/dealer/info?id=${dealer.id}" height="650" width="600" style="color: blue">查看详情</a>
+				    	&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- 	    <a target="dialog" href="${contextPath}/dealer/toUpdate?id=${dealer.id}" height="750" width="750" style="color: blue">修改</a>
+				    &nbsp;&nbsp;&nbsp;&nbsp;
+			 -->		<#if !setting.useable>
+						<a target="ajaxTodo" href="${contextPath}/dealer/usableBatch?ids=${dealer.id}" style="color: blue">启用</a>
+					</#if>
+					<#if setting.useable>
+						<a target="ajaxTodo" href="${contextPath}/dealer/disableBatch?ids=${dealer.id}" style="color: blue">禁用</a>
+					</#if>
+					
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+</div>
+

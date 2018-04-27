@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页-登录页面</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/flogin.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <!--content-->
+  <div class="content">
+   <div class="h20"></div>
+   <div class="pic"><img src="../temp/login.png"></div>
+   <div class="loginbar">
+     <div>
+       <div class="tab">
+              <ul class="tabbtn" id="normaltab">
+                 <li  id="lio" class="cur"><a href="#">个人用户</a></li>
+                 <li id="lit"><a href="#">企业用户</a></li>
+              </ul>
+            </div>
+       <div class="h40"></div>
+      <div  class="tabcon tabccn" id="normalcon">  
+        <div class="sublist" id="J_table_p">
+        <form action="" method="post" id="regForm">
+		<div class="dly">
+		<input id="username" type="text" value="" placeholder="输入您的用户名" />
+	    </div>
+        <div class="h20"></div>
+        <div class="dly">
+		<input id="pass" type="text" value="" placeholder="输入您的密码" />
+	    </div>
+        <div class="h20"></div>
+        <div class="dly">
+			<input id="yz" type="text" value="" placeholder="输入验证码" />
+			<img src="#">
+            <span><a href="#">换一张</a></span>
+	    </div>
+        <div class="dly" id="dly">
+        <div><a href="#">登录</a></div>
+        </div>
+        <div class="dly" id="forg">
+        <span><a href="#">新用户注册</a></span><span><a href="#">忘记密码</a></span>
+        </div>
+		</form>
+    <div class="mask">
+    <div class="mask_bg"></div>
+    <div class="mask_txt">敬请期待</div>
+    </div>
+    </div>
+        <div class="sublist" style="display:none;">
+        <form action="http://www.baid.com" method="post" id="regForm" class="C_regform">
+		<div class="dly">
+		<input id="C_username" type="text" value=""  placeholder="输入您的用户名"/><span class="c_eorr"></span>
+	    </div>
+        <div class="h20"></div>
+        <div class="dly">
+		<input id="C_pass" type="text" value=""  placeholder="输入您的密码"/><span class="c_eorr"></span>
+	    </div>
+        <div class="h20"></div>
+        <div class="dly">
+			<input id="C_yz" class="w150" type="text" value="" placeholder="输入验证码" />
+			<img src="#">
+            <span><a href="#">换一张</a></span>
+	    </div>
+        <div class="dly" id="dly">
+        <div><a href="#" id="C_submit">登录</a></div>
+        </div>
+        <div class="dly" id="forg">
+        <span><a href="#">新用户注册</a></span><span><a href="#">忘记密码</a></span>
+        </div>
+		</form>
+ </div>
+</div>
+</div>
+</div>
+</div>
+  <!--end content-->
+   <!--footer-->
+  <div id="footer" class="mt20">
+    <div class="fooerBD">
+      <div class="L about">
+        <dl>
+          <dt><a href="#">关于我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">加盟合作</a></dt>
+          <dd><a href="#">友情链接</a><a href="#">网站联盟</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">联系我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+        </dl>
+      </div>
+      <div class="L w260">
+        <div class="hot_phone">
+          <p><i class="tel"></i>24小时客服热线：4008-117-117</p>
+          <p><i class="tel"></i>境外游客紧急联络电话：4008-117-117</p>
+          <p><i class="QQ"></i>在线客服：QQ1</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../js/gb.js"></script>
+<script type="text/javascript">
+     //tab切换
+   $("#normaltab li").bind("click", function () {
+           var index = $(this).index(index);
+           var divs = $("#normalcon > div");
+					  $(this).parent().children("li").attr("class", "no");//将所有选项置为未选中
+            $(this).attr("class", "cur");     //设置当前选中项为选中样式
+            divs.hide(); 
+            divs.eq(index).show();
+  });
+</script>
+<script type="text/javascript">
+$("#C_username").blur(function(){
+	var reg=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){3,19}/
+	var username = $(this).val();
+	if(reg.test(username)){
+		$(this).next("span").html("ok");
+		}
+	else{
+		 $(this).next("span").html("输入您的用户名")
+		}
+	});
+
+	$("#C_pass").blur(function(){
+ 	var reg =/[a-zA-Z0-9]{5,19}/
+	var pwd = $(this).val();
+ 	 if(reg.test(pwd)){
+		 $(this).next("span").html("ok")
+ 		 }
+ 		else{
+			$(this).next("span").html("请输入6-20字符")
+ 		}	 
+ 	});
+	
+$("#C_submit").click(function(){
+ 
+ 	var reg1=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){3,19}/
+	var cusername = $("#C_username").val();
+	if(reg1.test(cusername)){
+		$("#C_username").next("span").html("ok");
+		}
+	else{
+		 $("#C_username").next("span").html("输入您的用户名")
+		 return false
+		}
+	
+	var reg2=/[a-zA-Z0-9]{5,19}/
+	var cusername = $("#C_pass").val();
+	if(reg2.test(cusername)){
+		$("#C_pass").next("span").html("ok");
+		}
+	else{
+		 $("#C_pass").next("span").html("输入您的密码")
+		 return false
+		}
+ 	 $(".C_regform").submit();	
+	})	
+	
+	
+</script>
+
+
+</body>
+</html>

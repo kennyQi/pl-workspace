@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hg.demo.member.service.dao.mybatis.RebateReportMyBatisDao">
+
+     <resultMap id="milerOrderMap" type="hg.fx.domain.MileOrder">
+     	 <result property="id" column="ID" />
+     	 <result property="count" column="COUNT" />
+     	 <result property="distributor.id" column="MER_ID" />
+     	 <result property="product.id" column="PROD_ID" />
+     	 <result property="importDate" column="CREATE_DATE" />
+     	 <result property="status" column="STATUS" />
+     </resultMap>
+     
+     <select id="queryOrderForRebateReport" parameterType="java.util.Map" resultMap="milerOrderMap">
+     	select 
+     		o.ID, O.COUNT, O.MER_ID, O.PROD_ID, o.CREATE_DATE, o.STATUS 
+     	from 
+     		hgfx_order o
+     	where 
+     		o.MER_ID = #{merId} and o.PROD_ID = #{prodId} and o.STATUS = #{status} and 
+     		<![CDATA[ o.CREATE_DATE >= #{startDate} and o.CREATE_DATE <= #{endDate} ]]>
+     </select>
+     
+</mapper>

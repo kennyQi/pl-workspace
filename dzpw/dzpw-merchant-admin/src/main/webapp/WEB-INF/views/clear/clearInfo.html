@@ -1,0 +1,11 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div>
+<script>
+	function openWin(){
+		$("#acc_reg").click();
+	}
+</script>
+	<a href="${contextPath}/account/addAccount" target="dialog" title="账户注册" width="500" height="520" id="acc_reg" style="display:none;"></a>
+	<button onclick="openWin()" class="button" style="margin:20px;">账户注册</button>
+</div>

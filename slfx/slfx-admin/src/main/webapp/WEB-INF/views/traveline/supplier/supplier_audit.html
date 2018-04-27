@@ -1,0 +1,34 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/linesupplier/audit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="${lineSupplier.id}"/>
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>供应商名称：</label>
+				${lineSupplier.name}
+			</div>
+			<div class="unit">
+				<label>审核：</label>
+				<#if STATUS_MAP??>
+                      <#list STATUS_MAP?keys as itemKey>
+                          <input type="radio" name="status"  value="${itemKey}" required="required"/> ${STATUS_MAP[itemKey]}
+                      </#list>
+                </#if>
+			</div>
+			<div class="unit">
+				<label>理由：</label>
+				<textarea name="remark" cols="60" rows="2"></textarea>
+			</div>
+			
+			
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="return checkAdd();">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>

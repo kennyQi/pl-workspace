@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- meta信息，可维护 -->
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="css/base.2.0.css" />
+    <!-- 页面样式表 -->
+    <!--<link rel="Stylesheet" href="css/main.css">-->
+    <link rel="Stylesheet" href="css/fbase.css">
+    <link rel="stylesheet" href="css/orderView.1.0.css" />
+    <link rel="stylesheet" href="css/airplane_list.css" />
+
+    <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+    <script src="js/fly.js"></script>
+</head>
+<body>
+ <!-- 页头  -->
+<header class="header">
+  <h1>订单支付</h1>
+  <div class="left-head"> <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn"> <span class="inset_shadow"> <span class="head-return"></span> </span> </a> </div>
+</header>
+<!-- 页头 -->
+
+    <!-- 页面内容块 -->
+    <div id="order-box">
+    <h2>订单信息</h2>
+    <h5>订单编号：201423132123</h5>
+        <div class="o-item o-detail" style="margin:0 auto;padding: 0;width:100%;">
+             <ul class="flight-listsim mt0" data-flg="">
+                <li class="flight-fltinfo1">
+                    <div class="fr">
+                        中型机
+                        <br>738</div> <i class="icon11"></i> <strong>2014-07-26</strong>
+                    &nbsp;海南航空&nbsp; <strong>HU7603</strong>&nbsp;
+                </li>
+                <li class="flight-fltinfo2">
+                    <div class="pos">
+                        <p>
+                            <strong>23:10</strong>
+                            北京首都T1航站楼
+                        </p>
+                        <p>
+                            <strong>01:15</strong>
+                            上海虹桥T2航站楼
+                        </p>
+                    </div>
+                    <div class="canwei" style="margin:14px 0 0 40px;">
+                        <p>经济舱</p>
+                    </div>
+                </li>
+            </ul>
+            <h3>登机者信息</h3>
+            <div id="fPeople">
+                <ul class="i-item per-list">
+                    
+                    <li class="fn-clear">
+                        <p>登机者1:<span style="padding-left:6px;">33**************11</span> </p>
+                     </li>
+                 </ul>
+            </div>
+            <div class="i-item per-list">
+                <dl class="fn-clear">
+                    <dt>联系方式:</dt>
+                    <dd>13412340987</dd>
+                </dl>
+            </div>
+            <div class="i-item per-list">
+                <p class="fn-clear" style="line-height:30px;text-align:left;">
+                   共计:
+                    <span class="price"><em>￥</em>500</span> 
+                </p>
+            </div>
+         
+
+        </div>
+        <div class="bankbox">
+            <p class="paytitle">请选择支付方式</p>
+            <div class="banklist">
+                <ul>
+                    <li class="w-item order-info order-info01"> 
+                        <a class="link" href="javascript:;" data-type="0" cardtype="0">支付宝账户支付<i></i></a>
+                        <input type="radio" name="pay" checked="ture" style="display:none">
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="youhuijuan">
+            <p class="youhuijuantitle">选择优惠方式</p>
+            <div class="youhuijuanlist">
+                <ul>
+                   <li><div class="yhj_name"><i></i>优惠卷</div><div class="yhj_dic">3张可用</div> <div class="yhj_state"><a href="选择卡卷.html">未选择</a></div></li> 
+                </ul>
+                </div>
+            </div>
+         </div>
+      
+      <div id="gopay">
+      <div class="order_price">实付总额：<strong> ¥680</strong></div>      
+      <a class="config" href="javascript:;">确认支付</a>
+      </div>    
+         <div id="loading" style="display: none;">
+            <div class="ui-loader">
+                <div class="load_container">
+                    <span class="loading"></span>
+                    <span class="loadFont">
+                        正在进入安全支付环境,
+                        <br>您的支付信息将加密后传输</span>
+                </div>
+            </div>
+            <div class="h-bg"></div>
+        </div>
+ </body>
+    </html>

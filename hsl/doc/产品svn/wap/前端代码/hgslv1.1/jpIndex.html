@@ -1,0 +1,711 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <!-- meta信息，可维护 -->
+  <meta charset="UTF-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta content="telephone=no" name="format-detection" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <!-- 公共样式 -->
+  <link rel="stylesheet" href="css/base.2.0.css" />
+  <!-- 页面样式表 -->
+  <link rel="stylesheet" href="css/flightsearch.css" />
+  <link rel="stylesheet" href="css/mCal.css" />
+  <link rel="stylesheet" href="css/hgsl_fly.css">
+  <style>
+  
+</style>
+  <script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+  <script type="text/javascript" src="js/fly.js"></script>
+  <script src="js/rili.js"></script>
+  <style>
+body {
+  padding-bottom:50px;
+}
+</style>
+</head>
+<body style="position:relative;width:100%;">
+  
+  <!-- 主页面 -->
+  <div class="content"  style="overflow-x:hidden;">
+    <div id="indexContent">
+    <!-- 公共页头  -->
+    <header class="header">
+      <h1>国内机票预订</h1>
+      <div class="left-head">
+        <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn fn-hide">
+          <span class="inset_shadow">
+            <span class="head-return"></span>
+          </span>
+        </a>
+      </div>
+      <!-- <div class="right-head">
+        <a href="/home/index.html" class="head-btn fn-hide">
+          <span class="inset_shadow">
+            <span class="head-home"></span>
+          </span>
+        </a>
+      </div> -->
+    </header>
+      <form method="get" id="myform">
+      <div id="main" class="b_padd">
+        <table class="city gray_b" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="from" style="padding-top:10px;">
+              <p class="city">
+                <span class="width_1">出发城市</span>
+                <span class="g_Color in">
+                  <input type="text" id="goCity" name="beginCity" class="c_name" placeholder="请输入或选择出发城市" value="北京"/>
+                  <span id="fromCity" class="tra_left02">
+                    <span class="tra_left" style="top:8px;"></span>
+                  </span>
+                </span>
+              </p>
+            </td>
+            <td rowspan="2" class="pic_change">
+              <span class="img_change"></span>
+            </td>
+          </tr>
+          <tr>
+            <td class="arr">
+              <p class="city">
+                <span class="width_1">到达城市</span>
+                <span class="g_Color in">
+                  <input type="text" id="backCity" name="arrCity" class="c_name" placeholder="请输入或选择到达城市"  value="上海"/>
+                  <span id="arrCity" class="tra_left02">
+                    <span class="tra_left" style="top:8px;"></span>
+                  </span>
+                </span>
+              </p>
+            </td>
+          </tr>
+        </table>
+        <p class="gray_b date" id="date">
+          <span class="width_1">出发日期&nbsp;&nbsp;</span>
+          <span id="select_Date">7月26日&nbsp;&nbsp;明天&nbsp;&nbsp;星期六</span>
+          <span class="tra_left"></span>
+          <input type="hidden" name="FlyOffTime" value="2014-07-26" id="traveldate" />
+        </p>
+        <a href="jpList.html"  class="search">搜索</a>
+      </div>
+    </form>
+ <!--  <div id="calContainer" class="slider"></div> -->
+    <div class="zx">
+      <ul class="fn-clear">
+        <li> <em class="flight"></em>
+          <span>100%</span>
+          <br />
+          航协认证
+        </li>
+        <li> <em class="lose"></em>
+          <span>机票</span>
+          <br />
+          贵就赔
+        </li>
+        <li>
+          <em class="time"></em>
+          <span>7x24</span>
+          <br />
+          保障服务
+        </li>
+      </ul>
+      <div class="linebox">
+        <span>有保障的低价</span>
+        <p></p>
+      </div>
+    </div>
+    </div>
+
+    <!-- 城市列表 -->
+    <!-- 城市列表 -->
+    <div class="qn_page active" id="citiesPage" >
+      <div class="qn_header">
+        <div class="back">
+          <a id="backHide"  href="javscsript:;"></a>
+        </div>
+        <div class="title">城市选择</div>
+      </div>
+      <div class="qn_index_list">
+        <div class="search ">
+          <div class="search_icon fl"></div>
+          <div class="delete_icon fr" style="display: none;"></div>
+          <div class="input" id="search">
+            <input type="text" placeholder="请输入拼音/简拼/中文"></div>
+        </div>
+        <div class="content">
+          <div class="search_result"></div>
+          <dl style="visibility: visible;">
+
+            <!-- 国内城市 -->
+            <div class="tab_content" id="city1_tab">
+
+              <dt>热门城市</dt>
+
+                <dd title="PEK">北京</dd>
+
+                <dd title="SHA">上海</dd>
+
+                <dd title="CAN">广州</dd>
+
+                <dd title="CTU">成都</dd>
+
+                <dd title="CKG">重庆</dd>
+
+                <dd title="SIA">西安</dd>
+
+                <dd title="KMG">昆明</dd>
+
+                <dd title="SZX">深圳</dd>
+
+                <dd title="HGH">杭州</dd>
+
+                <dd title="XMN">厦门</dd>
+
+                <dd title="CSX">长沙</dd>
+
+                <dd title="HAK">海口</dd>
+
+                <dd title="WUH">武汉</dd>
+
+                <dd title="URC">乌鲁木齐</dd>
+
+                <dd title="CGO">郑州</dd>
+
+                <dd title="SYX">三亚</dd>
+
+                <dd title="KWE">贵阳</dd>
+
+                <dd title="NKG">南京</dd>
+
+                <dd title="TAO">青岛</dd>
+
+                <dd title="HRB">哈尔滨</dd>
+
+              <dt>A</dt>
+
+                <dd title="AKU">阿克苏</dd>
+
+                <dd title="AQG">安庆</dd>
+
+                <dd title="AAT">阿勒泰</dd>
+
+                <dd title="AKA">安康</dd>
+
+                <dd title="IOB">鞍山</dd>
+
+                <dd title="AVA">安顺</dd>
+
+                <dd title="YIE">阿尔山</dd>
+
+                <dd title="NGQ">阿里</dd>
+
+                <dd title="RHT">阿拉善右旗</dd>
+
+                <dd title="AXF">阿拉善左旗</dd>
+
+                <dd title="MFM">澳门</dd>
+
+              <dt>B</dt>
+
+                <dd title="PEK">北京</dd>
+
+                <dd title="BAV">包头</dd>
+
+                <dd title="BHY">北海</dd>
+
+                <dd title="BSD">保山</dd>
+
+                <dd title="aeb">百色</dd>
+
+                <dd title="RLK">巴彦淖尔</dd>
+
+                <dd title="BFJ">毕节</dd>
+
+                <dd title="BPL">博乐</dd>
+
+              <dt>C</dt>
+
+                <dd title="CTU">成都</dd>
+
+                <dd title="CKG">重庆</dd>
+
+                <dd title="CSX">长沙</dd>
+
+                <dd title="CGQ">长春</dd>
+
+                <dd title="CZX">常州</dd>
+
+                <dd title="CGD">常德</dd>
+
+                <dd title="CIH">长治</dd>
+
+                <dd title="CIF">赤峰</dd>
+
+                <dd title="CHG">朝阳</dd>
+
+                <dd title="NBS">长白山</dd>
+
+                <dd title="JUH">池州</dd>
+
+                <dd title="BPX">昌都</dd>
+
+                <dd title="CNI">长海</dd>
+
+              <dt>D</dt>
+
+                <dd title="DLC">大连</dd>
+
+                <dd title="DDG">丹东</dd>
+
+                <dd title="DLU">大理</dd>
+
+                <dd title="DTG">大同</dd>
+
+                <dd title="DOY">东营</dd>
+
+                <dd title="DNH">敦煌</dd>
+
+                <dd title="DAX">达县(达州)</dd>
+
+                <dd title="DQA">大庆</dd>
+
+                <dd title="DCY">稻城</dd>
+
+                <dt title="">E</dt>
+
+                <dd title="ENH">恩施</dd>
+
+                <dd title="DSN">鄂尔多斯</dd>
+
+                <dd title="ERL">二连浩特</dd>
+
+                <dd title="EJN">额济纳旗</dd>
+
+              <dt>F</dt>
+
+                <dd title="FOC">福州</dd>
+
+                <dd title="FUG">阜阳</dd>
+
+                <dd title="FUO">佛山</dd>
+
+                <dd title="FYZ">抚远</dd>
+
+              <dt>G</dt>
+
+                <dd title="GAN">广州</dd>
+
+                <dd title="KWE">贵阳</dd>
+
+                <dd title="KWL">桂林</dd>
+
+                <dd title="KOW">赣州</dd>
+
+                <dd title="GYS">广元</dd>
+
+                <dd title="GOQ">格尔木</dd>
+
+                <dd title="GHN">广汉</dd>
+
+                <dd title="GYU">固原</dd>
+
+                <dd title="GXH">甘南(夏河)</dd>
+
+                <dd title="KHH">高雄</dd>
+
+              <dt>H</dt>
+
+                <dd title="HGH">杭州</dd>
+
+                <dd title="HAK">海口</dd>
+
+                <dd title="HRB">哈尔滨</dd>
+
+                <dd title="HFE">合肥</dd>
+
+                <dd title="HET">呼和浩特</dd>
+
+                <dd title="HLD">海拉尔</dd>
+
+                <dd title="HDG">邯郸</dd>
+
+                <dd title="TXN">黄山</dd>
+
+                <dd title="HTN">和田</dd>
+
+                <dd title="HUZ">惠州</dd>
+
+                <dd title="HZG">汉中</dd>
+
+                <dd title="JZH">黄龙(九寨沟)</dd>
+
+                <dd title="HNY">衡阳</dd>
+
+                <dd title="HEK">黑河</dd>
+
+                <dd title="HMI">哈密</dd>
+
+                <dd title="HYN">黄岩(台州)</dd>
+
+                <dd title="HIA">淮安</dd>
+
+                <dd title="HCN">恒春</dd>
+
+                <dd title="HLN">花莲</dd>
+
+              <dt>J</dt>
+
+                <dd title="TNA">济南</dd>
+
+                <dd title="JJN">晋江</dd>
+
+                <dd title="SWA">揭阳</dd>
+
+                <dd title="JMU">佳木斯</dd>
+
+                <dd title="JHG">景洪(西双版纳)</dd>
+
+                <dd title="JNZ">锦州</dd>
+
+                <dd title="JDZ">景德镇</dd>
+
+                <dd title="JIU">九江</dd>
+
+                <dd title="JNG">济宁</dd>
+
+                <dd title="JGS">井冈山</dd>
+
+                <dd title="KNC">吉安(井冈山)</dd>
+
+                <dd title="JGN">嘉峪关</dd>
+
+                <dd title="JZH">九寨沟</dd>
+
+                <dd title="CHW">酒泉</dd>
+
+                <dd title="JGD">加格达奇</dd>
+
+                <dd title="JXA">鸡西</dd>
+
+                <dd title="JIC">金昌</dd>
+
+                <dd title="KNH">金门</dd>
+
+                <dd title="CYI">嘉义</dd>
+
+              <dt>K</dt>
+
+                <dd title="KMG">昆明</dd>
+
+                <dd title="KHG">喀什</dd>
+
+                <dd title="KRL">库尔勒</dd>
+
+                <dd title="KCA">库车</dd>
+
+                <dd title="KRY">克拉玛依</dd>
+
+                <dd title="KJI">喀纳斯</dd>
+
+                <dd title="KGT">康定</dd>
+
+                <dd title="KJH">凯里</dd>
+
+              <dt>L</dt>
+
+                <dd title="LHW">兰州</dd>
+
+                <dd title="LJG">丽江</dd>
+
+                <dd title="LXA">拉萨</dd>
+
+                <dd title="LZH">柳州</dd>
+
+                <dd title="LYA">洛阳</dd>
+
+                <dd title="LYG">连云港</dd>
+
+                <dd title="LYI">临沂</dd>
+
+                <dd title="LZO">泸州</dd>
+
+                <dd title="LNJ">临沧</dd>
+
+                <dd title="LCX">连城</dd>
+
+                <dd title="HZH">黎平</dd>
+
+                <dd title="LLB">荔波</dd>
+
+                <dd title="LIA">梁平</dd>
+
+                <dd title="LZY">林芝</dd>
+
+                <dd title="LLV">吕梁</dd>
+
+                <dd title="GNI">绿岛</dd>
+
+                <dd title="KYD">兰屿</dd>
+
+              <dt>M</dt>
+
+                <dd title="MDG">牡丹江</dd>
+
+                <dd title="MIG">绵阳</dd>
+
+                <dd title="NZH">满洲里</dd>
+
+                <dd title="LUM">芒市</dd>
+
+                <dd title="MXZ">梅县</dd>
+
+                <dd title="OHZ">漠河</dd>
+
+                <dd title="MFK">马祖</dd>
+
+                <dd title="MZG">马公</dd>
+
+              <dt>N</dt>
+
+                <dd title="NKG">南京</dd>
+
+                <dd title="">南宁</dd>
+
+                <dd title="">宁波</dd>
+
+                <dd title="">南昌</dd>
+
+                <dd title="">南阳</dd>
+
+                <dd title="">南通</dd>
+
+                <dd title="">南充</dd>
+
+                <dd title="">那拉提</dd>
+
+              <dt>P</dt>
+
+                <dd title="">攀枝花</dd>
+
+                <dd title="">普洱</dd>
+
+                <dd title="">屏东</dd>
+
+              <dt>Q</dt>
+
+                <dd title="">青岛</dd>
+
+                <dd title="">齐齐哈尔</dd>
+
+                <dd title="">秦皇岛</dd>
+
+                <dd title="">衢州</dd>
+
+                <dd title="">庆阳</dd>
+
+                <dd title="">且末</dd>
+
+                <dd title="">黔江</dd>
+
+                <dd title="">七美</dd>
+
+              <dt>R</dt>
+
+                <dd title="">日喀则</dd>
+
+                <dd title="">日月潭</dd>
+
+              <dt>S</dt>
+
+                <dd title="">上海</dd>
+
+                <dd title="">深圳</dd>
+
+                <dd title="">沈阳</dd>
+
+                <dd title="">三亚</dd>
+
+                <dd title="">石家庄</dd>
+
+                <dd title="">思茅(普洱)</dd>
+
+                <dd title="">沙市</dd>
+
+                <dd title="">神农架</dd>
+
+                <dd title="">韶关</dd>
+
+                <dd title="">鄯善</dd>
+
+              <dt>T</dt>
+
+                <dd title="">天津</dd>
+
+                <dd title="">太原</dd>
+
+                <dd title="">通辽</dd>
+
+                <dd title="">铜仁</dd>
+
+                <dd title="">台州</dd>
+
+                <dd title="">塔城</dd>
+
+                <dd title="">通化</dd>
+
+                <dd title="">唐山</dd>
+
+                <dd title="">吐鲁番</dd>
+
+                <dd title="">腾冲</dd>
+
+                <dd title="">天水</dd>
+
+                <dd title="">台北</dd>
+
+                <dd title="">台南</dd>
+
+                <dd title="">台东</dd>
+
+                <dd title="">台中</dd>
+
+              <dt>W</dt>
+
+                <dd title="">武汉</dd>
+
+                <dd title="">乌鲁木齐</dd>
+
+                <dd title="">温州</dd>
+
+                <dd title="">无锡</dd>
+
+                <dd title="">威海</dd>
+
+                <dd title="">万州</dd>
+
+                <dd title="">万县(万州)</dd>
+
+                <dd title="">潍坊</dd>
+
+                <dd title="">武夷山</dd>
+
+                <dd title="">乌海</dd>
+
+                <dd title="">乌兰浩特</dd>
+
+                <dd title="">梧州</dd>
+
+                <dd title="">文山</dd>
+
+                <dd title="">芜湖</dd>
+
+                <dd title="">望安</dd>
+
+              <dt>X</dt>
+
+                <dd title="">西安</dd>
+
+                <dd title="">厦门</dd>
+
+                <dd title="">西宁</dd>
+
+                <dd title="">徐州</dd>
+
+                <dd title="">西双版纳</dd>
+
+                <dd title="">西昌</dd>
+
+                <dd title="">兴义</dd>
+
+                <dd title="">香格里拉</dd>
+
+                <dd title="">锡林浩特</dd>
+
+                <dd title="">襄阳(中国)</dd>
+
+                <dd title="">襄樊(襄阳)</dd>
+
+                <dd title="">兴城</dd>
+
+                <dd title="">夏河</dd>
+
+                <dd title="">邢台</dd>
+
+                <dd title="">香港</dd>
+
+              <dt>Y</dt>
+
+                <dd title="">银川</dd>
+
+                <dd title="">烟台</dd>
+
+                <dd title="">延吉</dd>
+
+                <dd title="">宜昌</dd>
+
+                <dd title="">义乌</dd>
+
+                <dd title="">运城</dd>
+
+                <dd title="">宜宾</dd>
+
+                <dd title="">榆林</dd>
+
+                <dd title="">盐城</dd>
+
+                <dd title="">伊宁</dd>
+
+                <dd title="">延安</dd>
+
+                <dd title="">永州</dd>
+
+                <dd title="">扬州</dd>
+
+                <dd title="">伊春</dd>
+
+                <dd title="">玉树</dd>
+
+                <dd title="">宜春</dd>
+
+              <dt>Z</dt>
+
+                <dd title="">郑州</dd>
+
+                <dd title="">珠海</dd>
+
+                <dd title="">张家界</dd>
+
+                <dd title="">湛江</dd>
+
+                <dd title="">芷江</dd>
+
+                <dd title="">舟山</dd>
+
+                <dd title="">昭通</dd>
+
+                <dd title="">遵义</dd>
+
+                <dd title="">张掖</dd>
+
+                <dd title="">中卫</dd>
+
+                <dd title="">张家口</dd>
+            </div>
+
+          </dl>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 出发日历 -->
+    <!-- 日历 -->
+   <div id="calContainer" class="slider" style="display:none;padding-bottom:10px;">
+            
+    </div>
+  </div>
+  <!-- 公共页脚  -->
+  <!-- 公共页脚  -->
+</body>
+</html>

@@ -1,0 +1,201 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量 - 机票预定">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/fly_order.css" rel="stylesheet" />
+</head>
+</@frame.head>
+<@frame.main "default" 2>
+
+
+
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+<!--弹出load层-->
+
+<div class="fly_load">
+	<div class="loadbg"></div>
+	<div class="loadIcon yahei">正在验证,请稍后...</div>
+</div>
+<div class="box">
+    <div class="fly_orderBox ma">
+        <!--左侧-->
+        <div class="orderBox_left fl">
+            <!--支付进程-->
+            <div class="pay_process ma">
+                <ul class="fl ov">
+                    <li class="fly_on"><i class="fl ic yahei h4">1</i><span class="fl lm yahei h3">填写订单</span></li>
+                    <li class=""><i class="fl ic yahei h4">2</i><span class="fl lm yahei h3">支付订单</span></li>
+                    <li class=""><i class="fl ic yahei h4">3</i><span class="fl lm yahei h3">支付成功</span></li>
+                </ul>
+            </div>
+            <!--支付进程-->
+            <!--通讯录选择框 -->
+            <div class="fl companyEmployee concatChoose">
+                        <div class="com_top wd">
+                            <span class="disb yahei h4">通讯录</span><a href="javascript:;" class="close fl"></a>
+                        </div>
+                        <ul class="com_list fl">
+	                        <#if commonContactDTOList??>
+	                        	<#if (commonContactDTOList?size) gt 0>
+	                        	<#list commonContactDTOList as commonContactDTO>
+	                        	 <li>
+	                            	<i></i>
+	                            	<span rel="${(commonContactDTO_index)+1}" passengerName="${(commonContactDTO.name)!}" idNo="${(commonContactDTO.cardNo)!}" mobile="${(commonContactDTO.mobile)!}" >${(commonContactDTO.name)!}</span>
+	                            </li>
+	                        	</#list>
+	                        	<#else>
+		                        		<span style="left: 20px">暂无联系人</span>
+	                        	</#if>
+	                        </#if>
+                        </ul>
+             </div>
+            <div class="left_box">
+          	 	 <input type="hidden" id="totalPrice" value="${(jpScartCommand.singlePlatTotalPrice)?c}" /><!-- 单人支付总价-->
+				
+            	<form id="tickerform" name="myform" action="${contextPath}/jp/createOrder" method="post">
+            	<!-- 航班信息 -->
+          		 <input type="hidden" id="SPRING_TOKEN" name="SPRING_TOKEN" value="${SPRING_TOKEN}"> 
+				<input type="hidden" name="encryptString" value="${(jpScartCommand.encryptString)!}" /> <!-- 加密字符串 -->
+				<input type="hidden" name="payType" value="1" />
+            	<div id="inputTemp">
+					<input type="hidden" name="startDate" value="${(jpScartCommand.startDate)?string('yyyy-MM-dd')} ${(jpScartCommand.startTime)!}:00" /><!-- 出发时间 -->
+					<input type="hidden" name="endDate"   value="${(jpScartCommand.endDate)?string('yyyy-MM-dd')} ${(jpScartCommand.endTime)!}:00" /><!-- 到达时间 -->
+					<input type="hidden" name="airComp" value="${(jpScartCommand.airComp)!}" /><!-- 航空公司名称 -->
+					<input type="hidden" name="airCompanyName" value="${(jpScartCommand.airCompanyName)!}" /><!-- 航空公司名称 -->
+					<input type="hidden" name="flightNO" value="${(jpScartCommand.flightno)!}" /><!-- 航班号 -->
+					<input type="hidden" name="planeType" value="${(jpScartCommand.planeType)!}" /><!-- 机型 -->
+					<input type="hidden" name="cabinName" value="${(jpScartCommand.cabinNamecode)!}" /><!-- 仓位名称 -->
+					<input type="hidden" name="cabinCode" value="${(jpScartCommand.cabinCode)!}" /><!-- 仓位代码 -->
+					<input type="hidden" name="stopNumber" value="${(jpScartCommand.stopNumbers)!}" /><!-- 中转次数 -->
+					<input type="hidden" name="cabinDiscount" value="${(jpScartCommand.cabinDiscount)!}" /><!-- 折扣 -->
+					<input type="hidden" name="flightPriceInfoDTO.ibePrice" value="${(jpScartCommand.ibePrice)?c}" /><!-- 票价 -->
+					<input type="hidden" name="flightPriceInfoDTO.oilFee" value="${(jpScartCommand.oilFee)?c}" /><!-- 燃油 -->
+					<input type="hidden" name="flightPriceInfoDTO.buildFee" value="${(jpScartCommand.buildFee)?c}" /><!-- 场建 -->
+					<input type="hidden" name="flightPriceInfoDTO.payAmount"  value="${((jpScartCommand.singlePlatTotalPrice)?c)!}" /><!-- 支付总价 -->
+					<input type="hidden" name="orgCity" value="${(jpScartCommand.orgCity)!}" /><!-- 始发地 -->
+					<input type="hidden" name="dstCity" value="${(jpScartCommand.dstCity)!}" /><!-- 目的地 -->
+					<input type="hidden" name="departAirport" value="${(jpScartCommand.orgCityName)!}" /><!-- 离港机场 -->
+					<input type="hidden" name="arrivalAirport" value="${(jpScartCommand.dstCityName)!}" /><!-- 到港机场 -->
+					<input type="hidden" name="departTerm" value="${(jpScartCommand.departTerm)!}" /><!-- 始发地航站楼 -->
+					<input type="hidden" name="arrivalTerm" value="${(jpScartCommand.arrivalTerm)!}" /><!-- 目的地航站楼 -->
+					<input type="hidden" name="payPlatform" value="${(jpScartCommand.payPlatform)!}" /> 
+					<input type="hidden" name="flightencryptString" value="${(jpScartCommand.flightencryptString)!}" /> 
+					<input type="hidden" name="singlePlatTotalPrice" value="${(jpScartCommand.singlePlatTotalPrice)?c}" /><!-- 单人支付总价-->
+					
+				</div>
+            	<!-- 提交个人订单 -->
+	                <span class="fly_bt yahei color3 h2 fl">填写乘机人信息</span>
+	                <#if (jpScartCommand.airCompanyName)!="首都航空公司">
+		                 <a href="javascript:;" class="yahei color6 h4 companyLink fr tc addFlyMenber">添加乘客</a>
+		                 <a href="javascript:;" class="yahei color6 h4 companyLink fr tc addCotanct">从通讯录中选择</a>
+	                 </#if>
+	                <i class="line wd fl"></i>
+	                <div class="opportunityModel person_fly">
+	                <ul class="opportunity fl h-opportunity-more"> 
+	                	<li class="type">
+	                	<span type="text" class="texta select yahei h3 color6 companySelect" id="optionValue2"  value="身份证">成人</span>
+	                    
+		                    <ul class="selectNav cardIdSelect" for="optionValue2">
+		                            <li class="l NI"  value="0">成人</li>
+		                           <!--  <li class="l FOID" name="FOID">护照</li> -->
+		                    </ul>
+	                    <!-- 	<input type="hidden" name="idType" value="0"/> -->
+	                    
+	                	<!-- <i class="radio radio_click" ></i><span class="fl yahei color6 h3" style="line-height:30px;">成人</span> --></li>
+	               		
+	                     <li><span class="cla yahei h3 color6 fl">姓名:</span><input type="text" class="texta yahei h3 color6 name yanz" name="passengerName">
+		                   <span class="fr h4 ts" style="color:#FF0004; line-height:30px; margin-left:10px; display:none" id="name"></span>
+		                   
+	                    </li>
+	                    <li class="cardId"><span type="text" class="texta select yahei h3 color6 companySelect" id="optionValue1"  value="身份证">身份证</span>
+	                    
+		                    <ul class="selectNav cardIdSelect" for="optionValue1">
+		                            <li class="l NI"  value="0">身份证</li>
+		                           <!--  <li class="l FOID" name="FOID">护照</li> -->
+		                    </ul>
+	                    	<input type="hidden" name="idType" value="0"/>
+	                    </li>
+	                   <li class="cardNum"><input type="text" class="texta yahei h3 color6 idNum  yanz" name="idNo" placeholder="证件号" ><span class="fr h4 ts" style="color:#FF0004; line-height:30px; margin-left:10px; display:none" id="idcardv"></span></li>
+	                    <li class="fly_mobile"><span class="cla yahei h3 color6 fl">手机:</span><input type="text" class="texta yahei h3 color6 mobileNum mobile  yanz" maxlength="11" name="mobile"><span class="fr h4 ts" style="color:#FF0004; line-height:30px; margin-left:10px; display:none"></span></li>
+	                   <li class="deleteBtn"><a href="javascript:" class="personDel fl tc color6 h3 del">删除</a></li>
+	               </ul>
+	               </div>
+	               
+	                <span class="fly_bt yahei color3 h2 fl">填写联系人信息</span>
+	                <i class="line wd fl"></i>
+	                <ul class="opportunity fl">
+	                <li><span class="cla yahei h3 color6 fl">手机号码:</span><input type="text" class="texta yahei h3 color6 mobile yanz" maxlength="11" id="linkMobile" name="linkTelephone"><span class="fl h4 ts" style="color:#FF0004; line-height:30px; margin-left:10px; display:none"></span></li>
+	                 </ul>
+	                <div class="policy fl">
+	                    <b class="yahei h3 color3 fl">退改签政策</b>
+	                    <span class="policys fl yahei color6 h3">由于航司政策原因，暂不提供退改签政策显示，敬请谅解！<br/>如需了解该航班最新退改签政策，请致电客服电话：400—660—6660</span>
+	                </div>
+	                <a href="javascript:;" class="createOrder yahei h3 fl tc" id="createOrder">生成订单</a>
+                </form>
+            </div>
+        </div>
+        <!-- 隐藏域 -->
+        <input type="hidden" value="${contextPath}" id="contextPath"/>
+        
+        <!--左侧-->
+        <!--右侧-->
+        <div class="orderBox_right fr">
+             <span class="flight fl yahei tc color3">航班信息</span>
+          
+            <div class="flight_mess fl" id="fly_temp">
+                <span class="flight_com fl yahei">
+                <i>
+                 <label class="fly_bg fl icon fly_{airComp}"></label> 
+                </i>${(jpScartCommand.airCompanyName)!}<b>${(jpScartCommand.flightno)!} &nbsp;${(jpScartCommand.planeType)!}</b> &nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${(jpScartCommand.cabinNamecode)!}</span>
+                <div class="voyage fl wd">
+                    <div class="voyage_left fl"><i></i></div>
+                    <div class="voyage_right fl">
+                        <span class="start citys fl yahei">
+                            <span class="time fl">${(jpScartCommand.startTime)!}<br/><i class="color6 h3 fl normal">${(jpScartCommand.startDate)?string("yyyy-MM-dd")}</i></span>
+                            <span class="place fl color6 yahei h3">${(jpScartCommand.orgCityName)!}
+                            	${(jpScartCommand.departTerm)!}</span>
+                            
+                        </span>
+                        <span class="end citys fl yahei">
+                            <span class="time fl" style="font-size:20px;">${(jpScartCommand.endTime)!}<br/><i class="color6 h3 fl normal">${(jpScartCommand.endDate)?string("yyyy-MM-dd")}</i></span>
+                            <span class="place fl color6 yahei h3">${(jpScartCommand.dstCityName)!}
+                           
+                            	${(jpScartCommand.arrivalTerm)!}</span>
+                        </span>
+                        <span class="fl yahei color9 h4" style="margin-top:20px;">
+                        ${(jpScartCommand.stopNumber)!}
+                        &nbsp;&nbsp;&nbsp;&nbsp;行程时间：
+							${(jpScartCommand.flyTime)!}
+						</span>
+                    </div>
+                </div>
+                <div class="charge fl wd">
+                    <span class="yahei color9 h3">票价：￥${(jpScartCommand.ibePrice)?c}</span><br/>
+                    <span class="yahei color9 h3">机建+燃油：￥${((jpScartCommand.buildFee)+(jpScartCommand.oilFee))?c}</span>
+                </div>
+                <div class="price fl wd">
+                    <span class="yahei color6 h2 fl" id="h-totalPrice">总票价：<b>￥${(jpScartCommand.singlePlatTotalPrice)?c}</b></span>
+                </div>
+            </div>
+        </div>
+        <!--右侧-->
+    </div>
+</div>
+<!--内容-->
+
+<!--页脚-->
+</@frame.main>
+<@frame.end "default"> </@frame.end>
+<script src="${contextPath}/resources/js/fly_order.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/fly_order1.js" language="javascript"></script>
+</html>

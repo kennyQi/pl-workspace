@@ -1,0 +1,35 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form method="post" enctype="multipart/form-data" id="form"
+			action="${contextPath}/jp/order/cancel"
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, dialogAjaxDone)">
+			<div class="pageFormContent" layoutH="58">
+				<input type="hidden" name="orderid" value="${JPOrderDTO.yeeXingOrderId}" />
+				<div class="unit">
+			   <label>乘机人：</label>
+			   <#if (JPOrderDTO.passengerList?size > 0)>
+			   	 <#list JPOrderDTO.passengerList as passenger>
+			   	  <input type="checkbox" value="${passenger.name}" name="passengerName" id="pid" /> ${passenger.name}
+			     </#list>
+			   <#else>
+			                 没有可以取消订单的乘机人
+			   </#if>
+			</div>
+			</div>
+			<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="checkNull();">确定</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+			</div>
+		</form>
+<script type="text/javascript">
+ function checkNull(){
+	 if($(':checkbox:checked').size() == 0){
+		  alert("请选择取消乘机人");
+		  return;
+	 }
+	 $("#form").submit();
+ }
+</script>

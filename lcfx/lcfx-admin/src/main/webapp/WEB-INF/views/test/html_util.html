@@ -1,0 +1,199 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+$(function(){
+	setData(${productJson})
+	//setData();
+})
+
+
+	function hideTemplate() {
+		var el = $("[htmltemplate]");
+		el.each(function() {
+			$(this).hide();
+
+		});
+	}
+	$(document).ready(function() {
+		//		hideTemplate();
+
+		cd = getCurrentDiv("asdasd");
+
+		dbp(cd);
+		$("#asdasd").keydown(a = function(a, b, c) {
+			dbp(a);
+			dbp(b);
+			dbp(c);
+
+			return ("aaa");
+		});
+		//		dbp(maxSize);
+
+	});
+
+	function appendHtmlData(target, template, data) {
+		var t = $("#" + target);
+		var html = getHtmlTemplate(template);
+		dbp(html);
+		html = replaceValInJson(data, html);
+		t.append(html);
+	}
+
+	function getHtmlTemplate(templateId) {
+		return $("[htmltemplate='" + templateId + "']").html();
+	}
+
+	function replaceValInJson(json, html) {
+		dbp(json);
+		for (key in json) {
+			eval("var re = /@\\{" + key + "\\}/g");
+			html = html.replace(re, json[key]);
+		}
+		return html;
+	}
+	function replaceVal(k, v, string) {
+		eval("var re = /@\\{" + k + "\\}/g");
+		dbp(string);
+		dbp(re);
+		string = string.replace(re, v);
+		dbp(string);
+		return string;
+	}
+	function getRmtVal(json, inElementId) {
+		var inElement;
+		if (inElementId != null) {
+			inElement = $("#" + inElementId);
+			if (inElement.length < 1) {
+				alert("warn:getRmtVal()@inElementId!=null but inElement !exist");
+			}
+		}
+		for (key in json) {
+			dbp(json[key]);
+
+			var e;
+			if (inElement != null && inElement.length > 0) {
+				e = inElement.find("[rval='" + key + "']");
+			} else {
+				e = $("[rval='" + key + "']");
+			}
+
+			dbp(e);
+			if (e.length > 0) {
+				e.removeAttr("rval");
+				e.val(json[key]);
+				e.html(json[key]);
+			}
+		}
+	}
+	function getddd() {
+
+		$.ajax({
+			url : "${contextPath}/test/get_dataaaa",
+			cache : false,
+			type : "post",
+			dataType : "json",
+			async : false,
+			success : function(data) {
+				//		var html=miniJsp(data,"<table border=\"1\"><tr><td>@{val}</td><td>@{val2}--@{val2}</td></tr><tr><td><input name=\"\" type=\"@{inputType}\" /></td><td>2222</td></tr></table>")
+				//	$("#data_div").append(html);
+				//				getRmtVal(data, "div1");
+
+				dbp(data);
+				var template = getHtmlTemplate("table_template");
+				var result = "";
+				for (key in data) {
+					var t = "" + template;
+					for (kk in data[key]) {
+						dbp(kk + ":" + data[key][kk]);
+						t = replaceVal(kk, data[key][kk], t);
+					}
+					result = result + t;
+				}
+
+				result = replaceVal("id2", "50", result);
+
+				$("#table1").append(result);
+				//				html = getHtmlTemplate("table_template");
+				//			html = replaceVal("id", "50", html);
+				//		html=replaceValInJson(data,html)
+				//	$("#table1").append(html);
+				//				appendHtmlData("table1","table_template",data);
+
+			},
+			error : function() {
+
+				alert('error');
+			}
+
+		});
+	}
+</script>
+<div id="asdasd">
+	<div id="data_div"></div>
+	<input type="button" onclick="getddd()" value="get data">
+	<input type="text" id="testKey" value="test">
+	<div id="div1">
+		<table border="1">
+			<thead>
+				<th>th1</th>
+				<th>th2</th>
+			</thead>
+			<tbody id="table1">
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<input type="text" name="id">
+	<textarea rows="" cols="" name="productName"></textarea>
+
+
+
+
+
+
+
+	<table border="0" class="spec_sel_table">
+  <tr>
+    <td>
+<a>规格名称：</a><b>规格1</b>
+
+</td>
+  </tr>
+  <tr>
+    <td>
+<a>规格值：</a>
+	<input name="fbcc7e75a6dc4d11be962d30fa2efead" type="checkbox" value="1704" style="
+"><label>22</label> <input name="fbcc7e75a6dc4d11be962d30fa2efead" type="checkbox" value="1705" checked="checked"><label>33</label> <input name="fbcc7e75a6dc4d11be962d30fa2efead" type="checkbox" value="1703"><label>11</label>
+    
+    </td>
+  </tr>
+  <tr>
+    <td><div ></div></td>
+  </tr>
+  <tr>
+    <td>
+   规格名称：<b>规格1</b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+        规格值：
+	<input name="fbcc7e75a6dc4d11be962d30fa2efead" type="checkbox" value="1704" style="
+"><label>22</label> <input name="fbcc7e75a6dc4d11be962d30fa2efead" type="checkbox" value="1705" checked="checked"><label>33</label> <input name="fbcc7e75a6dc4d11be962d30fa2efead" type="checkbox" value="1703"><label>11</label>
+    
+    </td>
+  </tr>
+    <tr>
+    <td><div  ></div></td>
+  </tr>
+</table>
+	<table border="0">
+		<tbody htmltemplate="table_template">
+			<tr>
+				<td id="aaa[@{id}]" name="@{id2}">@{name}</td>
+				<td id="bbb[@{id}]">@{code}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div htmltemplate="div_template"></div>
+</div>

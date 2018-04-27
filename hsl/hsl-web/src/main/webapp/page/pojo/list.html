@@ -1,0 +1,313 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "景点列表">
+<link href="${contextPath}/resources/css/scenery.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript">
+	//上一页和下一页以及表单的提交方法
+	$(function(){
+		//设置表单提交的按钮监听
+		$("#sendForm").on("click",function(){
+			$("#pageNo").val(1);
+			$("#searchform").submit();
+		});
+		$("#pre").on("click",function(){
+			var currentPageNo = parseInt($("#pageNo").val());
+			if(currentPageNo>1){
+				$("#pageNo").val(currentPageNo-1);
+				$("#searchform").submit();
+			}else{
+				alert("已经是第一页了");
+			}
+		});
+		$("#next").on("click",function(){
+			var currentPageNo = parseInt($("#pageNo").val());
+			var total = parseInt($("#totalPage").val());
+			if(currentPageNo>=total){
+				alert("已经是最后一页了");
+			}else{
+				$("#pageNo").val(currentPageNo+1);
+				$("#searchform").submit();
+			}
+		});
+		$("#searchform").on("submit",function(){
+			//表单提交前的处理
+			return true;
+		});
+		var reg = new RegExp(",","g");
+		var totalCount = ('${scenicMap.count}').replace(reg, "");
+		var totalNo = parseInt(totalCount/10)+1;
+		$("#totalPage").val(totalNo);
+	});
+</script>
+</@frame.head>
+<@frame.main "mp">
+  <div class="container" id="container">
+    <div id="searchbar" class="mt20 clearfix">
+      <div class="searchbd">
+        <div class="search_name">景点门票</div>
+        <form action="" id="searchform">
+          <input type="text"  class="w500 txt" />
+          <div class="bth">
+            <input type="submit" value="搜索" />
+          </div>
+        </form>
+        <div class="L searchhot w420"> <strong>热门景点:</strong>
+		<!-- 超链接指向详细的信息页面 -->
+        <#list hotScenicMap.hotScenicSpotDTO as hotspots>
+        	<a href="${contextPath}/mp/view?id=${hotspots.scenicSpotId}">${hotspots.scenicSpotBaseInfo.name}</a>
+        </#list>
+      </div>
+    </div>
+    <div class="main">
+      <div class="current mt20 clearfix"><strong>当前位置：</strong><a href="#">景点门票</a>&gt;<a href="#">景点门票</a>&gt;<a href="#">景点门票</a>&gt;<a href="#">景点门票</a></div>
+      <form action="" id="J_NavAttrsForm" class="clearfix">
+        <div id="attr">
+        <div id="attrnav"><span>您已选择：</span> <div class="attr_b" id="attr_b"></div> <a href="#" class="allattr">清除全部条件</a></div>
+          <dl>
+            <dt>所在省份：</dt>
+            <dd><a href="#" class="sel" >全部</a><a href="#" cate="1">浙江(21)</a><a href="#" cate="1">安徽(21)</a><a href="#" cate="1">福建(21)</a><a href="#" cate="1">北京(21)</a><a href="#" cate="categories">上海(21)</a><a href="#" cate="1">广西(21)</a><a href="#" cate="1">贵州(21)</a><a href="#" class="more">更多<i></i></a></dd>
+          </dl>
+          <dl>
+            <dt>所在城市：</dt>
+            <dd><a href="#" cate="2">全部</a><a href="#" cate="2">浙江</a><a href="#" class="on" cate="2">安徽</a><a href="#" class="on" cate="2">福建</a><a href="#" class="on" cate="2">北京</a><a href="#" class="on" cate="2">上海</a><a href="#" cate="2">广西</a><a href="#" cate="2">贵州</a><a href="#" class="more">更多<i></i></a></dd>
+          </dl>
+          <dl>
+            <dt>行政地区：</dt>
+            <dd><a href="#" cate="3">全部</a><a href="#" cate="3">淳安县(50)</a><a href="#" cate="3">安徽</a><a href="#" cate="3">福建</a><a href="#" cate="3">北京</a><a href="#" cate="3">上海</a><a href="#" cate="3">广西</a><a href="#" cate="3">贵州</a></dd>
+          </dl>
+          <dl>
+            <dt>门票价格：</dt>
+            <dd><a href="#" cate="4">全部</a><a href="#" cate="4">￥0-￥50</a><a href="#" cate="4">￥50-￥100</a><a href="#" cate="4">￥100-￥1000</a><a href="#" cate="4">￥1000-￥10000</a></dd>
+          </dl>
+          <dl>
+            <dt>景点级别：</dt>
+            <dd><a href="#" cate="5">全部</a><a href="#" cate="5">A</a><a href="#" cate="5">AA</a><a href="#" cate="5">AAA</a><a href="#" cate="5">AAAA</a><a href="#" cate="5">AAAAA</a></dd>
+          </dl>
+        </div>
+      </form>
+      
+      <!--景点列表-->
+      <div class="column L">
+        <div class="columnNav"> <span>排序：</span>
+          <div class="sort">
+            <select>
+              <option>默认排序</option>
+              <option>价格从高到低</option>
+              <option>价格从低到高</option>
+              <option>级别从高到低</option>
+              <option>级别从低到高</option>
+              <option>点评数量</option>
+            </select>
+          </div>
+          <div class="c_sale">
+            <label class="c_s1 ">
+              <input type="checkbox" />
+              <i></i>
+              </label>
+            <label class="c_s1 c_s2">
+              <input type="checkbox" />
+              <i></i></label>
+            <label class="c_s1 c_s3">
+              <input type="checkbox" />
+              <i></i></label>
+            <label class="c_s1 c_s4">
+              <input type="checkbox" />
+              <i></i></label>
+          </div>
+          <div class="navPage R"><a href="#" class="Prev"><i></i>上一页</a> <a href="#" class="next">下一页<i></i></a></div>
+        </div>
+        <#list scenicMap.dto as spots>
+        <div id="spot">
+          <div class="spot_p">
+            <div class="spot_img">
+            <div class="spot_P_name">
+                <div class="spot_p_title">
+                  <h2><a href="${contextPath}/mp/view?id=${spots.id}">${spots.scenicSpotBaseInfo.name}</a></h2>
+                </div>
+                <div class="spot_p_about">
+                  <p>${spots.scenicSpotBaseInfo.intro}</p>
+                </div>
+                <div class="spot_p_map">
+                  <p><a href="#"><i></i>查看地图</a></p>
+                </div>
+                <div class="spot_p_star s s4"><i></i></div>
+                <div class="spot_p_effect"><b>游客印象：</b><a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a> <a href="#">感觉很好</a></div>
+              </div>
+             </div>
+            <div class="spot_P_img"><a href="#"><img src="${spots.scenicSpotBaseInfo.image}" /></a></div>
+            <div class="spot_p_list clearfix ">
+              <div class="s_p_title sl">景点门票</div>
+              <div class="s_p_style sl">票型</div>
+              <div class="s_p_price sl">市场价</div>
+              <div class="s_p_wprice sl">网站价</div>
+              <div class="s_p_pay sl">支付方式</div>
+              <div class="s_p_operation sl">操作</div>
+            </div>
+            <div class="spot_info ">
+              <p>为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</p>
+              <div class="all_p_list">
+              <!-- 景点政策的列表 -->
+              <#if spots.plist?size=0>
+              	<p>暂无门票信息</p>
+              	<#else>
+	              <#list spots.plist as policy>
+	              		<div class="s_p_list">
+		                <div class="s_p_title sl">${policy.name}</div>
+		                <div class="s_p_style sl">${policy.ticketName}</div>
+		                <div class="s_p_price sl"><span>¥${policy.retailPrice}</span></div>
+		                <div class="s_p_wprice sl"><span>￥${policy.tcPrice}</span></div>
+		                <div class="s_p_pay sl"><span>
+		                	<#if policy.pMode==0>
+		                		景区现付
+		                	<#else>
+		                		在线支付
+		                	</#if>
+		                	</span></div>
+		                <div class="s_p_operation sl">
+		                <!-- 指向下订单的页面，并将政策参数传过去 -->
+		                  <div class="bth bth1"><a href="${contextPath}/mp/scart?id=${policy.policyId}&price=${policy.tcPrice}">预订</a></div>
+		                </div>
+		              </div>
+		          </#list>
+              </#if>
+              </div>
+              <div class="s_p_more"><span>查看所有门票类型(5)<i></i></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="page">  <div class="navPage R"><a href="#" class="Prev"><i></i>上一页</a> <a href="#" class="next">下一页<i></i></a></div></div>
+      </div>
+      <div class="sidebar R">
+        <div class="tese f20 sr box_t">
+          <h2>特色服务</h2>
+          <ul>
+            <li class="t t1"> <span></span>
+              <div class="t_info">
+                <p><strong>价格保证</strong></p>
+                <p>同类产品，保证低价</p>
+              </div>
+            </li>
+            <li class="t t2"> <span></span>
+              <div class="t_info">
+                <p><strong>退订保障</strong></p>
+                <p>因特殊情况影响出行，保证退订</p>
+              </div>
+            </li>
+            <li class="t t3"> <span></span>
+              <div class="t_info">
+                <p><strong>救援保障</strong></p>
+                <p>旅途中遇意外情况，保证救援</p>
+              </div>
+            </li>
+            <li class="t t4"> <span></span>
+              <div class="t_info">
+                <p><strong>7X24小时服务</strong></p>
+                <p>快速响应，全年无休</p>
+              </div>
+            </li>
+            <li class="t t5"> <span></span>
+              <div class="t_info">
+                <p><strong>退订保障</strong></p>
+                <p>因特殊情况影响出行，保证退订</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="history hp f20 sr box_t">
+          <h2>您的浏览记录</h2>
+          <ul>
+          <#list record as record>
+              <li><a href="${contextPath}/mp/view?id=${record.scenicSpotId}">${record.scenicSpotName}</a><b>￥${record.price}</b></li>
+          </#list>
+          </ul>
+        </div>
+        <div class="ranking hp f20 sr box_t">
+          <h2>您的浏览记录</h2>
+          <ul>
+            <#list rank as rank>
+              <li><a href="${contextPath}/mp/view?id=${rank.scenicSpotId}">${rank.scenicSpotName}</a><b>￥${rank.price}</b></li>
+            </#list>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="T_top"> <a href="#">Top</a> </div>
+  </@frame.main>
+<@frame.end "default"> 
+	<script type="text/javascript">
+$(function(){
+	 var chooseobj = {}
+        var oli = $("#attr dl dd a");
+        var ochoose = $("#attr_b");
+        oli.each(function(i,oitem){
+            oitem.onclick = function(){
+               var oword = $(".word");
+               chooseobj[this.getAttribute("cate")] = this.innerHTML;
+               createChooseResult(chooseobj,ochoose[0]);
+             }
+        });
+        function createChooseResult(obj,contain){
+            //console.dir(obj);
+            contain.innerHTML = "";
+            var str = "";
+            for(var i in obj){
+                str += "<div class='wordbox'><span cate="+i+" class='word'>"+obj[i]+"</span><span class='close'>×</span></div>";
+            }
+            contain.innerHTML = str;
+        }
+        $(".close").live("click",function(){
+            var key = $(this).prev().attr("cate");
+            delete chooseobj[key];
+            this.parentNode.parentNode.removeChild(this.parentNode);
+        })
+        var ochoose = $("#attr_b");
+        oli.each(function(i,oitem){
+            oitem.onclick = function(){
+               var oword = $(".word");
+               chooseobj[this.getAttribute("cate")] = this.innerHTML;
+               createChooseResult(chooseobj,ochoose[0]);
+             }
+        });
+        function createChooseResult(obj,contain){
+            //console.dir(obj);
+            contain.innerHTML = "";
+            var str = "";
+            for(var i in obj){
+                str += "<div class='wordbox'><span cate="+i+" class='word'>"+obj[i]+"</span><span class='close'>×</span></div>";
+            }
+            contain.innerHTML = str;
+        }
+        $(".close").live("click",function(){
+            var key = $(this).prev().attr("cate");
+            delete chooseobj[key];
+            this.parentNode.parentNode.removeChild(this.parentNode);
+        })
+				
+		$(".allattr").live("click",function(){
+			var f = $(".wordbox")
+		  delete f.hide()	 
+			 
+			});		
+	
+	})	
+</script>
+
+<script type="text/jscript">
+  $("#attr dl dd a").click(function(){
+	  $(this).addClass("sel").siblings().removeClass("sel")
+	 });
+	
+$('#spot').on('click', '.s_p_more', function(){
+	if($(this).prev('.all_p_list').hasClass('h')){
+		//关闭
+		$('#spot .s_p_more').prev('.all_p_list').removeClass('h');
+	}else{
+		//打开
+		$('#spot .s_p_more').prev('.all_p_list').removeClass('h');
+		$(this).prev('.all_p_list').addClass('h');
+	}
+});
+   </script>
+</@frame.end>
+

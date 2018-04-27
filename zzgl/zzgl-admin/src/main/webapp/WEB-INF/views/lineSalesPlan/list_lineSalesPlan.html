@@ -1,0 +1,123 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+    <form id="pagerForm" class="hlistQueryForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/lineSalesPlan/lineSalesList" method="post">
+        <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+        <input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td style="text-align: left">
+                        活动名称：
+                    </td>
+                    <td><input type="text" name="planName" value="${(pagination.condition.planName)!''}" ></td>
+                    <td style="text-align: left">
+                        出游时间：
+                    </td>
+                    <td>
+                        <input type="text" name="beginDate" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm:ss" value="${(pagination.condition.beginDate)!''}">-
+                        <input type="text" name="endDate" class="date textInput readonly" datefmt="yyyy-MM-dd HH:mm:ss" value="${(pagination.condition.endDate)!''}">
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button onclick="return checkQuery();">查询</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a class="buttonActive" href="${contextPath}/lineSalesPlan/addLineSales" target="navTab" rel="addLineSalesPlan" max="true" title="添加活动"><span>添加活动</span></a>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</div>
+</form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <!--<li>
+                <a title="确实要隐藏这些吗？" target="selectedTodo" postType="string" rel="ids"  href="" class="add"><span>隐藏</span></a>
+            </li>-->
+            <!-- <li>
+                 <a title="确实要删除这些吗？" target="selectedTodo" postType="string" rel="ids"  href="" class="delete"><span>删除</span></a>
+             </li>-->
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="136" >
+        <thead>
+        <tr>
+            <!-- <th width="100">
+                 <input type="checkbox" group="ids"  class="checkboxCtrl">
+             </th>-->
+            <th width="200">活动名称</th>
+            <th width="100">开始时间</th>
+            <th width="100">结束时间</th>
+            <th width="50">优先级</th>
+            <th width="50">团购价格</th>
+            <th width="50">发放数量</th>
+            <!-- <th width="100">团购图片</th>-->
+            <th width="100">出游时间</th>
+            <th width="50">活动类型</th>
+            <th width="100">活动状态</th>
+            <th width="50">已售数量</th>
+            <th width="200">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list pagination.list as lineSalesPlan>
+            <tr>
+                <!-- <td><input name="ids" value="" type="checkbox"></td>-->
+                <td  width="200">${(lineSalesPlan.baseInfo.planName)!""}</td>
+                <td  width="100">${(lineSalesPlan.lineSalesPlanSalesInfo.beginDate)!""}</td>
+                <td width="100">${(lineSalesPlan.lineSalesPlanSalesInfo.endDate)!""}</td>
+                <td width="50">${(lineSalesPlan.lineSalesPlanSalesInfo.priority)!""}</td>
+                <td width="50">${(lineSalesPlan.lineSalesPlanSalesInfo.planPrice)!""}</td>
+                <td width="50">${(lineSalesPlan.lineSalesPlanSalesInfo.provideNum)!""}</td>
+                <td width="100">${(lineSalesPlan.lineSalesPlanSalesInfo.travelDate)!""}</td>
+
+                <td width="100">
+                    <#if (lineSalesPlan.baseInfo.planType)??&&lineSalesPlan.baseInfo.planType==1>
+                        拼团
+                        <#else>
+                            人气秒杀
+                    </#if>
+                </td>
+                <td>
+                    <#if lineSalesPlan.lineSalesPlanStatus?? && lineSalesPlan.lineSalesPlanStatus.status??>
+                        ${lspStatus[(lineSalesPlan.lineSalesPlanStatus.status)?c]!}
+                    </#if>
+
+                </td>
+                <td width="50">${(lineSalesPlan.lineSalesPlanSalesInfo.soldNum)!""}</td>
+                <!-- <td ><image width="100" height="100" src=""/></td>-->
+                <td>
+                    <#if lineSalesPlan.lineSalesPlanStatus.status==1>
+                        <a target="ajaxTodo" title="确定要审核吗？"  href="${contextPath}/lineSalesPlan/showOrHide?status=2&planId=${(lineSalesPlan.id)!}" style="color:blue">审核</a>&nbsp;&nbsp;&nbsp;
+                    </#if>
+                    <#if lineSalesPlan.lineSalesPlanStatus.showStatus==1>
+                        <a target="ajaxTodo" title="确定要显示吗？" href="${contextPath}/lineSalesPlan/showOrHide?showStatus=2&planId=${(lineSalesPlan.id)!}" style="color:blue">显示</a>&nbsp;&nbsp;&nbsp;
+                        <#else>
+                            <a target="ajaxTodo" title="确定要隐藏吗？" href="${contextPath}/lineSalesPlan/showOrHide?showStatus=1&planId=${(lineSalesPlan.id)!}" style="color:blue">隐藏</a>&nbsp;&nbsp;&nbsp;
+                    </#if>
+                    <#if lineSalesPlan.lineSalesPlanStatus.status==1>
+                        <a target="ajaxTodo" title="确定要删除吗？" href="${contextPath}/lineSalesPlan/deleteLineSalesPlan?planId=${(lineSalesPlan.id)!}&status=1" style="color:blue">删除</a>&nbsp;&nbsp;&nbsp;
+                        <a target="dialog"  width="750" height="700"  mask="true" title="修改活动" href="${contextPath}/lineSalesPlan/updateLineSales?planId=${(lineSalesPlan.id)!}&status=1&type=1" style="color:blue">修改</a>
+                    </#if>
+                    <a target="dialog"  width="750" height="700"  mask="true" title="活动详情" href="${contextPath}/lineSalesPlan/updateLineSales?planId=${(lineSalesPlan.id)!}&status=1&type=2" style="color:blue">详情</a>
+                </td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+    <#include "/public/pagination/pagination.html">
+</div>

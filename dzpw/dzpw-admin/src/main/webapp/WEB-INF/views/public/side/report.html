@@ -1,0 +1,16 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>统计报表
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li><a href="${contextPath}/report/ticket_sale_count" target="navTab" rel="ticketSaleReport">联票销售统计</a></li>
+				<li><a href="${contextPath}/report/dealer_sale_count" target="navTab" rel="dealerReport">经销商销售统计</a></li>
+				<li><a href="${contextPath}/report/enter_scenicspot_count" target="navTab" rel="enterScenicspotReport">景区入园统计</a></li>
+				<li><a href="${contextPath}/report/ticket_use_count" target="navTab" rel="ticketUseReport">联票入园统计</a></li>
+			</ul>
+		</div>
+</div>

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改密码</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/member.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <div class="main">
+    <div class="current mt20 clearfix"><strong>企业账户中心：</strong><a href="#">首页</a></div>
+    <div class="sidebar L">
+      <div class="siderbar_title">
+        <h2>账户中心</h2>
+        <h3><a href="#">返回账户中心首页</a></h3>
+      </div>
+      <div class="jiaoyi s_l">
+        <h2><i></i>交易管理</h2>
+        <ul>
+          <li class="sel"><a href="#" class="j1"><i></i>所有订单</a></li>
+          <li><a href="#" class="j2"><i></i>我的卡券</a></li>
+          
+        </ul>
+      </div>
+      <div class="ziliao s_l">
+        <h2><i></i>资料管理</h2>
+        <ul>
+          <li><a href="#" class="z1"><i></i>个人资料</a></li>
+          <li><a href="#" class="z2"><i></i>修改密码</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="M_wrap R">
+       <div class="M_w">
+       <div class="M_m_title">
+       <h2>修改密码</h2>
+       </div>
+       <form action="" id="form1">
+      <ul class="mima">
+      <li><label>原密码:</label><input type="password" id="curp" /><div class="eorr"></div></li>
+      <li><label>新密码:</label><input type="password" id="curpass" placeholder="请输入6-20位字符密码"/><div class="eorr"></div></li>
+      <li><label>重复新密码:</label><input type="password" id="curpass1" /><div class="eorr"></div></li>  
+      <li><label></label><input type="submit" id="s_submit" /></li>  
+       </ul>
+      </form>  
+        </div>
+       </div>
+    </div>
+  </div>
+</div>
+<script src="../js/gb.js"></script>
+<script type="text/javascript">
+$("#curp").blur(function(){
+var curp = $("#curp").val()
+var curpreg = /^(\w){6,20}$/;;
+$.ajax()
+ if(curpreg.test(curp)){
+	  $(this).next(".eorr").html("<div class='wrong error'><i></i>成功</div>");
+		}
+   else{
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>请输入中文字</div>")
+	}
+ });
+ 
+$("#curpass").blur(function(){
+var curp = $("#curpass").val()
+var curpreg = /^(\w){6,20}$/;;
+ if(curpreg.test(curp)){
+	  $(this).next(".eorr").html("<div class='wrong error'><i></i>成功</div>");
+		}
+   else{
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>请输入6-20位字符密码</div>")
+	}
+ });
+ $("#curpass1").blur(function(){
+	 var curp = $("#curpass").val()
+	 var curp1 = $("#curpass1").val()
+	 if(curp === curp1){
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>成功</div>");
+		}
+   else{
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>密码不一致</div>")
+		 }
+ 	 });
+ $("#form1").submit(function(){
+ 	var curp = $("#curp").val();
+	var curp = $("#curpass").val();
+	var curp1 = $("#curpass1").val();
+ 	if(curp.length>=6&&curp.length<=20){
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>成功</div>");
+  }
+	 else{
+		 alert(this.typeof)
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>请输入6-20位字符密码</div>")
+		 return false
+		 }	 
+	 var curp = $("#curpass").val()
+	 var curp1 = $("#curpass1").val()
+	 if(curp === curp1){
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>成功</div>");
+		}
+   else{
+		 $(this).next(".eorr").html("<div class='wrong error'><i></i>密码不一致</div>")
+		 return false
+		 } 
+	 return true
+	 })
+	 
+	 
+ 
+
+</script>	
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">公司列表</span>
+				</div>
+				<div class="actions">
+					<!-- <a href="${contextPath}/hg/auth/project/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="projectIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a> -->
+					<a href="${contextPath}/company/add" class="btn btn-default btn-sm" target="hgTab"> <i
+						class="fa fa-plus"></i> 添加公司
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							公司名称：
+							<input class="form-control input-small input-inline" name="companyName" id="name">
+						</label>
+					</div>
+					<div class="col-md-4 text-right" style="float: right;">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#companyGrid" data-ref-param="{companyName: $('#name').val()}"><i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<!-- <th class="table-checkbox"><input type="checkbox" group="projectIds"
+								class="checkboxCtrl"/></th> -->
+							<th>公司名称</th>
+							<th>公司简介</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="companyGrid" target="grid" data-url="${contextPath}/company/companylist">
+						<tr class="odd gradeX">
+							<!-- <td>
+								<input type="checkbox" name="projectIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td> -->
+							<td>
+								{companyName}
+							</td>
+							<td>
+								{description}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/company/del?companyID={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/company/edit?companyID={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

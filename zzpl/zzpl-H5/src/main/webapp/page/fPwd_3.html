@@ -1,0 +1,160 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>重置密码3/3</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/findPwd.css" rel="stylesheet" />
+  <script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js" language="javascript"></script>
+  <script type="text/javascript">
+  function formsubmit(){
+	  $("#form").submit();
+  }
+  function alertMsg(msg){
+	    var html=' <div class="alertMsg"> <span>'+msg+'</span> </div>';
+	    $(".alertMsg").remove();
+	    $("body").append(html);
+	    var that=$(".alertMsg");
+	    setTimeout(function(){
+	      that.remove();
+	    },2500);}
+  </script>
+</head>
+
+<body>
+<div class="bg1_header">
+  <header class="header box">
+    <a href="${contextPath}/login" class="back_iconfont iconfont">&#xe606;</a>
+    <h1>设置新密码</h1>
+  </header>
+</div>
+<section class="content_form">
+  <form id="form" action="${contextPath}/login/resetpassword" method="post">
+  <input type="hidden" name="sagaID" value="${sagaID}"/>
+    <div class="input_wrap input_wrap_2">
+      <dl>
+        <dt>新密码</dt>
+        <dd>
+          <input id="newpwd" type="password"  name ="newPassword" placeholder="请输入新密码" id="newPwd">
+        </dd>
+      </dl>
+      <dl>
+        <dt>确认新密码</dt>
+        <dd>
+          <input id="newPwdAgain" type="password" placeholder="确认新密码" id="again">
+        </dd>
+      </dl>
+    </div>
+    <div class="btn_wrap">
+      <button type="submit" class="btn_submit" onclick="">确定</button>
+    </div>
+  </form>
+</section>
+<script>
+$(".btn_submit").click(function(e){
+    e.preventDefault();
+    var newpwd=$("#newpwd");
+    var newPwdAgain=$("#newPwdAgain");
+    var pattern=/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+    
+    if(newpwd.val()==""){
+      alertMsg("请填写新密码");
+      newpwd.focus();
+      return;
+    }
+    if(newPwdAgain.val()==""){
+      alertMsg("请再次填写新密码");
+      newPwdAgain.focus();
+      return;
+    }
+
+    var flag=true;
+    $("#form input[type=password]").each(function(){
+      var that=$(this);
+      if(flag){
+    
+        if(that.val().length<6||that.val().length>20){
+          alertMsg("请填写6-20位字母和数字组合");
+          that.focus();
+          flag=false;
+        }
+        if(pattern.test(that.val())){
+          alertMsg("有非法字符`~!@#$%^&*(");
+          that.focus();
+          flag=false;
+        }
+      }
+    });
+    if(!flag){
+      return;
+    }
+    if(newPwdAgain.val()!=newpwd.val()){
+      alertMsg("两次密码不一致请确认");
+      newpwd.focus();
+      newPwdAgain.val("");
+      newpwd.val("");
+      return;
+    }
+    formsubmit();
+  });
+
+/* 
+  $(".btn_submit").click(function(e){
+    e.preventDefault();
+    var newpwd=$("#newPwd");
+    var newPwdAgain=$("#again");
+    var pattern=/[`~!@#$%^&*()_+<>?:"{},.\/;'[\]]/im;
+    if(newpwd.val()==""){
+      alertMsg("请填写新密码");
+      newpwd.focus();
+      return;
+    }
+    if(newPwdAgain.val()==""){
+      alertMsg("请再次填写新密码");
+
+      newPwdAgain.focus();
+      return;
+    }
+    var flag=true;
+    $("#form input").each(function(){
+      var that=$(this);
+      if(flag){
+        if(that.val().length<6||that.val().length>20){
+          alertMsg("请填写6-20位字母和数字组合");
+          that.focus();
+          flag=false;
+        }
+        if(pattern.test(that.val())){
+          alertMsg("有非法字符`~!@#$%^&*(");
+          that.focus();
+          flag=false;
+        }
+      }
+    });
+    if(!flag){
+      return;
+    }
+    if(newPwdAgain.val()!=newpwd.val()){
+      alertMsg("两次密码不一致请确认");
+      newpwd.focus();
+      newPwdAgain.val("");
+      newpwd.val("");
+      return;
+    }
+    $("#form").submit();
+  });
+  function alertMsg(msg){
+    var html=' <div class="alertMsg"> <span>'+msg+'</span> </div>';
+    $(".alertMsg").remove();
+    $("body").append(html);
+    var that=$(".alertMsg");
+    setTimeout(function(){
+      that.remove();
+    },2500);
+  } */
+  </script>
+</body>
+</html>

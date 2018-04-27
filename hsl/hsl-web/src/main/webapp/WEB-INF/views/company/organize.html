@@ -1,0 +1,170 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "部门员工通讯录">
+
+<link href="${(contextPath)!}/resources/css/company/company.css" rel="stylesheet" />
+<link href="${(contextPath)!}/resources/css/company/company_list.css" rel="stylesheet" />
+
+<script src="${(contextPath)!}/resources/js/company/company.js" language="javascript"></script>
+<script src="${(contextPath)!}/resources/js/company/company_list.js" language="javascript"></script>
+</@frame.head>
+
+<!--导入成员-->
+<div class="IntroductionBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">导入成员<a href="javascript:;"></a></div>
+        <div class="file">
+            <form action="" method="post" enctype="multipart/form-data" id="uploadFileForm" target="uploadIframe">
+            <span>导入文件：</span>
+            <input type="text" name=""  id="uploadFile" style="background:#fff;" value="">
+            <input class="file" type="file" id="uploadfileName" style=" display:none">
+            <a class="choice" href="javascript:;">请选择文件</a>
+            </form>
+            <iframe name="uploadIframe" src="" style="display:none;" ></iframe>
+        </div>
+        <a class="yes" href="javascript:;" id="uploadYes">确 定</a>
+    </div>
+</div>
+<!--导入成员-->
+<!--添加组织-->
+<div class="organizationBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">添加组织<a href="javascript:;"></a></div>
+        <div class="file">
+            <span>组织名称：</span>
+            <input type="text" class="members input_p" name="" id="group" style="background:#fff;" />
+            <div class="eorr"></div>
+        </div>
+        <a class="yes" href="javascript:;" id="addgroup">确 定</a>
+    </div>
+</div>
+<!--添加组织-->
+<!--添加部门-->
+<div class="addDepBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">添加部门<a href="javascript:;"></a></div>
+        <div class="file">
+            <span>部门名称：</span>
+            <input type="text" class="members input_p" name="" id="depart" style="background:#fff;" maxlength="10" />
+            <div class="eorr"></div>
+        </div>
+        <a class="yes" href="javascript:;"  id="adddepart">确 定</a>
+    </div>
+</div>
+<!--添加部门-->
+<!--添加成员-->
+<div class="membersBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">添加成员<a href="#"></a></div>
+        <ul class="boxForm">
+        <form id="add_person">
+        	<input type="hidden" id="m_deptId" name="deptId" value="<#if deptId??>${(deptId)!} <#else>${(departmentList[0].id)!}</#if>" />
+        			
+            <li><span>姓名：</span><input class="members input_p username" type="text" name="name" id="person_name"><div class="eorr"></div></li>
+            <li><span>职务：</span><input class="members input_p zhiwu" type="text" name="job" id="person_job"><div class="eorr"></div></li>
+            <li><span>手机：</span><input class="members input_p tel" type="text" name="mobilePhone" id="person_mobile" maxLenth="12"><div class="eorr"></div></li>
+            <li><span>身份证号：</span><input class="members input_p certificate" type="text" name="certificateID" id="person_cardid"><div class="eorr"></div></li>
+        </form>
+        </ul>
+        <a class="yes" href="javascript:;"  id="addperson">确 定</a>
+    </div>
+</div>
+<!--添加成员-->
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	
+	<div class="g_cont disb ov">
+		<@frame.nav "部门员工通讯录" 3></@frame.nav>
+		<div class="m_cont ov fl">
+		 <!--右侧呈现页-->
+            <div class="ri">
+                <h1 class="rih1 yahei normal">部门员工通讯录</h1>
+                <ul class="rinav yahei" id="company_list">
+                    	<#list (companyList)!null as company>
+			        		<#if defaultCompanyId==company.id>
+			        		<li  class="selected" id="${(company.id)!}"><a href="${(contextPath)!}/company/organizeManage?id=${(company.id)!}">${(company.companyName)!}</a></li>      			
+			        		<#else>
+			        		<li id="${(company.id)!}"><a href="${(contextPath)!}/company/organizeManage?id=${(company.id)!}">${(company.companyName)!}</a></li>
+			        		</#if>
+			        	</#list>
+			        	<a class="addOrg yahei " id="ac_btn" href="#"  rel="dialog" for="organizationBox"><b>+</b>新增组织</a>
+                </ul>
+                <div class="navsbox">
+                    
+                    <a class="Introduction bt1 yahei h3" id="upload_M" href="javascript:;" rel="dialog" for="IntroductionBox">导入</a>
+                    <a class="bt1 yahei h3" href="javascript:;" id="download">导出</a>
+                </div>
+                <#if departmentList??&&(departmentList?size>0)>
+                <div class="bt">
+                  <span>
+                    <a href="javascript:;" class="addMembers" rel="dialog" for="membersBox">添加成员</a>
+                    <a href="javascript:;" id="del">删除成员</a>
+                  </span>
+                </div>
+                </#if>
+                <div class="inbox">
+                <!--分页表单-->
+					<form action="../company/organizeManage" method="get" class="mpOrderForm">
+						
+			               <input type="hidden" class="pageNum" name="page" value="${(memberPage.pageNo?c)!}">
+               			   <input type="hidden" name="pageSize" value="${(memberPage.pageSize?c)!}">
+			               
+			               <input type="hidden"  id="deptId" name="deptId" value="${(deptId)!}">
+			               <input type="hidden" id="id"  name="id" value="${(defaultCompanyId)!}">
+			              
+					</form>
+					<!-- 分页表单 -->
+                    <div class="rightNav" id="zz_bth">
+                        <a class="addDep yahei h2 color3" href="javascript:;" rel="dialog" for="addDepBox"><b>+</b>新增部门</a>
+                        <input class="bmNum" value="${departmentList?size}" type="hidden">
+                        <ul class="bm" id="department_list">
+                            <#list (departmentList)!null as dept>
+				           		<li  id="${(dept.id)!}" <#if deptId==dept.id>class="selected1" </#if>><a class="department" href="${(contextPath)!}/company/organizeManage?id=${(defaultCompanyId)!}&deptId=${(dept.id)!}" >${(dept.deptName)!}</a></li>
+				           	</#list>
+                        </ul>
+                    </div>
+                    <!--右侧列表开始-->
+                    <div class="depart fl" id="memberList">
+                        <ul class="rightTable">
+                            <li class="title">
+                            <span class="all">
+                            <i></i><span>全选</span></span><span class="name">姓名</span><span class="position">职务</span><span class="mobile">手机</span><span class="id">身份证号</span></li>
+							<#list (memberPage.list)!null as member>
+					          <#if (member_index>4)><#break /></#if>
+					           	<li>
+					           	<span class="all"><i id="${(member.id)!}"></i></span><span class="name">${(member.name)!}</span>
+					           	<span class="position">${(member.job)!}</span>
+					           	<span class="mobile">${(member.mobilePhone)!}</span>
+					           	<span class="id">${(member.certificateID)!}</span>
+					          </li>
+					          </#list>
+                        </ul>
+                      
+                    	<!--分页导航-->
+	                   <div class="m_pageNav listPageStyle">
+	                   	<div id="page" class="m_nums"></div>
+	                   	</div>
+	                   <!--分页导航-->
+                    </div>
+                    <!--右侧列表结束-->
+                </div>
+            </div>
+        <!--右侧呈现页-->
+		
+		
+		</div>
+	</div>
+</div>
+
+</@frame.main> 
+<@frame.end "default"> </@frame.end>	
+
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+<script>
+$(function(){
+	 pageCreate(${(((memberPage.totalCount-1)/5+1)?int)!1},"mpOrderForm");
+});
+
+</script>

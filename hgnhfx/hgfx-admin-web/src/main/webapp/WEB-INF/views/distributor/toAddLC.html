@@ -1,0 +1,115 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/toAddLC.js" type="text/javascript"></script>
+<script>
+function listenerBox(){
+	if($("#alertMsgBox").attr("name")!="alertMsgBox"){
+		$("#myBackground").css("display","none");
+	}
+}
+var path = '${contextPath}';
+var incrementValidateflag=0;
+var provePathValidateflag=0;
+var alertFlag=0;
+//展现弹出框
+function alertMessage(msg){
+	if(alertFlag==0){
+		var myBackground = "<div id='myBackground' class='alertBackground' style='display: none;'>";
+		$("body").append(myBackground);
+		alertFlag++;
+	}
+	var str = "</div><div id='alertMsgBox' class='alert' style='top: 0px;' name='alertMsgBox'><div class='alertContent'><div class='error'><div class='alertInner'><h1>错误</h1><div id='msgcontent' class='msg'></div></div><div class='toolBar'><ul><li><a class='button' rel='' href='javascript:'><span onclick='noAlertMessage()'>确定</span></a></li></ul></div></div></div><div class='alertFooter'><div class='alertFooter_r'><div class='alertFooter_c'></div></div></div></div>";
+	$("body").append(str);
+	$("#msgcontent").html(msg);
+	$("#myBackground").css("display","block");
+}
+//去弹出框
+function noAlertMessage(){
+	$("#myBackground").css("display","none");
+	alertMsg.close();
+}
+//校验里程数
+function incrementValidate(){
+	var reg = /^[1-9]*[1-9][0-9]*$/;
+	if(!reg.test($("#incrementVal").val())){
+		$("#increment").html("<span for='provePath' class='error'>请填写正整数</span>");
+		incrementValidateflag++;
+	}else if($("#incrementVal").val().length>16||$("#incrementVal").val().length<2){
+		$("#increment").html("<span for='provePath' class='error'>请输入2-16位的正整数</span>");
+		incrementValidateflag++;
+	}else{
+		$("#increment").html("");
+		incrementValidateflag=0;
+	}
+}
+//校验图片地址
+function provePathValidate(){
+	if($("#provePathVal").val()=="nothing"){
+		$("#provePath").html("<span for='provePath' class='error'>必填字段</span>");
+		provePathValidateflag++;
+	}else{
+		$("#provePath").html("");
+		provePathValidateflag=0;
+	}
+}
+//提交校验
+function checkform(){
+	incrementValidateflag=0;
+	provePathValidateflag=0;
+	incrementValidate();
+	provePathValidate();
+	if(provePathValidateflag==0&&incrementValidateflag==0){
+		if(confirm("确认修改吗")){
+			$("#myform").submit();
+		}else{
+		}
+	}else{
+		var str = "提交数据不完整，"+(incrementValidateflag+provePathValidateflag)+"个字段有错误，请改正后再提交!";
+		alertMessage(str);
+	}
+	listenerBox();
+}
+
+</script>
+<div class="pageContent">
+
+    <form id="myform" method="post" action="${contextPath}/distributorManagement/addLC" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+        	<div class="unit">
+                <label>账号：</label>
+                <label style="width:200px;">${loginName!''}</label>
+            </div>
+            <div class="unit">
+                <label>积分余额：</label>
+                <label style="width:200px;">${usableBalance!''}积分</label>
+            </div>
+            <div class="unit">
+                <label>添加积分：</label>
+                <input style="width:130px;" size="17" type="text"  class="required shiqiwei" id="incrementVal" name="increment"   style="width:62px;" />
+            	<span class="info">&nbsp;&nbsp;请填写正整数</span>
+            	<span id="increment" ></span>
+            </div>
+            <div class="unit">
+                <label>上传证明：</label>
+                
+				<input id="imgFile" name="file" type="file" onchange="imageAdd.imageUpload(this);" style="width:68px;"/>
+                <span style="color: #7F7F7F;">证明为对公账号转账的证明，以图片形式上传</span>
+                <br/>
+                <br/>
+                 <label>&nbsp;</label><img id="imgView" src="" style="width: 310px;height: 200px;">
+            <span id="provePath"></span>
+            <input type="hidden" name="distributorID" value="${distributorID}" class="required"/>
+            <input type="hidden" name="provePath" id="provePathVal" onchange="provePathValidate()" value="nothing" class="required"/>
+            </div>
+        </div>
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive"><div class="buttonContent"><button  type="button" onclick="checkform()" >确认修改</button></div></div></li>
+                <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+            </ul>
+        </div>
+    </form>
+</div>
+<div id = "myalert">
+

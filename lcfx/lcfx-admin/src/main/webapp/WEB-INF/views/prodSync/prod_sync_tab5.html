@@ -1,0 +1,33 @@
+<div>
+<button onclick="startSync()" id="buttonStartSync">同步</button>
+</div>
+<div id="e1433834635009">
+</div>
+
+<script type="text/javascript">
+var syncInfoIntervalId =null;
+function startGetSyncInfo(){
+	syncInfoIntervalId= setInterval(getSyncInfo,1000/4);
+}
+function stopGetSyncInfo(){
+	clearInterval(syncInfoIntervalId);
+}
+function getSyncInfo(){
+	var r =ut.simpleAjax(contextPath+"/prod_sync/get_sync_info",null);
+	$("#e1433834635009").empty();
+	$("#e1433834635009").append(r);
+}
+function startSync(){
+	$.get(contextPath+"/prod_sync/finish");
+	
+	startGetSyncInfo();
+	$("#buttonStartSync").hide();
+
+}
+
+function exportSyncLog(){
+	window.open(contextPath+"/prod_sync/export")
+
+}
+
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .lineDiv{height: 20px;width: 800px; cursor: pointer}
+        .lineDiv:hover{background:#00A0E9;}
+
+    </style>
+</head>
+<body>
+    <div style="height: 100%;width: 100%;overflow-y: auto">
+        <#list lineDtoList!null as lineDto>
+            <#if lineDto??&&(lineDto.baseInfo.name)!"">
+                <div   class="lineDiv" lineId="${(lineDto.id)!''}"
+                        lineName="${(lineDto.baseInfo.name)!''}"
+                        lineType="${(lineDto.baseInfo.type)!''}"
+                        ><span id="lineName" >${(lineDto.baseInfo.name)!''}</span>
+                <hr/>
+                </div>
+            </#if>
+        </#list>
+    </div>
+</body>
+<script>
+    $(".lineDiv").click(function(){
+        var lineId=$(this).attr("lineId");
+        var lineName=$(this).attr("lineName");
+        var lineType=$(this).attr("lineType");
+        if(lineType==1){
+            $("#lineType").val("跟团游");
+        }else{
+            $("#lineType").val("自助游");
+        }
+        $(".lineType").val(lineType);//用于提交给后台保存
+        $(".lineId").val(lineId);
+        $("#lineName").val(lineName);
+        $.pdialog.closeCurrent();
+    })
+</script>
+</html>

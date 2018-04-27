@@ -1,0 +1,182 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "卡券管理">
+<#if (((user.baseInfo.type?c)!0)==1)>
+	<link href="${(contextPath)!}/resources/css/personal/personal_cardCoupons.css" rel="stylesheet" />
+<#elseif (((user.baseInfo.type?c)!0)==2)>
+	<link href="${(contextPath)!}/resources/css/company/company_cardCoupons.css" rel="stylesheet" />
+</#if>
+
+<script src="${(contextPath)!}/resources/js/company/company_cardCoupons.js" language="javascript"></script>
+
+</@frame.head>
+
+
+<@frame.main "default" 6>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	<div class="g_cont disb ov">
+		<@frame.nav "我的卡券" 6></@frame.nav>
+		<div class="m_cont ov fl">
+		<!--右侧呈现页-->
+            <div class="ri">
+                <span tabId="1" class="rih1 yahei order_p <#if tab==1>onc</#if>"><a href="${contextPath}/company/couponList?tab=1">未使用</a><i></i></span>
+                <span tabId="2" class="rih1 yahei order_p <#if tab==2>onc</#if>"><a href="${contextPath}/company/couponList?tab=2">已使用</a><i></i></span>
+                <span tabId="3" class="rih1 yahei order_p <#if tab==3>onc</#if>"><a href="${contextPath}/company/couponList?tab=3">已过期/作废</a><i style="width:145px; margin-left:-125px;"></i></span>
+                <div class="navsbox"></div>
+                <#if pagination??&&((pagination.list)?size>0)>
+                <!--有订单-->
+                <div class="yesOrder">
+            <span class="donationBox"></span>
+            <div class="tableBox">
+            <span class="more_box"></span>
+                    <ul class="tableUl <#if tab=='2'||tab=='3'>cardUsed</#if>">
+                    	<#if tab=="1">
+                    	
+                        <li class="topBox">
+	                        <span class="source">获取来源</span>
+	                        <span class="money">金额</span>
+	                        <span class="conditions">使用条件</span>
+	                        <span class="term">有效期</span>
+	                        <span class="operation">操作</span></li>
+                        <#list (pagination.list)!null as coupon >
+                        <li>
+	                        <span class="source">${(coupon.baseInfo.couponActivity.baseInfo.name)!}</span>
+	                        <span class="money">${(coupon.baseInfo.couponActivity.baseInfo.faceValue)!}</span>
+	                        <span class="conditions">
+		                        <i style="margin-top:15px;">
+			                        ${(conditionMap[coupon.baseInfo.couponActivity.useConditionInfo.condition?c])!}
+									<#if (((coupon.baseInfo.couponActivity.useConditionInfo.condition?c)!0)==1)>
+										${(coupon.baseInfo.couponActivity.useConditionInfo.minOrderPrice)!}元可以使用
+									</#if>
+								</i>
+								<i><a id="${(coupon.id)!}" class="seeMore" seeMore="seeMore" href="javascript:" >查看更多》</a></i>
+							</span>
+	                        <span class="term"><i>${(coupon.baseInfo.couponActivity.useConditionInfo.beginDate?string("yyyy-MM-dd HH:mm:ss"))!""}至${(coupon.baseInfo.couponActivity.useConditionInfo.endDate?string("yyyy-MM-dd HH:mm:ss"))!""}</i></span>
+	                        
+	                        <#if (coupon.baseInfo.couponActivity.sendConditionInfo.isSend)=="true">
+				             <input type="hidden" class="passivityuserid" />
+				             <input type="hidden" class="initiativeuserid" />
+	                        <span class="operation"><a class="donation" href="javascript:;" id="zz01" name="${(coupon.id)!}">转赠</a></span>
+	                        </#if>
+	                        
+                        </li>
+                    	</#list>	
+                    
+                    	<#elseif tab==2>
+                    	
+                    	 <li class="topBox">
+	                        <span class="source">使用订单</span>
+	                        <span class="money">金额</span>
+	                        <span class="conditions">使用条件</span>
+	                        <span class="term">使用日期</span>
+	                    </li>
+	                    <#list (pagination.list)!null as coupon >
+	                    <li>
+	                    	<span class="source">${(coupon.consumeOrder.orderId)!}</span>
+	                    	<span class="money">${(coupon.baseInfo.couponActivity.baseInfo.faceValue)!}</span>
+	                    	<span class="conditions">
+	                    		<i style="margin-top:15px;">	
+	                    		${(conditionMap[coupon.baseInfo.couponActivity.useConditionInfo.condition?c])!}
+								<#if (((coupon.baseInfo.couponActivity.useConditionInfo.condition?c)!0)==1)>
+									${(coupon.baseInfo.couponActivity.useConditionInfo.minOrderPrice)!}元可以使用
+								</#if>
+								</i>
+								<i><a id="${(coupon.id)!}" class="blue J_order_info seeMore" seeMore="seeMore" href="javascript:" >查看更多>></a></i>
+	                    	</span>
+	                    	<span class="term ov">
+	                    		<!-- 从时间中遍历出使用日期 --><i>
+				              	<#list (coupon.eventList)!null as event>
+				              		<#if (event.eventType==2)>
+				              			${(event.occurrenceTime?string("yyyy-MM-dd HH:mm:ss"))!""}<br>
+				              		</#if>
+				              	</#list></i>
+	                    	</span>
+	                    </li>
+	                    </#list>	
+	                    		
+                    	<#elseif tab==3>
+                    	
+                    	 <li class="topBox">
+			              <span class="source">获取来源</span>
+			              <span class="money">金额</span>
+			              <span class="conditions">使用条件</span>
+			              <span class="term">过期时间</span>
+			            
+			           </li>
+			             <#list (pagination.list)!null as coupon >
+			             <li>
+			             <span class="source">${(coupon.baseInfo.couponActivity.baseInfo.name)!}</span>
+			             <span class="money">${(coupon.baseInfo.couponActivity.baseInfo.faceValue)!}</span>
+			             <span class="conditions">
+	                    		<i style="margin-top:15px;">	
+			              		${(conditionMap[coupon.baseInfo.couponActivity.useConditionInfo.condition?c])!}
+								<#if (((coupon.baseInfo.couponActivity.useConditionInfo.condition?c)!0)==1)>
+								${(coupon.baseInfo.couponActivity.useConditionInfo.minOrderPrice)!}元可以使用
+								</#if>
+			              		</i>
+			             <i><a  id="${(coupon.id)!}" class="blue J_order_info seeMore" seeMore="seeMore" href="javascript:" >查看更多>></a></i>
+			              &nbsp;&nbsp;&nbsp;&nbsp;
+			             </span>
+			             
+			              <span class="term ov">
+							<!-- 从时间中遍历出过期日期 -->
+			              	<#list (coupon.eventList)!null as event>
+			              		<#if (event.eventType==3||event.eventType==4)>
+			              			${(event.occurrenceTime?string("yyyy-MM-dd HH:mm:ss"))!""}
+			              		</#if>
+			              	</#list>
+						  </span>
+						  </li>
+			             </#list>
+                    	
+                    	
+                    	</#if>
+                    
+                    </ul>
+                   
+                    
+             <!--分页导航-->
+               <form id="pageForm" class="pageForm" action="${contextPath}/company/couponList">
+			  	<input type="hidden" name="tab" value="${(tab)!}"/>
+			  	<input type="hidden" class="pageNum" name="pageNum" value="${(pagination.pageNo)!}"/>
+			  	<input type="hidden" class="pageSize" name="pageSize" value="${(pagination.pageSize)!}"/>
+			  </form>
+               <div class="m_pageNav listPageStyle">
+               <div id="page" class="m_nums"></div>
+               </div>
+             <!--分页导航-->
+              </div>
+          </div>
+            <!--有订单-->
+            <#else>
+            <!--没有订单-->
+                <div class="noOrder">
+                    <span class="noIcon"></span>
+                    <span class="in">您暂时还没有获得卡券哦~</span>
+                </div>
+                <!--没有订单-->
+            </div>
+            </#if>
+      </div>
+            
+        <!--右侧呈现页-->
+		
+		
+		</div>
+	</div>
+</div>
+<@frame.end "default"> </@frame.end> 
+</@frame.main>	
+
+<script src="${(contextPath)!}/resources/js/lib/time/yui-min.js"></script> 
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+<script type="text/javascript">
+	// 添加机票分页控件
+	$(function(){
+		pageCreate(${(((pagination.totalCount-1)/5+1)?int)!1},"pageForm");
+	})
+	
+</script>	

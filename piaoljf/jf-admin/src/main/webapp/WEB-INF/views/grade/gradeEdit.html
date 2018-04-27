@@ -1,0 +1,74 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" id="addrule_form_r" action="${contextPath}/grade/edit"   class="pageForm required-validate"   >
+		<input type="hidden" name="id" value="${entity.id}">
+		<input type="hidden" name="accountType" value="${entity.accountType}">
+		<div class="pageFormContent" layoutH="58">
+			 <div class="unit">
+				<label>依据账户类型：</label>
+			 	${entity.accountTypeObj.name}
+			</div>
+			<div class="unit">
+				<label>等级编码:</label>
+				<input readonly="readonly" type="text" id="rule_code_r"  name="code" value="${entity.code}" size="64" maxlength="64" class="required"/>
+			</div>
+			<div class="unit">
+				<label>等级名称：</label>
+				<input  type="text" name="name" value="${entity.name}" size="64" class="required"  maxlength="64" class="required"/>
+			</div>
+			
+
+			<div class="unit">
+				<label>达到积分值</label>
+				<input name="jf" value="${entity.jf}" class="required number" >
+			</div>
+			<div class="unit">
+				<label>有限期（年）</label>
+				<input name="validYear" value="${entity.validYear}" class="required number" >
+			</div>	
+			<div class="unit">
+				<label>失效扣减积分值</label>
+				<input name="invalidJf" value="${entity.validYear}" class="required number" >
+			</div>					
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button"   onclick="putProps()">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+var jsonL;
+  
+
+function putProps(){
+  
+   
+  var f = $("#addrule_form_r");
+  var flag = true;
+   var re = /^\w*$/;
+   var rulecode = $("#rule_code_r").val().trim();
+   if(!re.test(rulecode))
+	{
+	    alert("等级编码只能包括字母、数字、下划线！");
+	    flag = false;
+	}
+   
+  
+  //页面校验
+  if (flag)
+  {
+     flag = validateCallback(f, dialogAjaxDone);
+  }
+ 
+ //验证通过
+  if(flag)
+ {
+    f.submit();
+ }
+ 
+  }
+   
+</script>

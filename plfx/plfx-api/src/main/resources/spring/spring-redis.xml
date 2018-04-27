@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName">
+		
+	<!-- redisson配置 -->
+	
+	<bean id="redissonConfig" class="plfx.jp.app.component.redisson.RedissonConfig">
+		<property name="addressList">
+			<list>
+				<value>${redis1_ip}:${redis1_port}</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="redissonFactory" class="plfx.jp.app.component.redisson.RedissonFactory">
+		<property name="redissonConfig" ref="redissonConfig" />
+	</bean>
+	<bean id="redisson" factory-bean="redissonFactory" factory-method="getRedisson" scope="singleton" />
+	
+	<!-- jedis配置 -->
+	
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxActive" value="${redis_pool_maxActive}" />
+		<property name="maxIdle" value="${redis_pool_maxIdle}" />
+		<property name="maxWait" value="${redis_pool_maxWait}" />
+		<property name="testOnBorrow" value="${redis_pool_testOnBorrow}" />
+		<property name="testOnReturn" value="${redis_pool_testOnReturn}" />
+	</bean>
+	
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg index="0" value="${redis1_ip}" />
+		<constructor-arg index="1" value="${redis1_port}" />
+	</bean>
+
+	<bean id="jedis" scope="prototype" factory-bean="jedisPool" factory-method="getResource" />
+	
+	<bean id="sysConfigCacheManager" class="hg.common.config.SysConfigCacheManager">
+		<property name="jedisPool" ref="jedisPool" />
+	</bean>
+	<bean id="jedis.shardInfo1" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg index="0" value="${redis1_ip}" />
+		<constructor-arg index="1" value="${redis1_port}" />
+	</bean>
+
+	<bean id="jedis.shardInfo2" class="redis.clients.jedis.JedisShardInfo">
+		<constructor-arg index="0" value="${redis2_ip}" />
+		<constructor-arg index="1" value="${redis2_port}" />
+	</bean>
+
+<!-- 	jedis shard pool配置  -->
+<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1">
+			<list>
+				<ref bean="jedis.shardInfo1" />
+				<ref bean="jedis.shardInfo2" /> 
+		</list>
+		</constructor-arg>
+	</bean>
+
+
+	<bean id="jedisCommands" factory-bean="shardedJedisPool"
+		factory-method="getResource" />
+</beans>

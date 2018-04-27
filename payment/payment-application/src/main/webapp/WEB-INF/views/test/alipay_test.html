@@ -1,0 +1,89 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/alipayorder/newOrder">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>客户端编号：</label>
+				<input type="text" name="payOrderCreateDTO.paymentClientId" size="40" maxlength="60" value="425078243aae407da092aaf3d4ab255b" />(必填)
+			</div>
+			<div class="unit">
+				<label>客户端密钥：</label>
+				<input type="text" name="payOrderCreateDTO.paymentClienKeys" size="40" maxlength="60" value="e10adc3949ba59abbe56e057f20f883e" />(必填)
+			</div>
+			<div class="unit">
+				<label>商城用户ID：</label>
+				<input type="text" name="payOrderCreateDTO.payerClientUserId" size="40" maxlength="60" value="1" />
+			</div>
+			<div class="unit">
+				<label>订单编号：</label>
+				<input type="text" name="payOrderCreateDTO.clientTradeNo" size="40" maxlength="60" value="" />(可不填，后台生成)
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>付款方姓名：</label>
+				<input type="text" name="payOrderCreateDTO.name" size="40" maxlength="60" value="张三" />
+			</div>
+			<div class="unit">
+				<label>付款方身份证号：</label>
+				<input type="text" name="payOrderCreateDTO.idCardNo" size="40" maxlength="60" value="360723199107114111" />
+			</div>
+				<div class="unit">
+				<label>付款方手机号：</label>
+				<input type="text" name="payOrderCreateDTO.mobile" size="40" maxlength="60" value="15279107876" />
+			</div>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>收款方姓名：</label>
+				<input type="text" name="payOrderCreateDTO.payeeName" size="40" maxlength="60" value="浙江汇购" />(必填)
+			</div>
+			<div class="unit">
+				<label>收款方支付宝帐号：</label>
+				<input type="text" name="payOrderCreateDTO.payeeAccount" size="40" maxlength="60" value="zjhg_jiesuan@163.com" />(必填)
+			</div>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>支付金额：</label>
+				<input type="text" name="payOrderCreateDTO.amount" size="40" maxlength="60" value="0.01" />(必填)
+			</div>
+			<div class="unit">
+				<label>支付渠道：</label>
+				<input type="text" name="payOrderCreateDTO.payChannelType" size="40" maxlength="60" value="1" />(必填)
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>支付宝partner：</label>
+				<input type="text" name="partner" size="40" maxlength="60" value="2088701074577516" />(必填)
+			</div>
+			<div class="unit">
+				<label>支付宝keys：</label>
+				<input type="text" name="keys" size="40" maxlength="60" value="gfu3gpkuiam1idh45do66ay0se4a83jv" />(必填)
+			</div>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>订单名称：</label>
+				<input type="text" name="subject" size="40" maxlength="60" value="商品名称" />(必填)
+			</div>
+			<div class="unit">
+				<label>订单描述 ：</label>
+				<input type="text" name="body" size="40" maxlength="60" value="汇购测试" />
+			</div>
+			<div class="unit">
+				<label>商品展示地址 ：</label>
+				<input type="text" name="showUrl" size="40" maxlength="60" value="www.baidu.com" />
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" >提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+

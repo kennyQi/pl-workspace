@@ -1,0 +1,100 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	function addChild(id) {
+		var url = "${contextPath}/category/to_add?id=" + id;
+		$.pdialog.open(url, 'category_add', '添加节点',{mask:true,width:900,height:555});　
+	}
+
+	function edit(id) {
+		var url = "${contextPath}/category/edit?id=" + id;
+		$.pdialog.open(url, 'category_edit', '编辑分类',{mask:true,width:900,height:555});　
+
+	}
+
+	function del(id) {
+		var flag = '';
+		$.ajax({
+			url : "${contextPath}/category/check_final_category",
+			cache : false,
+			type : "post",
+			dataType : "json",
+			async:false,
+			data : {
+				id : id
+			},
+			success : function(data) {
+				flag = data.result;
+			
+			},
+			error : function() {
+				return;
+			}
+
+		});
+		
+		var url = "${contextPath}/category/delete?categoryIdList=" + id;
+		var $this = $(this);
+		var title =''
+		if(flag == 'success'){
+			title = "你确定删除该分类吗";
+		}else {
+			 title = "该分类下有子分类，你确定删除该分类下的子分类吗";
+		}
+		if (title) {
+			alertMsg.confirm(title, {
+				okCall : function() {
+					ajaxTodo(url);
+				}
+			});
+		} else {
+			ajaxTodo(url);
+		}
+	}
+</script>
+<!-- 
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/orderChangeGood/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" /> <input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td class="label">xxx:</td>
+					<td><input name="" type="text" value="" /></td>
+
+					<td class="label">xxx:</td>
+					<td><input name="" type="text" value="" /></td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">b1</button>
+							</div>
+						</div></li>
+					<li>
+						<div class="buttonActive">
+							<a class="add" href="${contextPath}/spfl/add" lookupgroup="orgLookup" mask="true" width="900" height="650"><span>b2</span>
+							</a>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+-->
+<div class="pageContent b_button2">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a href="${contextPath}/category/to_add" class="add" mask="true" width="900" height="555" target="dialog" rel="category_add">
+					<span>新增</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div style="padding-top: 5px;padding-bottom: 4px;background-color: #eee;">
+		<b style="padding-left: 20px;">名称</b><span style="float: right;padding-right:  185px;"><b style="padding-right: 100px;">状态</b><b>操作</b> </span>
+	</div>
+	${dwzTreeHTML}
+</div>

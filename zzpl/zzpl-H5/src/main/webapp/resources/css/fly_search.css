@@ -1,0 +1,68 @@
+header{position: relative;z-index: 3;}
+header a{width:22px;}
+/*
+    城市选择
+*/
+
+#serchIndex{position: absolute;width: 100%;}
+
+#city header *{position: relative;z-index: 1;}
+#city .cont{background:none; }
+#city{-webkit-backface-visibility: hidden;}
+
+header:before{content:"";height:42px;background:-webkit-linear-gradient(top,#24272f,rgba(255, 255, 255, 0));display: block;position:absolute;left:0px;top:0px;
+width: 100%;z-index: 0;opacity: 0.3;}
+.citySearch{margin:9px 15px;background: #fff;border-radius: 6px;height:36px;line-height: 36px;font-size:13px;color:#cccccc; display: block;text-align: left;z-index: 3;
+    position: relative;padding-left:15px;}
+.citySearch:before{width:17px;height:17px;content: "";background: url("../images/flySearch.png") no-repeat;background-size: cover;display: inline-block;vertical-align: middle;}
+
+#city .inSearch{display:-moz-box;display:-webkit-box;display:box;}
+#city .inSearch input{-webkit-box-flex: 1;display: block;height: 24px;line-height: 24px;margin:6px 0px;}
+#city .inSearch:before{display: block;margin:9px;}
+#city .inSearch label{width:17px;height:17px;margin:9px;content: "";background: url("../images/flySearchClose.png") no-repeat;background-size: cover;display: block;vertical-align: middle;}
+
+
+#city .city{padding:0px 26px 0px 15px;overflow: hidden;margin-top: 96px;}
+#city .cityFast{width:26px;color:#206b94;font-size:13px;position:fixed;top:96px;right:0px;}
+#city .cityFast a{color:#206b94;font-size:14px;display: block;text-align: center;}
+#city .hotTitle{color:#206b94;}
+.hotList span.cityTap{width:77px;height:28px;border:1px solid #c8cfd5;border-radius:5px;display: block;background: #ffffff;color:#666666;
+text-align: center;line-height: 28px;margin:8px 14px 0px 0px; float:left;}
+.hotList span.on{background:#9ace45;color:#fff;border:1px solid #9ace45;}
+
+.cityAll{
+    position: relative;z-index: 2;}
+#city .cityList{margin-top:10px;float: left;width: 100%;}
+.cityList dt{font-size:16px;color:#206b94;border-bottom: 1px solid #d1e0e5;line-height: 36px;}
+.cityList dd{color:#666666;font-size:16px;border-bottom: 1px solid #e9eff0;line-height: 36px;
+    position: relative;}
+.cityList dd.cityOn{color:#48aa00;}
+.cityList dd.cityOn:after{content:"";width:18px;height:18px;position:absolute; right:9px;top:9px;background: url("../images/flySerachChecked.png") no-repeat;background-size: contain;}
+.headFixed{position:fixed;background-size:cover;top:0px;left:0px;width:100%;z-index: 20;overflow: hidden;}
+.headerBg{position: absolute;top:0px;left:0px;width:100%;z-index: 1;}
+#city .cityBg{position: fixed;top:0px;left:0px;width:100%;z-index: 0;}
+
+.pyBox{position: fixed;top:220px;width:100%;z-index: 100;}
+.pyBox label{width:80px;height:80px;margin:auto;background: #206b94;color:#fff;font-size:36px;border-radius: 50px;text-align: center;
+line-height: 80px;display: block;}
+
+
+/*
+    日历选择
+*/
+#date{width:100%;}
+#dateDetail{background: #fff;}
+#date header *{position: relative;z-index: 1;}
+#dateDetail{margin-top:72px;}
+.fullYear th{line-height:30px;color:#206b94;font-size:14px;text-align: center;border-bottom:1px solid #B4D8EB;}
+#dateDetail th,#dateDetail td{text-align: center;}
+#dateDetail .tt th{line-height: 22px;background: #ddeef6;display: none;}
+#dateDetail td{height:47px;line-height: 47px;opacity: 0;color:#333333;font-size:16px;padding:10px 0px;}
+#dateDetail td div{font-size:16px;display: inline-block;width: 36px;}
+#dateDetail td.show{opacity:1;color:#c7ced4;}
+#dateDetail td.can{color:#333;}
+#dateDetail td.on div{background: #9ace45;border-radius: 4px;color:#fff;}
+.headerDate{height: 30px;position: relative;z-index: 2;}
+.headerDate:before{width:100%;height:30px;background:#fff;position: absolute;left: 0px;top:0px;opacity: 0.4;content: "";}
+.headerDate span{width:13.44%;height:30px;line-height: 30px;display:inline-block;text-align: center;}
+.headerDate span:first-child,.headerDate span:last-child{color:#48aa00;}

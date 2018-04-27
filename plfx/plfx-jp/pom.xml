@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>plfx</groupId>
+		<artifactId>plfx-parent</artifactId>
+		<version>1.3.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+	<artifactId>plfx-jp-parent</artifactId>
+	<name>plfx-jp-parent</name>
+	<packaging>pom</packaging>
+	<url>http://www.hg365.com</url>
+	
+	<modules>
+		<!-- 机票公共领域模型 -->
+		<module>plfx-jp-domain</module>
+		<!-- 机票公共服务 -->
+		<module>plfx-jp-application</module>
+		
+		<module>plfx-jp-spi</module>
+		
+		<!-- 机票通用 JAVA BEAN 定义 -->
+		<module>plfx-jp-pojo</module>
+		
+		<!-- 易行天下国内机票接口 -->
+		<module>plfx-jp-yeexingclient</module>
+		<!-- 易行天下国际机票接口 -->
+		<module>plfx-jp-yxgjclient</module>
+		
+		<!-- 国际机票领域模型(依赖：机票公共领域模型) -->
+		<module>plfx-gjjp-domain</module>
+		<!-- 国际机票服务(依赖：机票公共服务) -->
+		<module>plfx-gjjp-application</module>
+		
+		<!-- 国内机票领域模型(依赖：机票公共领域模型) -->
+		<module>plfx-gnjp-domain</module>
+		<!-- 国内机票服务(依赖：机票公共服务) -->
+		<module>plfx-gnjp-application</module>
+		
+	</modules>
+
+</project>

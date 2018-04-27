@@ -1,0 +1,8 @@
+* 为票量规则做的java模版。
+很重要：
+1)规则参数的代码一定要在一行上，否则不能识别出规则参数！！！
+jfRatio = Double.parseDouble(rule.parameters.get("jfRatio"));//@REMARK@会员下单消费，所得积分（票豆）占消费金额的比重
+2)session参数的格式：
+//@SESSIONREMARK@mailBinding@邮箱绑定
+
+* 打包，使用build.xml。

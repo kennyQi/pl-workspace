@@ -1,0 +1,8 @@
+*{padding:0;margin:0;border:0;}
+body{font-size:12px;font-family:'微软雅黑';}
+img{display:block;}
+.bg{width:100%;height:100%;position:fixed;top:0;left:0;background:url(../img/bg.png);background-size:cover;}
+.btn-download-wrap{width:100%;position:absolute;left:0;}
+.btn-download-wrap a{display:block;width:64.41%;margin:0 auto;text-indent:-9999px;overflow:hidden;}
+.btn-download-wrap .placeholder{width:100%;height:21%;}
+.wx{position:fixed;top:0;left:0;width:100%;height:100%;}

@@ -1,0 +1,33 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>链接已失效 </title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<style>
+body{background: #f7f7f7}
+.g_bd{margin-top:60%;}
+.m_fail{padding-left:11%;background:url(${contextPath}/resources/images/warm.png) no-repeat 0px 0px;font-size:3rem;color:#b3b3b3;display:block;margin:auto;text-align:center; width:48.34%;line-height:1.9em;}
+.m_back{color:#ff2626;font-size:3rem;}
+@media screen and (max-width:380px){
+	.m_fail{background-size:14%;}
+}
+
+@media screen and (min-width:380px) and (max-width:460px){
+	.m_fail{background-size:15%;}
+
+}
+@media screen and (min-width:460px) and (max-width:540px){
+	.m_fail{background-size:15%;}
+}
+</style>
+</head>
+
+<body>
+<div class="g_bd">
+	<span class="m_fail">链接已失效 <a href="${contextPath}${redirectURL!}" class="m_back">返回列表</a></span>
+</div>
+</body>
+</html>

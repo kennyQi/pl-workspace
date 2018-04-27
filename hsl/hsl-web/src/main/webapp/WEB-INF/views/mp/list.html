@@ -1,0 +1,314 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<#assign current = 1 />
+<@frame.head "景点列表">
+
+<link href="${(contextPath)!}/resources/css/jd.css" rel="stylesheet" />
+<script type="text/javascript">
+		
+	$(function(){
+		var reg = new RegExp(",","g");
+		<#if scenicMap??>
+		var totalCount = ('${(scenicMap.count)!}').replace(reg, "");
+		var totalNo = parseInt(totalCount/10)+1;
+		$("#totalPage").val(totalNo);
+		</#if>
+	});
+	
+</script>
+
+</@frame.head>
+<@frame.main "default" "3">
+<!--内容-->
+	  <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="#top">
+    </a>
+<div class="g_bd disb ov p">
+        <!--轮播图部分-->
+        <div class="g_carousel ov pa disb" id="carousel">
+            <div class="img_list pa">
+                <!--图片宽度最少1200-->
+                <a  style="background-image:url(${(contextPath)!}/resources/images/jd_bn1.jpg)" class="turn"></a>
+                <a  style="background-image:url(${(contextPath)!}/resources/images/jd_bn2.jpg)" class="turn"></a>
+                <a  style="background-image:url(${(contextPath)!}/resources/images/jd_bn3.jpg)" class="turn"></a>
+            </div>
+            <div class="m_carousel_p pl ov diab">
+                <ul class="icon pa">
+                </ul></div>
+        </div>
+
+        <!--轮播图部分-->
+    	<!--条件筛选部分-->
+    	<div class="m_search disb pl">
+        	<div class="disb m_search_c ">
+            	<div class="load  color6 simsun"><label class="color8">您的位置：</label><a href="#" class="color6">景点</a> > <span  class="color3">景点列表</span></div>
+                
+                <!--搜索框-->
+                <div class="m_select disb pl">
+                	<div class="select_bg pa"></div>
+                	<div class="select_cont pl ov">
+                        <div class="input_box disb">
+                            <div class="left_bd fl"></div>
+                            <div class="input fl">
+                                <label class="fl">景点门票</label>
+                                 <form action="${(contextPath)!}/mp/list" method="get" id="searchform" name="searchform" class="searchform">
+						          <input type="text" id="scontent" name="content" class="txt" value="${(mpScenicSpotsQO.content)!}" />
+						          <input type="hidden" id="province" name="province" value="${(mpScenicSpotsQO.province)!}"/>
+						          <input type="hidden" id="provinceId" name="provinceId"  value="${(mpScenicSpotsQO.provinceId)!0}"/>
+						          <input type="hidden" id="cityId" name="cityId"  value="${(mpScenicSpotsQO.cityId)!0}"/>
+						          <input type="hidden" id="city" name="city" value="${(mpScenicSpotsQO.city)!}"/>
+						          <input type="hidden" id="mprice" name="maxPrice" value="${(mpScenicSpotsQO.maxPrice)!}"/>
+						          <input type="hidden" id="lprice" name="minPrice" value="${(mpScenicSpotsQO.minPrice)!0}"/>
+						          <input type="hidden" id="grade" name="grade" value="${(mpScenicSpotsQO.grade)!0}"/>
+						          <input type="hidden" id="pageSize" name="pageSize" value="10" />
+						          <input type="hidden" id="pageNum" name="pageNo" class="pageNum" value="${(mpScenicSpotsQO.pageNo)!}"/>
+						          <input type="hidden" id="totalPage" name="totalPage" />
+						          <input type="hidden" id="orderBy" name="orderBy" value="${(mpScenicSpotsQO.orderBy)!0}" />
+						          
+						        </form>
+                            </div>
+                            <a id="sendForm" href="#" class="btn fl"></a>
+                        </div>
+                        <div class="hot_box disb yahei">热门景点：
+                        	<!-- 超链接指向详细的信息页面 -->
+                            <#list (hotScenicMap.dto)!null as hotspots>
+					        	<a href="${(contextPath)!}/mp/view?id=${(hotspots.scenicSpotId)!}">${(hotspots.scenicSpotBaseInfo.name)!}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					        </#list>
+					       
+					        
+                        </div>
+                    </div>
+                </div>
+                
+
+                <!--搜索框-->
+            </div>
+        </div>
+
+        <!--搜索框-->
+        <div class="m_search disb m_search_jd">
+            <div class="disb m_search_c ">
+            <!--左侧筛选-->
+            <div class="left disb">
+                <ul class="left_all fl disb">
+                    <!--省级-->
+                    <li class="left_all_box1 left_all_box3">
+                        <dl class="pl left_choose yahei disb" id="search_province" rel="provinceId">
+                            <dt class="h3 fl">省<i>订单</i>级:</dt>
+                           
+                            <dd rel="0" class="<#if mpScenicSpotsQO.provinceId==0>nor on</#if>"><a href="javascript:">全部</a></dd>
+                           
+                            <#list (provinces)!null as province>
+			      				<dd rel="${(province.code)!}" class="<#if province.id==mpScenicSpotsQO.provinceId>on</#if>"><a href="javascript:" >${(province.name)!}</a></dd>
+			      		 	</#list>
+                            <dd class="more Bg cur pa"><a href="javascript:">更多</a></dd>
+                        </dl>
+                    </li>
+
+                    <!--市级-->
+                    <li class="left_all_box1" style="display:none;">
+                        <dl class=" pl left_choose yahei disb HousePrice" id="search_price" rel="cityId">
+                            <dt class="h3 fl">市<i>订单</i>级:</dt>
+                            <dd rel="0" class="nor on"><a href="javascript:">全部</a></dd>
+                           
+                            
+                        </dl>
+                    </li>
+                    <!--价格-->
+                    <li class="left_all_box1">
+                        <dl class=" pl left_choose yahei disb" id="search_hotalstar">
+                            <dt class="h3 fl">门票价格:</dt>
+                            <dd rel="0" class="nor <#if mpScenicSpotsQO.maxPrice=='' >on</#if>"><a href="javascript:">全部</a></dd>
+                            
+                            <dd lrel="0" mrel="50" class="<#if mpScenicSpotsQO.maxPrice=='50' >on</#if>"><a href="javascript:">￥0-￥50  </a></dd>
+                            <dd lrel="50" mrel="100" class="<#if mpScenicSpotsQO.maxPrice=='100' >on</#if>"><a href="javascript:">￥50-￥100 </a></dd>
+                            <dd lrel="100" mrel="1000" class="<#if mpScenicSpotsQO.maxPrice=='1000' >on</#if>"><a href="javascript:">￥100-￥1000</a></dd>
+                            <dd lrel="1000" mrel="10000" class="<#if mpScenicSpotsQO.maxPrice=='10000' >on</#if>"><a href="javascript:">￥1000-￥10000</a></dd>
+                        </dl>
+                    </li>
+
+                    <!--级别-->
+                    <li class="left_all_box1 left_all_box3 left_all_last" >
+                        <dl class="pl left_choose yahei disb brand" id="search_brand" rel="grade">
+                            <dt class="h3 fl">景点级别:</dt>
+                            <dd rel="0" class="nor <#if mpScenicSpotsQO.grade=='0'||mpScenicSpotsQO.grade=='' >on</#if>" ><a href="javascript:">全部</a></dd>
+                            <dd rel="AAAAA" class="<#if mpScenicSpotsQO.grade=='AAAAA' >on</#if>"><a href="javascript:">AAAAA</a></dd>
+                            <dd rel="AAAA" class="<#if mpScenicSpotsQO.grade=='AAAA' >on</#if>"><a href="javascript:">AAAA</a></dd>
+                            <dd rel="AAA" class="<#if mpScenicSpotsQO.grade=='AAA' >on</#if>"><a href="javascript:">AAA</a></dd>
+                            <dd rel="AA" class="<#if mpScenicSpotsQO.grade=='AA' >on</#if>"><a href="javascript:">AA</a></dd>
+                            <dd rel="A" class="<#if mpScenicSpotsQO.grade=='A' >on</#if>"><a href="javascript:">A</a></dd>
+
+                        </dl>
+                    </li>
+                </ul>
+                <div class="m_cond ov fl">
+                    <div class="m_condBox disb" id="condition">
+                        <h2 id="attr_b" class="tt h3 color3 fl">筛选条件：</h2>
+                        <label id="Mclose" class="clear fl curp">清除条件</label>
+                    </div>
+                </div>
+            </div>
+            <!--左侧筛选-->
+
+            </div>
+        </div>
+
+        <!--搜索框-->
+    	<!--条件筛选部分-->
+        
+        <!--排序部分-->
+        	<div class="m_sort yahei pl ov">
+        		<#if scenicMap??>
+        		<#if ((scenicMap.dto)!null?size!=0)>
+            	<div class="m_sort_box disb" id="desc">
+                	<!--<span class="total color3 disb">共1204条信息</span>-->
+                    <a href="javascript:" class="cmd color6 h2 <#if mpScenicSpotsQO.orderBy==0>cmdon</#if> curp firs">默认排序</a>
+                    <a href="javascript:" class="cmd color6 h2 <#if mpScenicSpotsQO.orderBy==1>cmdon</#if> curp">价格</a>
+                     <#if ((scenicMap.dto)!null?size!=0)>
+	                    <a id="pre" href="javascript:" class="color6 h2 curp  c_page pre">&lt;&lt;上一页</a>
+	                    <a id="next" href="javascript:" class="color6 h2 curp c_page next">下一页&gt;&gt;</a>
+                     </#if>
+                    <span class="icon_list">
+                    	<span class="icon_list_box">
+                        	<span class="check check_on Bg"></span>
+                    		<label class="icon Bg q"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg f"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg c"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg l"></label>
+                        </span>
+                    </span>
+                </div>
+               <#else>
+            	<div class="m_sort_box disb" id="desc">
+		       		抱歉，您根据您的搜索暂无内容，可尝试输入其他关键词
+		       		</div>
+		       </#if>
+		       </#if>
+            </div>
+        <!--排序部分-->
+
+        <!--列表部分-->
+        	<div class="g_list pl ov">
+               
+        		    
+            	<!--每逢第三列 需要添加额外样式 m_list_boxlast-->
+                <div class="m_list ov">
+            		<!--产品列表框-->
+                 <#if scenicMap??>
+        		<#list (scenicMap.dto)!null as spots>  
+                    <div class="m_list_box ov">
+                        <div class="hotel disb ov">
+                        	<span class="pic pl fl">
+                            	<a href="${(contextPath)!}/mp/view?id=${(spots.id)!}"><img src="${(spots.images[0].url)!}" alt="" ></a>
+                            </span>
+                            <div class="detail fl">
+                            	<h3 class="tt bold disb"><a href="${(contextPath)!}/mp/view?id=${(spots.id)!}">${(spots.scenicSpotBaseInfo.name)!}</a>
+                                    <span class="tt_icon">
+                                        <label class="icon">${(spots.scenicSpotBaseInfo.grade)!}</label>
+                                        <!-- <label class="icon">A</label>
+                                        <label class="icon">A</label>
+                                        <label class="icon">A</label> -->
+                                    </span>
+                               	</h3>
+                                <span class="addres Bg disb">${(spots.scenicSpotGeographyInfo.address)!}</span>
+                                <span class="det disb">${(spots.scenicSpotBaseInfo.intro)!}</span>
+                                <span class="tips disb">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+
+                            </div>
+                            <div class="price fl">
+                                <div class="pr">
+                                    ￥${(spots.bookInfoDTO.amountAdvice)!}<i class="up">起</i>
+                                </div>
+                                <a class="look_detail disb" href="${(contextPath)!}/mp/view?id=${(spots.id)!}">查看详情</a>
+                            </div>
+                        </div>
+                        <div class="house disb">
+                        	<table class="tb" cellspacing="0" cellpadding="0">
+                            	<tr class="tt">
+                                	<th class="ho">景点门票</th>
+                                	<th class="bd">票型</th>
+                                	<th class="bf">市场价</th>
+                                	<th class="wf">网站价</th>
+                                	<th class="pr">支付方式</th>
+                                	<th class="bt">&nbsp;</th>
+                                </tr>
+                            	<#if spots.plist?size=0>
+			              				 <tr>
+				                         <td colspan="6">暂无门票信息</td>
+				                     </tr>
+			                       <#else>
+				              	   <#list (spots.plist)!null as policy>
+				                     <tr>
+				                         <td>${(policy.name)!}</td>
+				                         <td>${(policy.ticketName)!}</td>
+				                         <td class="old_p">¥${(policy.retailPrice)!}</td>
+				                         <td class="p">￥${(policy.tcPrice)!}</td>
+				                         <td>景区现付</td>
+				                         <td>
+				                             <a href="${(contextPath)!}/mp/scart?id=${(policy.policyId)!}&price=${(policy.tcPrice)!}" class="rever">预订</a>
+				                         </td>
+				                     </tr>
+			                     </#list>
+			              		</#if>
+                                
+                                <tr class="last">
+                                	<td colspan="6">&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </#list>
+       		 </#if>
+            		<!--产品列表框-->
+                </div> 
+               
+           </div>
+        <!--列表部分-->
+        <!--页脚翻页-->
+        	<div class="g_page ov disb">
+            	<div class="m_pageNav listPageStyle">
+             	<div id="page" class="m_nums"></div>
+             </div>
+            </div>
+            
+             
+        <!--页脚翻页-->
+
+ 		<!--底部图片位置-->
+        	<div class="g_adimg disb ov">
+            	<a href="#"><img src="${(contextPath)!}/resources/images/list_ad5.jpg" class="fl"></a><!--图片尺寸291*160-->
+            	<a href="#"><img src="${(contextPath)!}/resources/images/list_ad6.jpg" class="fl"></a>
+            	<a href="#"><img src="${(contextPath)!}/resources/images/list_ad7.jpg" class="fl"></a>
+            	<a href="#"><img src="${(contextPath)!}/resources/images/list_ad8.jpg" class="fl last"></a>
+            </div>
+        <!--底部图片位置-->
+	</div>
+
+
+</@frame.main>
+<@frame.end "default"></@frame.end>	
+<script src="${(contextPath)!}/resources/js/jd.js" language="javascript"></script>
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtil.js"></script>
+
+<script type="text/javascript">
+	
+	$(function() {
+		//分页初始化;
+		$("#page").pageBar({
+			pageNum : "pageNum",//页码class
+			pageCount : ${(((scenicMap.count-1)/9 +1)?int)!1},//总页数
+			pageSize:"pageSize",//页面大小class
+			formClass : "searchform"//分页表单class
+		});
+	});
+</script>

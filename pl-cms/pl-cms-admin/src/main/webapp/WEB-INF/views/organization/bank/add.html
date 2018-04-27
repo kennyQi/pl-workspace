@@ -1,0 +1,70 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/organization/bank/save"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, navTabAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>银行名称：</label>` <input type="text" name="fullName" size="100"
+					class="required" />
+			</div>
+
+			<div class="unit">
+				<label>银行简称：</label> <input type="text" name="simpleName" size="100"
+					class="required" />
+			</div>
+
+			<div class="unit" style="height: 50px">
+				<label>LOGO图片：</label>
+				<p style="width:80px">
+				<img alt="" id="bankimage" width="50" height="50">
+				<input type="hidden" readonly="readonly" name="logoName" /></p>
+				<p><input type="file" name="fileName" id="add_bank_file_upload" /></p>
+			</div>
+			<div class="unit">
+				<label>简介：</label>
+				<textarea class="editor" name="intro" rows="15" cols="100"
+					upLinkUrl="upload.php" upLinkExt="zip,rar,txt"
+					upImgUrl="upload.php" upImgExt="jpg,jpeg,gif,png"
+					upFlashUrl="upload.php" upFlashExt="swf" upMediaUrl="upload.php"upMediaExt:"avi"></textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+$(function() {
+	 $("#add_bank_file_upload").uploadify({
+         'method'   : 'post',  
+         'buttonText' : '请选择',  
+         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+ 		 'uploader'      : '${contextPath}/uploadFile',
+         'fileObjName'   : 'file', 
+         'onUploadSuccess' : function(file, data, response) { 
+             $('input[name=logoName]').val(data.substring(data.lastIndexOf('/') + 1));
+             $('#bankimage').attr('src','${imageContextPath}' +data.substring(data.lastIndexOf('/')));
+         }  
+     });  
+});
+</script>
+</div>
+

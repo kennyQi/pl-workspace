@@ -1,0 +1,213 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>机票搜索</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+	<script type="text/javascript">
+		var request_path="${contextPath}";
+		function order(data){
+			$("#flightJSON").attr("value",$(data).attr("flightJSON"));
+			$("#cabinInfo").attr("value",$(data).attr("cabinInfo"));
+			$("#order").submit();
+		}
+		
+	</script>
+    <script  data-main="${contextPath}/resources/js/fly_list"  src="${contextPath}/resources/js/require.min.js" async="async" ></script>
+</head>
+
+<body>
+<link href="${contextPath}/resources/css/fly_list.css" rel="stylesheet" />
+<div class="main">
+<div class="headerCont">
+    <!---->
+    <img style="display:none" src="${contextPath}/resources/images/flyListsq.png" alt=""/>
+    <!---->
+        <header class="header box">
+            <a href="${contextPath}/flight/view" class="l iconfont" style="color:#fff;font-size:20px;">&#xe606;</a>
+            <h1>${startCity}-${endCity}
+                <label>共${flightGNListDTOs?size}条</label></h1>
+            <a href="javascript:"  class="r"></a>
+        </header>
+        <form action="${contextPath}/flight/getFlightList" method="post" id="selectFlight">
+        	<input type="text" hidden="hidden" name="orgCity" value="${gnFlightQO.orgCity}"> 
+        	<input type="text" hidden="hidden" name="dstCity" value="${gnFlightQO.dstCity}">
+        	<input type="text" hidden="hidden" name="endCity" value="${endCity}"> 
+        	<input type="text" hidden="hidden" name="startCity" value="${startCity}">  
+        	<input type="text" hidden="hidden" name="orderBy" value="${gnFlightQO.orderBy}" id="orderBy"> 
+        	<input type="text" hidden="hidden" name="orderType" value="${gnFlightQO.orderType}" id="orderType"> 
+        	<input type="text" hidden="hidden" name="startDate" value="${gnFlightQO.startDate}" id="startDate"> 
+        	<input type="text" hidden="hidden" name="flyDay" value="${flyDay}" id="flyDay"> 
+        	<input type="text" hidden="hidden" name="airCompany" value="${gnFlightQO.airCompany}" id="airCompany"> 
+        	<input type="text" hidden="hidden" name=time value="${time}" id="startTime"> 
+	        <div class="searchBox box">
+	            <span class="dayChange dayUp">
+	                前一天
+	            </span>
+	            <div class="dayTime" data-time="${gnFlightQO.startDate}">${gnFlightQO.startDate}${flyDay}</div>
+	            <span class="dayChange dayNext">
+	                后一天
+	            </span>
+	        </div>
+        </form>
+</div>
+<div id="list">
+	<#if flightGNListDTOs?size==0>
+	<p style="text-align: center;margin-top: 200px;"><font style="color: #C4C4C4">该航线没有符合的可用航班!</font></p>
+	</#if>
+	<#list flightGNListDTOs as flightGNListDTO>
+	
+    <div class="fly_box">
+        <div class="found box">
+            <div class="foundDetail">
+                <div class="time box">
+                	<input type="hidden" hidden="hidden" value="${flightGNListDTO.flightID}" id="flightID">
+                    <span class="flyTime">
+                        <e>${flightGNListDTO.startTime?string("HH:mm")}</e><br>${flightGNListDTO.departAirport}
+                    </span>
+                    <span class="crose">
+                        ${flightGNListDTO.dateDiff}
+                    </span>
+                    <span class="flyTime">
+                        <e>${flightGNListDTO.endTime?string("HH:mm")}</e><br>${flightGNListDTO.arrivalAirport}
+                    </span>
+                </div>
+                <div class="company fly_${flightGNListDTO.airComp}">${flightGNListDTO.airCompanyName}${flightGNListDTO.flightNO} <#if flightGNListDTO.planeType??><#if flightGNListDTO.planeType?substring(0,1)=="3">空客A<#elseif flightGNListDTO.planeType?substring(0,1)=="7">波音</#if><#else>&nbsp;-&nbsp;</#if>${flightGNListDTO.planeType}</div>
+            </div>
+            <div class="foundPrice">
+                <label class="p">${flightGNListDTO.ibePrice}</label>
+                <label class="off">${flightGNListDTO.cabinDiscount?number/10}折${flightGNListDTO.cabinName}</label>
+            </div>
+            <div class="moreIcon"></div>
+        </div>
+        <input type="text" hidden="hidden" value='${flightGNListDTO.flightJSON}' class="flightJSON">
+        <ul class="ticket" style="display:none;">
+        <li class="loadIngMsg" style="display: none;">
+	        <div class="downLoading">正在加载</div>
+	    </li>
+        </ul>
+    </div>
+    </#list>
+    <div style="display:none;">
+     	<form action="${contextPath}/flight/writeOrder" method="post" id="order">
+     		<input type="text" hidden="hidden" name="flightJSON" id="flightJSON" value="">
+     		<input type="text" hidden="hidden" name="cabinInfo" id="cabinInfo" value="">
+     		<!-- 页面直接获取 -->
+     		<!-- <input type="text" hidden="hidden" name="orgCityName" value="${startCity}">
+     		<input type="text" hidden="hidden" name="dstCityName" value="${endCity}">
+     		<input type="text" hidden="hidden" name="orgCity" value="${gnFlightQO.orgCity}">
+     		<input type="text" hidden="hidden" name="dstCityv" value="${gnFlightQO.dstCity}"> -->
+     	</form>
+    </div>
+    
+</div>
+<nav>
+    <a href="javascript:" class="p <#if gnFlightQO.orderBy==2>on</#if> single">价格<label class="up <#if gnFlightQO.orderBy==2&gnFlightQO.orderType==2>down</#if>"></label></a>
+    <a href="javascript:" class="time <#if gnFlightQO.orderBy==1>on</#if> single">起飞时间<label class="up <#if gnFlightQO.orderBy==1&gnFlightQO.orderType==2>down</#if>"></label></a>
+    <a href="javascript:" class="s double">筛选<label class="si"></label></a>
+</nav>
+    </div>
+<!--<div id="filter">
+    <div class="filter">
+        <h2 class="t">筛选</h2>
+        <dl class="fliterList">
+            <dt>起飞时段<label class="down"><#if time==null>不限<#elseif time=="00:00">00:00-06:00
+            <#elseif time=="06:00">06:00-12:00<#elseif time=="12:00">12:00-18:00<#elseif time=="18:00">18:00-24:00</#if></label></dt>
+            <dd <#if time==null>class="on"</#if>>不限</dd>
+            <dd data="00:00" for="time" <#if time=="00:00">class="on"</#if>>00:00-06:00</dd>
+            <dd data="06:00" for="time" <#if time=="06:00">class="on"</#if>>06:00-12:00</dd>
+            <dd data="12:00" for="time" <#if time=="12:00">class="on"</#if>>12:00-18:00</dd>
+            <dd data="18:00" for="time" <#if time=="18:00">class="on"</#if>>18:00-24:00</dd>
+        </dl>
+        <dl class="fliterList">
+            <dt>航空公司<label class="down"><#if gnFlightQO.airCompany==null>不限<#elseif gnFlightQO.airCompany=="MU">中国东方航空
+            <#elseif gnFlightQO.airCompany=="FM">上海航空<#elseif gnFlightQO.airCompany=="CA">中国国际航空<#elseif gnFlightQO.airCompany=="HU">海南航空
+            <#elseif gnFlightQO.airCompany=="CZ">中国南方航空<#elseif gnFlightQO.airCompany=="MF">厦门航空<#elseif gnFlightQO.airCompany=="KN">中国联合航空公司
+            <#elseif gnFlightQO.airCompany=="JD">首都航空公司</#if></label></dt>
+            <dd <#if gnFlightQO.airCompany==null>class="on"</#if>>不限</dd>
+            <dd data="MU" for="company" <#if gnFlightQO.airCompany=="MU">class="on"</#if>>中国东方航空</dd>
+            <dd data="FM" for="company" <#if gnFlightQO.airCompany=="FM">class="on"</#if>>上海航空</dd>
+            <dd data="CA" for="company" <#if gnFlightQO.airCompany=="CA">class="on"</#if>>中国国际航空</dd>
+            <dd data="HU" for="company" <#if gnFlightQO.airCompany=="HU">class="on"</#if>>海南航空</dd>
+            <dd data="CZ" for="company" <#if gnFlightQO.airCompany=="CZ">class="on"</#if>>中国南方航空</dd>
+            <dd data="MF" for="company" <#if gnFlightQO.airCompany=="MF">class="on"</#if>>厦门航空</dd>
+            <dd data="KN" for="company" <#if gnFlightQO.airCompany=="KN">class="on"</#if>>中国联合航空公司</dd>
+            <dd data="JD" for="company" <#if gnFlightQO.airCompany=="JD">class="on"</#if>>首都航空公司</dd>
+        </dl>
+    </div>
+    <div class="btnBox">
+        <div class="reset">重置</div>
+        <div class="sure">确定</div>
+    </div>
+</div> -->
+<!-- 筛选浮层 -->
+<div class="flight-filter">
+    <div class="flight-filter-bg"></div>
+    <section id="controlBtn" class="flight-filter">
+        <div class="flight-hd">
+            <div class="flight-cancel-btn">取消</div>
+            <div class="flight-reset-btn">重置</div>
+            <div class="flight-ok-btn">确定</div>
+        </div>
+        <ul class="flight-chooseMenus">
+            <li data-type="0" class="current"><span>起飞时段</span></li>
+            <li data-type="1"><span>航空公司</span></li>
+            <li data-type="2" style="display:none;"><span>舱位</span></li>
+        </ul>
+        <div class="flight-options">
+            <div class="itemsbox">
+                <ul class="fliterList flightTime">
+                    <li data="" <#if time==null>class="dot checked"<#else>class="dot"</#if>>
+                        不限<i></i>
+                    </li>
+                    <li data="00:00" for="time" <#if time=="00:00">class="checked"</#if>>
+                        00:00-06:00<i></i>
+                    </li>
+                    <li data="06:00" for="time" <#if time=="06:00">class="checked"</#if>>
+                        06:00-12:00<i></i>
+                    </li>
+                    <li data="12:00" for="time" <#if time=="12:00">class="checked"</#if>>
+                        12:00-18:00<i></i>
+                    </li>
+                    <li data="18:00" for="time" <#if time=="18:00">class="checked"</#if>>
+                        18:00-24:00<i></i>
+                    </li>
+                </ul>
+                <ul class="fliterList flightName" style="display:none;height:185px;overflow-y:auto;">
+                    <li data="" <#if gnFlightQO.airCompany==null>class="dot checked"<#else>class="dot"</#if>>
+                        不限<i></i>
+                    </li>
+                    <li data="MU" for="company" <#if gnFlightQO.airCompany=="MU">class="checked"</#if>>
+                        中国东方航空<i></i>
+                    </li>
+                    <li data="FM" for="company" <#if gnFlightQO.airCompany=="FM">class="checked"</#if>>
+                        上海航空<i></i>
+                    </li>
+                    <li data="CA" for="company" <#if gnFlightQO.airCompany=="CA">class="checked"</#if>>
+                        中国国际航空<i></i>
+                    </li>
+                    <li data="HU" for="company" <#if gnFlightQO.airCompany=="HU">class="checked"</#if>>
+                        海南航空<i></i>
+                    </li>
+                    <li data="CZ" for="company" <#if gnFlightQO.airCompany=="CZ">class="checked"</#if>>
+                        中国南方航空<i></i>
+                    </li>
+                    <li data="MF" for="company" <#if gnFlightQO.airCompany=="MF">class="checked"</#if>>
+                        厦门航空<i></i>
+                    </li>
+                    <li data="KN" for="company" <#if gnFlightQO.airCompany=="KN">class="checked"</#if>>
+                        中国联合航空公司<i></i>
+                    </li>
+                    <li data="JD" for="company" <#if gnFlightQO.airCompany=="JD">class="checked"</#if>>
+                        首都航空公司<i></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

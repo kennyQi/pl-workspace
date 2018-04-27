@@ -1,0 +1,182 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/airtkt/order/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						线路名称：
+					</td>
+					<td>
+						<input name="name" value=""/>
+					</td>
+					<td>
+						状态：
+					</td>
+					<td>
+						<select>
+							<option>--请选择--</option>
+							<option>未审核</option>
+							<option>审核不通过</option>
+							<option>已审核</option>
+							<option>已上架</option>
+							<option>已下架</option>
+						</select>
+					</td>
+					<td>
+						出发地：
+					</td>
+					<td>
+						<select>
+							<option>--请选择--</option>
+							<option>国内</option>
+							<option>国外</option>
+						</select>
+					</td>
+					<td>
+						线路类别：
+					</td>
+					<td>
+						<select>
+							<option>全部</option>
+							<option>跟团游</option>
+							<option>自助游</option>
+						</select>
+					</td>
+					<td>
+						<select>
+							<option>全部</option>
+							<option>国内线</option>
+							<option>国外线</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						发团日期：
+					</td>
+					<td>
+						<input type="text">
+						-
+						<input type="text">
+					</td>
+					<td>
+						网站价格：
+					</td>
+					<td>
+						<input type="text">
+						-
+						<input type="text">
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="formReset(this)">重置</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			 <li>
+               <a width="800" height="800" rel="line" class="add" href="${contextPath}/traveline/line/toadd" target="dialog" maxable="false" resizable="false"><span>新增线路</span></a>
+           </li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210">
+		<thead>
+			<tr>
+				<th width="120">编号</th>
+				<th width="120">线路类别</th>
+				<th width="120">线路名称</th>
+				<th width="120">出发地</th>
+				<th width="120">人均价格</th>
+ 				<th width="120">状态</th>
+				<th width="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as linDTO>
+				<tr height="60px">
+					<th width="120">编号</th>
+					<th width="120">线路类别</th>
+					<th width="120">线路名称</th>
+					<th width="120">出发地</th>
+					<th width="120">人均价格</th>
+					<th width="120">状态</th>
+					<th width="120">操作</th>
+				</tr>
+				<tr>
+				<td>编号</td>
+				<td>线路类别</td>
+				<td>线路名称</td>
+				<td>出发地</td>
+				<td>人均价格</td>
+				<td>状态</td>
+				<td>
+					<p>
+						<a target="dialog" href="javascript:alert('详情');return;" width="1000" height="800" style="color: blue">
+							线路基本信息
+						</a>
+					</p>
+					<p>
+						<a target="dialog" href="javascript:alert('取消');return;" width="1000" height="800" style="color: blue">
+							 行程详情  
+						</a>
+					</p>
+					<p>
+						<a target="dialog" href="javascript:alert('取消');return;" width="1000" height="800" style="color: blue">
+							团期维护
+						</a>
+					</p>
+					<p>
+						<a target="dialog" href="javascript:alert('取消');return;" width="1000" height="800" style="color: blue">
+							 图片  
+						</a>
+					</p>
+					<p>
+						<a target="dialog" href="javascript:alert('取消');return;" width="1000" height="800" style="color: blue">
+							 查看订单
+						</a>
+					</p>
+					<p>
+						<a target="dialog" href="javascript:alert('取消');return;" width="1000" height="800" style="color: blue">
+							 线路复制
+						</a>
+					</p>
+					<p>
+						<a target="dialog" href="javascript:alert('取消');return;" width="1000" height="800" style="color: blue">
+							  审核
+						</a>
+					</p>
+					
+				</td>
+			 </tr>
+			</#list>
+			
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

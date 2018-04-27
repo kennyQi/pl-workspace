@@ -1,0 +1,126 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+ <#if logPerms??>
+	<div class="accordionHeader">
+		<h2><span>Folder</span>日志管理</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+		
+			<#list logPerms as perm>
+			<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" fresh="true">${perm.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+ </#if>		
+ <#if sysPerms??>		
+	<div class="accordionHeader">
+		<h2><span>Folder</span>系统设置</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<#list sysPerms as perm>
+			<#if  perm.url?? && perm.url?contains("/clearTest")>
+			<#else>
+			<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" >${perm.displayName}</a></li>
+			</#if>
+			</#list>
+		</ul>
+	</div>
+ </#if>
+ <#if authPerms??>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>权限管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<#list authPerms as perm>
+				<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" >${perm.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+ </#if>
+ 
+  <#if orderList??>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>订单管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<#list orderList as perm>
+				<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" >${perm.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+ </#if>
+ 
+ <#if distributorList??>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>商户管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<#list distributorList as perm>
+				<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" >${perm.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+ </#if>
+ 
+ <#if sysMangerList??>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>系统管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<#list sysMangerList as perm>
+				<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" >${perm.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+ </#if>
+ 
+ <#if config??>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>配置
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<#list config as perm>
+				<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" >${perm.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+ </#if>
+ 
+ <#if reportList??>
+ 	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>报表
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<#list reportList as perm>
+				<li><a href="${contextPath}${perm.url}" target="navTab" rel="${perm.rel!}" >${perm.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+ </#if>
+ 
+</div>
+	
+	
+
+
+

@@ -1,0 +1,110 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;添加人员
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/user/useradd" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员名称：</label>
+									<div class="col-md-4">
+										<input type="text" name="name" class="form-control required isSpec chinese" placeholder="人员名称" maxlength="40"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员编号：</label>
+									<div class="col-md-4">
+										<input type="text" name="userNO" class="form-control isSpec required" placeholder="人员编号" maxlength="40" value=""/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员登录名：</label>
+									<div class="col-md-4">
+										<input type="text" name="loginName" class="form-control required isSpec alphanumeric" placeholder="人员登录名" maxlength="20"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">所属部门：</label>
+									<div class="col-md-4">
+										<select name="departmentID" class="form-control">
+											<#list departmentList as list>
+												<option value="${list.id}">${list.departmentName}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">角色：</label>
+									<div class="col-md-4">
+										<#list roleList as list>
+											<input type="checkbox" name="roleID" value="${list.id}" />${list.roleName}
+										</#list>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">购买权限：</label>
+									<div class="col-md-4">
+											<input type="checkbox" name="buyOthers" value="1" />为他人购票
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员性别：</label>
+									<div class="col-md-4">
+										<input type="radio" name="gender" value="1" checked="checked"/>男
+										<input type="radio" name="gender" value="0"/>女
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员身份证：</label>
+									<div class="col-md-4">
+										<input type="text" name="idCardNO" class="form-control idcard" placeholder="人员身份证" maxlength="18"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员生日：</label>
+									<div class="col-md-4">
+										<input type="date" name="birthday" class="form-control required date" dateFmt placeholder="人员生日,格式：1980-01-01" maxlength="10"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员电话：</label>
+									<div class="col-md-4">
+										<input type="text" name="linkMobile" class="form-control required tel"  placeholder="人员电话" maxlength="40"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员邮箱：</label>
+									<div class="col-md-4">
+										<input type="text" name="linkEmail" class="form-control email" placeholder="人员邮箱" maxlength="40"/>
+									</div>
+								</div>
+								<!-- <div class="form-group">
+									<label class="col-md-3 control-label">人员地址：</label>
+									<div class="col-md-4">
+										<input type="text" name="provinceID" class="form-control" placeholder="省份" maxlength="40"/>
+										<input type="text" name="cityID" class="form-control" placeholder="城市地区" maxlength="40"/>
+									</div>
+								</div> -->
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn yellow" target="submit">提交</a>
+									<a class="btn yellow" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

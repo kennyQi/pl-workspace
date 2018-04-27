@@ -1,0 +1,113 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> 
+<@frame.head "中智票量-会员中心">
+
+<#if (((user.baseInfo.type?c)!0)==1)>
+<link href="${(contextPath)!}/resources/css/personal/personal_orderLineDetails.css" rel="stylesheet" />
+<#elseif (((user.baseInfo.type?c)!0)==2)>
+<link href="${(contextPath)!}/resources/css/company/company_orderLineDetails.css" rel="stylesheet" />
+</#if>		
+
+</@frame.head>
+
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	
+	<div class="g_cont disb ov">
+		<@frame.nav "订单管理" 1></@frame.nav>
+		<div class="m_cont ov fl">
+		
+		<!--右侧呈现页-->
+         <div class="ri">
+             <div class="navigation">
+                 <a href="${contextPath}/company/main">我的账户</a><i>></i><a href="${(contextPath)!}/company/orderManage?sel=3">旅游订单</a><i>></i>旅游订单详情
+             </div>
+             <span class="rih1 yahei">订单详情</span>
+             <div class="tableBox">
+                <div class="boxs h3 yahei color3">
+                 <ul>
+                     <li class="tops">
+                     <span class="lineNum">线路编号</span>
+                     <span class="orderNo">订单号</span>
+                     <span class="lineName">线路名称</span>
+                     <span class="adult">成人人数</span>
+                     <span class="children">儿童人数</span>
+                     
+                     </li>
+                     <li style="height:50px; line-height:50px;">
+                     <span class="lineNum">${(lineOrderDTO.lineSnapshot.line.baseInfo.number)!}</span>
+                     <span class="orderNo">${(lineOrderDTO.baseInfo.dealerOrderNo)!}</span>
+                     <span class="lineName">${(lineOrderDTO.lineSnapshot.lineName)!}</span>
+                     <span class="adult">${(lineOrderDTO.baseInfo.adultNo)!}</span>
+                     <span class="children">${(lineOrderDTO.baseInfo.childNo)!}</span>
+                    
+                     </li>
+                     
+                     <li class="tops">
+                      <span class="placeTime">下单时间</span>
+                     <span class="travelTime">出游时间</span>
+                     <span class="starting">出发地</span>
+                     <span class="total">订单总金额</span>
+                     <span class="money">订单金额</span>
+                     <span class="tailSection">尾款金额</span>
+                     <span class="tailSection">优惠卡券</span>
+                     <span class="tailSection">使用余额</span>
+                     </li>
+                     <li>
+                      <span class="placeTime">${(lineOrderDTO.baseInfo.createDate)!}</span>
+                     <span class="travelTime">${(lineOrderDTO.baseInfo.travelDate)!}</span>
+                     <span class="starting">${(lineOrderDTO.lineSnapshot.cityName)!}</span>
+                     <span class="total"><b style="font-size:14px;">￥${(lineOrderDTO.baseInfo.salePrice)!}</b></span>
+                     <span class="money">￥${(lineOrderDTO.baseInfo.bargainMoney)!}</span>
+                     <span class="tailSection">￥${(lineOrderDTO.baseInfo.salePrice-lineOrderDTO.baseInfo.bargainMoney)?c}</span>
+                      <span class="tailSection">￥${(couponPrice)!'0'}</span>
+                      <span class="tailSection">￥${(balance)!'0'}</span>
+                     </li>
+                 </ul>
+                 
+                 <div class="touristInf">
+                 <span class="titles h2 color3">游客信息</span>
+                 <ul>
+                     <li class="tops">
+                     <span class="name1">姓名</span>
+                     <span class="phone1">手机</span>
+                     <span class="type">类别</span>
+                     <span class="ID">身份证号</span>
+                     <span class="orderState">订单状态</span>
+                     <span class="payState">支付状态</span>
+                     </li>
+                     <#list lineOrderDTO.travelers as traveler>
+                     <li class="spans">
+                     <span class="name1">${traveler.name}</span>
+                     <span class="phone1">${traveler.mobile}</span>
+                     <span class="type"><#if traveler.type==1>成人<#else>儿童</#if></span>
+                     <span class="ID">${traveler.idNo}</span>
+                     <span class="orderState">${(lineOrderStatusMap[(traveler.lineOrderStatus.orderStatus?c)])!}</span>
+                     <span class="payState">${(linePayStatusMap[(traveler.lineOrderStatus.payStatus?c)])!}</span>
+                     </li>
+                     </#list>
+                 </ul>
+                 </div>
+                 
+                 <div class="takeTicket">
+                 <span class="titles h2 color3">联系人信息</span>
+                 <ul>
+                     <li class="tops"><span class="name2">取票人姓名</span><span class="phone2">取票人手机</span><span class="null"></span></li>
+                     <li class="spans"><span class="name2">${(lineOrderDTO.linkInfo.linkName)!}</span><span class="phone2">${(lineOrderDTO.linkInfo.linkMobile)!}</span><span class="null"></span></li>
+                 </ul>
+                 </div>
+                </div>
+                
+             </div>
+
+         </div>
+     <!--右侧呈现页-->
+ 	 </div>
+	</div>
+ </div>
+<@frame.end "default"></@frame.end> 
+</@frame.main>    
+     
+     

@@ -1,0 +1,259 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> 
+<@frame.head "中智票量-会员中心">
+
+<#if (((user.baseInfo.type?c)!0)==1)>
+	<link href="${(contextPath)!}/resources/css/personal/personal_home.css" rel="stylesheet" />
+	<link href="${(contextPath)!}/resources/css/personal/personal_allOrderTourism.css" rel="stylesheet" />
+<#elseif (((user.baseInfo.type?c)!0)==2)>
+	<link href="${(contextPath)!}/resources/css/company/company_home.css" rel="stylesheet" />
+	<link href="${(contextPath)!}/resources/css/company/company_allOrderTourism.css" rel="stylesheet" />
+</#if>
+
+
+<script src="${(contextPath)!}/resources/js/company/laydate/laydate.js" language="javascript"></script> 
+<script>
+(function(){   //调用日期插件
+ 	;!function(){								
+		laydate.skin('dahong');							
+      	laydate({
+         elem: '#demo'
+      });							
+   }();
+ })();
+</script>
+
+</@frame.head>
+
+
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	
+	<div class="g_cont disb ov">
+		<@frame.nav "订单管理" 1></@frame.nav>
+		<!--右侧呈现页-->
+		<div class="m_cont ov fl">
+			<div class="ri">
+                <span class="rih1 yahei order_p "><a href="${(contextPath)!}/company/orderManage?sel=1">机票订单</a><i></i></span>
+                <span class="rih1 yahei order_p onc"><a href="${(contextPath)!}/company/orderManage?sel=2">景点订单</a><i></i></span>
+                <span class="rih1 yahei order_p"><a href="${(contextPath)!}/company/orderManage?sel=3">旅游订单</a><i></i></span>
+                <span class="rih1 yahei order_p "><a href="${(contextPath)!}/company/orderManage?sel=4">酒店订单</a><i></i></span>
+                <div class="navsbox"></div>
+                <!--有订单-->
+                <div class="yesOrder">
+                <div class="orderBox">
+                	<form action="${(contextPath)!}/company/orderManage?sel=2" name="mpOrderForm" id="mpOrderForm" class="mpOrderForm" method="post">
+						<!-- 门票订单状态复选框隐藏域 -->
+						<input type="hidden" name="M_orderStatus" id="M_orderStatus" value="${(M_orderStatus)!}"/>	
+						<input type="hidden" name="M_payStatus" id="M_payStatus" value="${(M_payStatus)!}"/>	
+			            
+			            <!-- 分页 -->
+			            <input type="hidden" class="pageNum" name="page" value="${(mPagination.pageNo?c)!}">
+                		<input type="hidden" name="pageSize" value="${(mPagination.pageSize?c)!}">	
+							
+                    <ul class="order">
+                            <li>
+                            	<span class="selti h3">订单编号：</span>
+                            	<input id="M_orderId" name="M_orderId" type="text" class="border slor optionValue input_p" value="${(hslMPOrderQO.dealerOrderCode)!}">
+                            	 <span></span>
+                            </li>
+                            <li style="width:370px; line-height:30px;"><span class="selti h3">下单时间：</span>
+	                            <span class="numTextRight">
+	                            	<input name="M_beginTime" type="text" id="start" value="${(hslMPOrderQO.beginTime)!}" class="border changeTime input_p" onClick="laydate()"></span>
+	                            	<i style=" margin:0 5px; float:left;">-</i>
+	                            <span class="numTextRight">
+	                            	<input name="M_EndTime" type="text" id="end" value="${(hslMPOrderQO.endTime)!}" class="border changeTime input_p" onClick="laydate()">
+	                            </span>
+													
+                            </li>
+                            <li>
+	                            <span class="selti h3">预订人：</span>
+	                            <input id="M_bookMan" name="M_bookMan" type="text" class="border input_p sl optionValue" value="${(hslMPOrderQO.bookMan)!}">
+	                             <span></span>
+                            </li>
+                            <li>
+                            	<span class="selti h3">景点名称：</span>
+                            	<input id="M_scenicSpotsName" name="M_scenicSpotsName" type="text" class="border input_p sl optionValue" value="${(hslMPOrderQO.scenicSpotsName)!}">
+                            	 <span></span>
+                            </li>
+                           <!--  <li><span class="selti h3">支付类型：</span><span class="dd companySelect"><span class="optionValue"  id="optionValue" style="line-height:30px;">请选择</span></span>
+                            <ul class="selectNav" for="optionValue"  forName="M_payStatus">
+                                <li class="l" value="">请选择</li>
+                            </ul>
+                            </li> -->
+                            <li style="width:325px; margin-left:20px;"><span class="selti h3">订单状态：</span><span class="dd companySelect"><span class="optionValue"  id="optionValue1" style="line-height:30px;">请选择</span></span>
+                            <ul class="selectNav" for="optionValue1" forName="M_orderStatus">
+                                <li class="l" value="">请选择</li>
+                                <li class="l" value="1">已取消</li>
+                                <li class="l" value="2">已过期失效</li>
+                                <li class="l" value="3">已预订待消费</li>
+                                <li class="l" value="4">已使用过</li>
+                            </ul>
+                            <a id="sendMp" href="javascript:;"  class="cx">查询</a></li>
+                     </ul>
+                    </form>
+                </div>
+                <#if mpOrderMap??&&((mpOrderMap.dto)?size>0)>
+                <div class="tableBox">
+                      
+                        <span class="inf_box"></span>
+			            <span class="qx_box"></span>
+                        <table  cellspacing="0" cellpadding=0 class="tableUl">
+                            <tr class="topBox">
+                            <td class="order">订单号</td>
+                            <td class="name">景点名称</td>
+                            <td class="type">门票类型</td>
+                            <td class="payType">支付类型</td>
+                            <td class="status">订单状态</td>
+                            <td class="money">订单金额</td>
+                            <td class="people">下单人</td>
+                            <td class="operation">操作</td>
+                            </tr>
+                            <#list (mpOrderMap.dto)!null as mpOrder> 
+                       		<#if (mpOrder_index>4)><#break></#if>
+                            <tr>
+                            <td class="order"><a href="${(contextPath)!}/company/orderManage/ticket?id=${(mpOrder.dealerOrderCode)!}">${(mpOrder.dealerOrderCode)!}</a></td>
+                            <td class="name ov">${(mpOrder.scenicSpot.scenicSpotBaseInfo.name)!}</td>
+                            <td class="type">${(mpOrder.mpPolicy.ticketName)!}</td>
+                            <td class="payType">景点现付</td>
+                            <td class="status">
+                            		<#if (mpOrder.status.cancel==true)> 已取消 
+                            			<#elseif
+											(mpOrder.status.outOfDate==true)> 已过期失效 
+										<#elseif
+											(mpOrder.status.prepared==true)> 已预订待消费 
+										<#elseif
+											(mpOrder.status.used)> 已使用过 
+										<#else> 状态获取失败 
+									</#if>
+							</td>
+                            <td class="money"><b style="font-size:16px;">${(mpOrder.price)!}</b></td>
+                            <td class="people"><i style="margin-top:15px;">${(user.authInfo.loginName)!}</i><i>${(mpOrder.createDate?string("yyyy-MM-dd"))!}</i></td>
+                            <td class="operation">
+                            	<#if (mpOrder.status.prepared=true)> 
+                            		<a class="cancelOrder" id="cancelOrder" href="javascript:" orderId="${(mpOrder.dealerOrderCode)!}">取消订单</a>
+								<#else> 已取消
+								</#if>
+							</td>
+							</tr>
+                           
+                           <!--  <li class="bottomBox"><span class="moneys h3 color3">合计金额: <b style="font-size:20px;">￥690</b></span></li> -->
+                            </#list> 
+                        </table>
+                    </div>
+                    
+                    <!--分页导航-->
+	                   <div class="m_pageNav listPageStyle">
+	                   	<div id="page" class="m_nums"></div>
+	                   </div>
+                   <!--分页导航-->
+                   
+                    <#else>
+                    </div>
+	               <!--有订单--> 
+	                <!--没有订单-->
+	                <div class="noOrder" >
+	                    <span class="noIcon" style="background:url(${(contextPath)!}/resources/images/ic_script.png) 0 -543px;"></span>
+	                    <span class="in">您目前还没有景点订单哦~</span>
+	                </div>
+	                <!--没有订单-->
+	                </#if>
+                 </div>
+                
+            </div>
+		</div>
+		<!--右侧呈现页-->
+	</div>
+ </div>
+<@frame.end "default"> </@frame.end> 
+</@frame.main>
+
+	<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+	<script type="text/javascript">
+				
+	$(function() {
+			
+		//初始化门票分页
+		 pageCreate(${(((mPagination.totalCount-1)/5+1)?int)!1},"mpOrderForm");
+		
+		//门票订单状态初始化
+		$('[forName="M_orderStatus"]').find("li[value='"+$("[name='M_orderStatus']").val()+"']").click();
+		$('[forName="M_payStatus"]').find("li[value='"+$("[name='M_payStatus']").val()+"']").click();
+	
+	});
+
+		//搜索框校验
+		$("#M_orderId").blur(function() {
+			var reg = /^[a-zA-Z0-9]{0,100}$/
+			var bianhao = $("#M_orderId").val();
+			if (reg.test(bianhao)) {
+				$(this).next("span").html("");
+				$(".m_errTips").remove();
+			} else {
+				alertMsg("请输入正确编号",$(this).offset().top-20,$(this).offset().left+$(this).width());
+			}
+		});
+
+		
+		$("#M_scenicSpotsName").blur(function() {
+			var reg = /^[a-zA-Z0-9\u4e00-\u9fa5]{0,100}$/
+			var xiadan = $(this).val();
+			if (reg.test(xiadan)) {
+				$(this).next("span").html("");
+				$(".m_errTips").remove();
+			} else {
+				alertMsg("请输入正确的景点名称",$(this).offset().top-20,$(this).offset().left+$(this).width());
+			}
+		});
+
+		
+		$("#cancelOrder").on("click",function() {
+			if (!confirm("确定取消吗?")) {
+				return false;
+			}
+			location.href = "${contextPath}/company/orderManage/cancelMp?id="+ $(this).attr("orderId");
+		});
+		$("#sendMp").on("click", function() {
+			var bianhao = $("#M_orderId").val();
+			var jingdian = $("#M_scenicSpotsName").val();
+			var yuding = $("#M_bookMan").val();
+			var reg = /^[a-zA-Z0-9]{0,100}$/;
+			var cn = /^[\u4e00-\u9fa5]{0,100}$/;
+			var comb = /^[a-zA-Z0-9\u4e00-\u9fa5]{0,100}$/;
+			//订单
+			if (reg.test(bianhao)) {
+				$("#M_orderId").next("span").html("");
+				$(".m_errTips").remove();
+			} else {
+				alertMsg("请输入正确编号",$("#M_orderId").offset().top-20,$("#M_orderId").offset().left+$("#M_orderId").width());
+				
+				return false
+			}
+			//景点
+			if (comb.test(jingdian)) {
+				$("#M_scenicSpotsName").next("span").html("");
+				$(".m_errTips").remove();
+			} else {
+				alertMsg("请输入正确景点名称",$("#M_scenicSpotsName").offset().top-20,$("#M_scenicSpotsName").offset().left+$("#M_scenicSpotsName").width());
+				return false
+			}
+			//预订人
+			if (cn.test(yuding)) {
+				$("#M_bookMan").next("span").html("");
+				$(".m_errTips").remove();
+			} else {
+				$("#M_bookMan").next("span").html("请输入预订人");
+				alertMsg("请输入预订人",$("#M_bookMan").offset().top-20,$("#M_bookMan").offset().left+$("#M_bookMan").width());
+				return false
+			}
+			
+			//重置分页的信息
+			//$('.M_pageNo').val(1);
+			$('#mpOrderForm').submit();
+		});
+		
+		
+	</script>
+

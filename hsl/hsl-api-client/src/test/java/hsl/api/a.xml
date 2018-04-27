@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<string xmlns="http://openapi.yeego.net/"><?xml version="1.0" encoding="UTF-8"?>
+	<YeeGo.QueryOrder_1_0>
+		<ErrorCode>0</ErrorCode>
+		<ErrorMsg></ErrorMsg>
+		<Status>DZ</Status>
+		<YeeGoStatus>TP</YeeGoStatus>
+		<PolicyId>58928588</PolicyId>
+		<PlatCode>B5</PlatCode>
+		<PlatIntCode>002</PlatIntCode>
+		<PlatOrderNo>112014101445627212</PlatOrderNo>
+		<OrderNo>4101420126101</OrderNo>
+		<Pnr>HX5271</Pnr>
+		<BalanceMoney>617.00</BalanceMoney>
+		<Fare>540.00</Fare>
+		<TaxAmount>100.00</TaxAmount>
+		<CommAmount></CommAmount>
+		<PayType></PayType>
+		<PayMoney>617.00</PayMoney>
+		<PayAccount></PayAccount>
+		<TradeNo>2014101442937751</TradeNo>
+		<NewPnr></NewPnr>
+		<Flights>
+			<Flight>
+				<Carrier>MF</Carrier>
+				<FlightNo>8126</FlightNo>
+				<BoardPoint>HGH</BoardPoint>
+				<OffPoint>XMN</OffPoint>
+				<ClassCode>Q</ClassCode>
+				<DepartureDate>2014-10-30</DepartureDate>
+				<DepartureTime>21:25</DepartureTime>
+				<ArrivalDate>2014-10-30</ArrivalDate>
+				<ArrivalTime>23:10</ArrivalTime>
+				<ActionCode>HK</ActionCode>
+			</Flight>
+		</Flights>
+		<Tickets>
+			<Ticket>
+				<Name>LI/LONG</Name>
+				<TicketNo>7312391550442</TicketNo>
+				<CardNo>410103198803190202</CardNo>
+				<Conjunction></Conjunction>
+			</Ticket>
+		</Tickets>
+	</YeeGo.QueryOrder_1_0>
+</string>

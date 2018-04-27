@@ -1,0 +1,40 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>交易记录管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a>现金订单管理</a>
+				<ul>
+					<li> <a href="${contextPath}/user/findUserRecord" target="navTab" rel="category">现金交易记录</a> </li>
+				</ul>
+			</li>
+			<li><a>基金订单管理</a>
+				<ul>
+					<li><a href="${contextPath}/fund/list" target="navTab"
+						rel="fund">基金交易记录</a>
+				</ul>
+			</li>
+			<li><a>货币基金订单管理</a>
+				<ul>
+					<li><a href="${contextPath}/moneyFund/list" target="navTab"
+						rel="moneyFund">货币基金交易记录</a>
+					</li>
+				</ul>
+			</li>
+
+			<li><a>黄金订单管理</a>
+				<ul>
+					<li><a href="${contextPath}/gold/list" target="navTab"
+						rel="goldlist">黄金订单交易列表</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+

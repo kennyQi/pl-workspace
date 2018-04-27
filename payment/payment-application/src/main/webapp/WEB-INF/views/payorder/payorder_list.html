@@ -1,0 +1,126 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+ 
+<div class="pageHeader">
+   <form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+       action="${contextPath}/payorder/list" method="post">
+       
+       <input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+       <input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+       <div class="searchBar">
+           	<table class="searchContent" style="text-align:left;">
+           		<tr>
+           		   <td>平台订单号：<input type="text" name="id" value="${qo.id}" /></td>
+           		   <td>商城订单号：<input type="text" name="clientTradeNo" value="${qo.clientTradeNo}" /></td>
+           		   <td>支付渠道 :
+		    	   <select name = "payChannelType" >
+		    	    <option value="" <#if qo.payChannelType == null> selected="selected"</#if>> 全部</option>
+					<#list paychannellist as paychannel>
+						<option value=${paychannel.type} <#if qo.payChannelType == paychannel.type> selected="selected"</#if>> ${paychannel.name}</option>
+					</#list>
+			       </select>
+		    	   </td>
+		    	   <td>客户端：
+			    	   <select name = "paymentClientID" >
+			    	      <option value="">全部</option>
+			    	    <#list clientlist as client>
+			    	       <option value="${client.id}" <#if client.id == qo.paymentClientID> selected="selected" </#if>>${client.name}</option>
+			    	    </#list>
+				       </select>
+			       </td>
+		    	   <td>创建时间：
+		    	   	 <input  id="beginDate" name="beginDate"  size="30" <#if qo.beginDate??> value="${qo.beginDate}"  </#if> class="date" [dateFmt="yyyy-MM-dd"] readonly="readonly" />
+				      — <input  id="endDate" name="endDate"  size="30"  <#if qo.endDate??> value="${qo.endDate}"  </#if> class="date" [dateFmt="yyyy-MM-dd"] readonly="readonly" />
+		    	   </td>
+           		</tr>
+           	</table>
+           <div class="subBar">
+               <ul>
+                   <li><div class="buttonActive">
+                           <div class="buttonContent">
+                               <button type="submit">检索</button>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+           </div>
+       </div>
+   </form>
+</div>
+<div class="pageContent">
+   <div class="panelBar">
+       <ul class="toolBar">
+           <li>
+               <a class="icon" href="${contextPath}/staff/export" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?">
+                   <span>导出EXCEL</span>
+               </a>
+           </li>
+           <li>
+               <a class="icon" href="${contextPath}/staff/print" target="navTab">
+                   <span>打印用户列表</span>
+               </a>
+           </li>
+       </ul>
+   </div>
+   <table class="table" width="100%" layoutH="138">
+       <thead>
+           <tr>
+               <th width="50" >平台订单号</th>
+               <th width="50" >商城订单号</th>
+               <th width="50" >支付金额</th>
+               <th width="50" >创建时间</th>
+               <th width="50" >支付渠道</th>
+               <th width="50">收款户名</th>
+               <th width="60">客户端名称</th>
+               <th width="60">支付状态</th>
+               <th width="50">通知状态</th>
+               <th width="50">备注</th>
+               <th width="100">操作</th>
+           </tr>
+       </thead>
+       <tbody>
+           <#list pagination.list as payOrder>
+           <tr>
+               <td>
+                   ${payOrder.id}
+               </td>
+               <td>
+                   ${payOrder.clientTradeNo}
+               </td>
+               <td>
+                   ${payOrder.amount}
+               </td>
+               <td>
+                   ${payOrder.createDate?string('yyyy-MM-dd HH:mm:ss')}
+               </td>
+               <td>
+                   ${payOrder.payChannel.name}
+               </td>
+               <td>
+                   ${payOrder.payeeInfo.payeeName}
+               </td>
+               <td>
+                   ${payOrder.paymentClient.name}
+               </td>
+                <td>
+                    ${paystatuslist[payOrder_index]}
+               </td>
+                <td>
+                    ${notifystatuslist[payOrder_index]}
+               </td>
+               <td>
+                   ${payOrder.orderRemark}
+               </td>
+               <td>
+                   <a title="订单详情" target="dialog"  height="700" width="600" mask="true"  href="${contextPath}/payorder/detail?id=${payOrder.id}" ">查询详情</a>
+                    <#if payOrder.payOrderProcessor.payStatus == 6>
+                     	<a title="订单详情" target="dialog"  height="700" width="600" mask="true"  href="${contextPath}/refund/detail?id=${payOrder.id}" >查询退款</a>
+                    </#if>
+               </td>
+           </tr>
+           </#list>
+       </tbody>
+   </table>
+   
+   <#include "/public/pagination/pagination.html">
+</div>
+

@@ -1,0 +1,148 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/mpOrder/list" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						订单状态：
+					</td>
+					<td>
+						<select name="orderStatus">
+							<option value="">全部</option>
+							<#list statusMap?keys as status>
+							<option value="${status}" <#if dwzPlatformOrderQO.orderStatus==status> selected="selected"  </#if> >${statusMap[status]}</option>
+							</#list>
+						</select>
+					</td>
+					<td>
+						景点名称：
+					</td>
+					<td><input type="text" name="scenicSpotsName" value="${dwzPlatformOrderQO.scenicSpotsName}"></td>
+					<td>
+						订单号：
+					</td>
+					<td><input type="text" name="dealerOrderCode" value="${dwzPlatformOrderQO.dealerOrderCode}"></td>
+				</tr>
+				<tr>
+					<td>支付状态：</td>
+					<td>
+						<select>
+							<option value="">全部</option>
+							<option value="1">无需支付</option>
+						</select>
+					</td>
+					<td>支付类型：</td>
+					<td>
+						<select>
+							<option value="">全部</option>
+							<option value="1">此门票无需线上支付</option>
+						</select>
+					</td>
+					<td>
+						下单时间：
+					</td>
+					<td><input type="text" readonly="readonly" name="createDateBegin" value="${dwzPlatformOrderQO.createDateBegin}" class="date" [dateFmt="yyyy-MM-dd"]  <#if dwzPlatformOrderQO.createDateBegin??> value="${dwzPlatformOrderQO.createDateBegin}"  </#if>/>
+					至<input type="text" readonly="readonly" name="createDateEnd" value="${dwzPlatformOrderQO.createDateEnd}" class="date" [dateFmt="yyyy-MM-dd"] <#if dwzPlatformOrderQO.createDateEnd??> value="${dwzPlatformOrderQO.createDateEnd}"  </#if>/></td>	
+				</tr>
+				<tr>
+					<td>
+						预定人：
+					</td>
+					<td><input type="text" name="bookMan" value="${dwzPlatformOrderQO.bookMan}"></td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="190" >
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids"
+					class="checkboxCtrl">
+				</th>
+				<th width="110">订单编号</th>
+				<th width="110">平台订单号</th>
+				<th width = "70">旅游时间</th>
+				<th width = "100">门票名称</th>
+				<th width = "70">总价</th>
+				<th width = "90">支付类型</th>
+				<th width = "70">支付状态</th>
+				<th width = "80">订单状态</th>
+				<th width = "80">是否可取消</th>
+				<th width = "80">下单时间</th>
+				<th width = "95">是否预订成功</th>
+				<th width="140">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as mpOrderDTO>
+			<tr height="21px">
+				<td><input name="ids" value="${mpOrderDTO.id}" type="checkbox">
+				</td>
+				<td><a href="${contextPath}/mpOrder/detail?dealerOrderCode=${mpOrderDTO.dealerOrderCode}" target="dialog" width="1000" height="800" style="color: blue">${mpOrderDTO.dealerOrderCode}</a></td>
+				<td>${mpOrderDTO.platformOrderCode}</td>
+				<td>${mpOrderDTO.travelDate}</td>
+				<td>${mpOrderDTO.mpPolicy.name}</td>
+				<td>${mpOrderDTO.price}</td>
+				<td>无需线上支付</td>
+				<td>无需支付</td>
+				<#if mpOrderDTO.status.cancel==true>
+				<td>取消订单</td>
+				<#elseif mpOrderDTO.status.outOfDate==true>
+				<td>预定未游玩</td>
+				<#elseif mpOrderDTO.status.prepared==true>
+				<td>新建待游玩</td>
+				<#elseif mpOrderDTO.status.used==true>
+				<td>游玩过订单</td>
+				</#if>
+				<td>是</td>
+				<td>${mpOrderDTO.createDate?date}</td>
+				<td>是</td>
+				<td>
+				<#if mpOrderDTO.status.cancel==false>
+					<a  target="dialog"
+					href="${contextPath}/mpOrder/detail?dealerOrderCode=${mpOrderDTO.dealerOrderCode}"  width="1000" height="800" style="color: blue">订单详情</a>
+				</#if>
+				<#if mpOrderDTO.status.prepared==true>
+					<a  target="dialog"
+					href="${contextPath}/mpOrder/tocancel?dealerOrderCode=${mpOrderDTO.dealerOrderCode}&platformOrderCode=${mpOrderDTO.platformOrderCode}" style="color: blue">取消订单</a>
+				</#if>
+				<#if mpOrderDTO.status.prepared==true>
+					<a  target="ajaxTodo"
+					href="${contextPath}/mpOrder/sync?platformOrderCode=${mpOrderDTO.platformOrderCode}" style="color: blue">同步</a>
+				</#if>
+				<#if mpOrderDTO.status.cancel==true>
+					<a  target="dialog"
+					href="${contextPath}/mpOrder/reason?dealerOrderCode=${mpOrderDTO.dealerOrderCode}" style="color: blue">取消原因</a>
+				</#if>				
+					</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

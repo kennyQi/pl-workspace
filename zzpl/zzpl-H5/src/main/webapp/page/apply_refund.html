@@ -1,0 +1,258 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>申请退票</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/applyRefund.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js" language="javascript"></script>
+<script type="text/javascript">
+	var request_path="${contextPath}";
+  $(function(){
+    var $style = $('.refund_style div');
+    $style.on('click',function(){
+      if($(this).hasClass('checked')){
+        $(this).removeClass('checked').siblings().addClass('checked');
+      }else{
+        $(this).addClass('checked').siblings().removeClass('checked');
+      }
+    });
+    $(".shenpi").click(function(){
+      //弹出审核页
+      $("#checkFlow").css({"z-index":505,"display":""}).animate({ "z-index":"0"}, {
+        duration:400,
+        step: function(now,fx) {
+          $("#checkFlow").css('-webkit-transform','translateX('+now+'px)');
+        },
+        complete:function(){
+          $(".content").hide();
+        }
+      });
+    });
+
+    //返回
+    $(".editorBack").click(function(){
+      var that=$(this);
+      $(".content").show();
+      that.closest(".scene").css({"z-index":50}).animate({ "z-index":"555"}, {
+        duration:400,
+        step: function(now,fx) {
+          that.closest(".scene").css('-webkit-transform','translateX('+(now-50)+'px)');
+        },
+        complete:function(){
+          that.closest(".scene").removeAttr("style").hide();
+        }
+      });
+    });
+    //下拉和收起审核框
+    $(document).on("click",".checkSelect dt",function(){
+        $(this).nextAll().slideToggle();
+        $(this).find("label").toggleClass("down");
+    })
+
+    //选中审核条件
+    $("#checkPointer").on("click","dd",function(){
+      var dd=$(this);
+      dd.closest(".checkSelect").find("dd").removeClass("on");
+      dd.addClass("on");
+      var data = dd.attr("data");
+      dd.closest(".checkSelect").find("dt label").html(dd.html());
+      if(dd.closest("dl").attr("for")){
+          $("#"+dd.closest("dl").attr("for")).html(dd.html());
+          if(dd.closest("dl").attr("for") == "checkFlowTips"){
+       	   queryStep(data);
+       	   $("#workflow").html(dd.html());
+          }else if (dd.closest("dl").attr("for") == "checkStep") {
+       	   queryExecutor(data);
+          }else {
+       	   $("#nextUserID").attr("value",data);
+       	   $("#user").html(dd.html());
+          }
+      }
+    });
+  //查询环节
+    function queryStep(id){
+    	$("#workflowID").attr("value",id);
+    	$.ajax({ 
+			url : "../flight/queryWorkflowStep?workflowID="+id, 
+			type : "post", 
+			cache : false, 
+			dataType : "json", //返回json数据 
+			error: function(){ 
+			alert('error'); 
+			}, 
+			success:onchangecallback
+		});
+    }
+    
+    function onchangecallback(data){
+    	var str = "<dt>流程环节<label>请选择</label></dt>";
+    	for(var i=0;i<data.length;i++){
+			str += "<dd data = "+data[i].stepNO+">"+data[i].stepName+"</dd>";
+    	}
+    	$("#steps").html(str);
+    }
+    
+    //查询执行人
+    function queryExecutor(id){
+    	var workflow =$("#workflowID").val();
+    	$("#nextStepNO").attr("value",id);
+    	$.ajax({ 
+			url : "../flight/queryExecutor?nextStepNO="+id+"&workflowID="+workflow, 
+			type : "post", 
+			cache : false, 
+			dataType : "json", //返回json数据 
+			error: function(){ 
+			alert('error'); 
+			}, 
+			success:onchangeExecutor
+		});
+    }
+    
+    function onchangeExecutor(data){
+    	var str = "<dt>审批人员<label>请选择</label></dt>";
+    	for(var i=0;i<data.length;i++){
+			str += "<dd data = "+data[i].userID+">"+data[i].name+"</dd>";
+    	}
+    	$("#checkExecutor").html(str);
+    }
+    //提交
+    $(".btn_sure").click(function(){
+    	var nextUserID = $("#nextUserID").attr("value");
+    	var refundType = $(".refundType").val();
+    	var refundMemo = $(".refundMemo").val();
+    	
+    	if(nextUserID == ""){
+    		alertMsg("请选择审核！");
+            $(".shenpi").click();
+            return ;
+    	}
+    	if(refundType == "0"){
+    		alertMsg("请选择退票原因！");
+    		return ;
+    	}
+    	if(refundMemo == ""){
+    		alertMsg("请选择退票理由！");
+    		return ;
+    	}
+    	$("#cancel").submit();
+    });
+    
+    function alertMsg(msg){
+        var html=' <div class="alertMsg"> <span>'+msg+'</span> </div>';
+        $(".alertMsg").remove();
+        $("body").append(html);
+        var that=$(".alertMsg");
+        setTimeout(function(){
+            that.remove();
+        },2500);
+    }
+  })
+</script>
+</head>
+
+<body style="background:#fff;">
+<div class="bg2_header">
+  <header class="header box">
+      <a href="javascript:history.back()" class="back_iconfont iconfont">&#xe606;</a>
+      <h1>申请退票</h1>
+  </header>
+</div>
+<section class="content cont_refund"> 
+  <div class="refund_status">
+    <dl>
+      <dt>预计退还金额</dt>
+      <dd>退票手续费需要计算</dd>
+    </dl>
+    <dl>
+      <dt class="status">待确认</dt>
+      <dd>退票成功后会展示退款明细</dd>
+    </dl>
+  </div>
+  <div class="refund_items">
+    <dl>
+      <dt>退票航段</dt>
+      <dd>${flightOrderInfo.orgCityName}-${flightOrderInfo.dstCityName}</dd>
+    </dl>
+    <dl>
+      <dt>退票人</dt>
+      <dd class="refund_person">
+	      <#list flightOrderInfo.passengerList as passenger>
+	      	${passenger.passengerName}
+	      </#list>
+      </dd>
+    </dl>
+  </div>
+  <form action="${contextPath}/order/cancelGNTicket" method="post" id="cancel">
+  	  <input type="hidden" hidden="hidden" name="orderID" value="${flightOrderInfo.orderID}"/>
+  	  <input type="hidden" hidden="hidden" name="orderNO" value="${flightOrderInfo.orderNO}"/>
+  	  <input type="text" hidden="hidden" name="currentStepNO" value="1"/>
+      <input type="text" hidden="hidden" name="nextStepNO" value="" id="nextStepNO"/>
+      <input type="text" hidden="hidden" name="nextUserID" value="" id="nextUserID"/>
+      <input type="text" hidden="hidden" name="workflowID" value="" id="workflowID">
+	  <dl class="refund_reason box">
+	    <dt>退票原因</dt>
+	    <dd>
+	      <select name="refundType" class="refundType">
+	        <option value="0">请选择退票原因</option>
+	        <option value="1">当日作废</option>
+	        <option value="2">自愿退票</option>
+	        <option value="3">非自愿退票</option>
+	        <option value="4">差错退款</option>
+	        <option value="5">其他</option>
+	      </select>
+	    </dd>
+	    <dd class="iconfont">&#xe606;</dd>
+	  </dl>
+	  <dl class="refund_reason box">
+	    <dt>退票备注</dt>
+	    <dd>
+	      <input type="text" value="" name="refundMemo" placeholder="添加备注信息" class="refundMemo">
+	    </dd>
+	  </dl>
+	  <div class="shenpi">
+	    <a href="#">
+	    <dl>
+	      <dt>审批流程</dt>
+	      <dd id="workflow">点击选择</dd>
+	    </dl>
+	    <dl>
+	      <dt>审批人员</dt>
+	      <dd id="user">点击选择</dd>
+	    </dl>
+	    <div class="shenpi_icon">
+	      <i class="iconfont">&#xe606;</i>
+	    </div>
+	    </a>
+	  </div>
+	  <div class="btn_wrap">
+	    <input type="button" class="btn_sure" value="申请退票">
+	  </div>
+  </form>
+</section>
+
+<div id="checkFlow" class="scene"  style="display: none;">
+  <header class="header box">
+    <a href="javascript:" class="l iconfont editorBack" style="color:#fff;font-size:20px;">&#xe606;</a>
+    <h1>审批流程</h1>
+  </header>
+  <div id="checkPointer">
+    <dl class="checkSelect" for="checkFlowTips">
+      <dt>审批流程<label>请选择</label></dt>
+      <#list workflowDTOs as workflow>
+	     <dd data = "${workflow.workflowID}">${workflow.workflowName}</dd>
+	  </#list>
+    </dl>
+    <dl class="checkSelect" for="checkStep" id ="steps" >
+      <dt>审批环节<label>请选择</label></dt>
+    </dl>
+    <dl class="checkSelect" for="checkFlowPerson" id="checkExecutor">
+      <dt>审批人员<label>请选择</label></dt>
+    </dl>
+  </div>
+</div>
+</body>
+</html>

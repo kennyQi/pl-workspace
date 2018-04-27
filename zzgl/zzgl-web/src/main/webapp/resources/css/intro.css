@@ -1,0 +1,101 @@
+@charset "utf-8";
+/* CSS Document */
+.gd_fixed{height:89px;position:fixed;top:0px;left:0px;width:100%;background:#fff;
+    z-index: 1000;}
+.gd_head{height:89px;}
+.gd_head .logo{margin:25px 0px 0px 25px}
+*{font-family:"Microsoft YaHei","微软雅黑";}
+.gd_head .intro_nav{margin-top:50px;}
+.gd_head .intro_nav li{height:20px;padding-left: 20px;border-left:1px solid #efefef;margin-left:130px;margin-right:8px;}
+.gd_head .intro_nav li a{color:#000000;font-size:16px;line-height:20px;}
+.gd_head .intro_nav li:hover,.gd_head .intro_nav li.on{border-left:1px solid #00a0e8;}
+.gd_head .intro_nav li:hover a,.gd_head .intro_nav li.on a{color:#00a0e8;}
+
+
+
+.g_bd{margin-top:89px;background: none;padding:0px;}
+.cont1{background: url("../images/intro_img1.jpg") no-repeat center center;width:100%;height:600px;}
+.cont2{background: url("../images/intro_img2.jpg") no-repeat center center;width:100%;height:599px;}
+.cont3{background: url("../images/intro_img6.jpg") no-repeat center center;width:100%;height:600px;}
+.cont3 .auto_title{margin-top:216px;}
+.auto_title{width:250px;margin:auto;overflow: hidden;text-align: center;margin-top:227px;}
+.auto_title span{text-align: center;display:block;color:#fff;}
+.auto_title .t{font-size:30px;}
+.auto_title .big_t{font-size:50px;font-weight:bold;}
+.auto_title .icon{padding:12px 29px;line-height:75px;background: url("../images/intro_icon1.png") no-repeat;display:inline;}
+
+
+.lunbo1{height:550px;background: #65c1cc;width:100%;}
+.lunbo1 .lunbo1_icon{width:1200px;margin:auto;height:50px;text-align: center;margin-top:5px;}
+.lunbo1 .lunbo1_icon li{padding:10px;background: url("../images/carslou_icon.png") -38px 7px no-repeat;display: inline;  cursor: pointer;}
+.lunbo1 .lunbo1_icon li.on{background-position:-3px 7px;}
+
+
+.orgin{background: #ecede8;height:633px; }
+.orgin img{margin:auto;}
+
+.power{height:1023px;background:url("../images/intro_img4.jpg") no-repeat center center }
+.power .auto_title{margin-top:50px;}
+.jzys{width:1200px;margin: auto;height:620px;}
+.jzys .jzys_list{width:390px;height:1240px;float:left;overflow: hidden;position: absolute;}
+.jzys .jzys_list img{float: left;}
+.jzys .c1{left:0px;top:0px;}
+.jzys .c2{left:405px;top:0px;}
+.jzys .c3{right:0px;top:0px;}
+
+
+.lunbo2{height:972px;background:#49c6a1;}
+.lunbo2 .lunbo2_icon{width:1200px;margin:auto;height:50px;text-align: center;margin-top:80px;}
+.lunbo2 .lunbo2_icon li{padding:10px;background: url("../images/carslou_icon.png") -38px 7px no-repeat;display: inline;  cursor: pointer;}
+.lunbo2 .lunbo2_icon li.on{background-position:-3px 7px;}
+.lunbo2 .pl_xt{font-size:14px;text-align: center;color:#fff;line-height:24px;padding:10px 0px 60px 0px;}
+.lunbo2 .pl_xt h4{font-size:26px;line-height:100px;}
+
+
+.lunbo3{height:800px;background:#ecede8;}
+.lunbo3 .lunbo3_icon{width:1200px;margin:auto;height:50px;text-align: center;margin-top:80px;}
+.lunbo3 .lunbo3_icon li{padding:10px;background: url("../images/carslou_icon.png") -38px 7px no-repeat;display: inline;  cursor: pointer;}
+.lunbo3 .lunbo3_icon li.on{background-position:-3px 7px;}
+.lunbo3 .pl_xt{font-size:14px;text-align: center;color:#4d4e49;line-height:24px;padding:10px 0px 60px 0px;}
+.lunbo3 .pl_xt h4{font-size:26px;line-height:100px;}
+
+.gssj{background: #8d5eff;height:1247px;}
+.gssj img{margin: auto;display:block;}
+
+.control{width:1200px;margin: auto;}
+.lunbo3 .c_left{width:84px;height:260px;background: url("../images/intro_left.png");left:0px;top:-510px; cursor: pointer}
+.lunbo3 .c_right{width:84px;height:260px;background: url("../images/intro_right.png");right:0px;top:-510px;cursor: pointer;}
+
+
+/* Swipe 2 required styles */
+
+.swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+    width: 1200px;
+    height: 454px;
+}
+.swipe-wrap {
+    overflow: hidden;
+    position: relative;
+}
+.swipe-wrap > div {
+    float:left;
+    width:100%;
+    position: relative;
+    height: 454px;
+}
+
+.swipe2 .swipe-wrap > div {
+    float:left;
+    width:100%;
+    position: relative;
+    height: 589px;
+}
+.swipe2 .swipe-wrap > div {
+    float:left;
+    width:100%;
+    position: relative;
+    height: 799px;
+}

@@ -1,0 +1,110 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>景区管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a>景区管理</a>
+				<ul>
+					<li><a href="${contextPath}/scenic/list"
+						target="navTab" rel="scenicList">景区列表</a></li>
+					<li><a href="${contextPath}/scenic/add"
+						target="navTab" rel="scenicAdd" title="添加景区">新增景区</a></li>
+				</ul></li>
+			<li><a href="${contextPath}/memberApply/list"
+				target="navTab" rel="bankList">入会管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>资讯管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a>资讯管理</a>
+				<ul>
+					<li><a href="${contextPath}/article/list" target="navTab"
+						rel="articleList">资讯列表</a></li>
+					<li><a href="${contextPath}/article/add" target="navTab"
+						rel="addArticle">新增资讯</a></li>
+				</ul></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>评论管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a>评论管理</a>
+				<ul>
+					<li><a href="${contextPath}/comment/list" target="navTab" rel="cmsList">评论管理</a></li>
+				</ul></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>投稿管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/contribution/list" target="navTab" rel="contributionList">投稿管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>轮播图管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/indexlunbo/list" target="navTab" rel="indexLunboList">轮播图管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>系统设置
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a>权限管理</a>
+				<ul>
+					<li><a href="${contextPath}/auth/perm/index" target="navTab"
+						rel="authPerm">资源管理</a></li>
+					<li><a href="${contextPath}/auth/role/list" target="navTab"
+						rel="authRole">角色管理</a></li>
+					<li><a href="${contextPath}/system/operator/list"
+						target="navTab" rel="operator">员工管理</a></li>
+				</ul></li>
+		</ul>
+		<!-- <ul class="tree treeFolder">
+			<li><a>SEO设置</a>
+				<ul>
+					<li><a href="${contextPath}/settings/seo/list" target="navTab"
+						rel="seoList">SEO配置列表</a></li>
+				</ul></li>
+		</ul>
+		<ul class="tree treeFolder">
+			<li><a>网站设置</a>
+				<ul>
+					<li><a href="${contextPath}/menu/list" target="navTab"
+						rel="menuList">底部菜单设置</a></li>
+					<li><a href="${contextPath}/footerAuth/list" target="navTab"
+						rel="footerList">认证信息设置</a></li>
+					<li><a href="${contextPath}/footerAuth/copyright"
+						target="navTab" rel="copyright">版权信息设置</a></li>
+				</ul></li>
+		</ul> -->
+	</div>
+</div>
+
+
+
+

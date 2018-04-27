@@ -1,0 +1,251 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/jp/order/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent"
+				<tr>
+					<td>
+						订单编号：
+					</td>
+					<td>
+						<input name="orderNo" value="${(platformOrderQO.orderNo)!''}"/>
+					</td>
+					
+					<td>
+						下单时间：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(platformOrderQO.createDateFrom?string('yyyy-MM-dd'))!''}" class="date"/>
+						至
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(platformOrderQO.createDateTo?string('yyyy-MM-dd'))!''}" class="date"/></td>
+					<td>订单状态：</td>
+					<td>
+						
+                          <select name="tempStatus" id="tempStatus">
+							<option value="">全部状态</option>
+							 <#list statusList as status>
+								<option value="${(status.key)!''}" <#if platformOrderQO.tempStatus == status.key> selected="selected"</#if>>${status.value!?html}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					<td>支付状态：</td>
+					<td>
+						
+                          <select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							 <#list orderPayStatusList as status>
+								<option value="${(status.key)!''}" <#if platformOrderQO.payStatus== status.key>selected="selected"</#if>>${status.value!?html}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					
+				</tr>
+				<tr>
+					<td>
+						易行天下订单号：
+					</td>
+					<td>
+						<input type="text" name="yeeXingOrderId" value="${(platformOrderQO.yeeXingOrderId)!''}" />
+					</td>
+					<td>
+						下单人：
+					</td>
+					<td>
+						<input type="text" name="loginName" value="${(platformOrderQO.loginName)!''}" />
+					</td>	
+					<td>
+						乘机人：
+					</td>
+					<td>
+						<input type="text" name="passengerName" value="${(platformOrderQO.passengerName)!''}" />
+					</td>	
+				</tr>
+				<tr>
+				    <td>
+						经销商订单号：
+					</td>
+					<td>
+						<input type="text" name="dealerOrderCode" value="${(platformOrderQO.dealerOrderCode)!''}" />
+					</td>
+					<td>订单记录状态：</td>
+					<td>
+                          <select name="refundType" id="refundType">
+							<option value="">全部状态</option>
+							 <#if JP_ORDER_TYPE??>
+		                      <#list JP_ORDER_TYPE?keys as itemKey>
+		                       <option value="${itemKey}" <#if itemKey ==platformOrderQO.refundType>selected="selected"</#if> >
+		                        ${JP_ORDER_TYPE[itemKey]}</option>
+		                      </#list>
+		                   </#if>
+						</select> 	
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent" id="table_c">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="100">经销商订单号</th>
+				<th width="30">平台订单号</th>
+				<th width="10">易行订单号</th>
+				<th colspan="5"  class="xianl_w20" width="30%">
+				    乘机人
+				</th>
+				<th>订单类型</th>
+				<th width = "90">航程</th>
+				<th width = "70">订单总金额</th>
+				<th width = "70">返点/佣金</th>
+			
+				<th width = "140">下单时间</th>
+				<th width = "90">订单状态</th>
+				<th width = "90">支付状态</th>
+				<th width="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as JPOrderDTO>
+				<tr height="60px">
+				<!-- <td><input name="ids" value="" type="checkbox"></td> -->
+				<td>${(JPOrderDTO.dealerOrderCode)!''}</td>
+				<td>${JPOrderDTO.orderNo}</td>				
+				<td>${JPOrderDTO.yeeXingOrderId}</td>
+				<td  colspan="5" >
+						<table width="100%" height="100%" border="1">
+						<tr>
+			 				<th width="40">姓名</th>
+			 				<th width="50">乘客类型</th>
+			 				<th width="50">证件类型</th>
+							<th width="80">身份证件号</th>
+							<th width="80">票号</th>		
+						</tr>
+						<#if JPOrderDTO.passengerList ??>
+							<#list JPOrderDTO.passengerList as passenger>
+								<tr>
+									<td>
+									<p>${passenger.name}</p>
+									</td>
+									<td>
+									<#if PASSENGER_TYPE_MAP??>
+						                   <#list PASSENGER_TYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.psgType>
+						                       		${PASSENGER_TYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td style="width:120px;">
+									<#if DOCUMENT_TYPE_MAP??>
+						                   <#list DOCUMENT_TYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.idType>
+						                       		${DOCUMENT_TYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td>
+									<p>${passenger.idNo}</p>
+									</td>
+									<td>
+									<p>${(passenger.ticket.ticketNo)!''}</p>
+									</td>
+								</tr>
+							</#list>
+						</#if>
+						</table>
+					</td>
+				<td><#if JPOrderDTO.refundType ??>${JPOrderDTO.refundType}</#if></td>
+				<td>
+                        <p>${JPOrderDTO.startCityName}--${JPOrderDTO.endCityName}</p>
+						<p>${JPOrderDTO.flightNo}</p>
+						<p>${JPOrderDTO.departureTime}--${JPOrderDTO.endTime}</p>
+				</td>	
+				<td>
+					<#if JPOrderDTO?? && JPOrderDTO.userPayAmount ??>
+						${(JPOrderDTO.userPayAmount)?c}
+					</#if>
+				</td>
+				<td>
+					<#if JPOrderDTO ?? && JPOrderDTO.disc?? && JPOrderDTO.commAmount??>
+						${(JPOrderDTO.disc)?c}/${(JPOrderDTO.commAmount)?c}
+					</#if>
+				</td>
+				
+				
+				
+				<td>
+					<#if JPOrderDTO.loginName??>
+						<p>${JPOrderDTO.loginName}</p>
+					<#else>
+						<p>未取到用户名</p>
+					</#if>
+					<#if JPOrderDTO.createTime??>
+					   ${JPOrderDTO.createTime}
+					</#if>
+				</td>
+				<td>
+					 <#list statusList as status>
+						<#if JPOrderDTO.orderStatus.status== status.key>${status.value!?html}</#if> 
+				     </#list>
+                                   
+				</td>
+				<td>
+					 <#list orderPayStatusList as payStatus>
+						<#if JPOrderDTO.orderStatus.payStatus== payStatus.key>${payStatus.value!?html}</#if> 
+				     </#list>
+              
+				</td>
+				<td>
+					<p><a target="dialog" href="${contextPath}/jp/order/detail?id=${(JPOrderDTO.id)!''}&&refundType=${(JPOrderDTO.refundType)!''}" width="1000" height="700" style="color: blue">订单详情</a></p>
+					<#if (JPOrderDTO.orderStatus.status == PAY_WAIT || JPOrderDTO.orderStatus.status == "30") && !JPOrderDTO.refundType?? >
+						<p><a  target="dialog" href="${contextPath}/jp/order/toCancel?id=${(JPOrderDTO.id)!''}" style="color: blue">取消订单</a></p>
+					</#if>
+					
+					<#if (TICKET_SUCC == JPOrderDTO.orderStatus.status || TICKET_REFUND_FAIL == JPOrderDTO.orderStatus.status)> 
+							<p>
+							<a  target="dialog" href="${contextPath}/jp/order/toRefund?id=${(JPOrderDTO.id)!''}" style="color: blue">
+								申请退废票
+							</a>
+							</p>
+					</#if>
+					<#if ("33" == JPOrderDTO.orderStatus.status && !JPOrderDTO.refundType??) || "34" == JPOrderDTO.orderStatus.status || "35" == JPOrderDTO.orderStatus.status>
+					        <p>
+							<a  target="dialog" href="${contextPath}/jp/order/toRefundQueryOrder?id=${(JPOrderDTO.id)!''}&&refundType=${(JPOrderDTO.refundType)!''}" style="color: blue">
+								同步退票状态
+							</a>
+							</p>
+					</#if>
+				</td>
+			</tr>
+			</#list>
+			
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

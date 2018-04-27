@@ -1,0 +1,65 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;取消手动出票
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/tasklistwait/cancelManaulVote" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" value="${taskListWaitDto.id}" name="tasklistWaitID"/>
+							<input type="hidden" value="N" name="opinion" />
+							<div class="form-body">
+							<#list taskListWaitDto.workflowInstanceOrderDTOs as order>
+								<!-- <div class="form-group">
+									<label class="col-md-3 control-label">航班号:</label>
+									<div class="col-md-4">
+										 <input type="text"  value="${order.flightNO}" name="flightNO" class="form-control required isSpec" placeholder="请输入航班号"/>
+									</div>
+								</div>
+						
+								<div class="form-group">
+									<label class="col-md-3 control-label">票号：</label>
+									<div class="col-md-4">
+										<input type="text"  value="${order.airID}" name="airID" class="form-control required isSpec" placeholder="请输入票号"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">起飞时间：</label>
+										<div class="col-md-4">
+									<input type="date"  value="${order.startTime}" name="startData" class="form-control required date" />
+									</div>
+								</div> -->
+								<div class="form-group">
+									<label class="col-md-3 control-label">实际退费：</label>
+										<div class="col-md-4">
+									<input type="text"  value="" name="refundPrice" class="form-control required"  placeholder="请输入退票金额"/>
+									</div>
+								</div>
+								<!-- <div class="form-group">
+									<label class="col-md-3 control-label">出票人：</label>
+									<div class="col-md-4">
+										${user.name}
+									</div>
+								</div> -->
+								</#list>
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn yellow" target="submit">提交</a>
+									<a class="btn yellow" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

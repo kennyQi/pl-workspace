@@ -1,0 +1,155 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>机票预订</title>
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/fly.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/fly_search.css" rel="stylesheet" />
+    <script  data-main="${contextPath}/resources/js/fly_index"  src="${contextPath}/resources/js/require.min.js" async="true" ></script>
+	<script type="text/javascript">
+		var request_path="${contextPath}";
+	</script>
+</head>
+
+<body>
+<div id="serchIndex" class="scene" >
+    <form action="${contextPath}/flight/getFlightList" method="post">
+    <div class="cont">
+    <header class="header box">
+        <h1>机票预订</h1>
+    </header>
+        <ul class="search_tab">
+            <li class="checked">国内</li>
+            <li>国际</li>
+        </ul>
+        <div class="city-input box">
+            <div class="input">
+                <div class="city from box" id="cityFrom">
+                    <i class="icon"><img src="${contextPath}/resources/images/fly_from.png" /></i>
+                    <label>出发城市 </label>
+                    <input type="text" readonly value="上海" name="startCity" class="cityName"/>
+                    <input type="hidden" readonly value="SVG" name="orgCity" hidden="hidden" class="cityCode"/>
+                </div>
+                
+                <div class="city box"  id="cityTo">
+                    <i class="icon"><img src="${contextPath}/resources/images/fly_to.png" /></i>
+                    <label>到达城市
+                    </label>
+                    <input type="text" readonly  value="北京" name="endCity" class="cityName"/>
+                    <input type="hidden" readonly  value="PAY" name="dstCity" hidden="hidden" class="cityCode"/>
+                </div>
+                 
+            </div>
+            <div class="change">
+                <label></label>
+            </div>
+        </div>
+    </div>
+    <div class="city-input">
+        <div class="city from fly-date box"  id="cityDate">
+            <i class="icon"><img src="${contextPath}/resources/images/fly_dat.png" /></i>
+            <label>出发日期</label>
+            <input type="text" readonly value="" />
+            <label class="fly-day">今天</label>
+        </div>
+        <input type="hidden" readonly value="" hidden="hidden" name="startDate" class="startDate"/>
+        <input type="hidden" readonly value="" hidden="hidden" name="flyDay" class="flyDay"/>
+        <span class="search-btn">
+            搜索
+        </span>
+    </div>
+    </form>
+    <nav>
+        <a href="${contextPath}/flight/view" class="index indexOn">首页</a>
+        <a href="${contextPath}/order/view?type=0" class="order">订单</a>
+        <a href="${contextPath}/user/view" class="home">个人中心</a>
+    </nav>
+</div>
+
+<div id="city"  class="scene"  style="display: none;">
+    <!---->
+    <div class="cont">
+        <div class="headFixed">
+            <header class="header box">
+                <a href="javascript:" class="l iconfont backIndex" style="color:#fff;font-size:20px;">&#xe606;</a>
+                <h1>选择国内城市</h1>
+                <a href="javascript:"  class="r"></a>
+            </header>
+            <span class="citySearch inSearchTips">请输入拼音/中文/简拼</span>
+            <span class="citySearch inSearch" style="display:none;"><input type="text" /><label></label></span>
+            <img src="${contextPath}/resources/images/city_bg.jpg" class="headerBg" />
+        </div>
+        <div class="cityAll">
+            <div class="city">
+                <h3 class="hotTitle">热门城市</h3>
+                <div class="hotList">
+                    <span class="cityTap">北京</span>
+                    <span class="cityTap">上海</span>
+                    <span class="cityTap">广州</span>
+                    <span class="cityTap">深圳</span>
+                    <span class="cityTap">杭州</span>
+                    <span class="cityTap">天津</span>
+                    <dl class="cityList" id="cityList">
+                    </dl>
+                </div>
+            </div>
+            <div class="cityFast">
+                热门
+                <a href="#A">A</a>
+                <a href="#B">B</a>
+                <a href="#C">C</a>
+                <a href="#D">D</a>
+                <a href="#E">E</a>
+                <a href="#F">F</a>
+                <a href="#G">G</a>
+                <a href="#H">H</a>
+                <a href="#J">J</a>
+                <a href="#K">K</a>
+                <a href="#L">L</a>
+                <a href="#M">M</a>
+                <a href="#N">N</a>
+                <a href="#P">P</a>
+                <a href="#Q">Q</a>
+                <a href="#R">R</a>
+                <a href="#S">S</a>
+                <a href="#T">T</a>
+                <a href="#W">W</a>
+                <a href="#X">X</a>
+                <a href="#Y">Y</a>
+                <a href="#Z">Z</a>
+            </div>
+        </div>
+
+        <img src="${contextPath}/resources/images/city_bg.jpg" class="cityBg" />
+        <div class="pyBox" style="display: none;"><label>A</label></div>
+    </div>
+    <!--city over-->
+</div>
+<div id="date" class="scene " style="display: none;">
+    <div class="headFixed">
+        <header class="header box">
+            <a href="javascript:" class="l iconfont backIndex" style="color:#fff;font-size:20px;">&#xe606;</a>
+            <h1>往返日期</h1>
+            <a href="javascript:"  class="r"></a>
+        </header>
+        <div class="headerDate">
+            <span>日</span>
+            <span>一</span>
+            <span>二</span>
+            <span>三</span>
+            <span>四</span>
+            <span>五</span>
+            <span>六</span>
+        </div>
+        <img src="${contextPath}/resources/images/city_bg.jpg" class="headerBg" />
+    </div>
+    <div id="dateDetail">
+        </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/mileOrder/<#if edit??>update<#else>create</#if>" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<input type="hidden" name="id" />
+				<table border="0" class="my_form">
+					<tr>
+						<td>分销商名称：</td>
+						<td>
+							<input name="name" type="text" maxlength="16" value="${(d.name)!}" />
+						</td>
+					</tr>
+					<tr>
+						<td>分销商联系人：</td>
+						<td>
+							<input name="linkMan" type="text" maxlength="16" value="${(d.linkMan)!}" />
+						</td>
+					</tr>
+					<tr>
+						<td>分销商联系电话：</td>
+						<td>
+							<input name="phone" type="text" maxlength="16" value="${(d.phone)!}" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<#include "/public/general/formBar.html">
+	</form>
+</div>

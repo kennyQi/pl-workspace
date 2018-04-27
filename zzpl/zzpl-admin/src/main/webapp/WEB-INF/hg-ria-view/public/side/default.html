@@ -1,0 +1,162 @@
+<!-- BEGIN SIDEBAR -->
+<div class="page-sidebar-wrapper">
+	<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+	<!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+	<div class="page-sidebar navbar-collapse collapse">
+		<!-- BEGIN SIDEBAR MENU -->
+		<ul class="page-sidebar-menu " data-auto-scroll="true" data-slide-speed="200">
+			<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+			<li class="sidebar-toggler-wrapper">
+				<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+				<!-- <div class="sidebar-toggler">
+				</div> -->
+				<!-- END SIDEBAR TOGGLER BUTTON -->
+			</li>
+			<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+			<li class="sidebar-search-wrapper">
+				<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+				<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+				<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+				<form class="sidebar-search" action="extra_search.html" method="POST">
+					<a href="javascript:;" class="remove">
+					<i class="icon-close"></i>
+					</a>
+					<!-- <div class="input-group">
+						<input type="text" class="form-control" placeholder="Search...">
+						<span class="input-group-btn">
+						<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+						</span>
+					</div> -->
+				</form>
+				<!-- END RESPONSIVE QUICK SEARCH FORM -->
+			</li>
+			<#if (menuDTOs?size>0)> 
+			 <#assign i=0/>
+			<#list menuDTOs as menu>
+			<!-- <li class="start active open"> -->
+			<li id="li${i}" name="menuli">
+				<a href="${contextPath}${(menu.url)!''}" target="hgTab" rel="${(menu.id)!''}" root="true" onclick="changeColor('${i}');">
+					<i class="icon-grid"></i>
+					<span class="title" id="span${i}" name="menuspan">${(menu.menuName)!''}</span>
+<!-- 					<span class="selected"></span>
+					<span class="arrow open"></span> -->
+				</a>
+			</li>
+			<#assign i=i+1/>
+			</#list> 
+			<#if role=="role">
+			<li name="menuli">
+				<a href="${contextPath}/CLGLYBookFlight/orders" rel="haha">
+					<i class="icon-grid"></i>
+					<span class="title" >代购订单</span>
+<!-- 					<span class="selected"></span>
+					<span class="arrow open"></span> -->
+				</a>
+			</li>
+			<li name="menuli">
+				<a href="${contextPath}/CLGLYBookFlight/view" rel="hahahaha">
+					<i class="icon-grid"></i>
+					<span class="title" >机票搜索</span>
+<!-- 					<span class="selected"></span>
+					<span class="arrow open"></span> -->
+				</a>
+			</li>
+			</#if>
+			</#if>
+			<!-- <li id="li77">
+				<a href="#''}" target="hgTab" rel="#" root="true" onclick="changeColor('77');">
+					<i class="icon-home"></i> 
+					<span class="title" >11111111111</span>
+					<span class="selected"></span>
+					<span class="arrow open"></span>
+				</a>
+			</li> -->
+			<!-- <li class="start active open">
+				<a href="#" target="hgTab" rel="${(menu.id)!''}" root="true"><span class="title">
+				<strong>百度</strong></span>
+				</a>
+			</li>
+			 <li>
+				<a href="#" target="hgTab" rel="${(menu.id)!''}" root="true"><span class="title">
+				<strong>百度</strong></span>
+				</a>
+			</li>
+			<li>
+				<a href="#" target="hgTab" rel="${(menu.id)!''}" root="true"><span class="title">
+				<strong>百度</strong></span>
+				</a>
+			</li>
+			<li>
+				<a href="#" target="hgTab" rel="${(menu.id)!''}" root="true"><span class="title">
+				<strong>百度</strong></span>
+				</a>
+			</li> -->
+			<!--<li class="start active open">
+				<a href="javascript:;">
+					<i class="icon-home"></i>
+					<span class="title">权限管理</span>
+					<span class="selected"></span>
+					<span class="arrow open"></span>
+				</a>
+				 <ul class="sub-menu">
+					<li class="active">
+						<a href="${contextPath}/hg/auth/perm/view" target="hgTab" rel="authPerm" root="true">
+						<i class="icon-link"></i>
+						资源管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/hg/auth/role/view" target="hgTab" rel="authRole" root="true">
+						<i class="icon-user"></i>
+						角色管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/hg/auth/staff/view" target="hgTab" rel="authStaff" root="true">
+						<i class="icon-users"></i>
+						员工管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/hg/auth/project/view" target="hgTab" rel="project" root="true">
+						<i class="icon-folder"></i>
+						项目管理</a>
+					</li>
+				</ul> 
+			</li>-->
+			<!--<li>
+				<a href="javascript:;">
+				<i class="icon-picture"></i>
+				<span class="title">相册管理</span>
+				<span class="arrow "></span>
+				</a>
+				 <ul class="sub-menu">
+					<li>
+						<a href="${contextPath}/hg/spiUseType/spiUseType/view" target="hgTab" rel="spiUseType" root="true">
+						<i class="icon-folder"></i>
+						用途管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/hg/spiAlbum/spiAlbum/view" target="hgTab" rel="spiAlbum" root="true">
+						<i class="icon-folder"></i>
+						相册管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/hg/spiAlbum/spiImage/view" target="hgTab" rel="spiImage" root="true">
+						<i class="icon-picture"></i>
+						图片管理</a>
+					</li>
+				</ul> 
+			</li>-->
+		</ul>
+		<!-- END SIDEBAR MENU -->
+	</div>
+</div>
+<script>
+function changeColor(id){
+	//$("li[name='menuli']").css('background-color','#f7f7f7');
+	//$("span[name='menuspan']").css('color','#333333');
+	//$("#li"+id).css('background-color','#00b1eb');
+	//$("#span"+id).css('color','#ffffff');
+	$("li[name='menuli']").removeClass("current");
+	$("#li"+id).addClass("current");
+}
+</script>
+<!-- END SIDEBAR -->

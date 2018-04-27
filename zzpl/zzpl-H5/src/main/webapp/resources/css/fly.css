@@ -1,0 +1,183 @@
+.cont{background: url("../images/fly_bg.jpg") no-repeat;background-size:cover;overflow:hidden;}
+.header h1{color:#fff;}
+nav{height:50px;background:#206b94;
+    position: fixed;bottom:0px;left:0px;width:100%;z-index:80;}
+nav a{width:33.3%;height:50px;display: block;text-align: center;color:#02b2eb;float:left;}
+nav a:before{display:block;content:"";width:22px;height:22px;background: url("../images/fly_home.png") no-repeat;background-size: contain;margin:4px auto;}
+nav a.home:before{background-image: url("../images/fly_user.png");}
+nav a.order:before{background-image: url("../images/fly_list.png");}
+nav a.indexOn:before{background-image: url("../images/fly_home-checked.png");}
+nav a.homeOn:before{background-image: url("../images/fly_user-checked.png");}
+nav a.orderOn:before{background-image: url("../images/fly_list-checked.png");}
+nav a.indexOn,nav a.homeOn,nav a.orderOn{color:#fff;}
+
+.search_tab{border-bottom: 1px solid #69afce;height:42px;padding:0px 14px;}
+.search_tab li{width:50%;display:block;color:#206b94;float: left;height:42px;line-height: 42px;text-align: center;font-size:16px;}
+.search_tab li.checked{border-bottom:2px solid #206b94;height: 40px;}
+
+.city-input{padding:0px 15px;}
+.city-input .input{-webkit-box-flex: 1; }
+.city-input .change{width:46px;height:124px;overflow: hidden;}
+.city-input .change label{width:32px;height:32px;display:block;margin:46px 0px 0px 14px;background: url("../images/fly_change.png") no-repeat center center;background-size:contain;}
+.city-input .city{height:61px;color:#206b94;line-height: 61px;}
+.city-input .city .icon{width:22px;display:inline-block;vertical-align:bottom;margin-bottom: 19px;}
+.city-input .city label{width:84px;display: block;text-indent: 10px;font-size:16px;line-height: 65px;}
+.city-input .city input{height:61px; line-height:61px;color:#206b94;font-size: 22px;
+    -webkit-box-flex: 1;display:block;}
+.city-input .from{border-bottom:1px solid #a1d7ea;}
+.city-input .fly-date{border-bottom-color:#f1f1f1}
+.city-input .fly-date input{width:30px;text-align: center;}
+.city-input .city .icon img{width:100%;display: block;}
+.city-input .fly-day{ -webkit-box-flex: 1;}
+.search-btn{border-radius: 4px;background: #9ace45;height:42px;font-size:20px;display:block;text-align: center;
+line-height: 42px;margin-top: 22px;color:#fff;}
+.search-btn:before{content:"";display: inline-block;width: 21px;background: url("../images/fly_search.png") no-repeat;height:28px;
+background-size:contain;vertical-align: middle;margin-right: 5px;}
+
+
+
+
+
+/*我的订单*/
+.listCont{z-index: 0;
+    position: relative;}
+.order_tab{padding:0px 15px;margin:8px 0px;}
+.order_tab li{border:1px solid #fff;height:40px;text-align: center;line-height:40px;-webkit-box-flex: 1;color:#fff;
+border-left:0px;}
+.order_tab li:first-child{border-radius: 6px 0px 0px 6px;border-left:1px  solid #fff;;border-right:1px solid #fff;;}
+.order_tab li:last-child{border-radius: 0px 6px 6px 0px;border-right:1px solid #fff;}
+.order_tab li.checked{background: #fff;color:#206b94;}
+
+.fly-order{margin-bottom:64px;}
+.fly-order li{border-bottom:1px solid #e4eef0;padding: 0px 15px;}
+.fly-order .order-detail{-webkit-box-flex: 1; }
+.fly-order .order-price{width:75px;}
+.fly-order .city{font-size:20px;color:#206b94;line-height:38px;}
+.fly-order .city label{display: inline-block;width:22px;height:9px;background: url("../images/fly_order_to.png") no-repeat center center;background-size: contain;
+margin:0px 10px 3px 10px;}
+.fly-order .company{color:#206b94;font-size:14px;}
+.fly-order .time{color:#888888;margin-bottom:7px;font-size:12px;}
+.fly-order .price{font-size:20px;color:#555555;margin-top:20px;text-align: right;}
+.fly-order .price:before{content:"￥";font-size:14px;}
+.fly-order .status{font-size:12px;color:#48aa00;text-align: right;}
+
+.loadIngMsg{text-align: center;font-size:12px;position: absolute;top:-40px;width: 100%;border-bottom:1px solid #e4eef0;}
+.downLoading{font-size: 14px;}
+.downLoading:before{content: "";display: inline-block;width: 16px;height: 16px;margin-right:4px;background: url("../images/downLoading.gif") no-repeat;background-size: contain;vertical-align: middle;}
+
+/*个人中心*/
+.flyPerson a{width:22px;}
+.flyPerson .r img{width:100%;    display: inline-block;
+    vertical-align: middle;}
+.flyPersonValt{border-radius: 50px;margin:18px auto 0px auto;width:98px;display:block;}
+.flyPersonName{text-align: center;color:#fff;margin:20px 0px;line-height: 20px;font-size:16px;}
+.flyPersonName:before{content:"";width:20px;height:20px;background: url("../images/flySexGirl.png") no-repeat;background-size:cover;display: inline-block;vertical-align: middle;margin-right:10px;}
+.flyPersonGirl:before{background-image: url("../images/flySexBoy.png");}
+
+.personNav{padding:0px 15px;}
+.personNav a.box{border-bottom:1px solid #f1f1f1;height:46px;color:#666666;line-height: 45px;font-size:16px;}
+.personNav .icon{width:27px;display: inline-block;height:27px;margin-right:5px;margin-top:9px;}
+.personNav .icon img{width:100%;}
+.personNav label{-webkit-box-flex: 1;display: block;font-size: 18px;}
+.personNav .iconR{color:#c3c5d8;-webkit-transform: rotate(180deg);display: block;}
+
+
+
+
+
+
+
+/*动画*/
+
+.changeAction{
+    animation: changeFlash 1s;
+    -webkit-animation: changeFlash 1s;	/* Safari 和 Chrome */
+}
+@keyframes changeFlash
+{
+    from {-webkit-transform:rotate(0deg)}
+    to {-webkit-transform:rotate(180deg)}
+}
+
+@-webkit-keyframes changeFlash /* Safari and Chrome */
+{
+    from {-webkit-transform:rotate(0deg)}
+    to {-webkit-transform:rotate(180deg)}
+}
+
+.changeCity{
+    animation: changeCity 1s;
+    -webkit-animation: changeCity 1s;	/* Safari 和 Chrome */
+}
+@keyframes changeCity
+{
+    0% {-webkit-transform:rotateX(0deg)}
+    25% {-webkit-transform:rotateX(120deg)}
+    75% {-webkit-transform:rotateX(240deg)}
+    100% {-webkit-transform:rotateX(360deg)}
+}
+
+@-webkit-keyframes changeCity /* Safari and Chrome */
+{
+    0% {-webkit-transform:rotateX(0deg)}
+    25% {-webkit-transform:rotateX(120deg)}
+    75% {-webkit-transform:rotateX(240deg)}
+    100% {-webkit-transform:rotateX(360deg)}
+}
+
+/*滑动*/
+
+.turnScene{
+    animation: turnScene 1s;
+    -webkit-animation: turnScene 1s;	/* Safari 和 Chrome */
+}
+@keyframes turnScene
+{
+   from {-webkit-transform:translateX(540px)}
+    to{-webkit-transform:translateX(0px)}
+}
+
+@-webkit-keyframes turnScene /* Safari and Chrome */
+{
+    from {-webkit-transform:translateX(540px)}
+    to{-webkit-transform:translateX(0px)}
+}
+
+
+.turnOutScene{
+    animation: turnOutScene 0.3s;
+    -webkit-animation: turnOutScene 0.3s;	/* Safari 和 Chrome */
+}
+@keyframes turnOutScene
+{
+    from {-webkit-transform:translateX(0px)}
+    to{-webkit-transform:translateX(540px)}
+}
+
+@-webkit-keyframes turnOutScene /* Safari and Chrome */
+{
+    from {-webkit-transform:translateX(0px)}
+    to{-webkit-transform:translateX(540px)}
+}
+
+
+
+.loading_bg{width: 100%;height: 100%;background: #fff;position:fixed;left:0px;top:0px;z-index:1000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    opacity:0.0;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

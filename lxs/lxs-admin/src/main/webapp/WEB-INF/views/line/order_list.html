@@ -1,0 +1,109 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" 
+		action="${contextPath}/line/orderList" method="post">
+		
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo?c)!5}"/>
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!1}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">
+						订单号：
+					</td>
+					<td style="text-align: left"><input type="text" name="title" value="" ></td>
+					<td style="text-align: left">
+						线路编号：
+					</td>
+					<td style="text-align: left"><input type="text" name="title" value="" ></td>
+					<td style="text-align: left">
+						线路名称：
+					</td>
+					<td style="text-align: left"><input type="text" name="title" value="" ></td>
+					<td style="text-align: left">
+						预订人：
+					</td>
+					<td style="text-align: left"><input type="text" name="title" value="" ></td>
+					</tr>
+					<tr>
+					<td style="text-align: left">
+						下单时间：
+					</td>
+					<td style="text-align: left"><input type="text" name="beginTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="">-
+						<input type="text" name="endTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="">
+					</td>
+					<td style="text-align: left">
+						订单状态：
+					</td>
+					<td style="text-align: left">
+						<select name="isShow">
+							<option>1</option>
+						</select>
+					</td>
+					<td style="text-align: left">
+						支付状态：
+					</td>
+					<td style="text-align: left">
+						<select name="isShow">
+							<option>1</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="136" >
+		<thead>
+			<tr>
+				<th width="100">
+					<input type="checkbox" group="ids"  class="checkboxCtrl">
+				</th>
+ 				<th width="100">订单号</th>
+ 				<th width="100">线路编号</th>
+				<th width ="300">线路名称</th>
+				<th width ="100">出发地</th>
+				<th width ="100">单价</th>
+				<th width ="100">姓名</th>
+				<th width ="150">身份证件号</th>
+				<th width ="100">订单状态</th>
+				<th width ="100">支付状态</th>
+				<th width ="100">订单总金额</th>
+				<th width ="100">定金金额</th>
+				<th width ="100">尾款金额</th>
+				<th width ="100">下单时间</th>
+				<th width ="100">联系方式</th>
+				<th width ="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#if 1>0??>
+			<#list pagination.list as lineOrder>
+			<tr>
+				<td width="100">${lineOrder.orderId}</td>
+			</tr>
+			</#list>
+			</#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+
+</script>

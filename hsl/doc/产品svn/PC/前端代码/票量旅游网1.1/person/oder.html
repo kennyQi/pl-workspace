@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/member.css" type="text/css" rel="stylesheet" />
+<link href="../css/jquery-ui.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.ui.core.js"></script>  
+<script type="text/javascript" src="../js/datepicker.js"></script>  
+<script type="text/javascript" src=""></script>  
+  <script type="text/javascript">
+$(function(){
+ 	$( "#start" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 2,
+		showClearButton : false,
+		onClose: function( selectedDate ) {
+			$( "#end" ).datepicker( "option", "minDate", selectedDate );
+		}
+	});
+	
+	$( "#end" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 2,
+		onClose: function( selectedDate ) {
+			$( "#start" ).datepicker( "option", "maxDate", selectedDate );
+		}
+	});
+	 	$( "#cstart" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 2,
+		onClose: function( selectedDate ) {
+			$( "#cend" ).datepicker( "option", "minDate", selectedDate );
+		}
+	});
+	
+	$( "#cend" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 2,
+		onClose: function( selectedDate ) {
+			$( "#cstart" ).datepicker( "option", "maxDate", selectedDate );
+		}
+	});
+ });
+ 
+  $("#ui-datepicker-close").live("click", function ()  
+     {  
+         datepicker_CurrentInput.value = "";  
+     });  
+ 
+</script>
+ </head>
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <div class="main">
+    <div class="current mt20 clearfix"><strong>企业账户中心：</strong><a href="#">首页</a></div>
+    <div class="sidebar L">
+      <div class="siderbar_title">
+        <h2>账户中心</h2>
+        <h3><a href="#">返回账户中心首页</a></h3>
+      </div>
+      <div class="jiaoyi s_l">
+        <h2><i></i>交易管理</h2>
+        <ul>
+          <li class="sel"><a href="#" class="j1"><i></i>所有订单</a></li>
+          <li><a href="#" class="j2"><i></i>我的卡券</a></li>
+          
+        </ul>
+      </div>
+      <div class="ziliao s_l">
+        <h2><i></i>资料管理</h2>
+        <ul>
+          <li><a href="#" class="z1"><i></i>个人资料</a></li>
+          <li><a href="#" class="z2"><i></i>修改密码</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="M_wrap R">
+      <div class="M_oder_c">
+        <ul class="my_oder_nav">
+          <li class="sel">机票订单</li>
+          <li>景点订单</li>
+        </ul>
+         </div>
+     <div class="M_w_ifo">   
+     <div class="M_info">
+        <form action="" id="form1">
+        <div class="bthsearch">
+          <ul>
+            <li>
+              <label>订单编号：</label>
+              <div>
+                <input type="text"  class="J_bianhao"/>
+                <span></span>
+              </div>
+            </li>
+            <li>
+              <label>下单时间：</label>
+             <div class="bth_time"> <div>
+                <input type="text" id="start" />
+              </div><span>--</span>
+              <div>
+                <input type="text" id="end" />
+              </div></div>
+            </li>
+            <li>
+              <label>订单状态：</label>
+              <div>
+                <select><option>全部</option><option>未通过</option></select>
+              </div>
+            </li>
+            <li>
+              <label>下单人：</label>
+               <div>
+                <input type="text" class="J_j_xiadan"/>
+                 <span></span>
+              </div>
+            </li>
+            <li>
+              <label>PNR：</label>
+              <div>
+                <input type="text" class="J_j_pnr" />
+                 <span></span>
+              </div>
+            </li>
+            <li>
+              <label>乘机人：</label>
+              <div>
+                <input type="text" class="J_j_chengji" />
+                <span></span>
+              </div>
+            </li>
+          </ul>
+          <div class="barnavbth"><a href="#" class="cx" id="cx_add">查询</a></div></div>
+          </form>
+        <div class="oder_tb">
+          <table cellpadding="0" cellspacing="0" class="tb" width="100%">
+            <tr>
+              <th width="10%">订单号</th>
+              <th width="20%">航程</th>
+              <th width="10%">乘机人</th>
+              <th width="10%">票号</th>
+              <th width="10%">订单状态</th>
+              <th width="10%">退费政策</th>
+              <th width="10%">订单金额</th>
+              <th width="10%">下单人</th>
+              <th width="10%">操作</th>
+            </tr>
+            <tr>
+              <td>56455478994</td>
+              <td><div class="hc"><p>长沙-大连</p>
+                <p>CA8959</p>
+                <p>2014_06_16:30</p></div></td>
+              <td><p>上官五治</p></td>
+              <td><p>3254684575</p></td>
+              <td><p>待付款</p></td>
+              <td><p class="blue"><a href="#">查看</a></p></td>
+              <td><p class="m_p">4568</p></td>
+              <td><p>上官五治</p>
+                <p>2014_06_16:30</p></td>
+              <td><div class="m_bth"><a href="#">申请退票</a></div></td>
+            </tr>
+          </table>
+          <div id="page"><span class="peve"><a href="#">上一页</a></span><a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span class="next"><a href="#">下一页</a></span><div class="page—ji">去第<input type="text">页 <a href="#">GO</a></div></div>
+        </div>
+        </div>
+         <div class="M_info hide">
+        <form action="" id="form2">
+        <div class="bthsearch">
+          <ul>
+            <li>
+              <label>订单编号：</label>
+              <div>
+                <input type="text" class="J_j_bianhao" />
+                <span></span>
+              </div>
+            </li>
+             <li>
+              <label>景点名称：</label>
+              <div>
+                <input type="text" class="J_j_jingdian" />
+                <span></span>
+              </div>
+            </li>
+            <li>
+              <label>下单时间：</label>
+             <div class="bth_time"> <div>
+                <input type="text" id="cstart" />
+              </div><span>--</span>
+              <div>
+                <input type="text" id="cend" />
+              </div></div>
+            </li>
+            <li>
+              <label>预定人：</label>
+              <div>
+                <input type="text"  class="J_j_yuding"/>
+                <span></span>
+              </div>
+            </li>
+            <li>
+              <label>支付类型：</label>
+              <div>
+                 <select>
+                 <option>全部支付类型</option>
+                 </select>
+               </div>
+            </li>
+            <li>
+              <label>游玩人：</label>
+              <div>
+                <input type="text" class="J_j_youwan" />
+                <span></span>
+              </div>
+            </li>
+            <li>
+              <label>订单状态：</label>
+              <div>
+                <input type="text" />
+              </div>
+            </li>
+          </ul>
+          <div class="barnavbth"><a href="#" class="cx" id="cx_form2">查询</a></div></div>
+          </form>
+        <div class="oder_tb">
+          <table cellpadding="0" cellspacing="0" class="tb" width="100%">
+            <tr>
+              <th width="10%">订单号</th>
+              <th width="20%">景点名称</th>
+              <th width="10%">门票类型</th>
+              <th width="10%">支付类型</th>
+              <th width="10%">订单状态</th>
+               <th width="10%">订单金额</th>
+              <th width="10%">下单人</th>
+              <th width="10%">操作</th>
+            </tr>
+            <tr>
+              <td>56455478994</td>
+              <td><p>11111111</p></td>
+              <td><p>景点</p></td>
+              <td><p>在线支付</p></td>
+              <td><p></p></td>
+              <td><p class="m_p">4568</p></td>
+              <td><p>上官五治</p>
+                <p>2014_06_16:30</p></td>
+              <td><div class="m_bth"><a href="#">取消订单</a></div></td>
+            </tr>
+          </table>
+          <div id="page"><span class="peve"><a href="#">上一页</a></span><a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span class="next"><a href="#">下一页</a></span><div class="page—ji">去第<input type="text">页 <a href="#">GO</a></div></div>
+        </div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../js/gb.js"></script>
+<script type="text/javascript">
+   $(".my_oder_nav li").bind("click", function () {
+           var index = $(this).index(index);
+           var divs = $(".M_w_ifo > div");
+					  $(this).parent().children("li").attr("class", "no");//将所有选项置为未选中
+            $(this).attr("class", "sel");     //设置当前选中项为选中样式
+            divs.hide(); 
+            divs.eq(index).show();
+  });
+		
+	
+$(".J_bianhao").blur(function(){
+ 		var reg = /[0-9]{1,100}/
+		var bianhao = $(".J_bianhao").val();
+ 		if(reg.test(bianhao)){
+		$(this).next("span").html("ok");
+		}
+	else{
+		 $(this).next("span").html("请输入纯数字编号");
+		}	
+});
+$(".J_j_bianhao").blur(function(){
+ 		var reg = /[0-9]{1,100}/
+		var bianhao = $(".J_j_bianhao").val();
+ 		if(reg.test(bianhao)){
+		$(this).next("span").html("ok");
+		}
+	else{
+		 $(this).next("span").html("请输入纯数字编号");
+		}	
+});
+
+$(".J_j_xiadan,.J_j_chengji,.J_j_pnr,.J_j_yuding,.J_j_jingdian,.J_j_youwan").blur(function(){
+ 		var reg = /^[\u4e00-\u9fa5]{1,100}/
+		var xiadan = $(this).val();
+ 		if(reg.test(xiadan)){
+		$(this).next("span").html("ok");
+		}
+	else{
+		 $(this).next("span").html("请输入纯中文");
+		}	
+});
+$("#cx_add").on("click",function(){
+	var bianhao = $(".J_bianhao").val();
+	var xiadan =$(".J_j_xiadan").val();
+	var pnr =$(".J_j_pnr").val();
+	var chengji = $(".J_j_chengji").val();
+ 	var reg=/[0-9]{1,100}/
+	var cn=/^[\u4e00-\u9fa5]{1,100}/
+  	//订单
+	if(reg.test(bianhao)){
+		$(".J_bianhao").next("span").html("ok")
+ 		}
+	else{
+		$(".J_bianhao").next("span").html("请输入纯数字编号")
+		return false
+ 	};
+ 	//用户名
+	if(cn.test(xiadan)){
+		$(".J_j_xiadan").next("span").html("ok")
+ 		}
+	else{
+		$(".J_j_xiadan").next("span").html("请输入纯中文")
+		return false
+ 	};
+ 	//用户名
+	if(cn.test(pnr)){
+		$(".J_j_pnr").next("span").html("ok")
+ 		}
+	else{
+		$(".J_j_pnr").next("span").html("请输入纯中文")
+		return false
+ 	};	
+	//用户名
+	if(cn.test(chengji)){
+		$(".J_j_chengji").next("span").html("ok")
+ 		}
+	else{
+		$(".J_j_chengji").next("span").html("请输入纯中文")
+		return false
+ 	};	 
+$("#form1").submit();
+ });
+
+
+$("#cx_form2").on("click",function(){
+	var bianhao = $(".J_j_bianhao").val();
+	var jingdian =$(".J_j_jingdian").val();
+	var yuding =$(".J_j_yuding").val();
+	var youwan = $(".J_j_youwan").val();
+ 	var reg=/[0-9]{1,100}/
+	var cn=/^[\u4e00-\u9fa5]{1,100}/
+  	//订单
+	if(reg.test(bianhao)){
+		$(".J_j_bianhao").next("span").html("ok")
+ 		}
+	else{
+		$(".J_j_bianhao").next("span").html("请输入纯数字编号")
+		return false
+ 	};
+ 	//用户名
+	if(cn.test(jingdian)){
+		$(".J_j_jingdian").next("span").html("ok")
+ 		}
+	else{
+		$(".J_j_jingdian").next("span").html("请输入纯中文")
+		return false
+ 	};
+ 	//用户名
+	if(cn.test(yuding)){
+		$(".J_j_yuding").next("span").html("ok")
+ 		}
+	else{
+		$(".J_j_yuding").next("span").html("请输入纯中文")
+		return false
+ 	};	
+	//用户名
+	if(cn.test(youwan)){
+		$(".J_j_youwan").next("span").html("ok")
+ 		}
+	else{
+		$(".J_j_youwan").next("span").html("请输入纯中文")
+		return false
+ 	};	 
+$("#form2").submit();
+ });		
+</script>
+ </body>
+</html>

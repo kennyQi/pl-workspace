@@ -1,0 +1,94 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+
+    <form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+          action="${contextPath}/dzp/ticket/list" method="post">
+
+        <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+        <input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td style="text-align: left">票务名称：	</td>
+                    <td style="text-align: left"><input name="name" value="${qo.name}"/></td>
+
+                    <td style="text-align: left">景区名称：</td>
+                    <td style="text-align: left">
+                        <select name="scenicSpotId">
+                            <option value="">--请选择景区--</option>
+                            <#list dzpScenicSpots as scenicSpot>
+                                <option value="${scenicSpot.id}" <#if qo.scenicSpotId == scenicSpot.id>selected="selected"</#if>>${scenicSpot.baseInfo.name}</option>
+                            </#list>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li><div class="buttonActive">
+                        <div class="buttonContent">
+                            <button type="submit">查询</button>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138" >
+        <thead>
+        <tr>
+            <th width="">产品编号</th>
+            <th width="">票务名称</th>
+            <th width="">票务类型</th>
+            <th width="">包含景区</th>
+            <th width="">发布时间</th>
+            <th width="">价格日历</th>
+            <th width="">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#if dzpTicketPolicys??>
+            <#list dzpTicketPolicys as policy>
+                <tr>
+                    <td>${policy.id}</td>
+                    <td>${policy.baseInfo.name}</td>
+                    <td>
+                        <#if (policy.type == 1)>
+                            单票
+                        </#if>
+                        <#if (policy.type == 2)>
+                            联票
+                        </#if>
+                    </td>
+                    <td>${policy.baseInfo.scenicSpotNameStr}</td>
+                    <td>${policy.baseInfo.createDate}</td>
+                    <td>
+                        <#if (policy.type == 1)>
+                            <a style="color: blue" href ="${contextPath}/dzp/ticket/price?ticketId=${(policy.id)!}" target="dialog" max="true">查看价格日历</a>
+                        </#if>
+                    </td>
+                    <td>
+                        <a style="color: blue" href ="${contextPath}/dzp/ticket/sync-single?ticketId=${(policy.id)!}" target="ajaxTodo" >同步</a>
+
+                        <#if (policy.type == 1)>
+                            <a href ="${contextPath}/dzp/ticket/single?ticketId=${(policy.id)!}" target="dialog" max="true" style="color: blue">查看详情</a>
+                        </#if>
+                        <#if (policy.type == 2)>
+                            <a href ="${contextPath}/dzp/ticket/group?ticketId=${(policy.id)!}" target="dialog" max="true" style="color: blue">查看详情</a>
+                        </#if>
+                    </td>
+                </tr>
+            </#list>
+        </#if>
+        </tbody>
+    </table>
+    <#include "/public/pagination/pagination.html">
+</div>

@@ -1,0 +1,45 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>公众投稿</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/user_list.css" rel="stylesheet" />
+</head>
+
+<body>
+<div class="g_bd">
+	<input id="contextPath" type="hidden" value="${contextPath}"/>
+   	<ul class="new_list">
+   		<#list pagination.list as c>
+   			<li><a href="${contextPath}/contribution/details/${c.id}">
+            <article class="tt fl">
+            	<h2 class="paT paB">${(c.baseInfo.title)!""}</h2>
+                <span class="t_b">${(c.createDate)!""}</span>
+            </article>
+        </a></li>
+   		</#list>
+   </ul>
+   <section class="m_load" style="display: none">
+            <span class="pl"><i></i>正在加载...</span>
+   </section>
+   <input class="gd_submit" type="submit" onclick="addContribution()" value="我也要投稿" />
+</div>
+
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${contextPath}/resources/js/user_list.js"></script>
+<script type="text/javascript">
+var pageNo=${pagination.pageNo},pageSize=${pagination.pageSize};
+$(function(){
+	if(${haveMore}){
+		$(".m_load").hide();
+ 	}
+});
+function addContribution(){
+	location.href="${contextPath}/contribution/add";
+}
+</script>
+</body>
+</html>

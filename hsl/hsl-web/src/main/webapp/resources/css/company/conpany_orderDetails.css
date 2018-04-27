@@ -1,0 +1,30 @@
+/* CSS Document */
+/*liwei 2015-4-20     orderDetails right*/
+.ri{ margin:24px 32px 30px 29px;}
+.ri .navigation{ width:900px; height:30px; float:left; border:1px solid #dfe8ef; background:#fcfcfc; padding-left:10px; font-size:12px;}
+.ri .navigation a{  color:#0073b6; font-family:"微软雅黑"; line-height:30px;}
+.ri .navigation i{ margin:0 5px;}
+.ri .rih1{ float:left; font-size:20px; line-height:28px; color:#333; margin-right:40px; margin-top:26px;}
+
+.ri .tableBox{float:left; width:910px; margin-top:16px;}
+.ri .tableBox ul{ width:906px;  border-left:2px solid #bce9fd; border-right:1px solid #bce9fd; border-bottom:5px solid #bce9fd; text-align:center; float:left;}
+.ri .tableBox ul .tops{ height:40px; background:#bce9fd; line-height:40px; font-size:14px;}
+.ri .tableBox ul li{ float:left; height:71px; line-height:71px; width:906px; font-size:12px; color:#333;}
+.ri .tableBox ul li span{ float:left; border-right:1px solid #bce9fd; }
+.ri .tableBox ul li .trip{ width:180px ;height:71px; overflow:hidden;}
+.ri .tableBox ul li .take{ width:180px; height:71px; overflow:hidden;}
+.ri .tableBox ul li .arrive{width:180px; height:71px; overflow:hidden;}
+.ri .tableBox ul li .flight{ width:180px; height:71px; overflow:hidden;}
+.ri .tableBox ul li .position{ width:181px; height:71px; overflow:hidden;}
+.ri .tableBox ul li .name{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox ul li .documentType{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox ul li .ID{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox ul li .orderNo{width:180px; height:50px; overflow:hidden;}
+.ri .tableBox ul li .record{width:181px; height:50px; overflow:hidden;}
+
+.ri .tableBox ul li .fly{ width:20px; height:20px; background:url(../images/ic_script.png) 0 -115px; display:inline-block; vertical-align:middle; margin:0 5px;}
+.ri .tableBox ul li .no1{  width:180px; line-height:20px; float:left; height:20px; margin-top:16px;}
+.ri .tableBox ul li .no2{ width:180px; line-height:20px; float:left; height:20px;}
+
+.ri .total{ clear:both; width:220px; margin:0 auto; padding-top:32px; *padding-top:40px;}
+.ri .total span{display:block; text-align:center; margin-top:8px;}

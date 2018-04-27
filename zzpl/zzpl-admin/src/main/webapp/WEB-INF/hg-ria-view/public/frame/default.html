@@ -1,0 +1,45 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#macro head title>
+<!-- BEGIN HEAD -->
+<head>
+<#include "/include/meta_include.html" />
+<#include "/include/css_include.html" />
+</head>
+<!-- END HEAD -->
+</#macro>
+
+
+<#macro body header, sider, footer>
+<!-- BEGIN BODY -->
+<body class="page-header-fixed page-quick-sidebar-over-content">
+
+	<!-- BEGIN HEADER -->
+	<#include "/public/header/${header!'default'}.html"> 
+	<!-- END HEADER -->
+
+	<div class="clearfix"></div>
+
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN SIDEBAR -->
+		<#include "/public/side/${sider!'default'}.html"> 
+		<!-- END SIDEBAR -->
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content" id="_content">
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+	<!-- END CONTAINER -->
+
+	<!-- BEGIN FOOTER -->
+	<#include "/public/footer/${footer!'default'}.html"> 
+	<!-- END FOOTER -->
+	
+	<#include "/include/js_include_content.html" /> 
+</body>
+<!-- END BODY -->
+</#macro>
+

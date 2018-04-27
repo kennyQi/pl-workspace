@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<!--页面样式-->
+<link rel="stylesheet" href="css/hgsl_base.css">
+</head>
+<body>
+	<!-- 公共页头  -->
+<header class="header">
+  <h1>快速登录</h1>
+  
+  <div class="left-head"> 
+    <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+        <span class="inset_shadow">
+            <span class="head-return"></span>
+        </span>
+    </a> 
+  </div>
+</header>
+<!--页面内容-->
+  <div  page="login" class="login">
+    <form action="" class="listForm" method="">
+      <input name="" type="hidden" value="">        
+      <input name="" type="hidden" value="">
+        <article class="circle_b bottom_c" id="payInfo">
+            <section class="secure selectBank" style="position: relative;">
+                <span class="username"></span>
+                <span class="fRight">
+                    <input  name="LoginName" id="name" placeholder="请输入您的用户名/手机号码" type="text" value="">
+                </span>
+            </section>
+            <section style="position: relative;">
+                <span class="password"></span>
+                <span class="fRight">
+                    <input  name="Passwd" id="pass" placeholder="请输入您的密码" type="password">
+                </span>
+            </section>
+        </article>
+        <div class="err"><p>会员登录失败：密码错误!!!</p>
+        <p>如果您忘记了密码，请点击右下角忘记密码以找回</p>
+        </div>
+
+        <div class="log_ele clear">
+            <a href="registration.html">免费注册</a>
+            <a href="forget_paswd.html">忘记密码</a>
+        </div>
+
+        <div class="col_div">
+            <a type="submit" class="btn btn-blue" title="会员登录">登录</a>
+        </div>
+
+    </form>
+  </div>
+
+</body>
+</html>

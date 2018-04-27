@@ -1,0 +1,15 @@
+html,body ,content,ul,li,img,form{padding:0px; margin:0px; }
+.content{ background:url(../image/login_background.jpg) repeat; padding:10px; font-size:12px; color:#333px;}
+.con-top{ margin-top:120px;}
+.loginbar img { margin-top:30px;}
+.line{ width:35%;}
+.top-n{ text-align:center; font-size:24px; font-weight:bold; font-family:"微软雅黑"; height:50px ; line-height:50px;}
+.con-z{margin-top:-10px;}
+.loginbar{ width:620px; margin:0 auto;text-align: center;}
+.myform{ background:#fff; width:620px; height:380px; border-radius:5px;padding-top:30px;}
+.pt{ height:50px; line-height:0px; margin:0px auto; padding-top:30px;}
+.pt input { height:40px; line-height:40px; border:#b1b1b1 solid 1px; border-radius:5px; width:340px;margin:0 auto; }
+.rempd{ margin:20px 280px  0px 0px;  height:30px; vertical-align:middle; line-height:30px;}
+.dl input{ background:#334056; color:#fff; font-weight:bold; font-size:20px; border:none; cursor:pointer;}
+.con-ftr img { width:100%; text-align:center;}
+.yz_y{ float:right; margin:-20px -50px 0px 50px; position:absolute;}

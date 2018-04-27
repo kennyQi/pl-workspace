@@ -1,0 +1,73 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form id="myForm"  method="post"
+			action="${contextPath}/gjjp/order/refund"
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, dialogAjaxDone)">
+			
+<!-- 			<input type="hidden" name="orderId" value="${orderDetail.baseInfo.supplierOrderId}" /> -->
+			<input type="hidden" name="platformOrderId" value="${orderDetail.id}" class="required"/>
+			<div class="pageFormContent" layoutH="58">
+				<div class="unit">
+				    <label>请选择退票乘机人:</label>
+					<#if orderDetail.passengers??>
+					<#list orderDetail.passengers as passenger>
+						<input type="checkbox" name="passengerIds" 
+						value="${passenger.id}" class="required"/>${(passenger.baseInfo.passengerName)!''}
+					</#list>
+					</#if>
+				</div>
+				<div class="unit">
+				<label>请选择退票类型:</label>
+				<select name="refundType" id="refundType" class="required">
+				<option value="">--请选择--</option>
+					<#if REFUND_TYPE_MAP??>
+		                   <#list REFUND_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${REFUND_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		             </#if>
+                </select>
+			   </div>
+
+				<div class="unit">
+					<span>请填写退票理由</span>
+				</div>
+				<div class="unit">
+					<textarea name="refundMemo" clos="80" rows="5" class="required">
+					</textarea>
+				</div>
+			
+			</div>
+			<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent">
+				<button type="submit">确认</button>
+				</div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+			</div>
+	</form>
+</div>
+<script type="text/javascript">
+function check(){
+	  var passengerInfos ="";
+	  var selectPassenger=$('input[name="passengerInfo"]:checked');
+	  selectPassenger.each(function(){
+		  //passengerInfos.push($(this).val());  
+		  passengerInfos=$(this).val()+","+passengerInfos;
+	  });
+	  console.info(selectPassenger.length);
+	  if(selectPassenger.length==0){
+		  alert( '请选择乘机人！');
+		  return;
+	  }else{
+		  console.info(passengerInfos);
+		  $("#passengerInfoStr").attr("value",passengerInfos);
+		  //alert("1="+$("#passengerInfos").val());
+		  $("#myForm").submit();
+	  }
+}
+</script>
+	
+		

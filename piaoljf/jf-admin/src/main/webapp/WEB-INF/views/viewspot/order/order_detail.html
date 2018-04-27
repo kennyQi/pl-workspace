@@ -1,0 +1,144 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageContent">
+<form method="post" enctype="multipart/form-data" action="${contextPath}/viewspot/order/tocancel" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+	<div class="unit">
+		<label>订单信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:100px">订单状态</th>
+				<th style="width:300px">平台订单号</th>
+				<th style="width:160px">供应商订单号</th>
+				<th style="width:300px">经销商订单号</th>
+				<th style="width:80px">门票数量</th>
+				<th style="width:100px">实付总金额</th>
+				<th style="width:100px">下单时间</th>
+				<th style="width:100px">游玩时间</th>
+			</thead>
+			<tbody>
+				<#if mpOrderDTO.status.cancel==true>
+				<td>已取消</td>
+				<#elseif mpOrderDTO.status.outOfDate==true>
+				<td>已过期</td>
+				<#elseif mpOrderDTO.status.prepared==true>
+				<td>已预定待消费</td>
+				<#elseif mpOrderDTO.status.used==true>
+				<td>已使用</td>
+				</#if>
+				<td>${mpOrderDTO.platformOrderCode}</td>
+				<td>${mpOrderDTO.supplierOrderCode}</td>
+				<td>${mpOrderDTO.dealerOrderCode}</td>
+				<td>${mpOrderDTO.number}</td>
+				<td>${mpOrderDTO.price*mpOrderDTO.number}</td>
+				<td>${mpOrderDTO.createDate?date}</td>
+				<td>${mpOrderDTO.tcOrder.travelDate?date}</td>
+			</tbody>
+		</table>
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>	
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:100px">供应商价格</th>
+				<th style="width:100px">平台价格</th>
+			</thead>
+			<tbody>
+				<td>${mpOrderDTO.marketPrice}</td>
+				<td>${mpOrderDTO.price}</td>
+			</tbody>
+		</table>
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>	
+	<div class="unit">
+		<label>景点名称</label>
+		<label>${mpOrderDTO.supplierPolicySnapshot.scenicSpotSnapshot.tcScenicSpotsName}</label>
+	</div>
+	<div class="unit">
+		<label>门票类型</label>
+		<label>${mpOrderDTO.supplierPolicySnapshot.ticketName}</label>
+	</div>
+	<div class="unit">
+		<label>支付方式</label>
+		<label>景区现付</label>
+	</div>
+	<div class="unit">
+		<label>取票地点</label>
+		<label>${mpOrderDTO.supplierPolicySnapshot.ticketDelivery}</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>	
+	<div class="unit">
+		<label>政策备注</label>
+	</div>
+	<div class="unit">
+		<#list mpOrderDTO.supplierPolicySnapshot.notice as notcie>
+		<label><b>${notcie.typeName}&nbsp;</b></label>
+			<#list mpOrderDTO.supplierPolicySnapshot.notice.noticeItems as noticeItems>
+				<label><b>${noticeItems.sort}&nbsp;&nbsp;${noticeItems.name}&nbsp;:</b>${noticeItems.content}</label>
+			</#list>
+		</#list>	
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>		
+	<div class="unit">
+		<label>游玩人信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:100px">游玩人姓名</th>
+				<th>游玩人手机</th>
+			</thead>
+			<tbody>
+				<td></td>
+				<td></td>
+			</tbody>
+		</table>
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>	
+	<div class="unit">
+		<label>取票人信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>		
+	<div class="unit">
+		<label>取票人姓名</label>
+		<label>${mpOrderDTO.tcOrder.bookName}</label>
+	</div>
+	<div class="unit">
+		<label>取票人手机</label>
+		<label>${mpOrderDTO.tcOrder.bookMobile}</label>
+	</div>
+</div>
+	<div class="formBar">
+			<ul>
+				<li><a class="button" target="dialog" href="${contextPath}/viewspot/order/tocancel?id=${mpOrderDTO.id}"><span>取消订单</span></a></li>
+			</ul>
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+	</div>
+</form>

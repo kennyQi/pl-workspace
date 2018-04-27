@@ -1,0 +1,131 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script src="${contextPath}/resources/js/calendar-widget/jquery.calendar-widget.js" type="text/javascript" charset="utf-8"></script>
+
+<style>
+	#dealerDatePrice td,th{border-left:1px solid #999;border-bottom:1px solid #999;width:90px;padding:10px 0;text-align:center}
+	#dealerDatePrice table{border-right:1px solid #999;border-top:1px solid #999}th{background:#666;color:#fff}.other-month{background:#eee}
+</style>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	
+	var map2 = {};
+	
+	/************/
+	var priceStr = $('.dpriceStr').val();
+	//解析后台返回经销商价格价格日历  放入map
+	//格式：20150312:100;20150313:101
+	var priceArr = priceStr.split(";");
+	for(var p in priceArr){
+		var priceArr2 = priceArr[p].split(":");
+		if(priceArr2.length==2)
+			map2["d_"+priceArr2[0]] = priceArr2[1];
+	}
+	/************/
+	
+	var date=new Date();
+	//当前年份
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	
+	var show = function(){
+		$('#dealerDatePrice').calendarWidget({month:m-1,year:y,cid:'d_'});//cid 日历input id的自定义前缀
+	}
+	
+	var save = function(){
+		$('.date-price').each(function(){
+			if($(this).attr('id').indexOf('d_')>-1){
+				var price = $(this).val();
+				if(price.trim().length>0){
+					map2[$(this).attr('id')] = $(this).val();
+				}else{
+					delete map2[$(this).attr('id')];
+				}
+			}
+		});
+	}
+	
+	var read = function(){
+		$('.date-price').each(function(){
+			if($(this).attr('id').indexOf('d_')>-1){
+				$(this).val(map2[$(this).attr('id')]);
+			}
+		});
+	}
+	
+	
+	//date开始日期 DATE  days天数
+	var newDay = function(dd, days){
+
+		dd.setDate(dd.getDate()+days);
+		var mm = dd.getMonth()+1;
+		var d = dd.getDate();
+		
+		if(mm<=9)
+			mm="0"+mm
+		if(d<=9)
+			d="0"+d;
+		
+		return dd.getFullYear()+""+mm+""+d;
+	}
+	
+	
+	//上个月
+	$('#preMonthBtn2').click(function(){
+		console.info('pre2');
+		if(--m<=0){
+			y--;
+			m=12;
+		}
+		
+		save();
+		console.info('pre2');
+		show();
+		read();
+	});
+	
+	//下个月
+	$('#nextMonthBtn2').click(function(){
+		if(++m>=13){
+			y++;
+			m=1;
+		}
+		
+		save();
+		show();
+		read();
+	});
+	
+	
+	show();
+	read();
+});
+</script>
+
+
+<div class="pageContent" style="padding-left: 20px">
+
+    <div class="pageFormContent" layoutH="58" id="singleTicketContent">
+    
+    	<input id="t_btn" type="hidden" value="${ticketPolicyId}"/>
+    	<input id="d_btn" type="hidden" value="${dealerId}"/>
+    	<input id="name_btn" type="hidden" value="${dealerName}"/>
+    	
+    	<input type="hidden" class="dpriceStr" value="${dpriceStr}">
+    	<input type="hidden" id="type_btn" value="${type}">
+    
+		<input id="preMonthBtn2" type="button" value="上个月"/>
+		<input id="nextMonthBtn2" type="button" value="下个月"/>
+		
+		</br>
+		</br>
+		
+		<div style="overflow: hidden;">
+		</div>
+		<br/>
+		
+		<div id="dealerDatePrice" />
+	</div>
+</div>

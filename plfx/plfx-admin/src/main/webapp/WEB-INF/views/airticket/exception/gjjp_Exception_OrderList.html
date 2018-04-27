@@ -1,0 +1,224 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" 
+		action="${contextPath}/gjjp/exception/orderList" method="post" >
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						订单编号：
+					</td>
+					<td>
+						<input name="id" id="id" value="${(gjjpOrderQo.id)!''}" />
+					</td>
+					
+					<td>
+						下单时间：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(gjjpOrderQo.createDateBegin?string('yyyy-MM-dd'))!''}" class="date"/>
+						至
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(gjjpOrderQo.createDateEnd?string('yyyy-MM-dd'))!''}" class="date"/>
+					</td>
+					<td>订单状态：</td>
+					<td>
+						 <select name="orderStatus" id="orderStatus">
+							<option value="">全部状态</option>
+							 <#list orderStatusMap?keys as key>
+								<option value="${(key)!''}" <#if gjjpOrderQo.orderStatus == key> selected="selected"</#if>>${orderStatusMap[key]}</option>
+						     </#list>
+						</select>
+					</td>
+					<td>支付状态</td>
+					<td>
+						<select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							 <#list orderPayStatusMap?keys as key>
+								<option value="${(status.key)!''}" <#if gjjpOrderQo.payStatus== key>selected="selected"</#if>>${orderPayStatusMap[key]}</option>
+						     </#list>
+						</select>
+					</td>
+					
+				</tr>
+				<tr>
+					<td>
+						下单人：
+					</td>
+					<td>
+						<input type="text" name="contactName" value="${(gjjpOrderQo.contactName)!''}" />
+					</td>
+					<td>
+						出发国家:
+					</td>
+					<td>
+						<select name="orgCountry" id="orgCountry">
+							<option value="">选择</option>
+							<#list countries as country>
+								<option value="${(country.thirdCode)!''}" >${country.simpleName!?html}</option>
+						     </#list>
+						</select>
+						
+						&nbsp;&nbsp;&nbsp;目的国家:
+						&nbsp;&nbsp;&nbsp;
+						<select name="dstCountry" id="dstCountry">
+							<option value="">选择</option>
+							 <#list countries as country>
+								<option value="${(country.thirdCode)!''}" >${country.simpleName!?html}</option>
+						     </#list>
+						</select>
+					</td>
+					
+					<td>
+						乘机人：
+					</td>
+					<td><input type="text" name="passengerName" value="${(gjjpOrderQo.passengerName)!''}" /></td>			
+					
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+				<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="reset" onclick="javascript:document.getElementById('pagerForm').reset()">重置</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent" id="table_c">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/gjjp/exception/toAddExceptionOrder" rel="queryHead"  target="dialog"
+				  mask="true" width="800" height="500"><span>新增异常订单</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids"
+					class="checkboxCtrl">
+				</th>
+ 				<th width="70">订单号</th>
+				<th width="60">供应商定单号</th>
+				<!-- <th width="70">供应商单号</th> -->
+				<th width="90">乘机人</th>
+				<th width = "60">PNR</th>
+				<th width = "150">航程</th>
+				<th width = "70">订单总金额</th>
+				<th width = "70">返点/佣金</th>
+ 				<th width = "70">调整</th> 
+				<th width = "90">票号</th>
+				<th width = "140">下单时间</th>
+				<th width = "60">订单状态</th>
+				<th width = "60">支付状态</th>
+				<th width="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as gjjpOrder>
+				<tr height="21px">
+				<td><input name="ids" value="" type="checkbox"></td>
+	<!-- 判断是否为异常订单 -->
+<#--					<#if gjjpOrder.exceptionInfo??>
+					<#if gjjpOrder.exceptionInfo.exceptionOrder>
+						异常订单
+					</#if>
+					<#if !gjjpOrder.exceptionInfo.exceptionOrder>
+						普通订单
+					</#if>
+				</#if>
+				
+ -->				<td>${gjjpOrder.id}</td>
+				<td>${gjjpOrder.baseInfo.supplierOrderId}</td>
+				<!-- 乘机人 -->
+				<td>
+					<#if gjjpOrder.passengers ??>
+							<#list gjjpOrder.passengers as passenger>
+								<p>${passenger.baseInfo.passengerName}</p>
+						 	</#list>
+					</#if>
+				</td>
+				<td>${gjjpOrder.baseInfo.pnr}</td>
+				<!-- 航程 -->
+				<td>
+						 <p>       
+                        ${dataTransService.getAirportName(gjjpOrder.segmentInfo.orgCity)}
+                        	-
+                        ${dataTransService.getAirportName(gjjpOrder.segmentInfo.dstCity)!''}
+                        </p>
+                    	<p> 用时：${(gjjpOrder.segmentInfo.takeoffTotalDuration)!''}分钟</p>
+				</td>
+				<!-- 订单总金额 -->
+				<td>
+					<#if (gjjpOrder?? && gjjpOrder.payInfo?? &&gjjpOrder.payInfo.totalPrice??)>
+						${(gjjpOrder.payInfo.totalPrice)!?c}
+					</#if>
+				</td>
+				<!-- 返点、佣金 -->
+				<td>
+						${(gjjpOrder.payInfo.supplierDisc)!''}/${(gjjpOrder.payInfo.commAmount)!''}
+				</td>
+				<!-- 调整 -->
+ 			<td>
+					<#if gjjpOrder.exceptionInfo?? && gjjpOrder.exceptionInfo.adjustAmount??><p>${gjjpOrder.exceptionInfo.adjustAmount?string('0.00')}</p>
+					<p>${(gjjpOrder.exceptionInfo.adjustReason)!''}</p>
+					</#if>
+					
+			</td>
+					<!-- 票号 -->
+				<td>
+					<#if gjjpOrder.passengers ??>
+						<#list gjjpOrder.passengers as passenger> 
+							<#if passenger.tickets??>
+								<#list passenger.tickets as ticket>
+									<p>${(ticket.ticketNo)!''}</p>
+								</#list>
+							</#if>
+						</#list>
+					</#if>
+				</td>
+				<!-- 下单时间 -->
+				<td>
+					 ${(gjjpOrder.baseInfo.createDate)!''}
+				</td>
+				<!-- 订单状态 -->
+				<td>
+					 <#list orderStatusMap?keys as key>
+						<#if gjjpOrder.status.currentValue== key>
+							${orderStatusMap[key]}
+						</#if> 
+				     </#list>
+				</td>
+				<!-- 支付状态 -->
+				<td>
+					 <#list orderPayStatusMap?keys as key>
+						<#if gjjpOrder.payInfo.status== key>${orderPayStatusMap[key]}</#if> 
+				     </#list>
+				</td>
+				<td>
+					<a style="color: blue" target="dialog" href="${contextPath}/gjjp/order/detail?id=${gjjpOrder.id}&type=1" width="1000" height="800">订单详情</a>
+				</td>
+			</tr>
+		</#list>	
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

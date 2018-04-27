@@ -1,0 +1,140 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>机票首页</title>
+<link href="${contextPath}/resources/hg-ria/new-web/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/hg-ria/new-web/css/fly_index.css" rel="stylesheet" />
+<script src="${contextPath}/resources/hg-ria/new-web/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/common.js" language="javascript"></script>
+</head>
+<body>
+<!---->
+<div class="head">
+    <div class="head-cont">
+        <a href="${contextPath}/home" class="logo fl">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/logo.jpg" />
+        </a>
+        <ul class="fl nav">
+            <li class="fl"><a href="${contextPath}/home">首页</a></li>
+            <li class="fl"><a href="${contextPath}/CLGLYBookFlight/view">机票</a></li>
+        </ul>
+        <div class="user fr">
+            <span class="out fr"><a href="${contextPath}/logout">
+					退出</a></span>
+            <span class="name fr">${(user.name)!''}</span>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<!--头部-->
+<!--内容-->
+<script src="${contextPath}/resources/hg-ria/new-web/js/city.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/laydate/laydate.js" language="javascript"></script>
+
+<link rel="stylesheet" href="${contextPath}/resources/hg-ria/new-web/css/jquery-ui.css">
+<script src="${contextPath}/resources/hg-ria/new-web/js/jquery-ui.js"></script>
+<script>
+    $(function() {
+        var from=$("#citySelect_from");
+        var to=$("#citySelect_to");
+        $( "#datepicker" ).datepicker({
+            numberOfMonths: 2,
+            showButtonPanel: true,
+            dateFormat:"yy-mm-dd",
+            minDate: 0
+        });
+        //更换出发城市****************************
+        $(".se_icon").click(function(){
+            var v1=from.val();
+            from.val(to.val());
+            to.val(v1);
+        });
+        $(".btn_search").click(function(e){
+            e.preventDefault();
+            if(from.val()==""||from.val()=="城市名"){
+                from.css("border","1px solid #fd0");
+                return;
+            }
+            if(to.val()==""||from.val()=="城市名"){
+                to.css("border","1px solid #fd0");
+                return;
+            }
+            if($("#datepicker").val()=="") {
+                $("#datepicker").css("border", "1px solid #fd0");
+                return;
+            }
+            ply.loading();
+            $(this).closest("form").submit();
+        });
+    });
+</script>
+<div class="content_wrap">
+<div class="content_box">
+	<!--放置时间参数-->
+    <input type="hidden" rel="0" id="day_rel" day="" loadDay="${time}"><!--loadDay页面加载时的时间参数，day是js校验用参数-->
+    <div class="content">
+      <h1 class="index_title">机票预订</h1>
+      <h2 class="text"><img src="${contextPath}/resources/hg-ria/new-web/images/text.png"></h2>
+      <div class="content_inner">
+        <h2 class="tit">国内机票</h2>
+        <div class="form_box">
+          <form  action="${contextPath}/CLGLYBookFlight/queryFlightGN" method="post">
+            <dl>
+              <dt>出发城市</dt>
+              <dd>
+                <i class="start"></i>
+                <input type="text" class="text_input" name="orgCity"   id="citySelect_from">
+              </dd>
+            </dl>
+            <dl>
+              <dt>到达城市</dt>
+              <dd>
+                <i class="end"></i>
+                <input type="text" class="text_input" name="dstCity"  id="citySelect_to">
+              </dd>
+            </dl>
+            <dl>
+              <dt>出发日期</dt>
+              <dd>
+                <i class="s_date"></i>
+                <input type="text" class="text_input" name="startDate" id="datepicker">
+              </dd>
+            </dl>
+            <input type="submit" class="btn_search" value="搜索">
+          </form>
+          <div class="se_icon_wrap">
+            <div class="se_icon"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="statement"></div>
+</div>
+<script>
+    var city1=new Vcity.CitySelector({input:'citySelect_from'});
+    var city2=new Vcity.CitySelector({input:'citySelect_to'});
+    </script>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+    <div class="foot">
+        <div class="l fl">
+            <a href="#">关于智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">联系智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">智行荣誉</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">帮助中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">意见与建议</a>
+        </div>
+        <div class="r fr">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/foot_logo.png" />
+        </div>
+    </div>
+</div>
+<!--页脚-->
+</body>
+</html>

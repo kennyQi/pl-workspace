@@ -1,0 +1,151 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "首页-登录页面">
+
+<!-- <link href="${contextPath}/resources/css/flogin.css" type="text/css" rel="stylesheet" /> -->
+
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.min.js"></script>
+<link href="${contextPath}/resources/css/login.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="${contextPath}/resources/js/login.js"></script>
+</@frame.head>
+
+<@frame.main "default" 6>
+<div class="wrapper"> 
+  <!--content-->
+<!--内容-->
+<div class="g_bd">
+    <div class="g_ct">
+        <div class="m_log fr dib">
+            <ul class="m_tab">
+                <li class="on" id="personal">个人登录</li>
+                <li id="enterprise">企业登录</li>
+            </ul>
+            
+            <div class="ct" id="G_form">
+            <form action="${contextPath}/user/login/check" method="post" id="G_regForm" class="C_regform">
+                <div class="input_li fl">
+                    <label class="fl name"></label><input type="text" name="loginName" value="${(hslUserQO.loginName)!}"  class="fl enter" placeholder="请输入您的用户名" onkeydown="keyUser(event)"/>
+                </div>
+                <div class="input_li fl">
+                    <label class="fl pwd"></label><input type="password" name="password" value="${(password1)!}"  class="fl enter" placeholder="输入密码" onkeydown="keyUser(event)"/>
+                </div>
+                <div class="log_li fl">
+                    <input type="text" class="fl yzm_enter" name="authcode"   placeholder="输入验证码" onkeydown="keyUser(event)" maxlength="4"/>
+                    	<img
+                    	id="p_kaptchaImage"
+						src="${contextPath}/comRegister/captcha-image"
+						class="fr yzm" p_kaptchaImage="p_kaptchaImage"/>
+                </div>
+                <div class="log_li fl foget">
+                <a href="${contextPath}/comRegister/forgetPwd" class="fl" target="_blank">忘记密码</a>
+                </div>
+                <div class="log_li fl log_btn">
+                    <a href="javascript:;" class="log fl" name="login" id="G_submit">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                </div>
+                <div class="log_li fl">
+                <a href="${contextPath}/user/register" class="reg fl" target="_blank">新用户注册</a>
+                </div>
+                </form>
+            </div>
+		
+		
+            <div class="ct" style="display:none;" id="Q_form">
+            <form action="${contextPath}/comLogin/login" method="post" id="Q_regForm">
+                <div class="input_li fl">
+                    <label class="fl name"></label><input type="text" name="loginName" value="${(hslUserQ.loginName)!}" class="fl enter" placeholder="请输入您的用户名" onkeydown="keyDown(event)"/>
+                </div>
+                <div class="input_li fl">
+                    <label class="fl pwd"></label><input type="password" name="password" value="${(password2)!}"  class="fl enter" placeholder="输入密码" onkeydown="keyDown(event)"/>
+                </div>
+                <div class="log_li fl">
+                    <input type="text" class="fl yzm_enter" name="authcode" placeholder="输入验证码" onkeydown="keyDown(event)" maxlength="4"/>
+                    <img
+                    	id="p_kaptchaImage"
+						src="${contextPath}/comRegister/captcha-image"
+						class="fr yzm" p_kaptchaImage="p_kaptchaImage"/>
+                </div>
+                <div class="log_li fl foget">
+                <a href="${contextPath}/comRegister/forgetPwd" class="fl" target="_blank">忘记密码</a>
+                </div>
+                <div class="log_li fl log_btn">
+                    <a href="javascript:" class="log fl" name="login" id="Q_submit">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                </div>
+                <div class="log_li fl">
+                <a href="${contextPath}/comRegister/main" class="reg fl" target="_blank">新用户注册</a>
+                </div>
+                </form>
+            </div>
+            <!-- 个人登陆 -->
+            <input type="hidden" id="pcodeError" value="${(pcodeError)!}"/><!-- 验证码错误 -->
+            <input type="hidden" id="perror" value="${(perror)!}"/><!-- 用户名或密码错误 -->
+            <!-- 个人or企业标识符 -->
+            <input type="hidden" id="index" value="${(index)!}"/><!-- 0为个人1为企业 -->
+            
+        </div>
+    </div>
+      <div class="g_f">
+	      <a href="${contextPath}/aboutPL"  target="_blank">票量简介</a>
+	      <a href="${contextPath}/aboutLaw" target="_blank">法律声明</a>
+	      <a href="${contextPath}/aboutContactUs"  target="_blank">网站地图</a>
+	      <a href="${contextPath}/footLink" target="_blank">友情链接</a>
+	      <a href="#">酒店加盟</a>
+	      <a href="${contextPath}/aboutAlliance" target="_blank">网站联盟</a>
+	      <a href="${contextPath}/aboutContactUs" target="_blank"帮助中心</a>
+	      <a href="${contextPath}/aboutComplaint"  target="_blank">投诉建议</a>
+	      <a href="${contextPath}/aboutJob"  target="_blank">诚聘英才</a>
+  	</div>
+</div>
+  <!--end content-->
+  </@frame.main> 
+<script type="text/javascript" src="${contextPath}/resources/js/gb.js"></script>
+<script type="text/javascript">
+	$(function() {
+	//判断是个人还是企业
+	var index=$("#index").val();
+	var submit="";//
+	if(index=="0"){
+		submit="#G_submit";
+		change(submit);
+	}else if(index=="1"){
+		submit="#Q_submit";
+		$("#enterprise").addClass("on");
+		$("#personal").removeClass("on");
+		$("#Q_form").show();
+		$("#G_form").hide();
+		change(submit);
+	}
+	$("[p_kaptchaImage='p_kaptchaImage']").click(function(){
+		$("[p_kaptchaImage='p_kaptchaImage']").each(function(){
+			 $("[p_kaptchaImage='p_kaptchaImage']").hide().attr('src','${contextPath}/comRegister/captcha-image?'+ Math.floor(Math.random() * 100)).fadeIn();
+		})
+		
+	})
+	})
+	function change(submit){
+		var perror=$("#perror").val();
+		var pcodeError=$("#pcodeError").val();
+		if(pcodeError!=""){
+			var parent=$(submit).closest(".ct");
+			alertMsg("验证码错误！",parent.find("[name='authcode']").offset().top-10,parent.find("[name='authcode']").offset().left-10);
+	        return;
+		}
+		if(perror!=""){
+			var parent=$(submit).closest(".ct");
+			 alertMsg(perror,parent.find("[name='loginName']").offset().top-10,parent.find("[name='loginName']").offset().left-40);
+	         return;
+		}
+	}
+	//按下键盘回车
+	function keyUser(e){
+		var event=window.event?window.event:e;
+		if(event.keyCode==13){
+			 $("#G_submit").trigger("click");
+		} 	
+	}
+	function keyDown(e){
+		var event=window.event?window.event:e;
+		if(event.keyCode==13){
+			 $("#Q_submit").trigger("click");
+		} 	
+	}
+ </script>

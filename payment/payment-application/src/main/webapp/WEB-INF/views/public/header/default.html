@@ -1,0 +1,17 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div id="header">
+			<div class="headerNav">
+				<ul class="nav">
+					<li><span style="color: white;">欢迎 <#if Session["_SESSION_USER_"]??>${Session["_SESSION_USER_"].loginName}</#if> </span></li>
+					<li><a href="${contextPath}/logout.html" style="color: white;">退出</a></li>
+				</ul>
+			</div>
+			<div id="navMenu">
+				<ul>
+					<li class="selected"><a href="${contextPath}/side/1"><span>全部菜单</span></a></li>
+					<li><a href="${contextPath}/side/2"><span>系统设置</span></a></li>
+					<li><a href="${contextPath}/side/3"><span>订单管理</span></a></li>
+					<li><a href="${contextPath}/side/4"><span>客户端管理</span></a></li>
+				</ul>
+			</div>
+		</div>

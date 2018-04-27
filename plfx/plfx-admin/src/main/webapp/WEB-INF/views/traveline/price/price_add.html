@@ -1,0 +1,81 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/price/add" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="lineID" value="${lineDTO.id}"/>
+			<div class="unit">
+				<label>线路名称</label>
+				${lineDTO.baseInfo.name}
+			</div>
+			<div class="unit">
+				<label>时间</label>
+				${saleDate}
+				<input type="hidden" name="saleDate" size="10" maxlength="10"   value="${saleDate}"/>
+			</div>
+			<div class="unit">
+				<label>成人价格</label>
+				<input type="text" name="adultPrice" size="20" maxlength="20"   class="number required" min="0" id="adultPrice"/>元
+			</div>
+			<div class="unit">
+				<label>儿童价格</label>
+				<input type="text" name="childPrice" size="20" maxlength="20"   class="number required" min="0" id="childPrice"/>元
+			</div>
+			<div class="unit">
+				<label>剩余人数</label>
+				<input type="text" name="number" size="20" maxlength="9"    class="digits required" min="0"/>人
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="" id="checkNumber">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+//取消回车键能提交表单的功能
+   document.onkeydown = function(event_e){  
+    if(window.event) {  
+        event_e = window.event;  
+    }  
+    var int_keycode = event_e.charCode||event_e.keyCode;  
+    if(int_keycode =='13') {  //13是回车键
+        return false;  
+    }  
+  }
+  
+   $("#checkNumber").click(function(){
+	   var adultPrice = $("#adultPrice").val();
+	   var childPrice = $("#childPrice").val();
+	   if(adultPrice < 1){	 
+			alert("成人价格不能低于1元");
+			return false;
+	   }
+	   if(childPrice < 1){	 
+		    alert("儿童价格不能低于1元");
+		    return false;
+	   }
+	   
+   });
+   
+   $("#adultPrice").blur(function(){
+		var adultPrice = $("#adultPrice").val();
+		if(adultPrice < 1){	 
+		  alert("成人价格不能低于1元");
+		  return false;
+		}
+		return true;
+	});
+   
+   $("#childPrice").blur(function(){
+		var childPrice = $("#childPrice").val();
+		if(childPrice < 1){	 
+		  alert("儿童价格不能低于1元");
+		  return false;
+		}
+		return true;
+	});
+</script>

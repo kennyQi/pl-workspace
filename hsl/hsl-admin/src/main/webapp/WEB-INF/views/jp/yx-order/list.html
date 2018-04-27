@@ -1,0 +1,157 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		  action="${contextPath}/yxjp/order/list" method="post">
+
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">订单号：	</td>
+					<td><input type="text" name="orderNo" value="${qo.orderNo}" ></td>
+
+					<td style="text-align: left">下单时间：</td>
+					<td><input type="text" name="createBegin" value="${createDateBegin}" class="date" readonly="readonly" />-<input type="text" name="createEnd" value="${createDateEnd}" class="date" readonly="readonly" /></td>
+
+					<td style="text-align: left">订单状态：	</td>
+					<td>
+						<select name="status">
+							<option value="">全部状态</option>
+							<#if yxOrderStatusMap??>
+								<#list yxOrderStatusMap?keys as key>
+									<option value="${(key)!}" <#if (qo.passengerQO.status)?? && qo.passengerQO.status == key>selected=selected</#if>>
+										<#if (key == 1)>待支付
+										<#elseif (key == 2)>已取消未付款
+										<#elseif (key == 3)>出票处理中
+										<#elseif (key == 4)>已出票
+										<#elseif (key == 5)>出票失败待退款
+										<#elseif (key == 6)>出票失败已退款
+										<#elseif (key == 7)>退废处理中
+										<#elseif (key == 8)>退废失败
+										<#elseif (key == 9)>退废成功待退款
+										<#elseif (key == 10)>退废成功已退款
+										</#if>
+									</option>
+								</#list>
+							</#if>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">下单人：	</td>
+					<td><input type="text" name="orderUserLoginName" value="${(qo.orderUserLoginName)!}"></td>
+
+					<td style="text-align: left">登机人：</td>
+					<td style="text-align: left"><input type="text" name="name" value="${(qo.passengerQO.name)!}" />
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">查询</button>
+						</div>
+					</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="163" >
+		<thead>
+		<tr>
+			<th width="">订单号</th>
+			<th width="">乘客</th>
+			<th width="">航程</th>
+			<th width="">订单支付信息</th>
+			<th width="">下单时间</th>
+			<th width="">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<#if orders??>
+			<#list orders as yxorder>
+				<tr>
+					<td>${(yxorder.baseInfo.orderNo)!}</td>
+					<td>
+						<#if (yxorder.passengers)??>
+							<table width="100%" border="0">
+								<tr>
+									<td width="30%" style="font-weight: bold;">乘客姓名</td>
+									<td width="30%" style="font-weight: bold;">状态</td>
+									<td width="40%" style="font-weight: bold;">票号</td>
+								</tr>
+								<#list yxorder.passengers as p>
+									<tr>
+										<td>${p.baseInfo.name}</td>
+										<td>${(yxOrderStatusMap[(p.ticket.status)?c])!}</td>
+										<td>${p.ticket.ticketNo}</td>
+									</tr>
+								</#list>
+							</table>
+						</#if>
+					</td>
+					<td>
+						<div>${yxorder.flight.baseInfo.orgCityName!}----${yxorder.flight.baseInfo.dstCityName!}</div>
+						<div>${yxorder.flight.baseInfo.flightNo!}</div>
+						<div>${yxorder.flight.baseInfo.startTime}</div>
+					</td>
+					<td>
+						<table width="100%" border="0">
+							<tr>
+								<td style="font-weight: bold;">应付</td>
+								<td style="font-weight: bold;">实付</td>
+								<td style="font-weight: bold;">实退</td>
+								<td style="font-weight: bold;">卡券总计</td>
+								<td style="font-weight: bold;">卡券使用</td>
+							</tr>
+							<tr>
+								<td>${(yxorder.payInfo.totalPrice - yxorder.payInfo.totalCancelPrice)?string('0.00')}</td>
+								<td>${yxorder.payInfo.totalPayAmount?string('0.00')}</td>
+								<td>${yxorder.payInfo.totalRefundAmount?string('0.00')}</td>
+								<td>${yxorder.payInfo.totalCouponAmount?string('0.00')}</td>
+								<td>${yxorder.payInfo.totalCouponUsedAmount?string('0.00')}</td>
+							</tr>
+						</table>
+					</td>
+					<td>
+						<div>${yxorder.userInfo.loginName!}</div>
+						<div>${yxorder.baseInfo.createDate}</div>
+					</td>
+					<td>
+						<a href="${contextPath}/yxjp/order/detail?orderNo=${(yxorder.baseInfo.orderNo)!}" target="dialog" max="true" style="color: blue">查看详情</a>
+							<#list yxorder.passengers as p2>
+								<div>
+									<#if (p2.ticket.status ==1)>
+										<a href="${contextPath}/yxjp/order/cancel?orderNo=${(yxorder.baseInfo.orderNo)!}" target="dialog" style="color: blue">取消订单</a>
+										<#break>
+									</#if>
+									<#if (p2.ticket.status ==4)>
+										<a href="${contextPath}/yxjp/order/refund?orderNo=${(yxorder.baseInfo.orderNo)!}" target="dialog" max="true" style="color: blue">申请退废票</a>
+										<#break>
+									</#if>
+									<#if (p2.ticket.status ==8)>
+										<a href="${contextPath}/yxjp/order/refund?orderNo=${(yxorder.baseInfo.orderNo)!}" target="dialog" max="true" style="color: blue">申请退废票</a>
+										<#break>
+									</#if>
+								</div>
+							</#list>
+					</td>
+				</tr>
+			</#list>
+		</#if>
+
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

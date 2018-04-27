@@ -1,0 +1,46 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/client/client/save" 
+		class="pageForm required-validate" 
+		onsubmit="$('#groupId').attr('name', 'groupId'); return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>客户端标示：</label>
+				<input type="text" name="clientId" size="8" 
+					class="required" minlength="2" maxlength="8"/>
+			</div>
+			<div class="unit">
+				<label>客户端名：</label>
+				<input type="text" name="name" size="64" 
+					class="required" minlength="2" maxlength="64"/>
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<input  type="text" name="remark"/>
+			</div>
+			<div class="unit">
+				<label>是否生效：</label>
+				<div style="text-align: left;">
+					<input type="radio" name="valid" value="false" checked="checked">无效
+					<input type="radio" name="valid" value="true">有效
+				</div>
+			</div>
+			<div class="unit">
+				<label>所属分组：</label>
+				<input id="groupId" type="hidden" name="groupQo.id"/>
+				<input type="text" name="groupQo.groupName"
+					style="float: left;" readonly="readonly">
+				<a class="btnLook" href="${contextPath}/client/client/grouplist" 
+					lookupGroup="groupQo" mask="true" target="dialog" ref="groupChos" width="800"><span>所属分组选择</span></a>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent">
+					<button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent">
+					<button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

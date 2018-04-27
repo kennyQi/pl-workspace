@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2014-07-30 00:36:49
+ * @version $Id$
+ */
+ *{margin:0;padding:0;}
+ a{text-decoration:none;}
+
+html{background:#f2f2f2;}
+/* 快速登录 */
+.login{margin-top:0px;padding:60px 25px 10px 25px;background:#f2f2f2;}
+#payInfo{font-family: microsoft yahei;font-size: 15px;padding:0 25px; background: #fff}
+.selectBank{border-bottom: 1px solid #bab5b1;}
+.red{color:#FF0000;}
+article.bottom_c section{padding:0 5px;height: auto; background-color:#fff;}
+article.bottom_c .LoginName_dic{margin-right:80px;}
+article.bottom_c .LoginName_dic #btn{margin-top: 10px;border: none;background: none;position: absolute;right: -100px;top: 10px;font-size: 10px;color: #61c177;}
+article.bottom_c input[type="text"], article.bottom_c input[type="password"],article.bottom_c input[name="Verify"]{position:absolute;top:10px;width:100%;text-align:left;outline:none; box-shadow:none;border:none; color:#333;background-color:#fff;height:24px;font-family: microsoft yahei;}
+section span{float:left; padding-left:5px}
+input::-webkit-input-placeholder {color:#ccc;}
+section span.fRight{float:none; padding-left:25px; position:relative;  display:block;height: 50px;line-height: 50px;text-align: left}
+
+.log_ele{padding:10px 15px 0 15px;font-size: 15px;}
+.log_ele p{color: #bab5b1; font-size: 12px}
+.log_ele a{ color: #929292}
+.log_ele a:nth-child(2){float:right}
+.dire_btn{color:white; font-size:16px; text-align:center; display:block; height:44px; line-height:44px; border:1px solid #4ba5ff; text-shadow:0px -1px 0px #0a83ff; -moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px; background-image:-webkit-gradient(linear,left top,left bottom,from(#75bbff),to(#0a83ff)); background-image:-webkit-linear-gradient(#75bbff,#0a83ff); background-image:-moz-linear-gradient(#75bbff,#0a83ff); background-image:-ms-linear-gradient(#75bbff,#0a83ff); background-image:-o-linear-gradient(#75bbff,#0a83ff); background-image:linear-gradient(#75bbff,#0a83ff); width:100%}
+
+a{color:#2DA1E7;text-decoration: none;-webkit-tap-highlight-color: #c8c8c8;font-family: microsoft yahei;}
+.passinfo .fRight{ overflow: hidden;padding-left:10px!important }
+.passinfo section{padding:0!important;}
+.passinfo .fRight input{ font-size: 12px;top: 12px!important}
+.passname{ width: 90px;color: #bdb8b5;line-height: 50px;height: 50px;}
+.username{background: url("../img/login/ico-user.png") no-repeat; display: inline-block;width: 20px;height: 25px;background-size:25px;margin: 9px -5px 0;}
+.password{background: url("../img/login/ico-password.png") no-repeat; display: inline-block;width: 20px;height: 26px !important;height: 25px;background-size:25px;margin: 9px -5px 0;}
+.LoginName_info{background: url("../img/login/ico-tel.png") no-repeat; display: inline-block;width: 20px;height: 26px !important;height: 25px;background-size:25px;margin: 9px -5px 0;}
+.LoginName_edir{background: url("../img/login/ico-edir.png") no-repeat; display: inline-block;width: 20px;height: 26px !important;height: 25px;background-size:25px;margin: 9px -5px 0;}
+.btn-blue {margin-top:16px; background:#fe932b; border:none;border-radius: 3px;font-family: microsoft yahei;font-size: 18px;}
+.btn-green{margin-top:35px; background:#4fc66a; border:none;border-radius: 3px;font-family: microsoft yahei;font-size: 18px;}
+.btn-green:hover{background: #33aa4e};
+.err{font-size:12px;padding:5px;border:1px solid #ffd5bb;color:#f60;background:#fff4ed;display:-none;text-indent:10px;}
+
+.btn {width:100%;height:40px;display: block;line-height: 40px;text-align: center;font-size: 18px;color: #fff;margin-bottom: 10px;cursor: pointer;}
+/*  */
+/* 绑定账号 */
+/*  */
+.content{background:#f2f2f2;}
+.content p{padding:10px;}
+
+.verify{background: url("../img/login/check.png") no-repeat;display: inline-block;width: 25px;height: 26px !important;height: 25px;background-size:cover;margin: 6px -5px 0;}
+.pic{text-align:center;}
+.pic img{margin-top:5px;width:100px;height:40px;}
+/*  */
+/* 修改密码 */
+/*  */
+.phone,.msg_verify{display:inline-block;width:74px;height:44px;line-height:44px;}
+.get{padding:6px;background:green;color:#fff;border:none;width:80%;}
+.msg_get{text-align:center;line-height:50px}
+/*  */
+/* 注册 */
+/*  */
+.registration{font-size:14px;}
+
+

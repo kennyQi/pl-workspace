@@ -1,0 +1,106 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+	<form id="pagerForm" class="hlistQueryForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/advertisement/getlList" method="post">
+	<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">
+						线路名称：
+					</td>
+					<td><input type="text" name="title" value="${(adQO.title)!}" ></td>
+						<td style="text-align: left">
+						线路广告类型：
+					</td>
+					<td>
+					<select name="positionId" class="positionId">
+						<#list lineList?keys as key>
+						<option value="${key}" <#if key==adQO.positionId>
+						selected="selected"
+						</#if>
+						>${(lineList[key])!}</option>
+					</#list>
+					</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button onclick="return checkQuery();">查询</button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<a href="${contextPath}/advertisement/addLineAd" target="navTab"
+				rel="addSpec"><span>添加</span></a>					
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		  <li>
+			  <a title="确实要隐藏这些吗？" target="selectedTodo" postType="string" rel="ids"  href="${contextPath}/advertisement/showPreferential?op=false&tab=getlList" class="add"><span>隐藏</span></a>
+		  </li>
+		  <li>
+		  	  <a title="确实要删除这些吗？" target="selectedTodo" postType="string" rel="ids"  href="${contextPath}/advertisement/deleteLineAd?tab=getlList" class="delete"><span>删除</span></a>
+		  </li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="136" >
+		<thead>
+			<tr>
+				<th width="100">
+					<input type="checkbox" group="ids"  class="checkboxCtrl">
+				</th>
+ 				<th width="100">线路名称</th>
+ 				<th width="100">添加时间</th>
+				<th width="100">排序</th>
+				<!-- <th width="100">类别</th> -->
+				<th width="200">线路缩略图</th>
+				<th width="200">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as pre>
+				<tr>
+					 <td><input name="ids" value="${(pre.id)!}#${pre.adId}" type="checkbox"></td>
+					<td>${(pre.adBaseInfo.title)!}</td>
+					<td>${(pre.adBaseInfo.createTime?string("yyyy-MM-dd HH:mm:ss"))!}</td>
+					<td>${(pre.adBaseInfo.priority)!}</td>
+					<!-- <td>${(typeMap[spec.position.id])!}</td> -->
+					<td><image width="100" height="100" src="${(pre.adBaseInfo.imagePath)!}"/></td> 
+					<td>
+						<a target="ajaxTodo" title="确定要隐藏吗？" href="${contextPath}/advertisement/updatePreferentialStatus?id=${(pre.id)!}&isShow=false&adId=${pre.adId}&tab=getlList" style="color:blue">隐藏</a>&nbsp;&nbsp;&nbsp;
+						<a target="ajaxTodo" title="确定要删除吗？" href="${contextPath}/advertisement/deleteLineAd?ids=${(pre.id)!}&adId=${pre.adId}&tab=getlList" style="color:blue">删除</a>&nbsp;&nbsp;&nbsp;
+						<a target="dialog" href="${contextPath}/advertisement/updateLineAd?id=${(pre.id)!}&tab=getlList" style="color:blue">修改</a>
+					</td>
+				</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+	//初始化查询参数
+	var position = '${(specOfferMpQO.positionId)!""}';
+	if(position!=""){
+		$(".hlistQueryForm .positionId option[value="+position+"]").prop("selected",true);
+	}
+</script>

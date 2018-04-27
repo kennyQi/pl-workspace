@@ -1,0 +1,70 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	
+	<!-- 景区管理 -->
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>景区管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a href="${contextPath}/scenic-spot/editInfo?navTabId=scenic-spot" target="navTab" rel="scenic-spot">景区管理</a></li>
+		</ul>
+	</div>
+	
+	
+	<!-- 票务管理-->
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>票务管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/singleTicket/list" target="navTab" rel="singleTicket">单票管理</a></li>
+			<li><a href="${contextPath}/groupTicket/list" target="navTab" rel="groupTicket">联票业务</a></li>
+		</ul>
+	</div>
+	
+	<!-- 订单管理-->
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>订单管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/order/list" target="navTab" rel="orderList">订单管理</a></li>
+		</ul>
+	</div>
+	
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>经销商管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/dealer/list" target="navTab" rel="dealer">经销商管理</a></li>
+		</ul>
+	</div>
+	
+	
+	<!-- 结算管理-->
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>统计报表
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+<!-- 			<li><a href="${contextPath}/clear/clearInfo" target="navTab" rel="singleTicket">结算信息</a></li> -->
+<!-- 			<li><a href="${contextPath}/checkAccountAll/list2" target="navTab" rel="finaRec">财务对账</a></li> -->
+<!-- 			<li><a href="${contextPath}/checkAccount/list2" target="navTab" rel="payRec">支付对账单</a></li> -->
+			<li><a href="${contextPath}/report/settleDetail/list" target="navTab" rel="settleDetail">结算明细</a></li>
+			<li><a href="${contextPath}/report/enter_scenicspot_count" target="navTab" rel="enterScenicspotReport">入园统计</a></li>
+		</ul>
+	</div>
+	
+</div>

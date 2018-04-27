@@ -1,0 +1,31 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/salepolicy/cancel" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="policyId" value="${salePolicyDTO.id}"/>
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>政策名称：</label>
+				${(salePolicyDTO.salePolicyLineName)!''}
+			</div>
+			<div class="unit">
+				<label>请填写取消原因：</label>
+				<textarea id="cancle_remark" name="cancleRemark" rows="5" cols="50" class="required"></textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" id="commit">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script>
+$("#commit").click(function(){
+	var remark = $("#cancle_remark").val();
+	if(remark.length > 512){
+		alert("取消原因过长");
+		return false;
+	}
+});
+</script>

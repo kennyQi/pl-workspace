@@ -1,0 +1,62 @@
+SELECT
+	fo.ORDER_NO '订单号',
+	fo.USER_NAME AS '下单人',
+	fo.CREATE_TIME '下单时间',
+	CASE fo.PAY_TYPE
+WHEN '1' THEN
+	'代扣'
+WHEN '2' THEN
+	'客户支付'
+END AS '支付方式',
+ fo.TICKET_CHANNEL_NAME AS '出票渠道',
+ CASE fo.PAY_STATUS
+WHEN '96' THEN
+	'等待用户支付'
+WHEN '98' THEN
+	'用户支付成功'
+WHEN '100' THEN
+	'等待支付'
+WHEN '102' THEN
+	'支付成功'
+WHEN '103' THEN
+	'支付失败'
+WHEN '104' THEN
+	'等待退款'
+WHEN '106' THEN
+	'退款成功'
+WHEN '107' THEN
+	'退款失败'
+WHEN '108' THEN
+	'等待退款给用户'
+WHEN '110' THEN
+	'退款到用户成功'
+END '支付状态',
+ CASE fo. STATUS
+WHEN '100' THEN
+	'审批中'
+WHEN '101' THEN
+	'审批不通过'
+WHEN '102' THEN
+	'出票中'
+WHEN '104' THEN
+	'已出票'
+WHEN '105' THEN
+	'出票失败'
+WHEN '106' THEN
+	'审批退票中'
+WHEN '108' THEN
+	'退票中'
+WHEN '110' THEN
+	'已退票'
+END '订单状态',
+ fo.PLAT_TOTAL_PRICE AS '企业支付价',
+ fo.REFUND_PRICE AS '退票价格',
+ fo.COMMIT_PRICE AS '提交价格',
+ fo.TOTAL_PRICE AS '经销商价格',
+ fo.USER_PAY_PRICE AS '用户支付价格' /*fo.**/
+FROM
+	o_flight_order fo
+WHERE
+	fo.CREATE_TIME > '2015-08-29' /*AND fo.ORDER_NO = 'B829102702010000'*/
+ORDER BY
+	fo.CREATE_TIME DESC

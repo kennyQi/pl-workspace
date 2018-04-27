@@ -1,0 +1,205 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader pay_code" style="text-align:left;">
+	<form  id="pagerForm" rel="pagerForm"  action="${contextPath}/balance/paymentRecordDetail" 
+	 onsubmit="return navTabSearch(this);">
+		<input type="hidden" name="id" id="payCodeRecordId" value="${(record.id)!}"/>
+		<input type="hidden" name="validToken_recharge" id="validToken_recharge" value="" />
+		<input type="hidden" name="pageNum" value="<#if pagination??>${pagination.pageNo?c}</#if>" />
+		<input type="hidden" name="numPerPage" value="<#if pagination??>${pagination.pageSize?c}</#if>" />
+		<input type="hidden" name="isQueryPayCodes" id="isQueryPayCodes" value="${(isQueryPayCodes)!}"/>
+		<div class="pageFormContent" >
+			<div class="unit">
+				<label>公司名称：</label>
+				<span>${(record.businessPartners.companyName)!}</span>
+			</div>
+			<div class="unit">
+				<label>公司联系人：</label>
+				<span>${(record.businessPartners.companyLinkName)!}</span>
+			</div>
+			
+			<div class="unit">
+				<label>公司联系人电话：</label>
+				<span>${(record.businessPartners.companyLinkTel)!}</span>
+			</div>
+			<div class="unit">
+				<label>对接人：</label>
+				<span>${(record.dockingPerson)!}</span>
+			</div>
+			
+			<div class="unit">
+				<label>对接人电话：</label>
+				<span>${(record.dockingPersonTel)!}</span>
+			</div>
+			<div class="unit">
+				<label>充值码金额：</label>
+				<span>${(record.payCodeMoney)?string('0.00')}</span>
+				
+			</div>
+			
+			<div class="unit">
+				<label>发放数量：</label>
+				<span>${(record.payCodeNum)}</span>
+			</div>
+			<div class="unit">
+				<label>发码人：</label>
+				<span>${(record.granterName)!}</span>
+			</div>
+			
+			<div class="unit">
+				<label>发码人电话：</label>
+				<span id="granterMobile" style="float:left;">
+				${(record.granterTel)!}
+				</span>
+				<i class="mobileyzms"><a class="button" href="javascript:;"  id="granterTel_btn" ><span style="font-style:normal;">发送验证码</span></a></i>
+			</div>
+			
+			<div class="unit">
+				<label>验证码：</label>
+				<input type="text" name="validCode" id="validCode_recharge" size="30"   maxlength="20 " />
+			</div>
+			
+			<div class="unit">
+				<button type="button" class="queryCodes" >查看兑换码</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</div>
+			
+		</div>
+		
+	</form>
+	
+	
+ </div>
+<div  id="pageContent" class="recharge_pageContent" >	
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			<input type="hidden" id="exist" value="${(exist)!}"/>
+			<button type="button" id="export" class="queryCodeExport">导出</button>
+			</li>
+		</ul>
+	</div>
+	<table  class="table" width="100%" layoutH="450">
+	
+		<thead>
+			<tr>
+ 				<th width="20%">序号</th>
+				<th width="80%">兑换码</th>
+			</tr>
+		</thead>
+		<tbody id="recharge_payCodeList">
+		<#if pagination??>
+				<#list pagination.list!null as payCode>
+					<tr>
+						<td>${payCode_index+1}</td>
+						<td>${(payCode.code)!}</td>
+					</tr>
+				</#list>
+			</#if>
+		</tbody>
+	</table>
+	
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+
+	/**
+	 *发送验证码
+	 */
+	var ajaxCan=true;
+	$("#granterTel_btn span").on("click",function(){
+		
+		var that=$(this);
+		var mobile=$("#granterMobile").text();
+
+		if(mobile==""){
+			alertMsg.error("发码人手机号为空");
+      		return false;
+		}else{ 
+
+			 if(!ajaxCan)return;
+			 ajaxCan=false;
+			$.ajax({
+				type: "POST",
+				url: "${contextPath}/balance/sendCode?scene=6&mobile="+mobile,
+				contentType: "application/x-www-form-urlencoded; charset=utf-8",
+				dataType:"json",
+				success: function(result) {
+					if(result.status=="success"){
+						
+						$("#validToken_recharge").val(result.validToken);
+						var wait = 60;
+						function time(){
+							if (wait == 0) {
+								
+								that.closest(".pageHeader").find("#granterTel_btn span").html("发送验证码");
+								wait = 60;
+								ajaxCan=true;
+							} else {
+								
+								that.closest(".pageHeader").find("#granterTel_btn span").html("重新发送("+wait+")");
+								wait--;
+								setTimeout(function() {
+									time();
+								},
+								1000)
+							}
+						}
+						time();
+					}else{
+						
+						alertMsg.error("验证码发送失败");
+						ajaxCan=true;
+
+					}
+				},error:function(result) {
+					alertMsg.error("验证码发送失败");
+					ajaxCan=true;
+				}
+			});
+		}
+	});
+	//查看兑换码之前，校验手机验证码是否正确
+	$(".queryCodes").on("click",function(){
+		 var validToken=$("#validToken_recharge").val();
+		 var validCode=$("#validCode_recharge").val();
+		 var payCodeRecordId=$("#payCodeRecordId").val();
+		 
+		 if(validCode==""){
+			 alertMsg.error("请输入手机验证码");
+		 }else{
+			 $.ajax({
+					type: "POST",
+					url: "${contextPath}/balance/checkValidCode?validToken="+validToken+"&validCode="+validCode+"&payCodeRecordId="+payCodeRecordId,
+					contentType: "application/x-www-form-urlencoded; charset=utf-8",
+					dataType:"json",
+					success: function(result) {
+						if(result.status=="success"){
+							$("#isQueryPayCodes").val("yes");
+							$(".pay_code #pagerForm").submit();;
+						}else if(result.status == "error"){
+							alertMsg.error("手机验证码错误");
+						}
+					},error:function(result) {
+						alertMsg.error("操作失败");
+						
+					}
+			});
+		 }
+		 
+	
+		
+	 });
+	 
+	//导出兑换码
+	$(".queryCodeExport").on("click",function(){
+		var payCodeRecordId=$("payCodeRecordId").val();
+		
+		if($(".recharge_pageContent #exist").val()=="yes"){
+			location.href = "${contextPath}/balance/export?payCodeRecordId"+payCodeRecordId;
+		}else{
+			alertMsg.error("没有兑换码导出");
+		}
+		
+	});
+	
+</script>

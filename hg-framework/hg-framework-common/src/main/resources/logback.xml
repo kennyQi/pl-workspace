@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="1000 seconds">
+	<timestamp key="date" datePattern="yyyyMMdd"/>
+
+	<!-- 控制台输出 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%-4r %-5p [%d{yyyy-MM-dd HH:mm:ss}] %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- MongoDB输出 -->
+	<appender name="MONGODB" class="hg.framework.common.base.log.HgLogAppender">
+		<encoder>
+			<pattern>%m</pattern>
+		</encoder>
+		<!-- 日志配置 -->
+		<config>
+			<!-- 工程名称 -->
+			<projectName>${project.name}</projectName>
+			<!-- 工程版本 -->
+			<projectVersion>${project.version}</projectVersion>
+			<!-- Mongo地址 -->
+			<address>192.168.2.214:27017</address>
+			<!-- Mongo库名 -->
+			<dbName>newDevLog</dbName>
+			<!-- Mongo表名 -->
+			<collectionName>testLog</collectionName>
+		</config>
+	</appender>
+
+	<!-- 异步MongoDB输出 -->
+	<appender name="ASYNC_MONGODB" class="ch.qos.logback.classic.AsyncAppender">
+		<!-- 从不阻塞 -->
+		<neverBlock>true</neverBlock>
+		<!-- 设置调用者信息 -->
+		<includeCallerData>true</includeCallerData>
+		<!-- 不丢失日志（默认的如果队列的80%已满，则会丢弃TRACT、DEBUG、INFO级别的日志） -->
+		<discardingThreshold>0</discardingThreshold>
+		<!-- 更改默认的队列的深度，该值会影响性能，默认值为256 -->
+		<queueSize>2048</queueSize>
+		<!-- 添加附加的appender，最多只能添加一个 -->
+		<appender-ref ref="MONGODB"/>
+	</appender>
+
+	<!-- 打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和  OFF 默认是DEBUG -->
+	<root level="ERROR">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ASYNC_MONGODB"/>
+	</root>
+
+	<!-- 日志记录器配置 -->
+	<logger name="hg.framework.common.base.log" level="DEBUG"/>
+	<logger name="hg.framework.common.base.quartz" level="DEBUG"/>
+
+</configuration>

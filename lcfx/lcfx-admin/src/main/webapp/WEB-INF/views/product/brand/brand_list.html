@@ -1,0 +1,112 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+function exportExcel(){
+	processInput();
+	var parmStr = $("#pagerForm",navTab.getCurrentPanel()).serialize();
+	var url = "${contextPath}/brand/export?"+parmStr;
+	window.location.href=url;
+}
+
+function processInput(){
+	$("#chineseName").val(trim($("#chineseName").val()));
+	$("#englishName").val(trim($("#englishName").val()));
+}
+</script>
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/brand/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'}" />
+		<div class="searchBar dwz_query_box">
+			<table class="searchContent">
+				<tr>
+					<td class="label">中文名称：</td>
+					<td>
+						<input name="chineseName" id="chineseName" type="text" value="${brandQO.chineseName}" placeholder="请输入中文名" />
+					</td>
+					<td class="label">英文名称：</td>
+					<td>
+						<input name="englishName" id="englishName" type="text" value="${brandQO.englishName}" placeholder="请输入英文名" />
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" onclick="processInput()">查询</button>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="buttonActive">
+							<a class="add" href="${contextPath}/brand/to_import" target="dialog" mask="true" width="600" height="367">
+								<span>导入</span>
+							</a>
+						</div></li>
+					<li>
+						<div class="buttonActive">
+							<a onclick="exportExcel()">
+								<span>导出</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		<#if branddelete>
+			<li><a title="确实要删除选中项?" target="selectedTodo" rel="brandIdList" href="${contextPath}/brand/delete" class="delete">
+					<span>删除</span>
+				</a>
+			</li>
+			</#if>
+		<#if brandto_add>
+			<li><a class="add" href="${contextPath}/brand/to_add" lookupgroup="orgLookup" mask="true" width="900" height="650">
+					<span>新增</span>
+				</a></li>
+			</#if>
+		</ul>
+	</div>
+	<div>
+		<table class="table" cellpadding="0" cellspacing="0" width="100%" layoutH="137">
+			<thead>
+				<tr>
+					<th width=""><input type="checkbox" group="brandIdList" class="checkboxCtrl" /></th>
+					<th width="">品牌编号</th>
+					<th width="">中文名</th>
+					<th width="">英文名</th>
+					<th width="">创建时间</th>
+					<th width="">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list pagination.list as t>
+				<tr>
+					<td>
+						<input type="checkbox" name="brandIdList" value="${(t.id)!''}" />
+					</td>
+					<td>${t.brandCode}</td>
+					<td>${t.chineseName}</td>
+					<td>${t.englishName}</td>
+					<td>${t.createDate}</td>
+					<td class="a_button2">
+					<#if brandto_add>
+						<a target="dialog" href="${contextPath}/brand/edit?id=${(t.id)!''}" mask="true" width="900" height="650">编辑</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						</#if>
+						<#if branddelete>
+						<a target="ajaxTodo" title="确定要删除吗？" href="${contextPath}/brand/delete?brandIdList=${(t.id)!''}">删除</a>
+						</#if>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+</div>

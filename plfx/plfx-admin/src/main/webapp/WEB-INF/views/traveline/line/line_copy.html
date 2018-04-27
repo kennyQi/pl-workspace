@@ -1,0 +1,79 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/line/copy" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="lineID" value="${lineID}"/>
+			<div class="unit">
+				<label>线路名称</label>
+				<input type="text" id = "name" name="name" size="40" maxlength="40"  class="required"/>
+			</div>
+			<div class="unit">
+				<label>线路编号</label>
+				<input type="text" id = "number" name="number" size="20" maxlength="40"  class="required"/>
+			</div>
+			<div class="unit">
+				<label>推荐指数</label>
+				<select name="recommendationLevel">
+				<option value="">--请选择--</option>
+					<#if RECOMMAND_MAP??>
+		                   <#list RECOMMAND_MAP?keys as itemKey>
+		                       <option value="${itemKey}">${RECOMMAND_MAP[itemKey]}</option>
+		                   </#list>
+		             </#if>
+                </select>
+			</div>
+			<div class="unit">
+				<label>供应商</label>
+				<select name="lineSupplierID">
+				<option value="">--请选择--</option>
+					<#if supplierList??>
+		                   <#list supplierList as supplier>
+		                       <option value="${supplier.id}">${supplier.name}</option>
+		                   </#list>
+		              </#if>
+                </select>
+			</div>
+			<div class="unit">
+				<label>线路类型</label>
+				<select name="type">
+					<option value="">--请选择--</option>
+					<#if TYPE_MAP??>
+	                    <#list TYPE_MAP?keys as itemKey>
+	                    	<option value="${itemKey}">${TYPE_MAP[itemKey]}</option>
+	                    </#list>
+	                </#if>
+                </select>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">复制</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+$("#name").blur(function(){
+	var name = $(this).val();
+	if(name != ""){
+		$.post("${contextPath}/traveline/line/uniqueName",{'name':name},function(data){
+			if (data.length > 0) {  
+	 			alert(data);
+	 			$("#name").focus();
+	         }  
+	 	},"json");
+	}
+});
+$("#number").blur(function(){
+	var number = $(this).val();
+	if(number != ""){
+		$.post("${contextPath}/traveline/line/uniqueNumber",{'number':number},function(data){
+	 		if (data.length > 0) {  
+	 			alert(data);
+	 			$("#number").focus();
+	         }  
+	 	},"json");
+	}
+});
+</script>

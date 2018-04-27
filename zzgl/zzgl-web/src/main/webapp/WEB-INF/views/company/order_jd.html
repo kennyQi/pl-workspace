@@ -1,0 +1,195 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> 
+<@frame.head "中智票量-会员中心">
+
+	<link href="${(contextPath)!}/resources/css/company/company_home.css" rel="stylesheet" />
+	<link href="${(contextPath)!}/resources/css/company/company_hotel.css" rel="stylesheet" />	
+
+<#if (((user.baseInfo.type?c)!0)==1)>
+	<link href="${(contextPath)!}/resources/css/personal/personal_hotel.css" rel="stylesheet" />
+</#if>
+<script src="${(contextPath)!}/resources/js/company/laydate/laydate.js" language="javascript"></script> 
+<script>
+(function(){   //调用日期插件
+ ;!function(){								
+laydate.skin('dahong');							
+      laydate({
+         elem: '#demo'
+      });							
+   }();
+ })();
+</script>
+</@frame.head>
+
+
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	
+	<div class="g_cont disb ov">
+		<@frame.nav "订单管理" 1></@frame.nav>
+		<div class="m_cont ov fl">
+        <!--右侧呈现页-->
+            <div class="ri">
+                 <span class="rih1 yahei order_p "><a href="${(contextPath)!}/company/orderManage?sel=1">机票订单</a><i></i></span>
+                <span class="rih1 yahei order_p "><a href="${(contextPath)!}/company/orderManage?sel=2">景点订单</a><i></i></span>
+                <span class="rih1 yahei order_p "><a href="${(contextPath)!}/company/orderManage?sel=3">旅游订单</a><i></i></span>
+                <span class="rih1 yahei order_p onc"><a href="${(contextPath)!}/company/orderManage?sel=4">酒店订单</a><i></i></span>
+                <div class="navsbox"></div>
+                <div class="yesOrder">
+                    <div class="orderBox">
+                    <form action="${(contextPath)!}/company/orderManage?sel=4" name="hotelOrderForm" id="hotelOrderForm" class="hotelOrderForm" method="post">
+			            <input type="hidden" class="pageNum" name="page" value="${(hotelPagination.pageNo?c)!}">
+                		<input type="hidden" name="pageSize" value="${(hotelPagination.pageSize?c)!}">	
+						<input type="hidden" name="showStatus" id="showStatus" value="${showStatus}">
+                    	<ul class="order">
+                            <li>
+                            <span class="selti h3">订单编号：</span>
+                            <input id="dealerOrderNo" name="dealerOrderNo" type="text" class="border slor optionValue input_p" value="${(hotelOrderQO.dealerOrderNo)!}">
+                            <span></span>
+                            </li>
+                            <li style="width:400px; line-height:30px;">
+                            	<span class="selti h3">下单时间：</span>
+                            	<span class="numTextRight">
+                            		<input id="cstart" name="beginDateTime" class="border changeTime input_p" onClick="laydate()" value="${(hotelOrderQO.beginDateTime)!}">
+                            	</span>
+                            <i style=" margin:0 5px; float:left;">-</i>
+                            <span class="numTextRight">
+                            	<input id="cend" name="endDateTime" class="border changeTime input_p" onClick="laydate()" value="${(hotelOrderQO.endDateTime)!}">
+                            </span>
+                            </li>
+                            <li></li>
+										
+                     	<li>
+                        	<span class="selti h3">订单状态：</span><span class="dd companySelect"><span class="optionValue" id="optionValue" style="line-height:30px;">请选择</span></span>
+                         <ul class="selectNav" for="optionValue" forName="showStatus">
+                             <li class="l" value="">请选择</li>
+                           	 <#if hotelShowStatusMap?exists>
+                           	 	<#list hotelShowStatusMap?keys as key>
+                           	 		 <li class="l" value="${key}">${hotelShowStatusMap[key]}</li>
+                           	 	</#list>
+                           	 </#if>
+                         </ul>
+                        </li>
+                        
+										<li></li>
+                        <li style="width:50px;">
+                        <a  id="sendHotel" href="#" class="cx">查询</a>
+                        </li>   
+                     </ul>
+                	</div>
+                    
+                 	<#if hotelPagination??&&((hotelPagination.list?size)>0)>
+                    
+			            <span class="inf_box"></span>
+			            <span class="qx_box"></span>
+	                 <div class="tableBox">
+	                 <#list hotelPagination.list as hotelOrder> 
+                     <ul class="tableUl">
+                        <li class="pl">
+                        <span class="orderInf">
+                        	订单编号：
+                        	<i>
+                        	<a class="blue" id="toLineDetail" href="${(contextPath)!}/company/orderManage/hotelOrderDetail?id=${(hotelOrder.dealerOrderNo)!}">${(hotelOrder.dealerOrderNo)!}</a>
+							&nbsp;
+							</i>
+                        	预定时间：
+                        	<i><b>${(hotelOrder.creationDate)!}</b></i></span>
+                        <span class="lineName">
+                            <div class="img">
+		                        <img src="">
+                            </div>
+                            <div class="line">
+                                <i class="line_name iStyle">
+                                <a href="#">${(hotelOrder.hotelName)!}</a>
+                                </i>
+                                <i class="line_no iStyle color8 hotel_d">酒店地址：</i>
+                                <i class="line_no iStyle color8 hotel_d">联系电话：</i>
+                            </div>
+                        </span>
+                        <span class="money">
+                            <i class="iStyle h2" style="margin-top:20px; font-weight:bold;">
+                           		  ￥<#if hotelOrder.totalPrice??>
+								   ${(hotelOrder.totalPrice)?c}
+								</#if>
+                            </i>
+                        </span>
+                        <span class="status">
+                        	<i class="line_name iStyle">
+                        		<#if hotelOrder.showStatus??>
+                        			${hotelShowStatusMap[hotelOrder.showStatus?c]}
+                        		</#if>
+                        	</i>
+                        </span>
+                       
+                        </li>
+                        
+                    </ul>
+                    </#list> 
+                    
+                    
+                   <div class="m_pageNav listPageStyle">
+                   	<div id="page" class="m_nums"></div>
+                   </div>
+                </div>
+                <#else>
+            </div>
+          <!--有订单-->
+         <!--没有订单-->
+         <div class="noOrder">
+             <span class="noIcon" style="background:url(${(contextPath)!}/resources/images/company/ic_script.png) 0 -543px;"></span>
+             <span class="in">您目前还没有酒店订单哦~</span>
+         </div>
+          </form>
+         <!--没有订单-->
+         </#if>
+     </div>
+     </div>
+     
+	 <!--右侧呈现页-->
+	 </div>
+	</div>
+ </div>
+<@frame.end "default"> </@frame.end> 
+</@frame.main>
+
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		//分页初始化
+		 pageCreate(${(((hotelPagination.totalCount-1)/5+1)?int)!1},"hotelOrderForm");
+		//酒店订单状态初始化
+		$('[forName="showStatus"]').find("li[value='"+$("[name='showStatus']").val()+"']").click();
+	});
+	
+	//搜索框校验
+	$("#dealerOrderNo").blur(function() {
+		var reg = /^[a-zA-Z0-9]{0,100}$/
+		var bianhao = $("#dealerOrderNo").val();
+		if (reg.test(bianhao)) {
+			$(this).next("span").html("");
+			$(".m_errTips").remove();
+		} else {
+			alertMsg("请输入正确格式的订单编号",$(this).offset().top-20,$(this).offset().left+$(this).width());
+		}
+	});
+	
+	
+	$("#sendHotel").on("click", function() {
+		var reg = /^[a-zA-Z0-9]{0,100}$/
+		var bianhao = $("#dealerOrderNo").val();
+		if (reg.test(bianhao)) {
+			$(this).next("span").html("");
+			$(".m_errTips").remove();
+		} else {
+			alertMsg("请输入正确格式的订单编号",$(this).offset().top-20,$(this).offset().left+$(this).width());
+			return false;
+		}
+		
+		
+		$('#hotelOrderForm').submit();
+	});
+	
+</script>		

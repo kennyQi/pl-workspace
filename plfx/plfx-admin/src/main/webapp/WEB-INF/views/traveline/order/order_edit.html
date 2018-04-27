@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/price/edit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>出游时间</label>
+				<input type="text" class="date">
+			</div>
+			<div class="unit">
+			    <dl>
+			       <dt>成人价格</dt>
+			       <dd></dd>
+			    </dl>
+				<dl>
+			       <dt>儿童价格</dt>
+			       <dd></dd>
+			    </dl>
+			</div>
+			<div class="unit">
+				<label>成人人数</label>
+				<label>儿童人数</label>
+			</div>
+			<div>
+				<label>姓名</label>
+				<input type="text">
+			</div>
+			<div>
+				<label>证件</label>
+				<select></select>
+				<input type="text">
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+//取消回车键能提交表单的功能
+document.onkeydown = function(event_e){  
+ if(window.event) {  
+     event_e = window.event;  
+ }  
+ var int_keycode = event_e.charCode||event_e.keyCode;  
+ if(int_keycode =='13') {  //13是回车键
+     return false;  
+ }  
+}
+</script>

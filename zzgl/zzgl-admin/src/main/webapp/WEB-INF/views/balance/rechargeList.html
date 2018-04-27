@@ -1,0 +1,73 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/balance/rechargeRecordList" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">兑换码：</td>
+					<td><input type="text" name="code" value="${(prQo.code)!}"  /></td>
+					
+					<td style="text-align: left">账户名：	</td>
+					<td><input type="text" name="userName" value="${(prQo.userName)!}" ></td>
+					<td style="text-align: left">充值时间：</td>
+					<td><input type="text" name="beginTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="${(prQo.beginTime)!}" />-
+					<input type="text" name="endTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="${(prQo.endTime)!}"/></td>
+					
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="163" >
+		<thead>
+			<tr>
+ 				<th width="">帐号名</th>
+				<th width="">兑换码</th>
+				<th width="">面值</th> 
+				<th width="">充值日期</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<#if pagination??>
+				<#list pagination.list as record>
+				<tr>
+					<td>${(record.holdUserSnapshot.loginName)!}</td>
+					<td>${(record.code)!}</td>
+					<td>${(record.price)?string('0.00')}</td>
+					<td>
+					<#if record.rechargeDate??>
+					${record.rechargeDate?string('yyyy-MM-dd HH:mm:ss')}
+					</#if>
+					</td>
+					
+				</tr>
+				</#list>
+			</#if>
+			
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

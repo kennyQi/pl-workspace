@@ -1,0 +1,234 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" 
+		action="${contextPath}/line/orderList" method="post">
+		
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo?c)!5}"/>
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!1}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					
+					<td style="text-align: left">
+						经销商订单号：
+					</td>
+					<td style="text-align: left"><input type="text" name="dealerOrderNo" value="${(hslLineOrderQO.dealerOrderNo)!''}" ></td>
+					<td style="text-align: left">
+						线路编号：
+					</td>
+					<td style="text-align: left"><input type="text" name="lineNumber" value="${(hslLineOrderQO.lineNumber)!''}" ></td>
+					<td style="text-align: left">
+						线路名称：
+					</td>
+					<td style="text-align: left"><input type="text" name="lineName" value="${(hslLineOrderQO.lineName)!''}" ></td>
+					<td style="text-align: left">
+						预订人：
+					</td>
+					<td style="text-align: left"><input type="text" name="booker" value="${(hslLineOrderQO.booker)!''}" ></td>
+					</tr>
+					<tr>
+					<td style="text-align: left">
+						下单时间：
+					</td>
+					<td style="text-align: left">
+						<input type="text" name="startTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="${(hslLineOrderQO.startTime)!''}">-
+						<input type="text" name="endTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="${(hslLineOrderQO.endTime)!''}">
+					</td>
+					<!-- <td style="text-align: left">
+						订单状态：
+					</td>
+					<td>
+					<select name="orderStatus" id="orderStatus">
+							<option value="">--请选择--</option>
+							<#if orderStatusList??>
+                               <#list orderStatusList as os>
+                                  <option value="${os.key}" <#if os.key==(hslLineOrderQO.orderStatus)>selected="selected"</#if> >${os.value}</option>
+                               </#list>
+                            </#if>
+					</select>
+						
+					</td>
+					
+					<td style="text-align: left">
+						支付状态：
+					</td>
+					<td colspan="2">
+						<select name="payStatus" id="payStatus">
+						<option value="">--请选择--</option>
+						<#if payStatusList??>
+                            <#list payStatusList as os>
+                                 <option value="${os.key}" <#if os.key==(hslLineOrderQO.payStatus)>selected="selected"</#if> >${os.value}</option>
+                            </#list>
+                         </#if>
+					</td> -->
+					
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="150" >
+		<thead>
+			<tr>
+				<!-- <th width="100">
+					<input type="checkbox" group="ids"  class="checkboxCtrl">
+				</th> -->
+ 				<th width="100">经销商订单号</th>
+ 				<!-- <th width="9%">订单号</th> -->
+ 				<th width="100">线路编号</th>
+				<th width ="300">线路名称</th>
+				<th width ="60">出发地</th>
+				<th width ="300">游玩人</th>
+				<th width ="50">订单总金额</th>
+				<th width ="50">定金金额</th>
+				<th width ="100">下单时间</th>
+				<th width ="100">联系方式</th>
+				<th width ="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			<#list pagination.list as lineOrderDTO>
+			<tr>
+				
+				<td width="100">
+					<#if lineOrderDTO?? && lineOrderDTO.baseInfo??>
+						${(lineOrderDTO.baseInfo.dealerOrderNo)!''}
+					</#if>
+				</td>
+				<!-- <td>
+					<#if lineOrderDTO??>
+						${(lineOrderDTO.id)!''}
+					</#if>
+				</td> -->
+				<td>
+					<#if lineOrderDTO?? && lineOrderDTO.lineSnapshot?? && lineOrderDTO.lineSnapshot.line??>
+						${(lineOrderDTO.lineSnapshot.line.baseInfo.number)!''}
+					</#if>
+				</td>
+				<td>
+					<#if lineOrderDTO?? && lineOrderDTO.lineSnapshot?? && lineOrderDTO.lineSnapshot.line?? && lineOrderDTO.lineSnapshot.line.baseInfo??>
+						${(lineOrderDTO.lineSnapshot.line.baseInfo.name)!''}
+					</#if>
+				</td>
+				<td>
+					<#if lineOrderDTO?? && lineOrderDTO.lineSnapshot?? && lineOrderDTO.lineSnapshot.starting??>
+					    <#list cityList as city>
+	                        <#if city.id == lineOrderDTO.lineSnapshot.starting>
+	                               ${city.name}    
+	                        </#if>
+	                    </#list>
+	                </#if>
+				</td>
+				<td colspan="5" >
+					<table width="100%" height="100%" border="1">
+						<tr>
+							<th width="40">价格</th>
+			 				<th width="40">姓名</th>
+							<th width="80">身份证件号</th>
+							<th width="140">订单状态</th>
+							<th width="140">支付状态</th>
+						</tr>
+						<#if lineOrderDTO.travelers??>
+							<#list lineOrderDTO.travelers as traveler>
+								<tr>
+									<td>
+									<#if traveler?? && traveler.singleSalePrice??>
+										${(traveler.singleSalePrice)!''}
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.name??>
+										${(traveler.name)!''}
+									</#if>
+									</td>
+									<td style="width:120px;">
+									<#if traveler?? && traveler.idNo??>
+										${(traveler.idNo)!''}
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.lineOrderStatus??>
+										<#if orderStatusList??>
+						                   <#list orderStatusList as os>
+						                       <#if os.key == traveler.lineOrderStatus.orderStatus?c>
+						                       		${os.value}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.lineOrderStatus??>
+										<#if payStatusList??>
+						                   <#list payStatusList as ps>
+						                       <#if ps.key == traveler.lineOrderStatus.payStatus?c>
+						                       		${ps.value}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</#if>							
+									</td>
+								</tr>
+							</#list>
+						</#if>
+					</table>
+				<td>
+					<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.salePrice??>
+					${(lineOrderDTO.baseInfo.salePrice)?string('0.00')}
+					</#if>					
+				</td>
+				<td>
+					<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.bargainMoney??>
+					${(lineOrderDTO.baseInfo.bargainMoney)?string('0.00')}
+					</#if>
+				</td>
+				<td>
+					<#if lineOrderDTO?? && lineOrderDTO.baseInfo?? && lineOrderDTO.baseInfo.createDate??>
+					${(lineOrderDTO.baseInfo.createDate)?string("yyyy-MM-dd HH:mm:ss")}
+					</#if>
+				</td>
+				<td>
+					<#if lineOrderDTO?? && lineOrderDTO.lineOrderUser??>
+					${(lineOrderDTO.linkInfo.linkName)!''}
+					<br>
+					${(lineOrderDTO.linkInfo.linkMobile)!''}
+					</#if>
+				</td>
+				<td>
+				<p>
+					<a target="dialog" href="${contextPath}/line/orderDetail?id=${lineOrderDTO.id!''}" width="1000" height="800" style="color: blue">
+						 订单详情
+					</a>
+					 <a rel="lineOrder" target="dialog" href="${contextPath}/line/tocancle?id=${lineOrderDTO.baseInfo.dealerOrderNo!''}" width="400" height="200" style="color: blue">
+						取消订单
+					</a>
+					
+				</p>
+				
+			</td>
+		</#list>
+		</tbody>
+		
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+
+</script>

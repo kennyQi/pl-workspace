@@ -1,0 +1,14 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#if unitBoxDivId?? == false><#assign unitBoxDivId="jbsxBox"></#if>
+<div class="panelBar">
+	<div class="pages">
+		<span>显示</span> <select class="combox" name="numPerPage"
+			onchange="dialogPageBreak({numPerPage:this.value})">
+			<option value="20" <#if pagination.pageSize==20>selected="selected"</#if>>20</option>
+			<option value="50" <#if pagination.pageSize==50>selected="selected"</#if>>50</option>
+			<option value="100" <#if pagination.pageSize==100>selected="selected"</#if>>100</option>
+			<option value="200" <#if pagination.pageSize==200>selected="selected"</#if>>200</option>
+		</select> <span>条，共${pagination.totalCount}条</span>
+	</div>
+	<div class="pagination" targetType="dialog" totalCount="${pagination.totalCount?c}" numPerPage="${pagination.pageSize?c}" pageNumShown="10" currentPage="${pagination.pageNo?c}"></div>
+</div>

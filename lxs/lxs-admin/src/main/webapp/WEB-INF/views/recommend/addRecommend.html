@@ -1,0 +1,205 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.sa{ width:163px; background:#fff; border:1px solid #ccc; padding:10px 0px 10px; margin-left:62px;}
+.sa ul {padding:0px ; margin:0px;}
+.sa li{ list-style:none; padding:10px; margin-top:5px;}.sa li:hover{ background:#ccc;} li.current{ background:#ccc;}}
+</style>
+<!-- <script src="${staticPath}/js/jquery-validation-1.9.0/lib/jquery.js" type="text/javascript"></script> -->
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	var path = '${contextPath}';
+	
+	function checkPosition(){
+		
+		if($("#position2").val()!=$("#positionHide").val() && $("#positionHide").val()!=""){
+			alert('请上传推荐图片');
+			return false;
+		}else{
+			$("#add").submit();
+		}
+		
+	}
+	
+	var imageAdd = {};
+	
+	imageAdd.imageUpload = function (me) {
+		
+		$.ajaxFileUpload({
+			url : path+"/file/imgUpload",
+	       	secureuri : false,
+	       	fileElementId : 'imgFile',
+	       	dataType : 'json',
+	       	data: {
+	       		//maxHeight: 175,
+	       		//maxWidth: 230,
+	       		maxSize: 20480
+	       	},
+			success: function (data, status) {
+				if ("success" == data.status) {
+		       		$("#imgView").attr("src", data.imageUrl);
+		       		$("#imageInfo").attr("value",data.fileInfo);
+		       		$("#imagePath").attr("value",data.imageUrl);
+		       		$("#fileName").attr("value",data.imageName);
+	    	  	} else {
+	    	  		alertMsg.info(data.msg);
+	    	  	}
+			},
+	        error: function (data, status, e) {
+	        	alertMsg.info("上传失败");
+	        }
+	    });
+	}
+	
+	function change(obj){
+		if(obj.checked){
+			obj.attr("checked", "false");
+		}
+	}
+</script>
+
+<div class="pageHeader" layoutH="26">
+
+	<form action="${contextPath}/recommend/saveRecomend" id="add"
+	method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone)">
+	
+	<table style="width: 800px;">
+	
+			<tr style="float:left;"> 
+				<td>
+					推荐标题：&nbsp;<input type="text" id="title" name="recommendName" size="30" class="required" maxlength="20">&nbsp;&nbsp;<span style="color: red;">限制在20个字以内</span>
+				</td>
+			</tr>
+			<tr height="20px;"/> 
+			<tr style="float:left;">
+				<td>
+					<div style="float:left;">展示图片：&nbsp;</div>
+					<span style="color: red">
+						完成上传图片，再次修改推荐位时需要重新上传图片，原图会失效!<br/><br/>
+					</span>
+					<span style="color: red">
+						建议上传jpg、gif、png、bmp或JPG、GIF、PNG、BMP格式，单张图片大小不超过2M<br/><br/>
+					</span>
+					<span>
+						<img id="imgView" width="120" height="120" style="padding-left: 65px;"/>
+					</span>	
+					<span style="padding-left: 60px;">
+						<input id="imgFile" name="file" type="file" onchange="imageAdd.imageUpload(this);" size="60" style="width: 170px;"/><span style="color: red;">*</span>
+						<input id="imageInfo" type="hidden" name="imageInfo" class="required"/>
+						<input id="imagePath" type="hidden" name="imagePath" class="required"/>
+						<input id="fileName" type="hidden" name="fileName" class="required"/>
+					</span>
+				</td>
+			</tr>
+			<tr height="20px;"/> 
+			<tr style="float:left;"> 
+				<td>
+					<div style="float:left;">简介说明：&nbsp;</div><textarea type="text" id="title" name="note" cols="30" rows="4"  maxlength="100"></textarea>&nbsp;&nbsp;<span style="color: red;">限制在100个字以内</span>
+					<input type="text" name="recommendType" value="6" hidden="hidden" id="recommendType">
+					<input type="text" id="recommendActionCheck" class="required" name="recommendAction" value="" class="url" hidden="hidden" size="30" >
+				<td>
+			</tr>
+			<tr height="20px;"/> 
+			<tr style="float:left;"> 
+				<td>
+					选择跳转：&nbsp;<span style="color: red;">*再次修改推荐位时需要重新选择链接，原链接会失效!</span>
+				<td>
+			</tr>
+	</table>
+	</form>
+	<table>
+			<tr height="10px;"/> 
+			<tr style="float:left;">
+			
+				<td>
+					<div class="tabs" currentIndex="2" eventType="click" style="width: 700px;">
+						<div class="tabsHeader">
+							<div class="tabsHeaderContent">
+								<ul>
+									<li><a href="${contextPath}/recommend/lineList?handleType=add&recommendID='1'" target="ajax" rel="addLineTable"><span>线路</span></a></li>
+									<li><a href="${contextPath}/recommend/mpList?handleType=add&recommendID='1'" target="ajax" rel="addMpTable"><span>门票</span></a></li>
+									<li><a href="javascript:;"><span>链接</span></a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="tabsContent" style="height:300px;">
+							<div id="addLineTable" class="page unitBox">
+							</div>
+							<div id="addMpTable" class="page unitBox">
+							</div>
+							<div>
+								<input id="link" type="text" name="recommendAction" placeholder="格式：http://www.baidu.com" class="url" size="30" onclick="check2();" onblur="add();">
+							</div>
+						</div>
+						<div class="tabsFooter">
+							<div class="tabsFooterContent"></div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			
+			<!-- <tr height="20px;"/> 
+			<tr>
+				<td style="float: right;">
+					<div class="buttonActive"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+					<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="checkPosition()">保存</button></div></div>
+				</td>
+			</tr> -->
+			<tr height="20px;"/> 
+			<tr>
+				<td><br />
+			<div class="" style="float: right">
+					<ul>
+						<li><div class="buttonActive">
+                             <div class="buttonContent">
+									<button type="reset" class="close" style="width: 32px">取消&nbsp;&nbsp;</button>
+								</div>
+								</div>
+									<div class="buttonActive" spellcheck="margin-left: 5px;">
+								<div class="buttonContent" >
+									<button type="submit"  onclick="checkPosition()" style="width: 32px">保存&nbsp;&nbsp;</button>
+								</div>
+							</div></li>
+					</ul>
+				</div></td>
+			</tr>
+	</table>
+</div>
+<script src="${contextPath}/resources/dwz-ria/js/dwz.ajax.js" type="text/javascript"></script>
+<script>
+function check2(){
+	$("input[name=recommendActionCheck]").attr("checked",false);
+	$("#recommendType").attr("value","6");
+	
+}
+function add(){
+	var link = $("#link").val()
+	if(link == ""){
+		$("#recommendType").attr("value","2");
+	}else{
+		$("#recommendActionCheck").attr("value",$("#link").val());
+	}
+}
+function check1(){
+	$("#recommendType").attr("value","2");
+	$("input[name=recommendAction]").attr("value","");
+	$("#recommendActionCheck").attr("value",getRadioValue("recommendActionCheck"));
+}
+function getRadioValue(name){
+	var radioes = document.getElementsByName(name);
+	for(var i=0;i<radioes.length;i++)
+	{
+	     if(radioes[i].checked){
+	      return radioes[i].value;
+	     }
+	}
+	return false;
+}
+
+function checkMp(){
+	$("#recommendType").attr("value","3");
+	$("input[name=recommendAction]").attr("value","");
+	$("#recommendActionCheck").attr("value",getRadioValue("recommendActionCheck"));
+}
+
+</script>

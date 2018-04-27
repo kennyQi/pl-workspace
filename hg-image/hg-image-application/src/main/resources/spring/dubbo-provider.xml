@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="image-spi-provider-1.0-release" />
+
+	<!-- 
+	<dubbo:registry address="redis://127.0.0.1:6379" />
+ 	-->
+	<dubbo:registry address="${dubbo_register_center}" />
+	<dubbo:protocol name="dubbo" port="${dubbo_register_port}" />
+
+	<!-- SPI SERVICE -->
+
+	<dubbo:service interface="hg.service.image.spi.inter.AlbumService_1" 			ref="spiAlbumServiceImpl_1" />
+	<dubbo:service interface="hg.service.image.spi.inter.FastdfsService_1" 		ref="spiFastdfsServiceImpl_1" />
+	<dubbo:service interface="hg.service.image.spi.inter.ImageService_1" 			ref="spiImageServiceImpl_1" />
+	<dubbo:service interface="hg.service.image.spi.inter.ImageUseTypeService_1" 	ref="spiImageUseTypeServiceImpl_1" />
+</beans>

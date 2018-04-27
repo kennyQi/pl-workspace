@@ -1,0 +1,80 @@
+/* CSS Document */
+/*liwei 2015-4-20     travel right*/
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+a{ color:#333;}
+.ri{ margin:24px 32px 30px 29px;}
+.ri .rih1{ font-size:20px; line-height:28px; color:#333;}
+.ri .rih1 span{color:#666; font-size:14px; margin-left:19px; font-weight:normal;}
+.ri .navsbox{width:100%; height:3px; background:#c9e5e9;  margin-top:16px;}
+
+.infBox{ width:400px; height:230px; margin-top:30px;}
+.infBox li{float:left; height:30px; line-height:30px; margin-top:10px; width:400px;}
+.infBox .infTitle{font-weight:normal; color:#666; width:80px; text-align:right; float:left; margin-right:5px;}
+.infBox .textBox{ float:left; width:228px; height:28px; border:1px solid #dfe8ef; padding:0 10px; font-weight:bold; font-family:"微软雅黑";}
+.infBox .checkMobi{ width:118px; height:28px; border:1px solid #dfe8ef; background:#f8fbff; float:left;margin-left:16px;}
+.infBox .hover:hover{ border:1px solid #4bc5c3; color:#4bc5c3;}
+.infBox .select{width:100px;height:30px; background:url(../../images/personal/ic_tr.png) 0 -105px; padding:0 10px;}
+/*下拉列表*/
+.infBox .selectNav{ float:left; width:116px; position:absolute; z-index:999; background:#fff; border:2px solid #80d7d6;  margin-left:85px; display:none; max-height:500px; overflow-y:auto;overflow-x:hidden;}
+.infBox .province{*margin-left:-250px;}
+.infBox .city{  *position:relative; *margin-top:-30px;}
+
+.infBox .selectNav .l{ float:left; width:96px; height:28px;  margin:0; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.infBox .selectNav .l:hover{ background:#80d7d6; color:#fff;}
+/*下拉列表*/
+/*性别*/
+.sex{ float:left; margin-right:34px;}
+.sex i{float:left; width:16px;height:16px;  margin-top:7px; margin-right:6px;}
+.noClick{background:url(../../images/personal/ic_script.png) 0 -952px;}
+.clickSex{ background:url(../../images/personal/ic_script.png) 0 -975px;}
+
+/*性别*/
+
+
+.preservation{ width:250px; height:30px; color:#fff; background:#4bc5c3; text-align:center; line-height:30px; clear:both; margin-top:35px; margin-left:85px; *margin-top:130px; }
+
+
+
+/*修改手机弹出层*/
+.checkMobileBox{ width:100%; height:100%; top:0; float:left; position:fixed; z-index:999; display:none;}
+.checkMobileBox .boxMessage{  width:516px;height:319px; background:url(../../images/personal/popup_script.png) 0 -363px;}
+.checkMobileBox .boxMessage .boxTitle{ height:40px;  color:#fff; font-size:14px; font-family:"微软雅黑"; text-align:center; line-height:40px;}
+.checkMobileBox .boxMessage .boxTitle a{width:18px;height:18px; position:absolute; float:right; margin-left:180px; margin-top:12px; *margin-top:2px; background:url(../../images/personal/ic_script.png) 0 -800px;}
+.checkMobileBox  .boxMessage .checkBox { width:500px; margin-top:25px;}
+.checkMobileBox  .boxMessage .checkBox span{ width:500px; margin:0 40px; float:left; height:30px; line-height:30px; margin-top:15px;}
+.checkMobileBox  .boxMessage .checkBox span i{ float:left;}
+.checkMobileBox  .boxMessage .checkBox span .yz{ width:98px; height:28px; float:left; margin:0 10px; padding:0 10px; font-size:14px; font-family:"微软雅黑"; border:1px solid #dfe8ef;}
+.checkMobileBox  .boxMessage .checkBox .determine{width:60px; height:30px; color:#fff; line-height:30px; background:#4bc5c3; margin-left:190px; margin-top:25px;}
+.checkMobileBox    .boxMessage .checkBox .mobile{ width:210px; height:28px;  border:1px solid #dfe8ef; margin:0 10px; padding:0 10px;}
+.checkMobileBox	.boxMessage .checkBox .verification{ width:100px; height:28px; border:1px solid #dfe8ef; line-height:28px; background:#f8fbff;}
+/*修改手机弹出层*/
+/*修改成功弹出层*/
+.successBox{width:100%; height:100%; top:0; float:left; position:fixed; z-index:999; display:none;}
+.successBox .boxMessage{  width:516px;height:198px; background:url(../../images/personal/popup_script.png) 0 -683px;}
+.successBox .boxMessage .boxTitle{ height:40px;  color:#fff; font-size:14px; font-family:"微软雅黑"; text-align:center; line-height:40px;}
+.successBox .boxMessage .boxTitle a{width:18px;height:18px; position:absolute; float:right; margin-left:180px; margin-top:12px; *margin-top:2px; background:url(../../images/personal/ic_script.png) 0 -800px;}
+.successBox  .boxMessage .checkBox span{ width:500px; margin:0 40px; float:left; height:30px; line-height:30px; margin-top:10px;}
+.successBox  .boxMessage .checkBox span i{ float:left;}
+.successBox  .boxMessage .checkBox .determine{width:60px; height:30px; color:#fff; line-height:30px; background:#4bc5c3; margin-left:190px; margin-top:15px;}
+/*修改成功弹出层*/
+
+/*充值页面 */
+.recharge{height:auto;}
+.recharge .infTitle{width:136px;}
+.rechargeBtn{margin-left:136px;}
+.recharge li{width:800px;}
+.recharge li .tips{font-size:12px;color:red;margin-left:10px;}
+
+
+/*弹出框*/
+.alertBox{position:fixed; z-index:999;  top:350px;width:100%;}
+.more_float{width:300px;height:auto; margin:auto;}
+
+.more_float .userCoupan{text-align:center;overflow-y:auto;max-height:220px;white-space:normal;word-break: break-word;padding:10px 10px;width: 280px;background:#f5f9fb;}
+.more_float .float_title{background:#4BC5C3;color:#fff; height:31px !important; display:block; text-align:center; margin-top:6px; line-height:31px !important;}
+.more_float .float_title a{width:18px;height:18px; float:right; position:absolute; background:url(../../images/personal/ic_script.png) 0 -800px; margin-left:195px; margin-top:7px; *margin-top:0px;}
+.more_float p{ width:460px; height:240px; font-size:14px; color:#333; font-family:"微软雅黑"; margin-left:30px; margin-top:20px; line-height:23px;word-break:break-all;}
+.more_float .userCoupan .preservation{width:100px;margin:auto;display:block;margin-top:20px;}
+/*查看更多*/
+
+.sendCode1{border: 1px solid #dfe8ef;  background: #4BC5C3;color:#fff;float: left;display: block;padding: 0px 5px;}

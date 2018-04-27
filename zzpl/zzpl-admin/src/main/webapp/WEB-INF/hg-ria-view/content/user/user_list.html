@@ -1,0 +1,84 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-red-sunglo bold uppercase">人员列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/user/execel" class="btn btn-default btn-sm" target="hgTab" rel="importusers" >
+					 导入人员
+					</a>
+					<a href="${contextPath}/user/add" class="btn btn-default btn-sm" target="hgTab"> 
+					 添加人员
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							人员名称：
+							<input class="form-control input-small input-inline" name="userName" id="name">
+						</label>
+					</div>
+					<div class="col-md-4 text-right" style="float: right;">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#userGrid" data-ref-param="{userName: $('#name').val()}"> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<!-- <th class="table-checkbox"><input type="checkbox" group="projectIds"
+								class="checkboxCtrl"/></th> -->
+							<th>人员编号</th>
+							<th>人员名称</th>
+							<th>公司名称</th>
+							<th>部门名称</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="userGrid" target="grid" data-url="${contextPath}/user/userList">
+						<!-- <tr class="odd gradeX" > -->
+						<tr class="odd gradeX" onclick="getDetail('{id}')">
+							<!-- <td>
+								<input type="checkbox" name="projectIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td> -->
+							<td>
+								{userNO}
+							</td>
+							<td>
+								{name}
+							</td>
+							<td>
+								{companyName}
+							</td>
+							<td>
+								{departmentName}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/user/del?userID={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/user/edit?userID={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function getDetail(userID){
+	$.hgtab.open("${contextPath}/user/detail?userID="+userID+"","detail","人员详情",false);
+}
+
+</script>

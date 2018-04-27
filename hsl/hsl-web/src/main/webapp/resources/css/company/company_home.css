@@ -1,0 +1,24 @@
+/* CSS Document */
+/*liwei 2015-4-28     company_home.html right*/
+.top_navs{ margin:30px 0 0 30px;}
+.top_navs li{ float:left; width:443px; height:148px; border:1px solid #dfe8ef; background:#fcfcfc; margin-right:20px;}
+.top_navs li:hover{ border:1px solid #febe32;}
+.top_navs li .allOrder:hover{ text-decoration:underline}
+.top_navs li .icons{width:72px;height:72px; margin-left:60px; margin-top:36px;}
+.top_navs li .order{ background:url(../../images/company/com_script.png) -72px 0;}
+.top_navs li .coupons{ background:url(../../images/company/com_script.png) 0 0; }
+.top_navs li .titles{ margin-left:25px; margin-top:50px; width:260px;}
+.top_navs li .allOrder{ margin-left:25px;}
+.top_navs li .allOrder:hover{ text-decoration:underline;}
+
+.ri{ margin:50px 32px 0px 30px;}
+.ri .rih1{ font-size:20px; line-height:28px;font-weight:normal;}
+.ri .rih1 a{ margin-left:19px; }
+.ri .rih1 a:hover{}
+.ri .navsbox{width:910px; height:2px; background:#dfe8ef;  margin-top:16px;}
+
+.company{ width:908px; height:159px; margin-left:30px; margin-top:10px; }
+.company li{ width:906px; height:51px; border:1px solid #dfe8ef; line-height:51px;  background:#fcfcfc;}
+.company li .companyName{ margin:0 25px 0 10px;}
+.company li a{font-size:12px; color:#0073b6; }
+.company li a:hover{ text-decoration:underline;}

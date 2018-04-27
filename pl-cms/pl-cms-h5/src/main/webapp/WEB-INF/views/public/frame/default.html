@@ -1,0 +1,58 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#macro head title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>${title}</title>
+<!-- CSS BEGIN-->
+<link href="${contextPath}/resources/css/gb.css" type="text/css" rel="stylesheet" />
+
+ <!--[if IE 6]>
+    <link href="${contextPath}/resources/themes/bootstrap/bsie/css/bootstrap-ie6.min.css" rel="stylesheet" />
+    <link href="${contextPath}/resources/themes/bootstrap/bsie/css/ie.css" rel="stylesheet" />
+    <![endif]-->
+    <!--[if lte IE 8]>
+    <link href="${contextPath}/resources/themes/bootstrap/bsie/css/ie67.css" rel="stylesheet" />
+    <![endif]-->
+
+
+<!-- END -->
+<!-- JS BEGIN-->
+<script src="${contextPath}/resources/js/jquery.min.js" type="text/javascript"></script>
+<script>
+	$.ajaxSetup({cache:false});
+</script>
+<!-- END -->
+<#nested>
+</head>
+</#macro> 
+<#macro main header sel="1">
+<body>
+	<div class="g-wrap">
+		<!-- header页面 -->
+		<#include "/public/header/${header!'default'}.html"> 
+
+			<!-- 页面主体 -->
+			<#nested>
+			
+	<!-- layout end -->
+	</#macro> 
+	
+	<#macro end footer>
+	<!-- 页脚 -->
+	<#include "/public/footer/${footer}.html"> 
+	
+	
+	
+</div>
+
+<script src="${contextPath}/resources/js/gb.js" type="text/javascript" > </script>
+</body>
+</html>
+	<#nested>
+</#macro>
+<#macro nav pos sel>
+	<#include "/public/usercenter/leftnav.html"> 
+</#macro>

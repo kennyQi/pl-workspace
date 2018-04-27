@@ -1,0 +1,171 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "酒店订单详情">
+<link href="${(contextPath)!}/resources/css/member.css" type="text/css" rel="stylesheet" />
+<link href="${(contextPath)!}/resources/css/company/company.css" rel="stylesheet" />
+
+<link href="${(contextPath)!}/resources/css/company/company_hotelDet.css" rel="stylesheet" />
+<#if (((user.baseInfo.type?c)!0)==1)>
+<link href="${(contextPath)!}/resources/css/personal/personal_hotelDet.css" rel="stylesheet" />
+</#if>
+
+
+<script src="${(contextPath)!}/resources/js/company/company.js" language="javascript"></script>
+</@frame.head>
+
+
+<@frame.main "default">
+<div class="g_bd disb yahei">
+	<@frame.top ></@frame.top>
+    <div class="g_cont disb ov">
+		<@frame.nav "订单管理" 0></@frame.nav>
+		    	
+        <div class="m_cont ov fl">
+        <!--右侧呈现页-->
+            <div class="ri">
+                <div class="navigation">
+                    <a href="${contextPath}/company/main">我的账户</a><i>></i><a href="${(contextPath)!}/company/orderManage?sel=4">酒店订单</a><i>></i>酒店订单详情
+                </div>
+                <span class="rih1 yahei">订单详情</span>
+                <#if hotelOrder??>
+                <!-- 详情开始 -->
+                <div class="tableBox">
+                
+                <div class="boxs h3 yahei color3">
+                    <table cellspacing="0" cellpadding=0>
+                        <tr class="tops">
+                        	<td class="trip">订单号</td>
+                        	<td class="trip">预定时间</td>
+	                        <td class="trip">总金额</td>
+	                        <td class="trip">订单状态</td>
+                        </tr>
+                        <tr>
+	                        <td class="trip"><i class="no1">${(dealerOrderNo)!}</i></td>
+	                        <td class="trip"><i class="no1">${(hotelOrder.creationDate)?string('yyyy-MM-dd HH:mm:ss')}</i></td>
+	                        <td class="trip"><i class="no1 bd">￥${(hotelOrder.totalPrice)?c}</i></td>
+	                        <td class="trip"><i class="no1">
+	                        	<#if hotelOrder.showStatus??>
+                        			${hotelShowStatusMap[hotelOrder.showStatus?c]}
+                        		</#if>
+                        	</i></td>
+                        </tr>
+                       
+                       
+                    </table>
+                   </div>
+                <div class="hotelD">
+                <div class="line-cross">
+                	<div class="word">
+                		<span>提交订单</span>
+                		<span>酒店确认</span>
+                		<span>担保成功</span>
+                		<span>入住（解冻担保）</span>
+                		<span>离店（返现可用）</span>
+                	</div>
+                	<div class="cross">
+                		<span class="h"></span>
+                		<span class="icon"></span>
+                		<span class="lin"></span>
+                		<span class="icon"></span>
+                		<span class="lin"></span>
+                		<span class="icon"></span>
+                		<span class="lin off"></span>
+                		<span class="icon"></span>
+                		<span class="lin off"></span>
+                		<span class="icon"></span>
+                		<span class="lin off" style="width:100px;"></span>
+                		<span class="la"></span>
+                	</div>
+                </div>
+                	<ul class="status">
+                		<li class="on"> ${(hotelOrder.departureDate)?string('yyyy-MM-dd HH:mm')}&nbsp;&nbsp;&nbsp;&nbsp;您离开酒店</li>
+                		<li>${(hotelOrder.arrivalDate)?string('yyyy-MM-dd HH:mm')}&nbsp;&nbsp;&nbsp;&nbsp;您入住酒店</li>
+                	</ul>
+                	<h2 class="title">${(hotelOrder.hotelName)!}</h2>
+                	<div class="address"><i>酒店地址：<#if hotelOrder.hotelDto??&&hotelOrder.hotelDto.ylHotelDetailDTO??>${hotelOrder.hotelDto.ylHotelDetailDTO.address}</#if></i></div>
+                	<div class="address"><i>联系电话：<#if hotelOrder.hotelDto??&&hotelOrder.hotelDto.ylHotelDetailDTO??>${hotelOrder.hotelDto.ylHotelDetailDTO.phone}</#if></i></div>
+                </div>
+                <div class="takeTicket">
+                 <span class="titles h2 color3">入住信息</span>
+                 <div class="boxs h3 yahei color3">
+                    <table cellspacing="0" cellpadding=0>
+                        <tr class="tops">
+                        	<td class="trip">入离时间</td>
+                        	<td class="trip">到店时间</td>
+	                        <td class="trip">房间</td>
+	                        <td class="trip">房量</td>
+                        </tr>
+                        <tr>
+	                        <td class="trip"><i class="no1">
+	                        ${(hotelOrder.arrivalDate)?string('yyyy年MM月dd日')} 入住,
+	                       </i></td>
+	                        <td class="trip"><i class="no1"> ${(hotelOrder.earliestArrivalTime)?string('HH:mm')}-${(hotelOrder.latestArrivalTime)?string('HH:mm')}</i></td>
+	                        <td class="trip"><i class="no1 bd">${(hotelOrder.roomTypeName)!}</i></td>
+	                        <td class="trip"><i class="no1">${(hotelOrder.numberOfRooms)?c}间</i></td>
+                        </tr>
+                       
+                       
+                    </table>
+                   </div>
+                 </div>
+                
+                
+                
+                
+                	<div class="takeTicket">
+                 <span class="titles h2 color3">联系人信息</span>
+                <div class="boxs h3 yahei color3">
+                    <table cellspacing="0" cellpadding=0>
+                        <tr class="tops">
+                        	<td class="trip">联系方式</td>
+                        	<td class="trip">入住人</td>
+	                        <td class="trip">邮箱</td>
+                        </tr>
+                        <tr>
+                        	<#if hotelOrder.contact??>
+	                        <td class="trip"><i class="no1">${(hotelOrder.contact.mobile)!}</i></td>
+	                        <td class="trip"><i class="no1">${(hotelOrder.contact.name)!}</i></td>
+	                        <td class="trip"><i class="no1 bd">${(hotelOrder.contact.email)!}</i></td>
+	                        </#if>
+                        </tr>
+                       
+                       
+                    </table>
+                   </div>
+                 </div>
+                 <div class="takeTicket">
+                 <span class="titles h2 color3">支付信息</span>
+                 <div class="boxs h3 yahei color3">
+                    <table cellspacing="0" cellpadding=0>
+                        <tr class="tops">
+                        	<td class="trip">支付方式</td>
+                        	<td class="trip"></td>
+	                        <td class="trip"></td>
+	                        <td class="trip"></td>
+                        </tr>
+                        <tr>
+	                        <td class="trip" colspan="4" align="left"><i class="no1">&nbsp;&nbsp;&nbsp;&nbsp;信用卡担保￥
+	                        <#if hotelOrder.creditCard??>${(hotelOrder.creditCard.amount)?c}</#if> ，离店日3-5个工作解冻</i></td>
+                        </tr>
+                       
+                       
+                    </table>
+                   </div>
+                 </div>
+                
+                
+                </div>
+                <#else>
+                <div class="tableBox" ><br><br><br>订单不存在</div>
+                
+                
+                </#if>
+                <!-- 详情结束 -->
+            </div>
+        <!--右侧呈现页-->
+        </div>
+    </div>
+</div>
+<!--内容-->
+<@frame.end "default"></@frame.end> 
+</@frame.main>

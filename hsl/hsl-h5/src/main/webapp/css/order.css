@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2014-08-15 12:29:14
+ * @version $Id$
+ */
+ *{margin:0;padding:0;}
+ a{text-decoration:none;}
+
+/**********************************个人中心personal.html*******************************/
+
+.personal{width:100%;background:#f2f2f2}
+
+.personal .top{width:100%;background:#3cafdc;height:102px;border-top:2px solid #fff;}
+
+.personal .top img{margin:10px 20px;width:80px;height:80px;border:1px solid #d7d7d7;border-radius:40px;float:left;}
+
+.personal .top h3{line-height:100px;float:left;}
+
+.personal .people{clear:both;width:100%}
+
+.personal .people a{margin-bottom:10px;width:100%;line-height:40px;display:block;text-align:center;border-top:1px solid #d7d7d7;border-bottom:1px solid #d7d7d7;background:#fff;color:#787878;}
+
+.personal .people a:nth-child(1){background:url(../img/order_clock.png) 9% center no-repeat;background-size:30px 30px;}
+
+.personal .people a:nth-child(2){background:url(../img/question.png) 10% center no-repeat;background-size:24px 24px;}
+
+
+/**********************************我的机票订单myOrder.html*******************************/
+
+
+.myorder{clear:both;width:100%;background:#f2f2f2;margin-top:-20px;}
+
+.myorder .table{width:100%;}
+
+.myorder .table a{width:50%;float:left;color:#000;line-height:40px;text-align:center;border-bottom:3px solid #d7d7d7;}
+
+.myorder .table .active{background:#fff;color:#3cafdc;border-bottom:3px solid #3cafdc;}
+
+.myorder .lists{clear:both;padding:5px 7px 1px 5px}
+
+.myorder .lists .list{width:100%;margin:0px auto 5px auto;background:#fff;border:1px solid #d7d7d7;border-bottom:none;}
+
+.myorder .lists .list h3{text-indent:6px;width:100%;margin-right:10px;line-height:30px;font-size:14px;}
+
+.myorder .lists .list h3 span:nth-child(2){float:right;margin-right:10px}
+
+.myorder .lists .list h3 span:nth-child(1){color:#3cafdc;}
+
+.myorder .lists .list .planeMsg{clear:both;position:relative;margin:0px auto 0 -1px;width:100%;height:88px;border:1px solid #d7d7d7;}
+
+.myorder .lists .list .planeMsg .plane{width:100%;border-bottom:1px solid #d7d7d7;line-height:34px;font-size:15px}
+
+.myorder .lists .list .planeMsg .plane span:nth-child(1){margin-left:10px;padding:0 10px;background:url(http://pic.c-ctrip.com/h5/flight/flight-icon.png) -20px -20px / 100px no-repeat;}
+
+.myorder .lists .list .planeMsg .plane .model{float:right;margin-right:8px;margin-top:2px;text-align:center;color:#666;font-size:12px;display:block;line-height:16px;}
+
+.myorder .lists .list .planeMsg .time{clear:both;position:absolute;width:80%;display:block;}
+
+.myorder .lists .list .planeMsg .time p{text-indent:10px;font-weight:700;font-size:15px;line-height:26px;}
+
+.myorder .lists .list .planeMsg .time p span{font-weight:normal;}
+
+.myorder .lists .list .planeMsg .price{clear:both;position:absolute;right:0px;margin-top:16px;width:20%;display:block;text-align:center;}
+
+.myorder .lists .list .planeMsg .price p{color:#f60;line-height:30px;font-weight:700;}
+
+/**********************************我的门票订单myOrder.html*******************************/
+
+ .detail dl {width: 100%; display: block; overflow: hidden; border-top: 1px #d7d7d7 solid; padding: 6px 0px; position: relative;}
+
+ .detail dl:last-child{border-bottom: 1px #d7d7d7 solid;}
+
+ .detail dl a{width: 96%; margin: 0px auto; display: block; overflow: hidden;}
+
+ .detail dl dd{display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+
+ .detail dl dd span{color:#000;font-size:15px;position:absolute; right:0px; top:6px;width:60px;}
+
+ .detail dl dt{ float: left; width: 70px; height: 60px;text-align: center; }
+
+ .detail dl dt img{ width: 60px; height: 60px; }
+
+ .detail dl dd{ color: #333;font-size: 15px; }
+
+ .detail dl dd:nth-child(2){ font-size: 15px; line-height: 24px; width: 40%; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+ .detail dl dd:nth-child(3) { font-size: 13px; color: #787877; line-height: 18px; }
+
+.header {height: 44px;line-height: 44px;text-align: center;background-color: #3cafdc;}
+
+.left-head {position: absolute;left: 0;top: 0;height: 40px}
+
+.right-head {position: absolute;right: 0;top: 0;height: 40px;padding-right: 5px}
+
+.head-btn {height: 28px;line-height: 28px;display: block;margin-top: 8px}
+
+.inset_shadow {display: block;overflow: hidden}
+
+.head-return {width: 11px;height: 17px;margin: 5px 15px 0;overflow: hidden;display: inline-block;background: url(../img/public/icon_back.png) no-repeat;background-size: 11px 17px}
+
+.head-return.bdlist {background: url(../img/bdlist/icon_back.png);background-size: 11px 17px;margin: 15px 25px 0}
+
+.head-home {width: 21px;height: 20px;margin: 4px 10px 0;overflow: hidden;display: inline-block;background: url(../img/public/home.png) no-repeat;background-size: 21px 20px}
+
+.head-txt {padding: 0 10px;color: #fff}
+
+.header h1 {width: 190px;display: block;margin: 0 auto;font-family: microsoft yahei;font-size: 18px;color: #fff;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;font-weight: 700}

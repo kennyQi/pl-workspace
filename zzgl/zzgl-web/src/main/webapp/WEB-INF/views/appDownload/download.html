@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+    <title></title>
+</head>
+<style>
+    *{padding:0px;margin:0px;}
+    body,html{width:100%;height:100%;}
+    .wx{background: #7f7f7f;height: 100%;}
+    .normal{background:url("${contextPath}/resources/images/appDownload/normal.jpg") no-repeat bottom center #02B2ED;background-size:cover;height: 100%;padding-top: 120px;}
+    .normal img{margin: auto;display: block;}
+    .normal img.btn{margin-top:25px;}
+
+</style>
+<body>
+<div class="normal" id="fi" style="display: none;">
+    <a href="${contextPath}/appfile/zzpl.apk"><img src="${contextPath}/resources/images/appDownload/btn2.png" alt="" width="165px" class="btn" /></a>
+</div>
+<div class="wx" id="se"  style="display: none;">
+    <img src="${contextPath}/resources/images/appDownload/wx.png" alt="" width="100%" />
+</div>
+<script >
+    var userAgentInfo = navigator.userAgent;
+    if(userAgentInfo.indexOf("MicroMessenger")!=-1){
+        document.getElementById("se").style.display="block";
+
+    }
+    else{
+        document.getElementById("fi").style.display="block";
+    }
+//    else if(userAgentInfo.indexOf("iPhone")!=-1){
+//        location.href="http://fir.im/16p2";
+//    }
+
+</script>
+</body>
+</html>

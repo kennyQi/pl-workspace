@@ -1,0 +1,47 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<ul class="mix-filter">
+			<li class="filter" data-filter="all">
+				 全部
+			</li>
+			<li class="filter" data-filter="default">
+				默认
+			</li>
+			<#if image && image.useType>
+				<#list image.useType.imageSpecKeys as specKey>
+					<li class="filter" data-filter="${specKey.key}">
+						${specKey.key}
+					</li>
+				</#list>
+			</#if>
+		</ul>
+		<div class="row mix-grid" target="mixitup">
+			<#list imageSpecList as imageSpec>
+				<#assign fileInfo = imageSpec.fileInfo?eval />
+				<div class="col-md-3 col-sm-4 mix all ${imageSpec.key}">
+					<div class="mix-inner">
+						<img class="img-responsive" src="${imageStaticUrl}${fileInfo.uri}" alt="">
+						<div class="mix-details">
+							<h4>文件大小: ${(imageSpec.fileSize!'0'?html) / 1024} (kb) <br />
+								<!-- 保存时间: ${fileInfo.createTimestamp} --></h4>
+							<a class="mix-link" style="right:70%" target="hgTab" rel="imageSpecCut" title="以该图为原图裁剪新规格图片" href="${contextPath}/hg/spiAlbum/spiImageSpec/cut?id=${imageSpec.id}&imageId=${image.id}">
+								<i class="fa fa-cut"></i>
+							</a>
+							<a class="mix-preview fancybox-button" style="left:40%" href="${imageStaticUrl}${fileInfo.uri}" 
+								target="fancybox" title="" data-rel="fancybox-button">
+								<i class="fa fa-search"></i>
+							</a>
+							<#if imageSpec.key != 'default'>
+								<a class="mix-link" style="right:15%" href="${contextPath}/hg/spiAlbum/spiImageSpec/del?imageSpecId=${imageSpec.id}"
+									target="ajaxTodo" title="确认删除？">
+									<i class="fa fa-minus"></i>
+								</a>
+							</#if>
+						</div>
+					</div>
+				</div>
+			</#list>
+		</div>
+	</div>
+</div>

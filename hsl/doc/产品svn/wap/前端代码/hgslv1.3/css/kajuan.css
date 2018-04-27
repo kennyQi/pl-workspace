@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+.kajuan_nav{position:relative; height:35px;padding: 15px 40px }
+.kajuan_nav a{text-align:center; height:35px; line-height:35px; font-size:15px; font-family:"黑体"; color:#7f7e7e; width:50%;float: left}
+.kajuan_nav a:nth-child(1) div{}
+.kajuan_nav a:nth-child(2) div{ border-right:#ddd 1px solid;border-radius: 0 3px 3px 0;}
+.kajuan_nav a.sel div{ color:#3cafdc;border:#1bbc9b 1px solid;border-right:none; background: #1bbc9b; color: #fff}
+.kajuan_nav a:nth-child(2).sel div{border-radius: 0 3px 3px 0; }
+.kajuan_nav a div{border:#ddd 1px solid; border-right:none;border-radius: 3px 0 0 3px;background: #fff;color: 4f4f4d}
+ 
+.kajuan_info{}
+.kajuan_info ul{padding:0 15px;}
+.kajuan_info ul li{ width:100%; background:url(../img/member/kajuan_bg.png) no-repeat; background-size:100% 93px;height: 93px; margin-bottom:15px; cursor:pointer; position:relative;: ;}
+.kajuan_info ul li .ka_left{position: absolute;;left:0;width: 20px; height: 93px; background:url(../img/member/kajuan_l.png) no-repeat; background-size: 20px;top: 0}
+.kajuan_info ul li .kalist{ padding:10px 20px 10px 20px; position:relative; height: 70px}
+.kajuan_info ul li .ka_title{font-size:20px; font-family:"黑体"; float: left; width: 110px; text-align: center; height: 70px;padding:0 10px 0 35px; background: url(../img/member/l_icon.png) no-repeat #1bbc9b 5px 20px;color: #fff; background-size: 24px}
+.kajuan_info ul li .ka_title .ka_price_t{float: left; width: 100%; text-align:left;margin-top: 8px}
+.kajuan_info ul li .ka_title .ka_price{ width:100%; text-align:center;font-size: 15px;float: left;}
+.kajuan_info ul li .ka_info{height: 70px;bottom: 10px;color: #999;position: absolute;right:20px;width: 90px;}
+
+
+.kajuan_info ul li .ka_info .ka_data{ left: 0;color: #a0a0a0;width: 100%;font-size: 15px;top: 17px;position: absolute;text-align: right;}
+.kajuan_info ul li .ka_info .ka_data i{ margin-top: -4px;margin-right: 8px;vertical-align: middle;height: 15px;width: 17px;display: inline-block;background: url(../img/member/kajuan_time.png) no-repeat;
+background-size: 17px 15px; }
+.kajuan_info ul li .ka_info .ka_time{right: 0;width: 80px;text-align: right;color: #c6c6c6;position: absolute;top: 44px; }
+.kajuan_info ul li .ka_right{position: absolute;;right:0;width: 20px; height: 93px; background:url(../img/member/kajuan_r.png) no-repeat; background-size:20px 93px;top: 0}
+
+.kajuan_info ul li .kalistgq .ka_title{background: url(../img/member/l_icon.png) no-repeat #8f8f8f 5px 20px;color: #fff; background-size: 24px}
+.kalistgq_icon{ z-index: 999;position: absolute;height: 67px;width: 78px;background: url(../img/member/guoqi.png) no-repeat;background-size: 78px 67px;right:0;}
+
+#kajuan_secc{ position:absolute;right:20px;top:0}
+#kajuan_secc a{ color:#fff; font-size:16px;font-family:"黑体"; }
+.ka_sel{ position:absolute;left:10px;top:20px}
+.hover .ka_sel i{ background:url(../img/member/input_r.png) no-repeat;background-size:14px;}
+.ka_sel i{ background:url(../img/member/input_r.png) no-repeat 0 -14px;  width:14px; height:14px; background-size:14px; display:inline-block }
+.ka_sel input{ display:none}
+
+.kajuan_info{}
+.kajuan_info article{ padding: 10px 20px; color: #4f4f4d}
+.kajuan_info article p{ margin-bottom:8px; font-size: 13px }
+

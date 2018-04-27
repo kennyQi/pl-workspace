@@ -1,0 +1,214 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/payRecord/line/change" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden"  name="id" value="${linePayRecordDTO.id}" size="40" maxlength="40" />
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>项目来源标识</label>
+					<select name="fromProjectCode" id="fromProjectCode">
+							<#if PAY_RECORD_PROJECT_TYPE_MAP??>
+		                    <#list PAY_RECORD_PROJECT_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}" <#if itemKey == linePayRecordDTO.fromProjectCode>selected="selected" </#if>>
+		                        ${PAY_RECORD_PROJECT_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+			</div>
+			<div class="unit">
+				<label>来源项目IP</label>
+				<input type="text" id="fromProjectIP" name="fromProjectIP" value="${linePayRecordDTO.fromProjectIP}"  size="20" maxlength="32" />
+			</div>
+			
+			<div class="unit">
+				<label>平台订单号</label>
+				<input type="text" id="number" name="platOrderNo"  value="${linePayRecordDTO.platOrderNo}" size="20" maxlength="32"  />
+			</div>
+			
+			<div class="unit">
+				<label>经销商订单号</label>
+				<input type="text" id="number" name="dealerOrderNo"  value="${linePayRecordDTO.dealerOrderNo}" size="20" maxlength="32"  />
+			</div>
+			
+			
+			<div class="unit">
+				<label>供应商订单号</label>
+				<input type="text" id="number" name="supplierNo"  value="${linePayRecordDTO.supplierNo}" size="20" maxlength="32"  />
+			</div>
+			
+			<div class="unit">
+				<label>订购人</label>
+				<input type="text" id="number" name="booker"  value="${linePayRecordDTO.booker}" size="20" maxlength="32" />
+			</div>
+			<div class="unit">
+				<label>游玩人(多个用|隔开)</label>
+				<input type="text" id="number" name="passengers" value="${linePayRecordDTO.passengers}" size="20" maxlength="1000"  />
+			</div>
+			<div class="unit">
+				<label>出发地</label>
+				<input type="text" id="number" name="startCity" value="${linePayRecordDTO.startCity}" size="20" maxlength="32"/>
+			</div>
+			<div class="unit">
+				<label>目的地</label>
+				<input type="text" id="number" name="destCity" value="${linePayRecordDTO.destCity}" size="20" maxlength="32"  />
+			</div>
+			<div class="unit">
+				<label>线路id</label>
+				<input type="text" id="number" name="lineID" value="${linePayRecordDTO.lineID}" size="20" maxlength="64"/>
+			</div>
+			<div class="unit">
+				<label>线路名称</label>
+				<input type="text" id="number" name="lineName" value="${linePayRecordDTO.lineName}" size="20" maxlength="8"  />
+			</div>
+			
+			<div class="unit">
+				<label>线路类别</label>
+				<input type="text" id="number" name="type" value="${linePayRecordDTO.type}" size="20" maxlength="6" />
+			</div>
+			<div class="unit">
+				<label>成人人数</label>
+				<input type="text" id="number" name="adultNo" value="<#if linePayRecordDTO.adultNo?? >${linePayRecordDTO.adultNo?c}</#if>" size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>儿童人数</label>
+				<input type="text" id="number" name="childNo" value="<#if linePayRecordDTO.childNo ??>${linePayRecordDTO.childNo?c}</#if>" size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>成人销售单价</label>
+				<input type="text" id="number" name="adultUnitPrice" value="<#if linePayRecordDTO.adultUnitPrice??>${linePayRecordDTO.adultUnitPrice?c}</#if>" size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>儿童销售单价</label>
+				<input type="text" id="number" name="childUnitPrice" value="<#if linePayRecordDTO.childUnitPrice??>${linePayRecordDTO.childUnitPrice?c}</#if>" size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>销售总价</label>
+				<input type="text" id="number" name="salePrice" value="<#if linePayRecordDTO.salePrice??>${linePayRecordDTO.salePrice?c}</#if>" size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>销售定金</label>
+				<input type="text" id="number" name="bargainMoney" value="<#if linePayRecordDTO.bargainMoney??>${linePayRecordDTO.bargainMoney?c}</#if>" size="20" maxlength="10"  />
+			</div>
+			
+			<div class="unit">
+				<label>发团日期</label>
+				<input type="text" readonly="readonly" name="travelDate"  value="${linePayRecordDTO.travelDate?date}" class="date"/>
+			</div>
+			
+			<div class="unit">
+				<label>支付方式</label>
+				 <select name="payPlatform" id="payPlatform">
+				 <#list PAYMENT_TYPE?keys as itemKey>
+		               <option value="${itemKey}">
+	                         ${PAYMENT_TYPE[itemKey]}
+	                   </option> 
+		            </#list>
+		           </select>
+			</div>
+			
+			<div class="unit">
+				<label>付款帐号</label>
+				<input type="text" id="number" name="payAccountNo" value="${linePayRecordDTO.payAccountNo}" size="20" maxlength="64"  class="required"/>
+			</div>
+			<div class="unit">
+				<label>支付流水号</label>
+				<input type="text" id="number" name="paySerialNumber" value="${linePayRecordDTO.paySerialNumber}" size="20" maxlength="32"  class="number required"/>
+			</div>
+			<div class="unit">
+				<label>支付时间</label>
+				<input type="text" readonly="readonly" name="payTime"  value="${linePayRecordDTO.payTime?date}" class="date" class="required"/>
+			</div>
+			<div class="unit">
+				<label>订单总金额</label>
+				<input type="text"  name="orderPrice"  value="<#if linePayRecordDTO.orderPrice??>${linePayRecordDTO.orderPrice?c}</#if>"  class="number required"  size="20" maxlength="20"/>
+			</div>
+			<div class="unit">
+				<label>收入</label>
+				<input type="text" id="number" name="incomeMoney" value="<#if linePayRecordDTO.incomeMoney??>${linePayRecordDTO.incomeMoney?c}</#if>" size="20" maxlength="20"  class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>支出</label>
+				<input type="text" id="number" name="payMoney" value="<#if linePayRecordDTO.payMoney??>${linePayRecordDTO.payMoney?c}</#if>" size="20" maxlength="20"  class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>返点/折扣</label>
+				<input type="text" id="number" name="rebate" value="<#if linePayRecordDTO.rebate??>${linePayRecordDTO.rebate?c}</#if>" size="20" maxlength="20" class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>佣金</label>
+				<input type="text" id="number" name="brokerage" value="<#if linePayRecordDTO.brokerage??>${linePayRecordDTO.brokerage?c}</#if>" size="20" maxlength="20" class="number required" />
+			</div>
+			
+			<div class="unit">
+				<label>订单状态</label>
+					<select name="orderStatus" id="orderStatus">
+							<option value="">全部状态</option>
+							<#if statusMap??>
+		                    <#list statusMap?keys as itemKey>
+		                       <option value="${itemKey}" <#if itemKey == linePayRecordDTO.orderStatus>selected="selected" </#if>>
+		                        ${statusMap[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+                      	
+				</select>
+			</div>
+			<div class="unit">
+				<label>支付状态</label>
+				 <select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							<#if payStatusMap??>
+		                    <#list payStatusMap?keys as itemKey>
+		                       <option value="${itemKey}" <#if itemKey == linePayRecordDTO.payStatus>selected="selected" </#if>>
+		                        ${payStatusMap[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+			</div>
+			
+			<div class="unit">
+				<label>记录类型</label>
+				 <select name="recordType" id="recordType">
+							<#if PAY_RECORD_TYPE_MAP??>
+		                    <#list PAY_RECORD_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}"<#if itemKey == linePayRecordDTO.recordType>selected="selected" </#if>>
+		                        ${PAY_RECORD_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+				</select>
+			</div>
+			<div class="unit">
+				<label>来源客户端类型 </label>
+				 <select name="fromClientType" id="fromClientType">
+							<#if FROM_CLIENT_TYPE??>
+		                    <#list FROM_CLIENT_TYPE?keys as itemKey>
+		                       <option value="${itemKey}"<#if itemKey == linePayRecordDTO.fromClientType>selected="selected" </#if>>
+		                        ${FROM_CLIENT_TYPE[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+				</select>
+			</div>
+			
+			<div class="unit">
+				<label>备注</label>
+				<textarea rows="6" cols="60"  class="editor" name="remarks">${linePayRecordDTO.remarks}</textarea>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" id="checkData" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+
+$("#downPayment").blur(function(){
+
+});
+</script>

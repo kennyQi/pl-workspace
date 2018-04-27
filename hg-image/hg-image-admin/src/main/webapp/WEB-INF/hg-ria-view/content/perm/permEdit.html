@@ -1,0 +1,88 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-gift"></i>资源编辑
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+							<a href="#portlet-config" data-toggle="modal" class="config">
+							</a>
+							<a href="javascript:;" class="reload">
+							</a>
+							<a href="javascript:;" class="remove">
+							</a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/hg/auth/perm/update" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="permId" value="${perm.id}"/>
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">资源名称：</label>
+									<div class="col-md-4">
+										<input type="text" id="displayName" name="displayName" class="form-control required isSpec" 
+											placeholder="资源名称" maxlength="22" value="${perm.displayName}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">URL：</label>
+									<div class="col-md-4">
+										<input type="text" name="url" class="form-control required" placeholder="url" value="${perm.url}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">资源类型：</label>
+									<div class="col-md-4">
+										<select class="form-control select2me" target="dropDown" name="permType" class="required" value="${perm.permType}">
+											<#list permTypeList as permType>
+												<option value="${permType.key!?html}"
+												<#if perm.permType == permType.key>
+													selected="selected"
+												</#if>>${permType.value!?html}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">角色：</label>
+									<div class="col-md-4">
+										<input type="text" name="permRole" class="form-control isInject" placeholder="角色" value="${perm.permRole}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">上级资源：</label>
+									<div class="col-md-4">
+										<select class="form-control select2me" target="dropDown" 
+											name="parentId" value="${perm.parentId}" data-live-search="true">
+											<option value="">顶级资源</option>
+											<#list parentPermList as parentPerm>
+												<option value="${parentPerm.id!0}"
+												<#if perm.parentId == parentPerm.id>
+													selected="selected"
+												</#if>> ${parentPerm.displayName!?html}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn green" target="submit">提交</a>
+									<a class="btn blue" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

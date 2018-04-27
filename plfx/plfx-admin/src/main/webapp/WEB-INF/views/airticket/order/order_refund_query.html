@@ -1,0 +1,47 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form method="post" enctype="multipart/form-data" id="form"
+			action="${contextPath}/jp/order/refundQueryOrder"
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, dialogAjaxDone)">
+			<div class="pageFormContent" layoutH="58">
+				<input type="hidden" name="orderid" value="${JPOrderDTO.yeeXingOrderId}" />
+				<input type="hidden" name="id" value="${JPOrderDTO.id}" />
+				<input type="hidden" name="refundType" value="${JPOrderDTO.refundType}" />
+				<div class="unit">
+			   <label>乘机人：</label>
+			   <#if (JPOrderDTO.passengerList?size > 0)>
+			   	 <#list JPOrderDTO.passengerList as passenger>
+			   	  <input type="checkbox" value="${passenger.name}" name="passengername" id="pid" /> ${passenger.name}
+			     </#list>
+			   <#else>
+			                 没有可以同步退票状态的乘机人
+			   </#if>
+			</div>
+			</div>
+			<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="checkNull();">确定</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+			</div>
+		</form>
+<script type="text/javascript">
+ function checkNull(){
+	 if($(':checkbox:checked').size() == 0){
+		  alert("请选择同步退票状态的乘机人");
+		  return;
+	 }
+	 $("#form").submit();
+ }
+ 
+ $(function () {
+     var allBox = $(":checkbox");
+     allBox.click(function () {
+        if(this.checked){
+            allBox.removeAttr("checked");
+            $(this).attr("checked", "checked");
+          }
+     });
+ });
+</script>

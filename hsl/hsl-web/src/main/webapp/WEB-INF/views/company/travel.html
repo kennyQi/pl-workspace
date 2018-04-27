@@ -1,0 +1,185 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> 
+<@frame.head "差旅管理">
+<link href="${(contextPath)!}/resources/css/company/company.css" rel="stylesheet" />
+<!-- <link href="${(contextPath)!}/resources/css/company/company_home.css" rel="stylesheet" /> -->
+<link href="${(contextPath)!}/resources/css/company/company_travel.css" rel="stylesheet" />
+
+<script src="${(contextPath)!}/resources/js/company/company.js" language="javascript"></script>
+<script src="${(contextPath)!}/resources/js/company/company_travel.js" language="javascript"></script>
+<script src="${(contextPath)!}/resources/js/company/laydate/laydate.js" language="javascript"></script> 
+
+<script type="text/javascript">
+
+	$('#checkout').on("click",function(){
+		//alert(1);
+		$("#queryForm").attr("action",'${(contextPath)!}/company/travelManage/excel');
+		$("#queryForm").submit();
+		$("#queryForm").attr("action","");
+	});
+</script>
+</@frame.head>
+
+
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	<div class="g_cont disb ov">
+		 <@frame.nav "差旅管理" 2></@frame.nav>
+			<div class="m_cont ov fl">
+			        <!--右侧呈现页-->
+			           <div class="ri">
+			               <h1 class="rih1 yahei normal">差旅管理<span>企业用户名：${(user.baseInfo.name)!}</span></h1>
+			               <form action="" method="post" id="queryForm" name="queryForm" class="queryForm">
+			                <input type="hidden" class="pageNum" name="page" value="${(pagination.pageNo?c)!1}">
+               				<input type="hidden" name="pageSize" value="${(pagination.pageSize?c)!5}">
+
+               				<!-- 复选框值隐藏域 -->
+               				<input type="hidden" id="companyId" name="companyId" value="${(hslTravelQO.companyId)!'0'}" />
+               				<input type="hidden" id="departmentId" name="departmentId" value="${(hslTravelQO.departmentId)!}" />
+               				<input type="hidden" id="memberId" name="memberId" value="${(hslTravelQO.memberId)!}" />
+               				
+               				<input type="hidden" id="projectType" name="projectType" value="${(hslTravelQO.projectType)!}" />
+               				
+			               <div class="navsbox"></div>
+			               <div   class="selectBox">
+			                   <ul class="select">
+			                       <li><span class="selti h3">请选择公司：</span>
+			                       <span class="sl companySelect"><span class="optionValue" id="optionValue" >全部</span></span>
+			                       <ul class="selectNav" for="optionValue"  id="companyLi"  forName="companyId">
+			                           <li class="l" value="0">全部</li>
+			                           <#list (companyList)!null as company>
+						                	 <li class="l" value="${(company.id)!}">${(company.companyName)!}</li>
+						                </#list>
+			                       </ul>
+			                       </li>
+			                       <li><span class="selti h3">请选择部门：</span><span class="sl companySelect"><span class="optionValue" id="optionValue1" >全部</span></span>
+			                       <ul class="selectNav" for="optionValue1" id="depatLi"  forName="departmentId">
+			                           <li class="l" value="0">全部</li>
+			                          
+			                       </ul>
+			                       </li>
+			                       <li><span class="selti h3">请选择人员：</span><span class="sl companySelect"><span class="optionValue"id="optionValue2" >全部</span></span>
+			                       <ul class="selectNav" for="optionValue2" id="personLi"  forName="memberId">
+			                           <li class="l" value="0">全部</li>
+			                       </ul>
+			                       </li>
+			                       <li><span class="selti h3">请选择差旅：</span><span class="sl companySelect"><span class="optionValue" id="optionValue3" >全部</span></span>
+			                       <ul class="selectNav" for="optionValue3"  forName="projectType" id="ticketType">
+			                           <li class="l"  value="0">全部</li>
+			                           <li class="l"  value="1">门票</li>
+			                           <li class="l"  value="2">机票(旧)</li>
+									   <li class="l"  value="3">易行机票</li>
+			                       </ul>
+			                       </li>
+			                       <li  style="width:565px;">
+			                       <span class="selti h3">请选择日期：</span>
+			                       <span class="numTextRight">
+			                       <input id="start" name="startTime" value="${(hslTravelQO.startTime)!}" class="border changeTime input_p" onClick="laydate()">
+			                       </span><i style=" margin:0 5px; float:left;">-</i>
+			                       <span class="numTextRight">
+			                       <input type="text" id="end" name="endTime" value="${(hslTravelQO.endTime)!}" class="border changeTime input_p" onClick="laydate()">
+			                       <a  id="checkout" href="#" class="dc h3 bts">导出</a></span><a id="sendForm" href="#" class="cx h3 bts">查询</a></li>
+			                   </ul>
+			               </div>
+			               </form>
+			               <div class="tableBox">
+			                   <ul class="tableUl">
+			                       <li class="topBox">
+				                       <span class="order">订单号</span>
+				                       <span class="company">公司</span>
+				                       <span class="department">部门</span>
+				                       <span class="position">职位</span>
+				                       <span class="projects">差旅项目</span>
+				                       <span class="destination">目的地</span>
+				                       <span class="money">金额</span>
+			                        </li>
+			                        
+			                        <#list (travelList)!null as travel>
+			                       		<li>
+			                       		<span class="order ov">
+				                       		<a class="blue"  
+				                       		<#if travel.projectType==1>
+				                       			href="${(contextPath)!}/company/orderManage/airplane?id=${(travel.orderNum)!}"
+				                       		<#elseif travel.projectType==2>href="${(contextPath)!}/company/orderManage/ticket?id=${(travel.orderNum)!}" 
+				                       		</#if>>${(travel.orderNum)!}
+				                       		</a>
+			                       		</span>
+			                       		<span class="company  ov">${(travel.companyName)!}</span>
+			                       		<span class="department  ov">${(travel.deptName)!}</span>
+			                       		<span class="position  ov">${(travel.job)!}</span>
+			                       		<span class="projects  ov">
+			                       			<#if (travel.projectType==1) >
+										   		机票
+										   	<#elseif (travel.projectType==2)>
+										   		门票
+											<#elseif (travel.projectType==3)>
+												易行机票
+										   	</#if>
+										</span>
+			                       		<span class="destination  ov">${(travel.destination)!}</span>
+			                       		<span class="money  ov"><b>${(travel.price)!}</b></span>
+			                       		</li>
+			                       	 <#if !travel_has_next>	
+			                       		<li class="bottomBox"><span class="moneys h3 color3">合计金额: <b style="font-size:20px;">￥${(totalPrice)!}</b></span></li>
+		                       		 </#if>	
+		                       		 </#list>
+			                   </ul>
+			                   <!--分页导航-->
+			                   <div class="m_pageNav listPageStyle">
+			                   <div id="page" class="m_nums"></div>
+			                   </div>
+			                   <!--分页导航-->
+			               </div>
+			               <!--搜索无结果-->
+			               <div class="noResult pl" style="display:none;" >
+			                   <label>&nbsp;</label>
+			                   没有符合条件的订单，请尝试其他查询条件。
+			               </div>
+			               <!--搜索无结果-->
+			               <!--没有订单-->
+			               <div class="noOrder"  style="display:none;">
+			                   <span class="noIcon"></span>
+			                   <span class="in">您暂时还没有获得差旅信息哦~</span>
+			               </div>
+			               <!--没有订单-->
+			           </div>
+			       <!--右侧呈现页-->
+			       </div>
+			       
+	</div>
+ </div>
+<@frame.end "default"> </@frame.end> 
+</@frame.main>
+<script src="${(contextPath)!}/resources/js/gb.js"></script>
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//分页初始化
+		 pageCreate(${(((pagination.totalCount-1)/10+1)?int)!1},"queryForm");
+		 
+		 
+		//发送表单
+		$("#sendForm").on("click",function(){
+			$("#queryForm").attr("action",'${(contextPath)!}/company/travelManage');
+			//重置分页参数
+			$('.pageNum').val(1);
+			$("#queryForm").submit();
+		});
+		
+		
+	});
+	
+	$('#checkout').on("click",function(){
+		//alert(1);
+		$("#queryForm").attr("action",'${(contextPath)!}/company/travelManage/excel');
+		$("#queryForm").submit();
+		$("#queryForm").attr("action","");
+	});
+	
+	
+	
+	
+</script>		       
+			       

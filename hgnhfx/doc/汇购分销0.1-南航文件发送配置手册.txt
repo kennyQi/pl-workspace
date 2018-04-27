@@ -1,0 +1,37 @@
+* 目录规划
+	里程server，汇购分销admin，汇积分admin 三者 需要共享目录 作为 南航文件处理目录：
+	/main/apps/jfPath/cz/fenxiao/ 分销平台文件缓存
+	/main/apps/jfPath/cz/sum/	里程server 文件缓存
+	/main/apps/jfPath/cz 		汇积分 文件缓存
+*  生成文件时间的规划
+		分销平台，汇积分平台先生成文件，然后 里程 server 再集中 发送。
+		分销平台时间 $webroot/task.properties sendToCzTime = 00:30
+		汇积分平台时间 $home/remote-config.json czTime =	00:30
+		里程server 时间 $home/remote-config.json czTime =  01:00
+	
+
+* 停掉旧的分销管理端 lcfx-admin
+* 配置新 汇购分销管理端（版本0.1）hgfx-admin-web中的任务处理
+	${webroot}/sms.properties,配短信帐号
+	${webroot/task.properties ：
+		#格式：xx:xx.生成里程文件时间。（要在hg-licheng-server里配置的总处理时间之前）
+		sendToCzTime = 11:03
+		#单位：分钟。检查里程反馈文件时间间隔
+		getFileTime =10
+		# 生成里程文件的目录。（要在hg-licheng-server里配置的总处理目录之下））
+		czPath =/main/apps/jfPath/cz/fenxiao/
+
+		# cz server site. please use internal ip address
+		# serverSite = http\://192.168.10.182\:8080
+		# cz server contextPath
+		# serverContextPath =/hg-licheng-server
+
+		#reserveinfo warn sms。每日发送预警短信时间
+		smsWarnTime=18\:10			
+		
+* 启动hgfx-api ,接受 里程server 发送文件成功的通知
+		
+* 里程server配置 （licheng-sever）
+		# 里程分销接受通知地址
+	    lcfxAdminUrl=http://192.168.2.19:8081/hgfx-api
+		

@@ -1,0 +1,60 @@
+/* CSS Document */
+/*liwei 2015-4-20     travel right*/
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+a{ color:#333;}
+.ri{ margin:24px 32px 30px 29px;}
+.ri .rih1{ font-size:20px; line-height:28px; color:#333;}
+.ri .rih1 span{color:#666; font-size:14px; margin-left:19px; font-weight:normal;}
+.ri .select{ float:left; width:909px; height:120px; background:#fcfcfc;  border-bottom:1px solid #dfe8ef; }
+
+.ri .selectBox .select{ float:left;}
+.ri .selectBox .select li{  float:left; width:250px; margin-left:30px; margin-top:18px;}
+.ri .selectBox .select li .selti{ color:#555; float:left; margin-top:5px;}
+.ri .selectBox .select li .sl{ width:160px; height:30px; background:url(../../images/company/ic_tr.png) 0 0; float:left; font-size:14px; color:#033333; line-height:30px;}
+/*下拉列表*/
+.ri .selectBox .select li .optionValue{ padding:0 10px;}
+.ri .selectBox .select li .selectNav{ float:left; width:156px; position:absolute; z-index:999; background:#fff; border:2px solid #55bfef;  margin-left:84px; *margin-left:-160px; display:none;}
+.ri .selectBox .select li .selectNav .l{ float:left; width:136px; height:28px;  margin:0; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.ri .selectBox .select li .selectNav .l:hover{ background:#55bfef; color:#fff;}
+/*下拉列表*/
+
+
+.ri .selectBox .select li input { float:left; width:118px; height:28px; padding:0 10px; border:1px solid #dfe8ef; line-height:28px; font-size:14px; text-align:center;}
+
+.ri .selectBox .select li .bts{width:58px; height:28px; background:#f8fbff; border:1px solid #dfe8ef; float:right; color:#333; text-align:center; line-height:28px;  margin-left:6px;}
+.ri .selectBox .select li .bts:hover{ width:58px; height:28px; color:#00a0e9; border:1px solid #00a0e9; line-height:28px; margin-left:6px;}
+
+.ri .selectBox .select li .cx{ width:60px; height:30px; border:0; float:right; background:#00a0e9; font-size:14px; text-align:center; line-height:30px; color:#fff;}
+.ri .selectBox .select li .cx:hover{width:60px; border:0; height:28px; border-bottom:2px solid #438cac; background:#55bcf6; line-height:28px; color:#fff;}
+
+.ri .tableUl{margin-top:20px;}
+.ri .tableBox ul{ float:left; widows:910px; border-left:2px solid #bce9fd; border-right:1px solid #bce9fd; }
+.ri .tableBox ul li{ float:left; width:910px; height:73px; text-align:center; line-height:72px; font-size:12px;}
+.ri .tableBox ul li:hover{background:#ebf8fe;}
+.ri .tableBox ul li span{height:72px; border-right:1px solid #bce9fd; float:left; border-bottom:1px solid #bce9fd; }
+.ri .tableBox ul li .order{ width:131px; }
+.ri .tableBox ul li .order a{color:#0073b6; }
+.ri .tableBox ul li .order a:hover{ text-decoration:underline;}
+.ri .tableBox ul li .company{ width:218px;}
+.ri .tableBox ul li .department{ width:111px;}
+.ri .tableBox ul li .position{width:111px;}
+.ri .tableBox ul li .projects{width:111px;}
+.ri .tableBox ul li .destination{width:111px;}
+.ri .tableBox ul li .money{width:110px; font-size:16px;}
+.ri .tableBox ul li .moneys{ float:right; border-bottom:0; background:#bce9fd; margin-right:20px; height:55px; line-height:55px;}
+.ri .tableBox ul .topBox{ height:40px;  background:#bce9fd; font-size:14px;}
+.ri .tableBox ul .topBox span{ height:40px; background:#bce9fd; line-height:40px; color:#333;}
+.ri .tableBox ul .topBox .money{ font-size:14px;}
+.ri .tableBox ul .bottomBox{ background:#bce9fd !important; height:55px;}
+.changeTime{ float:left; font-size:14px;}
+
+/*分页导航*/
+.listPageStyle{padding-bottom:40px; margin-top:40px;}
+/*分页导航*/
+/*没有订单*/
+.ri .navsbox{width:100%; height:3px; background:#dfe8ef;  margin-top:12px;}
+.ri .noOrder{ width:165px; height:137px; font-size:14px; font-family:"微软雅黑"; color:#98abbc; margin:0 auto; margin-top:220px;}
+.ri .noOrder span{margin:0 auto;}
+.ri .noOrder .noIcon{width:165px;height:116px; display:block;background: url(../../images/company/ic_script.png) 20px -137px;}
+.ri .noOrder .in{ margin-top:15px; float:left;}
+/*没有订单*/

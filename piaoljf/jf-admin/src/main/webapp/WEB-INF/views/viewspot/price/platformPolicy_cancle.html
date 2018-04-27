@@ -1,0 +1,21 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/viewspot/price/stopPlatformPolicy" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+             
+			<div class="unit">
+				<label>请填写取消原因：</label>
+				<input type="hidden" name="policyId" value="${policyId}">
+				<textarea rows="5" cols="50" name="command.cancleInfo"></textarea>
+			</div>
+	    </div>
+		   <div class="formBar">
+			<ul>
+				<li><button type="submit">确认</button></li>
+				<li><button type="button" class="close">关闭</button></li>
+			</ul>
+		   </div>
+	</form>
+	
+</div>
+

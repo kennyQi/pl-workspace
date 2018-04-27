@@ -1,0 +1,7 @@
+# 远程配置：
+http://192.168.2.85:9999/cc-admin/，登录admin/123456
+	* 加项目
+	* 加环境
+	* 配环境的 log4j文件和 数据库, MonoDb, Redis, 日志控制,jf.properties。 
+	
+

@@ -1,0 +1,463 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "旅游线路">
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript"  src="${(contextPath)!}/resources/js/common.js"></script>
+<script type="text/javascript"  src="${(contextPath)!}/resources/js/jquery.datetimepicker.js"></script>
+<script type="text/javascript"  src="${(contextPath)!}/resources/js/detail.js"></script>
+<link href="${(contextPath)!}/resources/css/common.css"  rel="stylesheet"/>
+<link href="${(contextPath)!}/resources/css/jquery.datetimepicker.css" rel="stylesheet" />
+<link href="${(contextPath)!}/resources/css/detail.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" 4>
+<body>
+<!--内容-->
+	<div class="g_bd">
+    	<!--头部详情-->
+    	<div class="m_bd_auto ov">	
+        	<div class="m_load disb color6 simsun">
+            	<label class="color8">您的位置：</label><a href="${contextPath}/line/list" class="color6">国内游</a> >${(line.baseInfo.name)!}
+            </div>
+            <!--页面左侧-->
+            <div class="pro_left ov fl">
+            	<!--轮播图--><!--图片尺寸463px*338px;-->
+            	<div class="m_carousel disb ov" id="carousel">
+                	<div class="carousel_img_box fl" id="show_img">
+                    	<img src="" alt="景区图片">
+                    </div>
+                	<div class="carousel_img_tab fl pl">
+                    	<span class="up indexBg disb curp"></span>
+                        <ul class="list disb ov">
+                         <#list (line.lineImageList)!null as headImage>
+                        	<li>
+                           <img src="${image_host}${(headImage.urlMaps['default'])!''}">
+                                <i></i>
+                            </li>
+                          </#list>
+                        </ul>
+                    	<span class="down indexBg disb curp"></span>
+                    </div>
+                </div>
+                <!--轮播图-->
+                <!--日历-->
+                <div class="m_data dateLay fl" id="m_data">
+                	<input type="text" id="datetimepicker3" style="display: none;">
+    <input style="display: none;" type="button" onclick="$(&#39;#datetimepicker3&#39;).datetimepicker({value:&#39;2011/12/11 12:00&#39;})" value="set inline value 2011/12/11 12:00">
+                </div>
+				
+                
+                <!--日历over-->
+            </div>
+            <!--页面右侧-->
+            <div class="pro_right fl">
+            	<h1 class="title disb pad15 yahei">${(line.baseInfo.name)!}</h1>
+                <span class="id disb pad15 simsun">编号${(line.baseInfo.number)!}
+                	<!--几颗星 放几个i标签-->
+                            <#if (((line.baseInfo.recommendationLevel)!"")==1)>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==2)>
+                            <i></i>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==3)>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==4)>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==5)>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            </#if>	
+                </span>
+                <span class="tips disb pad15 simsun h4 color9" >本产品由杭州票量旅行社及具有资质的合作旅行社提供相关服务</span>
+                <div class="disb ov">
+                	<div class="special fl disb">
+                	<label>${(line.routeInfo.routeName)!}</label>
+                    </div>
+                </div>
+                <div class="price disb">
+                	<span class="p tom"><i class="yahei h3">¥</i>${(line.minPrice)!0}<i class="simsun h3">/人起</i></span>
+                    <span class="de simsun curp pl" id="price_explain">起价说明
+                    	<div class="price_explain pa yahei">
+                        	<i class="icon indexBg pa"></i>
+                        	<h2 class="h4">起价说明</h2>
+                            <p class="h4"><#-- ${(line.baseInfo.feeDescription)!} -->
+                         	   本起价是可选出发日期中，按双人出行共住一间房核算的最低单人价格。产品价格会根据您所选择的出发日期、出行人数、入住酒店房型航班或交通以及所选附加服务的不同而有所差别。
+                            </p>
+                        </div>
+                    </span>
+                </div>
+             <!--    <span class="prefer disb pl">
+                	<i class="icon indexBg simsun h4 pa">优惠</i>
+                	<label class="disb">${(line.baseInfo.favorableDescription)!}</label>
+                </span> -->
+                <span class="from disb pad15 simsun color3">
+                	<label class="color6 indexBg" >出发地：</label>
+                	<#if (line.baseInfo.starting)!>
+                	${cityMap[line.baseInfo.starting]}
+                	</#if>
+                </span>
+                <span class="to disb pad15 simsun"><label class="color6">途经及目的地：</label>
+                <#if (line.baseInfo.starting)!>
+                	${cityMap[line.baseInfo.starting]}
+                	</#if>
+                      	  <!-- 通过主键获取Map的值 -->
+                      	  <#if (line.baseInfo.destinationCity)!>
+                      	  <#list (line.baseInfo.destinationCity)?split(",") as destinationCity>
+                      	  		>${cityMap[destinationCity]}
+                      	  </#list>
+                      	</#if>
+                </span>
+                <span class="load disb pad15 ov">
+                    <label class="color6 fl">行程概要：</label>
+                    <span class="fl">
+                    <#if (line.baseInfo.starting)!>
+                	<i>D1</i> ${cityMap[line.baseInfo.starting]}
+                	</#if>
+                      	  <!-- 通过主键获取Map的值 -->
+                      	 <!-- 通过主键获取Map的值 -->
+                      	  <#if (line.baseInfo.destinationCity)!>
+                      	  <#list (line.baseInfo.destinationCity)?split(",") as destinationCity>
+                      	  		><i>D${destinationCity_index+2} </i> ${cityMap[destinationCity]}
+                      	  </#list>
+                      	</#if> 
+                    </span>
+                </span>
+                <div class="order disb">
+                		<#if line.forSale==1>
+                		<ul class="condit_box ov disb">
+                        	<li class="condit begin">
+                            	<span class="t">出发日期:</span>
+                                <div class="select pl color9 h4 simsun fl indexBg curp" id="starSelect">
+                                	<label id="start">
+                                	请选择出发日期
+                                	</label>
+                                    <div class="select_option pa">
+                                    
+                                    	<!--span的参数 money 成人价格 children:儿童价格 num:总人数  date:出发日期 格式20150301 -->
+                                    	<#list (line.dateSalePriceList)!null as dateSalePrice>
+                                    	<span money="${dateSalePrice.adultPrice}" children="${(dateSalePrice.childPrice)!}" num="${(dateSalePrice.number)!}" date="${(dateSalePrice.saleDate?date)}" id="${(dateSalePrice.id)!}">${(dateSalePrice.saleDate?date)} ${(dateSalePrice.adultPrice)!}元/成人 ${(dateSalePrice.childPrice)!}元/儿童</span>
+                                    	</#list>
+                                    </div>
+                                </div>
+                            </li>
+                        	<li class="condit ov">
+                            	<span class="t">成人:</span>
+                                <div class="chooce_num fl">
+                                	<span class="minus fl curp on">-</span>
+                                	<span class="num fl color6" min="1" id="adult" >1</span>
+                                	<span class="add fl curp">+</span>
+                                </div>
+                            	<span class="boy color6 fl">儿童:</span>
+                                <div class="chooce_num fl">
+                                	<span class="minus fl curp on">-</span>
+                                	<span class="num fl color6" min="0"  id="chidren" >0</span>
+                                	<span class="add fl curp">+</span>
+                                </div>
+                            </li>
+                        	<li class="condit ov">
+                            	<span class="t totalpt">总价:</span>
+                                <span class="totalp yahei" id="trips_money"><i class="h3">￥</i></span>
+                            </li>
+                        	<li class="condit ov">
+                            	<span class="t">&nbsp;</span>
+                            	
+                                <a class="btn h2 yahei fl save" style="cursor:pointer">开始预订</a>
+                            </li>
+                        </ul>
+                        
+                        <#else>
+                        	<ul class="condit_box ov disb">
+                        		<li class="off yahei">此线路已下架!</li>
+                        	</ul>
+                        	<style>
+                        		#subNav .reserve,#subNav .help{display:none;}
+                        	</style>
+                        
+                        
+                        </#if>
+                </div>
+                
+                <div class="msg disb pad15 pl ov">
+                	<i class="iconUp indexBg pa"></i>
+                	<i class="icondown indexBg pa"></i>
+                	<div  class="order_news ov disb pl" id="order_carous" rel="0">
+                    	<ul class="pa order_new_move">
+                    	<#list listlineOrderFirstTopDTO! as listlineOrderFirst>
+                    	<li class="color6"><label class="color3">**${(listlineOrderFirst.dealerOrderNo)!}</label> ${(listlineOrderFirst.getTime)!}前预订2人出游<a href="${contextPath}/line/detail?id=${(listlineOrderFirst.id)!}" class="linkC"> ${(listlineOrderFirst.lineName)!}</a></li>
+                        </#list>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    	<!--头部详情-->
+        <!--中部导航栏-->
+        <div class="m_bd_all" id="subNav">
+        	<div class="m_subnav pl ov" >
+            	<ul class="nav yahei fl ov">
+                	<li><a rel="anchor_detail" href="javascript:;" class="on">行程详情</a></li>
+                    <li><a rel="anchor_traffic" href="javascript:;">交通信息</a></li>
+                    <li><a rel="anchor_tips" href="javascript:;">提示信息</a></li>
+                    <li><a rel="anchor_price" href="javascript:;">费用说明</a></li>
+                    <li><a rel="anchor_reserve" href="javascript:;">预订须知</a></li>
+                    <li><i class="icon pa indexBg" href="javascript:;" id="subNav_bg"></i></li>
+                </ul>
+                <a class="reserve fr btn yahei h2 save" style="cursor:pointer">开始预定</a>
+                <a href="#" class="help fr linkC">如何预定?</a>
+            </div>
+        </div>
+        <!--中部导航栏-->
+        
+        <!--详细介绍-->
+        <div class="g_detail disb">
+        <#if (line.baseInfo.favorableDescription)!>
+        	<div class="m_boxDashed pl disb">
+            	<span class="title h1 linkC yahei pa indexBg">优惠活动</span>
+                <div class="detail">
+                	<div class="m_discount_box pl">
+                    	<i class="icon indexBg pa">优惠活动</i>
+                       ${(line.baseInfo.favorableDescription)!}
+                    </div>
+                </div>
+            </div>
+            </#if>
+            
+            <div class="m_boxDashed pl disb">
+            	<span class="title h1 linkC yahei pa indexBg">线路特色</span>
+                <div class="detail h3 simsun special">
+                <#if (line.baseInfo.featureDescription)!>
+                	  ${(line.baseInfo.featureDescription)!} 
+                	  <#else>
+           			 暂无信息!
+                </#if>
+                </div>
+            </div>
+             
+            <!--行程详细介绍-->
+           
+            <div class="m_boxDashed pl disb border_none" id="anchor_detail">
+            	<span class="title h1 linkC yahei pa indexBg">行程详情</span>
+                <ul class="m_air_day pa" id="day_anchor" >
+                <#list (line.routeInfo.dayRouteList)!null as dayroute>
+                <#if (dayroute_index+1)==1>
+                <!-- href="javascript:;" -->
+                <li><a href="javascript:;"  rel="anchor_${dayroute_index+1}" class="on" >第${dayroute_index+1}天</a></li>
+                <#else>
+                 <li><a href="javascript:;"  rel="anchor_${dayroute_index+1}" >第${dayroute_index+1}天</a></li>
+                </#if>
+                </#list>
+                </ul>
+                <div class="detail h3 simsun special">
+                	<div class="m_tips disb">
+                    	<span class="tips_line disb fl pl">
+                        	<label>${(line.routeInfo.routeName)!}</label>
+                            <i class="icon indexBg pa"></i>
+                        </span>
+                    </div>
+                    <div class="m_allotTime disb">
+                    	<span class="day pl h3 yahei fl">行程天数<i class="routeDay">${(line.routeInfo.routeDays)!}</i>天<i class="icon indexBg pa"></i>
+                    	</span>
+                        <span class="buy fl h3 yahei ">购物时间<i>${(line.routeInfo.shoppingTimeHour)!}</i>小时</span>
+                    </div>
+                    <!--第一天行程 添加anchor_first锚点-->
+                     <#list (line.routeInfo.dayRouteList)!null as dayroute>
+                    <div class="m_detailTrip m_detailTrip_F pl" id="anchor_${dayroute.days}">
+                    
+                    	<i class="icon_circle pa indexBg"></i>
+                    	<i class="icon_box pa indexBg"></i>
+						<div class="day_traffic disb ov">
+                        	<span class="num fl">${dayroute.days}</span>
+                            <div class="fl">
+                                <span class="day disb">DAY</span>
+                                <span class="city disb h2 color3 yahei">${(dayroute.starting)!}
+                                <#list ((dayroute.vehicle)!)?split(",") as dayroute>
+                                <#switch dayroute>
+                                <#case "1">
+                                <i class="icon_fly h2 color3 yahei indexBg "></i>
+                                <#break>
+                                <#case "2">
+                                <i class="icon_bus h2 color3 yahei indexBg "></i>
+                                <#break>
+                                <#case "3">
+                               	 <i class="icon_ship h2 color3 yahei indexBg "></i>
+                               	 <#break>
+                                 <#case "4">
+                                 <i class="icon_train h2 color3 yahei indexBg "></i>
+                                 <#break>
+                                </#switch>
+                                </#list>
+                                ${(dayroute.destination)!}</span><!--火车样式：icon_train,飞机：icon_fly，大巴：icon_bus-->
+                            </div>
+                        </div>
+                        <div class="live disb indexBg simsun h3">住宿: 
+                        	<#list (dayroute.hotelList) as key>
+                        	 ${key.hotelName}
+                        	</#list>
+                        </div>
+                        <div class="eat disb indexBg simsun h3">餐饮: 
+                        <#if (dayroute.includeBreakfast)=="true">
+                                                                          包括早餐
+                        <#else>
+                                                                       不包括早餐
+						</#if>
+						 <#if (dayroute.includeLunch)=="true">
+                       	  包括午餐
+                       <#else>
+                       	不包括午餐
+					   	</#if>
+					 	 <#if (dayroute.includeDinner)=="true">
+                       	  包括晚餐
+                       <#else>
+                       	不包括晚餐
+						</#if>
+						</div>
+                        <div class="detail h3 simsun">
+                        		${(dayroute.schedulingDescription)!}
+                        </div>
+                        
+                        <div class="m_detail_carousl pl">
+                        	<span class="left pa indexBg curp">向左</span>
+                            <div class="img_show ov pa">
+                            	<ul class="img_list pa">
+		                            <#list (dayroute.lineImageList)!null as dayRouteImage>
+				                        	<li>
+				                        	<img src="${image_host}${(dayRouteImage.urlMaps['default'])!''}" style="max-width:700px;">
+				                            </li>
+	                            	</#list>
+                                	
+                                </ul>
+                            </div>
+                        	<span class="right pa indexBg curp">向右</span>
+                        </div>
+                    </div>
+                    </#list>
+					
+                    <!--旅游贴士-->
+                    <div class="m_detailTrip m_detailTrip_L pl">	
+                    		<i class="icon_circle pa indexBg"></i>
+                    		<i class="icon_box pa"></i>
+                    		<div class="tips h3 simsun">
+                            *以上行程时间安排可能会因天气、路况等原因做相应调整，敬请谅解。<br>
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <!--行程详细介绍-->
+            
+        	<div class="m_box disb"  id="anchor_traffic">
+            	<h2 class="title">
+                	<label class="linkC h2 yahei fl">交通信息</label>
+                </h2>
+                <div class="text simsun h3">
+                <#if (line.baseInfo.trafficDescription)!>
+						${(line.baseInfo.trafficDescription)!}
+					<#else>
+           			 暂无信息!
+           		  </#if>
+                </div>
+            </div>
+           
+             
+            <div class="m_box disb"   id="anchor_tips">
+            	<h2 class="title">
+                	<label class="linkC h2 yahei fl">提示信息</label>
+                </h2>
+                <div class="text simsun h3">
+                <#if (line.baseInfo.noticeDescription)!>
+                	${(line.baseInfo.noticeDescription)!}
+                 <#else>
+           		 暂无信息!
+             </#if>
+                </div>
+            </div>
+           
+            
+            <div class="m_box disb" id="anchor_price">
+            	<h2 class="title">
+                	<label class="linkC h2 yahei fl">费用说明</label>
+                </h2>
+                <div class="text simsun h3">
+                <#if (line.baseInfo.feeDescription)!>
+                	${(line.baseInfo.feeDescription)!}
+                	<#else>
+           		 暂无信息!
+                	 </#if>
+                </div>
+            </div>
+           
+            
+            <div class="m_box disb" id="anchor_reserve">
+            	<h2 class="title">
+                	<label class="linkC h2 yahei fl">预定须知</label>
+                </h2>
+                <div class="text simsun h3">
+                <#if (line.baseInfo.bookDescription)!>
+                	${(line.baseInfo.bookDescription)!}
+                	<#else>
+           		 暂无信息!
+           		</#if>
+                </div>
+            </div>
+             
+        </div>
+        <!--详细介绍-->
+    </div>
+  <form action="${contextPath}/line/reseve" method="post" id="yd">
+  	<input type="hidden" id="adults" name="adults"/>
+  	<input type="hidden" id="chidrens" name="chidrens"/>
+  	<input type="hidden" value="${line.id}" name="id" id="lineid"/>
+  	<input type="hidden" id="startdate" name="startdate"/>
+  </form>  
+<!--内容-->
+<!--页脚-->
+<div class="detailPage">
+ <@frame.end "default"> </@frame.end>
+</@frame.main>
+<!--页脚-->
+<script type="text/javascript">
+$(function(){
+//判断剩余人数是否足够
+	var identification=${(identification)!}
+	if(identification==1){
+		alert("剩余人数不足 ");
+	}
+	$(".save").click(function(){
+		var start=$("#start").html().trim();
+		var lineid=$("#lineid").val();
+		if(start=="请选择出发日期"||start==""){
+			alert(start)
+		}else{
+			start=start.substring(0,10);
+			//查询是否已到最晚付款时间
+			$.ajax({
+				type : "post",
+				url : "${contextPath}/line/checkPay",
+				data:"start="+start+"&lineid="+lineid,
+				success : function(data) {
+					data=eval(data);
+					if(data=="1"){
+						$("#startdate").val(start);
+						$("#adults").val($("#adult").html());
+						$("#chidrens").val($("#chidren").html());
+						$("#yd").submit();
+					}else if(data=="2"){
+						alert("已到最晚付款时间!")
+					}
+				}
+			});
+		}
+	})
+})
+</script>
+</body>
+</html>

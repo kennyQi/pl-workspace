@@ -1,0 +1,176 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>加入名胜</title>
+<link href="${contextPath}/resources/css/new.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/submission.css" rel="stylesheet" />
+
+</head>
+
+<body>
+<form class="gd_detail" action="${contextPath}/scenic/create" id="addhist" method="post" >
+	<label class="lab paT">景区名称</label>
+    <input type="text" id="scenicName" name="scenicName" placeholder="请填写景区名称"  class="inp"/>
+    
+    
+	<label class="lab paT">联系人</label>
+    <input type="text" placeholder="请填写景区联系人" id="linkMan" name="linkMan" class="inp"/>
+    
+    
+	<label class="lab paT">联系电话</label>
+    <input type="text"  placeholder="请填写景区联系人电话" id="mobile" name="mobile" class="inp"/>
+    
+    
+	<label class="lab paT">申请理由</label>
+    <textarea  class="inp"  rows="3"  id="remark" name="remark"></textarea>
+    
+    <input class="gd_submit" type="button" value="立即加入" onclick="checkForm()"/>
+</form>
+<!--弹出框-->
+    <div class="tm_bg"></div>
+    <div class="tm">
+        <div id="msg" class="tm_ct">
+            	请填写信息提交
+        </div>
+    </div>
+    <!--弹出框-->
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${contextPath}/resources/js/addhist.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var ss=${success};
+		if(ss){
+			var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("提交成功，等待审核!");
+			setTimeout(function(){
+				$(".tm_bg").add(".tm").hide();
+			}, 1000);
+		}
+	});
+	function checkForm(){
+		var scenicName=$.trim($("#scenicName").val());
+		var linkMan=$.trim($("#linkMan").val());
+		var mobile=$.trim($("#mobile").val());
+		var remark=$.trim($("#remark").val());
+		//var reg = /^0?(13|15|18)[0-9]{9}/;
+		var reg=new RegExp(/^((0?1\d{10})|(\d{3,4}-\d{7,8}))$/);
+		var textreg=/[\'*~`@#$%^&+={}\[\]\<\>\(\)]/;
+		if(scenicName==""){
+			showBox("请输入景区名称");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("请输入景区名称"); */
+			return false;
+		}
+		if(textreg.test(scenicName)){
+			showBox("景区名称包含有特殊字符！");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_ct").html("景区名称包含有特殊字符！");
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2,}); */
+			return false;
+		}
+		if(linkMan==""){
+			showBox("请输入联系人");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("请输入联系人"); */
+			return false;
+		}
+		if(textreg.test(linkMan)){
+			showBox("联系人包含有特殊字符！");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_ct").html("联系人包含有特殊字符！");
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2,}); */
+			return false;
+		}
+		if(mobile==""){
+			showBox("联系方式不能为空");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("联系方式不能为空"); */
+			return false;
+		}
+		if (reg.test(mobile)) {
+		} else {
+			showBox("请输入正确的电话格式");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			//$("#msg").html("请输入正确的电话格式:(0)13800138000或010(0)-1234567(8)");
+			$("#msg").html("请输入正确的电话格式"); */
+			return false;
+		}
+		if (remark.length>1000) {
+			showBox("申请理由过长！");
+			/* var hei = document.documentElement.clientHeight;
+			var tm_box = $(".tm_ct").height();
+			$(".tm_bg").show().css("height", hei);
+			$(".tm").show().css({
+				"height" : hei,
+				"top" : (hei - tm_box) / 2
+			});
+			$("#msg").html("申请理由过长！"); */
+			return false;
+		}
+		if (remark == "请填写申请加入理由" || remark == "") {
+			showBox("请输入申请理由");
+			/* var hei = document.documentElement.clientHeight;
+			var tm_box = $(".tm_ct").height();
+			$(".tm_bg").show().css("height", hei);
+			$(".tm").show().css({
+				"height" : hei,
+				"top" : (hei - tm_box) / 2
+			});
+			$("#msg").html("请输入申请理由"); */
+			return false;
+		}
+		if(textreg.test(remark)){
+			showBox("申请理由包含有特殊字符！");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_ct").html("申请理由包含有特殊字符！");
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2,}); */
+			return false;
+		}
+		$(".tm_bg").add(".tm").hide();
+		var hei=document.documentElement.clientHeight;
+		var tm_box=$(".tm_ct").height();
+		$(".tm_bg").show().css("height",hei);
+		$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+		$("#msg").html("提交成功，等待审核!");
+		setTimeout(function(){
+			$(".tm_bg").add(".tm").hide();
+			$("#addhist").submit();
+		}, 2000);
+	}
+	function showBox(title){
+		setTimeout(function(){
+			var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_ct").html(title);
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2,});
+		}, 200);
+	}
+</script>
+</body>
+</html>

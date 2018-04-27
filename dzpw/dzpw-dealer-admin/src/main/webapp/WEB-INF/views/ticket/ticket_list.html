@@ -1,0 +1,125 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+	
+	function initText(){
+		$("#ticketPolicyName", navTab.getCurrentPanel()).attr("value",'');
+		$("#scenicSpotStr", navTab.getCurrentPanel()).attr("value","");
+	}
+
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this)" action="${contextPath}/ticket/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						票务名称：<input type="text" id="ticketPolicyName" name="ticketPolicyName" value="${ticketPolicyName}"/>
+					</td>
+					<td>
+						景区名称：
+						<input type="text" id="scenicSpotStr" name="scenicSpotStr" value="${scenicSpotStr}"/>
+					</td>
+				</tr>
+			</table>
+			
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkCashStr()">查询</button></div></div>
+					</li>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="button" onclick="initText()">条件重置</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+<!-- 	<div class="panelBar"> -->
+<!-- 		<ul class="toolBar"> -->
+<!-- 			<li> -->
+<!-- 				<a width="520" height="200" class="add" href="${contextPath}/ticket/toImport" target="dialog" maxable="false" resizable="false"><span>导入批量购买</span></a> -->
+<!-- 			</li> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
+
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="155" id="table_caiwu">
+		<thead>
+			<tr>
+			    <th width="180px;">产品编号</th>
+				<th width="280px;">票务名称</th>
+				<th width="80px;">票务类型</th>
+				<th width="250px;">包含景区</th>
+				<th width="90px;">库存数量（张）</th>
+				<th width="110px;">发布时间</th>
+				<th width="100px;">价格日历</th>
+				<th width="180px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as policy>
+		<tr>
+			<td>${policy.baseInfo.key}</td>
+			<td>${policy.baseInfo.name}</td>
+			<td>
+				<#if policy.type==1>单票</#if>
+				<#if policy.type==2>联票</#if>
+			</td>
+			<td>${policy.baseInfo.scenicSpotNameStr}</td>
+			<td>
+					<#if policy.sellInfo.remainingQty == -1>
+						无限
+					<#else>
+						${(policy.sellInfo.remainingQty)!'-'}
+					</#if>
+			</td>
+			<td>${policy.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+			<td>
+				<#if policy.type==1>
+					<a target="dialog" href="${contextPath}/ticket/single/datePrice/page?ticketPolicyId=${policy.id}" width="700" height="700" mask="true" style="color: blue">查看价格日历</a>
+				</#if>
+			</td>
+			<td>
+				<#if policy.type==1>
+					<#assign x=0>
+					<#list settingList as s>
+						<#if policy.scenicSpot.id == s.scenicSpot.id >
+							<#assign x=1>
+							<#break>
+					    </#if>
+					</#list>
+					<#if x==0>
+						<#if policy.sellInfo.remainingQty==0>
+							<a style="color: blue; cursor: pointer;" onclick="alert('已无票源，请联系供应商。')">购买</a>
+						<#else>
+							<a target="dialog" href="${contextPath}/ticket/buy?ticketPolicyId=${policy.id}" 
+				   		   		width="700" height="650" mask="true" style="color: blue">购买</a>
+						</#if>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+				    <#else>
+				    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    </#if>
+				<#else>
+					<#if policy.sellInfo.remainingQty==0>
+						<a style="color: blue; cursor: pointer;" onclick="alert('已无票源，请联系供应商。')">购买</a>
+					<#else>
+						<a target="dialog" href="${contextPath}/ticket/buy?ticketPolicyId=${policy.id}" 
+					   	   width="700" height="650" mask="true" style="color: blue" onclick="return false">购买</a>
+					</#if>
+					    &nbsp;&nbsp;&nbsp;&nbsp;
+				</#if>
+				<a target="navTab" href="${contextPath}/ticket/info?ticketPolicyId=${policy.id}" height="750" width="950" style="color: blue">查看详情</a>
+			</td>
+		</tr>
+		</#list>
+		</tbody>
+	</table>
+</div>

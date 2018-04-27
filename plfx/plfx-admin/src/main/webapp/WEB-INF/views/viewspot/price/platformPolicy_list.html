@@ -1,0 +1,216 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/viewspot/price/list" method="post">
+		
+	    <input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		
+		<div class="searchBar">
+		
+		  <table class="searchContent" style="text-align:left;">
+		   
+		  <tr>
+		    <td>政策编号 <input type="text" name="policyId" value="${qo.policyId}" /></td>
+		    <td>使用时间
+		       <input  id="beginDate" name="beginDate" <#if qo.beginDate??> value="${qo.beginDate?date}"  </#if>  size="30"  class="date" [dateFmt="yyyy-MM-dd"] readonly="readonly" />
+				 — <input  id="endDate" name="endDate" <#if qo.endDate??> value="${qo.endDate?date}"  </#if> size="30"  class="date" [dateFmt="yyyy-MM-dd"] readonly="readonly" />
+		    </td>
+		    <td>政策状态
+		       <select name = "state" >
+			       <option value="0"  <#if qo.state == 0> selected="selected" </#if> >全部</option>
+			       <option value="1"  <#if qo.state == 1> selected="selected" </#if> >未发布</option>
+			       <option value="2"  <#if qo.state == 2> selected="selected" </#if> >已发布</option>
+			       <option value="3"  <#if qo.state == 3> selected="selected" </#if> >已开始</option>
+			       <option value="4"  <#if qo.state == 4> selected="selected" </#if> >已下架</option>
+			       <option value="5"  <#if qo.state == 5> selected="selected" </#if> >已取消</option>
+			   </select>
+		    </td>
+		    <td>创建人<input type="text" name="operatorName" value="${qo.operatorName}" /></td>
+		  </tr>
+		  
+		  <tr>
+		    <td>适用经销商
+		        <select  name="dealerId">
+			       <option value="1" <#if qo.dealerId == 1> selected </#if> >全部</option>
+			       <option value="2" <#if qo.dealerId == 2> selected </#if> >南传</option>
+			       <option value="3" <#if qo.dealerId == 3> selected </#if> >其他经销商</option>
+				</select>
+		    </td>
+		    
+		    <td>适用景点
+		    <select onchange="filterChange(this)" name="queryScenicSpotType">
+		       <option value="1" <#if qo.queryScenicSpotType == 1> selected </#if>>全部</option> 
+		       <option value="2" <#if qo.queryScenicSpotType == 2> selected </#if>>省市区</option> 
+		       <option value="3" <#if qo.queryScenicSpotType == 3> selected </#if>>景点名称</option>
+		    </select>
+		    
+		    
+		    <select name = "scenicSpotProviceCode" id="scenicSpotProvice" <#if qo.queryScenicSpotType == 2> style="display:inline" <#else> style="display:none" </#if> >
+		        <option value="">省</option> 
+				<#list provinceList as provice>
+				<option value="${provice.code}" <#if provice.code==${qo.scenicSpotProviceCode> selected="selected" </#if>>${provice.name}</option>
+				</#list>
+		    </select>
+		    <select name = "scenicSpotCityCode" id="scenicSpotCity" <#if qo.queryScenicSpotType == 2> style="display:inline" <#else> style="display:none" </#if>>
+		        <option value="">市</option> 
+		        <#list cityList as city>
+				<option value="${city.code}" <#if city.code==${qo.scenicSpotCityCode> selected="selected" </#if>>${city.name}</option>
+				</#list>
+		    </select>
+		    <select name = "scenicSpotDistrict" id="scenicSpotDistrict" <#if qo.queryScenicSpotType == 2> style="display:inline" <#else> style="display:none" </#if>>
+		        <option value="">区</option> 
+				<#list areaList as area>
+				<option value="${area.code}" <#if area.code==${qo.scenicSpotAreaCode> selected="selected" </#if>>${area.name}</option>
+				</#list> 
+		    </select>
+		    
+		     <input  name="scenicSpotName" value="${qo.scenicSpotName}" id="scenicSpotName" <#if qo.queryScenicSpotType == 3> style="display:inline" <#else> style="display:none" </#if>/>
+		     
+		    </td>
+		  </tr>
+		</table>
+		
+	   
+	   <div class="subBar">
+			<ul>
+			  <li><div class="buttonActive">
+					 <div class="buttonContent">
+						<button onclick="return checkQuery();">查询</button>
+					  </div>
+					</div>
+				</li>
+			</ul>
+	  </div> 
+
+      </div>
+		
+	</form>
+</div>
+    <div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/viewspot/price/toCreatePlatformPolicy"
+                target="dialog" mask="true" width="600" height="600"><span>添加价格政策</span>
+			</a>
+			</li>
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="160">
+		<thead>
+			<tr>
+				<th width="80">优先级</th>
+				<th width="100" >政策编号</th>
+				<th width="80" >适用景点</th>
+				<th width="80" >价格</th>
+				<th width="100" >使用时间</th>
+				<th width="80" >适用经销商范围</th>
+				<th width="80" >状态</th>
+				<th width="80">创建时间</th>
+				<th width="200">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as salePolicySnapshotDTO>
+			<tr target="sid_user" rel="${salePolicySnapshotDTO.policyId}">
+				<td>${salePolicySnapshotDTO.level}</td>
+				<td><a title="政策详情" target="dialog" height="400" href="${contextPath}/viewspot/price/queryPlatformPolicyDetail?policyId=${salePolicySnapshotDTO.policyId}">${salePolicySnapshotDTO.policyId}</a></td>
+				<td>${salePolicySnapshotDTO.scenicSpotNames}</td>
+				<td>
+				    ${salePolicySnapshotDTO.modifyPriceType}
+				    ${salePolicySnapshotDTO.modifyProceValue}
+				</td>
+				<td>${salePolicySnapshotDTO.beginDate} -- ${salePolicySnapshotDTO.endDate} </td>
+				<td>南传</td>
+				<#if salePolicySnapshotDTO.status.status==1>
+				<td>未发布</td>
+				<#else if salePolicySnapshotDTO.status.status==2>
+				<td>已发布</td>
+				<#else if salePolicySnapshotDTO.status.status==3>
+				<td>未开始</td>
+				<#else if salePolicySnapshotDTO.status.status==4>
+				<td>已开始</td>
+				<#else if salePolicySnapshotDTO.status.status==5>
+				<td>已下架</td>
+				<#else if salePolicySnapshotDTO.status.status==6>
+				<td>已取消</td>
+				</#if>				
+				<td>${salePolicySnapshotDTO.snapshotDate}</td>
+				<td>
+					<a title="政策详情" target="dialog" height="400" href="${contextPath}/viewspot/price/queryPlatformPolicyDetail?policyId=${salePolicySnapshotDTO.policyId}" >政策详情</a>
+					<#if salePolicySnapshotDTO.status.status==2>
+					<a title="取消" target="dialog"  href="${contextPath}/viewspot/price/toStopPlatformPolicy?policyId=${salePolicySnapshotDTO.policyId}" >取消</a>
+					<#else if salePolicySnapshotDTO.status.status==6>
+					<a title="取消原因" target="dialog" href="${contextPath}/viewspot/price/queryPlatformPolicyStopInfo?policyId=${salePolicySnapshotDTO.policyId}" >取消原因</a>
+					<#else if salePolicySnapshotDTO.status.status==1>
+					<a title="发布" target="ajaxTodo" href="${contextPath}/viewspot/price/releasePlatformPolicy?policyId=${salePolicySnapshotDTO.policyId}&flag=table" >发布</a>
+					</#if>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+
+<script type="text/javascript">
+
+ function filterChange(obj){
+ 
+      if(obj.value == "1"){
+        noShow();
+      }
+      if(obj.value == "2"){
+        noShow();
+        document.getElementById("scenicSpotProvice").style.display = "inline";
+        document.getElementById("scenicSpotCity").style.display = "inline";
+        document.getElementById("scenicSpotDistrict").style.display = "inline";
+        document.getElementById("scenicSpotName").value="";
+      }
+      if(obj.value == "3"){
+        noShow();
+        document.getElementById("scenicSpotProvice").value = "";
+        document.getElementById("scenicSpotCity").value = "";
+        document.getElementById("scenicSpotDistrict").value = "";
+        document.getElementById("scenicSpotName").style.display = "inline";
+      }
+ }
+ 
+
+ function noShow(){
+ 
+   document.getElementById("scenicSpotProvice").style.display = "none";
+   document.getElementById("scenicSpotCity").style.display = "none";
+   document.getElementById("scenicSpotDistrict").style.display = "none";
+   document.getElementById("scenicSpotName").style.display = "none";
+   
+ }
+ 
+ //检查查询条件
+ function checkQuery(){
+    var beginDate = document.getElementById("beginDate").value;
+    var endDate = document.getElementById("endDate").value;
+    if(beginDate != "" && endDate != ""){
+       if(beginDate > endDate){
+          alert("结束时间不能小于开始时间");
+          return false;
+       }
+    }
+    
+    if(beginDate == "" && endDate == ""){
+        document.getElementById("beginDate").value = "1000-01-01";
+        document.getElementById("endDate").value = "1000-01-01";
+    }
+    
+    
+    if(beginDate != ""  && endDate == ""){
+       document.getElementById("endDate").value = beginDate;
+    }
+    
+    if(endDate != "" && beginDate == ""){
+       document.getElementById("beginDate").value = endDate;
+    }
+ }
+</script>

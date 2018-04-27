@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-部门员工通讯录</title>
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/company_list.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/company_list.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+<script>
+
+	
+</script>
+
+</head>
+
+
+
+<body>
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1 on">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav3">酒&nbsp;店</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav5">周边游</a>
+        <a href="#" title="" class="h1 yahei nav6">跟团游</a>
+        <a href="#" title="" class="h1 yahei nav7">自由行</a>
+        <a href="#" title="" class="h1 yahei nav8">团&nbsp;购</a>
+        <a href="#" title="" class="h1 yahei nav9">说走就走</a>
+        <a href="#" title="" class="h1 yahei nav10 last">合作专区</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="javascript:;" style="display:block;"></a>
+<!--头部-->
+<!--导入成员-->
+<div class="IntroductionBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">导入成员<a href="javascript:;"></a></div>
+        <div class="file">
+            <form action="" method="post" enctype="multipart/form-data" id="uploadFileForm" target="uploadIframe">
+            <span>导入文件：</span>
+            <input type="text" name=""  id="uploadFile" style="background:#fff;" value="">
+            <input class="file" type="file" id="uploadfileName" style=" display:none">
+            <a class="choice" href="javascript:;">请选择文件</a>
+            </form>
+            <iframe name="uploadIframe" src="" style="display:none;" ></iframe>
+        </div>
+        <a class="yes" href="javascript:;" id="uploadYes">确 定</a>
+    </div>
+</div>
+<!--导入成员-->
+<!--添加组织-->
+<div class="organizationBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">添加组织<a href="javascript:;"></a></div>
+        <div class="file">
+            <span>组织名称：</span>
+            <input type="text" class="members input_p" name="" id="" style="background:#fff;" />
+        </div>
+        <a class="yes" href="javascript:;">确 定</a>
+    </div>
+</div>
+<!--添加组织-->
+<!--添加部门-->
+<div class="addDepBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">添加部门<a href="javascript:;"></a></div>
+        <div class="file">
+            <span>部门名称：</span>
+            <input type="text" class="members input_p" name="" id="" style="background:#fff;" >
+        </div>
+        <a class="yes" href="javascript:;">确 定</a>
+    </div>
+</div>
+<!--添加部门-->
+<!--添加成员-->
+<div class="membersBox" opt="box">
+    <div class="boxMessage">
+        <div class="boxTitle floating_p">添加成员<a href="javascript:;"></a></div>
+        <ul class="boxForm">
+            <li><span>姓名：</span><input class="members input_p" type="text" name="" id="name"></li>
+            <li><span>职务：</span><input class="members input_p" type="text" name="" id="job"></li>
+            <li><span>手机：</span><input class="members input_p" type="text" name="" id="mobile"></li>
+            <li><span>身份证号：</span><input class="members input_p" type="text" name="" id="cardid"></li>
+        </ul>
+        <a class="yes" href="javascript:;">确 定</a>
+    </div>
+</div>
+<!--添加成员-->
+<!--内容-->
+<link href="css/company.css" rel="stylesheet" />
+<script src="js/company.js" language="javascript"></script>
+<div class="g_bd disb yahei">
+	<div class="g_banner disb">
+    	<div class="m_banner_c wd12 ma">
+        	<span class="pic fl ov pl">
+            	<img src="images/user.jpg" alt="" class="user">
+                <i class="icon Bg pa"></i>
+                <i class="hoverIcon Bg pa curp"></i>
+            </span>
+            <div class="word fl h4">
+            	<h2 class="welc fl wd">尊敬的" xujy "，欢迎来到您的账户中心</h2>
+                <span class="phone fl ">绑定手机：159****9636</span><a href="#" class="changePhone fl curp">[更换手机号码]</a>
+            </div>
+        </div>
+    </div>
+    <div class="g_cont disb ov">
+    	<div class="m_nav ov fl">
+        	<h1 class="home Bg"><a href="company_home.html" class="color3 h2">我的企业账户中心</a></h1>
+            <dl class="navList Ba top ov">
+            	<dt class="h3">交易管理</dt>
+            	<dd ><a href="company_allOrder.html" class="color3 h2 order">所有订单</a></dd>
+            	<dd ><a href="company_cardCoupons.html" class="color3 h2 card">我的卡券</a></dd>
+            	<dd ><a href="company_travel.html" class="color3 h2 cl">差旅管理</a></dd>
+            	<dd class="on"><a href="company_list.html" class="color3 h2 connect">部门员工通讯录</a></dd>
+            </dl>
+            <dl class="navList Ba ov">
+            	<dt  class="h3">资料管理</dt>
+            	<dd ><a href="company_accountInf.html" class="color3 h2 user_d">账户资料</a></dd>
+            	<dd ><a href="company_changePWD.html" class="color3 h2 pwd">修改密码</a></dd>
+            </dl>
+        </div>
+        <div class="m_cont ov fl">
+        <!--右侧呈现页-->
+            <div class="ri">
+                <h1 class="rih1 yahei normal">部门员工通讯录</h1>
+                <ul class="rinav yahei">
+                    <li class="selected"><a href="javascript:;">票量科技</a></li>
+                    <li ><a href="javascript:;">汇购科技</a></li> 
+                    <li ><a href="javascript:;">汇金宝科技</a></li> 
+                    <li ><a href="javascript:;">润达博宏</a></li>
+                </ul>
+                <div class="navsbox">
+                    <a class="addOrg yahei" href="javascript:;"  rel="dialog" for="organizationBox"><b>+</b>新增组织</a>
+                    <a class="Introduction bt1 yahei h3" href="javascript:;" rel="dialog" for="IntroductionBox">导入</a>
+                    <a class="bt1 yahei h3" href="javascript:;">导出</a>
+                    </div>
+                <div class="bt">
+                  <span>
+                    <a href="javascript:;" class="addMembers" rel="dialog" for="membersBox">添加成员</a>
+                    <a href="javascript:;">删除成员</a>
+                  </span>
+                </div>
+                <div class="inbox">
+                    <div class="rightNav">
+                        <a class="addDep yahei h2 color3" href="javascript:;" rel="dialog" for="addDepBox"><b>+</b>新增部门</a>
+                        <ul>
+                            <li><a class="department" id="APD" href="javascript:;">行政人事部</a></li>
+                            <li><a class="department" id="SMC" href="javascript:;">景区商务部</a></li>
+                            <li><a class="department" id="PO" href="javascript:;">平台运营部</a></li>
+                            <li class="selected1"><a class="department" id="VDD" href="javascript:;">视觉设计部</a></li>
+                            <li><a class="department" id="PD" href="javascript:;">产品部</a></li>
+                            <li><a class="department" id="DD" href="javascript:;">开发部</a></li>
+                        </ul>
+                    </div>
+                    <!--右侧列表开始-->
+                    <div class="depart fl">
+                        <ul class="rightTable">
+                            <li class="title"><span class="all"><i></i><span>全选</span></span><span class="name">姓名</span><span class="position">职务</span><span class="mobile">手机</span><span class="id">身份证号</span></li>
+
+                        </ul>
+                        <!--分页导航-->
+                        <div class="m_pageNav listPageStyle">
+                          <div class="m_nums">
+                            <a href="javascript:;" class="m_previous m_bg">上一页</a>
+                            <a href="javascript:;" class="m_num m_bg nc">1</a>
+                            <a href="javascript:;" class="m_num m_bg">2</a>
+                            <a href="javascript:;" class="m_num m_bg">3</a>
+                            <a href="javascript:;" class="m_num m_bg">4</a>
+                            <a href="javascript:;" class="m_num m_bg">5</a>
+                            <i style=" margin:0 15px;">...</i>
+                            <a href="javascript:;" class="m_next m_bg">下一页</a>
+                          </div>
+                            <i>共10页，去第</i>
+                            <input type="text" name="" id="">
+                            <i>页</i>
+                            <a class="m_bg m_bgs" href="javascript:;">确定</a>
+                        </div>
+                        <!--分页导航-->
+                    </div>
+                    <!--右侧列表结束-->
+                </div>
+            </div>
+        <!--右侧呈现页-->
+        </div>
+    </div>
+</div>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">票量简介</a>
+                	<a href="#" title="" class="simsun h4">法律声明</a>
+                	<a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">友情链接</a>
+                	<a href="#" title="" class="simsun h4">酒店加盟</a>
+                	<a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">帮助中心</a>
+                	<a href="#" title="" class="simsun h4">投诉建议</a>
+                	<a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class=" disb h2 yahei yj">意见反馈</span>
+                    <span class=" disb h2 yahei kf">客服电话</span>
+                    <label class="yahei abt color6  disb">0571-23288385</label>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <div class="special"></div>
+</div>
+
+<!--页脚-->
+</body>
+</html>

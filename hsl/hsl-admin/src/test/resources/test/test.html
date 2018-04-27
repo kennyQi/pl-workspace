@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>微信自定义菜单</title>
+	<script type="text/javascript" src="jquery-1.10.2.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			var index = 0;
+			$('.menu_add').click(function () {
+				index++;
+				var menu = '<tr index="menu_' + index + '" first>';
+				menu += '<td><input name="name" type="text" placeholder="一级菜单名称"></td>';
+				menu += '<td>--</td>';
+				menu += '<td><input name="url" type="text" placeholder="一级菜单链接"></td>';
+				menu += '<td>' +
+						'<a class="menu_del" href="javascript:;">删除</a><br/>' +
+						'<a class="item_add" href="javascript:;">添加二级菜单</a><br/>' +
+						'</td>';
+				menu += '</tr>';
+				$('.menu').append(menu);
+			});
+			$('body').on('click', '.item_add', function () {
+				var tr = $(this).parents('tr').eq(0);
+				var idx = tr.attr('index');
+
+				var item = '<tr index="' + tr.attr('index') + '" second>';
+				item += '<td>&nbsp;</td>';
+				item += '<td><input name="name" type="text" placeholder="二级菜单名称"></td>';
+				item += '<td><input name="url" type="text" placeholder="二级菜单链接"></td>';
+				item += '<td>' +
+						'<a class="item_del" href="javascript:;">删除</a><br/>' +
+						'</td>';
+				item += '</tr>';
+
+				$('tr[index=' + idx + ']').last().after(item);
+			});
+			$('body').on('click', '.menu_del', function () {
+				var tr = $(this).parents('tr').eq(0);
+				$('tr[index=' + tr.attr('index') + ']').remove();
+			});
+			$('body').on('click', '.item_del', function () {
+				$(this).parents('tr').eq(0).remove();
+			});
+			$('#submit').click(function () {
+				var data = {menuItemList: []};
+				$('.menu tr[first]').each(function () {
+					var menu = {name: $(this).find('input[name=name]').val()};
+					var idx = $(this).attr('index');
+					var items = $('tr[index=' + idx + '][second]');
+					if (items.size() == 0) {
+						menu['url'] = $(this).find('input[name=url]').val();
+					} else {
+						menu['sub_button'] = [];
+						$('tr[index=' + idx + '][second]').each(function () {
+							var item = {
+								name: $(this).find('input[name=name]').val(),
+								url: $(this).find('input[name=url]').val()
+							};
+							menu['sub_button'].push(item);
+						});
+					}
+					data.menuItemList.push(menu);
+				});
+				alert(JSON.stringify(data));
+			});
+		});
+
+	</script>
+</head>
+<body>
+<input id="menu_add" class="menu_add" type="button" value="增加一级菜单"/>
+<table class="menu" border="1px" width="80%">
+	<tr>
+		<td width="25%">一级菜单</td>
+		<td width="25%">二级菜单</td>
+		<td width="25%">链接</td>
+		<td width="25%">操作</td>
+	</tr>
+</table>
+<button id="submit">提交</button>
+</body>
+</html>

@@ -1,0 +1,50 @@
+
+<div>
+	<div>
+		<#if categoryExisted??>
+		<div>分类已自动关联上</div>
+		<#else> 分类不存在，需要匹配到其他分类下还是自动新建？ <br />
+		<input value="2" type="radio" name="categoryType" checked="checked" onclick="hideTabs345()">
+		匹配其他分类 <select name="category"> <#list pdbCategoryList as t>
+			<option value="${t.id}">${t.name}</option> </#list>
+		</select> <br />
+		<input value="3" type="radio" name="categoryType" onclick="hideTabs345()">
+		自动新建分类 <br /> <br /> 
+	</div>
+	</#if> <#if brandExisted??>
+	<div>品牌已自动关联上</div>
+	<#else>
+	<div>
+		品牌不存在，需要匹配到其他品牌下还是自动新建？ <br />
+		<input value="2" type="radio" name="brandType" checked="checked" onclick="hideTabs345()">
+		匹配其他品牌 <select name="brand"> <#list pdbBrandList as t>
+			<option value="${t.id}">${t.brandChName}</option> </#list>
+		</select> <br />
+		<input value="3" type="radio" name="brandType" onclick="hideTabs345()">
+		自动新建品牌 <br />
+	</div>
+	</#if>
+</div>
+<button onclick="prodSyncNext3()">下一步</button>
+<script type="text/javascript">
+	//	alert($("[name='brand']").val());
+function prodSyncNext3(){
+	if(pdbCode.val() == ""){
+		alert("未选择项目");
+		return;
+	}
+	if(supplier.val() == ""){
+		alert("未选择供应商");
+		return;
+	}
+	
+	var brandType = $("[name = 'brandType']:checked").val();
+	var categoryType = $("[name = 'categoryType']:checked").val();
+	var brand = $("[name = 'brand']").val();
+	var category = $("[name = 'category']").val();
+	
+	$("#ps_div3").empty();
+	$("#ps_div3").append(ut.simpleAjax(contextPath+"/prod_sync/sync_next_3?pdbCode="+pdbCode.val()+"&supplierId="+supplier.val(),	{"brandType":brandType,"categoryType":categoryType,"brand":brand,"category":category}));
+	$("#pstab3").show();
+}
+</script>

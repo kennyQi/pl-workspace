@@ -1,0 +1,60 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<!--头部-->
+<!--锚点-->
+<a name="top" id="top"></a>
+<div class="gd_head">
+	<a href="${contextPath}/home" class="logo fl" title="票量旅游网">
+    	<img src="${contextPath}/resources/images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb curp">0571-28280813
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="${contextPath}/resources/images/wx.png">
+       	</span>
+    </div>
+    <div class="login fr">
+    	<#if user!=null>
+	    	<a href="${contextPath}/exist" class="hand color9">注销</a>
+	        <a href="#" class="hand color9" >帮助中心</a>
+	        <!-- <a href="${contextPath}/aboutPL" class="hand color9" target="_blank">票量简介</a> -->
+	        <a href="${contextPath}/resources/pdf/about.pdf" class="hand color9" target="_blank">票量简介</a>
+	     
+	        <a href="${contextPath}/company/orderManage?sel=5" class="hand color9 last">我的订单</a>
+	        <a href="${contextPath}/company/main" class="hand color9 last">欢迎您，${(user.authInfo.loginName)!}</a>
+    	<#else>
+	    	<a href="${contextPath}/user/login" class="hand color9">登录</a>
+	        <a href="${contextPath}/user/register" class="hand color9">免费注册</a>
+	        <a href="#" class="hand color9">帮助中心</a>
+	         <a href="${contextPath}/resources/pdf/about.pdf" class="hand color9" target="_blank">票量简介</a>
+        </#if>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+
+        <a href="${contextPath}/home" title="" class="h1 yahei nav1 <#if (sel==1)>on</#if> " >首&nbsp;页</a>
+        <a href="${contextPath}/yxjp/main" title=""   class="h1 yahei nav2 <#if (sel==2)>on</#if> ">机&nbsp;票</a>
+        <a href="${contextPath}/mp/list" title=""  class="h1 yahei nav4 <#if (sel==3)>on</#if> ">景&nbsp;点</a>
+        <a href="${contextPath}/line/list" title=""  class="h1 yahei nav6 <#if (sel==4)>on</#if> ">线&nbsp;路</a>
+		<a href="${contextPath}/dzp" title="" class="h1 yahei nav7 <#if sel == 5>on</#if>">电子票</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->

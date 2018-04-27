@@ -1,0 +1,5 @@
+0    INFO  [2016-01-08 13:32:05]  using logger: com.alibaba.dubbo.common.logger.log4j.Log4jLoggerAdapter
+0    INFO  [2016-01-08 13:33:13]  using logger: com.alibaba.dubbo.common.logger.log4j.Log4jLoggerAdapter
+0    INFO  [2016-01-08 13:33:53]  using logger: com.alibaba.dubbo.common.logger.log4j.Log4jLoggerAdapter
+0    INFO  [2016-01-08 13:35:00]  using logger: com.alibaba.dubbo.common.logger.log4j.Log4jLoggerAdapter
+0    INFO  [2016-01-08 13:35:58]  using logger: com.alibaba.dubbo.common.logger.log4j.Log4jLoggerAdapter

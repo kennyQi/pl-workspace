@@ -1,0 +1,455 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+	
+	.sa{ width:163px; background:#fff; border:1px solid #ccc; padding:10px 0px 10px; margin-left:120px;}
+	.sa ul {padding:0px ; margin:0px;}
+	.sa li{ list-style:none; padding:10px; margin-top:3px;}.sa li:hover{ background:#ccc;} li.current{ background:#ccc;}}
+	
+	.sa2{ width:163px; background:#fff; border:1px solid #ccc; padding:10px 0px 10px; margin-left:120px;}
+	.sa2 ul{padding:0px ; margin:0px;}
+	.sa2 li{ list-style:none; padding:10px; margin-top:3px;}.sa2 li:hover{ background:#ccc;} li.current{ background:#ccc;}}
+</style>
+
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="25">
+	
+	<form id="f1" method="post">
+	<div id="stepOne">
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>基本信息</span></div>
+		
+		<div class="unit">
+			<label>联票名称：</label>
+			<input type="text" name="name" size="32" class="isSpec required" autocomplete="off" />
+		</div>
+		
+		<div class="unit">
+			<label>联票介绍：</label>
+			<textarea id="intro" class="editor required" data-meg="联票介绍" name="intro" rows="10" cols="68" 
+					  tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,
+					         Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+			</textarea>
+			<input type="hidden" id="hiddenIntro" name="hiddenIntro" />
+		</div>
+		
+		<div class="unit">
+			<label>预订须知：</label>
+			<textarea id="notice" class="editor required" data-meg="预订须知" name="notice" rows="10" cols="68" 
+					  tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,
+					         Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+			</textarea>
+			<input type="hidden" id="hiddenNotice" name="hiddenNotice" />
+		</div>
+		
+		<div class="unit">
+			<label>联票协议：</label>
+			<textarea id="saleAgreement" class="editor required" data-meg="售卖协议" name="saleAgreement" rows="10" cols="68" 
+					  tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,Italic,Underline,
+					         Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,Link,Unlink,Hr,Table">
+			</textarea>
+			<input type="hidden" id="hiddenSaleAgreement" name="hiddenSaleAgreement" />
+		</div>
+		
+		
+		<!-- 价格、库存与有效期 -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>价格、库存与有效期</span></div>
+		<div >
+			<label>联票景区：</label>
+			<input type="text" id="find_jq" onkeyup="autoSeachJQ()" autocomplete="off" placeholder="请输入搜索景区">
+			<div class="sa" style="display: none; position: absolute;margin-top:374px; margin-left:130px; z-index: 99999;" />
+		</div>
+		<div class="unit"  style="padding-left: 130px;">
+			 <table id="table1" border="1" style="display: none">
+				<thead>
+						<tr height="25px;">
+							<th align="center" width="210px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">景区</th>
+							<th align="center" width="65px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">结算价(元)</th>
+							<th align="center" width="65px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">游玩理财价(元)</th>
+							<th align="center" width="65px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">市场票面价(元)</th>
+							<th align="center" width="90px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">可连续游玩天数</th>
+							<th align="center" width="60px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">操作</th>
+						</tr>
+					</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>	
+		
+		<div class="unit">
+			<label>销售价格：</label>
+			<input type="text"id="playPriceSum" name="settlementPriceSum" readonly="readonly"/>&nbsp;元
+		</div>
+		
+		<div class="unit">
+			<label>市场价格：</label>
+			<input type="text" id="rackRateSum" name="rackRateSum" class="isInject number" readonly="readonly"/>&nbsp;元
+		</div>
+		
+		<div class="unit">
+			<label>库存数量：</label>
+			<input id="remainingQty" name="remainingQty" class="isInject number required" maxlength="5" autocomplete="off" />&nbsp;张
+			<span style="color: red;">&nbsp;&nbsp;至多99999张, -1表示库存无限</span>
+		</div>
+		
+		
+		<div class="unit">
+			<label>联票有效期：</label>
+			<span>
+				<input type="hidden" name="validUseDateType" value="2" checked="checked"  autocomplete="off" />&nbsp;自出票后
+				<input id="validDays" maxlength="3" size="5" name="validDays" class="isInject number" autocomplete="off">
+					&nbsp;天有效
+				<span style="color: red;">&nbsp;&nbsp;&nbsp;至多999天</span>	
+			</span>
+		</div>
+		
+		<div class="unit">
+			<label>退票规则：</label>
+			<input type="radio" name="returnRule" checked="checked" value="1"/><span>不得退票</span>
+		</div>
+
+		<div class="unit">
+			<label>过期退：</label>
+			<input type="checkBox" name="autoMaticRefund" value="1" class="addSpan" checked="checked" disabled="disabled"/>&nbsp;支持
+		</div>
+
+
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" onclick="closeDialog()" style="width: 35px;">取消</button></div></div>
+				</li>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="button" style="width: 35px;" onclick="return submitStepOne()">保存</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	</form>
+	
+</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$("#find_jq").parent().css("position","relative").css("float","left").css("width","100%");
+		$(".sa").css("height","100px").css("overflow","auto").css("position","absolute").css("marginTop","0").css("top",20);
+		
+	});
+
+	function closeDialog(){
+		if(confirm("是否取消添加该联票")){
+			navTab.closeCurrentTab();
+		}
+	}
+	
+	/**有效期切换*/
+	$("input[name='validUseDateType']").change(function(){
+		if($(this).val() == '1'){
+			$("#fixedUseDateStart", navTab.getCurrentPanel()).removeAttr("disabled");
+			$("#fixedUseDateEnd", navTab.getCurrentPanel()).removeAttr("disabled");
+			$("#validDays", navTab.getCurrentPanel()).val("");
+			$("#validDays", navTab.getCurrentPanel()).attr("disabled", "disabled");
+		}else{
+			$("#fixedUseDateStart", navTab.getCurrentPanel()).val("");
+			$("#fixedUseDateEnd", navTab.getCurrentPanel()).val("");
+			$("#fixedUseDateStart", navTab.getCurrentPanel()).attr("disabled", "disabled");
+			$("#fixedUseDateEnd", navTab.getCurrentPanel()).attr("disabled","disabled");
+			$("#validDays", navTab.getCurrentPanel()).removeAttr("disabled");
+		}
+	});
+	
+	/**退票规则切换*/
+	$("input[name='returnRule']").change(function(){
+		if($(this).val()=='1'){
+			$("#percent", navTab.getCurrentPanel()).attr("disabled", "disabled");
+			$("#yuan", navTab.getCurrentPanel()).attr("disabled", "disabled");
+			$("#percent", navTab.getCurrentPanel()).val("");
+			$("#yuan", navTab.getCurrentPanel()).val("");
+			
+		}else if($(this).val()=='3'){//百分比
+			$("#percent", navTab.getCurrentPanel()).removeAttr("disabled");
+			$("#yuan", navTab.getCurrentPanel()).attr("disabled", "disabled");
+			$("#yuan", navTab.getCurrentPanel()).val("");
+		}else{
+			$("#yuan", navTab.getCurrentPanel()).removeAttr("disabled");
+			$("#percent", navTab.getCurrentPanel()).attr("disabled", "disabled");
+			$("#percent", navTab.getCurrentPanel()).val("");
+		}
+	});
+	
+	/**搜索景区*/
+	function autoSeachJQ(){
+		if($("#find_jq", navTab.getCurrentPanel()).val().length>0){
+			$.ajax({
+				type:"post",
+				url:'${contextPath}'+"/scenic-spot/ajax/findjq",
+				cache:false,
+				dataType:"json",
+				data:{"name":$("#find_jq", navTab.getCurrentPanel()).val()},
+				success:function(data){
+					if(data.status==1){
+						$(".sa").html(data.html);
+						$(".sa ul li").click(function(){
+							
+							//获取景区ID
+							var scenicSpotId = $(this).children("input").val()
+							
+							var insert = true;
+							$(".addssc").each(function(){
+								if($(this).val()==scenicSpotId){
+									alertMsg.error("该景区已存在,请勿重复选择");
+									insert = false;
+								}
+							})
+							
+							if(insert){
+								$("#table1 tr:eq(0)").after("<tr height=\"25px;\">"+
+						                   						"<td>"+$(this).text()+"<input class=\"addssc\" type=\"hidden\" name=\"scenicSpotIds\" value=\""+scenicSpotId+"\" /></td>"+
+						                   						"<td align=\"center\"><input class=\"settlementPrice\" type=\"text\" style=\"width:80px;\" name=\"settlementPrice\" /></td>"+
+						                   						"<td align=\"center\"><input class=\"playPrice\" type=\"text\" style=\"width:80px;\" name=\"playPrice\" onchange=\"fenCal2()\" /></td>"+
+						                   						"<td align=\"center\"><input class=\"rackRate\" type=\"text\" style=\"width:80px;\" name=\"rackRate\" onchange=\"fenCal()\" /></td>"+
+						                   						"<td align=\"center\"><input type=\"text\" style=\"width:80px;\" name=\"days\" /></td>"+
+						                   						"<td align=\"center\"><a onclick=\"delTr(this, 'table1')\" style=\"color:blue;\">删除</a></td>"+
+						                 					"</tr>");
+							}
+							//经销商价格日历行数>1 显示列表
+							if($("#table1 tr").length>1){
+								$("#table1").show();
+							}
+							
+							$(".sa").hide();
+						});
+						$(".sa").show();	
+					}else{
+						$(".sa").hide();
+					}
+				}
+			})
+		}else{
+			$(".sa").hide();
+		}
+	}
+	
+	
+	/**搜索经销商*/
+	function autoSeachDealer(){
+		
+		if($("#find_dealer", navTab.getCurrentPanel()).val().length>0){
+			$.ajax({
+				type:"post",
+				url:'${contextPath}'+"/dealer/ajax/findDealer",
+				cache:false,
+				dataType:"json",
+				data:{"name":$("#find_dealer", navTab.getCurrentPanel()).val()},
+				success:function(data){
+					if(data.status==1){
+						$(".sa2").html(data.html);
+						$(".sa2 ul li").click(function(){
+// 							获取景区ID
+							var dealerId = $(this).children("input").val()
+							var dealerName = $(this).text();
+							
+							var insert = true;
+							$(".ddc", navTab.getCurrentPanel()).each(function(){
+								if($(this).val()==dealerName){
+									alertMsg.error("该经销商已存在,请勿重复选择");
+									insert = false;
+								}
+							});
+							
+							if(insert){
+								var ps = '${contextPath}'+"/ticket-group/dealerDatePrice?dealerId="+dealerId+"&ticketPolicyId="+$("#ticketPolicyId").val()+"&dealerName="+dealerName;
+								//设置按钮URL
+								$("#addBtn").attr("href", ps);
+								//显示按钮
+								$(".ac").show();
+							}
+							
+							//点击后隐藏 按钮  置空URL
+							$("#addBtn").click(function(){
+								$(".ac").hide();
+								$("#addBtn").attr("href", "");
+							})
+							
+// 							经销商价格日历行数>1 显示列表
+							if($("#table2 tr").length>1){
+								$("#table2").show();
+							}
+							
+							$(".sa2").hide();
+							
+						});
+						$(".sa2").show();	
+					}else{
+						$(".sa2").hide();
+					}
+				}
+			})
+		}else{
+			$(".sa2").hide();
+		}
+	}
+	
+	/**删除景区表格行*/
+	function delTr(obj, id){
+		
+		$(obj).parent().parent().remove();
+		if(id=='table1'){
+			//删除行后计算游玩价  市场票面价
+			fenCal();
+			fenCal2();
+		}
+		
+		if(id=='table1' && $("#table1 tr").length<2){
+			$("#table1").hide();
+		}
+	}
+	
+	//金额正则
+	var re = /^(([1-9]{1}[\d]*)|([0]{1}))(\.[\d]{1,2})?$/;
+	//库存正则
+	var kc = /[1-9]{1,}\d*/
+	
+	/**市场价计算*/
+	function fenCal(){
+		
+		var fens = $(".rackRate");
+		var total = 0.00;
+		for(var i = 0,len = fens.length;i < len;i++){
+			
+			if(!(fens[i].value=='')){
+				if(re.test(fens[i].value)){
+					total += parseFloat(fens[i].value);
+				}else{
+					alertMsg.error("市场价格式不正确！");
+				}
+			}else{
+				continue;
+			}
+		}
+		$("#rackRateSum").val(total.toFixed(2));
+	}
+	
+	/**销售价格计算*/
+	function fenCal2(){
+		var fens = $(".playPrice");
+		var total = 0.00;
+		for(var i = 0,len = fens.length;i < len;i++){
+			
+			if(!(fens[i].value=='')){
+				if(re.test(fens[i].value)){
+					total += parseFloat(fens[i].value);
+				}else{
+					alertMsg.error("游玩理财价格式不正确！");
+				}
+			}else{
+				continue;
+			}
+		}
+		$("#playPriceSum").val(total.toFixed(2));
+	}
+	
+	
+	/**异步提交stepOne*/
+	function submitStepOne(){
+		
+		$('#f1').unbind();
+		$("#f1").submit(function(){
+			//复制编辑器内容到隐藏input 提交
+			$("input[name='hiddenIntro']").attr("value", $("#intro").val());
+			$("input[name='hiddenNotice']").attr("value", $("#notice").val());
+			$("input[name='hiddenSaleAgreement']").attr("value", $("#saleAgreement").val());
+			
+			$(this).ajaxSubmit({
+				type:"post",
+				url:'${contextPath}'+"/ticket-group/saveAdd",
+				dataType:"json",
+				beforeSubmit:function(){
+					return stValidate();
+				},
+				success:function(data){
+					if(data.status==1){
+						navTab.closeCurrentTab();
+						navTab.reloadFlag("ticket-group");
+					}else if(data.status==-1){
+						alertMsg.error(data.msg);
+					}else{
+						alertMsg.error("系统异常")
+					}
+				}
+			});
+			return false;
+		});
+		
+		return $("#f1").submit();
+	}
+	
+	/**删除经销商价格日历行*/
+	function ajaxDelTr(obj, priceId){
+		//priceId 价格日历ID
+		$.ajax({
+			type: "post",
+			url: '${contextPath}'+"/ticket-group/dealerDatePrice/del",
+			cache:false,
+			dataType:"json",
+			data:{"datePriceId":priceId},
+			success:function(data){
+				if(data.status==1){
+					$(obj).parent().parent().remove();
+					//没有经销商价格日历记录时隐藏列表
+					if($("#table2 tr").length<2)
+						$("#table2").hide();
+				}else if(data.status==-1){
+					alertMsg.error("删除失败");
+				}else{
+					alertMsg.error("系统异常");
+				}
+			}
+		})
+		return false;
+	}
+	
+	
+	function stValidate(){
+		
+		if($("input[name='name']", navTab.getCurrentPanel()).val().length<1){
+			alertMsg.error("联票名称不能为空");
+			return false;
+		}
+		if($("#intro").val().length<1){
+			alertMsg.error("联票介绍不能为空");
+			return false;
+		}
+		
+		if($("#notice").val().length<1){
+			alertMsg.error("联票预定须知不能为空");
+			return false;
+		}
+		
+		if($("#saleAgreement").val().length<1){
+			alertMsg.error("售卖协议不能为空");
+			return false;
+		}
+		
+		if($("#table1 tr").length<2){
+			alertMsg.error("联票景区不能为空");
+			return false;
+		}
+		
+		if($("input[name='remainingQty']").val().length<1){
+			alertMsg.error("库存数量不能为空");
+			return false;
+		}
+		
+		if($("input[name='validUseDateType']:checked").val()=='2' && $("#validDays").val()==""){
+			alertMsg.error("联票有效期不能为空");
+			return false;
+		}
+		
+		return true;
+	}
+
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>图片裁切</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script type="text/javascript"
+	src="http://libs.baidu.com/jquery/1.7.2/jquery.js"></script>
+
+<script src="../PicCut.js" type="text/javascript"></script>
+<script>
+$(function(){
+	picCut($("#pic0"),0,callback);
+	picCut($("#pic1"),1,callback);
+	picCut($("#pic2"),2,callback);
+	picCut($("#pic3"),3,callback);
+	});
+function callback(s){
+	console.info("select:"+s.x+","+s.y+","+s.x2+","+s.y2+","+s.w+","+s.h);
+	}
+</script>
+</head>
+
+<body>
+	<table style="width: 80%;margin-left:10%;">
+	<tr>
+		<td id="demo0">
+			<span>picCut(),mode=0,绘制矩形选框</span>
+			<img id="pic0" width="480" src="cutPic1.jpg"/>
+		</td>
+		<td id="demo1">
+			<span>picCut(),mode=1,绘制等比选框</span>
+			<img id="pic1" width="480" src="cutPic1.jpg"/>
+		</td>
+	</tr>
+	<tr>
+		<td id="demo2">
+			<span>picCut(),mode=2,居中选区</span>
+			<img id="pic2" width="480" src="cutPic1.jpg"/>
+		</td>
+		<td id="demo3">
+			<span>picCut(),mode=3,最大宽高适配</span>
+			<img id="pic3" width="480" src="cutPic1.jpg"/>
+		</td>
+	</tr>
+	</table>
+</body>
+</html>

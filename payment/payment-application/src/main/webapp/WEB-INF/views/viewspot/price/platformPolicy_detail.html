@@ -1,0 +1,62 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/viewspot/price/releasePlatformPolicy" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<label>政策编号：</label>
+				<input type="hidden" name="policyId" value="${salePolicySnapshot.policyId}">
+				<input type="hidden" name="flag" value="dialog">
+				${salePolicySnapshotDTO.policyId}
+			</div>
+			<div class="unit">
+				<label>价格添加方式：</label>
+				${salePolicySnapshotDTO.filterType}
+			</div>
+			<div class="unit">
+				<label>适用范围：</label>
+			    ${salePolicySnapshotDTO.filterType}
+			</div>
+			<div class="unit">
+				<label>适用时间：</label>
+				${salePolicySnapshotDTO.beginDate} - ${salePolicySnapshotDTO.endDate}
+			</div>
+			<div class="unit">
+				<label>价格政策：</label>
+				${salePolicySnapshotDTO.modifyPriceType} ${salePolicySnapshotDTO.modifyProceValue}
+			</div>	
+			<div class="unit">
+				<label>备注：</label>
+				${salePolicySnapshotDTO.remark}
+			</div>	
+			<div class="unit">
+				<label style="font-size: 14px"><b>操作日志</b></label>
+			</div>
+			<div class="unit">
+				<hr>
+			</div>
+			<div class="unit">
+				<table style="padding-left: 10px;">
+				   <thead>
+				     <tr>
+				        <th width="100"><b>时间</b></th>
+				        <th width="100"><b>操作</b></th>
+				        <th width="100"><b>操作人</b></th>
+				        <th width="100"><b>操作信息</b></th>
+				     </tr>
+				   </thead>
+				   <tbody>
+				   </tbody>
+				</table>
+			</div>				
+		</div>
+		<div class="formBar">
+			<ul>
+			    <li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">发布</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

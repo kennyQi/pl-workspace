@@ -1,0 +1,38 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>景区介绍</title>
+<link href="${contextPath}/resources/css/scenic.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+
+</head>
+
+<body>
+<h2 class="gd_tt">
+	<label class="t">景区介绍</label>
+</h2>
+<!--景区介绍内容-->
+<article class="cont">
+ 	<div class="cont_text paT paB">
+ 				<div class="t">
+ 					${scenic.scenicSpotBaseInfo.intro}
+ 				</div>
+        </div>
+</article>
+<!--景区介绍内容-->
+<h2 class="gd_tt">
+	<label class="t">交通指南</label>
+</h2>
+<article class="cont">
+ 	<div class="cont_text paT paB">
+ 				<div class="t">
+            	 ${scenic.scenicSpotGeographyInfo.traffic}
+            	 </div>
+        </div>
+</article>
+          
+</body>
+</html>

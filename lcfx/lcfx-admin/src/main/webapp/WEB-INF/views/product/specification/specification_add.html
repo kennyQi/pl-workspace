@@ -1,0 +1,86 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	
+	function addSpecValueInput(){
+		$("#specTable").append("<tr><td><input name=\"specValueList\" class=\"textInput valid\" onchange=\"checkSpecValue(this)\" /></td><td><input name=\"specValueList\" class=\"textInput valid\" onchange=\"checkSpecValue(this)\" /></td><td><input name=\"specValueList\" class=\"textInput valid\" onchange=\"checkSpecValue(this)\" /></td><td><input name=\"specValueList\" class=\"textInput valid\" onchange=\"checkSpecValue(this)\" /></td><td><input name=\"specValueList\" class=\"textInput valid\"  onchange=\"checkSpecValue(this)\" /></td></tr>");
+	} 
+	
+	function checkSpecValue(input){
+		if(input.value ==''){
+			return;
+		}
+		if(input.value.length >10){
+			alertMsg.error("规格值最大长度为10");
+			input.value ='';
+			return;
+		}
+
+		var t=0;
+		$("input[name='specValueList']").each(function(){
+			if(input.value == $(this).val()){
+				t= t+1;
+			}
+		});
+		
+		if(t>=2){
+			alertMsg.error('规格重名');
+			input.value = '';
+		}
+	}
+</script>
+<div class="pageContent">
+	<form method="post" action="${contextPath}/specification/create" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>所属分类：</dt>
+					<input name="categoryId" value="" type="hidden" />
+					<input class="required" name="categoryName" type="text" readonly value="" />
+					<a class="btnLook" href="${contextPath}/category/lookup?inputName=categoryId&mode=2&findUsing=1" lookupGroup rel="categoryLookup" width="367" height="600">查找分类</a>
+				</dl>
+				<dl>
+					<dt>规格名称：</dt>
+					<dd>
+						<input name="specificationName" type="text" class="required" maxlength="30"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>规格值：</dt>
+					<dd>
+						<div class="unit" style="width:500px">
+							<table border="0" id="specTable">
+								<tr>
+									<td><input name="specValueList" onchange="checkSpecValue(this)" type="text" maxlength=10 /></td>
+									<td><input name="specValueList" onchange="checkSpecValue(this)" type="text" maxlength=10 /></td>
+									<td><input name="specValueList" onchange="checkSpecValue(this)" type="text" maxlength=10 /></td>
+									<td><input name="specValueList" onchange="checkSpecValue(this)" type="text" maxlength=10 /></td>
+									<td><input name="specValueList" onchange="checkSpecValue(this)" type="text" maxlength=10 /></td>
+								</tr>
+							</table>
+							<input type="button" name="button" id="button" value="添加规格值" onclick="addSpecValueInput()" />
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div></li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

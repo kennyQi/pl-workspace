@@ -1,0 +1,40 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageContent" style="text-align:left;">
+	<form method="post" id="addForm" enctype="multipart/form-data"
+		action="${contextPath}/businessPartners/save"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, dialogAjaxDone)">
+		
+		<input type="hidden" name="id" id="id" value="${(bp.id)!}"/>
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>*公司名称：</label> 
+						<input  type="text" maxlength=40 size="40" name="companyName" class="required" value="${(bp.companyName)!}" />
+			</div>
+			
+			<div class="unit">
+				<label>联系人：</label> 
+						<input type="text" name="companyLinkName" size="30"  value="${(bp.companyLinkName)!}" />
+			</div>
+			<div class="unit">
+				<label>联系电话：</label><br>
+				<input type="text" name="companyLinkTel" size="30"  class="phone textInput" value="${(bp.companyLinkTel)!}" />
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div></li>
+				<li><div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,273 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "订单管理">
+
+<#if (((user.baseInfo.type?c)!0)==1)>
+	<link href="${(contextPath)!}/resources/css/personal/personal_home.css" rel="stylesheet" />
+	<link href="${(contextPath)!}/resources/css/personal/personal_allOrder.css" rel="stylesheet" />
+	<#elseif (((user.baseInfo.type?c)!0)==2)>
+		<link href="${(contextPath)!}/resources/css/company/company_home.css" rel="stylesheet" />
+		<link href="${(contextPath)!}/resources/css/company/company_allOrder.css" rel="stylesheet" />
+</#if>
+
+<script src="${(contextPath)!}/resources/js/company/laydate/laydate.js" language="javascript"></script>
+<script>
+	(function(){   //调用日期插件
+		;!function(){
+			laydate.skin('dahong');
+			laydate({
+				elem: '#demo'
+			});
+		}();
+	})();
+</script>
+
+</@frame.head>
+
+
+<@frame.main "default" 1>
+<div class="g_bd disb yahei">
+	<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+
+<div class="g_cont disb ov">
+	<@frame.nav "订单管理" 1></@frame.nav>
+<!--右侧呈现页-->
+<div class="m_cont ov fl">
+	<div class="ri">
+		<span class="rih1 yahei order_p onc"><a href="${(contextPath)!}/company/orderManage?sel=5">机票订单</a><i></i></span>
+		<span class="rih1 yahei order_p "><a href="${(contextPath)!}/company/orderManage?sel=2">景点订单</a><i></i></span>
+		<span class="rih1 yahei order_p"><a href="${(contextPath)!}/company/orderManage?sel=3">旅游订单</a><i></i></span>
+		<#if hasOldJpOrder>
+			<span class="rih1 yahei order_p"><a href="${(contextPath)!}/company/orderManage?sel=1">机票订单(旧)</a><i></i></span>
+		</#if>
+		<div class="navsbox"></div>
+
+		<!--有订单-->
+		<div class="yesOrder">
+			<form action="${(contextPath)!}/company/orderManage?sel=5" name="jpQueryForm" id="jpQueryForm" class="jpQueryForm" method="post">
+				<input type="hidden"  name="J_status" value="${J_status}"/>
+				<input type="hidden" class="pageNum" name="page" value="${(yxPagination.pageNo?c)!1}">
+				<input type="hidden" name="pageSize" value="${(yxPagination.pageSize?c)!5}">
+				<!--搜索框-->
+				<div class="orderBox">
+					<ul class="order">
+						<li>
+							<span class="selti h3">订单编号：</span>
+							<input id="J_orderNum" name="J_orderNum" type="text" class="border slor optionValue input_p" value="${(yxJPOrderQO.orderNo)!}">
+							<span></span>
+						</li>
+						<li style="width:370px; line-height:30px;">
+							<span class="selti h3">下单时间：</span>
+                            	<span class="numTextRight">
+                            		<input id="cstart" name="J_beginTime" class="border changeTime input_p" onClick="laydate()" value="${beginTime}">
+                            	</span>
+							<i style=" margin:0 5px; float:left;">-</i>
+                            <span class="numTextRight">
+                            	<input id="cend" name="J_endTime" class="border changeTime input_p" onClick="laydate()" value="${endTime}">
+                            </span>
+						</li>
+						<li>
+							<span class="selti h3">联系人：</span>
+							<input id="J_bookMan" name="yxJ_bookMan" type="text" title="联系人手机号" class="border sl optionValue input_p" value="${(yxJPOrderQO.linkMobile)!}">
+							<span></span>
+						</li>
+						<li>
+							<span class="selti h3">订单状态：</span>
+							<span class="dd companySelect"><span class="optionValue" style="line-height:30px;" id="optionValue">请选择</span></span>
+
+							<ul class="selectNav" for="optionValue"  forName="J_status">
+
+								<li class="l" value="">请选择</li>
+								<li class="l" value="1">待支付</li>
+								<li class="l" value="2">已取消未付款</li>
+								<li class="l" value="3">出票处理中</li>
+								<li class="l" value="4">已出票</li>
+								<li class="l" value="5">出票失败待退款</li>
+								<li class="l" value="6">出票失败已退款</li>
+								<li class="l" value="7">退票处理中</li>
+								<li class="l" value="8">退票失败</li>
+								<li class="l" value="9">退票成功待退款</li>
+								<li class="l" value="10">退票成功已退款</li>
+							</ul>
+						</li>
+						<li style="width:350px;">
+							<span class="selti h3">乘机人：</span>
+							<input id="J_Passenger" name="J_Passenger" type="text" class="border sl optionValue input_p" value="${passenger}">
+							<span></span>
+							<a  id="sendJp" href="#" class="cx">查询</a></li>
+
+					</ul>
+
+				</div>
+
+				<#if jPOrders??&&((jPOrders?size)>0)>
+					<!--搜索结果-->
+					<div class="tableBox">
+
+						<#list jPOrders as jpOrder>
+							<#if (jpOrder_index>4)><#break></#if>
+							<ul class="tables">
+								<li class="tableTop">
+									<span class="order">订单号</span>
+									<span class="voyage">航程</span>
+									<span class="people">乘机人</span>
+									<span class="bank">票号</span>
+									<span class="status">订单状态</span>
+									<span class="policy">退费政策</span>
+									<span class="money">订单金额</span>
+									<span class="place">联系人</span>
+									<span class="operation">操作</span>
+								</li>
+								<#list (jpOrder.passengers)!null as passenger>
+									<li>
+										<span class="order"><a href="${(contextPath)!}/company/yxjp-order-detail?orderNo=${jpOrder.baseInfo.orderNo}">${jpOrder.baseInfo.orderNo}</a></span>
+										<span class="voyage"><i class="places"><i>${jpOrder.flight.baseInfo.orgCityName}</i><i class="fly"></i><i>${jpOrder.flight.baseInfo.dstCityName}</i></i><b class="flight">${jpOrder.flight.baseInfo.flightNo}</b><b class="times">${jpOrder.flight.baseInfo.startTime}</b></span>
+										<span class="people">
+												${passenger.baseInfo.name}
+										</span>
+										<span class="bank">
+												${passenger.ticket.ticketNo}
+										</span>
+										<span class="status noTicket">
+											${(orderStatusMap[(passenger.ticket.status)?c])!}
+										</span>
+										<span class="policy"><a content="">暂无政策</a></span>
+										<span class="money">
+											<b>
+												<#if passenger.ticket.status !=2>
+													${(passenger.payInfo.price)!}
+												</#if>
+												<#if passenger.ticket.status ==2>
+													0
+												</#if>
+											</b>
+										</span>
+										<span class="place"><i style="margin-top:15px;">${jpOrder.linkman.linkMobile}</i><i>${(jpOrder.baseInfo.createDate?datetime)!}</i></span>
+										<span class="operation operation_cont">
+
+											<a class="blue" href="${(contextPath)!}/company/yxjp-order-detail?orderNo=${jpOrder.baseInfo.orderNo}">查看详细</a>
+											<#if passenger.ticket.status ==1>
+												<a class="blue" href="${(contextPath)!}/yxjp/pay-order-pag?orderId=${jpOrder.id}">去支付</a>
+											</#if>
+										</span>
+									</li>
+								</#list>
+							</ul>
+
+						</#list>
+
+						<!--分页导航-->
+						<div class="m_pageNav listPageStyle">
+							<div id="page" class="m_nums"></div>
+						</div>
+						<!--分页导航-->
+					</div>
+					<!--有订单-->
+					<#else>
+		</div>
+		<!--搜索无结果-->
+		</form>
+		<!--没有数据-->
+
+		<div class="noOrder" >
+			<span class="noIcon" style="background:url(${(contextPath)!}/resources/images/company/ic_script.png) 0 -427px;"></span>
+			<span class="in">您目前还没有机票订单哦~</span>
+		</div>
+		</#if>
+		<!--没有数据-->
+	</div>
+</div>
+<!--右侧呈现页-->
+</div>
+</div>
+<@frame.end "default"> </@frame.end>
+</@frame.main>
+
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+
+		sessionStorage.setItem("yxJpPayOrderToken","F");
+		sessionStorage.setItem("yxOrderToken","F");
+		// 添加机票分页控件
+		pageCreate(${(((yxPagination.totalCount-1)/5+1)?int)!1},"jpQueryForm")
+		//初始化机票状态
+		$('[forName="J_status"]').find("li[value='"+$("[name='J_status']").val()+"']").click();
+		console.info($("[name='J_status']").val());
+
+	});
+
+	//搜索框校验
+	$("#J_orderNum").blur(function() {
+		var reg = /^[a-zA-Z0-9]{0,100}$/
+		var bianhao = $("#J_orderNum").val();
+		if (reg.test(bianhao)) {
+			$(this).next("span").html("");
+			$(".m_errTips").remove();
+		} else {
+			alertMsg("请输入正确编号",$(this).offset().top-20,$(this).offset().left+$(this).width());
+		}
+	});
+
+
+	$("#J_bookMan").add("#J_Passenger").blur(function() {
+
+		var reg = /^[\u4e00-\u9fa5]{0,100}$/
+		var xiadan = $(this).val();
+		if (reg.test(xiadan)) {
+			$(this).next("span").html("");
+			$(".m_errTips").remove();
+		} else {
+//			alertMsg("请输入正确的文字",$(this).offset().top-20,$(this).offset().left+$(this).width());
+		}
+	});
+
+
+	//给查询按钮添加监听
+	$('#sendJp').on("click", function() {
+
+		var bianhao = $("#J_orderNum").val();
+		var xiadan = $("#J_bookMan").val();
+		var pnr = $("#J_PNR").val();
+		var chengji = $("#J_Passenger").val();
+		var reg = /^[a-zA-Z0-9\_]{0,100}$/;
+		var pnrT = /^[a-zA-Z0-9]{0,6}$/;
+		var cn = /^[\u4e00-\u9fa5]{0,100}$/;
+		//订单编号
+		if (reg.test(bianhao)) {
+			$("#J_orderNum").next("span").html("");
+			$(".m_errTips").remove();
+		} else {
+			alertMsg("请输入正确编号",$("#J_orderNum").offset().top-20,$("#J_orderNum").offset().left+$("#J_orderNum").width());
+			return false;
+		}
+		//用户名
+		if (reg.test(xiadan)) {
+			$("#J_bookMan").next("span").html("");
+			$(".m_errTips").remove();
+		} else {
+			//$("#J_bookMan").next("span").html("请输入正确的下单人");
+			alertMsg("请输入正确的下单人",$("#J_bookMan").offset().top-20,$("#J_bookMan").offset().left+$("#J_bookMan").width());
+			return false;
+		}
+
+		//乘客
+		if (cn.test(chengji)) {
+			$("#J_Passenger").next("span").html("");
+			$(".m_errTips").remove();
+		} else {
+			alertMsg("请输入正确的乘机人",$("#J_bookMan").offset().top-20,$("#J_bookMan").offset().left+$("#J_bookMan").width());
+			return false
+		}
+
+		//重置分页的信息
+		$('#jpQueryForm').submit();
+	});
+
+
+
+</script>
+
+

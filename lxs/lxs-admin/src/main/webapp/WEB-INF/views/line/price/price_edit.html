@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/price/edit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="id" value="${priceDTO.id}"/>
+			<div class="unit">
+				<label>线路名称</label>
+				${(priceDTO.line.baseInfo.name)!''}
+			</div>
+			<div class="unit">
+				<label>时间</label>
+				${priceDTO.saleDate?date}
+			</div>
+			<div class="unit">
+				<label>成人价格</label>
+				<input type="text" name="adultPrice" size="20" maxlength="20"  min="0" value="${(priceDTO.adultPrice)?c}" class="number required"/>元
+			</div>
+			<div class="unit">
+				<label>儿童价格</label>
+				<input type="text" name="childPrice" size="20" maxlength="20"  min="0" value="${(priceDTO.childPrice)?c}" class="number required"/>元
+			</div>
+			<div class="unit">
+				<label>剩余人数(确认后累加)</label>
+				<input type="text" id="update_number" name="number" size="20" maxlength="9"   value="${(priceDTO.number)?string('#')}" onblur="checkNum(this)"/>人
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+function checkNum(obj)
+{
+ var re = /^-?[0-9]*(\d*)?$|^-?0(\d*)?$/;
+     if (!re.test(obj.value))
+    {
+    	alertMsg.error("非法数字");
+    	$("#update_number").val("");
+    	$("#update_number").focus();
+
+        //alert("非法数字");
+        //obj.value="";
+        //obj.focus();
+        return false;
+     }
+}
+
+</script>

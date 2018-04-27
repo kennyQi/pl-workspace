@@ -1,0 +1,109 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css'
+	rel='stylesheet' />
+<div class="pageHeader">
+
+	<form id="pagerForm" rel="pagerForm"
+		onsubmit="return navTabSearch(this);"
+		action="${contextPath}/member/personList" method="post">
+
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage"
+			value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">昵称：</td>
+					<td><input type="text" name="nickName"
+						value="${userQO.nickName}"></td>
+					<td style="text-align: left">手机号码：</td>
+					<td><input type="text" name="mobile" value="${userQO.mobile}"></td>
+					<td style="text-align: left">来源：</td>
+					<td style="text-align: left"><select name="source">
+							<option value="">全部</option>
+							<option value="android"<#if userQO.source=='android'>
+								selected="selected" </#if>>安卓端</option>
+							<option value="ios"<#if userQO.source=='ios'>
+								selected="selected" </#if>>苹果端</option>
+					</select></td>
+					<td>注册时间：</td>
+					<td><input id="beginDate" name="beginTime"<#if
+						userQO.beginTime??> value="${userQO.beginTime}" </#if>
+						class="date" [dateFmt="yyyy-MM-dd"] readonly="readonly" /> -<input
+						id="endDate" name="endTime"<#if userQO.endTime??>
+						value="${userQO.endTime}" </#if> class="date"
+						[dateFmt="yyyy-MM-dd"] readonly="readonly" /></td>
+						<td>
+							<a  target="dialog" rel="queryValid" href="${contextPath}/member/getQueryValidPage"  width="450" height="150" style="color: blue">查询验证码</a>
+						</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button onclick="return checkQuery();"><span>查询</span></button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div style="height: 30px;text-align: left;">
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<span><font style="font-size: 10px;">注册会员：${userNO}&nbsp;人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交易总额：${totalPrice}&nbsp;元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;客单价：${orderAvgPrice}&nbsp;元</font></span>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="150">
+		<thead>
+			<tr>
+				<th width="100">昵称</th>
+				<th width="100">手机号</th>
+				<th width="100">注册时间</th>
+				<th width="100">最近登录时间</th>
+				<th width="100">交易次数(次)</th>
+				<th width="100">交易金额(元)</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#if (userList?size>0)> <#list userList as userDTO>
+			<tr>
+
+				<!-- <td><input name="ids" value="${userDTO.id}" type="checkbox">
+				</td> -->
+				<td>${userDTO.baseInfo.nickName}</td>
+				<td>${userDTO.contactInfo.mobile}</td>
+				<td>${userDTO.baseInfo.createTime}</td>
+				<td>${userDTO.status.lastLoginTime}</td>
+				<td>${userDTO.businessInfo.orderTimes}</td>
+				<td>${userDTO.businessInfo.tradingVolume}</td>
+				<td>
+					<table style="height: 100%;width:100%">
+						<tr style="height: 100%">
+							<td style="width: 50%"><a title="确定重置密码吗？" target="ajaxTodo" href="${contextPath}/member/reset?id=${userDTO.id}"  style="color: blue">重置密码</a></td>
+							<td style="width: 50%"><a target="dialog" href="${contextPath}/member/detail?id=${userDTO.id}" width="450" height="650" style="color: blue">查看详情</a></td>
+						</tr>
+					</table></td>
+			</tr>
+			</#list> </#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+	//检查查询条件
+	function checkQuery() {
+		var beginDate = document.getElementById("beginDate").value;
+		var endDate = document.getElementById("endDate").value;
+		if (beginDate != "" && endDate != "") {
+			if (beginDate > endDate) {
+				alert("结束时间不能小于开始时间");
+				return false;
+			}
+		}
+	}
+</script>

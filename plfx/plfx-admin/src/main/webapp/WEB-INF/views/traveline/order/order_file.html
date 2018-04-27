@@ -1,0 +1,51 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/order/upload" class="pageForm required-validate" 
+		onsubmit="return iframeCallback(this,callback)" target="callbackframe">
+		<div class="pageFormContent" layoutH="58">
+			<table>
+				<tr style="height:30px;">
+					<td>已上传文件:</td>
+				<tr>
+				<#list fileList as fileDTO>
+				<tr style="height:25px;">
+					<td></td>
+					<td>
+						<a href="${fileDTO.filePath}"> ${fileDTO.fileName}</a><br>
+					</td>				   	
+				<tr>
+				</#list>
+			</table>
+			    
+			<div class="unit">
+				<label>上传文件</label>
+				<input name="file" type="file"/>
+			</div>
+			<input type="hidden" name="lineOrderID" value="${qo.lineOrderID}"/>
+ 		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="">上传</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+
+	//上传文件后，显示上传操作是否成功，并刷新文件上传对话框
+	 function callback(json){
+		 DWZ.ajaxDone(json);
+		 if(json.statusCode == DWZ.statusCode.ok){
+			 if(json.navTabId){
+				 var dialog = $("body").data(json.navTabId);
+				 $.pdialog.reload(dialog.data("url"),{data:{},dialogId:json.navTabId,callback:null});
+			 }
+		 }
+		 if("closeCurrent" == json.callbackType){
+			 $.pdialog.closerCurrent();
+		 }
+	 }
+</script>
+

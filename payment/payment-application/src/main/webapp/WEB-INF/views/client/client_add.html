@@ -1,0 +1,163 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/client/add" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>名称：</label>
+				<input type="text" name="name" size="40" maxlength="40" required="required"/>
+			</div>
+			<div class="unit">
+				<label>是否有效：</label>
+				<label><input type="radio" name="valid" class="required" value="1" checked="checked"/>是</label>
+				<label><input type="radio" name="valid" class="required" value="0"/>否</label>
+			</div>
+			<div class="unit">
+				<label>密钥：</label>
+				<input type="text" name="secretKey" size="40" maxlength="40" required="required"/>
+			</div>
+			<div class="unit">
+				<label>支付渠道：</label>
+				<input type="hidden" id="validPayChannelTypes" name="validPayChannels"/>
+				<select class="combox"  id="channelCombox">
+					<option value="0">请选择</option>
+					<#list paychannellist as paychannel>
+						<option value=${paychannel.type} > ${paychannel.name}</option>
+					</#list>
+				</select>
+			</div>
+			<div class="unit">
+			  <label>已选支付渠道：</label>
+			  <div  id="content" ></div>
+			</div>
+			<div class="unit">
+			  <label>商城消息地址：</label>
+			  <input type="text" name="clientMessageURL"  required="required" size="70" />
+			</div>
+			<div class="unit">
+			  <label>商城重定向地址：</label>
+			  <input type="text" name="clientReturnURL"  required="required" size="70" />
+			</div>
+			<div class="unit">
+			  <label>商城域名：</label>
+			  <input type="text" name="clientShopURL"  required="required" size="70" />
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<textarea rows="3" cols="40" name="remark"></textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="return checkAdd();">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+
+  //选择支付渠道
+  $("#channelCombox").change(function(){
+     var channelName = $("#channelCombox").find("option:selected").text();
+     var channelType = $("#channelCombox").val();
+     if(channelType != 0 && !existChannel(channelType)){
+        addElementNew(channelName,channelType);
+     }
+  });
+  
+    //添加 已选支付渠道DIV
+   function addElementNew(name,type){
+   
+       var newElementFontColor = "#4876FF";
+       var cancle_img_margin_right = "5px";
+       var channel_name_span_margin_right = "5px";
+       var channel_name_span_margin_left = "2px";
+       var channel_name_span_margin_bottom = "5px";
+       var channel_name_div_padding_bottom = "5px";
+       var channel_name_div_margin_right = "10px";
+       var cancleImgSrc = "resources/image/mp/u233.png"
+       var borderStyle = "1px solid #63B8FF";
+       
+      
+      var nameSpan = document.createElement("span");
+      nameSpan.innerHTML = name;
+      nameSpan.style.marginRight = channel_name_span_margin_right;
+      nameSpan.style.marginLeft = channel_name_span_margin_left;
+      
+      
+      var cancleImg = document.createElement("img");
+      cancleImg.src = cancleImgSrc;
+      cancleImg.style.marginRight = cancle_img_margin_right;
+      cancleImg.onclick = function(){
+         removeElementNew(type);
+      };
+      
+      var channelNameDiv = document.createElement("div");
+      channelNameDiv.style.cssFloat = "left";
+      channelNameDiv.style.border = borderStyle;
+      channelNameDiv.style.paddingBottom = channel_name_div_padding_bottom;
+      channelNameDiv.style.marginRight = channel_name_div_margin_right;
+      channelNameDiv.style.marginBottom = channel_name_span_margin_bottom;
+      
+      channelNameDiv.appendChild(nameSpan);
+      channelNameDiv.appendChild(cancleImg);
+      
+      
+      var allDiv = document.createElement("div");
+      allDiv.id = type + "bak";
+      allDiv.style.color = newElementFontColor;
+      
+      allDiv.appendChild(channelNameDiv);
+      
+      document.getElementById("content").appendChild(allDiv);
+      
+   }
+   
+   //删除 已选支付渠道DIV
+   function removeElementNew(type){
+      var labelNew = document.getElementById(type + "bak");
+      if(labelNew != null){
+        labelNew.parentNode.removeChild(labelNew);
+      }
+   }
+   
+   //判断支付渠道是否存在
+  function existChannel(channelType){
+  	  var id = channelType + "bak";
+      var div = document.getElementById(id);
+      if(div == null){
+        return false;
+      }else{
+        return true;
+      }
+  }
+  
+  //获取已选择支付渠道列表
+  function getChannelList(){
+  	  var channels = "";
+      channelList = document.getElementById("content").getElementsByTagName("div");
+      var length = channelList.length;
+      if(length != 0){
+        for(var i=0;i<length;i++){
+          var div = channelList[i];
+          if(div.id != ''){
+              channels = channels + div.id.replace("bak","") +",";
+          }else{}
+        }
+      } 
+      document.getElementById("validPayChannelTypes").value = channels.substring(0, channels.length-1);
+  }
+  
+  
+  function checkAdd(){
+     getChannelList();
+     if($("#validPayChannelTypes").val() == ""){
+     	alert("请选择支付渠道");
+     	return false;
+     }
+     return true;
+  }
+</script>
+
+

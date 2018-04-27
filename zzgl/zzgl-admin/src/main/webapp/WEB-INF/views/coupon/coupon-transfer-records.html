@@ -1,0 +1,25 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<html>
+<body style="background-color: white;">
+<table class="table" width="100%">
+	<thead>
+	<tr>
+		<th width="20%">转赠时间</th>
+		<th width="40%">来自用户</th>
+		<th width="40%">转赠用户</th>
+	</tr>
+	</thead>
+	<tbody>
+
+	<#list records as record>
+		<tr>
+			<td>${record.transferDate?string('yyyy-MM-dd HH:mm:ss')}</td>
+			<td>${record.fromUser.loginName!?html}/${record.fromUser.realName!?html}/${record.fromUser.mobile!?html}
+			</td>
+			<td>${record.toUser.loginName!?html}/${record.toUser.realName!?html}/${record.toUser.mobile!?html}</td>
+		</tr>
+	</#list>
+	</tbody>
+</table>
+</body>
+</html>

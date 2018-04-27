@@ -1,0 +1,198 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /><#assign fontSize="20" />
+<form>
+	<div class="pageFormContent" layouth="55">
+		<div class="bill">
+			<fieldset>
+				<legend>
+					<a style="font-size:${fontSize}px">供应商基本信息</a>
+				</legend>
+
+				<table border="0" class="gridtable" style="width: 630px;" >
+					<tr>
+						<td>供应商名称</td>
+						<td>${(supplier.baseInfo.name)!}</td>
+						<td>供应商类型</td>
+						<td>
+						<#if (supplier.baseInfo.type == 0)>
+							经销
+						</#if>
+						<#if (supplier.baseInfo.type == 1)>
+							代销
+						</#if>
+						</td>
+					</tr>
+					<tr>
+						<td>开户银行</td>
+						<td>${(supplier.baseInfo.bank)!}</td>
+						<td>账号</td>
+						<td>${(supplier.baseInfo.account)!}</td>
+					</tr>
+					<tr>
+						<td>联系电话</td>
+						<td>${(supplier.contact.phone)!}</td>
+						<td>联系地址</td>
+						<td>${(supplier.contact.address)!}</td>
+					</tr>
+					<tr>
+						<td>邮编号码</td>
+						<td>${(supplier.contact.postCode)!}</td>
+						<td>联系邮箱</td>
+						<td>${(supplier.contact.email)!}</td>
+					</tr>
+					<tr>
+						<td>传真号码</td>
+						<td>${(supplier.contact.fax)!}</td>
+						<td>公司网址</td>
+						<td>${supplier.baseInfo.URL}</td>
+					</tr>
+					<tr>
+						<td>法人姓名</td>
+						<td>${(supplier.baseInfo.legalPerson)!}</td>
+						<td>税务号</td>
+						<td>${(supplier.baseInfo.tax)!}</td>
+					</tr>
+					<tr>
+						<td>注册资金</td>
+						<td>${(supplier.baseInfo.registeredCapital)!}</td>
+						<td>成立时间</td>
+						<td>${(supplier.baseInfo.establishDate)!}</td>
+					</tr>
+					<tr>
+						<td>供应商编码</td>
+						<td>${(supplier.supplierCode)!}</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>备注信息：</td>
+						<td colspan="3" style="word-break: break-all;">${(supplier.remark)!}</label>
+						</td>
+					</tr>
+				</table>
+
+			</fieldset>
+
+			<fieldset>
+				<legend>
+					<a style="font-size:${fontSize}px">供应商联系人</a>
+				</legend>
+			
+				<#if linkmanList?size==0 >
+				<br><br>
+				未填写联系人
+				<br><br>
+				</#if>
+				
+				<#list linkmanList as t>
+				<table class="gridtable">
+					<tr>
+						<td>姓名</td>
+						<td>${(t.name)!}
+						</td>
+						<td>职务</td>
+						<td>${(t.post)!}
+						</td>
+					</tr>
+					<tr>
+						<td>手机</td>
+						<td>${(t.mobile)!}
+						</td>
+						<td>联系电话</td>
+						<td>${(t.phone)!}
+						</td>
+					</tr>
+					<tr>
+						<td>联系QQ</td>
+						<td>${(t.QQ)!}
+						</td>
+						<td>联系邮箱</td>
+						<td>${(t.email)!}
+						</td>
+					</tr>
+				</table>
+				<br> <br> </#list>
+			</fieldset>
+			<fieldset>
+			
+							<legend>
+
+
+					<a style="font-size:${fontSize}px">供应商资质</a>
+				</legend>
+				<table class="gridtable">
+					<tr>
+						<td><img id="imgSrc0" height="120px" width="120px" src="<#if (imgSrc1)??> ${contextPath}${imgSrc1} </#if>" alt="" />
+						</td>
+						<td>营业执照<br />
+						</td>
+						<td><img id="imgSrc1" height="120px" width="120px" src="<#if (imgSrc2)??> ${contextPath}${imgSrc2} </#if>" alt="" />
+						</td>
+						<td>税务登记证<br /></td>
+					</tr>
+					<tr>
+						<td><img id="imgSrc2" height="120px" width="120px" src="<#if (imgSrc3)??> ${contextPath}${imgSrc3} </#if>" alt="" />
+						</td>
+						<td>法人身份证<br /></td>
+						<td><img id="imgSrc3" height="120px" width="120px" src="<#if (imgSrc4)??> ${contextPath}${imgSrc4} </#if>" alt="" />
+						</td>
+						<td>授权书<br />
+						</td>
+					</tr>
+					<tr>
+						<td><img id="imgSrc4" height="120px" width="120px" src="<#if (imgSrc5)??> ${contextPath}${imgSrc5} </#if>" alt="" />
+						</td>
+						<td>资质认证<br /></td>
+						<td><img id="imgSrc5" height="120px" width="120px" src="<#if (imgSrc6)??> ${contextPath}${imgSrc6} </#if>" alt="" />
+						</td>
+						<td>其他证书<br />
+						</td>
+					</tr>
+				</table>
+
+			</fieldset>
+
+				<fieldset>
+									<legend>
+						<a style="font-size:${fontSize}px">审核记录</a>
+					</legend>
+				<br><br>
+				<#list supplierCheckList as t>
+					<table border="0" >
+						<tr>
+							<td width="${tdw}">审核时间：</td>
+							<td>${(t.createDate)}</td>
+						</tr>
+						<td>审核结果：</td>
+						<td>
+						<#if (t.status == 1 )>
+						审核通过
+						</#if>		
+						<#if (t.status == 2 )>
+						审核不通过
+						</#if>		
+						
+						</td>
+						</tr>
+						<tr>
+							<td valign="top">审核意见：</td>
+							<td>${(t.content)!}</td>
+						</tr>
+					</table>
+					<br> <br>
+				</#list>
+
+				</fieldset>
+
+		</div>
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="button">
+					<div class="buttonContent">
+						<button type="button" class="close">关闭</button>
+					</div>
+				</div></li>
+		</ul>
+	</div>
+</form>

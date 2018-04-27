@@ -1,0 +1,238 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'scenic-spot' />
+<#assign pathUrl = (contextPath+'/scenic-spot') />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+	.imgContext{
+		height:250px !important;
+		width:600px;
+		border-style: solid;
+		border-width: 1px;
+		border-color: #b8d0d6;
+	}
+	.myUnit{
+		display: inline-block;
+    	margin: 7px;
+	}
+	.myUnit p{
+		width:160px;
+		float:none !important;
+	}
+	.myUnit p input{
+		float:left;
+	}
+	.themeType{
+		padding: 2px 4px;
+		background-color: rgb(248, 226, 187);
+		margin-right:5px;
+	}
+</style>
+
+<div class="pageContent">
+
+<form method="post" action="${pathUrl}/addSubmit" class="pageForm required-validate" onsubmit="return beforeSubmitForm(this)">
+
+	<div class="pageFormContent" layoutH="58" id="scenicContent">
+		<!-- 景区基本信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>景区基本信息</span></div>
+		<div class="unit">
+			<label>登录账号：</label>
+			<input type="text" name="adminLoginName" size="32" readonly="true" size="32" value="${scen.superAdmin.adminLoginName}"/>
+		</div>
+		<div class="unit">
+			<label>景区全称：</label>
+			<input type="text" name="name" size="32" readonly="true" value="${(scen.baseInfo.name)!''}"/>
+		</div>
+		<div class="unit">
+			<label>景区简称：</label>
+			<input type="text" name="shortName" size="32" readonly="true" value="${(scen.baseInfo.shortName)!''}"/>
+		</div>
+		<div class="unit">
+			<label>景区别名：</label>
+			<input type="text" name="aliasName" size="32" readonly="true" value="${(scen.baseInfo.aliasName)!''}"/>
+		</div>
+		<div class="unit">
+			<label>景区质量等级：</label>
+			<input type="text" name="level" size="32" readonly="true" value="${scen.baseInfo.level}"/>
+		</div>
+		<div class="unit">
+			<label>建筑部等级：</label>
+			<input type="text" name="buildLevel" size="32" readonly="true" value="${(scen.baseInfo.buildLevel)!''}"/>
+		</div>
+		<div class="unit">
+			<label>主题类型：</label>
+			<p>
+				<#list scen.baseInfo.themeValue as value>
+					<#list scenThemeType?keys as key>
+						<#if value==key>
+							<span class="themeType">${scenThemeType[key]}</span>
+						</#if>
+					</#list>
+				</#list>
+			</p>
+		</div>
+		<div class="unit">
+			<label>景区特色：</label>
+			<input type="text" size="64" value="${(scen.baseInfo.feature)!''}" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>开放时间：</label>
+			<input type="text" size="64" value="${(scen.baseInfo.openTime)!''}" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>百度经度：</label>
+			<input value="${(scen.contactInfo.longitude)!''}" type="text" size="64" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>百度纬度：</label>
+			<input value="${(scen.contactInfo.latitude)!''}" type="text" size="64" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>景区网址：</label>
+			<input type="text" size="64" placeholder="输入带有HTTP前缀的地址" maxlength="1024" value="${scen.baseInfo.webSite}" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>景区地址：</label>
+			<input name="province.name" value="${scen.baseInfo.province.name}" size="10" readonly="true"/>
+			<span>></span>
+				<input name="city.name" size="12" value="${scen.baseInfo.city.name}" readonly="true"/>
+			<span>></span>
+				<input name="area.name" size="25" value="${scen.baseInfo.area.name}" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+			<textarea id="street" name="street" rows="4" cols="55" placeholder="详细地址" readonly="true">${scen.baseInfo.street}</textarea>
+		</div>
+		<div class="unit">
+			<label>景区简介：</label>
+			<textarea rows="5" cols="50" readonly="true">${(scen.baseInfo.intro)!''}</textarea>
+		</div>
+		<div>
+			<label>交通指南：</label>
+			<textarea rows="5" cols="50" readonly="true">${(scen.contactInfo.traffic)!''}</textarea>
+		</div>
+		<div class="unit">
+			<label>预定须知：</label>
+			<textarea rows="5" cols="50" readonly="true">${(scen.baseInfo.preNotice)!''}</textarea>
+		</div>
+		
+		<div class="unit">
+			<label>企业LOGO：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="企业LOGO" title="企业LOGO" src="${(scen.certificateInfo.scenicSpotLogo)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<div class="unit">
+			<label>景区图片：</label>
+			<div class="imgContext" layoutH="700">
+			<#list scenicSpotPic as pic>
+				<div class="myUnit">
+					<img class="img-polaroid" width="160" height="120" alt="name" title="name" src="${pic.url}"/>
+					<p style="height:25px;line-height:20px;">
+						
+						<label class="myLabel">${(pic.name)!''}</label>
+					</p>
+					<div class="imgIdContext">
+						
+					</div>
+				</div>
+			</#list>
+			</div>
+		</div>
+		<!-- 资质信息  -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>资质信息</span></div>
+		<div class="unit">
+			<label>营业执照：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="营业执照" title="营业执照" src="${(scen.certificateInfo.businessLicense)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<div class="unit">
+			<label>税务登记证：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="税务登记证" title="税务登记证" src="${(scen.certificateInfo.taxRegistrationCertificate)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<div class="unit">
+			<label>组织代码证：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="组织代码证" title="组织代码证" src="${(scen.certificateInfo.organizationCodeCertificate)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		<div class="unit">
+			<label>法人身份证：</label>
+			<span class="u-upload">
+				<img class="img-polaroid" width="80" alt="法人身份证" title="法人身份证" src="${(scen.certificateInfo.corporateIDCard)!'resources/image/u39.png'}"/>
+            </span>
+		</div>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>联系信息</span></div>
+		<div class="unit">
+			<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+			<input type="text" name="linkMan" size="32" maxlength="64" value="${scen.contactInfo.linkMan}" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>&nbsp;&nbsp;职&nbsp;&nbsp;位&nbsp;&nbsp;：</label>
+			<input type="text" name="job" size="32" readonly="true" placeholder="联系人职位" maxlength="64" value="${scen.contactInfo.job}"/>
+		</div>
+		<div class="unit">
+			<label>联系电话：</label>
+			<input type="text" name="telephone" size="32" maxlength="12" value="${scen.contactInfo.telephone}" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>联系邮箱：</label>
+			<input type="text" name="email" size="32" maxlength="64" value="${scen.contactInfo.email}" readonly="true"/>
+		</div>
+		
+				
+		<!-- 结算信息 -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>结算信息</span></div>
+		<div class="unit">
+			<label>开&nbsp;&nbsp;户&nbsp;&nbsp;行：</label>
+			<input value="${(scen.settleInfo.depositBank)!''}" size="32" readonly="true">
+		</div>
+		<div class="unit">
+			<label>开户单位：</label>
+			<input type="text" value="${(scen.settleInfo.depositOrg)!''}" size="32" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>&nbsp;&nbsp;帐&nbsp;&nbsp;号&nbsp;&nbsp;：</label>
+			<input type="text" value="${(scen.settleInfo.depositAccount)!''}" size="32" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>手续费率：</label>
+			<input type="text" value="${(scen.settleInfo.settlementFee)!''}" size="12" readonly="true"/> 元/人次
+		</div>
+		<!-- 设备信息 -->
+<#--		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>设备信息</span></div>
+		<div class="unit">
+			<label>设备编码：</label>
+			<#if (listSize>0) >
+				<table id="deviceTable" border="1">
+					<thead>
+					<tr height="25px;">				
+						<th align="center" width="60px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">序号</th>
+						<th align="center" width="250px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">设备编码</th>
+					</tr>
+					</thead>
+					<tbody>
+					<#list deviceList as d >
+						<tr height="25px;">
+							<td align="center">${d_index+1}</td>
+							<td align="center">${d.id}</td>
+			 			</tr>
+					</#list>
+					</tbody>
+				</table>
+			</#if>
+			
+		</div>
+-->		
+	</div>
+	</div>
+	
+</form>
+
+</div>

@@ -1,0 +1,1047 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>票量 -首页</title>
+<!-- CSS BEGIN-->
+<link href="css/gb.css" type="text/css" rel="stylesheet" />
+  <!--[if IE 6]>
+    <link href="../themes/bootstrap/bsie/css/bootstrap-ie6.min.css" rel="stylesheet" />
+    <link href="../themes/bootstrap/bsie/css/ie.css" rel="stylesheet" />
+    <![endif]-->
+    <!--[if lte IE 8]>
+    <link href="../themes/bootstrap/bsie/css/ie67.css" rel="stylesheet" />
+    <![endif]-->
+ <!-- END -->
+<!-- JS BEGIN-->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script>
+	$.ajaxSetup({cache:false});
+</script>
+<!-- END -->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.flexslider').flexslider({
+			directionNav: false,
+			pauseOnAction: false
+		});
+	});
+	/* function checkMPForm(){
+		var mp_name=$("#mp_name").val();
+		if(mp_name.length==0){
+			return false;
+		}
+		return true;
+	} */00
+	function checkJPForm(){
+		var city1=$("#citySelect").val();
+		var city2=$("#citySelect1").val();
+		var date=$("#J_DepDate").val();
+		if(city1.length==0){
+			$("#err_msg").html("出发城市不能为空");
+			$("#err_msg").show();
+			return false;
+		}
+		if(city2.length==0){
+			$("#err_msg").html("到达城市不能为空");
+			$("#err_msg").show();
+			return false;
+		}
+		if(date.length==0){
+			$("#err_msg").html("出发时间不能为空");
+			$("#err_msg").show();
+			return false;
+		}
+		if(city1==city2){
+			$("#err_msg").html("不能为同一个城市");
+			$("#err_msg").show();
+			return false;
+		}
+		return true;
+	}
+	
+	$(function(){
+		$(".mpForm").on("submit",function(){
+			//alert("组织提交");
+			//表单提交前的处理
+			var comb=/^[a-zA-Z0-9\u4e00-\u9fa5]{0,100}$/;
+			if(!comb.test($("#mp_name").val())){
+				alert("景点名字不正确");
+				return false;
+			}
+			return true;
+		});
+	});
+</script>
+<script type="text/javascript">
+
+YUI({
+    modules: {
+       'trip-calendar': {
+           fullpath: 'js/lib/time/trip-calendar.js',
+           type    : 'js',
+           requires: ['trip-calendar-css']
+       },
+       'trip-calendar-css': {
+           fullpath: 'js/lib/time/trip-calendar.css',
+           type    : 'css'
+       }
+   }
+}).use('trip-calendar', function(Y) {
+   
+   var oCal = new Y.TripCalendar({
+       minDate         : new Date,     //最小时间限制
+       triggerNode     : '#J_DepDate', //第一个触节点
+       finalTriggerNode: '#J_EndDate'  //最后一个触发节点
+   });
+    
+});
+
+</script>
+<link href="css/index.css" type="text/css" rel="stylesheet" />
+<script src="js/lib/laydate/laydate.js" type="text/javascript"></script>
+</head>
+ <body>
+	<div class="g-wrap">
+		<!-- header页面 -->
+ <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <!-- <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门fghfg随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div> -->
+      </div>
+      <div class="sitenavr R">
+       	<ul id="J_SiteNavBdR" class="L"><li><a href="/user/register">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>0571-28280813</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo L"><a href="/home">票量云科技</a></div>
+      <div class="headerr R">
+      	<div class="h_adv L w290_45 mt10 mr40"><a href="#"><img  src="img/h_advjpg.jpg" /></a></div>
+        <div class="h_tel L mt20"><a href="#"><i class="icont"></i>客服电话：0571-23288385</a> <a href="#"><i class="iconapp"></i>手机APP下载</a></div>
+      </div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="/home"  class="sel" >首页</a></li>
+        <li><a href="/jp/main" >机票</a></li>
+        <li><a href="/mp/list" >景点门票</a></li>
+        <li><a href="#" >帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+      
+       <!--未登录 -->
+       <div class="s_nav_bar"><h4><a href="/user/login">登录</a><b></b></h4></div>
+       <!--end未登录 -->
+      </div>
+    </div>
+  </div>
+
+			<!-- 页面主体 -->
+
+<div class="container" id="container">
+	<div class="ifous" id="J_ifous">
+		<!--banner-->
+		<div class="flexslider">
+			<ul class="slides">
+				<li style="background:url(http://121.52.224.230//group1/M00/00/08/wKgBK1Ss9FWAHGjoAAHaNXX_l_o066.png) 50% 0 no-repeat;">
+					<a href="http://www.ply365.com/user/register"></a>
+				</li>
+			</ul>
+		</div>
+		<div class="w1200">
+			<div class="submenu">
+				<ul class="subnav">
+					<li class="sel">机票</li>
+					<li>门票</li>
+				</ul>
+				<span class="subnav_d">
+					<p>
+						酒店<br /> <em>敬请期待</em>
+					</p>
+					<p>
+						线路<br /> <em>敬请期待</em>
+					</p>
+				</span>
+
+				<div class="bar_info" style=" display:block">
+					<div class="bar_txt w350">
+						<div class="ticket_hd">
+							<h2>
+								<i></i>国内机票
+							</h2>
+              <em></em>
+						</div>
+						<div id="search">
+							<form action="/jp/ticketList" method="post"
+								id="J_Search" onsubmit="return checkJPForm()">
+								<ul>
+									<li class="t_city_button">
+										<div class="city_tips" id="err_msg" style="display: none;"></div>
+										<div class="ticket">
+											<span></span>
+											<div class="t_city_search">
+												<label>出发城市：</label>
+												<div class="t_city_input txt t_city1">
+													<input type="text" class="cityinput" id="citySelect"
+														onclick="hideMsg()" name="from" value="请输入您的目的地名称">
+												</div>
+											</div>
+											<div class="t_city_search">
+												<label>到达城市：</label>
+												<div class="t_city_input txt t_city2">
+													<input type="text" class="cityinput" id="citySelect1"
+														onclick="hideMsg()" name="arrive" value="请输入您的目的地名称">
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="t_time mt10">
+											<label>出发日期：</label>
+											<div class="t_time_input txt">
+												<input id="J_DepDate" type="text" class="f-text" name="date"
+													value="时间/日期" onclick="laydate({min:laydate.now(0)});" />
+											</div>
+										</div>
+									</li>
+									<li>
+ 										<div class="bth t_bth ji_bth">
+											<input id="J_search_btn" type="submit" value="搜索" />
+										</div>
+									</li>
+								</ul>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="bar_info" style="display:none">
+					<div class="bar_txt w350 mt20">
+						<form action="/mp/list" class="mpForm" method="post">
+							<p class="txt">
+								<input type="text" class="h35" id="mp_name" name="content"  placeholder="景点名称搜索"/>
+							</p>
+							<div class="bth mt10 mb10 t_bth">
+								<input type="submit" value="搜索" />
+							</div>
+						</form>
+					</div>
+					<div class="bar_dl mt20">
+						<dl>
+                <dt>精选主题：</dt>
+                <dd><a href="#">毕业季</a><a href="#">毕业季</a><a href="#">毕业季</a><a href="#">毕业季</a></dd>
+              </dl>
+              <dl>
+                <dt>热门城市：</dt>
+                <dd><a href="#">杭州</a><a href="#">宁波</a><a href="#">金华</a><a href="#">湖州</a> <a href="#" class="more">更多</a></dd>
+               </dl>
+						<dl class="jindian">
+							<dt>热搜景点：</dt>
+							<dd>
+								<!-- 超链接指向详细的信息页面 -->
+                   <a href="#">杭州大明山</a> 
+                  <a href="#">横店影视城</a>
+                 <a href="#">东钱湖乐园</a> 
+                 <a href="#">杭州大明山</a> 
+                  <a href="#">横店影视城</a>
+                 <a href="#">东钱湖乐园</a> 
+                 <a href="#">杭州大明山</a> 
+                  <a href="#">横店影视城</a>
+                 <a href="#">东钱湖乐园</a> 
+							</dd>
+						</dl>
+            
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="trip">
+			<div class="trip_bd">
+				<p class="trip_icon L">放心出行，出行有保障</p>
+				<ul class="L trip_list">
+					<li>
+						<p>
+							<strong>100%</strong>
+						</p>
+						<p>航协认证</p>
+					</li>
+					<li>
+						<p>
+							<strong>100%</strong>
+						</p>
+						<p>出票保证</p>
+					</li>
+					<li>
+						<p>
+							<strong>100%</strong>
+						</p>
+						<p>航司标准退改签</p>
+					</li>
+					<li>
+						<p>
+							<strong>100%</strong>
+						</p>
+						<p>退款保障</p>
+					</li>
+          
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!--END banner-->
+	<div class="main">
+		<div class="m_left L m">
+    <div class="m1">
+			<div class="m_left column L">
+				<div class="m_title">
+					<div class="m_i m_i1">
+						<i></i><b>景点门票</b>
+					</div>
+					<ul class="m_subm" id="m_subm">
+						<li class="sel">主题乐园</li>
+						<li>古镇迷情</li>
+						<li>游逛香港</li>
+<!-- 						<li>暑期亲水</li> -->
+						<li>山水园林</li>
+						<li>美景人文</li>
+<!-- 						<li>玩转海外</li> -->
+					</ul>
+					<span class="tcon tcon1"></span>
+				</div>
+				<div class="m_main">
+					<div class="m_adv L">
+						<a href="http://www.ply365.com/mp/list">
+						<img src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss7GyAQNfHAAHZHzzObF0092.jpg" style="width: 240px;height:340px;"/>
+						</a>
+					</div>
+					<div class="m_p L w680">
+						<!-- 主题乐园 -->
+						<div class="p_item">
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=0a468553f1794cea9fb293af33dcc502"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs7kmATudrAADudwL2r7o740.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=0a468553f1794cea9fb293af33dcc502">尧龙湾温泉水上乐园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥128</span><span class="R red"><b>￥</b>99</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=05fe3a1471054486939a9abeae4ce2ca"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs_K-AdoV4AACURSo3v3g756.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=05fe3a1471054486939a9abeae4ce2ca">左海冰雪乐园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥40</span><span class="R red"><b>￥</b>24</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=05cbd167dafc4ab68c9c1de5b6723e21"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFStAGGAYsUQAAFWdNY0_vc736.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=05cbd167dafc4ab68c9c1de5b6723e21">金斗湾水乡旅游渡假怡乐园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥45</span><span class="R red"><b>￥</b>35</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=038c4908810748d1b363e14d31404b01"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss_sKAKGpIAACHU3tlJKQ522.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=038c4908810748d1b363e14d31404b01">YOYO乐园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥210</span><span class="R red"><b>￥</b>120</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=037ef480318943808ed910fd5b52cd53"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss6sGAHHWgAACjmfBCw5s548.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=037ef480318943808ed910fd5b52cd53">东方巨龟苑冰雪乐园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥65</span><span class="R red"><b>￥</b>60</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=00923e30e2d9447da7f2d32d532a7b36"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1StAPKAROBcAADVk_8XyE0903.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=00923e30e2d9447da7f2d32d532a7b36">深圳光明滑草游乐园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥80</span><span class="R red"><b>￥</b>65</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				
+						<!-- 古镇迷情 -->
+						<div class="p_item hide">
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/list"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss8ciAJ66nAAB5Ud2tD38564.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/list">成都新场古镇</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥15</span><span class="R red"><b>￥</b>10</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=36739b1bd046406e81caf5aa43a51140"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs8SWAEWmKAAB-i8Ss8NY939.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=36739b1bd046406e81caf5aa43a51140">五凤溪古镇</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥80</span><span class="R red"><b>￥</b>75</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=1f442ed07e954f269a29644a67db98d6"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs8HWAMVRcAABtG-PMuVw952.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=1f442ed07e954f269a29644a67db98d6">沙溪古镇</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥50</span><span class="R red"><b>￥</b>45</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=10e75aeb73b24b3f9e86d9478bb85a75"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs7-uAJWglAACH5hs3kQk241.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=10e75aeb73b24b3f9e86d9478bb85a75">安昌古镇</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥25</span><span class="R red"><b>￥</b>25</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=0b25bfaf2ed345dd946308dcd25db33b"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss7zqAUCJnAACDIrRlnog430.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=0b25bfaf2ed345dd946308dcd25db33b">黑井古镇</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥30</span><span class="R red"><b>￥</b>28</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+						<!-- 游逛香港-->
+						<div class="p_item hide">
+						</div>
+						
+						<!-- 暑期亲水 -->
+<!-- 						<div class="p_item hide"> -->
+<!-- 							 -->
+<!-- 						</div> -->
+						
+						<!-- 山水园林 -->
+						<div class="p_item hide">
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=1ea62fcb7ce0478e85240ca3a1ce8607"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss-nyAdIhzAAEatKb_iwE578.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=1ea62fcb7ce0478e85240ca3a1ce8607">山水园景区（原名碧莲峰景区）</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥30</span><span class="R red"><b>￥</b>25</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=c72550f61cd141179f109bdedd6ba3b0"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs9DaASS0jAADZAlVnbsI826.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=c72550f61cd141179f109bdedd6ba3b0">丹霞山水上丹霞</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥90</span><span class="R red"><b>￥</b>80</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=b0cdf0c6ebe049a686298e581192ea46"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss87-ADYYQAAD8j6zcoBc603.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=b0cdf0c6ebe049a686298e581192ea46">武山水帘洞</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥30</span><span class="R red"><b>￥</b>25</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=58ea75633ad54c67b9005f799f7b4098"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs81GAOcItAADDKui8NGo162.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=58ea75633ad54c67b9005f799f7b4098">聪明山水景区</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥80</span><span class="R red"><b>￥</b>70</span>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=4c34951c7c894488a9ee51d1fa626633"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs8rOARVhkAAD-_rr5YGA398.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=4c34951c7c894488a9ee51d1fa626633">观澜山水田园旅游文化园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥118</span><span class="R red"><b>￥</b>78</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=3412e1781d954351b5cd61b2f8eb409e"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs8jmAYSNkAADDG4Su7tY444.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=3412e1781d954351b5cd61b2f8eb409e">新安江山水画廊</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥148</span><span class="R red"><b>￥</b>128</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 美景人文 -->
+						<div class="p_item hide">
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=086cb1803f7e4640ada45ce308238a2a"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs-gCADh0FAACpC0b5SuE655.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=086cb1803f7e4640ada45ce308238a2a">花亭湖风景名胜区</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥30</span><span class="R red"><b>￥</b>27</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=03cc05289eff4f6cb80cb5a3e47a5a83"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss-SiAexgBAADxAFHJQqQ956.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=03cc05289eff4f6cb80cb5a3e47a5a83">九峰山网岙景区</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥30</span><span class="R red"><b>￥</b>24</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=036d012778ef484aa1c03a3c8b54a701"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs9--AUqMOAAFUQ9ymcJ4351.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=036d012778ef484aa1c03a3c8b54a701">老龙湾风景区</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥50</span><span class="R red"><b>￥</b>45</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=02c96d98c82f4bd388085fc3c3a33fa2"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss9yqAJHISAADuuFbE3KQ479.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=02c96d98c82f4bd388085fc3c3a33fa2">中国丝绸文化旅游景区丝博园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥38</span><span class="R red"><b>￥</b>30</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=009ae78882644819b1ed025834acc841"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss9raAVo3HAAC0fPuoZPw369.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=009ae78882644819b1ed025834acc841">哀牢山红河谷旅游景区</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥150</span><span class="R red"><b>￥</b>100</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="p ">
+								<div class="p_img">
+									<a href="http://www.ply365.com/mp/view?id=7c39486518654e65810225f0c83dd830"><img width="220px" height="160" src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs9UGARaeTAADRi3kMOCA366.jpg" /></a>
+								</div>
+								<div class="p_cen">
+									<div class="p_dask"></div>
+									<div class="p_cen_info">
+										<div class="p_title">
+											<a href="http://www.ply365.com/mp/view?id=7c39486518654e65810225f0c83dd830">五美景园</a>
+										</div>
+										<div class="p_price index_m_price">
+											<span class='L'>原价￥50</span><span class="R red"><b>￥</b>35</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- 玩转海外 -->
+<!-- 						<div class="p_item hide"> -->
+<!-- 							 -->
+<!-- 						</div> -->
+						
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="m2 m3 L">
+			<div class="m_left column L">
+				<div class="m_title">
+					<div class="m_i m_i3">
+						<i></i><b>热门预定</b>
+					</div>
+          <span class="tcon tcon3"></span>
+				</div>
+				<div class="m_main">
+					<div class="hot_p">
+		      <div class="Cont" id="ISL_Cont">
+		      <div class="ScrCont">
+		       <div id="gdq1">
+		         <!-- 图片列表 begin -->
+		          <ul>
+									<li>
+										<div class="p_img">
+											<a href="/mp/view?id=000916fd33c546f9a290e31fc07f3934"><img src="http://upload.17u.com/uploadfile/scenerypic_common/350_263/2014/12/15/2/201412151046479077163.jpg" /></a>
+										</div>
+										<div class="p_city">
+											<a href="/mp/view?id=000916fd33c546f9a290e31fc07f3934">紫裕鱼疗</a>
+										</div>
+									</li>
+									<li>
+										<div class="p_img">
+											<a href="/mp/view?id=002d8c8ea71344ccb9c5f3f7ccb47606"><img src="http://upload.17u.com/uploadfile/scenerypic_common/350_263/2005/12/15/2/2005121510482286923.jpg" /></a>
+										</div>
+										<div class="p_city">
+											<a href="/mp/view?id=002d8c8ea71344ccb9c5f3f7ccb47606">应县木塔</a>
+										</div>
+									</li>
+									<li>
+										<div class="p_img">
+											<a href="/mp/view?id=006857855874432c8451bdc01193a64c"><img src="http://upload.17u.com/uploadfile/scenerypic_common/350_263/2014/11/24/2/201411241019349539340.JPG" /></a>
+										</div>
+										<div class="p_city">
+											<a href="/mp/view?id=006857855874432c8451bdc01193a64c">莆田市御庄园温泉度假村</a>
+										</div>
+									</li>
+									<li>
+										<div class="p_img">
+											<a href="/mp/view?id=00374aa3fa48470d86598599a7466464"><img src="http://upload.17u.com/uploadfile/scenerypic_common/350_263/2014/02/26/2/201402261040577663556.jpg" /></a>
+										</div>
+										<div class="p_city">
+											<a href="/mp/view?id=00374aa3fa48470d86598599a7466464">芜湖方特（直通车）</a>
+										</div>
+									</li>
+									<li>
+										<div class="p_img">
+											<a href="/mp/view?id=05cbd167dafc4ab68c9c1de5b6723e21"><img src="http://upload.17u.com/uploadfile/scenerypic_common/350_263/2011/05/10/2/2011051016332052658.jpg" /></a>
+										</div>
+										<div class="p_city">
+											<a href="/mp/view?id=05cbd167dafc4ab68c9c1de5b6723e21">金斗湾水乡旅游渡假怡乐园</a>
+										</div>
+									</li>
+		          </ul>
+		        </div>
+		       <div id="gdq2"></div>
+		      </div>
+		     </div>
+		     <div class="next_icon">
+		      <span class="next_L" id="next_L" onmousedown="ISL_GoUp()" onmouseup="ISL_StopUp()" onmouseout="ISL_StopUp()"><i></i></span> 
+		      <span class="next_R" id="next_R" onmousedown="ISL_GoDown()" onmouseup="ISL_StopDown()" onmouseout="ISL_StopDown()"><i></i></span> 
+		      </div>
+     </div>
+					<div class="brand">
+						<h2>合作伙伴</h2>
+						<ul class="box_img">
+							<li>
+								<p class="b_img">
+									<a href="http://www.plyou365.com">
+									<img src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss8tuANj1uAABUDw8i7nw283.jpg" style="width: 85px;height: 40px;"/></a>
+								</p>
+								<p class="b_name">
+									<a href="http://www.plyou365.com">杭州票量旅行社有限公司</a>
+								</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+  		</div>
+    </div>
+     <div class="m_right R">
+     <div class="sidebar">
+				<div class="activity f20">
+					<h2>网站公告</h2>
+					<ul>
+						<li><a href="/noticeDetails?id=9dd913acb5de46fd8e16bb4e03d556d1">欢迎光临票量旅游欢迎光临票欢迎光临票</a><img src="img/text_dic.jpg" /></li>
+            <li><a href="/noticeDetails?id=9dd913acb5de46fd8e16bb4e03d556d1">欢迎光临票量旅游欢迎光临票量旅</a></li>
+            <li><a href="/noticeDetails?id=9dd913acb5de46fd8e16bb4e03d556d1">欢迎光临票量旅游</a></li>
+            <li><a href="/noticeDetails?id=9dd913acb5de46fd8e16bb4e03d556d1">欢迎光临票量欢迎光</a></li>
+ 					</ul>
+				</div>
+        </div>
+         <div class="tese f20">
+            <h2>特色服务</h2>
+           <ul>
+              <li class="t t1"> <span></span>
+                <div class="t_info">
+                  <p><strong>特价尾单</strong></p>
+                  <p>特价优惠，放心出游</p>
+                </div>
+              </li>
+              <li class="t t2"> <span></span>
+                <div class="t_info">
+                  <p><strong>低价承诺</strong></p>
+                  <p>同类旅游产品，保证低价</p>
+                </div>
+              </li>
+              <li class="t t3"> <span></span>
+                <div class="t_info">
+                  <p><strong>专业旅游顾问 </strong></p>
+                  <p>1对1专业顾问，全程贴心服务</p>
+                </div>
+              </li>
+              <li class="t t4"> <span></span>
+                <div class="t_info">
+                  <p><strong>海量精品景点</strong></p>
+                  <p>海量精品，实时更新</p>
+                </div>
+              </li>
+              <li class="t t5"> <span></span>
+                <div class="t_info">
+                  <p><strong>全球签证办理</strong></p>
+                  <p>专业签证，方便快捷</p>
+                </div>
+              </li>
+               <li class="t t6"> <span></span>
+                <div class="t_info">
+                  <p><strong>欧洲游学订制</strong></p>
+                  <p>产品丰富，品质保证</p>
+                </div>
+              </li>
+              <!--<li class="t t5"> <span></span>
+                <div class="t_info">
+                  <p><strong>退订保障</strong></p>
+                  <p>因特殊情况影响出行，保证退订</p>
+                </div>
+              </li>-->
+            </ul>
+          </div>
+          <div class="activity-adv">
+				  <a href="http://www.ply365.com/mp/list">
+				  <img src="http://121.52.224.230//group1/M00/00/08/wKgBK1Ss7LGABsqDAADZ5YGI1rk887.jpg" alt="广告侧边栏" title="广告侧边栏" style="width:260px;height:75px;">
+				  </a>
+				  <a href="http://www.ply365.com/mp/list">
+				  <img src="http://121.52.224.230//group1/M00/00/08/wKgBLFSs7JiAHjGXAADeOoOtzI8688.jpg" alt="广告侧边栏" title="广告侧边栏" style="width:260px;height:75px;">
+				  </a>
+				</div>
+ 				<div class="tool mt10 L">
+					<h2>工具箱</h2>
+					<div class="tool_info">
+						<div class="weixin">
+							<div class="w">
+ 								<div class="close">
+									<p></p>关注微信
+								</div>
+								<p>
+									<img class="p_img" src="img/weixin.jpg" />
+								</p>
+							</div>
+							<div class="w wn10">
+								<div class="close">
+									<p></p>关注微博
+								</div>
+								<p>
+									<img   class="p_img"src="img/weibo.jpg" />
+								</p>
+							</div>
+						</div>
+						<div class="email"></div>
+					</div>
+				</div>
+			 		 
+      </div>
+	</div>
+</div>
+			
+	<!-- layout end -->
+ 	<!-- 页脚 -->
+  <div id="footer" class="mt10">
+    <div class="fooerBD">
+       <div class="L about">
+        <dl>
+          <dt><a href="#">关于我们</a></dt>
+          <dd><a href="/about">网站简介</a><a href="/mfsm">法律规定</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">加盟合作</a></dt>
+          <dd><a href="/about">友情链接</a><a href="/sitemap">网站联盟</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">联系我们</a></dt>
+          <dd><a href="/contact">联系我们</a><a href="/rsjy">投诉建议</a><a href="/jobs">诚聘英才</a></dd>
+        </dl>
+      </div>
+      <div class="L w260">
+        <div class="hot_phone">
+          <p>24小时客服热线：0571-28280813</p>
+          <p>境外游客紧急联络电话：</p>
+          <p>在线客服：23154212</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ <script src="js/gb.js" type="text/javascript" > </script>
+</body>
+</html>
+ 
+<script src="js/lib/time/yui-min.js" type="text/javascript"></script>
+<script src="js/index.js" type="text/javascript"></script>
+<script src="js/jquery.flexslider-min.js" type="text/javascript"> </script>
+<script src="js/lib/city/city.js" type="text/javascript"> </script>
+<script type="text/javascript">
+//图片滚动列表
+var Speed = 1; //速度(毫秒)
+var Space = 5; //每次移动(px)
+var PageWidth = 190; //翻页宽度
+var fill = 0; //整体移位
+var MoveLock = false;
+var MoveTimeObj;
+var Comp = 0;
+var AutoPlayObj = null;
+GetObj("gdq2").innerHTML = GetObj("gdq1").innerHTML;
+GetObj('ISL_Cont').scrollLeft = fill;
+GetObj("ISL_Cont").onmouseover = function(){clearInterval(AutoPlayObj);}
+GetObj("ISL_Cont").onmouseout = function(){AutoPlay();}
+AutoPlay();
+function GetObj(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval('document.all.'+objName)}}
+function AutoPlay(){ //自动滚动
+ clearInterval(AutoPlayObj);
+ AutoPlayObj = setInterval('ISL_GoDown();ISL_StopDown();',3000); //间隔时间
+}
+function ISL_GoUp(){ //上翻开始
+ if(MoveLock) return;
+ clearInterval(AutoPlayObj);
+ MoveLock = true;
+ MoveTimeObj = setInterval('ISL_ScrUp();',Speed);
+}
+function ISL_StopUp(){ //上翻停止
+ clearInterval(MoveTimeObj);
+ if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0){
+  Comp = fill - (GetObj('ISL_Cont').scrollLeft % PageWidth);
+  CompScr();
+ }else{
+  MoveLock = false;
+ }
+ AutoPlay();
+}
+function ISL_ScrUp(){ //上翻动作
+ if(GetObj('ISL_Cont').scrollLeft <= 0){GetObj('ISL_Cont').scrollLeft = GetObj('ISL_Cont').scrollLeft + GetObj('gdq1').offsetWidth}
+ GetObj('ISL_Cont').scrollLeft -= Space ;
+}
+function ISL_GoDown(){ //下翻
+ clearInterval(MoveTimeObj);
+ if(MoveLock) return;
+ clearInterval(AutoPlayObj);
+ MoveLock = true;
+ ISL_ScrDown();
+ MoveTimeObj = setInterval('ISL_ScrDown()',Speed);
+}
+function ISL_StopDown(){ //下翻停止
+ clearInterval(MoveTimeObj);
+ if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0 ){
+  Comp = PageWidth - GetObj('ISL_Cont').scrollLeft % PageWidth + fill;
+  CompScr();
+ }else{
+  MoveLock = false;
+ }
+ AutoPlay();
+}
+function ISL_ScrDown(){ //下翻动作
+ if(GetObj('ISL_Cont').scrollLeft >= GetObj('gdq1').scrollWidth){GetObj('ISL_Cont').scrollLeft = GetObj('ISL_Cont').scrollLeft - GetObj('gdq1').scrollWidth;}
+ GetObj('ISL_Cont').scrollLeft += Space ;
+}
+function CompScr(){
+ var num;
+ if(Comp == 0){MoveLock = false;return;}
+ if(Comp < 0){ //上翻
+  if(Comp < -Space){
+   Comp += Space;
+   num = Space;
+  }else{
+   num = -Comp;
+   Comp = 0;
+  }
+  GetObj('ISL_Cont').scrollLeft -= num;
+  setTimeout('CompScr()',Speed);
+ }else{ //下翻
+  if(Comp > Space){
+   Comp -= Space;
+   num = Space;
+  }else{
+   num = Comp;
+   Comp = 0;
+  }
+  GetObj('ISL_Cont').scrollLeft += num;
+  setTimeout('CompScr()',Speed);
+ }
+}
+</script>

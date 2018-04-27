@@ -1,0 +1,13 @@
+/zzgl-api-client/bin
+/.idea
+/zzgl-parent.iml
+/zzgl-admin/zzgl-admin.iml
+/zzgl-api/zzgl-api.iml
+/zzgl-api-client/zzgl-api-client.iml
+/zzgl-application/zzgl-application.iml
+/zzgl-domain/zzgl-domain.iml
+/zzgl-h5/zzgl-h5.iml
+/zzgl-pojo/zzgl-pojo.iml
+/zzgl-spi/zzgl-spi.iml
+/zzgl-web/zzgl-web.iml
+/temp

@@ -1,0 +1,30 @@
+body{background: #fff;}
+.title{font-size:15px;border-bottom: 1px solid #f2f2f2;line-height: 24px;padding:25px 20px 15px 20px;}
+.total{border-bottom: 1px solid #f2f2f2;line-height: 24px;padding:15px 30px 15px 30px;font-size:14px;}
+.total .iconfont2{color:#60c900;font-size:24px;margin-right:10px;vertical-align: middle;}
+.tips{padding:10px 20px 10px 20px;line-height: 20px;color:#858585;font-size:11px;}
+.success{font-size:25px;text-align: center;}
+.success .iconfont2{color:#60c900;font-size:50px;margin-right:10px;vertical-align: middle;}
+.order_btn{border-radius: 40px;border: 1px solid #46b9ff;height:48px;width: 80%;display: block;margin:25px auto 0px auto;
+text-align: center;color:#858585;font-size:17px;line-height: 48px;}
+.order_btn .iconfont2{color:#46b9ff;font-size:28px;margin-right:10px;vertical-align: middle;}
+.order_btn .type1{font-size:32px;}
+.order_btn .type2{font-size:34px;color:#00c800;}
+.weixin{color:#020202;font-size:17px;}
+.alipay:before{content:"";margin:7px;display:block;height:34px;background: url("../images/alipay.png") no-repeat center center; background-size: contain;}
+
+
+
+.input{height:50px;border-bottom: 1px solid #f2f2f2;padding:0px 35px;line-height: 50px;display:-moz-box;display:-webkit-box;display:box;}
+.input i.iconfont{font-size:20px;margin-right:10px;color:#7bd22b;}
+.input span{width:50px;display:block;margin-right:10px;}
+.input input{-webkit-box-flex:1;box-flex:1;
+    display: block;height: 30px;line-height: 30px;margin-top:10px;}
+
+.payOff{border-top: 10px solid #f2f2f2;}
+.pay_money{color:#b4b3b3;-webkit-box-flex:1;box-flex:1;}
+.payOff i.r{font-size:14px; color:#dad9d9;margin-right: -5px;}
+
+.use_youhui{text-decoration: line-through;}
+.off_price{color:red;padding-left: 10px;}
+.submit{background: #ffcb3a;color:#fff;font-size:24px;border:1px solid #ffcb3a;}

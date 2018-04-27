@@ -1,0 +1,162 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-red-sunglo bold uppercase">流程列表</span>
+				</div>
+				<div class="actions">
+					
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							流程名称：${workflow.workflowName}
+						</label>
+					</div>
+				</div>
+				<form  method="post" action="${contextPath}/workflow/addWorkflowStep"  id="myform" target="selectedTodo" onsubmit="return validateCallback(this, hgTabAjaxDone)">  
+					<table class="table table-striped table-bordered table-hover" name='tbl' id="tab" >
+						<tr>
+							<!-- <th>环节编号</th> -->
+							<th>环节名称</th>
+							<th>处理人</th>
+							<th>表单按钮</th>
+							<th class="text-center">操作</th>
+						</tr>
+						<tr class="odd gradeX">
+							<input name="workflowID" value="${workflow.id}" readonly="readonly" id="workflowID" type="hidden" class="workflowID">
+							<input value="${workflowSteps?size}" readonly="readonly" id="workflowStepsSize" type="hidden" class="workflowID">
+							<td>
+								<input type="text" value="" name="stepName" class="required stepName" />
+							</td>
+							<td>
+								<select id="chooseExecutorType" name="chooseExecutorType" onchange="getExecutor()">
+									<option value="0">--请选择--</option>
+									<option value="2">角色</option>
+									<option value="4">自定义</option>
+								</select>
+								<select id="executor" name="executor" onchange="changeExecutor()">
+									<option value="0">--请选择--</option>
+								</select>
+							</td>
+							<td>
+							<#list stepActions as action>
+								<input type="checkbox" name="actionID" value="${action.id}" class="actionID">${action.actionName}
+							</#list>
+							</td>
+							<td class="text-center">
+								<span id="buttonspan">
+									<button class="btn btn-sm yellow filter-submit margin-bottom" onclick="return saveStep();"> 保存 </button>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+//select框联动
+function getExecutor(){
+	//选择‘请选择’
+	if($("#chooseExecutorType").val()=="0"){
+		var html_str = "<option value='nothing'>--请选择--</option>";
+		$("#executor").html(html_str);
+	}else {
+		//选择其他值 发送ajax请求
+		$.ajax({     
+	        url: "${contextPath}/workflow/chooseExecutor?chooseExecutorType="+$("#chooseExecutorType").val(),
+	        type: "POST",
+	        dataType: "json",
+	        success: function(data, textStatus){
+				var html_str = "<option value='0'>--请选择--</option>";
+	        	if($("#chooseExecutorType").val()=="2"){
+		            var users = JSON.parse(data);
+					for(var i = 0;i<users.length;i++){
+						html_str+="<option value='"+users[i].id+"'>"+users[i].roleName+"</option>";
+					}
+	        	}else if($("#chooseExecutorType").val()=="4"){
+	        		var users = JSON.parse(data);
+	        		for(var i = 0;i<users.length;i++){
+						html_str+="<option value='"+users[i].userFlagkey+"'>"+users[i].userFlagval+"</option>";
+					}
+	        	}
+				$("#executor").html(html_str);
+	        }
+	    });
+	}
+}
+function changeExecutor(){
+	if($("#executor").val()!="CLGLY"){
+		for(var i =1 ;i<18;i++){
+			if(i==3||i==7||i==13||i==16||i==17){
+				$(":checkbox[value='"+i+"']").attr('disabled','disabled');
+				$(":checkbox[value='"+i+"']").attr("checked",false);
+			}else{
+				$(":checkbox[value='"+i+"']").attr("disabled",false);
+				$(":checkbox[value='"+i+"']").attr("checked",false);
+			}
+		}
+	}else{
+		for(var i =1 ;i<18;i++){
+			if(i==3||i==7||i==13||i==16||i==17){
+				$(":checkbox[value='"+i+"']").attr("disabled",false);
+				$(":checkbox[value='"+i+"']").attr("checked",true);
+			}else{
+				$(":checkbox[value='"+i+"']").attr('disabled','disabled');
+				$(":checkbox[value='"+i+"']").attr("checked",false);
+			}
+		}
+	}
+}
+function saveStep(){
+	//alert("let's fuck the world up!");
+	var str = "";
+	$("input[name='actionID']:checked").each(function(){
+		str+=$(this).val()+";";
+	});
+	if($.trim($("input[name='stepName']").val()).length==0){
+		alert("请填写环节名称");
+		return false;
+	}
+	if(($("#chooseExecutorType").val()=="0")&&($("#workflowStepsSize").val()!=0)){
+		alert("请选择执行人类型");
+		return false;
+	}
+	if(($("#executor").val()=="0")&&($("#workflowStepsSize").val()!=0)){
+		alert("请选择执行人");
+		return false;
+	}
+	if($("#executor").val()=="CLGLY"){
+		if($(":checkbox[value='7']").is(':checked') ==true){
+			if($(":checkbox[value='3']").is(':checked') ==true||$(":checkbox[value='13']").is(':checked') ==true||$(":checkbox[value='16']").is(':checked') ==true){
+				alert("出票操作与退票操作不能同时被选中");
+				return false;
+			}
+		}
+	}else if($(":checkbox[value='10']").is(':checked') ==true||$(":checkbox[value='12']").is(':checked') ==true){
+		if($(":checkbox[value='11']").is(':checked') ==true||$(":checkbox[value='14']").is(':checked') ==true){
+			alert("出票操作与退票操作不能同时被选中");
+			return false;
+		}
+	}
+	 /*  $.ajax({
+        type: "POST",
+        dataType: "html",
+        data:$("#myform").serialize(),
+        url: "${contextPath}/workflow/workflowStepAdd",
+        success: function(data, textStatus){
+			var html_str = "<option value='nothing'>--请选择--</option>";
+        	
+			$("#executor").html(html_str);
+        }
+     });  */
+}
+</script>

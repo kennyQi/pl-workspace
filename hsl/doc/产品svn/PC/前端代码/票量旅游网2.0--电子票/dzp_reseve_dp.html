@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-电子票预定</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+
+</head>
+
+<body>
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav6">线&nbsp;路</a>
+        <a href="#" title="" class="h1 yahei nav7 on">电子票</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+<link href="css/dzp_reseve.css" rel="stylesheet" />
+
+<script src="js/dzp_win.js" language="javascript"></script>
+<script src="js/dzp_reseve.js" language="javascript"></script>
+<script src="js/Yui_date/yui-min.js"></script>
+<script src="js/Yui_date/yui-ur1.js"></script>
+<script src="js/Yui_date/yui-ur2.js"></script>
+
+<script>
+    YUI({
+        modules: {
+            'trip-calendar': {
+                fullpath: 'js/Yui_date/trip-calendar.js',
+                type    : 'js',
+                requires: ['trip-calendar-css']
+            },
+            'trip-calendar-css': {
+                fullpath: 'js/Yui_date/trip-calendar.css',
+                type    : 'css'
+            }
+        }
+    }).use('trip-calendar', function(Y) {
+
+        /**
+         * 弹出式日历实例
+         * 将日历与指定的触发元素绑定
+         * 日历可根据浏览器窗口大小，自动调整显示位置
+         */
+        var oCal = new Y.TripCalendar({
+            //绑定日历的节点，支持选择器模式，可批量设置（必选）
+            triggerNode: '.J_Item'
+        });
+
+        oCal.on('dateclick', function(e) {
+            this.getCurrentNode().setAttribute('data-date', e.date);
+        });
+
+        //显示日历时自定义事件
+        oCal.on('show', function() {
+            var v = this.getCurrentNode().getAttribute('data-date');
+            this.set('date', v || new Date);
+            this.set('selectedDate', v).render();
+        });
+
+        //解决chrome的foucs事件bug
+        Y.on('click', function(e) {
+            e.currentTarget.focus();
+        }, 'button, .J_Link');
+    });
+</script>
+
+<div class="g_body ov" style="min-height:1100px; display:block;">
+<div class="g_step disb ov">
+	<ul>
+    	<li class="m_move ticketSU">
+        	<h3 class="h3">填写订单</h3>
+            <span class="tick_order icon">1</span>
+      </li>
+    	<li class="m_move ticketSU">
+        	<h3 >支付订单</h3>
+            <span class="">2</span>
+      </li>
+    	<li class="m_move ticketSU">
+        	<h3>支付成功</h3>
+            <span class="">3</span>
+      </li>
+  </ul>
+</div>
+<div class="tick_ME wd ov fl">
+    <ul class="wd12 ma">
+        <i class="ic"></i>
+        <li class="disb tick_title">
+            <span class="h1 yahei color3">预订门票：</span>
+            <a class="h1 linkCm" href="javascript:;">铜川药王山成人票  旺季</a>
+            &nbsp;&nbsp;
+            <a class="h1 linkC btn_ydxz" href="javascript:;" style="font-size:14px;">预订须知</a>
+        </li>
+        <!-- <li class="disb h4 yahei color6"><span>景点现付：无需提前在线付款，订单提交成功后，游玩时到景点售票窗口付款取票游玩，确保您的资金安全，出游安排更自由，轻松！</span></li> -->
+        <span class="disb total color3 h2 yahei">票价：<span class="forange">￥<i class="forange" style="font-size:24px;">80</i></span>*<span class="playerLen" style="font-size:16px;color:#333;">2</span>；  应付金额：<span class="forange">￥<i class="forange" style="font-size:30px;">160</i></span></span>
+    </ul>
+</div>
+<div class="tick_box wd12 ma">
+        <ul class="tick_da fl">
+            <li class="fl "><span class="fl tick_ti">游玩日期：</span>
+                <input type="text" class="data fl yahei color3 h3 J_Item" autocomplete="off" name="" id="" />
+            </li>
+            <li id="data" class="none ov fl"></li>
+        </ul>
+        <div class="tick_people fl wd">
+            <span class="h1 yahei color3 people ">填写游玩人信息</span>
+            <span class="underline wd disb"></span>
+            <div class="btn_wrap">
+                <span class="btn_choosePlayer">从联系人中选择</span>
+                <span class="btn_addPlayer">添加游玩人</span>
+            </div>
+            <div class="person_play_box">
+            <form class="person_play_form" method="" action="">
+                <ul class="tick_PM fl color6 yahei h3 playerList">
+                    <li class="fl wd playerItem">
+                      <i class="icon_delete"></i>
+                      <span class="tick_tis playerName fl">姓名：</span>
+                      <input type="text" name="name" class="playerName" rell="name">
+                      <span class="tick_tis playerId fl">身份证：</span>
+                      <input type="text" name="idNo" class="playerId" rell="idNo">
+                      <span class="color8 h4 yahei tick_ts">请输入正确的姓名格式和身份证</span>
+                    </li>
+                </ul>
+            </form>
+            </div>
+        </div>
+        <div class="tick_people fl wd">
+            <span class="h1 yahei color3 people ">填写预订人信息</span>
+            <span class="underline wd disb"></span>
+            <ul class="tick_PM fl color6 yahei h3">
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>预订人姓名：</span><input type="text" id="" name="" class=""><span class="color8 h4 yahei tick_ts">输入姓名须与身份证上一致，取票时须出示身份证</span></li>
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>预订人手机号：</span><input type="text" maxlength="11" id="" name="" class="mobile"><span class="color8 h4 yahei tick_ts">接收订单确认短信，请务必填写填写正确</span></li>
+            </ul>
+        </div>
+        <div class="protocol fl wd ov">
+            <span class="color3 yahei h2 protocol_title">购票协议</span>
+            <div class="protocol_content color6 yahei h4 ">
+            <i class="sj fl"></i>
+            <p style="margin:14px;">
+            <b>1.开放时间：</b>周一至周五：09:00—17:00<br/>
+            <b>2.取票地点：</b>景区正门售票处<br/>
+            <b>3.入园凭证：</b><i class="forange">游客必须凭身份证</i>（门票必须要保留好）<br/>
+            <b>4.特惠政策：</b>儿童身高1米以下免费；老人持老年优待证免费；军官、士兵、记者、残疾人等都可以凭证在窗口免费兑换 ；儿童身高1—1.3米之间购景区优惠票；65岁以上的老人持身份证购景区优惠票<br/>
+            <b>5.发票说明：</b>所有门票均提供发票，在景区现场支付的订单，您需在取票时向景区索要发票，离开景区后将无法提供，敬请谅解。<br/>
+            <b>6.退改规则：</b><br/>
+            现场支付<br/>
+            ⑴.如需修改出游日期，请登录同程旅游订单中心自行修改，或重新预订门票。<br/>
+            ⑵.如需取消订单，请您登录同程旅游订单中心取消或回复同程旅游短信取消。<br/>
+            7.温馨提示<br/>
+            ⑴.门票当天有效，出园需入园，需再次购票<br/>
+            ⑵.景区门票包含：景区大门票<br/>
+            ⑶.为保证取票、入园顺利，预订时请务必填写真实姓名、手机号码等信息<br/>
+            ⑷.景区正门口停车场大巴车15元/位；私家车10元/位；进入景区大巴车20元/位；私家车15元/位<br/>
+            </p>
+            </div>
+        </div>
+        <div class="fl wd12 ov">
+            <div class="tick_tj">
+                <a class="fr yahei h2" href="javascript:;" class="tick_btn_tj">提交订单</a>
+                <span class="disb total color3 h2 yahei fr">票价：<span class="forange">￥<i class="forange" style="font-size:24px;">80</i></span>*<span class="playerLen" style="font-size:16px;color:#333;">2</span>；  应付金额：<span class="forange">￥<i class="forange" style="font-size:30px;">0</i></span></span>
+             </div>
+        </div>
+    </div>
+</div>
+
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class=" h4">票量简介</a>
+                	<a href="#" title="" class=" h4">法律声明</a>
+                	<a href="#" title="" class=" h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class=" h4">友情链接</a>
+                	<a href="#" title="" class=" h4">酒店加盟</a>
+                	<a href="#" title="" class=" h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class=" h4">帮助中心</a>
+                	<a href="#" title="" class=" h4">投诉建议</a>
+                	<a href="#" title="" class=" h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class="color8 disb h2 yahei">24小时客服热线</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <span class="color8 disb h2 yahei">境外游客紧急联络电话</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <!-- <div class="special"></div> -->
+</div>
+<!--页脚-->
+<!-- 从联系人中选择游玩人弹框 -->
+<div class="win_choosePlayer" style="display:none;">
+    <div class="btn_close btn_submit"></div>
+    <h1>联系人</h1>
+    <div class="linksList">
+        <ul>
+            <li>
+              <i></i>
+              <span rel="1" name="杨阳洋" idno="412702190906082768">杨阳洋</span>
+            </li>
+            <li>
+              <i></i>
+              <span rel="2" name="奥利" idno="412702191906082768">奥利</span>
+            </li>
+            <li>
+              <i></i>
+              <span rel="3" name="贾云馨" idno="412702192906082768">贾云馨</span>
+            </li>
+            <li>
+              <i></i>
+              <span rel="4" name="伍嘉成" idno="412702193906082768">伍嘉成</span>
+            </li>
+            <li>
+              <i></i>
+              <span rel="5" name="谷嘉成" idno="412702194906082768">谷嘉成</span>
+            </li>
+            <li>
+              <i></i>
+              <span rel="3" name="贾云馨" idno="412702199906082768">贾云馨</span>
+            </li>
+            <li>
+        </ul>
+    </div>
+</div>
+<!-- 预订须知弹框 -->
+<div class="win_bg" style="display:none;"></div>
+<div class="ydinfo_box" style="display:none;">
+    <div class="btn_close"></div>
+    <h1>预订须知</h1>
+    <div class="title">西湖景区船票</div>
+    <div class="ydxz">
+        <dl>
+            <dt>入园方式：</dt>
+            <dd>凭身份证或者二维码扫描入园；</dd>
+        </dl>
+        <dl>
+            <dt>预订说明：</dt>
+            <dd>预订须知内容预订须知内容预订须知内容预订须知须知内容预订须知内容预订须知容预订须知内容预订须知须知内容预订须知内容预订须知内容预订须知内容须知须知内容预订须知内容预订须知</dd>
+        </dl>
+        <dl>
+            <dt>退改说明：</dt>
+            <dd>
+                <span>不得退票</span>
+                <span>过期退</span>
+            </dd>
+        </dl>
+    </div>
+</div>   
+</body>
+</html>

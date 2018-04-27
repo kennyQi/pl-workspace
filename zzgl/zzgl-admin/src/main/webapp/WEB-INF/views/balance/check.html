@@ -1,0 +1,50 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" id="checkForm"   action="${contextPath}/balance/check" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="${id}">
+		<input type="hidden" name="status" id="status" value="">
+		<div class="pageFormContent" layoutH="58">
+			审核是否通过
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+				<div class="button">
+					<div class="buttonContent">
+						<button type="button" value="2" onclick="check(this);">通过</button>
+						
+					</div>
+					
+					
+				</div>
+				</li>
+				<li>
+				<div class="button">
+					<div class="buttonContent">
+					<button type="button" value="3" onclick="check(this);">不通过</button>
+					</div>
+				</div>
+				</li>
+			</ul>
+			
+			
+		</div>
+		
+		<!-- 
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" id="app">通过</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" id="notApp">不通过</button></div></div></li>
+			</ul>
+		</div> -->
+	
+	</form>
+</div>
+
+<script type="text/javascript">
+	function check(obj){
+		$("#status").val(obj.value);
+		$("#checkForm").submit();
+	}
+
+</script>

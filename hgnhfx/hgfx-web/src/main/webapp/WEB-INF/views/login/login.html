@@ -1,0 +1,236 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>商户登录</title>
+    <link type="text/css" href="${contextPath}/resources/css/login.css" rel="stylesheet">
+    <link type="text/css" href="${contextPath}/resources/css/common.css" rel="stylesheet">
+    <script src="${contextPath}/resources/commonFile/jquery-1.12.0.min.js"></script>
+
+<script src="${contextPath}/resources/commonFile/scUtil102.js"></script>	
+<script src="${contextPath}/resources/commonFile/jsService.js"></script>	
+    <script type="text/javascript">
+    function warning1(){
+		$(".test-code").find(".test-code-abc").find(".test-code-ab")
+		.addClass("warnning");
+		var m = '${message}';
+		if(m=='-2')
+// 		$(".tip-show-a span").text("请输入验证码");
+		$(".tip-show-a").css({"right":"348px"}).find("span").text("请输入验证码");
+		$(".tip-show-a").show();
+	}
+	
+	function warningRemove1(){
+		$(".test-code").find(".test-code-abc").find(".test-code-ab")
+		.removeClass("warnning");
+		$(".tip-show-a").hide();
+	}
+	
+	function warning2(){
+		$(".password").addClass("warnning");
+		var need = '${needValidate}';
+		if(need=='1'){
+		$(".tip-show-a").css({"right":0,"top":"-131px"}).find("span").text("密码不能为空");
+		$(".tip-show-a").find("span").css("margin-top","-1px")
+		}
+		else{
+		$(".tip-show-a").css({"right":0,"top":"-65px"}).find("span").text("密码不能为空");
+		$(".tip-show-a").find("span").css("margin-top","-1px")
+		}
+		$(".tip-show-a").show();
+		//$(".test-code").hide();
+		$(".password").css({"margin-bottom":"25px"});
+	}
+	
+	function warningRemove2(){
+		$(".password").removeClass("warnning");
+// 		$(".tip-show-a").css({"right":"174px"}).find("span").text("验证码错误");
+		$(".tip-show-a").find("span").text("验证码错误");
+		$(".tip-show-a").hide();
+		//$(".test-code").show();
+		$(".password").css({"margin-bottom":"0px"});
+	}
+	
+	function warning3(){
+		$(".login")
+		.addClass("warnning");
+		$(".tip-show-b").show();
+		//$(".test-code").hide();
+		$(".password").css({"margin-bottom":"25px"});
+	}
+	
+	function warningRemove3(){
+		$(".login")
+		.removeClass("warnning");
+		$(".tip-show-b").hide();
+		//$(".test-code").hide();
+		$(".password").css({"margin-bottom":"25px"});
+	}
+	
+    
+    $(function(){
+		document.getElementById("login").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("login").onblur=function(){
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		document.getElementById("password").onfocus=function(){
+			this.parentNode.style.cssText+="border:1px solid #4799ef";
+		};
+		document.getElementById("password").onblur=function(){
+			this.parentNode.style.cssText+="border:1px solid #d5d5d5;";
+		};
+		
+		
+		var m = '${message}';
+		var need = '${needValidate}';
+		if((m=='-1'||m=='-2')&&need=='1')
+		{
+		warning1();
+		
+		}
+	});
+
+        var localHref=document.location.href;
+        if(localHref.indexOf('/home')>=0){
+            document.location.href = "${contextPath}/login";
+        }
+
+        function toLogin(){
+            var pwd =document.getElementById("pwd").value;
+            document.getElementById("password").value = hex_md5(pwd);
+
+            alert(hex_md5(pwd));
+        }
+        function submit()
+        {
+        var b = true;
+        if($("#login").val().replace(/[ ]/g,"")=="")
+        {warning3();
+        b = false;
+        }
+        else
+        {
+        warningRemove3();}
+        if($("#password").val().replace(/[ ]/g,"")=="")
+        {
+        warning2();
+        b = false;
+        }
+        else
+        {warningRemove2();}
+        if(b==false)
+        {
+        return b;
+        }
+        var needValidate = '${needValidate}';
+       if(needValidate=='1')
+       {
+       if($("#test_code_b").val().replace(/[ ]/g,"")=="")
+        {
+        $(".test-code").find(".test-code-abc").find(".test-code-ab")
+		.addClass("warnning");
+// 		$(".tip-show-a span").text("请输入验证码");
+		$(".tip-show-a").css({"right":"348px"}).find("span").text("请输入验证码");
+		$(".tip-show-a ").show();
+         return false;
+        }
+        }
+        
+        $(".myform").submit();
+        }
+        
+        
+        $(function(){
+        	$(".tip-show-a").click(function(e){
+        		e.stopPropagation();
+        		return;
+        	});
+        	
+        	$(window).keyup(function(e){
+        		if(e && e.keyCode==13){
+        			$(".login-btn").click();
+        		}
+        	});
+        });
+    </script>
+    
+    
+    
+</head>
+<style>
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0px 1000px white inset;}
+#login_id{  color: #4799ef;    padding-bottom: 2px;  display: inline-block;  margin-right: 18px;  line-height: 40px; /* height: 46px;*/cursor:pointer;border-bottom:3px solid #4799ef;}
+#reg_id{cursor:pointer;}
+</style>
+<body>
+<div id="top">
+
+		<div style="cursor:pointer ; width:200px; height:110px; color: red; z-index: 10; border: 1px; border-color: red; 
+				position:relative; top:50px; left:855px;" onclick="window.location.href='${contextPath}'">
+		</div>
+
+        <form class="myform" name="loginForm" method="post" action="${contextPath}/login/loginpost" onsubmit="" >
+		<div class="top-wrap" >
+			<div class="top-wrap-pure">
+				<div class="tip-show-b" ><img src="${contextPath}/resources/img/login-tip/red-warning.png"><span style="margin-top: -1px;">请输入账号</span></div>
+				<p class="tip" style="margin:34px 0 44px 0;"><span id="login_id" >登录</span><span id="reg_id"><a href="${contextPath}/register/page">注册</a></span></p>
+				<div class="login">
+					<img src="${contextPath}/resources/img/login/mail.png">
+					<input style="display:none" >
+					<input type="text" name="loginName"  autocomplete="off"  id="login"  style="    width: 87%;" placeholder="您的登录账号 " value="${account}"/>
+					<#if message!=""&&message!='-1'&&message!='-2'>
+					<div class="yellow-tip" style="display: block;">${(message)!}</div>
+					</#if>
+				</div>
+				<div class="password" style="margin:18px 0 0 0;">
+					<img src="${contextPath}/resources/img/login/lock.png">
+					<input type="password" name="password" id="password"  autocomplete="off"  style="    width: 87%;" placeholder="您的登录密码 ">
+				</div>
+				<#if needValidate==1>
+				<div class="test-code" style="margin:18px 0 26px 0;">
+				<#else>
+				<div class="test-code" style="display:none;margin:18px 0 26px 0;">
+				</#if>
+					<div class="test-code-abc">
+						<div class="test-code-ab ">
+							<input type="text" name="validcode" id="test_code_b" class="test-code-a" placeholder="输入右侧图形验证码">
+						</div>
+						
+					</div>
+					
+					<div class="test-code-b">
+					<img id="validate_code" src="${contextPath}/login/valid-code-image.jpg" width="80" height="40" onclick="$(this).attr('src', '${contextPath}/login/valid-code-image.jpg?'+new Date());" />
+					</div>
+					<a onclick="$('#validate_code').attr('src', '${contextPath}/login/valid-code-image.jpg?'+new Date());" href="javascript:void(0)"><div class="test-code-c"></div></a>
+				</div>
+				
+				<div class="select">
+					<input name="rememberAccount" value="1"  class="select-ab"  type="checkbox" <#if rememberAccount==1>checked</#if> />
+					<span  class="select-a" style="color:#454545">记住账号</span>
+					<a href="${contextPath}/accountManager/forgetPass"><span class="select-b" style="color:#4799ef">忘记密码？</span></a>
+				</div>
+				<a href="javascript:void(0);"><div  style="margin:22px 0 55px 0;"  class="login-btn" onclick="submit()">
+				<div class="tip-show-a" style="right: 358px;"><img src="${contextPath}/resources/img/login-tip/red-warning.png"><span style="margin-top:none;">验证码错误</span></div></div></a>
+			</div>
+		</div>
+		
+		<div class="top-gap">
+			<div class="top-gap-line"></div>
+		</div>
+		<!-- <p  style="margin:26px 0 140px 0;"><span>没有账号，<a href="javascript:void(0);"><span class="reg">马上注册！</span></a></span></p> -->
+	  </form>
+	</div>
+</body>
+
+
+<script type="text/javascript">
+setCp("${contextPath}")
+if(!adminConfigService.adminIsCreated().result){
+	alert("系统未初始化，现在跳转到初始化配置")
+	window.location.href = "${contextPath}/adminConfig/toCreateAdminAccount"
+}
+</script>
+</html>

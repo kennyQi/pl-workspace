@@ -1,0 +1,12 @@
+*.classpath
+*.project
+*.settings
+*.log
+*.myumldata
+*/target
+*/bin
+*~$*.doc
+*~$*.docx
+*~*.tmp
+.idea
+*.iml

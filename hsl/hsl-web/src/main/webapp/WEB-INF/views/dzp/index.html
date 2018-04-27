@@ -1,0 +1,487 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "电子票 - 票量旅游" />
+<@frame.main "default" 5>
+<!--头部-->
+
+<!--锚点-->
+<a name="top"></a>
+
+<!--快速回顶部-->
+<a class="g_totop bg_cmd curp" href="#top"></a>
+
+<!--内容-->
+<link href="${contextPath}/resources/css/dzp/dzp.css" rel="stylesheet" />
+<div class="g_bd disb ov p">
+    <!--轮播图部分-->
+    <div class="g_carousel ov pa disb" id="carousel">
+        <div class="img_list pa">
+            <!--图片宽度最少1200-->
+            <a href="#" style="background-image:url(${contextPath}/resources/images/jd_bn1.jpg)" class="turn"></a>
+            <a href="#" style="background-image:url(${contextPath}/resources/images/jd_bn2.jpg)" class="turn"></a>
+            <a href="#" style="background-image:url(${contextPath}/resources/images/jd_bn3.jpg)" class="turn"></a>
+        </div>
+        <div class="m_carousel_p pl ov diab">
+            <ul class="icon pa">
+            </ul></div>
+    </div>
+
+    <!--轮播图部分-->
+    <!--条件筛选部分-->
+    <div class="m_search disb pl">
+        <div class="disb m_search_c ">
+		 	<!--<div class="load  color6 simsun"><label class="color8">您的位置：</label><a href="#" class="color6">电子票</a></div>-->
+            <div style="height:61px"></div>
+
+            <!--搜索框-->
+            <div class="m_select disb pl">
+                <div class="select_bg pa"></div>
+                <div class="select_cont pl ov">
+                    <div class="input_box disb">
+                        <div class="left_bd fl"></div>
+                        <div class="input fl">
+                            <label class="fl">景点门票</label>
+							<form id="qForm" class="searchForm">
+                            <input id="q" type="text" class="fl" value="${rqo.q!?html}" />
+							<input type="hidden" class="pageNo" value="${pagination.pageNo?c}">
+							<input type="hidden" class="pageSize" value="${pagination.pageSize?c}">
+							</form>
+                        </div>
+                        <a href="javascript:;" class="btn fl qForm"></a>
+                    </div>
+                    <div class="hot_box disb yahei">热门景点：<a href="#">雷峰塔</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">三清山金沙索道</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="#">洛阳灵山寺</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">少林景区（少林寺）</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="#">青龙山慈云寺</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">东林寺</a></div>
+                </div>
+            </div>
+
+
+            <!--搜索框-->
+        </div>
+    </div>
+
+    <!--搜索框-->
+    <div class="m_search disb m_search_jd">
+        <div class="disb m_search_c ">
+            <!--左侧筛选-->
+			<a name="search"></a>
+            <div class="left disb">
+                <ul class="left_all fl disb">
+                    <!--省级-->
+                    <li data-flg="province" class="left_all_box1 left_all_box3">
+                        <dl class="pl left_choose yahei disb  " >
+                            <dt class="h3 fl">省<i>订单</i>级:</dt>
+                            <dd class="nor<#if rqo.provinceId?length==0> on</#if>"><a href="javascript:">全部</a></dd>
+                            <#list provinces as p>
+                            <dd data-id="${p.id}"<#if rqo.provinceId==p.id> class="on"</#if>><a href="javascript:">${p.name!?html}</a></dd>
+                            </#list>
+                            <dd class="more Bg cur pa"><a href="javascript:;">更多</a></dd>
+                        </dl>
+                    </li>
+
+                    <!--市级-->
+                    <li data-flg="city" class="left_all_box1"<#if rqo.provinceId?length==0> style="display: none;"</#if>>
+                        <dl class=" pl left_choose yahei disb HousePrice" id="price">
+                            <dt class="h3 fl">市<i>订单</i>级:</dt>
+                            <dd class="nor<#if rqo.cityId?length==0> on</#if>"><a href="javascript:">全部</a></dd>
+							<#list cities as c>
+                            <dd data-id="${c.id}" <#if rqo.cityId==c.id>class="on"</#if>><a href="javascript:">${c.name!?html}</a></dd>
+							</#list>
+                        </dl>
+                    </li>
+
+                    <!--价格-->
+                    <li data-flg="price" class="left_all_box1">
+                        <dl class=" pl left_choose yahei disb" id="hotalstar">
+                            <dt class="h3 fl">门票价格:</dt>
+                            <dd class="nor<#if rqo.priceMax lt 50> on</#if>"><a href="javascript:">全部</a></dd>
+                            <dd <#if rqo.priceMax==50>class="on"</#if> data-price-min="0" data-price-max="50"><a href="javascript:;">￥0-￥50  </a></dd>
+                            <dd <#if rqo.priceMax==100>class="on"</#if> data-price-min="50" data-price-max="100"><a href="javascript:;">￥50-￥100 </a></dd>
+                            <dd <#if rqo.priceMax==1000>class="on"</#if> data-price-min="100" data-price-max="1000"><a href="javascript:;">￥100-￥1000</a></dd>
+                            <dd <#if rqo.priceMax==10000>class="on"</#if> data-price-min="1000" data-price-max="10000"><a href="javascript:;">￥1000-￥10000</a></dd>
+                        </dl>
+                    </li>
+
+                    <!--级别-->
+                    <li data-flg="level" class="left_all_box1 left_all_box3" >
+                        <dl class="pl left_choose yahei disb brand" id="brand">
+                            <dt class="h3 fl">景点级别:</dt>
+                            <dd class="nor<#if rqo.level lt 1> on</#if>"><a href="javascript:">全部</a></dd>
+                            <dd <#if rqo.level==5>class="on"</#if> data-level="5"><a href="javascript:">AAAAA</a></dd>
+                            <dd <#if rqo.level==4>class="on"</#if> data-level="4"><a href="javascript:">AAAA</a></dd>
+                            <dd <#if rqo.level==3>class="on"</#if> data-level="3"><a href="javascript:">AAA</a></dd>
+                            <dd <#if rqo.level==2>class="on"</#if> data-level="2"><a href="javascript:">AA</a></dd>
+                            <dd <#if rqo.level==1>class="on"</#if> data-level="1"><a href="javascript:">A</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+                <div class="m_cond ov">
+                    <div class="m_condBox disb" id="condition" style="display: none;">
+                        <h2 class="tt h3 color3 fl">筛选条件：</h2>
+                        <label class="clear fl curp">清除条件</label>
+                    </div>
+                </div>
+            </div>
+            <!--左侧筛选-->
+
+        </div>
+    </div>
+
+    <!--搜索框-->
+    <!--条件筛选部分-->
+
+
+    <!--排序部分-->
+    <div class="m_sort yahei pl ov">
+        <div class="m_sort_box disb">
+			<#if pagination.list?size==0>
+			抱歉，您根据您的搜索暂无内容，可尝试输入其他关键词
+			<#else>
+            <a href="javascript:;" data-order="1" class="cmd color6 h2 <#if rqo.order!=3>cmdon</#if> curp firs">默认排序</a>
+            <a href="javascript:;" data-order="3" class="cmd color6 h2 <#if rqo.order==3>cmdon</#if> curp">价格</a>
+            <a href="javascript:;" class="color6 h2 curp next c_page" data-page-jump="peve" >&lt;&lt;上一页</a>
+            <a href="javascript:;" class="color6 h2 curp c_page" data-page-jump="next">下一页&gt;&gt;</a>
+                    <span class="icon_list">
+                    	<span class="icon_list_box">
+                        	<span class="check check_on Bg"></span>
+                    		<label class="icon Bg q"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg f"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg c"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg l"></label>
+                        </span>
+                    </span>
+			</#if>
+        </div>
+    </div>
+    <!--排序部分-->
+
+    <!--列表部分-->
+    <div class="g_list pl ov">
+        <div class="m_list ov">
+            <!--产品列表框-->
+			<#assign lv=["","A","AA","AAA","AAAA","AAAAA"] />
+            <#list pagination.list as scenicSpot>
+				<div class="m_list_box ov">
+					<div class="hotel disb ov">
+						<span class="pic pl fl">
+							<#-- 封面图 -->
+							<a href="${contextPath}/dzp/scenic-spot-detail/${scenicSpot.id!}">
+							<#if scenicSpot.cover??>
+							<img src="${scenicSpot.cover.url!?html}" alt="${scenicSpot.cover.name!?html}" >
+							<#else>
+							<#-- 默认封面 -->
+							<img src="${contextPath}/resources/images/jd_img.jpg" alt="" >
+							</#if>
+							</a>
+						</span>
+						<div class="detail fl">
+							<#-- 名称 -->
+							<h3 class="tt bold disb"><a href="${contextPath}/dzp/scenic-spot-detail/${scenicSpot.id!}">${scenicSpot.baseInfo.name!?html}</a>
+								<span class="tt_icon">
+									<#-- 景区级别 -->
+									<label class="icon">${lv[scenicSpot.baseInfo.level]}</label>
+								</span>
+							</h3>
+							<#-- 景区地址 -->
+							<span class="addres Bg disb">
+								<#-- 省（直辖市不显示） -->
+								<#if scenicSpot.baseInfo.province??
+										&& scenicSpot.baseInfo.province.name?index_of("北京") == -1
+										&& scenicSpot.baseInfo.province.name?index_of("上海") == -1
+										&& scenicSpot.baseInfo.province.name?index_of("天津") == -1
+										&& scenicSpot.baseInfo.province.name?index_of("重庆") == -1
+										&& scenicSpot.baseInfo.province.name?index_of("香港") == -1
+										&& scenicSpot.baseInfo.province.name?index_of("澳门") == -1
+								>${scenicSpot.baseInfo.province.name!?html}</#if>
+								<#-- 市 -->
+								<#if scenicSpot.baseInfo.city??>${scenicSpot.baseInfo.city.name!?html}</#if>
+								<#-- 区 -->
+								<#if scenicSpot.baseInfo.area??>${scenicSpot.baseInfo.area.name!?html}</#if>
+								<#-- 街道地址 -->
+								${scenicSpot.baseInfo.street!?html}
+							</span>
+							<#-- 景区简介 -->
+							<span class="det disb">${scenicSpot.baseInfo.intro!?html}</span>
+							<span class="tips disb">为了能成功提交订单，您需在游玩当天08:30前预订，请尽早预订！</span>
+
+						</div>
+						<div class="price fl">
+							<#-- 景区门票最低价 -->
+							<div class="pr">￥${scenicSpot.priceMin?c}<i class="up">起</i>
+							</div>
+							<a class="look_detail disb" href="${contextPath}/dzp/scenic-spot-detail/${scenicSpot.id!}">查看详情</a>
+						</div>
+					</div>
+					<div class="house disb">
+						<table class="tb" cellspacing="0" cellpadding="0">
+							<tr class="tt">
+								<th class="ho">景点门票</th>
+								<th class="bd">票型</th>
+								<th class="bf">市场价</th>
+								<th class="wf">网站价</th>
+								<th class="pr"></th>
+								<th class="bt">&nbsp;</th>
+							</tr>
+							<#-- 景区门票 -->
+							<#if scenicSpot.ticketPolicies?size gt 0>
+							<#list scenicSpot.ticketPolicies as policy>
+							<tr>
+								<td>${policy.baseInfo.name!?html}</td>
+								<td>
+									<#if policy.type==1>单票<#else>联票</#if>
+								</td>
+								<td class="old_p">￥${policy.baseInfo.rackRate}</td>
+								<td class="p">￥<#if policy.type==1>${policy.sellInfo.priceMin}<#else>${policy.baseInfo.playPrice}</#if></td>
+								<td>
+									<a href="javascript:;" class="btn_ydxz"
+									   data-title="${policy.baseInfo.name!?html}"
+									   data-notice="${policy.baseInfo.notice!?html}"
+									   data-refund-role="<#if
+									   	policy.sellInfo.returnRule==1>不得退票<#elseif
+										policy.sellInfo.returnRule==2>无条件退票<#elseif
+										policy.sellInfo.returnRule==3>退票收取${policy.sellInfo.returnCost?string('0.00')}%手续费<#elseif
+										policy.sellInfo.returnRule==4>退票收取${policy.sellInfo.returnCost?string('0.00')}元续费</#if>"
+									   data-auto-refund="<#if policy.sellInfo.autoMaticRefund>过期退<#else>过期不退</#if>"
+									>预订须知</a>
+								</td>
+								<td>
+									<a href="${contextPath}/dzp/order-edit/${policy.id!}" class="rever">预订</a>
+								</td>
+							</tr>
+							</#list>
+							<#else>
+								<tr>
+									<td colspan="6">暂无门票信息</td>
+								</tr>
+							</#if>
+							<tr class="last">
+								<td colspan="6">&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</#list>
+        </div>
+    </div>
+
+    <!--列表部分-->
+    <!--页脚翻页-->
+
+	<!--<div class="g_page ov disb">-->
+		<!--<div class="m_pageNav listPageStyle">-->
+			<!--<div id="page" class="m_nums"></div>-->
+		<!--</div>-->
+	<!--</div>-->
+	<#if pagination.list?size gt 0>
+    <div id="pageBar" class="g_page ov disb"></div>
+	</#if>
+    <!--页脚翻页-->
+    <!--底部图片位置-->
+    <div class="g_adimg disb ov">
+        <a href="#"><img src="${contextPath}/resources/images/list_ad3.jpg" class="fl"></a><!--图片尺寸291*160-->
+        <a href="#"><img src="${contextPath}/resources/images/list_ad4.jpg" class="fl"></a>
+        <a href="#"><img src="${contextPath}/resources/images/list_ad5.jpg" class="fl"></a>
+        <a href="#"><img src="${contextPath}/resources/images/list_ad6.jpg" class="fl last"></a>
+    </div>
+    <!--底部图片位置-->
+</div>
+<!--内容-->
+
+</@frame.main>
+
+<!--页脚-->
+<@frame.end "default">
+
+<!-- 预订须知弹框 -->
+<div class="win_bg" style="display:none;"></div>
+<div class="ydinfo_box" style="display:none;">
+    <div class="btn_close"></div>
+    <h1>预订须知</h1>
+    <div class="title">西湖景区船票</div>
+    <div class="ydxz">
+        <dl>
+            <dt>入园方式：</dt>
+            <dd>凭身份证或者二维码扫描入园</dd>
+        </dl>
+        <dl>
+            <dt>预订说明：</dt>
+            <dd class="notice"></dd>
+        </dl>
+        <dl>
+            <dt>退改说明：</dt>
+            <dd>
+                <span class="refundRole"></span>
+                <span class="autoRefund"></span>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+</@frame.end>
+<script src="${contextPath}/resources/js/pageUtil/pageUtil.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function(){
+
+		// 分页初始化;
+		var currentPageBar=$("#pageBar").pageBar({
+			// 页码class
+			pageNum: "pageNo",
+			// 总页数
+			pageCount: parseInt('${pagination.totalPage?c}'),
+			// 页面大小class
+			pageSize: "pageSize",
+			// 分页表单class
+			formClass: "searchForm"
+		}).data('pageBar');
+
+		// 翻页事件
+		$('.c_page[data-page-jump]').click(function(){
+			if($(this).data('page-jump')=='next')
+				currentPageBar.next('${pagination.pageNo?c}');
+			else
+				currentPageBar.peve('${pagination.pageNo?c}');
+		});
+
+		// 省份选择索引，超过16就展开
+		if($('li[data-flg=province] dd.on').index()>16) {
+			$('li[data-flg=province] .more a').html("收起").closest(".left_all_box1").height("102");
+		}
+
+        // 更多省份
+        $('.left_choose .more').click(function(){
+            if($(this).find("a").html()=="更多"){
+                $(this).find("a").html("收起").closest(".left_all_box1").height("102");
+            }else{
+                $(this).find("a").html("更多").closest(".left_all_box1").height("34");
+            }
+        });
+
+        // 筛选条件选择
+        $('.left_all.disb dd:not(.more)').click(function(){
+            if($(this).hasClass('on'))return;
+            $(this).siblings('.on').removeClass('on');
+            $(this).addClass('on');
+            var dataFlg = $(this).parents('li[data-flg]').attr('data-flg');
+            // 省份选择后重置城市
+            if(dataFlg=='province'){
+                var li= $('li[data-flg=city]');
+                li.find('.on').removeClass('on');
+                li.find('.nor').addClass('on');
+            }
+            refreshCondition();
+			refreshUrl();
+        });
+
+		// 排序事件
+		$('.m_sort a[data-order]').click(function () {
+			$(this).siblings('.cmdon').removeClass('cmdon');
+			$(this).addClass('cmdon');
+			refreshUrl();
+		});
+
+        // 刷新筛选条件
+        function refreshCondition() {
+            $('#condition a').remove();
+            $('.left_all.disb dd.on:not(.more,.nor) a').each(function(){
+                var dataFlg = $(this).parents('li[data-flg]').attr('data-flg');
+                $('#condition .clear').before('<a href="javascript:;" data-flg="'+dataFlg+'" class="choose">'
+                        +$(this).html()+'<i class="icon">&nbsp;</i></a>');
+            });
+
+            if($('#condition a').size()==0)
+                $('#condition').hide();
+            else
+                $('#condition').show();
+        }
+
+		// 刷新条件筛选
+		refreshCondition();
+
+		// 刷新请求地址
+		function refreshUrl() {
+			var condition=$('.left_all.disb');
+			var price=condition.find('li[data-flg=price] dd.on');
+			var params = {
+				q: $('#q').val(),
+				provinceId: condition.find('li[data-flg=province] dd.on').data('id'),
+				cityId: condition.find('li[data-flg=city] dd.on').data('id'),
+				level: condition.find('li[data-flg=level] dd.on').data('level'),
+				order: $('.m_sort .curp.cmdon').data('order'),
+				pageNo: $('.searchForm .pageNo').val(),
+				pageSize: $('.searchForm .pageSize').val(),
+				priceMin: price.data('price-min'),
+				priceMax: price.data('price-max')
+			};
+			document.location.href = '${contextPath}/dzp?'+$.param(params)+'#search';
+		}
+
+		// 搜索框事件
+		$('#qForm').submit(function(){
+			if($('#q:focus').size()>0)
+				$('.searchForm .pageNo').val(1);
+			refreshUrl();
+			return false;
+		});
+		$('.qForm').click(function () {
+			refreshUrl();
+		});
+
+        // 筛选条件样式效果变化
+        $(document).on("mouseover","#condition a",function(){
+            $(this).addClass("choose_on");
+        });
+        $(document).on("mouseout","#condition a",function(){
+            $(this).removeClass("choose_on");
+        });
+		// 删除条件
+        $(document).on("click","#condition a",function(){
+            var dataFlg = $(this).data('flg');
+            $(this).remove();
+            var li=$('.left_all.disb li[data-flg='+dataFlg+']');
+            li.find('.on').removeClass('on');
+            li.find('.nor').addClass('on');
+            if($('#condition a').size()==0)
+                $('#condition').hide();
+			refreshUrl();
+        });
+		// 清除条件
+        $(document).on("click","#condition .clear",function(){
+            $(this).siblings('a').remove();
+			var li=$('.left_all.disb li[data-flg]');
+			li.find('.on').removeClass('on');
+			li.find('.nor').addClass('on');
+			li.siblings('li[data-flg=city]').hide();
+            $('#condition').hide();
+			refreshUrl();
+        });
+
+		// 预订须知
+		var btnYdxz = $('.btn_ydxz');
+		var winBg = $('.win_bg');
+		var ydinfoBox= $('.ydinfo_box');
+		var btnClose = $('.btn_close');
+		// 弹出预定须知
+		btnYdxz.click(function(){
+			ydinfoBox.find('.title').html($(this).data('title'));
+			ydinfoBox.find('.notice').html($(this).data('notice'));
+			ydinfoBox.find('.refundRole').html($(this).data('refund-role'));
+			ydinfoBox.find('.autoRefund').html($(this).data('auto-refund'));
+			winBg.show();
+			ydinfoBox.show();
+		});
+		// 关闭预定须知
+		btnClose.click(function(){
+			winBg.show().hide();
+			$(this).parent().hide();
+		});
+    });
+</script>

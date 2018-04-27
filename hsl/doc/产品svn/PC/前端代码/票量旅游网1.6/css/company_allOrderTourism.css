@@ -1,0 +1,63 @@
+/* CSS Document */
+/*liwei 2015-4-22     allOrder right*/
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+a{ color:#333;}
+.ri{ margin:24px 32px 30px 29px;}
+.ri .rih1{ font-size:20px; line-height:28px; color:#333; margin-right:40px; margin-left:15px;}
+.ri .onc a{ color:#0073b6;}
+.ri .onc i{ width:110px; height:3px; background:#00a0e9; float:left; position:absolute; margin-top:44px; margin-left:-94px;}
+.ri .oncs a{ color:#0073b6;}
+.ri .oncs i{ width:110px; height:3px; background:#00a0e9; float:left; position:absolute; margin-top:44px; margin-left:-94px;}
+.ri .navsbox{width:100%; height:3px; background:#dfe8ef;  margin-top:16px;}
+
+.ri .orderBox{height:122px; float:left; width:100%; background:#fcfcfc;  border-bottom:1px solid #dfe8ef; }
+.ri .orderBox .order{ margin-left:15px; width:100%;}
+.ri .orderBox .order li{ width:235px; float:left; margin-top:20px; height:30px; line-height:30px;}
+.ri .orderBox .order li .selti{ width:70px; color:#555; float:left; text-align:right;}
+.ri .orderBox .order li .slor{ width:118px; height:28px;border:1px solid #dfe8ef;float:left; padding:0 10px; text-align:left; font-size:14px; color:#333;}
+.ri .orderBox .order li .changeTime{ float:left; width:118px; height:28px; padding:0 10px; border:1px solid #dfe8ef; line-height:28px; font-size:14px; text-align:center;}
+.ri .orderBox .order li .sl{ width:138px; height:28px; border:1px solid #dfe8ef; float:left; background:#fff;}
+.ri .orderBox .order li .dd{width:160px;height:30px; float:left; background:url(../images/ic_tr.png) 0 0;}
+.ri .orderBox .order li .optionValue{width:118px; text-align:left; font-size:14px; color:#333; line-height:26px; padding:0 10px;}
+.ri .orderBox .order li .cx{ width:60px; height:30px; float:right; background:#00a0e9; font-size:14px; text-align:center; line-height:30px; color:#fff;}
+.ri .orderBox .order li .cx:hover{width:60px; height:28px; border-bottom:2px solid #438cac; background:#55bcf6; line-height:28px;}
+
+
+/*下拉列表*/
+.ri .orderBox li .selectNav{ float:left; width:156px; position:absolute; z-index:999; background:#fff; border:2px solid #55bfef; margin-left:70px; *margin-left:-160px; display:none;}
+.ri .orderBox li .selectNav .l{ float:left; width:136px; height:28px; margin:0; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.ri .orderBox li .selectNav .l:hover{ background:#55bfef; color:#fff;}
+/*下拉列表*/
+
+
+.ri .tableBox ul{ float:left; widows:910px; border-left:2px solid #bce9fd; border-right:1px solid #bce9fd; margin-top:19px; margin-bottom:60px;}
+.ri .tableBox ul li{ float:left; width:910px; height:73px; text-align:center; line-height:72px; font-size:12px;}
+.ri .tableBox ul li:hover{background:#ebf8fe;}
+.ri .tableBox ul li span{height:72px; border-right:1px solid #bce9fd; float:left; border-bottom:1px solid #bce9fd; }
+.ri .tableBox ul li .order{ width:131px;  }
+.ri .tableBox ul li .order a{ color:#0073b6;}
+.ri .tableBox ul li .order a:hover{ text-decoration:underline;}
+.ri .tableBox ul li .name{ width:200px;}
+.ri .tableBox ul li .type{ width:92px;}
+.ri .tableBox ul li .payType{width:94px;}
+.ri .tableBox ul li .status{width:105px;}
+.ri .tableBox ul li .money{width:100px;}
+.ri .tableBox ul li .people{width:98px; }
+.ri .tableBox ul li .people i{display:block; line-height:20px; height:20px;}
+.ri .tableBox ul li .operation{ width:82px;}
+.ri .tableBox ul li .operation a{ color:#0073b6;}
+.ri .tableBox ul li .operation a:hover{ text-decoration:underline;}
+.ri .tableBox ul li .moneys{ float:right; border-bottom:0; background:#bce9fd; margin-right:20px; height:55px; line-height:55px;}
+.ri .tableBox ul .topBox .money{ font-size:14px;}
+.ri .tableBox ul .topBox{ height:40px;  background:#bce9fd; font-size:14px;}
+.ri .tableBox ul .topBox span{ height:40px; background:#bce9fd; line-height:40px; color:#333;}
+.ri .tableBox ul .bottomBox{ background:#bce9fd !important;; height:55px;}
+.changeTime{ float:left; font-size:14px;}
+
+
+/*没有订单*/
+.ri .noOrder{ width:165px; height:137px; font-size:14px; font-family:"微软雅黑"; color:#98abbc; margin:0 auto; margin-top:220px;}
+.ri .noOrder span{margin:0 auto;}
+.ri .noOrder .noIcon{width:165px;height:116px; display:block;}
+.ri .noOrder .in{ margin-top:15px; float:left;}
+/*没有订单*/

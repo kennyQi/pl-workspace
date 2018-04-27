@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+    default-autowire="byName">
+ 
+	<!-- 清理过期平台价格政策 -->
+	<bean name="TestTask" class="plfx.jp.app.task.AutoCheckPolicyStatus" />
+	
+	<bean id="TestTaskEntrance" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="TestTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	
+	<bean id="TestTaskEntranceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="TestTaskEntrance" />
+		</property>
+		<property name="startDelay" value="60000" />
+		<property name="cronExpression">
+			<value>0 0 6 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- （renfeng）定时 扫描 机票订单，超过20分钟未支付状态的订单，执行取消订单操作 -->
+	<bean name="CancelJPOrderTask" class="plfx.jp.app.task.TimeoutCancelJPOrderTask" />
+	<bean id="CancelJPOrderTaskEntrance" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="CancelJPOrderTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	
+	<bean id="CancelJPOrderTaskEntranceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="CancelJPOrderTaskEntrance" />
+		</property>
+		<property name="startDelay" value="60000" />
+		<property name="cronExpression">
+			<value>0 * * * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 定时同步易购订单状态(查询已经成功支付但未能获取票号的订单，一分钟轮询) -->
+	<bean name="UpdateJPOrderStatusTask" class="plfx.jp.app.task.UpdateJPOrderStatusTask" />
+	<bean id="UpdateJPOrderStatusTaskEntrance" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="UpdateJPOrderStatusTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	
+	<bean id="UpdateJPOrderStatusTaskEntranceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="UpdateJPOrderStatusTaskEntrance" />
+		</property>
+		<property name="startDelay" value="60000" />
+		<property name="cronExpression">
+			<value>0 * * * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 定时同步支付宝批量退款 -->
+	<bean name="RefundJPOrderTask" class="plfx.jp.app.task.RefundJPOrderTask" />
+	
+	<bean id="RefundJPOrderTaskEntrance" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="RefundJPOrderTask" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	
+	<bean id="RefundJPOrderTaskEntranceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="RefundJPOrderTaskEntrance" />
+		</property>
+		<property name="startDelay" value="60000" />
+		<property name="cronExpression">
+			<value>0 0/10 * * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 定时更新团期最低价格 -->
+	<bean id="UpdateXlMinPrice" class="plfx.xl.app.task.UpdateXlMinPriceTask" />
+	<bean id="UpdateXlMinPriceEntrance" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="UpdateXlMinPrice" />
+		</property>
+		<property name="targetMethod">
+			<value>run</value>
+		</property>
+	</bean>
+	<bean id="UpdateXlMinPriceEntranceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="UpdateXlMinPriceEntrance" />
+		</property>
+		<property name="cronExpression">
+			<value>59 59 23 * * ?</value>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" autowire="no">
+		<property name="triggers">
+			<list>
+				<ref local="TestTaskEntranceJobTrigger" />
+				<ref local="CancelJPOrderTaskEntranceJobTrigger" />
+				<ref local="UpdateJPOrderStatusTaskEntranceJobTrigger" />
+				<ref local="UpdateXlMinPriceEntranceJobTrigger" />
+				<!--实际上只是用了一个支付宝账号，屏蔽退款功能 tandeng 20141125 
+				<ref local="RefundJPOrderTaskEntranceJobTrigger" />
+				 -->
+			</list>
+		</property>
+	</bean>
+	
+</beans>

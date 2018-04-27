@@ -1,0 +1,93 @@
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/respond.min.js"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/excanvas.min.js"></script> 
+<![endif]-->
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/json/jquery.json-2.4.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/validation/jquery.validate.min.js" type="text/javascript"></script>
+<!-- END CORE PLUGINS -->
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<!-- <script src="${contextPath}/resources/hg-ria/assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script> -->
+
+<!-- <script src="${contextPath}/resources/hg-ria/assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery.pulsate.min.js" type="text/javascript"></script> -->
+
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+
+<!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
+<!-- <script src="${contextPath}/resources/hg-ria/assets/global/plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/gritter/js/jquery.gritter.js" type="text/javascript"></script> -->
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="${contextPath}/resources/hg-ria/hg-common/dist/jstree.js"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap-toastr/toastr.min.js"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/fuelux/js/spinner.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/iCheck/js/jquery.icheck.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery-tags-input/jquery.tagsinput.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/upload/ajaxupload.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jquery-mixitup/jquery.mixitup.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/assets/global/plugins/jcrop/js/jquery.Jcrop.min.js"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<!-- BEGIN HG SCRIPTS -->
+<script src="${contextPath}/resources/hg-ria/hg-common/base/layout/hglayout.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/core/hgcore.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/validation/hg.validate.method.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/regional/zh/hgregionalzh.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/database/hgdatabase.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/grid/grid.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/ajax/hgajax.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/checkbox/hgcheckbox.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/ui/hgui.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/base/tab/hgtab.js" type="text/javascript"></script>
+<!-- END HG SCRIPTS -->
+
+<!-- BEGIN UEDITOR SCRIPTS -->
+<script src="${contextPath}/resources/hg-ria/hg-common/ueditor/ueditor.config.js" charset="utf-8" type="text/javascript"></script>
+<script src="${contextPath}/resources/hg-ria/hg-common/ueditor/ueditor.all.min.js" charset="utf-8" type="text/javascript"> </script>
+<script src="${contextPath}/resources/hg-ria/hg-common/ueditor/lang/zh-cn/zh-cn.js" charset="utf-8" type="text/javascript"></script>
+<!-- END UEDITOR SCRIPTS -->
+
+<script type="text/javascript">
+	HG.init("${contextPath}/resources/hg-ria/hg.frag.xml", {
+		proUrl:   '${contextPath}',			// 项目路径
+		loginUrl: '/login',					// 登陆页面路径
+		homeUrl:  '/hg/home/view',			// 主页面路径
+		imagePriewUrl: '/image',
+		imageUploadUrl: '/hg/album/image/imgUpload',
+		imageUploadTempUrl: '/hg/album/image/imgUploadInTemp',
+		debug:    true
+	});
+</script>
+<!-- END JAVASCRIPTS -->

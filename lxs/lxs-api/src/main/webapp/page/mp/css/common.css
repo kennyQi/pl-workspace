@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+
+body{min-width:320px;background: #fff;}
+*{padding:0px;margin:0px;list-style:none;font-family:"noto sans","Source Han Sans CN","yahei","microsoft yahei","微軟雅黑";font-size:14px;}
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+button{cursor:pointer;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+
+/*
+-webkit-box-flex: 1;box-flex:1;
+*/
+/*common*/
+.fl{float:left;}
+.fr{float:right;}
+.pr{position:relative;}
+.pa{position:absolute;}
+.ov{overflow:hidden;}
+.db{display:block;}
+.b{font-weight:bold;}
+.nm{font-weight:normal;}
+.cp{cursor:pointer}
+.h1{font-size:18px;}
+.h2{font-size:16px;}
+.h3{font-size:14px;}
+.h4{font-size:12px;}
+.yh{font-family:"yahei","Microsoft YaHei","微软雅黑";}
+.tc{text-align:center;}
+
+.box{display:-moz-box;display:-webkit-box;display:box;}
+
+.cont.contNo{padding-top:0;}
+
+/*头部导航*/
+.headFixed{position:fixed;z-index:999999;width:100%;height:44px;background:#fafafa;box-shadow:0 0 10px #ccc;}
+.headFixed .title{font-size:16px;color:#333;text-align:left;line-height:44px;padding-left:9px;}
+.headFixed .btn_qxdd{position:absolute;top:11px;right:9px;font-size:14px;color:#92cf0f;}
+
+/*更多*/
+.more{padding:22px 0 10px 0;text-align:center;font-size:15px;color:#666;}
+.more:before{width:34px;height:34px;content:"";background:url("../images/icon-ff.png") no-repeat;background-size:cover;display:inline-block;vertical-align:middle;margin-right:8px;}
+
+/*去除input[number]的默认样式*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}

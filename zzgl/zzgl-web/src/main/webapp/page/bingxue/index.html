@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>炫精彩</title>
+		<style type="text/css">
+        	*{padding:0;margin:0;border:0;}
+        	map,map area{outline:none;}
+        	.container{width:100%;overflow:hidden;background:url(images/bg.jpg) no-repeat top center;}
+        	.content{width:1192px;overflow:hidden;margin:0 auto;padding:807px 0 200px 0;}
+        	.cont1{width:100%;height:982px;margin-bottom:342px;}
+        	.sideNav{width:160px;height:306px;background:url(images/sideNav.png);position:fixed;top:100px;right:10px;}
+        	.sideNav a{display:block;width:122px;height:40px;}
+        	.btn_more{display:block;width:374px;height:105px;background:url(images/btn_more.png) no-repeat center;margin:47px auto 0 auto;}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+		    <div class="content">
+			<div class="cont1">
+				<img src="images/cont1.jpg" usemap="#productmap1">
+                <map name="productmap1">
+                  <area shape="rect" coords="1,2,391,292" href="http://zzpl.ply365.com/line/detail?id=84859b125ed64b75adf1e5c6ff6b0e6b" target="_blank">
+                  <area shape="rect" coords="401,2,791,292" href="http://zzpl.ply365.com/line/detail?id=61a8f8ff9dcf410cb09b1f2805bf67e1" target="_blank">
+                  <area shape="rect" coords="802,2,1190,292" href="http://zzpl.ply365.com/line/detail?id=a1bfab2478fc4231be7a6cbadbf7ac61" target="_blank">
+                  <area shape="rect" coords="1,352,391,642" href="http://zzpl.ply365.com/line/detail?id=952641839b8c49608c1bf9f48b2d1af5" target="_blank">
+                  <area shape="rect" coords="400,352,791,642" href="http://zzpl.ply365.com/line/detail?id=c4b8e18c63a243bd81c04d8c3aa71c4f" target="_blank">
+                  <area shape="rect" coords="801,352,1190,641" href="http://zzpl.ply365.com/line/detail?id=aad9279169a5488fae7c9f30513c9442" target="_blank">
+                  <area shape="rect" coords="1,692,391,981" href="http://zzpl.ply365.com/line/detail?id=a123c06d6087470fb4a20c0c2b5df50d" target="_blank">
+                  <area shape="rect" coords="400,691,791,981" href="http://zzpl.ply365.com/line/detail?id=dc0d944c0bd946879dcba376c7cb138f" target="_blank">
+                  <area shape="rect" coords="801,692,1190,981" href="http://zzpl.ply365.com/line/detail?id=0b7367c7db144377b2e546d98f2729e9" target="_blank">
+                </map>
+			</div>
+			<div class="cont2">
+				<img src="images/cont2.jpg" usemap="#productmap2">
+                <map name="productmap2">
+                  <area shape="rect" coords="2,66,391,356" href="http://zzpl.ply365.com/line/detail?id=c08e8fb4243e4064954f56396fcbec42" target="_blank">
+                  <area shape="rect" coords="402,66,792,356" href="http://zzpl.ply365.com/line/detail?id=72eda320c8f5451492fc15d86a8af7cf" target="_blank">
+                  <area shape="rect" coords="802,66,1191,356" href="http://zzpl.ply365.com/line/detail?id=fa40fff83e3946ceb6546f00066dd3c6" target="_blank">
+                  <area shape="rect" coords="2,465,392,756" href="http://zzpl.ply365.com/line/detail?id=8b703f5fc4fb4cdf93f7365cac84f4e4" target="_blank">
+                  <area shape="rect" coords="402,465,792,756" href="http://zzpl.ply365.com/line/detail?id=3c89400ed62e4db3aecb7d9292e7663a" target="_blank">
+                  <area shape="rect" coords="802,465,1191,756" href="http://zzpl.ply365.com/line/detail?id=006479ab63da4a08bd0e63a4f1c38a3a" target="_blank">
+                </map>
+			</div>
+			<a href="http://zzpl.ply365.com/line/list" target="_blank" class="btn_more"></a>
+			</div>
+		</div>
+		<div class="sideNav">
+			<a href="javascript:;" style="position:absolute;top:163px;left:20px;"></a>
+			<a href="javascript:;" style="position:absolute;top:226px;left:20px;"></a>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				var $sideNav_a = $('.sideNav a');
+				$sideNav_a.eq(0).click(function(){
+					$('html,body').animate({scrollTop:'610px'},300);
+				});
+				$sideNav_a.eq(1).click(function(){
+					$('html,body').animate({scrollTop:'1899px'},300);
+				});
+			})
+		</script>
+	</body>
+</html>

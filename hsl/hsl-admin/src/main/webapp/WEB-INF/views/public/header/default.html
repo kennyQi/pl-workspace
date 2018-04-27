@@ -1,0 +1,12 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div id="header" >
+
+	<div class="headerNav">
+		<ul class="nav">
+			<li><span style="color: white;"><a title="修改密码" target="dialog" mask="true" height="200" width="720"
+				href="${contextPath}/password-edit">修改密码</a></span></li>
+			<li><span style="color: white;">欢迎 <#if Session["_SESSION_USER_"]??>${Session["_SESSION_USER_"].loginName}</#if> </span></li>
+			<li><a href="${contextPath}/logout" style="color: white;">退出</a></li>
+		</ul>
+	</div>
+</div>

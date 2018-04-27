@@ -1,0 +1,52 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/client/client/update" 
+		class="pageForm required-validate" 
+		onsubmit="$('#groupId').attr('name', 'groupId'); return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>客户端标示：</label>
+				<span class="inputInfo">${client.id!?html}</span>
+			</div>
+			<div class="unit">
+				<label>客户端名：</label>
+				<input type="text" name="name" size="64" 
+					class="required" minlength="2" maxlength="64" value="${client.name!?html}"/>
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<input  type="text" name="remark" value="${client.remark!?html}"/>
+			</div>
+			<div class="unit">
+				<label>是否生效：</label>
+				<div style="text-align: left;">
+					<input type="radio" name="valid" value="false" 
+						<#if !client.valid>checked="checked"</#if> >无效
+					<input type="radio" name="valid" value="true"
+						<#if client.valid?? && client.valid>checked="checked"</#if> >有效
+				</div>
+			</div>
+			<div class="unit">
+				<label>api密钥：</label>
+				<input  type="text" name="secretKey" size="64"
+					value="${client.secretKey!?html}" class="required" />
+			</div>
+			<div class="unit">
+				<label>所属分组：</label>
+				<input id="groupId" type="hidden" name="groupQo.id" <#if client.group>value="${client.group.id}"</#if>/>
+				<input type="text" name="groupQo.groupName" <#if client.group>value="${client.group.groupName}"</#if>
+					style="float: left;" readonly="readonly">
+				<a class="btnLook" href="${contextPath}/client/client/grouplist" 
+					lookupGroup="groupQo" mask="true" target="dialog" ref="groupChos" width="800"><span>所属分组选择</span></a>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent">
+					<button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent">
+					<button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

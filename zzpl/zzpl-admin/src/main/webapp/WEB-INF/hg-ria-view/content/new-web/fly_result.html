@@ -1,0 +1,70 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>我的订单</title>
+<link href="${contextPath}/resources/hg-ria/new-web/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/hg-ria/new-web/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/common.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/pageUtilforA.js" language="javascript"></script>
+</head>
+<body>
+<!---->
+<div class="head">
+    <div class="head-cont">
+        <a href="${contextPath}/home" class="logo fl">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/logo.jpg" />
+        </a>
+        <ul class="fl nav">
+            <li class="fl"><a href="${contextPath}/home">首页</a></li>
+        </ul>
+        <div class="user fr">
+          <span class="out fr"><a href="${contextPath}/logout">
+					退出</a></span>
+            <span class="name fr">${(user.name)!''}</span>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<!--头部-->
+<!--内容-->
+<div class="g-bd">
+ <div class="g-nav fl">
+</div>
+    <!--左侧内容-->
+    <link href="${contextPath}/resources/hg-ria/new-web/css/index.css" rel="stylesheet" />
+    <script src="${contextPath}/resources/hg-ria/new-web/laydate/laydate.js" language="javascript"></script>
+    <div class="g-cont fr">
+        <!--位置-->
+        <div class="g-load">
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;您所在位置:</label>
+        </div>
+        <div class="g-tb">
+        	<span style="font-size: 26px;margin-left: 350px;">${msg}</span>
+        </div>
+        <!--位置结束-->
+    </div>
+    <!--左侧内容结束-->
+</div>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+    <div class="foot">
+        <div class="l fl">
+            <a href="#">关于智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">联系智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">智行荣誉</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">帮助中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">意见与建议</a>
+        </div>
+        <div class="r fr">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/foot_logo.png" />
+        </div>
+    </div>
+</div>
+<!--页脚-->
+</body>
+</html>

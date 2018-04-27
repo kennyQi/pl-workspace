@@ -1,0 +1,421 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/line/edit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="lineID" id="lineId" value="${(lineDTO.id)!''}"/>
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>线路名称</label>
+				<input type="text" id="name" type="text" name="baseInfoDTO.name" size="40" maxlength="64"  class="required" value="${(lineDTO.baseInfo.name)!''}"/>
+			</div>
+			<div class="unit">
+				<label>线路编号</label>
+				<input type="text" id="number" name="baseInfoDTO.number" size="20" maxlength="20"  class="required" value="${(lineDTO.baseInfo.number)!''}"/>
+			</div>
+			<div class="unit">
+				<label>推荐指数</label>
+				<select name="baseInfoDTO.recommendationLevel">
+				<option value="">--请选择--</option>
+					<#if RECOMMAND_MAP??>
+		                   <#list RECOMMAND_MAP?keys as itemKey>
+		                       <option value="${itemKey}"  <#if  itemKey==lineDTO.baseInfo.recommendationLevel>selected="selected"</#if>>${RECOMMAND_MAP[itemKey]}</option>
+		                   </#list>
+		             </#if>
+                </select>
+			</div>
+			<div class="unit">
+				<label>供应商</label>
+				<select name="lineSupplierID"  class="required">
+				<option value="">--请选择--</option>
+					<#if supplierList??>
+		                   <#list supplierList as supplier>
+		                       <option value="${supplier.id}" <#if lineDTO?? && lineDTO.lindSupplier?? && supplier.id == lineDTO.lindSupplier.id>selected="selected"</#if>>${supplier.name!''}</option>
+		                   </#list>
+		              </#if>
+                </select>
+			</div>
+			<div class="unit">
+				<label>线路类型</label>
+				<select name="baseInfoDTO.type">
+					<option value="">--请选择--</option>
+					<#if TYPE_MAP??>
+	                    <#list TYPE_MAP?keys as itemKey>
+	                        <option value="${itemKey}" <#if  itemKey==lineDTO.baseInfo.type>selected="selected"</#if>>${TYPE_MAP[itemKey]}</option>
+	                    </#list>
+	                </#if>
+                </select>
+                <select  id="domesticLine_edit">
+							<option value="">--请选择--</option>
+							<option value="1" selected="selected">国内线</option>
+							<!-- <option>国外线</option> -->
+				</select>
+				<select  id="type_province_edit">
+					<option value="">--请选择省--</option>
+					<#list provinceList as province>
+						<#if lineDTO.baseInfo.provinceOfType == province.id>
+					    	<option value="${province.code}" selected="selected">${province.name}</option>
+					    	<#else>
+					    	<option value="${province.code}">${province.name}</option>
+						 </#if>
+					</#list>
+				</select>   
+				<select  id="type_city_edit" name="baseInfoDTO.cityOfType">
+					<option value="">--请选择市--</option>
+					<#if cityOfTypeList??>
+						<#list cityOfTypeList as city>
+						    <#if lineDTO.baseInfo.cityOfType== city.id>
+						    	<option value="${city.code}" selected="selected">${city.name}</option>
+						    	<#else>
+						    	<option value="${city.code}">${city.name}</option>
+						    </#if>
+					    </#list>
+					</#if>
+				</select>
+			</div>
+			<div class="unit">
+				<label>线路目的地及途径地</label>
+				<input type="hidden" id="destinationCity_edit" value="${lineDTO.baseInfo.destinationCity}">
+				<select  id="destCity_eidt">
+							<option value="">--请选择--</option>
+							<option value="1" >国内</option>
+							<!-- <option>国外线</option> -->
+				</select>
+				<select  id="dest_province_edit" style="display:none">
+					<option value="">--请选择省--</option>
+					<#list provinceList as province>
+						<option value="${province.code}">${province.name}</option>
+					</#list>
+				</select>   
+				<select  id="dest_city_edit" style="display:none">
+					<option value="">--请选择市--</option>
+				</select>
+				<button type="button" onclick="addDest();">增加</button>
+			</div>
+			<div class="unit">
+				<div id="content" ></div>
+			</div>
+			<div class="unit">
+				<label>出发地</label>
+				<select id="start_province_edit"> 
+					<option value="">--请选择省--</option>
+					<#list provinceList as province>
+						<option value="${province.code}"  <#if province.code == lineDTO.baseInfo.startProvince>selected="selected"</#if>>${province.name}</option>
+					</#list>
+				</select>
+				<select name="baseInfoDTO.starting"  id="start_city_edit">
+					<option value="">--请选择市--</option>
+					<#if startCityList??>
+						<#list startCityList as city>
+						    <option value="${city.code}" <#if city.code==lineDTO.baseInfo.starting>selected="selected"</#if>>${city.name}</option>
+						</#list>
+					</#if>
+												
+				</select>
+			</div>
+			
+			<!-- 支付信息 -->
+			<div class="unit">
+				<label>订金支付比例</label>
+				<input type="text" name="payInfoDTO.downPayment"  value="${(lineDTO.payInfo.downPayment)?c}" size="10" class="number required" max="100" min="0"/>%
+			</div>
+			<div class="unit">
+				<label>全款支付出发日期前</label>
+				<input type="text" name="payInfoDTO.payTotalDaysBeforeStart" size="10"  value="${(lineDTO.payInfo.payTotalDaysBeforeStart)?c}" class="digits  required"/>天
+			</div>
+			<div class="unit">
+				<label>最晚付款时间出发日期前</label>
+				<input type="text" name="payInfoDTO.lastPayTotalDaysBeforeStart" size="10"  value="${(lineDTO.payInfo.lastPayTotalDaysBeforeStart)?c}" class="digits   required"/>天
+			</div>
+			<!-- 支付信息 -->
+			
+			<div class="unit">
+				<label>线路特色</label>
+				<textarea rows="6" cols="60"  class="editor" name="baseInfoDTO.featureDescription">${(lineDTO.baseInfo.featureDescription)!''}</textarea>
+			</div>
+			<div class="unit">
+				<label>线路优惠</label>
+				<textarea rows="6" cols="60"  class="editor" name="baseInfoDTO.favorableDescription">${(lineDTO.baseInfo.favorableDescription)!''}</textarea>
+			</div>
+			<div class="unit">
+				<label>提示信息</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.noticeDescription">${(lineDTO.baseInfo.noticeDescription)!''}</textarea>
+			</div>
+			<div class="unit">
+				<label>交通信息</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.trafficDescription">${(lineDTO.baseInfo.trafficDescription)!''}</textarea>
+			</div>
+			<div class="unit">
+				<label>费用说明</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.feeDescription">${(lineDTO.baseInfo.feeDescription)!''}</textarea>
+			</div>
+			<div class="unit">
+				<label>预订须知</label>
+				<textarea rows="6" cols="60"  class="editor"  name="baseInfoDTO.bookDescription">${(lineDTO.baseInfo.bookDescription)!''}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" id="checkNull" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+var  destinationCity = $("#destinationCity_edit").val();//目的地城市和途经城市的id字符串
+var  result = [];
+var destIndex = 0;
+
+//显示线路途径地信息
+if(destinationCity != null && destinationCity != ""){
+	$.post("${contextPath}/traveline/line/queryCity",{'cityCodes':destinationCity},function(data){
+			if (data.length > 0) {  
+	            $.each(data, function (idx, item) {
+	            	addElementNew(item.id,item.name);
+	            });
+	            
+	        }  
+		},"json");
+}
+
+//开始城市选择了指定的省份时，则该省份的城市列表初始化出来
+$("#start_province_edit").change(function(){   
+	$.post("${contextPath}/traveline/line/searchCity",{'province':$("#start_province_edit").val()},function(data){
+		if (data.length > 0) {  
+           var layer = "<option value=''>--请选择--</option>";  
+           $.each(data, function (idx, item) {  
+               layer += "<option value="+item.code +">"+ item.name + "</option>";  
+           });
+           
+			$("#start_city_edit").empty();
+			$("#start_city_edit").append(layer);
+       }  
+	},"json");
+}); 
+
+//线路类型选择了指定的省份时，则该省份的城市列表初始化出来
+$("#type_province_edit").change(function(){
+	$.post("${contextPath}/traveline/line/searchCity",{'province':$("#type_province_edit").val()},function(data){
+		if (data.length > 0) {  
+           var layer = "<option value=''>--请选择--</option>";  
+           $.each(data, function (idx, item) {  
+               layer += "<option value="+item.code +">"+ item.name + "</option>";  
+           });
+           
+			$("#type_city_edit").empty();
+			$("#type_city_edit").append(layer);
+       }  
+	},"json");
+}); 
+
+//途径地选择了指定的省份时，则该省份的城市列表初始化出来
+$("#dest_province_edit").change(function(){
+	$.post("${contextPath}/traveline/line/searchCity",{'province':$("#dest_province_edit").val()},function(data){
+		if (data.length > 0) {  
+           var layer = "<option value=''>--请选择--</option>";  
+           $.each(data, function (idx, item) {  
+               layer += "<option value="+item.code +">"+ item.name + "</option>";  
+           });
+           
+			$("#dest_city_edit").empty();
+			$("#dest_city_edit").append(layer);
+       }  
+	},"json");
+}); 
+
+
+
+//当线路目的地及途径地下拉框选择“国内线”时，联动出省市下拉框
+$("#destCity_eidt").change(function(){
+	$("#dest_province_edit").show();
+	$("#dest_city_edit").show();
+});
+
+
+//添加途径地
+function addDest(){
+	var cityID = $("#dest_city_edit").val();
+	if(cityID == ""){
+		alert("请先选择城市");
+		return ;
+	}
+	var cityName = $("#dest_city_edit").find("option:selected").text();
+	var s = document.getElementById("content").getElementsByTagName("input");
+	
+	for(var i = 0; i < s.length; i++){
+		if(s[i].value == cityID){
+			alert("目的地及途径地已经添加");
+			return ;
+		}
+	}
+	addElementNew(cityID,cityName);
+}
+
+
+//添加途经地DIV
+function addElementNew(cityID,cityName){
+
+    var newElementFontColor = "#4876FF";
+    var cancle_img_margin_right = "5px";
+    var dest_name_span_margin_right = "5px";
+    var dest_name_span_margin_left = "2px";
+    var dest_name_span_margin_bottom = "5px";
+    var dest_name_div_margin_right = "10px";
+    var cancleImgSrc = "resources/image/mp/u233.png"
+    var borderStyle = "1px solid #63B8FF";
+    
+   
+   var nameSpan = document.createElement("span");
+   nameSpan.innerHTML =  cityName;
+   nameSpan.style.marginRight = dest_name_span_margin_right;
+   nameSpan.style.marginLeft = dest_name_span_margin_left;
+   
+   
+   var cancleImg = document.createElement("img");
+   cancleImg.src = cancleImgSrc;
+   cancleImg.style.marginRight = cancle_img_margin_right;
+   cancleImg.id = "cancle" + cityID  ;
+   cancleImg.onclick = function(){
+      removeElementNew(this.id);
+   };
+   
+   var destNameDiv = document.createElement("div");
+   destNameDiv.style.cssFloat = "left";
+   destNameDiv.style.border = borderStyle;
+   destNameDiv.style.paddingBottom = dest_name_span_margin_bottom;
+   destNameDiv.style.marginRight = dest_name_div_margin_right;
+   destNameDiv.style.marginBottom = dest_name_span_margin_bottom;
+   
+   destNameDiv.appendChild(nameSpan);
+   destNameDiv.appendChild(cancleImg);
+   
+   
+   var allDiv = document.createElement("div");
+   allDiv.id = "name" + cityID;
+   allDiv.style.color = newElementFontColor;
+   
+   allDiv.appendChild(destNameDiv);
+   
+   document.getElementById("content").appendChild(allDiv);
+   
+   
+   var cityInput = document.createElement("input");
+   cityInput.name = "baseInfoDTO.destinationCity";
+   cityInput.value = cityID;
+   cityInput.id = "city_edit" + cityID;
+   cityInput.type = "hidden";
+   
+   	
+   destIndex = destIndex + 1;
+   document.getElementById("content").appendChild(cityInput);
+}
+
+//删除 已选途经地DIV
+function removeElementNew(cancleId){
+	
+   var destIndex = cancleId.replace("cancle","");
+   var labelNew = document.getElementById("name" + destIndex);
+   if(labelNew != null){
+     labelNew.parentNode.removeChild(labelNew);
+   }
+   var destCityId = document.getElementById("city_edit" + destIndex);
+   if(destCityId != null){
+	   destCityId.parentNode.removeChild(destCityId);
+   }
+}
+var oldname = "";
+$("#name").focus(function(){
+	if(oldname == ""){
+		oldname = $("#name").val();
+	}
+});
+var oldnumber = "";
+$("#number").focus(function(){
+	if(oldnumber ==""){
+		oldnumber = $(this).val();
+	}
+});
+$("#name").blur(function(){
+	var name = $(this).val();
+	if(name != ""){
+		if(name != oldname){
+			$.post("${contextPath}/traveline/line/uniqueName",{'name':name},function(data){
+				if (data.length > 0) {  
+		 			alert(data);
+		 			$("#name").focus();
+		         }  
+		 	},"json");
+		}
+	}
+});
+$("#number").blur(function(){
+	var number = $(this).val();
+	if(number != ""){
+		if(number != oldnumber){
+			$.post("${contextPath}/traveline/line/uniqueNumber",{'number':number},function(data){
+		 		if (data.length > 0) {  
+		 			alert(data);
+		 			$("#number").focus();
+		         }  
+		 	},"json");
+		}
+	}
+});
+
+//取消回车键能提交表单的功能
+document.onkeydown = function(event_e){  
+ if(window.event) {  
+     event_e = window.event;  
+ }  
+ var int_keycode = event_e.charCode||event_e.keyCode;  
+ if(int_keycode =='13') {  //13是回车键
+     return false;  
+ }  
+}
+
+$("#checkNull").click(function(){
+	
+	var domesticLine_edit=$("#domesticLine_edit").val();
+	var  type_province_edit = $("#type_province_edit").val();
+	var  type_city_edit = $("#type_city_edit").val();
+	
+	var destCity_eidt=$("#destCity_eidt").val();
+	var dest_province_edit=$("#dest_province_edit").val();
+	var dest_city_edit=$("#dest_city_edit").val();
+
+	var start_province_edit=$("#start_province_edit").val();
+	var start_city_edit=$("#start_city_edit").val();
+	var destinationCity_edit=$("#destinationCity_edit").val();
+	var inputlen =document.getElementById("content").getElementsByTagName("input").length;  
+	if(domesticLine_edit==""){
+		alert("请选择国内线");
+		return false;
+	}
+	if(type_province_edit==""){
+		alert("请选择线路类型中的省");
+		return false;
+	}
+	if(type_city_edit==""){
+		alert("请选择线路类型中的城市");
+		return false;
+	}
+	if(destinationCity_edit==""){
+		if(destCity_eidt==""||dest_province_edit==""||dest_city_edit==""){
+			alert("线路目的地及途径地不能为空");
+			return false;
+		}
+		
+	}
+	
+	if(inputlen==0){
+	    alert("请点击添加线路目的地及途径地");
+		return false;
+	}
+	if(start_province_edit==""||start_city_edit==""){
+		alert("出发地不能为空");
+		return false;
+	}
+	
+	
+});
+</script>

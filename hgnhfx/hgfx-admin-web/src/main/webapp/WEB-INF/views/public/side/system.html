@@ -1,0 +1,19 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>系统设置
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<#list systemSideList as systemSide>
+				<#if systemSide.rel == "sysUserList">
+					<li><a  href="${contextPath}${(systemSide.url)!''}" target="dialog" rel="${(systemSide.rel)!''}">${(systemSide.displayName)!''}</a></li>
+				<#else>
+					<li><a  href="${contextPath}${(systemSide.url)!''}" target="navTab" rel="${(systemSide.rel)!''}">${(systemSide.displayName)!''}</a></li>
+				</#if>
+			</#list>
+		</ul>
+	</div>
+</div>

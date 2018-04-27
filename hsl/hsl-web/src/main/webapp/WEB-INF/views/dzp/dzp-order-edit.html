@@ -1,0 +1,294 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "电子票预定 - 票量旅游" />
+<@frame.main "default" 5>
+
+<!--锚点-->
+<a name="top"></a>
+
+<!--快速回顶部-->
+<a class="g_totop bg_cmd curp" href="#top"></a>
+
+<!--内容-->
+<link href="${contextPath}/resources/css/dzp/dzp_reseve.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/dzp/dzp_reseve.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/dzp/dzp_win.js" type="text/javascript"></script>
+
+<div class="g_body ov" style="min-height:1100px; display:block;">
+<div class="g_step disb ov">
+	<ul>
+    	<li class="m_move ticketSU">
+        	<h3 class="h3">填写订单</h3>
+            <span class="tick_order icon">1</span>
+      </li>
+    	<li class="m_move ticketSU">
+        	<h3 >支付订单</h3>
+            <span class="">2</span>
+      </li>
+    	<li class="m_move ticketSU">
+        	<h3>支付成功</h3>
+            <span class="">3</span>
+      </li>
+  </ul>
+</div>
+<div class="tick_ME wd ov fl">
+    <ul class="wd12 ma" style="margin-top:10px;">
+        <i class="ic"></i>
+        <li class="disb tick_title">
+            <span class="h1 yahei color3">预订门票：</span>
+            <a class="h1 linkCm" href="javascript:;">${policy.baseInfo.name!?html}</a>
+            &nbsp;&nbsp;
+            <a class="h1 linkC btn_ydxz" href="javascript:;" style="font-size:14px;">预订须知</a>
+        </li>
+        <li class="disb h4 yahei color6 scenices">
+            <span>${policy.baseInfo.scenicSpotNameStr!?html}</span>
+        </li>
+
+        <#-- 门票价格栏，当门票政策为单票时，选择可预定的游玩日期时才显示，联票直接展示 -->
+        <span class="disb total color3 h2 yahei ticketPriceBar" id="ticketPriceBar" style="display: none;"
+            data-price="${policy.baseInfo.playPrice!0?c}">
+            票价：<span class="forange">￥<i class="forange ticketPrice" style="font-size:24px;"></i></span>*<span class="playerLen ticketCount" style="font-size:16px;color:#333;"></span>；
+            应付金额：<span class="forange">￥<i class="forange ticketTotalPrice" style="font-size:30px;"></i></span></span>
+    </ul>
+</div>
+<div class="tick_box wd12 ma">
+
+        <#-- 游玩日期（单票才有） -->
+        <ul class="tick_da fl" <#if policy.type!=1>style="display: none"</#if>>
+            <li class="fl "><span class="fl tick_ti">游玩日期：</span>
+                <input type="text" class="data fl yahei color3 h3 J_Item" autocomplete="off" id="travelDate" readonly
+                       data-date-price="${priceJson!?html}" />
+            </li>
+            <li id="data" class="none ov fl"></li>
+        </ul>
+
+        <#-- 有效期（联票才有） -->
+        <#if policy.type==2>
+        <div class="deadline_box">
+            有效期：<span class="deadline">出票后<i>${policy.useInfo.validDays!1?c}</i>天内有效</span>
+        </div>
+        </#if>
+
+        <div class="tick_people fl wd">
+            <span class="h1 yahei color3 people ">填写游玩人信息</span>
+            <span class="underline wd disb"></span>
+            <div class="btn_wrap">
+                <span class="btn_choosePlayer">从联系人中选择</span>
+                <span class="btn_addPlayer">添加游玩人</span>
+            </div>
+            <div class="person_play_box">
+            <form class="person_play_form">
+                <ul class="tick_PM fl color6 yahei h3 playerList">
+                    <li class="fl wd playerItem">
+                      <i class="icon_delete"></i>
+                      <span class="tick_tis playerName fl">姓名：</span>
+                      <input type="text" name="name" class="playerName" rell="name">
+                      <span class="tick_tis playerId fl">身份证：</span>
+                      <input type="text" name="idNo" class="playerId" rell="idNo">
+                      <span class="color8 h4 yahei tick_ts">请输入正确的姓名格式和身份证</span>
+                    </li>
+                </ul>
+            </form>
+            </div>
+        </div>
+        <div class="tick_people fl wd">
+            <span class="h1 yahei color3 people ">填写预订人信息</span>
+            <span class="underline wd disb"></span>
+            <ul class="tick_PM fl color6 yahei h3">
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>预订人姓名：</span><input type="text" id="linkMan"><span class="color8 h4 yahei tick_ts">输入姓名须与身份证上一致，取票时须出示身份证</span></li>
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>预订人手机号：</span><input type="text" maxlength="11" id="linkMobile" class="mobile"><span class="color8 h4 yahei tick_ts">接收订单确认短信，请务必填写填写正确</span></li>
+                <#-- 理财收益支付宝账号（联票才有） -->
+                <#if policy==2>
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>支付宝账号：</span><input type="text" id="alipayAccount" class="accountId"><span class="color8 h4 yahei tick_ts">用于接收理财收益，请务必填写填写正确</span></li>
+                </#if>
+            </ul>
+        </div>
+        <div class="protocol fl wd ov">
+            <span class="color3 yahei h2 protocol_title">购票协议</span>
+            <div class="protocol_content color6 yahei h4 ">
+            <#-- 售卖协议（这里不需要转义） -->
+            ${policy.baseInfo.saleAgreement!}
+            </div>
+        </div>
+        <div class="fl wd12 ov">
+            <div class="tick_tj">
+                <a class="fr yahei h2 tick_btn_tj" href="javascript:;" >提交订单</a>
+                <span class="disb total color3 h2 yahei fr ticketPriceBar" style="display: none;">
+                    票价：<span class="forange">￥<i class="forange ticketPrice" style="font-size:24px;"></i></span>*<span class="playerLen ticketCount" style="font-size:16px;color:#333;"></span>；
+                    应付金额：<span class="forange">￥<i class="forange ticketTotalPrice" style="font-size:30px;"></i></span></span>
+                </span>
+             </div>
+        </div>
+    </div>
+</div>
+
+<!--内容-->
+
+</@frame.main>
+
+<!--页脚-->
+<@frame.end "default">
+
+<!-- 从联系人中选择游玩人弹框 -->
+<div class="win_choosePlayer" style="display:none;">
+    <div class="btn_close btn_submit"></div>
+    <h1>联系人</h1>
+    <div class="linksList">
+        <ul>
+            <#list travelers as traveler>
+            <li>
+                <i></i>
+                <span rel="${traveler_index+1}" name="${traveler.baseInfo.name!?html}" idno="${traveler.baseInfo.idNo!?html}">${traveler.baseInfo.name!?html}</span>
+            </li>
+            </#list>
+        </ul>
+    </div>
+</div>
+
+<!-- 预订须知弹框 -->
+<div class="win_bg" style="display:none;"></div>
+<div class="ydinfo_box" style="display:none;">
+    <div class="btn_close"></div>
+    <h1>预订须知</h1>
+    <div class="title">${policy.baseInfo.name!?html}</div>
+    <div class="ydxz">
+        <dl>
+            <dt>入园方式：</dt>
+            <dd>凭身份证或者二维码扫描入园</dd>
+        </dl>
+        <dl>
+            <dt>预订说明：</dt>
+            <dd class="notice">${policy.baseInfo.notice!?html}</dd>
+        </dl>
+        <dl>
+            <dt>退改说明：</dt>
+            <dd>
+                <span><#if policy.sellInfo.returnRule==1>不得退票<#elseif
+                    policy.sellInfo.returnRule==2>无条件退票<#elseif
+                    policy.sellInfo.returnRule==3>退票收取${policy.sellInfo.returnCost?string('0.00')}%手续费<#elseif
+                    policy.sellInfo.returnRule==4>退票收取${policy.sellInfo.returnCost?string('0.00')}元续费</#if></span>
+                <span><#if policy.sellInfo.autoMaticRefund>过期退<#else>过期不退</#if></span>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+</@frame.end>
+<script src="${contextPath}/resources/js/3.5.1/build/yui/yui-min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    // 页面逻辑
+    $(function () {
+
+        // 全局属性
+        window.dzpOrderEdit = {
+            // 价格日历
+            priceMap: {},
+            // 更改行程日期
+            changeTravelDate: function (date) {
+                $('#ticketPriceBar').data('price', this.priceMap[date] == undefined ? 0 : this.priceMap[date]);
+                this.refreshPrice();
+            },
+            // 刷新价格
+            refreshPrice: function () {
+                var price = $('#ticketPriceBar').data('price');
+                var ticketCount = $('.playerItem').size();
+                var ticketPriceBar = $('.ticketPriceBar');
+                var totalPrice = parseFloat((price * ticketCount).toFixed(2));
+                if (price == 0) ticketPriceBar.hide();
+                else ticketPriceBar.show();
+                ticketPriceBar.find('.ticketPrice').html(price);
+                ticketPriceBar.find('.ticketCount').html(ticketCount);
+                ticketPriceBar.find('.ticketTotalPrice').html(totalPrice);
+            }
+        };
+
+        // 价格日历
+        var travelDatePriceArray = $('#travelDate').data('date-price');
+        $.each(travelDatePriceArray, function (idx, datePrice) {
+            dzpOrderEdit.priceMap[datePrice.date] = datePrice.price;
+        });
+
+        // 提交订单
+        $('.tick_btn_tj').click(function() {
+            var command = {
+                ticketPolicyId:'${policy.id}',
+                ticketPolicyVersion:parseInt('${policy.version!0?c}'),
+                travelDate:$('#travelDate').val(),
+                linkMan:$('#linkMan').val(),
+                linkMobile:$('#linkMobile').val(),
+                alipayAccount:$('#alipayAccount').val(),
+                tourists:[]
+            };
+            $('.playerList .playerItem').each(function() {
+                var that = $(this);
+                var tourist = {
+                    name:that.find('input.playerName').val(),
+                    idNo:that.find('input.playerId').val()
+                };
+                command.tourists.push(tourist);
+            });
+
+            // ajax提交
+            $.ajax({
+                type: 'post',
+                url: '${contextPath}/dzp/order-create',
+                contentType: 'application/command-json',
+                data: JSON.stringify(command),
+                dataType: 'json',
+                success: function (data) {
+                    console.info('提交成功');
+                    console.info(JSON.stringify(data));
+                }
+            });
+
+        });
+
+        // 刷新价格
+        dzpOrderEdit.refreshPrice();
+    });
+
+    // 价格日历控件
+    YUI({
+        modules: {
+            'trip-calendar': {
+                fullpath: '${contextPath}/resources/js/dzp/dzp-yui-date/trip-calendar.js',
+                type    : 'js',
+                requires: ['trip-calendar-css']
+            },
+            'trip-calendar-css': {
+                fullpath: '${contextPath}/resources/js/dzp/dzp-yui-date/trip-calendar.css',
+                type    : 'css'
+            }
+        }
+    }).use('trip-calendar', function(Y) {
+
+        /**
+         * 弹出式日历实例
+         * 将日历与指定的触发元素绑定
+         * 日历可根据浏览器窗口大小，自动调整显示位置
+         */
+        var oCal = new Y.TripCalendar({
+            //绑定日历的节点，支持选择器模式，可批量设置（必选）
+            triggerNode: '.J_Item'
+        });
+
+        oCal.on('dateclick', function(e) {
+            this.getCurrentNode().setAttribute('data-date', e.date);
+        });
+
+        //显示日历时自定义事件
+        oCal.on('show', function() {
+            var v = this.getCurrentNode().getAttribute('data-date');
+            this.set('date', v || new Date);
+            this.set('selectedDate', v).render();
+        });
+
+        //解决chrome的foucs事件bug
+        Y.on('click', function(e) {
+            e.currentTarget.focus();
+        }, 'button, .J_Link');
+
+    });
+</script>
+

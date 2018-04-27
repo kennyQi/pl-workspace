@@ -1,0 +1,112 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/footerAuth/copyright/save"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, navTabAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>网站名称：</label>
+				<input type="text" name="webTitle" size="100"	class="required" value="${webTitle}"/>
+			</div>
+			<div class="unit">
+				<label>ICP备案号：</label><input type="text" name="icp" size="100" value="${icp}"/>
+			</div>
+			<div class="unit">
+				<label>客服电话：</label><input type="text" name="tel" size="100" value="${tel}"/>
+			</div>
+			<div class="unit">
+				<label>外省客服电话：</label><input type="text" name="otherTel" size="100" value="${otherTel}"/>
+			</div>
+			<div class="unit" style="height: 50px">
+				<label>网站LOGO：</label>
+				<p style="width:80px">
+				<img alt="" id="webLogo_img" width="50" height="50" src="${imageContextPath}/${webLogo}">
+				<input type="hidden" readonly="readonly" name="webLogo"  value="${webLogo}"/></p>
+				<p><input type="file" name="fileName" id="webLogo_input" /></p>
+			</div>
+			<div class="unit" style="height: 50px">
+				<label>顶部二维码：</label>
+				<p style="width:80px">
+				<img alt="" id="topQr_img" width="50" height="50" src="${imageContextPath}/${topQr}">
+				<input type="hidden" readonly="readonly" name="topQr"  value="${topQr}"/></p>
+				<p><input type="file" name="fileName" id="topQr_input" /></p>
+			</div>
+			<div class="unit">
+                <label>顶部微博代码：</label>
+                <textarea class="" name="weibo" rows="5" cols="100">${weibo}</textarea>
+            </div>
+			<div class="unit" style="height: 50px">
+				<label>底部二维码：</label>
+				<p style="width:80px">
+				<img alt="" id="bottomQr_img" width="50" height="50" src="${imageContextPath}/${bottomQr}">
+				<input type="hidden" readonly="readonly" name="bottomQr" value="${bottomQr}"/></p>
+				<p><input type="file" name="fileName" id="bottomQr_input" /></p>
+			</div>
+			 <div class="unit">
+                <label>版权信息：</label>
+                <textarea class="" name="copyright" rows="5" cols="100">${copyright}</textarea>
+            </div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+$(function() {
+	 $("#webLogo_input").uploadify({
+         'method'   : 'post',  
+         'buttonText' : '请选择',  
+         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+ 		 'uploader'      : '${contextPath}/uploadFile',
+         'fileObjName'   : 'file', 
+         'onUploadSuccess' : function(file, data, response) { 
+             $('input[name=webLogo]').val(data.substring(data.lastIndexOf('/') + 1));
+             $('#webLogo_img').attr('src','${imageContextPath}' +data.substring(data.lastIndexOf('/')));
+         }  
+     });  
+     
+     $("#topQr_input").uploadify({
+         'method'   : 'post',  
+         'buttonText' : '请选择',  
+         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+ 		 'uploader'      : '${contextPath}/uploadFile',
+         'fileObjName'   : 'file', 
+         'onUploadSuccess' : function(file, data, response) { 
+             $('input[name=topQr]').val(data.substring(data.lastIndexOf('/') + 1));
+             $('#topQr_img').attr('src','${imageContextPath}' +data.substring(data.lastIndexOf('/')));
+         }  
+     }); 
+     
+     $("#bottomQr_input").uploadify({
+         'method'   : 'post',  
+         'buttonText' : '请选择',  
+         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+ 		 'uploader'      : '${contextPath}/uploadFile',
+         'fileObjName'   : 'file', 
+         'onUploadSuccess' : function(file, data, response) { 
+             $('input[name=bottomQr]').val(data.substring(data.lastIndexOf('/') + 1));
+             $('#bottomQr_input').attr('src','${imageContextPath}' +data.substring(data.lastIndexOf('/')));
+         }  
+     }); 
+     
+});
+</script>
+</div>
+

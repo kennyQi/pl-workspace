@@ -1,0 +1,316 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as dk>
+<@dk.head "" >
+</@dk.head>
+
+<@dk.main "" "createOrder">
+
+<script src="${contextPath}/resources/js/order-manage-new-mini-window.js" charset="utf-8"></script>
+<script src="${contextPath}/resources/js/order-manage-new.js" type="text/javascript"></script>
+<!-- </head> -->
+<style type="text/css">
+.none 
+{ 
+width: 0px; 
+height: 0px; 
+display: none; 
+} 
+</style>
+<script>
+	var path = "${contextPath}";
+</script>
+<!-- <body>
+	<div class="mininav">
+		<div class="banner">
+			<div class="banner-pure">
+				<div class="logo"></div>
+				<div class="logo-gap"></div>
+				<div class="logo2"></div>
+				
+				<div class="banner-right">
+					<img src="${contextPath}/resources/img/order/icon.png">
+					<span class="user">admin</span>
+					<a href="javascript:void(0);"><span class="out">退出</span></a>
+				</div>
+			</div>
+		</div>
+		<div id="content">
+			<div class="content-wrap">
+				<div class="content-wrap-pure">
+					<div class="content-control">
+						<div class="left-banner line">
+							<div src1="url(${contextPath}/resources/img/order/order-icon.png) no-repeat"  src2="url(${contextPath}/resources/img/order/order-icon1.png) no-repeat" class="select-item line select-item1"><div class="select-item-wrap">
+								订单管理<img class="other other1" src="${contextPath}/resources/img/order/d-l.png">
+								<img style="display:none;" class="other other2" src="${contextPath}/resources/img/order/r-l.png">
+							</div></div>
+							<div class="select-item-sub">
+								<div data-index=0 class="select-item-sub-li  ">订单列表<div style="display:none;" class="light"></div><div  class="light2"></div></div>
+								<div data-index=1 class="select-item-sub-li selected">新建订单<div  class="light"></div><div style="display:none;" class="light2"></div></div>
+								<div data-index=2 class="select-item-sub-li ">历史导入<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+								
+								<div class="parent-light"></div>
+							</div>
+							<div src1="url(${contextPath}/resources/img/order/user.png) no-repeat" src2="url(${contextPath}/resources/img/order/user1.png) no-repeat" class="select-item line select-item2"><div class="select-item-wrap">
+								用户管理<img style="display:none;" class="other other1" src="${contextPath}/resources/img/order/d-l.png">
+								<img style="display:none;" class="other other2" src="${contextPath}/resources/img/order/r-l.png">
+							</div></div>
+							<div src1="url(${contextPath}/resources/img/order/personal.png) no-repeat" src2="url(${contextPath}/resources/img/order/personal1.png) no-repeat" class="select-item line select-item3"><div class="select-item-wrap">
+								个人管理<img class="other other2" src="${contextPath}/resources/img/order/r-l.png">
+								<img style="display:none;" class="other other1" src="${contextPath}/resources/img/order/d-l.png">
+							</div></div>
+							<div class="select-item-sub" style="display:none;">
+								<div data-index=0 class="select-item-sub-li  ">订单列表<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+								<div data-index=1 class="select-item-sub-li ">新建订单<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+								<div data-index=2 class="select-item-sub-li ">历史导入<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+								
+								<div class="parent-light" style="display:none;"></div>
+							</div>
+						</div> -->
+						<div class="right-content">
+							<div class="right-content-pure">
+								<div class="right-content-title">
+									<span class="tt">
+										<img src="${contextPath}/resources/img/order/wd.png">
+										<span class="tl">订单管理<span>>> 新建订单</span></span>
+									</span>
+									
+								</div>
+								
+								<div class="condition">
+									<div class="condition-wrap">
+										<span class="condition-item">
+											<span class="text">商品类型</span>
+											<div class="product-type" style="  width: 260px;">
+												<select  id="productID" onchange="schange()">
+												<#if !productID??>
+												<#assign selectflag=0/>
+												<#list productInUses as productInUse>
+													<option value="${productInUse.product.id}" <#if selectflag==0>selected="selected"</#if>>${productInUse.product.prodName}</option>
+												<#assign selectflag=1/>
+												</#list>
+												<#else>
+												<#list productInUses as productInUse>
+													<option value="${productInUse.product.id}" <#if productInUse.product.id==productID>selected="selected"</#if>>${productInUse.product.prodName}</option>
+												</#list>
+												</#if>
+												</select>
+												<div class="select-icon">
+													<img src="${contextPath}/resources/img/order/select-a.png">
+												</div>
+											</div>
+										</span>
+										<div id="queryBtn2" style="display:none;"></div>
+									</div>
+								</div>
+								<!-- excel提交 form -->
+								<form action="${contextPath}/mileOrder/submit" method="post" id="submitform">
+									<input type="hidden" value="${url}" name="url"/>
+									<input type="hidden" value="${fileName}" name="fileName"/>
+									<input type="hidden" value="${commands}" name="commands"/>
+									<input type="hidden" value="${dataFalg}" name="dataFalg"/>
+									<input type="hidden"  name="productID" value="${productID}"/>
+									<input type="hidden" name="token" value="${token}">
+								</form>
+								<div class="table-content">
+									<div class="table-content-wrap" style="  background-color: #fff;">
+										<div class="table-content-title" style="  background-color: #f8f8f8;">
+											<!-- 上传excel form -->
+											<span class="text2">新建订单列表</span>
+											<form id="myform" method="post" action="${contextPath}/mileOrder/upload"  enctype="multipart/form-data">
+											<div class="export" style="margin-left:0;  " > 导入订单</div><div class="none"><input id="imgFile" name="file" type="file" onchange="imageAdd.imageUpload(this);"/></div>
+											<input type="hidden"  name="productID" id="productIDInput"/>
+											<input type="hidden" name="token" value="${token}">
+											</form>
+											<div class="load-in" style="  ">订单模板下载</div><a id="templet" href="${contextPath}/excel/templet.xls"></a>
+											<div class="time " style="  display: none;"><div class="time-a">按订单时间排序<img src="${contextPath}/resources/img/order/v-i2.png"></div></div>
+											<div class="amount active" style="  display: none;"><div class="amount-a">按数量大小排序<img style="display:none;" src="${contextPath}/resources/img/order/v-i2.png"></div></div>
+										</div>
+										<!-- 提交手动添加 form -->
+										<form action="${contextPath}/mileOrder/batchSubmit" method="post" id="batchform">
+										<input type="hidden" value="${dataFalg}" name="dataFalg"/>
+										<input type="hidden"  name="productID" value="${productID}" id="productIDInput1"/>
+										<input type="hidden"  name="size"  id="sizeInput"/>
+										<input type="hidden" name="token" value="${token}">
+										<div class="list-content">
+											<#if errorommands??>
+											<#assign i=0/>
+											<#list errorommands as errorommand>
+											<div class="list-content-one" data-index=${i}>
+												<span class="list-content-item"><span>明珠卡号${i+1}</span><input type="text" name="csairCard" value="${errorommand.csairCard!""}"></span>
+												<span class="list-content-item"><span>用户姓名</span><input type="text" name="csairName" value="${errorommand.csairName!""}"></span>
+												<span class="list-content-item"><span>里程</span>
+												<#if errorommand.num??>
+												<input type="text" name="num" value="${(errorommand.num)?c}">
+												<#else>
+												<input type="text" name="num" value="">
+												</#if>
+												</span>
+												<img class="add" src="${contextPath}/resources/img/order/add.png">
+												<#if i!=0>
+												<img class="delete" src="${contextPath}/resources/img/order/del.png">
+												</#if>
+												<#if errorommand.errorTip??>
+												</#if>
+											</div>
+											<span id = "span${i}"style="color: red;">${errorommand.errorTip}</span>
+											<#assign i=i+1/>
+											</#list>
+											<#else>
+											<div class="list-content-one" data-index=0>
+												<span class="list-content-item"><span>明珠卡号1</span><input type="text" name="csairCard"></span>
+												<span class="list-content-item"><span>用户姓名</span><input type="text" name="csairName"></span>
+												<span class="list-content-item"><span>积分</span><input type="text" name="num"></span>
+												<img class="add" src="${contextPath}/resources/img/order/add.png">
+												<img style="display:none;" class="delete" src="${contextPath}/resources/img/order/del.png">
+											</div>
+											</#if>
+										</div>
+										</form>
+									</div>
+								</div>
+								<p>
+									<div class="comtt-box"  style="text-align: center;">
+										<div class="comtt" onclick="batchSubmit()"></div>
+										<!-- <div class="cancel"></div> -->
+									</div>
+								</p>
+							</div>
+						</div>
+					<!-- </div>
+				</div>
+				
+				<div class="bottom-box">
+					<p style="  padding-top: 20px;">Copyright © 2010 hg365.com All Rights Reserved 浙江汇购科技 版权所有</p>
+					<p style="  padding-top: 4px;">客服热线：28322875</p>
+				</div>
+			</div>
+		</div> -->
+		<div id="winP" style="display: none;"></div>
+		<div id="win" style="display: none;">
+			<div class="win-p">
+				<div class="table-pure">
+					<div class="table-pure-content" style="  border-bottom: 1px dashed #d5e2ef; margin-bottom:20px;">导入订单列表
+						<div id="closeWin"><img src="${contextPath}/resources/img/order/close.png"></div>
+					</div>
+				</div>
+				<div class="table-content">
+					<div class="table-content-wrap" style="margin-top:0;">
+						<div class="table-content-title">
+							<span class="text2">订单列表</span>
+							
+							<div class="export">重新导入</div>
+							<div class="time active"><div class="time-a">按充值积分排序<img src="${contextPath}/resources/img/order/v-i2.png"></div></div>
+							<div style="display:none; " class="amount active"><div class="amount-a">按数量大小排序<img style="display:none;" src="${contextPath}/resources/img/order/v-i2.png"></div></div>
+						</div>
+						<!-- 分页排序 form -->
+						<form action="${contextPath}/mileOrder/commandList" method="post" id="listform">
+							<input type="hidden" value="${pageNum}" name="pageNum" id="pageNum"/>
+							<input type="hidden" value="${totalPageNum}" name="totalPageNum"/>
+							<input type="hidden" value="${sort}" name="sort" id="sort"/>
+							<input type="hidden" value="${url}" name="url"/>
+							<input type="hidden" value="${fileName}" name="fileName"/>
+							<input type="hidden" value="${commands}" name="commands"/>
+							<input type="hidden"  name="productID" value="${productID}"/>
+							<input type="hidden"  name="dataFalg" value="${dataFalg}"/>
+							<input type="hidden" name="token" value="${token}">
+						</form>
+						<div  class="table-content-pure">
+							<table>
+								<tr class="thd"><th>明珠卡号</th><th>用户姓名</th><th>积分数</th><th>订单提示</th></tr>
+								<#assign  flag=1/>
+								<#list importMileOrderCommands as importMileOrderCommand>
+								<#if flag==1>
+								<tr class="ta" >
+								<#assign  flag=0/>
+								<#else>
+								<tr class="tb">
+								<#assign  flag=1/>
+								</#if>
+									<td>${importMileOrderCommand.csairCard!"-"}</td>
+									<td>${importMileOrderCommand.csairName!"-"}</td>
+									<td>${importMileOrderCommand.num!"-"}</td>
+									<#if (importMileOrderCommand.errorTip)??>
+									<td class="warning">${importMileOrderCommand.errorTip}</td></tr>
+									<#else>
+									<td class="normal">正常</td></tr>
+									</#if>
+								</tr>
+								</#list>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div class="bottom-links">
+					<span class="right-links">
+						<#if pageNum??>
+						<#if pageNum-1!=0>
+						<span class="first" onclick="jumpPage(1)">首页</span>
+						<span class="prev" onclick="jumpPage(${(pageNum-1)?c})"><<</span>
+						<#else>
+						<span class="first"">首页</span>
+						<span class="prev" ><<</span>
+						</#if>
+						<#list [1,2,3,4,5] as i>
+						<#if (pageNum/5)?ceiling*5+i-5<=totalPageNum>
+						<#if pageNum==(pageNum/5)?ceiling*5+i-5>
+						<span class="item-link active"  onclick="jumpPage(${((pageNum/5)?ceiling*5+i-5)?c})">${((pageNum/5)?ceiling*5+i-5)?c}</span>
+						<#else>
+						<span class="item-link "  onclick="jumpPage(${((pageNum/5)?ceiling*5+i-5)?c})">${((pageNum/5)?ceiling*5+i-5)?c}</span>
+						</#if>
+						</#if>
+						</#list> 
+						<#if pageNum+1<=totalPageNum>
+						<span class="next" onclick="jumpPage(${(pageNum+1)?c})">>></span>
+						<span class="last" onclick="jumpPage(${(totalPageNum)?c})">尾页</span>
+						<#else>
+						<span class="next" >>></span>
+						<span class="last">尾页</span>
+						</#if>
+						</#if>
+					</span>
+				</div>
+				<div><div class="commit-order" onclick="submitForm()"></div></div>
+			</div>
+		</div>
+	<!-- </div> -->
+	<#assign  openflag=0/>
+	<#list filecontentlist as fc>
+		<#if filecontent==fc.contentMD5>
+			<#assign  openflag=1/>
+		</#if>
+	</#list>
+	<#if miniWindow="open"&&openflag==0>
+	<script type="text/javascript">
+		showWin();
+	</script>
+	<#elseif miniWindow="open"&&openflag==1>
+	<script type="text/javascript">
+		if(confirm("该文件今日已经提交，是否继续？")){
+			showWin();
+		}else{
+			window.location.href=path+"/mileOrder/newOrderView";
+		}
+	</script>
+	</#if>
+	
+	
+	<#if status="error">
+	<#if msg??>
+	<script type="text/javascript">
+	alert("${msg}");
+	</script>
+	</#if>
+	</#if>
+	<#if status="success">
+	<script type="text/javascript">
+	alert("操作成功!");
+	window.location.href=path+"/mileOrder/newOrderView";
+	</script>
+	</#if>
+	 </@dk.main>
+	 <@dk.end "">
+</@dk.end>
+<!-- </body>
+</html>
+ -->

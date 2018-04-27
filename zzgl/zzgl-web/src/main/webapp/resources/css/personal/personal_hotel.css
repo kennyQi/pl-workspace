@@ -1,0 +1,11 @@
+.ri .tableBox ul li .orderInf{background:#A1E9E8; border-top:1px solid #A1E9E8;  border-right:1px solid #A1E9E8; }
+
+.ri .orderBox .order li .cx{  background:#4BC5C3; }
+.ri .orderBox .order li .cx:hover{border-bottom:2px solid #30a3a1; background:#A1E9E8; }
+
+.ri .onc a{color:#4BC5C3;}
+.ri .onc i{background:#4BC5C3;}
+/*下拉列表*/
+.ri .orderBox li .selectNav{ border:2px solid #4BC5C3; }
+.ri .orderBox li .selectNav .l:hover{ background:#4BC5C3; color:#fff;}
+/*下拉列表*/

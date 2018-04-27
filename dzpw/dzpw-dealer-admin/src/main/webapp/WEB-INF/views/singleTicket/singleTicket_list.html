@@ -1,0 +1,163 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	function checkTimeStr(){
+		 /* if($("#beginCashStr").val()!="" && $("#endCashStr").val()!=""){
+			if($("#beginTimeStr").val()>$("#endTimeStr").val()){
+				alert("添加开始时间不能大于添加结束时间!");
+				return false
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		} */
+		
+	} 
+	
+	//重置
+	function initText(){
+		$("#ticketPolicyName", navTab.getCurrentPanel()).attr("value",'');
+		$("#key", navTab.getCurrentPanel()).attr("value","");
+		$("#status", navTab.getCurrentPanel()).attr("value","");
+		$("#createBeginDateStr", navTab.getCurrentPanel()).attr("value","");
+		$("#createEndDateStr", navTab.getCurrentPanel()).attr("value","");
+	}
+	
+// 	function selfNavTabSearch(obj){
+		
+// 		var n = /^(0|[1-9][0-9]*)$/
+// 		if($("#soldQtyMin").val()!=""){
+// 			if(!n.test($("#soldQtyMin").val())){
+// 				alertMsg.error("总销量参数格式不正确");
+// 				return false;
+// 			}
+// 		}
+		
+// 		if($("#soldQtyMax").val()!=""){
+// 			if(!n.test($("#soldQtyMax").val())){
+// 				alertMsg.error("总销量参数格式不正确");
+// 				return false;	
+// 			}
+// 		}
+		
+// 		return navTabSearch(obj)
+// 	}
+	
+	
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this)" action="${contextPath}/singleTicket/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						产品编号：<input type="text" id="key" name="key" value="${key}"/>
+					</td>
+					<td>
+						单票名称：<input type="text" id="ticketPolicyName" name="ticketPolicyName" value="${ticketPolicyName}"/>
+					</td>
+					<td>
+						启用状态：
+						<select id="status" name="status">
+							<option value="">全部</option>
+							<option value="3" <#if status==3 >selected="selected"</#if> > 启用 </option><!-- 上架 -->
+							<option value="4" <#if status==4 >selected="selected"</#if> > 禁用 </option><!-- 下架 -->
+						</select>
+					</td>
+					<td>
+						发布时间：
+						<input type="text" id="createBeginDateStr" name="createBeginDateStr" value="${createBeginDateStr}" class="date" readonly="true"/>&nbsp;到&nbsp;
+						<input type="text" id="createEndDateStr" name="createEndDateStr" value="${createEndDateStr}" class="date" readonly="true"/>
+					</td>
+				</tr>
+			</table>
+			
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkCashStr()">查询</button></div></div>
+					</li>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="button" onclick="initText()">条件重置</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+	    <ul class="toolBar">
+			<li><a class="add" href="${contextPath}/singleTicket/toAdd" target="navTab"  mask="true" width="980" height="780"><span>发布单票</span></a></li>
+			<li><a class="edit" target="selectedTodo"  href="${contextPath}/singleTicket/usableBatch" title="确定启用选中单票吗？" warn="请选择一个单票"><span>批量启用</span></a></li>
+			<li><a class="icon" target="selectedTodo" href="${contextPath}/singleTicket/disableBatch"  title="确认禁用选中单票吗？" warn="请选择一个单票"><span>批量禁用</span></a></li>
+			<li><a class="delete" target="selectedTodo" href="${contextPath}/singleTicket/delBatch"  rel="ids" title="确定删除选中单票吗？" warn="请选择一个单票"><span>批量删除</span></a></li>
+		</ul>
+	</div>
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="155" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="20px;">
+					<input type="checkbox" group="ids" class="checkboxCtrl" title="全选" />
+				</th>
+			    <th width="210px;">产品编号</th>
+				<th width="280px;">单票名称</th>
+				<th width="90px;">库存数量（张）</th>
+				<th width="110px;">发布时间</th>
+				<th width="80px;">启用状态</th>
+				<th width="100px;">价格日历</th>
+				<th width="180px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as policy>
+			<tr>
+				<td><input name="ids" value="${policy.id!?html}" type="checkbox"></td>
+				<td>${policy.baseInfo.key}</td>
+				<td>${policy.baseInfo.name}</td>
+				<td>${policy.sellInfo.remainingQty}</td>
+				<td>${policy.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<td>
+					<#if policy.status.current==0>
+						禁用
+					</#if>
+					<#if policy.status.current==3>
+						启用
+					</#if>
+					<#if policy.status.current==4>
+						禁用
+					</#if>
+				</td>
+				<td style="color: red">
+					<a target="dialog" href="${contextPath}/singleTicket/showDateSalePrice?id=${policy.id}" width="700" height="530" mask="true" style="color: blue">查看价格日历</a>
+				</td>
+				<td>
+					<a target="dialog" href="${contextPath}/singleTicket/info?id=${policy.id}" height="750" width="950" style="color: blue">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				    <#if policy.status.current==0>
+				    	<a target="navTab" href="${contextPath}/singleTicket/toUpdate?id=${policy.id}" width="980" height="780" style="color: blue">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				    	<a target="ajaxTodo" title="确认启用‘${(policy.baseInfo.name)!'-'}’吗？" href="${contextPath}/singleTicket/usableBatch?ids=${policy.id}" style="color: blue">启用</a>&nbsp;&nbsp;&nbsp;&nbsp; 	
+				    </#if>
+				    <#if policy.status.current==3>
+				    	<a target="ajaxTodo" title="确认禁用‘${(policy.baseInfo.name)!'-'}’吗？" href="${contextPath}/singleTicket/disableBatch?ids=${policy.id}" style="color: blue">禁用</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				    </#if>
+				    
+				    <#if policy.status.current==4>
+				    	<a target="navTab" href="${contextPath}/singleTicket/toUpdate?id=${policy.id}" width="980" height="780" style="color: blue">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				    	<a target="ajaxTodo" title="确认启用‘${(policy.baseInfo.name)!'-'}’吗？" href="${contextPath}/singleTicket/usableBatch?ids=${policy.id}" style="color: blue">启用</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				    	<a target="ajaxTodo" href="${contextPath}/singleTicket/delBatch?ids=${policy.id}" title="确定删除该单票吗？" style="color: blue">删除</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				    </#if>
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+</div>
+

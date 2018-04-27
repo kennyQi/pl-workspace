@@ -1,0 +1,151 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/viewspot/finance/report" method="post">
+		
+		<input type="hidden" name="pageNum" value="" />
+		<input type="hidden" name="numPerPage" value="" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">
+						下单时间：
+					</td>
+					<td style="text-align: left">
+						<input type="text" readonly="readonly" name="createDateBegin" value="${dwzPlatformOrderQO.createDateBegin}" class="date" [dateFmt="yyyy-MM-dd"]  <#if dwzPlatformOrderQO.createDateBegin??> value="${dwzPlatformOrderQO.createDateBegin}"  </#if>/>
+						至<input type="text" readonly="readonly" name="createDateEnd" value="${dwzPlatformOrderQO.createDateEnd}" class="date" [dateFmt="yyyy-MM-dd"] <#if dwzPlatformOrderQO.createDateEnd??> value="${dwzPlatformOrderQO.createDateEnd}"  </#if>/>
+					</td>
+					<td style="text-align: left">
+						订单状态：
+					</td>
+					<td style="text-align: left">
+						<select name="orderStatus">
+							<option value="">全部</option>
+							<#list statusMap?keys as status>
+							<option value="${status}" <#if dwzPlatformOrderQO.orderStatus==status> selected="selected"  </#if> >${statusMap[status]}</option>
+							</#list>
+						</select>
+					</td>
+					<td style="text-align: left">
+						下单人：
+					</td>
+					<td style="text-align: left">
+						<input type="text" name="bookMan" value="${dwzPlatformOrderQO.bookMan}">
+					</td>	
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						景点名称：
+					</td>
+					<td style="text-align: left">
+						<input type="text" name="scenicSpotsName" value="${dwzPlatformOrderQO.scenicSpotsName}">
+					</td>						
+					<td style="text-align: left">
+						省市区：
+					</td>
+					<td style="text-align: left">
+						<select name="province">
+							<option value="">全部</option>
+							<#list provinceList as province>
+							<option value="${province.code}" <#if province.code==dwzPlatformOrderQO.province> selected="selected" </#if>>${province.name}</option>
+							</#list>
+						</select>
+						<select name="city">
+							<option value="">全部</option>
+							<#list cityList as city>
+							<option value="${city.code}" <#if city.code==dwzPlatformOrderQO.city> selected="selected"  </#if>>${city.name}</option>
+							</#list>							
+						</select>
+						<select name="area">
+							<option value="">全部</option>
+							<#list areaList as area>
+							<option value="${area.code}" <#if area.code==dwzPlatformOrderQO.area> selected="selected" </#if>>${area.name}</option>
+							</#list>	
+						</select>
+					</td>
+					<td style="text-align: left">
+						经销商渠道：
+					</td>
+					<td style="text-align: left">
+						<select>
+							<option value="">全部</option>
+							<option value="1">汇商旅</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button onclick="exp()" type="button">导出数据</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+	</div>
+	<table class="table" width="100%" layoutH="160" >
+		<thead>
+			<tr>
+				<th width = "50">序号</th>
+ 				<th width="50">经销商渠道</th>
+				<th width="60">平台订单号</th>
+				<th width="80">供应商订单号</th>
+				<th width="80">经销商订单号</th>
+				<th width = "50">订单状态</th>
+				<th width = "50">景点名称</th>
+				<th width = "50">省</th>
+				<th width = "50">市</th>
+				<th width = "50">下单时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as mpOrderDTO>
+			<tr>
+				<td>${mpOrderDTO_index+1}</td>
+				<td>汇商旅</td>
+				<td><a href="${contextPath}/viewspot/order/detail?platformOrderCode=${mpOrderDTO.platformOrderCode}" target="dialog" width="1000" height="800" style="color: blue">${mpOrderDTO.platformOrderCode}</a></td>
+				<td>${mpOrderDTO.supplierOrderCode}</td>
+				<td>${mpOrderDTO.dealerOrderCode}</td>
+				<#if mpOrderDTO.status.cancel==true>
+				<td>已取消</td>
+				<#elseif mpOrderDTO.status.outOfDate==true>
+				<td>已过期</td>
+				<#elseif mpOrderDTO.status.prepared==true>
+				<td>已预定待消费</td>
+				<#elseif mpOrderDTO.status.used==true>
+				<td>已使用</td>
+				</#if>
+				<td>${mpOrderDTO.supplierPolicySnapshot.scenicSpotSnapshot.tcScenicSpotsName}</td>
+				<td>${mpOrderDTO.supplierPolicySnapshot.scenicSpotSnapshot.provinceName}</td>
+				<td>${mpOrderDTO.supplierPolicySnapshot.scenicSpotSnapshot.cityName}</td>
+				<td>${mpOrderDTO.createDate?date}</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+
+function exp(){
+	document.forms[0].action="${contextPath}/viewspot/finance/export.csv";
+	document.forms[0].submit();
+	document.forms[0].action="${contextPath}/viewspot/finance/report";
+}
+</script>

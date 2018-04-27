@@ -1,0 +1,39 @@
+﻿$axure.loadCurrentPage({
+  "url":"旅游线路预定流程_1.html",
+  "generationDate":new Date(1417677017860.22),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable",
+"temp",
+"rl_date",
+"rl_day"],
+  "page":{
+    "packageId":"ec84d8805fba4320a41d800bbf00cb3d",
+    "type":"Axure:Page",
+    "name":"旅游线路预定流程",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[]}},
+  "masters":{
+},
+  "objectPaths":{
+}});

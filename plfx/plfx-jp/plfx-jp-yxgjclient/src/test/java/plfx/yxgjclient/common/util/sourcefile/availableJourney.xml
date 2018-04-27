@@ -1,0 +1,55 @@
+ <availableJourney>
+            <takeoffAvailJourney>
+                
+                <flights>
+                    <flight>
+                        <orgCity>PVG</orgCity>
+                        <orgTerm>2</orgTerm>
+                        <dstCity>ICN</dstCity>
+                        <marketingAirline>OZ</marketingAirline>
+                        <ticketingCarrier>OZ</ticketingCarrier>
+                        <flightNo>368</flightNo>
+                        <carriageAirline>OZ</carriageAirline>
+                        <carriageFlightno>368</carriageFlightno>
+                        <mealCode>B</mealCode>
+                        <cabinCode>E</cabinCode>
+                        <cabinSales>9</cabinSales>
+                        <qcharge>0.0</qcharge>
+                        <planeType>763</planeType>
+                        <startTime>2015-07-25 08:35</startTime>
+                        <endTime>2015-07-25 11:30</endTime>
+                        <isShare>0</isShare>
+                        <resBookDesigList>C:3,D:3,Z:3,U:3,Y:9,B:9,M:9,H:9,E:9,Q:9,K:9,S:9,V:9,L:9,W:9</resBookDesigList>
+                        <duration>1:55</duration>
+                    </flight>
+                    <flight>
+                        <orgCity>SHA</orgCity>
+                        <orgTerm>1</orgTerm>
+                        <dstCity>GMP</dstCity>
+                        <dstTerm>I</dstTerm>
+                        <marketingAirline>OZ</marketingAirline>
+                        <ticketingCarrier>OZ</ticketingCarrier>
+                        <flightNo>3625</flightNo>
+                        <carriageAirline>OZ</carriageAirline>
+                        <carriageFlightno>3625</carriageFlightno>
+                        <mealCode>D</mealCode>
+                        <cabinCode>M</cabinCode>
+                        <cabinSales>3</cabinSales>
+                        <qcharge>0.0</qcharge>
+                        <planeType>333</planeType>
+                        <startTime>2015-07-25 18:00</startTime>
+                        <endTime>2015-07-25 20:50</endTime>
+                        <isShare>0</isShare>
+                        <resBookDesigList>C:9,D:9,Z:9,U:9,Y:8,B:8,M:3</resBookDesigList>
+                        <duration>1:50</duration>
+                    </flight>
+                </flights>
+            </takeoffAvailJourney>
+            <priceInfos>
+                <priceInfo>
+                    <totalPrice>6400.0</totalPrice>
+                    <totalTax>1373.0</totalTax>
+                    <passType>ADT</passType>
+                </priceInfo>
+            </priceInfos>
+        </availableJourney>

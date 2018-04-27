@@ -1,0 +1,115 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*reset*/
+*{padding:0px;margin:0px;list-style:none;font-style: inherit;font-size: 100%;font-family:"Microsoft YaHei","微软雅黑";}
+
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+button{cursor:pointer;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+
+/*reset*/
+
+/*common*/
+.fl{float:left;}
+.fr{float:right;}
+.pl{position:relative;}
+.pa{position:absolute;}
+.ov{overflow:hidden;}
+.disb{display:block;}
+.bold{font-weight:bold;}
+.normal{font-weight:normal;}
+
+.yahei{font-family:"Microsoft YaHei","微软雅黑";}
+.simsun{font-family:"simsun","宋体";}
+.tom{font-family:"Tahoma";}
+.h1{font-size:18px;}
+.h2{font-size:16px;}
+.h3{font-size:14px;}
+.h4{font-size:12px;}
+.color3{color:#333333;}
+.color9{color:#999999;}
+.color6{color:#666666;}
+.color8{color:#888;}
+.linkC{color:#0073b6;}
+.f_red{color:#ff0000;}
+.forange{color:#ff6600;}
+.curp{cursor:pointer}
+.wd{width:100%;}
+.wd12{width:1200px;}
+.tc{text-align:center;}
+.ma{margin:auto;}
+/*common*/
+/**头部**/
+/**头部**/
+
+/* CSS Document */
+.sx_theme{
+	max-width: 1920px;
+	/*min-width:1148px;*/
+	height:144px;
+	margin:0 auto;
+	background-color:#54c51a;
+	background: url('../images/theme.jpg') no-repeat center top;
+	padding-top:888px;
+}
+.sx_theme .nav{
+	width:1148px;
+	height:80px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.sx_theme .nav li{
+	display:block;
+	float:left;
+	width:360px;
+	height:80px;
+	line-height:80px;
+	margin:11px;
+	text-align: center;
+}
+.sx_theme .nav li a{
+	display:block;
+	width:360px;
+	height:80px;
+}
+.xg_contents{
+	max-width: 1920px;
+	margin:0 auto;
+	height:1573px;
+	background: url('../images/theme.jpg') no-repeat center top;
+}
+.sx_content_1{
+	height:1630px;
+    background: url('../images/sx_content1.jpg') no-repeat center top;
+}
+.sx_content_detail_1{
+	width:1114px;
+    margin:0 auto;
+}
+.sx_content_2{
+	max-width: 1920px;
+	margin:0 auto;
+	height:2916px;
+    background: #f9e642;
+}
+.sx_content_detail_2{
+	width:1112px;
+    margin:0 auto;
+}
+.sx_content_3{
+	height:1805px;
+    background: url('../images/sx_content3.png') no-repeat center top;
+    padding-top:36px;
+}
+.sx_content_detail_3{
+	width:1111px;
+	margin:0 auto;
+}

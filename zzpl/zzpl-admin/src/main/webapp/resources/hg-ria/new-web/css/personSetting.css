@@ -1,0 +1,256 @@
+.r_content{
+	width:901px;
+	overflow: hidden;
+}
+.d_content{
+	margin-top:20px;
+}
+.sub_nav{
+	width:100%;
+	height:46px;
+	background: #f7f7f7 url('../images/divider.png') no-repeat center left;
+
+}
+.sub_nav li{
+    float:left;
+    width:137px;
+    height:46px;
+    line-height:46px;
+    text-align:center;
+}
+.sub_nav li.current{
+    background: url('../images/sub_nav_icon.png') no-repeat 12px 0;
+}
+.sub_nav li a{
+    font-size: 14px;
+    font-weight: normal;
+    color:#555;
+}
+.sub_nav li.current a{
+	font-size: 16px;
+    font-weight: bold;
+}
+#personInfo,#personInfo_edit{
+    width:100%;
+    background:#ffffff;
+    margin-bottom: 10px;
+}
+#linkManInfo,#linkManInfo_edit{
+    width:100%;
+    background:#ffffff;
+}
+.sub_title{
+	width:100%;
+	height:30px;
+	border-bottom:1px solid #cccccc;
+	font-size: 14px;
+    font-weight: normal;
+    color:#333;
+    padding-left:40px;
+    padding-top:12px;
+}
+table{
+    margin-top:5px;
+    margin-bottom: 15px;
+    margin-left:40px;
+}
+.td_l{
+    width:70px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: normal;
+    color:#999;
+    line-height: 40px;
+}
+.td_r{
+    text-align: left;
+    font-size: 14px;
+    font-weight: normal;
+    color:#333;
+    line-height: 40px;
+    padding-left:10px;
+    width:170px;
+}
+.td_r input{
+    width:170px;
+    height:30px;
+    line-height: 30px;
+    border:1px solid #cccccc;
+    padding-left:10px;
+    color:#333;
+}
+.td_r input.readonly{
+    color:#333;
+    background: #fff;
+    border:0;
+}
+.td_r input.edit_sex{
+    width:90px;
+    height:30px;
+    line-height: 30px;
+    border:1px solid #cccccc;
+    padding-left:10px;
+    color:#333;
+}
+.sex_wrap{
+    width:90px;
+    position:relative;
+}
+.sex_wrap .select{
+    width:100px;
+    height:60px;
+    background: #fff;
+    border:1px solid #cccccc;
+    position: absolute;
+    top:35px;
+    left:10;
+}
+*+html .sex_wrap .select{
+    top:35px;
+    left:10px;
+}
+.sex_wrap .select li{
+    width:90px;
+    padding-left:10px;
+    line-height:30px;
+}
+.sex_wrap .select li:hover{
+    background: #00b1eb;
+    color:#fff;
+}
+.btn_edit_wrap,.btn_wrap{
+    width:100%;
+    height:40px;
+    line-height:40px;
+    background: #f7f7f7;
+}
+
+.btn_edit{
+    font-size: 14px;
+    font-weight: normal;
+    color:#009bce;
+    cursor: pointer;
+    width:80px;
+    height:40px;
+    border:0;
+    background:#f7f7f7;
+    margin:0 auto;
+    display: block;
+}
+.btn_submit,.btn_reset{
+    display:inline-block;
+    width:80px;
+    height:26px;
+    line-height:26px;
+    border:none;
+    border:1px solid #cccccc;
+    background:#ffffff;
+    font-size: 12px;
+    font-weight: normal;
+    color:#333;
+    cursor: pointer;
+    text-align: center;
+}
+.td_r .g-search{
+    margin:0px;
+    padding: 0px;
+}
+.g-searchOff .input-select,.g-searchOff .current  .input-select{
+    border:0px;background-image: none;}
+
+.g-searchOff .current ul{
+    display: none;
+}
+.btn_submit:hover,.btn_reset:hover{
+    border:none;
+    border:1px solid #ff9c00;
+    background:#ff9c00;
+    color:#fff;
+}
+.btn_submit{
+    margin-left:365px;
+}
+
+/*修改密码样式*/
+.change_pwd{
+    width:100%;
+    height:566px;
+    background: #fff;
+    padding-top:12px;
+}
+.td_ll{
+    width:112px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: normal;
+    color:#333;
+    line-height: 45px;
+}
+.td_rr input{
+    width:190px;
+    height:30px;
+    line-height:30px;
+    border:1px solid #cccccc;
+    padding-left:10px;
+    font-size: 14px;
+    font-weight: normal;
+    color:#333;
+}
+.td_rr .btn_sub{
+    width:106px;
+    height:42px;
+    border:0;
+    line-height:42px;
+    background:#ff9c00;
+    color:#fff;
+    padding: 0px;
+    cursor: pointer;
+}
+.td_rr{
+    position: relative;
+}
+.td_rr input.tip{
+    position: absolute;
+    top:38px;
+    left:48px;
+    padding:0 5px;
+    font-size:14px;
+    color:#fff;
+    width:144px;
+    height:20px;
+    line-height:20px;
+    background: #ff9c00;
+    border:0;
+    z-index:100;
+}
+*+html .td_rr input.tip{
+    top:33px;
+    left:48px;
+}
+/*修改密码弹出框样式*/
+.w_change_pwd{
+    width:380px;
+    height:210px;
+    background:#fff;
+    position:fixed;
+    top:428px;
+    left:50%;
+    margin-left:-170px;
+    outline:1px solid #ff0000;
+    text-align: center;
+    z-index: 10001;
+}
+.w_change_pwd img{
+    display:block;
+    margin:30px auto 0px auto;
+}
+.w_change_pwd p{
+    font-size:14px;
+    color:#666;
+    line-height:40px;
+}
+
+
+
+/*new*/
+.dd_content .off{border:0px;padding:0px;}

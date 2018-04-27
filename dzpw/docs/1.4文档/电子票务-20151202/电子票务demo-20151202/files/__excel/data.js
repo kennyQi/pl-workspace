@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"__excel.html",
+  "generationDate":new Date(1449047708033.5),
+  "isCanvasEnabled":false,
+  "variables":["isLeftOpen"],
+  "page":{
+    "packageId":"ec33ca4977914441854ed67b4ffc397d",
+    "type":"Axure:Page",
+    "name":"导出excel",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"afa875187e1040499a46496fcf4d7de9",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":-144,
+              "y":113},
+            "size":{
+              "width":1304,
+              "height":127}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"6e1e66b5e2904c5080ce1792d71eebe0",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":-144,
+                  "y":113},
+                "size":{
+                  "width":1304,
+                  "height":127}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/__excel/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "afa875187e1040499a46496fcf4d7de9":{
+      "scriptId":"u0"},
+    "6e1e66b5e2904c5080ce1792d71eebe0":{
+      "scriptId":"u1"}}});

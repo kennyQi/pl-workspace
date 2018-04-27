@@ -1,0 +1,19 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>订单管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+					<li> <a href="${contextPath}/payorder/list" target="navTab" rel="order">订单列表</a> </li>
+					<li> <a href="${contextPath}/hjborder/testorder" target="navTab" height="700" width="650" rel="hjbtest">汇金宝支付测试</a> </li>
+					<li> <a href="${contextPath}/alipayorder/testorder" target="navTab" height="700" width="650" rel="alipaytest">支付宝支付测试</a> </li>
+					<li> <a href="${contextPath}/alipayorder/testrefund" target="navTab" height="700" width="650" rel="alipaytest">支付宝退款测试</a> </li>
+		</ul>
+	</div>
+</div>
+
+
+

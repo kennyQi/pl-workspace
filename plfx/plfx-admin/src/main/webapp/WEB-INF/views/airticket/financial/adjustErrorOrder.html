@@ -1,0 +1,88 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+	var myEdit={};
+	myEdit.clickFileInput = function (me) {
+	    if (isIE(6)) {
+	        $(me).next().trigger("click");
+	    }
+	};
+	var voucherPictureEdit = {};
+	voucherPictureEdit.fileChg= function (me){
+		
+		$.ajaxFileUpload({
+	       url : '${contextPath}/jp/finance/upload',
+	       secureuri : false,
+	       fileElementId : 'voucherPictureFile',
+	       dataType : 'json',
+	      success: function (data, status) {
+	    	  
+	    	  	if("success" == data.status) {
+	    	  		
+		       		$("#voucherPicture").val(data.imageName);
+		       		$("#voucherPictureImgSrc").attr("src",data.imageUrl);
+	    	  	}
+	        },
+	        error: function (data, status, e) {
+	            alert("上传失败");
+	        }
+	    });
+	    	    
+	   
+	}
+
+
+</script>
+
+	<div id="adjustErrorOrder" class="pageContent"  title="异常订单调整">
+	<form method="post" action="${contextPath}/jp/finance/addErrorOrder" target="dialog" 
+   class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone);">
+	
+	<input type="hidden" name="id" id="id" value="${id}"/>
+	<input type="hidden" name="orderNo" id="orderNo" value="${orderNo}"/>
+	<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>调整金额：</label>
+				<input type="text" name="adjustAmount" id="adjustAmount" size="60" class="required number textInput" value=""/>
+				<span id="zzmmsg"></span>
+			</div>
+			<div class="unit">
+				<label>上传凭证：</label>
+				<span style="display: inline-block;margin-bottom: 5px;">建议上传175*230尺寸jpg、gif、png或bmp格式，单张图片大小不超过2MB</span>
+	            <span class="u-upload">
+	                  
+	                  <input id="voucherPictureFile" name="voucherPictureFile" type="file" onchange="voucherPictureEdit.fileChg(this);" size="60" />
+	            	  <input type="hidden" name="voucherPicture" id="voucherPicture" value="" class="required"/>
+	            </span>
+			</div>
+			<div class="unit">
+				<label>&nbsp;</label>
+				<!-- <button type="button" onclick="voucherPictureEdit.fileChg(this);">上传图片</button> -->
+				<img id="voucherPictureImgSrc" width="40" height="60" alt="" title="上传凭证" src="">
+			</div>
+			<div class="unit">
+				<label>调整原因：</label>
+				<textarea rows="5" cols="50" name="adjustReason" id="adjustReason" class="required"></textarea>
+				<span id="zzmmsg"></span>
+			</div>
+			
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="buttonActive">
+					<div class="buttonContent">
+						<button type="submit">确定</button>
+					</div>
+				</div>
+			</li>
+			
+			<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+		</ul>
+	</div>
+	</form>
+		
+</div>
+
+
+

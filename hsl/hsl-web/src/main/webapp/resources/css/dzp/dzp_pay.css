@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+/*支付成功*/
+.g_step .m_move .h3{color:#00a0e9;}        /*未完成部分的样式*/
+.g_step .m_move .icon{background:url(../../images/payScript.png) 0 -28px; color:#fff;}   /*未完成部分的样式*/
+
+.g_step .m_move .h3Complete{color:#71c287;}     /*已完成部分样式*/
+.g_step .m_move .iconComplete{background:url(../../images/payScript.png) 0 -56px; color:#fff;}
+.success{ width:100%; min-width:1200px; height:730px; border-bottom:1px solid #f0f0f0; background:#fafafa; overflow:hidden;}
+
+.balloon{ width:1200px; height:287px; background:url(../../images/balloon.png); margin:0 auto; min-width:1200px;}
+.confirm{ width:124px; height:124px; background:url(../../images/confirm.png); display:block; position:absolute; margin-top:124px; margin-left:538px;}
+.success .information{width:1200px; margin:0 auto; min-width:1200px;}
+.success .information span{ font-size:32px; color:#03af69; display:block; text-align:center; line-height:32px;}
+.success .information .order{font-size:24px; color:#666; text-align:center; line-height:23px; margin-top:16px;}
+.success .information .route{ font-size:16px; color:#888; text-align:center; line-height:15px; margin-top:35px;}
+
+
+/*支付订单页面*/
+.g_step .m_move span{ width:232px; height:28px; background:url(../../images/payScript.png) 0 0; display:block; line-height:25px; font-family:Arial Regular; font-size:20px; color:#cdcece;}
+.g_step .m_move .h3{color:#00a0e9;}        /*未完成部分的样式*/
+.g_step .m_move .icon{background:url(../../images/payScript.png) 0 -28px; color:#fff;}   /*未完成部分的样式*/
+
+.g_step .m_move .h3Complete{color:#71c287;}     /*已完成部分样式*/
+.g_step .m_move .iconComplete{background:url(../../images/payScript.png) 0 -56px; color:#fff;}
+
+.g_title{width:100%;min-width:1200px; height:50px; background:#F0f0f0;}
+.g_title span{ font-size:22px; float:left; margin:17px 0 16px -1190px;}
+
+.m_order{ clear:both; width:100%; min-width:1200px; background:#f0f0f0; height:50px;}
+.m_order .orderTitle{ width:1200px; margin:0 auto; font-size:18px; line-height:50px; padding-left:80px;}
+.details{width:1200px; min-width:1200px; margin:0 auto; height:281px;}
+.details .message{ padding-left:75px; padding-top:24px; color:#666;}
+.details .message li{height:30px;}
+.details span{ line-height:30px; font-size:14px; }
+.details .name{ width:80px; text-align:right; float:left; padding-right:3px;}
+.details .theme{ color:#0073b6;}
+.details .children{ padding-left:29px;}
+
+.pay{clear:both; width:100%; min-width:1200px; background:#e8f4fb; height:68px;}
+.pay .payTitle{width:1160px; margin:0 auto; font-size:18px; line-height:68px; padding-left:40px;}
+.pay .detailed{ float:right; padding-right:40px; }
+.detailed span{ font-size:14px;line-height:68px;}
+.category{color:#666;}
+#money{color:#000000; margin-right:30px; font-family:"Tahoma";}
+#moneys{color:#ff6600; font-size:20px; margin-left:5px;}
+.payfor{ height:330px; width:1200px; min-width:1200px; margin:0 auto;}
+.payBox{width:1114px; height:100px; background:#fff4d9; border:3px solid #fd893e; margin:0 auto;  margin-top:10px;}
+.paytitle{ font-family:"微软雅黑"; font-size:16px; color:#333; line-height:100px; padding-left:20px; padding-right:36px;}
+.alipay{ width:126px; height:58px; position:absolute; margin-top:21px; margin-left:10px; background:url(../../images/Alipay.png); }
+.clearing{ float:right; margin-top:54px; margin-right:20px;}
+.clearing .category{font-size:14px; font-family:"宋体";margin-top:5px;}
+.clearing .moneyLogo{font-size:18px; color:#ff6600;font-size:30px;font-weight:bold;}
+.clearing .moneys{ font-size:30px; color:#ff6600; font-family:"Tahoma";}
+
+
+.clause{ float:right; padding-right:40px; width:227px; margin-top:20px;}
+.clause .checkbox{width:16px; height:16px; background:url(../../images/payScript.png) -216px -128px; display:inline-block;}
+.clause .tiaokuan{ height:16px; font-family:"宋体"; font-size:14px; float:right; line-height:16px; color:#666; margin-right:145px;}
+.clause li{ height:16px;}
+.clause .button{width:227px; height:40px; background:#ff6600; float:left; margin-top:10px; text-align:center;}
+.clause .button a{color:#FFFFFF; line-height:40px;}
+.yesChoice{background:url(../../images/payScript.png) 0 -128px !important; }
+
+.payBox_radio{margin-top:45px;width:12px;height:12px;}
+.radio{float:left; height:16px;width:17px;margin-top:45px;font-size:14px; line-height:16px; background:url(../../images/payScript.png) no-repeat -215px -157px;}
+.radio_on{background:url(../../images/payScript.png) no-repeat 1px -157px;}
+
+/*预定成功页面*/  
+.g_step .m_move .ticketSuccess{background:url(../../images/payScript.png) 0 -186px; width:360px; color:#fff;}
+.success .information .tickTop{ margin-top:45px;}
+/*预定成功页面*/

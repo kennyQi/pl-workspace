@@ -1,0 +1,105 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+ 
+<form method="post" action="${contextPath}/airtkt/policy/publish"  
+               class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone);">
+               <div class="formBar">
+   <input type="hidden" name="policyId" value="${(policyId)!''}" />
+<div class="pageContent">
+   <div class="unit">
+       <div>
+       政策编号：${(policyDTO.no)!''}
+       </div>
+       <div>
+           适用平台：${(policyDTO.supplier.name)!''}
+       </div>
+       <div>
+           适用范围：${(policyDTO.dealer.name)!''}
+       </div>
+       <div>
+           适用时间：${(policyDTO.beginTime)!?string("yyyy-MM-dd HH:mm:ss")} - ${(policyDTO.endTime)!?string("yyyy-MM-dd HH:mm:ss")}
+       </div>
+       <div>
+           价格政策：
+           <#if policyDTO.pricePolicy ??>
+               <#if policyDTO.pricePolicy gt 0>
+                   增加
+                   ${(policyDTO.pricePolicy)!''}
+               <#else>
+                   减少
+                   ${(policyDTO.pricePolicy * -1)!''}
+               </#if>
+               元
+           <#else>
+               <#if policyDTO.percentPolicy gt 0>
+                   增加
+                   ${(policyDTO.percentPolicy * 100)!''}%
+               <#else>
+                   减少
+                   ${(policyDTO.percentPolicy * -100)!''}%
+               </#if>
+           </#if>
+       </div>
+       <div>
+           备注：${(policyDTO.remark)!''}
+       </div>
+   </div>
+   
+   
+   <br/><br/>
+   <div class="unit">
+       <label>操作日志</label>
+   </div>
+   <div class="unit">
+       <hr/>
+   </div>
+   <div class="unit">
+       <table class="table" width="100%" layoutH="210" >
+           <thead>
+               <tr>
+                    <th width="70">时间</th>
+                   <th width="100">操作</th>
+                   <th width="100">操作人</th>
+                   <th width="90">操作信息</th>
+               </tr>
+           </thead>
+           <tbody>
+           <#list LOG_EVENTS as event>
+           	<tr>
+           		<td>
+           			<#if event.createDate ??>
+	           			${event.createDate!?string("yyyy-MM-dd HH:mm:ss")}
+           			</#if>
+           		</td>
+           		<td>
+           			<#if event.methodName =='cancelPolicy'>
+           				取消政策
+           			<#elseif event.methodName =='publicPolicy'>
+           				发布政策
+           			<#elseif event.methodName =='savePolicy'>
+           				增加政策
+           			</#if>
+           		</td>
+           		<td>${(event.operate)!''}</td>
+           		<td>
+           			<#if event.params ??>
+           				<#list event.params as param>
+           					<p>${(param)!''}</p>
+           				</#list>
+           			</#if>
+           		</td>
+           	</tr>
+           	</#list>
+           </tbody>
+       </table>
+   </div>
+   
+</div>
+<div class="formBar">
+   <ul>
+       <#if PUBLISH?? && PUBLISH==true>
+           <li><div class="buttonActive"><div class="buttonContent"><button type="submit">发布</button></div></div></li>
+       </#if>
+       <li><div class="buttonActive"><div class="buttonContent"><button class="close">关闭</button></div></div></li>
+   </ul>
+</div>
+</form>

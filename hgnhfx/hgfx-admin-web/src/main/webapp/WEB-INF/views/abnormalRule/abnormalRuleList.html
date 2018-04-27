@@ -1,0 +1,82 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	
+	function show(){
+		$("#stepTwo",navTab.getCurrentPanel()).show();
+		$("#stepOne",navTab.getCurrentPanel()).hide();
+	}
+	
+	function confirmSave(){
+		if (confirm("是否要保存修改？")){
+			if ($("#dayMax").val().trim() =="" && $("#orderUnitMax").val().trim() == "" && $("#mouthMax").val().trim() == ""){
+				$("#stepTwo",navTab.getCurrentPanel()).hide();
+				$("#stepOne",navTab.getCurrentPanel()).show();
+				return;
+			}
+			$('#pagerFormAR').submit();
+		}
+	}
+	
+	
+</script>
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="58">
+	
+	<form  id="pagerFormAR" ref="pagerForm" class="pageForm required-validate" method="post" 
+		action="${contextPath}/abnormalRule/modify" onsubmit="return validateCallback(this, navTabAjaxDone);">
+		
+	<div class="jq unit" style="padding:8px 5px;margin-bottom:10px;"><span style="color: gray">此配置用于限制异常订单</span></div>
+	
+	<div class="unit">
+			<label style="width: 150px;">南航积分非正常订单配置</label>
+	</div>
+	
+	<input type="hidden" name="ruleId" value="${rule.id}">
+		
+	<div id="stepOne">
+		<div class="unit">
+			<label>单笔订单积分上限</label>
+			<label>${rule.orderUnitMax?c}&nbsp;&nbsp;&nbsp;积分</label>
+		</div>
+		
+		<div class="unit">
+			<label>同账号每日订单上限</label>
+			<label>${rule.dayMax?c}&nbsp;&nbsp;&nbsp;次</label>
+		</div>
+		
+		<div class="unit">
+			<label>同账号每月订单上限</label>
+			<label>${rule.mouthMax?c}&nbsp;&nbsp;&nbsp;次</label>
+		</div>
+		
+		<div class="unit" style="padding: 15px 1px;">
+			<input type="button" value="&nbsp;修&nbsp;改&nbsp;" onclick="show()"/>
+		</div>
+	</div>
+	
+	<div id="stepTwo" style="display:none;">
+		<div class="unit">
+			<label>单笔订单积分上限</label>
+			<input id="orderUnitMax" name="orderUnitMax" maxlength="10" size="15">&nbsp;&nbsp;&nbsp;积分
+		</div>
+		
+		<div class="unit">
+			<label>同账号每日订单上限</label>
+			<input id="dayMax" name="dayMax" maxlength="4" size="15">&nbsp;&nbsp;&nbsp;次
+		</div>
+		
+		<div class="unit">
+			<label>同账号每月订单上限</label>
+			<input id="mouthMax" name="mouthMax" maxlength="4" size="15">&nbsp;&nbsp;&nbsp;次
+		</div>
+		
+		<div class="unit" style="padding: 15px 1px;">
+			<input type="button" onclick="confirmSave();" value="&nbsp;保&nbsp;存&nbsp;"/>
+		</div>
+	</div>
+	
+	</form>
+</div>
+
+

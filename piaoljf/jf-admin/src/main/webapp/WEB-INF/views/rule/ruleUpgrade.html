@@ -1,0 +1,229 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+      <form id="rule_upgrade_form" method="post" action="${contextPath}/rule/upgrade" class="pageForm required-validate" >
+		<div class="pageFormContent" layoutH="58" >
+		<h1>升级前规则</h1><div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+			<div class="unit">
+				<label>规则编码:</label>
+				<input type="text"  size="64" maxlength="30"  value="${ruleEntity.code}"     readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>规则名称：</label>
+				<input  type="text" size="64"  maxlength="64" value="${ruleEntity.name}" readonly="readonly"/>
+			</div>
+			
+				<#assign startDate="${ruleEntity.startDate}"?date("yyyy-MM-dd")> 
+				<#assign endDate="${ruleEntity.endDate}"?date("yyyy-MM-dd")>
+	        <div class="unit">
+				<label>开始日期：</label>
+ 				<input type="text"   value="${startDate}"    readonly="readonly" />
+			</div>
+		   <div class="unit">
+				<label>结束日期：</label>
+			  <input type="text"  value="${endDate}"      readonly="readonly" />
+			</div>
+			<div class="unit">
+				<label>规则模板：</label>
+				<label>${ruleEntity.templateName}</label>
+				<input hidden="hidden"  id="template_logicClass" value="${ruleEntity.logicClass}"/>
+			</div>	
+			<div class="unit"  >
+				<label>模板参数：</label>
+				 <table id="rule_template_check"></table>
+			     <label  id ="template_props"  hidden="hidden">${ruleEntity.props}</label>
+			</div>
+			 <div class="unit">
+				<label>产生积分账户类型：</label>
+				<#list ruleTypeList as rl>
+				<#if rl.me.code == ruleEntity.accountType><label>${rl.me.name}</label></#if>
+				</#list>
+			</div>
+			 <div class="unit">
+				<label>规则状态：</label>
+				<label>升级后规则作废</label>
+			</div>
+			<div>&nbsp;&nbsp;&nbsp;&nbsp;</div><div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+		 <h1>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</h1>
+		 <div>&nbsp;&nbsp;&nbsp;</div>
+		 	 <h1>升级为</h1>
+		 	 <div>&nbsp;&nbsp;&nbsp;</div>
+		  <input hidden="hidden"  name="ex_code" value="${ruleEntity.code}"/>
+			 <div class="unit">
+				<label>规则编码:</label>
+				<input id="rule_upgrade_code" type="text" name="code" size="64" maxlength="30"   class="required" />
+			</div>
+			<div class="unit">
+				<label>规则名称：</label>
+				<input  type="text" name="name" size="64" class="required"  maxlength="64" class="required"  />
+			</div>
+	        <div class="unit">
+				<label>开始日期：</label>
+ 				<input type="text" id="rule_upgrade_startDate" name="startDate"  value="<#if dto.startDate??>${dto.startDate?string("yyyy-MM-dd")}</#if>" class="date" minDate="<#if dto.startDate??> ${dto.startDate?string("yyyy-MM-dd")}</#if>" maxDate="<#if dto.startDate??> ${dto.startDate?string("yyyy-MM-dd")}</#if>" readonly="true" />
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</div>
+		   <div class="unit">
+				<label>结束日期：</label>
+			  <input type="text" name="endDate" id="rule_upgrade_endDate" class="required date"  minDate="2000-01-15" maxDate="2016-12-15" readonly="true" />
+				<a class="inputDateButton" href="javascript:;">选择</a>
+			</div>
+			<div class="unit">
+				<label>规则模板：</label>
+				 <select class="required combox" name="logicClass" onchange="getRuleParam();"  id="rule_select">
+					<option value="">所有类型</option>
+					<#list templateList.list as t>
+					  <option value="${t.code}">${t.name}</option>
+					</#list>
+				</select>
+			</div>	
+			<div class="unit">
+				<label>模板参数：</label>
+				<table id="rule_template"></table>
+				<input hidden="hidden" name="props" id="template_param"  />
+			</div>
+			 <div class="unit">
+				<label>产生积分账户类型：</label>
+			   <select class="required combox" name="accountType">
+					<option value="">所有类型</option>
+					<#list ruleTypeList as rl>
+					<option value="${rl.me.code}" >${rl.me.name}</option>
+					</#list>
+				</select>
+			</div>
+	    </div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button"   onclick="putProps()">立即升级</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+   //获得模板remark
+     $("#rule_template_check").html("");
+      var code = $("#template_logicClass").val();
+			$.ajax({
+				type: "post",
+				url: "${contextPath}/rule/getParm?code="+code,
+				cache:false,
+				dataType:"json",
+				success: function(data){
+			   jsonL = data.length;
+			  for (var i = 0; i<data.length; i++)
+			  {
+			  	   var ht="<tr><td>"+data[i].remark+"：</td><td><input     name="+data[i].name +" readonly='readonly'></input></td></tr>";
+	               $("#rule_template_check").append(ht);
+			  }
+			  	   //模板参数
+		      var props  = $("#template_props").html();
+		      if(props.length > 2)
+		      {
+		       props = props.substr(1,props.length-2);
+		      var arr = new Array();
+		    arr = props.split(",");
+		    for (var i =0 ; i<arr.length; i++)
+		    {
+		       var av = arr[i].split(":");
+		       var vaLen = av[0].length;
+		       var vnLen = av[1].length;
+		       var inputName = av[0].substr(1,vaLen-2);
+		      $("input[name="+inputName+"]").attr("value", av[1].substr(1,vnLen-2));
+		    }
+		      }
+
+		  }, error:function(e){  alert("请求发生错误"); }
+	     });
+    
+});
+
+
+var jsonL;
+function getRuleParam(obj){
+      $("#rule_template").html("");
+      var code = $("#rule_select").val();
+			$.ajax({
+				type: "post",
+			    url: "${contextPath}/rule/getParm?code="+code,
+				cache:false,
+				dataType:"json",
+				success: function(data){
+			  jsonL = data.length;
+			  for (var i = 0; i<data.length; i++)
+			  {
+			  	   var ht="<tr><td>"+data[i].remark+"：</td><td><input  id = 'param_props"+i+"'  name="+data[i].name +"  class='number required'></input></td></tr>";
+	               $("#rule_template").append(ht);
+			  }
+		  },
+				error:function(e){
+				 alert("请求发生错误");
+				}
+	     });	
+}
+
+function putProps(){
+  
+   parms();
+    
+    
+  var f = $("#rule_upgrade_form");
+  var flag = true;
+   var re = /^\w*$/;
+   var rulecode = $("#rule_upgrade_code").val().trim();
+   if(!re.test(rulecode))
+	{
+	    alert("规则编码只能包括字母、数字、下划线！");
+	    flag = false;
+	}
+	 //判断日期
+   var sd = $("#rule_upgrade_startDate").val();
+   var ed = $("#rule_upgrade_endDate").val();
+   var arr = sd.split("-");
+   var sdata = new Date(arr[0],arr[1],arr[2]);
+   var startData = sdata.getTime();
+   var earr = ed.split("-");
+   var edata = new Date(earr[0],earr[1],earr[2]);
+   var endData = edata.getTime();
+   if(startData > endData )
+  {
+   alert("开始时间不能大于结束时间！");
+   $("#rule_upgrade_startDate").addClass("error");
+   $("#rule_upgrade_endDate").addClass("error");
+   flag =  false;
+  }
+  
+  if (flag)
+  {
+     flag = validateCallback(f, dialogAjaxDone);
+  }
+ 
+ //验证通过
+  if(flag)
+ {
+    f.submit();
+ }
+    
+  }
+  
+  
+  function parms()
+ {
+   //组合模板参数放入隐藏域当做字段保存数据库
+  var content = "{";
+  for(var i =0; i< jsonL; i++)
+  {
+       var pvalue = $("#param_props"+i).val();
+       var pname = $("#param_props"+i).attr("name");
+       
+       content += "\""+pname+"\":\""+pvalue+"\"";
+       if(i!=jsonL-1)
+           content+=",";
+  }
+  content+="}";
+  $("#template_param").val(content);
+ 
+ }
+</script>

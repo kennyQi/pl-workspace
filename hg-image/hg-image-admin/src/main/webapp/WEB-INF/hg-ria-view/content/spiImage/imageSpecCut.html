@@ -1,0 +1,141 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign fileInfo = imageSpec.fileInfo?eval />
+
+<div class="row">
+	<div class="col-md-7 col-sm-12 responsive-1024">
+		<img src="${imageStaticUrl}${fileInfo.uri}" target="jcrop" alt="Jcrop Example" id="jcropImg"
+			class="img-responsive" x-ref="#top" y-ref="#left" 
+			w-ref="#width" h-ref="#height" prev-ref="#imgPrev"/>
+	</div>
+	<div class="col-md-5 col-sm-12 responsive-1024">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-gift"></i>图片裁剪
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+							<a href="#portlet-config" data-toggle="modal" class="config">
+							</a>
+							<a href="javascript:;" class="reload">
+							</a>
+							<a href="javascript:;" class="remove">
+							</a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/hg/spiAlbum/spiImageSpec/cutSave"
+											class="coords form-inline pageForm required-validate"
+											onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="imageSpecId" value="${imageSpec.id!?html}" />
+							<input type="hidden" name="imageId" value="${image.id}" />
+							<input type="hidden" name="imgUrl" value="${imageStaticUrl}${fileInfo.uri}" />
+							
+							<input type="hidden" id="top" name="_top"/>
+							<input type="hidden" id="left" name="_left"/>
+							<input type="hidden" id="width" name="_width"/>
+							<input type="hidden" id="height" name="_height"/>
+							<table class="table table-bordered">
+								<tr>
+									<td>
+										<label class="control-label">预览</label>
+									</td>
+									<td>
+										<div id="imgPrev" />
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label class="control-label">新宽度</label>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" id="newWidth" class="form-control btn-sm" readonly="readonly"/>
+											<span class="input-group-addon">px</span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label class="control-label">新高度</label>
+									</td>
+									<td>
+										<div class="input-group">
+											<input type="text" id="newHeight" class="form-control btn-sm" readonly="readonly"/>
+											<span class="input-group-addon">px</span>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label class="control-label">规格名称</label>
+									</td>
+									<td>
+										<select class="combox" name="key" id="key" target="dropDown" 
+											data-live-search="true" onchange="imageSpecCut.reSetPre(this);">
+											<#if image && image.useType>
+												<#list image.useType.imageSpecKeys as specKey>
+													<#if specKey.key == imageSpec.key>
+														<option value="${specKey.key}" selected 
+															data-width="${specKey.width?c}" data-height="${specKey.height?c}">${specKey.key}</option>
+													<#else>
+														<option value="${specKey.key}"
+															data-width="${specKey.width?c}" data-height="${specKey.height?c}">${specKey.key}</option>
+													</#if>
+												</#list>
+											</#if>
+										</select>
+									</td>
+								</tr>
+							</table>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-2 col-md-10">
+									<a class="btn green" target="submit">提交</a>
+									<a class="btn blue" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	var imageSpecCut = {};
+	
+	$(document).ready(function() {
+		
+		imageSpecCut.init = function() {
+			
+			imageSpecCut.reSetPre();
+		};
+
+		imageSpecCut.reSetPre = function() {
+
+			var $op = $('#key').find("option:selected")
+			var newWidth = $op.attr('data-width');
+			var newHeight = $op.attr('data-height');
+			
+			$('#newWidth').val(newWidth);
+			$('#newHeight').val(newHeight);
+			
+			var op = {
+				width: newWidth,
+				height: newHeight
+			}
+			
+			$('#jcropImg').trigger('changePrev', op);
+		};
+		
+		imageSpecCut.init();
+		
+		setTimeout(imageSpecCut.reSetPre, 1000);
+	});
+
+</script>

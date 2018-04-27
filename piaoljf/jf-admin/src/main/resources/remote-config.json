@@ -1,0 +1,61 @@
+{
+    "properties": {
+        "czPath": "D:/",
+        "czTime": "9:40",
+        "db_password": "hjf_dev",
+        "db_username": "hjf_dev",
+        "dubbo_register_center": "redis://127.0.0.1:6379",
+        "fastdfs_base_path": "",
+        "fastdfs_double": "",
+        "fastdfs_http_tracker_server_port": "",
+        "fastdfs_tracker_server_address1": "",
+        "fastdfs_tracker_server_address2": "",
+        "fastdfs_tracker_server_port": "",
+        "group_name": "",
+        "group_password": "",
+        "isDetectionSignature": "false",
+        "jdbc_url": "jdbc:mysql://192.168.41.108:3306/piaol_dev?characterEncoding=utf8",
+        "jfPath": "/main/apps/jfPath",
+        "logger_file": "c:/hjf/pljf_admin.log",
+        "logger_level": "info",
+        "mdb_host": "192.168.2.214",
+        "mdb_password": "",
+        "mdb_port": "27017",
+        "mdb_username": "",
+        "multicast_enabled": "",
+        "multicast_group": "",
+        "multicast_port": "",
+        "network_port": "",
+        "passK": "abc",
+        "picContextPath": "http://app.51hjf.com:9119/hg-hjf-admin/",
+        "redis1_ip": "192.168.2.211",
+        "redis1_port": "6379",
+        "redis2_ip": "192.168.2.211",
+        "redis2_port": "6379",
+        "redis_pool_maxActive": "300",
+        "redis_pool_maxIdle": "100",
+        "redis_pool_maxWait": "2000",
+        "redis_pool_testOnBorrow": "true",
+        "redis_pool_testOnReturn": "true",
+        "service_aop_hglog": "false",
+        "sms1234": "true",
+        "sms_address": "",
+        "sms_password": "",
+        "sms_suffix": "",
+        "sms_user": "",
+        "tcp_ip_enabled": "",
+        "tcp_ip_members": ""
+    },
+    "propertyFile": [
+        {
+            "content": "log4j.rootLogger=info, stdout, R\r\nlog4j.appender.stdout=org.apache.log4j.ConsoleAppender\r\nlog4j.appender.stdout.layout=org.apache.log4j.PatternLayout\r\n\r\nlog4j.logger.org.apache.commons.httpclient=info\r\nlog4j.logger.httpclient.wire.content=info\r\nlog4j.logger.httpclient.wire.header=info\r\n\r\n# Pattern to output the caller's file name and line number.\r\nlog4j.appender.stdout.layout.ConversionPattern=%-4r %-5p [%d{yyyy-MM-dd HH:mm:ss}]  %m%n\r\n\r\nlog4j.appender.R=org.apache.log4j.RollingFileAppender\r\nlog4j.appender.R.File=c:/hjf/pljf_admin.log\r\nlog4j.appender.R.MaxFileSize= 100MB\r\n\r\n# Keep one backup file\r\nlog4j.appender.R.MaxBackupIndex=1\r\n\r\nlog4j.appender.R.layout=org.apache.log4j.PatternLayout\r\nlog4j.appender.R.layout.ConversionPattern=%-4r %-5p [%d{yyyy-MM-dd HH:mm:ss}]  %m%n\r\nlog4j.appender.LOGFILE.encoding=UTF-8\r\n\r\n# cz config\r\nlog4j.logger.hg.jfadmin.task.CZReturnTask=info,CZR\r\nlog4j.appender.CZR=org.apache.log4j.RollingFileAppender\r\nlog4j.appender.CZR.File=/main/apps/jfPath/cz.log\r\nlog4j.appender.CZR.MaxFileSize= 100MB\r\n\r\n# Keep one backup file\r\nlog4j.appender.CZR.MaxBackupIndex=1\r\n\r\nlog4j.appender.CZR.layout=org.apache.log4j.PatternLayout\r\nlog4j.appender.CZR.layout.ConversionPattern=%-4r %-5p [%d{yyyy-MM-dd HH:mm:ss}]  %m%n\r\n# end cz config\r\n\r\n",
+            "encoding": "ISO-8859-1",
+            "name": "log4j.properties"
+        },
+        {
+            "content": "#read by JfProperty.java\r\n\r\nsms1234=true\r\npassK=abc\r\nisDetectionSignature=false\r\njfPath=/main/apps/jfPath\r\nczPath=D:/\r\nurl99=${url99}\r\nczTime=9:40\r\n#picture server context path. \r\npicContextPath=http://app.51hjf.com:9119/hg-hjf-admin/\r\n",
+            "encoding": "ISO-8859-1",
+            "name": "jf.properties"
+        }
+    ]
+}

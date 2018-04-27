@@ -1,0 +1,156 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/couponActivity/couponManage" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">
+						活动名称：
+					</td>
+					<td><input type="text" id="couponId" name="name" value="${qo.name}" ></td>
+					<td style="text-align: left">
+						所属分类：
+					</td>
+					<td style="text-align: left">
+						<select id="couponType" name="couponType">
+							<option value="0">全部</option>
+							<option value="1">代金券</option>
+							<option value="2">现金券</option>
+						</select>
+					</td>
+					<td style="text-align: left">
+						状态：
+					</td>
+					<td style="text-align: left">
+						<select id="currentValue" name="currentValue">
+							<option value="0" >全部</option>
+							<option value="1">未审核</option>
+							<option value="2">审核未通过</option>
+							<option value="3">审核通过</option>
+							<option value="4">发放中</option>
+							<option value="5">名额已满</option>
+							<option value="6">活动结束</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: left">
+						发放渠道：
+					</td>
+					<td style="text-align: left">
+						<select id="issueWay" name="issueWay">
+							<option value="0" >全部</option>
+							<option value="1">注册</option>
+							<option value="2">订单满</option>
+							<option value="3">指定人员发放</option>
+							<option value="4">赠券</option>
+						</select>					
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button >查询</button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<a href="${contextPath}/couponActivity/addCoupon" target="navTab"
+				rel="addCoupon"><span>添加卡券活动</span></a>					
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</form>
+		</div>
+<div class="pageContent">
+	<div class="panelBar">
+	</div>
+	<table class="table" width="100%" layoutH="170" >
+		<thead>
+			<tr>
+ 				<th width="50">优先级</th>
+ 				<th width="100">活动名称</th>
+				<th width = "100">分类</th>
+				<th width = "150">发放渠道</th>
+				<th width = "70">卡券面额（元）</th>
+				<th width = "150">使用条件</th>
+				<th width = "300">活动有效期</th>
+				<th width = "150">状态</th>
+				<th width = "50">已发放数量</th>
+				<th width="150">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list (pagination.list)!null as couponActivity>
+			<tr>
+				<td>${(couponActivity.issueConditionInfo.priority)!}</td>
+				<td>${(couponActivity.baseInfo.name)!}</td>
+				<td>${(couponTypeMap[couponActivity.baseInfo.couponType?c])!}</td>
+				<td>${(issueWayMap[couponActivity.issueConditionInfo.issueWay?c])!}</td>				
+				<td>${(couponActivity.baseInfo.faceValue)!}</td>	
+				<td>
+					${(conditionMap[couponActivity.useConditionInfo.condition?c])!}
+					<#if (((couponActivity.useConditionInfo.condition)!)?c==1)>
+					${(couponActivity.useConditionInfo.minOrderPrice)!}元可以使用
+					</#if>
+				</td>	
+				<td>${(couponActivity.issueConditionInfo.issueBeginDate?string("yyyy-MM-dd HH:mm:ss"))!''}—${(couponActivity.issueConditionInfo.issueEndDate?string("yyyy-MM-dd HH:mm:ss"))!''}</td>				
+				<td>${(currentValueMap[couponActivity.status.currentValue?c])!}</td>				
+				<td>${(couponActivity.status.issueNum)!}</td>
+				<td><a href="${contextPath}/couponActivity/showCoupon?id=${(couponActivity.id)!}" target="navTab"
+				rel="viewCoupon" style="color:blue">详情</a>
+					<#if ((couponActivity.status.currentValue)??&&couponActivity.status.currentValue<4)>
+					<a href="${contextPath}/couponActivity/addCoupon?id=${(couponActivity.id)!}" target="navTab"
+				rel="addCoupon" style="color:blue">修改</a>
+					</#if>
+					<#if ((couponActivity.status.currentValue)??&&couponActivity.status.currentValue==1)>
+					<a target="dialog" href="${contextPath}/couponActivity/examPage?id=${(couponActivity.id)!}" style="color:blue" >审核</a>
+					</#if>
+					<#if ((couponActivity.status.currentValue)??&&couponActivity.status.currentValue==4||couponActivity.status.currentValue==5)>
+					<a target="dialog" href="${contextPath}/couponActivity/cancelActivity?id=${(couponActivity.id)!}" style="color:blue" >取消</a>
+					</#if>
+					<#if ((couponActivity.status.currentValue)??&&couponActivity.status.currentValue==7)>
+					<a href="${contextPath}/couponActivity/showReason?id=${(couponActivity.id)!}" target="dialog" style="color:blue" >取消原因</a>
+					</#if>
+					
+					<#if ((couponActivity.issueConditionInfo.issueWay)??&&couponActivity.issueConditionInfo.issueWay==3)
+						&&((couponActivity.status.currentValue)??&&couponActivity.status.currentValue==4)>
+					<a href="${contextPath}/couponActivity/sendWelfarePage?id=${(couponActivity.id)!}" target="dialog"  mask="true" style="color:blue" width="500" height="350" title="向指定用户发送">发放</a>
+					</#if>
+					<#if ((couponActivity.sendConditionInfo.isSend)??&&couponActivity.sendConditionInfo.isSend==true)>
+					<a href="${contextPath}/couponActivity/conversedPage?id=${(couponActivity.id)!}&sendAppendCouponIds=${couponActivity.sendConditionInfo.sendAppendCouponIds}&userCreateTime=${couponActivity.sendConditionInfo.userCreateTime}"
+					 target="dialog" mask="true" width="500" height="300" style="color:blue" title="转赠设置">转赠</a>
+					</#if>
+					
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+<#include "/public/pagination/pagination.html">
+	
+
+</div>
+<script type="text/javascript">
+//初始化查询条件
+$("#couponType option[value=${qo.couponType}]").prop("selected",true);
+$("#currentValue option[value=${qo.currentValue}]").prop("selected",true);
+$("#issueWay option[value=${qo.issueWay}]").prop("selected",true);
+
+
+</script>

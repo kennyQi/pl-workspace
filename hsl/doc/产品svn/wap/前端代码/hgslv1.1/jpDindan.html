@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- meta信息，可维护 -->
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="css/base.2.0.css" />
+    <!-- 页面样式表 -->
+    <!--<link rel="Stylesheet" href="css/main.css">
+    -->
+    <link rel="Stylesheet" href="css/fbase.css">
+    <link rel="stylesheet" href="css/airplane_list.css" />
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/fly.js"></script>
+
+</head>
+<body style="position:relative;width:100%;overflow-y:hidden;">
+    <!-- 公共页头  -->
+    <!-- 公共页头  -->
+
+    <div id="contentWrap" style="position:absolute;width:100%;">
+        <header class="header">
+            <h1>订单填写</h1>
+
+            <div class="left-head">
+                <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+                    <span class="inset_shadow">
+                        <span class="head-return"></span>
+                    </span>
+                </a>
+            </div>
+
+            <!-- <div class="right-head">
+                <a href="/home/index.html" class="head-btn fn-hide">
+                    <span class="inset_shadow">
+                        <span class="head-home"></span>
+                    </span>
+                </a>
+            </div>
+            -->
+        </header>
+        <!-- 页面内容块 -->
+
+        <!--航班信息-->
+        <section class="flight" id="flightInfo">
+            <div class="pd5">
+                <h3 class="msgTitle">航班信息</h3>
+                <ul class="flight-listsim mt0" data-flg="">
+                    <li class="flight-fltinfo1">
+                        <div class="fr">
+                            中型机
+                            <br>738</div> <i class="flight-icon-flight"></i> <strong>2014-07-26</strong>
+                        &nbsp;海南航空&nbsp; <strong>HU7603</strong>
+                    </li>
+                    <li class="flight-fltinfo2">
+                        <p>
+                            <strong>23:10</strong>
+                            北京首都T1航站楼
+                        </p>
+                        <p>
+                            <strong>01:15</strong>
+                            上海虹桥T2航站楼
+                        </p>
+                        <iframe id="tmp_downloadhelper_iframe" style="display: none;"></iframe>
+                    </li>
+                    <li class="flight-fltinfo3">
+                        <p class="clr-666">
+                            <span data-flighttype="0" class="flight-btn-chgc">修改舱位</span>
+                            经济舱
+                        </p>
+                        <p>
+                            <span class="fnt-15">机票价</span>
+                            &nbsp;
+                            <span class="fnt-15 clr-ff9913"> <dfn>¥</dfn>
+                                <strong>390</strong>
+                            </span>
+                            &nbsp;&nbsp;
+                            <span class="fnt-12">机建</span>
+                            &nbsp;
+                            <span class="fnt-12 clr-ff9913"> <dfn>¥</dfn>
+                                50
+                            </span>
+                            &nbsp;&nbsp;
+                            <span class="fnt-12">燃油</span>
+                            &nbsp;
+                            <span class="fnt-12 clr-ff9913">
+                                <dfn>¥</dfn>
+                                120
+                            </span>
+                        </p>
+                        <div class="clr-666">不支持儿童、婴儿预订</div>
+                        <p class="flight-arrdown flight-rmk-btn">退改签政策请咨询客服热线</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!--登机人-->
+        <article class="pd5" id="flightBox">
+            <section class="flight">
+                <h3 class="msgTitle">登机者信息<span>选择登记人</span></h3>
+               <!--  <div class="flight-tips-etp2" style="display: none;">
+                   12岁以下乘机人须有成人陪同登机
+                   <div class="click_close"> <i class="close">关闭</i>
+                   </div>
+               </div> -->
+               <div class="personal" >
+                    <!-- 登机者 1-->
+                    <div id="addPassenger1" class="flight-listsim2 flight-add-psg">
+                        <div class="msg">
+                            <div class="flight-infoinput">
+                            <div class="flight-infoinput-pdl clear-input-box">
+                                <label id="readmeAction" class="flight-labq">姓名</label>
+                                <input type="text" placeholder="所持证件姓名" class="js_newName" value="">
+                            </div>
+                        </div>
+                        <div class="flight-infoinput" style="border:none;">
+                            <div class="flight-infoinput-pdl clear-input-box">
+                                <label class="flight-arrdown">身份证号</label>
+                                <input type="text" placeholder="所持证件号码" class="js_no" data-index="0" value="" > 
+                            </div>
+                        </div>
+                        </div>
+                        <div class="del"></div>
+                    </div>
+                    <!-- 添加更多联系人 -->
+                    <div id="add" class="flight-listsim3" style="clear:both">
+                        <div id="js_addPass_btn" class="flight-btn-addps">
+                            <span class="fr">添加更多乘机人</span>
+                        </div>
+                    </div>
+               </div>
+            </section>
+            <!-- 手机号码 -->
+            <section class="flight-listsim3-table">
+               <div class="phone">
+                    <label class="flight-arrdown">联系手机</label>
+                    <input id="linkTel" data-role="tel" class="flight-linktel" placeholder="用于接收短信" type="tel" maxlength="25">
+               </div>
+            </section>
+            <!-- 客服咨询 -->
+            <section class="flight-listsim4" id="insure" >
+                <div class="flight-infoinput hotline" >获取行程单请咨询客服热线</div>
+            </section>
+            <section class="fpay" id="paybox">
+                <div class="money js_fixed" style="background: #ff9a14" id="paybtn" data-oamt="590" data-amt="590">
+                    <span class="btn" style="font-weight:lighter;font-size:15px">下一步</span>
+                    <span class="fnt-13 clr-fff" style="font-weight:lighter;font-size:13px;">订单总额：</span> <em>¥</em> <em class="fs" style="font-weight:lighter;font-size:18px;">590</em>
+                </div>
+            </section>
+        </article>
+    </div>
+    <!-- 弹窗 -->
+    <div id="windows" class="click">
+        <div class="fix click">
+            <div class="top">
+                <ul>
+                    <li>是否拨打客服电话</li>
+                    <li>400-186-566</li>
+                </ul>
+            </div>
+            <div class="cancel">取消</div>
+        </div>
+    </div>
+<!-- 模板 -->
+<div id="temp" style="display:none;">
+    <div id="addPassenger#p#" class="flight-listsim2 flight-add-psg">
+        <div class="msg">
+            <div class="flight-infoinput">
+            <div class="flight-infoinput-pdl clear-input-box">
+                <label id="readmeAction" class="flight-labq">姓名</label>
+                <input type="text" placeholder="所持证件姓名" class="js_newName" value="">
+            </div>
+        </div>
+        <div class="flight-infoinput" style="border:none;">
+            <div class="flight-infoinput-pdl clear-input-box">
+                <label class="flight-arrdown">身份证号</label>
+                <input type="text" placeholder="所持证件号码" class="js_no" data-index="0" value=""> 
+            </div>
+        </div>
+        </div>
+        <div class="del"></div>
+    </div>
+</div>
+<!-- 页头 -->
+<section id="zhizu" style="display:none">
+<section class="zuzhi_search">
+  <form action="" id="zuzhi_form1">
+      <div class="user_name">
+         <input type="text" value="搜索" class="txt_search"  id="J_txt_s" autocomplete="off">
+         <em id="z_sea_icon"></em>
+      </div>
+  </form>
+	</section>
+ 	<section class="zuzhi_style">
+  <h2>组织</h2>
+  </section>
+	<!--start 页面内容 -->
+	<section class="plist pzuzhi">
+		<a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+ 		<a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+ 	</section>
+	<!--end 页面内容 -->
+</section>
+
+
+  <section id="chengyuan" style="display:none">
+	<section class="zuzhi_style">
+  <h2>成员 <span>完成</span></h2>
+  </section>
+	<!--start 页面内容 -->
+	<section class="plist pzuzhi">
+		<a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+ 		<a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+ 		<a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+ 	</section>
+	<!--end 页面内容 -->
+</section>
+
+<script type="text/javascript">
+	$("#J_txt_s").focus(function(){
+			$(this).val("")
+	 });
+	 $("#J_txt_s").blur(function(){
+		 if($("#J_txt_s").val().length>0){			  
+			}
+			else{
+				$(this).val("搜索")
+				}
+ 	 })
+	
+	$("#z_sea_icon").click(function(){
+			$("#zuzhi_form1").submit();
+	})
+
+
+$(".msgTitle span").click(function(){
+	 $("#contentWrap").hide();
+	 $("#zhizu").show();	 
+	});	
+$("#zhizu .pzuzhi a").click(function(){
+	$("#zhizu").hide();
+	$("#chengyuan").show();	
+	});		
+  
+$("#chengyuan .pzuzhi a").click(function(){
+	$(this).addClass("hover").siblings().removeClass("hover")
+ $("input[name=cy]").attr("checked",false); 
+ $($(this).find('.cy')[0]).attr("checked",true)
+ })	
+	
+	
+</script>
+
+</body>
+</html>

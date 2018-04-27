@@ -1,0 +1,23 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>index.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <form action="${contextPath}/init/login" method="post">
+    	管理员密码:<input type="password" name="initPassWord">
+    	<input type="submit" value="登入">
+    	<br/>
+    	<p style="color: red;">${message}</p>
+    </form>
+  </body>
+</html>

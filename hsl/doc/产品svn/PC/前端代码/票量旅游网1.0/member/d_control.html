@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>资料管理</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/member.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <div class="main">
+    <div class="current mt20 clearfix"><strong>企业账户中心：</strong><a href="#">首页</a></div>
+    <div class="sidebar L">
+      <div class="siderbar_title">
+        <h2>账户中心</h2>
+        <h3><a href="#">返回账户中心首页</a></h3>
+      </div>
+      <div class="jiaoyi s_l">
+        <h2><i></i>交易管理</h2>
+        <ul>
+          <li ><a href="#" class="j1"><i></i>所有订单</a></li>
+          <li><a href="#" class="j2"><i></i>差旅管理</a></li>
+          <li><a href="#" class="j3"><i></i>组织架构</a></li>
+        </ul>
+      </div>
+      <div class="ziliao s_l">
+        <h2><i></i>资料管理</h2>
+        <ul>
+          <li class="sel"><a href="#" class="z1"><i></i>账户资料</a></li>
+          <li><a href="#" class="z2"><i></i>修改密码</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="M_wrap R">
+       <div class="M_w">
+       <div class="M_m_title">
+       <h2>企业资料管理<i>汇购科技</i></h2>
+       </div>
+       <form action="">
+      <ul class="mima">
+      <li><label>用户名：</label><p>阿牛</p></li>
+      <li><label>企业名称：</label><p>浙江汇购有限公司</p></li>
+      <li><label>邮箱：</label><p><input type="text" id="curpass1" /> <span class="yanz">验证邮箱</span></p></li>  
+      <li><label>昵称：</label><p><input type="text" /></p></li>  
+      <li><label>所在地区：</label><p><select><option>浙江</option></select> <select><option>杭州</option></select> <select><option>西湖</option></select></p></li>  
+      <li><label>绑定手机：</label><p><input type="text"  /><span id="J_m_tel" class="yanz">更换手机号码</span></p></li>  
+      <li><label></label><input type="submit" id="s_submit" value="保存" /></li>  
+      </ul>
+      </form>  
+        </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+<div class="msg" style="display:none; position:absolute">
+<div class="msg_title"><h2>验证手机</h2><span id="close">X</span></div>
+ <div class="msg_info"> 
+ <div class="M_1">
+ <div class="m_listinfo">
+<p> 已发送手机验证至您原始的手机号133****5698，</p>
+<p><em>请输入您收到的验证码</em><input type="text" class="txt" id="J_tel" /></p>
+ </div>
+  <div class="bth bth1" id="m_bth1"><a href="#" id="ture">确认</a></div>
+  </div>
+ <div class="M_2" style="display:none">
+ <div class="m_listinfo">
+ <p><em>请输入新手机号</em><input type="text" class="txt" id="J_new_tel"/>号码不正确</p>
+ <p><em>&nbsp;</em><span id="J_m2_tel">验证手机</span></p>
+ </div>
+ <div class="bth bth1" id="m_bth2"><a href="#" id="ture">确认</a></div>
+ </div>
+  <div class="M_3" style="display:none">
+ <div class="m_listinfo">
+<p> 已发送手机验证至您原始的手机号133****5698，</p>
+<p><em>请输入您收到的验证码</em><input type="text" class="txt" id="J_tel" /></p>
+ </div>
+  <div class="bth bth1" id="m_bth4"><a href="#" id="ture">确认</a></div>
+  </div>
+ <div class="M_4" style="display:none">
+ <div class="m_listinfo"><p>手机133****5698已验证通过，手机号码已更改</p></div>
+  <div class="bth bth1" id="m_bth3"><a href="#" id="ture">确认</a></div>
+ </div>
+ </div>
+ </div>
+ <script src="../js/gb.js"></script>
+<script type="text/javascript">
+$(function(){
+	var w = $(window).width();
+	var h = $(window).height();
+	var h1 =$("msg").height();
+  	$(".msg").css({"left":(w-350)/2,"top":(h-h1+50)/2})
+ 	})
+ 
+$("#J_m_tel").on("click",function(){
+ 	$(".msg,.M_1").show();
+ });
+
+$("#m_bth1").on("click",function(){
+	$(".M_1").hide()
+	$(".M_2").show()
+ 	});
+$("#J_m2_tel").on("click",function(){
+	$(".M_2").hide()
+	$(".M_3").show()
+  	});	
+$("#m_bth2").on("click",function(){
+	$(".M_2").hide()
+	$(".M_3").show()
+ 	});
+	$("#m_bth3").on("click",function(){
+	$(".M_3").hide()
+	$(".M_4").show()
+ 	});
+$("#m_bth4").on("click",function(){
+	$(".M_4").hide()
+	$(".M_3").hide()
+	$(".msg").hide()
+	window.opener.document.location.reload()
+	})	
+ $("#close").on("click",function(){
+	 $(".msg").hide()
+	 })
+
+</script>	
+
+</body>
+</html>

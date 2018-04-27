@@ -1,0 +1,191 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>机票预定页</title>
+<link href="${contextPath}/resources/hg-ria/new-web/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/hg-ria/new-web/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/common.js" language="javascript"></script>
+</head>
+<body>
+<!---->
+<div class="head">
+    <div class="head-cont">
+        <a href="${contextPath}/home" class="logo fl">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/logo.jpg" />
+        </a>
+        <ul class="fl nav">
+            <li class="fl"><a href="${contextPath}/home">首页</a></li>
+            <li class="fl"><a href="${contextPath}/CLGLYBookFlight/view">机票</a></li>
+        </ul>
+        <div class="user fr">
+            <span class="out fr"><a href="${contextPath}/logout">
+					退出</a></span>
+            <span class="name fr">${(user.name)!''}</span>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<!--头部-->
+<!--内容-->
+<link href="${contextPath}/resources/hg-ria/new-web/css/fly_order.css" rel="stylesheet" />
+<script src="${contextPath}/resources/hg-ria/new-web/js/fly_order.js" language="javascript"></script>
+<div class="content_wrap">
+
+  <div class="plan_info">
+    <h1 class="tit">计划机票信息</h1>
+    <div class="dp_left fl">
+      <div class="l fl">
+        <p class="jc_name">${command.departAirport}</p>
+        <p class="f_time">${command.startTime?string("HH:mm")}</p>
+        <p class="f_date">${command.startTime?date}</p>
+      </div>
+      <div class="m fl">
+        <p class="f_id">${command.airCompanyName}${command.flightNO}</p>
+        <p class="f_type">机型：<span class="">${command.planeType}</span></p>
+        <p class="f_bg"></p>
+        <p class="sum_time">${dates}</p>
+        <p class="f_date">${command.cabinName}${command.cabinCode}</p>
+      </div>
+      <div class="r fl">
+        <p class="jc_name">${command.arrivalAirport}</p>
+        <p class="f_time">${command.endTime?string("HH:mm")}</p>
+        <p class="f_date">${command.endTime?date}</p>
+      </div>
+    </div>
+    <div class="dp_right fl">
+      <p class="p_line">
+        <span class="p1">票价</span>
+        <span class="p2">机建燃油</span>
+        <span class="p3">总票价</span>
+        <span class="p4">结算价</span>
+      </p>
+      <p>
+        <span class="p1">￥${command.ibePrice}</span>
+        <span class="p2">￥${command.oilFee+command.buildFee}</span>
+        <span class="p3 f_cb">￥${command.totalPrice}</span>
+        <span class="p4 f_cb">￥${command.totalPrice}</span>
+      </p>
+    </div>
+  </div>
+  
+ <form action="${contextPath}/CLGLYBookFlight/commitOrder" method="post" id="order">
+  <input type="text" hidden="hidden" name="commandJSON" value='${commandJSON}'/>
+  <input type="text" hidden="hidden" name="priceDTOJSON" value='${priceDTOJSON}'/>
+  <input type="text" hidden="hidden" name="dates" value="${dates}"/>
+  <div class="order">
+    <div class="title">
+      填写乘机人信息
+    </div>
+    <div class="fly_company">
+      <div class=" g-search">
+        <div class="input-selectBox pl">
+          <input type="hidden" value="0" readonly="true" name="companyID" id="company"/>
+          <span class="input-select" id="company_select" >请选择公司</span>
+          <ul class="pa">
+            <li data="0" rel="companyID">请选择公司</li>
+            <#if companys??><#list companys as company>
+            <li data="${company.id}" rel="companyID">${company.companyName}</li>
+            </#list></#if>
+          </ul>
+        </div>
+      </div>
+    </div>
+   
+   
+    <div class="order_member g-search">
+        
+    </div>
+    
+    <div class="order_btn">
+      <span class="add_btn" id="add_connect">从公司员工通讯录中选择</span>
+      <span class="add_btn" id="add_member">添加非本公司员工乘机人</span>
+    </div>
+  </div>
+   
+  <div class="order_sum">
+    <h4>退改签政策</h4>
+    <p>由于航司政策原因，暂不提供退改签政策显示，敬请谅解！<br/>
+    如需了解该航班最新退改签政策，请致电客服电话：0571-28280813</p>
+    <input class="btn_order" type="button" value="生成订单" />
+  </div>
+  </form>
+</div>
+<!--内容-->
+<div id="temp" style="display:none">
+<div  class="member_box pl">
+            <div class="unit">
+            	<input type="hidden" value="not" readonly="true" name="userID" />
+              <label class="tab">姓名:</label>
+              <input class="input-text" type="text"  placeholder="请输入姓名"  for="姓名" name="passengerName" validate="true" />
+              
+              <div class="input-selectBox input-type pl">
+                <input type="hidden" value="0" readonly="true" name="idType" />
+                <span class="input-select">身份证</span>
+                <ul class="pa">
+                  <li data="0">身份证</li>
+                </ul>
+              </div>
+              <input class="input-text fly_card_id" type="text"  placeholder="请输入证件号" name="idNO"   for="证件号" validate="true"  />
+
+              <label class="tab">手机:</label>
+              <input class="input-text fly_mobile" type="text"  placeholder="请输入手机" name="telephone"  for="手机" validate="true" />
+              <div class="input-selectBox pl">
+                <input type="hidden" value="0" readonly="true" name="costCenterIDs" id="cost" />
+                <span class="input-select" id="costCent">请选择成本中心</span>
+                <ul class="pa" id="costCentList">
+                  <li data="0" >请选择成本中心</li>
+                </ul>
+              </div>
+            </div>
+            <div class="unit">
+              <label class="tab">联系人:</label>
+              <input class="input-text" type="text"  placeholder="请输入联系人"  for="联系人" validate="true" name="linkName" id="linkName"/>
+              <label class="tab">联系电话:</label>
+              <input class="input-text fly_mobile" type="text"  placeholder="请输入联系电话"  for="联系电话" validate="true" name="linkTelephone" id="linkTelephone"/>
+            	<label class="formWarn"></label>
+            </div>
+            <span class="member_del pa">删除</span>
+        </div>
+</div>
+<div class="alertBg" style="display: none;" id="alertBg" ></div>
+ <div class="alertConfirm" id="alert_confirm" style="display: none;">
+        <div class="a-tips">{msg}</div>
+        <div class="a-btn a-btn-sure" >确定</div>
+        <div class="a-btn" id="cancelCompany"  >取消</div>
+    </div>
+<div class="alertWarm" id="alert_warm" style="display: none;">
+    <div class="a-icon {status}"></div>
+    <div class="a-tips">{msg}</div>
+    <div class="a-btn" onclick="ply.alertBoxClose('warm')">确定</div>
+</div>
+<div class="alert fly_alert" style="display:none;" id="alert_form">
+    <!--弹出框内容-->
+    <div class="title">从公司员工中选中
+        <label onclick="ply.alertBoxClose('form')">x</label></div>
+    <div class=" g-search">
+        <ul class="plist">
+        </ul>
+    </div>
+    <!--弹出框内容-->
+</div>
+<!--页脚-->
+<div class="gd_foot">
+    <div class="foot">
+        <div class="l fl">
+            <a href="#">关于智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">联系智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">智行荣誉</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">帮助中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">意见与建议</a>
+        </div>
+        <div class="r fr">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/foot_logo.png" />
+        </div>
+    </div>
+</div>
+<!--页脚-->
+</body>
+</html>

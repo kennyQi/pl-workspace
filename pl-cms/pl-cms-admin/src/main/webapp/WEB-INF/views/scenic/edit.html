@@ -1,0 +1,197 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/kindeditor/themes/default/default.css" />
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/kindeditor.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/lang/zh_CN.js"></script>
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/scenic/update"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, navTabAjaxDone)">
+		<input type="hidden" name="scenicId" value="${(scenic.id)!}">
+		<input type="hidden" id="cityId" value="${(scenic.scenicSpotGeographyInfo.city.id)!""}">
+		
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>景区名称：</label> <input type="text" name="name" size="100" class="required" placeholder="输入景区名称"  value="${(scenic.scenicSpotBaseInfo.name)!}"/>
+			</div>
+
+			<div class="unit" style="height:110px">
+				<label>景区地址：</label> 
+				<p><select id="province" name="provinceId" class="required">
+					<option value="">---选择省---</option>
+					<#list provinces as province>
+	      					<option value="${(province.code)!}" <#if scenic.scenicSpotGeographyInfo.province.id=="${(province.code)!}"> selected="selected"</#if> >${(province.name)!}</option>
+	      			</#list>
+				</select>
+				<select id="city" name="cityId" class="required">
+					<option value="">---选择市---</option>
+				</select></p>
+				<p style="float:left;width:100%; margin-left:131px; _display:inline"  ><textarea rows="5" cols="50" name="address">${(scenic.scenicSpotGeographyInfo.address)!}</textarea></p>
+			</div>
+
+			<div class="unit">
+				<label>景区级别：</label> 
+				<select name="grade" class="required" >
+					<option value="">---请选择---</option>
+					<#list grades as s>
+						<option value="${s!}" <#if scenic.scenicSpotBaseInfo.grade=="${s!}"> selected="selected"</#if>>${s!}</option>
+					</#list>
+				</select>
+			</div>
+			<div class="unit">
+				<label>景区联系人：</label>
+				<input type="text" name="linkMan" size="100" class="required"  value="${(scenic.contactInfo.linkMan)!}"/>
+			</div>
+			<div class="unit">
+				<label>联系电话：</label> 
+				<input type="text" id="tel" name="tel" size="100" class="required " value="${(scenic.contactInfo.tel)!}"/>
+			</div>
+			<div class="unit">
+				<label>联系邮箱：</label> 
+				<input type="text" name="email" size="100" class="required email" value="${(scenic.contactInfo.email)!}"/>
+			</div>
+			<div class="unit" style="height: 100px">
+				<label>封面图片：</label>
+				<p style="width:160px">
+				<img alt="" src="${fileUploadPath!''}${(scenic.scenicSpotBaseInfo.titleImage.urlMaps['default'])!""}" id="editScenicTitleImage" width="100" height="100">
+				<input type="hidden" readonly="readonly" name="fdfsFileInfoJSON" value="${fdfsFileInfoJSON?html}"/></p>
+				<p><input type="file" name="fileName" id="edit_scenic_file_upload" /></p>
+				<p>建议尺寸580*300</p>
+			</div>
+			<div class="unit">
+				<label>景区介绍：</label>
+				<textarea name="intro" id="scenic_edit_editor" class="required " style="width:700px;height:425px;" maxlength="10000">${(scenic.scenicSpotBaseInfo.intro)!}</textarea>
+			</div>
+			<div class="unit">
+				<label>交通指南：</label>
+				<textarea name="traffic" id="traffic_edit_editor" class="required " style="width:700px;height:425px;" maxlength="10000">${(scenic.scenicSpotGeographyInfo.traffic)!}</textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		//渲染编辑器
+		initKindEditor();
+		$("#edit_scenic_file_upload").uploadify({
+	         'method'   : 'post',  
+	         'buttonText' : '请选择',  
+	         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+	 		 'uploader'      : '${contextPath}/image/upload',
+	         'fileObjName'   : 'imgFile', 
+	         'onUploadSuccess' : function(file, data, response) {
+	        	 var img=$.parseJSON(data)
+	             $('input[name=fdfsFileInfoJSON]').val(JSON.stringify(img.fdfsFileInfo));
+	             $('#editScenicTitleImage').attr('src',img.url);
+	         }  
+	     });  
+		//页面加载的时候，把城市初始化选中
+		if($("#province").val()!="0"){
+			$.ajax({
+			       type: "POST",
+			       url: "${contextPath}/scenic/searchCity?province="+$("#province").val(),
+			       contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			       dataType:"json",
+			       success: function(data) {
+			    	   if (data.length > 0) {  
+				            var layer = "<option value='0'>---请选择---</option>";  
+				            $.each(data, function (idx, item) {
+				            	if($("#cityId").val()==item.code){
+				            		layer += "<option value="+item.code +" selected='selected'>"+ item.name + "</option>"; 
+				            	}else{
+				            		layer += "<option value="+item.code +" >"+ item.name + "</option>"; 
+				            	}
+				            });
+				            
+							$("#city").empty();
+							$("#city").append(layer);
+				        }
+			       }
+			});
+		}
+		$("#province").change(function(){
+			if($("#province").val()=="0"){
+				var layer = "<option value='0'>---请选择---</option>";  
+				$("#city").empty();
+				$("#city").append(layer);
+			}else{
+				$.ajax({
+				       type: "POST",
+				       url: "${contextPath}/scenic/searchCity?province="+$("#province").val(),
+				       contentType: "application/x-www-form-urlencoded; charset=utf-8",
+				       dataType:"json",
+				       success: function(data) {
+				    	   if (data.length > 0) {  
+				    		   var layer = "<option value='0'>---请选择---</option>";  
+					            $.each(data, function (idx, item) {  
+					                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+					            });
+								$("#city").empty();
+								$("#city").append(layer);
+					        }
+				       }
+				});
+			}
+		});
+	});
+	function initKindEditor(){
+		var editor;
+		var traffic_editor;
+		editor = KindEditor.create('#scenic_edit_editor',{
+			basePath : '${contextPath}/resources/js/kindeditor/',
+			items : [
+			 		'source', '|', 'undo', 'redo', '|', 'preview',  'template', 'code', 'cut', 'copy', 'paste',
+			 		'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			 		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			 		'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			 		'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			 		'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+			 		 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			 		'anchor', 'link', 'unlink', '|'
+			 	],
+			uploadJson : '${contextPath}/image/upload',
+			afterChange : function() {
+				this.sync();
+			}
+		});
+		traffic_editor = KindEditor.create('#traffic_edit_editor',{
+			basePath : '${contextPath}/resources/js/kindeditor/',
+			items : [
+			 		'source', '|', 'undo', 'redo', '|', 'preview',  'template', 'code', 'cut', 'copy', 'paste',
+			 		'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			 		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			 		'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			 		'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			 		'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+			 		 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			 		'anchor', 'link', 'unlink', '|'
+			 	],
+			uploadJson : '${contextPath}/image/upload',
+			afterChange : function() {
+				this.sync();
+			}
+		});
+	}
+	function checkForm(){
+		var mobile=$("#").val();
+	}
+</script>
+</div>
+

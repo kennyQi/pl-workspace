@@ -1,0 +1,149 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> <@frame.head "票量 -
+订单支付">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+</@frame.head> <@frame.main "default" 2>
+
+<!--内容-->
+<div class="box">
+    <div class="fly_orderBox ma">
+        <!--左侧-->
+        <div class="orderBox_left fl">
+            <!--支付进程-->
+            <div class="pay_process ma">
+                <ul class="fl ov">
+                    <li class="fly_on"><i class="fl ic yahei h4">1</i><span class="fl lm yahei h3">填写订单</span></li>
+                    <li class="fly_on"><i class="fl ic yahei h4">2</i><span class="fl lm yahei h3">支付订单</span></li>
+                    <li class=""><i class="fl ic yahei h4">3</i><span class="fl lm yahei h3">支付成功</span></li>
+                </ul>
+            </div>
+            <input type="hidden" id="contextPath" value="${contextPath}"/>
+		   	  <input type="hidden" id="daijinquan" value="0"/><!-- 代金券金额 -->
+		   	  <input type="hidden" id="xianjinquan" value="0"/><!-- 现金券金额 -->
+            <!--支付进程-->
+            <div class="left_box">
+                <span class="fly_bt yahei color3 h2 fl">乘机人信息</span>
+                <i class="line wd fl"></i>
+                <div class="fly_pay_box fl">
+                <#if (jporderDto.passangers)??> 
+                    <#list jporderDto.passangers as passanger>
+                    <div class="fly_pasInf yahei color6"><i class="fl"></i><span class="h3 fly_payBt">乘客姓名</span><span class="" style="font-size:20px;">
+                   		 ${(passanger.name)!}
+						</span><span class="h3 fly_payBt ids">身份证</span><span style="font-size:20px;">${(passanger.cardNo)!}</span></div>
+						</#list> 
+					</#if>
+                    <div class="fly_pasInf yahei color6 h3 fly_payOrder"><span class="fly_payBt">订单号</span><span>${(jporderDto.dealerOrderCode)!}</span><span class="fly_payBt pays">支付状态</span><span style="color:#fcb714;">${(jpStatusMap[(''+jporderDto.status?c+jporderDto.payStatus?c)!])!}</span></div>
+                </div>
+                <span class="fly_bt yahei color3 h2 fl">使用卡券</span>
+                <div class="fly_pay_box fl">
+                    <i class="line wd fl"></i>
+                    <div class="yahei h3 color6 fly_sale"><span>账户里可使用卡券<i id="position"></i>张</span></div>
+                    <div class="fly_use fly_saleSel yahei h3 color6 fl"><i></i>使用</div>
+                    <ul class="fly_sales fl yahei h4 color6">
+                    <i class="Triangle"></i>
+                        <li id="options"><i class="Vouchers" id="use"></i><span>使用代金券</span>
+                        <span type="text" class="texta select yahei h4 color3 companySelect fl" id="optionValue">请选择现金券</span>
+                        <ul class="selectNav" for="optionValue" id="useCondition">
+                        </ul>
+                        <span class="fly_payTs yahei h4 color9" style="margin-left:10px;"><!-- 订单满1000可使用 有效期：2016-02-25 --></span>
+                        </li>
+                        <!-- <li><i class="Vouchers"></i><span>使用500元现金券</span><span class="fly_payTs yahei h4 color9">订单满1000可使用 有效期：2016-02-25</span></li>
+                        <li><i class="Vouchers"></i><span>使用100元现金券</span><span class="fly_payTs yahei h4 color9">订单满1000可使用 有效期：2016-02-25</span></li>
+                        <li><i class="Vouchers"></i><span>使用50元现金券</span><span class="fly_payTs yahei h4 color9">订单满1000可使用 有效期：2016-02-25</span></li> -->
+                        <i id="cashcoupon"></i>
+                    </ul>
+                    <div class="fly_noUse fly_saleSel yahei h3 color6 fl" ><i class="fly_pay_cli" id="nouse" onclick="nouse()"></i>不使用</div>
+                    <div class="fly_payBox fl">
+                        <span class="fly_payMethod yahei color3 h2 fl">请选择支付方式</span>
+                        <div class="fly_payPlatform wd disb">
+                                <span class="yahei h3 color6 fl">支付平台</span>
+                                <i class="payfor fl alipay"></i>
+                                <img class="fl" src="${contextPath}/resources/images/alipay_03.png">
+                        </div>
+                    </div>
+                    <div class="fl fly_Clause">
+                        <i class="fl Agreement" id="service"></i>
+                        <span class="yahei h2 fl"><a class="color6" href="${contextPath}/user/jpOrderDeal"
+							target="_blank">票量游机票服务条款</a></span>
+                    </div>
+                    <div class="fly_payFor fl">
+                        <span class="fl yahei color6 h2 fly_payCard">优惠卡券：<i>￥<em id="youhui">0 </em></i></span>
+                        <span class="fl yahei color6 h2 fly_payMon">应付金额：<b style="font-size:26px; color:#3ebdb6;">￥<em class="yue">${(jporderDto.payAmount?c)!}</em></b></span>
+                        <a href="javascript:;" class=" yahei h3 fr tc bth1">确认无误，前往支付</a>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+                
+            </div>
+        </div>
+        <!--左侧-->
+        <!--右侧-->
+        <div class="orderBox_right fr">
+            <span class="flight fl yahei tc color3">航班信息</span>
+            <#if jporderDto.flightDTO??>
+            <#list jporderDto as flightCart>
+           	<form id="myform" action="${contextPath}/jp/payOrder" method="post">
+				<input type="hidden" id="SPRING_TOKEN" name="SPRING_TOKEN" value="${SPRING_TOKEN}"> 
+				<input type="hidden" id="startCity" name="startCity" value="${(flightCart.flightDTO.startCity)!}" /> 
+				<input type="hidden" id="endCity" name="endCity" value="${(flightCart.flightDTO.endCity)!}" /> 
+				<input type="hidden" id="dealerOrderId" name="dealerOrderId" value="${(flightCart.dealerOrderCode)!}" /> 
+				<input type="hidden" id="totalPrice" name="totalPrice"  /> 
+				<input type="hidden" id="useCouponIDs" name="useCouponIDs" value="" /> 
+				<input type="hidden" id="payPrice" name="payPrice" value="${(flightCart.payAmount?c)!}" /> 
+				<input type="hidden" id="payType" name="payType" value="1" /> 
+				
+		 	</form>
+            <div class="flight_mess fl">
+                <span class="flight_com fl yahei"><i>
+                <label class="fly_bg fl icon fly_${flightCart.flightDTO.carrier}"></label> 
+                </i>${flightCart.flightDTO.airCompName}<b>${flightCart.flightDTO.flightNo} &nbsp;${flightCart.flightDTO.aircraftCode}</b> &nbsp;${jClassName!}</span>
+                <div class="voyage fl wd">
+                    <div class="voyage_left fl"><i></i></div>
+                    <div class="voyage_right fl">
+                        <span class="start citys fl yahei">
+                            <span class="time fl">${flightCart.flightDTO.startTime}<br/><i class="color6 h3 fl normal">${flightCart.flightDTO.startDate}</i></span>
+                            <span class="place fl color6 yahei h3">${(flightCart.flightDTO.startPortName)!}${flightCart.flightDTO.startTerminal}</span>
+                        </span>
+                        <span class="end citys fl yahei">
+                            <span class="time fl" style="font-size:20px;">${flightCart.flightDTO.endTime}<br/><i class="color6 h3 fl normal">${flightCart.flightDTO.endDate}</i></span>
+                            <span class="place fl color6 yahei h3">${(flightCart.flightDTO.endPortName)!}${(flightCart.flightDTO.endTerminal)!}</span>
+                        </span>
+                        <span class="fl yahei color9 h4" style="margin-top:20px;">直飞&nbsp;&nbsp;&nbsp;&nbsp;
+							<#if ((flightCart.flightDTO.flyTime)/60)?floor==0>
+                           	<#else>
+                       			 ${((flightCart.flightDTO.flyTime)/60)?floor}小时
+                         </#if>
+                        <#if   (flightCart.flightDTO.flyTime)%60==0>
+                       			0分钟
+                        	<#else>
+                        		${(flightCart.flightDTO.flyTime)%60}分钟
+                        </#if>
+						</span>
+                    </div>
+                </div>
+                <div class="charge fl wd">
+                    <span class="yahei color9 h3">票价：￥${(flightCart.ticketPrice)?c}</span><br/>
+                    <span class="yahei color9 h3">机建+燃油：￥${(flightCart.singleTaxAmount)?c}</span><br/>
+                    <span class="yahei color9 h3">优惠卡券：￥<em id="youhuis">0</em></span>
+                </div>
+                <div class="price fl wd">
+                    <span class="yahei color6 h2 fl">总票价：<b>￥<em class="payAmount">${(flightCart.ticketPrice+flightCart.singleTaxAmount)?c}</em></b></span>
+                </div>
+            </div>
+            </#list>
+            </#if>
+        </div>
+        <!--右侧-->
+    </div>
+</div>
+<!--内容-->
+
+
+</@frame.main> <@frame.end "default"> </@frame.end>
+<script src="${contextPath}/resources/js/jpPayOrder_info.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/fly_order1.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/fly_order1.css" rel="stylesheet" />
+
+

@@ -1,0 +1,49 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" id="cancelPersonForm" enctype="multipart/form-data" action="${contextPath}/yxjp/order/cancel-order" class="pageForm required-validate" onsubmit="return valiCancelOrderForm(this)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="orderId" value="${(id)!}">
+			<div id="passangerDiv" style="display: none"></div>
+			<div class="unit">
+				<span>请选择需要取消的乘客：</span>
+			</div>
+			<div class="unit">
+				<#if (canCancelPrs)??>
+					<#list canCancelPrs as ps>
+						<input type="checkbox" name="checkPerson" rel="${(ps.id)!}">${(ps.baseInfo.name)!}
+					</#list>
+
+				</#if>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+	function valiCancelOrderForm(that){
+		try{
+			var htm="";
+			$("#cancelPersonForm").find("input[name='checkPerson']").each(function(){
+				if(this.checked == true){
+					var passengerId = $(this).attr("rel");
+					htm+="<input name='passengerIds' value='"+passengerId+"'>";
+				}
+			})
+			if(htm==""){
+				alertMsg.error("请选择需要取消的乘客");
+				return false;
+			}
+			$("#cancelPersonForm #passangerDiv").html(htm);
+			validateCallback(that, dialogAjaxDone);
+		}catch(e){
+			console.info(e);
+		}
+		return false;
+	}
+</script>

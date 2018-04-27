@@ -1,0 +1,87 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form id="myForm" method="post"
+			action="${contextPath}/airtkt/order/refundTicket"
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, dialogAjaxDone)">
+			
+			<div class="pageFormContent" layoutH="58">
+				<input type="hidden" name="id" value="${(id)!}" />
+				<input type="hidden" name="pnr" value="${(pnr)!}" />
+				<input type="hidden" name="refundType" value="F" />
+				<input type="hidden" name="ticketNos" id="ticketNos" value="" >
+				<input type="hidden" name="reason" id="reason" value="" >
+				<div class="unit">
+					<#if orderDetail.passangerList ??>
+					<#list orderDetail.passangerList as passenger>
+						<input type="checkbox" name="tempTicketNos" value="${(passenger.ticket.ticketNo)!''}"/>${(passenger.name)!''}
+					</#list>
+					</#if>
+				</div>
+				<div class="unit">
+					<span>请选择废票类型</span>
+				</div>
+				<div class="unit">
+					<select name="actionType" id="actionType" class="required" onchange="autoSetResion();">
+						<#if actionTypeList??>
+							<#list actionTypeList as refundActionTypeDTO>
+								<#if refundActionTypeDTO.actionTypeCode?? && refundActionTypeDTO.actionTypeTxt != '差错退款'>
+								<option value="${(refundActionTypeDTO.actionTypeCode)!}">
+									${(refundActionTypeDTO.actionTypeTxt)!}
+								</option>
+								</#if>
+							</#list>
+						</#if>
+					</select>
+				</div>
+				
+				<!-- 
+				<div class="unit">
+					<span>请填写废票原因</span>
+				</div>
+				<div class="unit">
+					<textarea name="reason" class="required" clos="80" rows="5">
+					</textarea>
+				</div>
+				 -->
+			</div>
+			<div class="formBar">
+			<ul>
+			<!-- 
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+			 -->
+			 	<li>
+					<div class="buttonActive">
+					<div class="buttonContent">
+<script type="text/javascript">
+function autoSetResion(){
+	var tempReason = $("#actionType").find("option:selected").text();
+	//alert("tempReason="+tempReason);
+	$("#reason").val(tempReason);
+}
+
+function ok(){
+	  var chk_value =[];
+	  
+	  $('input[name="tempTicketNos"]:checked').each(function(){    
+	   chk_value.push($(this).val());    
+	  });
+	  
+	  if(chk_value.length==0){
+		  alert( '请选择乘机人！');
+		  return;
+	  }else{
+		  $("#ticketNos").val(chk_value);
+		  //alert("1="+$("#ticketNos").val());
+		  $("#myForm").submit();
+	  }
+}
+</script>
+					<input type="button" onclick="ok();" value="确定" />
+					</div>
+					</div>
+				</li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+		</form>

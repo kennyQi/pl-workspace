@@ -1,0 +1,209 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/payRecord/line/add" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>项目来源标识</label>
+					<select name="fromProjectCode" id="fromProjectCode">
+							<#if PAY_RECORD_PROJECT_TYPE_MAP??>
+		                    <#list PAY_RECORD_PROJECT_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}" >
+		                        ${PAY_RECORD_PROJECT_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+			</div>
+			<div class="unit">
+				<label>来源项目IP</label>
+				<input type="text" id="fromProjectIP" name="fromProjectIP" size="20" maxlength="32" />
+			</div>
+			
+			<div class="unit">
+				<label>平台订单号</label>
+				<input type="text" id="number" name="platOrderNo" size="20" maxlength="32"  />
+			</div>
+			
+			<div class="unit">
+				<label>经销商订单号</label>
+				<input type="text" id="number" name="dealerOrderNo"   size="20" maxlength="32"  />
+			</div>
+			
+			
+			<div class="unit">
+				<label>供应商订单号</label>
+				<input type="text" id="number" name="supplierNo"   size="20" maxlength="32"  />
+			</div>
+			
+			<div class="unit">
+				<label>订购人</label>
+				<input type="text" id="number" name="booker"  size="20" maxlength="32" />
+			</div>
+			<div class="unit">
+				<label>游玩人(多个用|隔开)</label>
+				<input type="text" id="number" name="passengers"  size="20" maxlength="1000"  />
+			</div>
+			<div class="unit">
+				<label>出发地</label>
+				<input type="text" id="number" name="startCity"  size="20" maxlength="32"/>
+			</div>
+			<div class="unit">
+				<label>目的地</label>
+				<input type="text" id="number" name="destCity"  size="20" maxlength="32"  />
+			</div>
+			<div class="unit">
+				<label>线路id</label>
+				<input type="text" id="number" name="lineID"  size="20" maxlength="64"/>
+			</div>
+			<div class="unit">
+				<label>线路名称</label>
+				<input type="text" id="number" name="lineName"  size="20" maxlength="8"  />
+			</div>
+			
+			<div class="unit">
+				<label>线路类别</label>
+				<input type="text" id="number" name="type"  size="20" maxlength="64" />
+			</div>
+			<div class="unit">
+				<label>成人人数</label>
+				<input type="text" id="number" name="adultNo"  size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>儿童人数</label>
+				<input type="text" id="number" name="childNo"  size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>成人销售单价</label>
+				<input type="text" id="number" name="adultUnitPrice"  size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>儿童销售单价</label>
+				<input type="text" id="number" name="childUnitPrice"  size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>销售总价</label>
+				<input type="text" id="number" name="salePrice" size="20" maxlength="10"  />
+			</div>
+			<div class="unit">
+				<label>销售定金</label>
+				<input type="text" id="number" name="bargainMoney"  size="20" maxlength="10"  />
+			</div>
+			
+			<div class="unit">
+				<label>发团日期</label>
+				<input type="text" readonly="readonly" name="travelDate"   class="date"/>
+			</div>
+			
+			<div class="unit">
+				<label>支付方式</label>
+				 <select name="payPlatform" id="payPlatform">
+				 <#list PAYMENT_TYPE?keys as itemKey>
+		               <option value="${itemKey}">
+	                         ${PAYMENT_TYPE[itemKey]}
+	                   </option> 
+		            </#list>
+		           </select>
+			</div>
+			
+			<div class="unit">
+				<label>付款帐号</label>
+				<input type="text" id="number" name="payAccountNo"  size="20" maxlength="64"  class="required"/>
+			</div>
+			<div class="unit">
+				<label>支付流水号</label>
+				<input type="text" id="number" name="paySerialNumber"  size="20" maxlength="32"  class="number required"/>
+			</div>
+			<div class="unit">
+				<label>支付时间</label>
+				<input type="text" readonly="readonly" name="payTime"   class="date" class="required"/>
+			</div>
+			<div class="unit">
+				<label>订单总金额</label>
+				<input type="text"  name="orderPrice"   class="number required"  size="20" maxlength="20"/>
+			</div>
+			<div class="unit">
+				<label>收入</label>
+				<input type="text" id="number" name="incomeMoney"  size="20" maxlength="20"  class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>支出</label>
+				<input type="text" id="number" name="payMoney"  size="20" maxlength="20"  class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>返点/折扣</label>
+				<input type="text" id="number" name="rebate"  size="20" maxlength="20" class="number required"/>
+			</div>
+			
+			<div class="unit">
+				<label>佣金</label>
+				<input type="text" id="number" name="brokerage"  size="20" maxlength="20" class="number required" />
+			</div>
+			
+			<div class="unit">
+				<label>订单状态</label>
+					 <select name="orderStatus" id="orderStatus">
+							<#if statusMap??>
+		                    <#list statusMap?keys as itemKey>
+		                       <option value="${itemKey}" >
+		                        ${statusMap[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+				</select>
+			</div>
+			<div class="unit">
+				<label>支付状态</label>
+				<select name="payStatus" id="payStatus">
+							<#if payStatusMap??>
+		                    <#list payStatusMap?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${payStatusMap[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+			</div>
+			
+			<div class="unit">
+				<label>记录类型</label>
+				 <select name="recordType" id="recordType">
+							<#if PAY_RECORD_TYPE_MAP??>
+		                    <#list PAY_RECORD_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${PAY_RECORD_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+				</select>
+			</div>
+			<div class="unit">
+				<label>来源客户端类型 </label>
+				 <select name="fromClientType" id="fromClientType">
+							<#if FROM_CLIENT_TYPE??>
+		                    <#list FROM_CLIENT_TYPE?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${FROM_CLIENT_TYPE[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+				</select>
+			</div>
+			<div class="unit">
+				<label>备注</label>
+				<textarea rows="6" cols="60"  class="editor" name="remarks"></textarea>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" id="checkData" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+
+$("#downPayment").blur(function(){
+
+});
+</script>

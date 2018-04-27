@@ -1,0 +1,717 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/ticketlist.css" type="text/css" rel="stylesheet" />
+<link href="../css/jquery-ui.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.ui.core.js"></script>  
+<script type="text/javascript" src="../js/datepicker.js"></script>  
+<script type="text/javascript">
+	$(function(){ 
+   	$("#date_1,#date_2").datepicker({
+		changeMonth: true,
+		changeYear: true
+	});//日期修改年份
+$("#ui-datepicker-div").hide()
+});	
+</script>
+<title>机票列表</title>
+</head>
+
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <div class="main">
+    <div class="current mt20 clearfix"><strong>当前位置：</strong><a href="#">国内机票</a>&gt;上海到北京机票(单程)</div>
+    <div class="L column">
+      <div id="search-bar" >
+        <form action="" >
+          <ul>
+            <li>
+              <div class="t_city_search">
+                <label>出发城市：</label>
+                <div class="t_city_input  t_city1">
+                  <input type="text" class="cityinput" id="citySelect" value="城市名">
+                </div>
+              </div>
+              <div class="t_city_icon"></div>
+              <div class="t_city_search">
+                <label>出发城市：</label>
+                <div class="t_city_input  t_city2">
+                  <input type="text" class="cityinput" id="citySelect1" value="城市名">
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="t_city_search">
+                <label>出发日期:</label>
+                <div class="t_city_input  t_city2">
+                  <input id="date_1" type="text" class="f-text" value="" />
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="bth">
+                <input type="submit" value="搜索"  />
+              </div>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <div class="changehb clearfix">选择航班 上海--北京机票(9月2号 周末)</div>
+      <div class="k_list">
+        <div class="Date_seacrh">
+          <div class="ki1 ki"><i></i></div>
+          <div class="K_date">
+            <ul>
+              <li class="sel"> <a href="#"> <span>09_02&nbsp;周一</span>
+                <p class="money">￥425</p>
+                </a> </li>
+              <li> <a href="#"> <span>09_02&nbsp;周一</span>
+                <p class="money">￥425</p>
+                </a> </li>
+              <li> <a href="#"> <span>09_02&nbsp;周一</span>
+                <p class="money">￥425</p>
+                </a> </li>
+              <li> <a href="#"> <span>09_02&nbsp;周一</span>
+                <p class="money">￥425</p>
+                </a> </li>
+              <li> <a href="#"> <span>09_02&nbsp;周一</span>
+                <p class="money">￥425</p>
+                </a> </li>
+              <li> <a href="#"> <span>09_02&nbsp;周一</span>
+                <p class="money">￥425</p>
+                </a> </li>
+              <li> <a href="#"> <span>09_02&nbsp;周一</span>
+                <p class="money">￥425</p>
+                </a> </li>
+            </ul>
+          </div>
+          <div class="ki2 ki"><i></i></div>
+        </div>
+        <div class="k_saix clearfix" > <span>筛选条件:
+          <select>
+            <option value ="1">起飞时段</option>
+            <option value ="2">起飞时段</option>
+            <option value="3">起飞时段</option>
+            <option value="4">起飞时段</option>
+          </select>
+          <select>
+            <option value ="1">航空公司</option>
+            <option value ="2">航空公司</option>
+            <option value="3">航空公司</option>
+            <option value="4">航空公司</option>
+          </select>
+          <select>
+            <option value ="1">时间从早到晚</option>
+            <option value ="2">航空公司</option>
+            <option value="3">航空公司</option>
+            <option value="4">航空公司</option>
+          </select>
+          <select>
+            <option value ="1">价格从高到低</option>
+            <option value ="2">航空公司</option>
+            <option value="3">航空公司</option>
+            <option value="4">航空公司</option>
+          </select>
+          </span> </div>
+        <div class="k_p">
+          <div class="k_p_list">
+            <ul class="k_p_title">
+              <li>
+                <div class="p_img"> <span><img src="../temp/k.jpg" /></span>
+                  <p>香港航空<br />
+                    HX331</p>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_time">
+                  <div class="k_p_t_l k_P_t">
+                    <p><strong>11:25</strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                  <div class="t_r"><span>直飞</span>
+                    <p></p>
+                  </div>
+                  <div class="k_p_t_r k_P_t">
+                    <p><strong>11:25<i></i></strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_price">
+                  <p>￥1250<i>起</i></p>
+                  <span>参考税费：¥241</span> </div>
+              </li>
+              <li>
+                <div class="bth bth1 operate"><a href="scart.html">预定</a></div>
+              </li>
+            </ul>
+            <div class="pop_p" style="display:none"> <i></i> <span class="close">X</span>
+              <ul>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="k_p_list">
+            <ul class="k_p_title">
+              <li>
+                <div class="p_img"> <span><img src="../temp/k.jpg" /></span>
+                  <p>香港航空<br />
+                    HX331</p>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_time">
+                  <div class="k_p_t_l k_P_t">
+                    <p><strong>11:25</strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                  <div class="t_r"><span>直飞</span>
+                    <p></p>
+                  </div>
+                  <div class="k_p_t_r k_P_t">
+                    <p><strong>11:25<i></i></strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_price">
+                  <p>￥1250<i>起</i></p>
+                  <span>参考税费：¥241</span> </div>
+              </li>
+              <li>
+                <div class="bth bth1 operate"><a href="scart.html">预定</a></div>
+              </li>
+            </ul>
+            <div class="pop_p" style="display:none"> <i></i> <span class="close">X</span>
+              <ul>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="k_p_list">
+            <ul class="k_p_title">
+              <li>
+                <div class="p_img"> <span><img src="../temp/k.jpg" /></span>
+                  <p>香港航空<br />
+                    HX331</p>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_time">
+                  <div class="k_p_t_l k_P_t">
+                    <p><strong>11:25</strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                  <div class="t_r"><span>直飞</span>
+                    <p></p>
+                  </div>
+                  <div class="k_p_t_r k_P_t">
+                    <p><strong>11:25<i></i></strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_price">
+                  <p>￥1250<i>起</i></p>
+                  <span>参考税费：¥241</span> </div>
+              </li>
+              <li>
+                <div class="bth bth1 operate"><a href="scart.html">预定</a></div>
+              </li>
+            </ul>
+            <div class="pop_p" style="display:none"> <i></i> <span class="close">X</span>
+              <ul>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="k_p_list">
+            <ul class="k_p_title">
+              <li>
+                <div class="p_img"> <span><img src="../temp/k.jpg" /></span>
+                  <p>香港航空<br />
+                    HX331</p>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_time">
+                  <div class="k_p_t_l k_P_t">
+                    <p><strong>11:25</strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                  <div class="t_r"><span>直飞</span>
+                    <p></p>
+                  </div>
+                  <div class="k_p_t_r k_P_t">
+                    <p><strong>11:25<i></i></strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_price">
+                  <p>￥1250<i>起</i></p>
+                  <span>参考税费：¥241</span> </div>
+              </li>
+              <li>
+                <div class="bth bth1 operate"><a href="scart.html">预定</a></div>
+              </li>
+            </ul>
+            <div class="pop_p" style="display:none"> <i></i> <span class="close">X</span>
+              <ul>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="k_p_list">
+            <ul class="k_p_title">
+              <li>
+                <div class="p_img"> <span><img src="../temp/k.jpg" /></span>
+                  <p>香港航空<br />
+                    HX331</p>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_time">
+                  <div class="k_p_t_l k_P_t">
+                    <p><strong>11:25</strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                  <div class="t_r"><span>直飞</span>
+                    <p></p>
+                  </div>
+                  <div class="k_p_t_r k_P_t">
+                    <p><strong>11:25<i></i></strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_price">
+                  <p>￥1250<i>起</i></p>
+                  <span>参考税费：¥241</span> </div>
+              </li>
+              <li>
+                <div class="bth bth1 operate"><a href="scart.html">预定</a></div>
+              </li>
+            </ul>
+            <div class="pop_p" style="display:none"> <i></i> <span class="close">X</span>
+              <ul>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="k_p_list">
+            <ul class="k_p_title">
+              <li>
+                <div class="p_img"> <span><img src="../temp/k.jpg" /></span>
+                  <p>香港航空<br />
+                    HX331</p>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_time">
+                  <div class="k_p_t_l k_P_t">
+                    <p><strong>11:25</strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                  <div class="t_r"><span>直飞</span>
+                    <p></p>
+                  </div>
+                  <div class="k_p_t_r k_P_t">
+                    <p><strong>11:25<i></i></strong></p>
+                    <span>北京</span> <span>北京首都机场</span> </div>
+                </div>
+              </li>
+              <li>
+                <div class="k_p_price">
+                  <p>￥1250<i>起</i></p>
+                  <span>参考税费：¥241</span> </div>
+              </li>
+              <li>
+                <div class="bth bth1 operate"><a href="scart.html">预定</a></div>
+              </li>
+            </ul>
+            <div class="pop_p" style="display:none"> <i></i> <span class="close">X</span>
+              <ul>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+                <li>
+                  <div class="pop_s">经济舱</div>
+                  <div class="pop_sale">9.9折</div>
+                  <div class="pop_t">退改签</div>
+                  <div class="pop_pr">￥999.00</div>
+                  <div class="pop_bth"><a href="scart.html">预定</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="page"> <a href="#" class="pv"><i></i>前一天航班(07-11)</a> <a href="#" class="next"><i></i>后一天航班(07-11)</a> </div>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar R">
+      <div class="jindian f20 sr box_t">
+        <h2>景点门票搜索</h2>
+        <div id="search-bar" class="bar_search" >
+          <form action="" >
+            <ul>
+              <li>
+                <div class="t_city_search">
+                  <label>出发日期：</label>
+                  <div class="t_city_input  t_city2">
+                    <input id="date_2" type="text" class="f-text" value="" />
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="t_city_search">
+                  <label>出发城市：</label>
+                  <div class="t_city_input t_city1">
+                    <input type="text" class="cityinput" id="citySelect2" value="城市名">
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="bth">
+                  <input type="submit" value="搜索" />
+                </div>
+              </li>
+            </ul>
+          </form>
+        </div>
+        <dl>
+          <dt>热搜景点:</dt>
+          <dd><a href="#" target="_blank">杭州大明山</a><a href="#" target="_blank">杭州大明山</a><a href="#" target="_blank">杭州大明山</a><a href="#" target="_blank">杭州大明山</a><a href="#" target="_blank">杭州大明山</a><a href="#" target="_blank">杭州大明山</a></dd>
+        </dl>
+      </div>
+      <div class="tese f20 sr box_t">
+        <h2>特色服务</h2>
+        <ul>
+          <li class="t t1"> <span></span>
+            <div class="t_info">
+              <p><strong>价格保证</strong></p>
+              <p>同类产品，保证低价</p>
+            </div>
+          </li>
+          <li class="t t2"> <span></span>
+            <div class="t_info">
+              <p><strong>退订保障</strong></p>
+              <p>因特殊情况影响出行，保证退订</p>
+            </div>
+          </li>
+          <li class="t t3"> <span></span>
+            <div class="t_info">
+              <p><strong>救援保障</strong></p>
+              <p>旅途中遇意外情况，保证救援</p>
+            </div>
+          </li>
+          <li class="t t4"> <span></span>
+            <div class="t_info">
+              <p><strong>7X24小时服务</strong></p>
+              <p>快速响应，全年无休</p>
+            </div>
+          </li>
+          <li class="t t5"> <span></span>
+            <div class="t_info">
+              <p><strong>退订保障</strong></p>
+              <p>因特殊情况影响出行，保证退订</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="history hp f20 sr box_t">
+        <h2>您的浏览记录</h2>
+        <ul>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+        </ul>
+      </div>
+      <div class="ranking hp f20 sr box_t">
+        <h2>您的浏览记录</h2>
+        <ul>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+          <li><a href="#">1.苏州太湖国家湿地公园</a><b>￥200</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--END banner--> 
+</div>
+<div id="footer" class="mt20">
+  <div class="fooerBD">
+    <div class="L about">
+      <dl>
+        <dt><a href="#">关于我们</a></dt>
+        <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+      </dl>
+      <dl>
+        <dt><a href="#">加盟合作</a></dt>
+        <dd><a href="#">友情链接</a><a href="#">网站联盟</a></dd>
+      </dl>
+      <dl>
+        <dt><a href="#">联系我们</a></dt>
+        <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+      </dl>
+    </div>
+    <div class="L w260">
+      <div class="hot_phone">
+        <p><i class="tel"></i>24小时客服热线：4008-117-117</p>
+        <p><i class="tel"></i>境外游客紧急联络电话：4008-117-117</p>
+        <p><i class="QQ"></i>在线客服：QQ1</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="T_top"> <a href="#">Top</a> </div>
+</div>
+<script src="../lib/city/city.js"></script> 
+<script src="../js/gb.js"></script> 
+<script type="text/javascript">
+ 	$(".K_date ul li").click(function(){
+	$(this).addClass("sel").siblings().removeClass("sel");
+	});
+	var showDivArrs = $(".k_p").find(".pop_p");
+ 	var flag = 0;
+    $(".k_p div.k_p_list .k_p_title").click(function () {
+  	 var divStauts = $(this).next().css('display');
+ 		 for(var i = 0 ; i < showDivArrs.length ; i++){
+			 var currDiv = showDivArrs[i];
+			 var a = $(".k_p div.k_p_list").index($(this).parent())
+    	  if(i === a){
+				 if(divStauts == "none"){
+					 
+					 $(currDiv).show();
+				 }
+				 if(divStauts == "block"){
+					  $(currDiv).hide();
+					 }
+			 }else{
+				 	$(currDiv).hide();
+				 }
+		 }
+   });
+ 	$(".close").click(function(){
+		  $(this).parents(".pop_p").hide();
+  		});  	
+ </script> 
+ </body>
+</html>
+</body>
+</html>

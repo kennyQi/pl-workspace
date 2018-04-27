@@ -1,0 +1,15 @@
+/* CSS Document */
+/*liwei 2015-4-28     changePWD right*/
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+a{ color:#333;}
+.ri{ margin:24px 32px 30px 29px;}
+.ri .rih1{ font-size:20px; line-height:28px; color:#333;}
+.ri .navsbox{width:100%; height:3px; background:#dfe8ef;  margin-top:16px;}
+
+.changeBox{ background:#FF0004;}
+.changeBox ul{ float:left; width:910px; margin-top:30px;}
+.changeBox ul li{ float:left; width:910px; line-height:30px; height:30px; margin-top:10px;}
+.changeBox ul li span{ float:left; text-align:right; width:80px;}
+.changeBox ul li input{ width:228px; height:28px; float:left; border:1px solid #dfe8ef; padding:0 10px; font-family:"微软雅黑"; color:#333; line-height:28px; margin:0 10px;}
+.changeBox ul li i{ float:left; width:500px; height:30px; color:#ff6600;}
+.changeBox .yes{ width:250px; height:30px; background:#00a0e9; color:#fff; float:left; text-align:center; line-height:30px; font-size:14px; font-family:"微软雅黑"; margin-left:90px; margin-top:50px;} 

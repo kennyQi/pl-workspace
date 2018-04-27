@@ -1,0 +1,108 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+	function checkTimeStr(){
+		
+		if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()=="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()!=""){
+			
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}else if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()!="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()==""){
+			
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}else if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()>$("#saleEndTimeStr", navTab.getCurrentPanel()).val()){
+			
+			alert("销售开始时间不能大于销售结束时间!");
+			return false
+		}else{
+			return true;
+		}
+	}
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/report/dealer_sale_count" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						经销商名称：
+						<select name="dealerId" >
+							<option value="">全部</option>
+							<#list dealerList as d >
+								<option value="${d.id}" <#if dealerId==d.id >selected="selected"</#if> > ${d.baseInfo.name} </option>							
+							</#list>
+						</select>
+					</td>
+					<td>
+						销售日期：
+						<input type="text" id="saleBeginTimeStr" name="saleBeginTimeStr" value="${saleBeginTimeStr}" class="date" readonly="true"/>-
+						<input type="text" id="saleEndTimeStr" name="saleEndTimeStr" value="${saleEndTimeStr}" class="date" readonly="true" />
+					</td>
+					<td>
+						排序方式：
+						<select name="sortMethod">
+							<option value="1" <#if sortMethod=='1' >selected="selected"</#if> > 按销量 </option>
+							<option value="2" <#if sortMethod=='2' >selected="selected"</#if> > 按销售额 </option>
+						</select>
+					</td>
+					<td>
+						<span onclick="getYesteday()" style="cursor: pointer;">昨天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getToday()" style="cursor: pointer;">今天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getLastWeek()" style="cursor: pointer;">上周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentWeek()" style="cursor: pointer;">本周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getPreviousMonth()" style="cursor: pointer;">上月</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentMonth()" style="cursor: pointer;">本月</span>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkTimeStr()">查询</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" target="dwzExport" targetType="navTab"  href="${contextPath}/report/dealer_sale_count/export"><span>导出EXCEL</span></a>
+			</li>
+		</ul>
+	</div>
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="85" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="50px;">排名</th>
+				<th width="350px;">经销商名称</th>
+				<th width="150px;">销量</th>
+				<th width="150px;">日均销量</th>
+				<th width="150px;">销售额</th>
+				<th width="180px;">操作</th>
+			</tr>
+		</thead>
+		<#list pagination.list as d>
+			<tr>
+				<td>${d.rank}</td>
+				<td>${d.dealerName}</td>
+				<td>${d.saleTicketTotalCount}</td>
+				<td>${d.saleTicketDayCount}</td>
+				<td>${d.saleTotalAmount}</td>
+				<td>
+					<a href="${contextPath}/report/dealer_sale_count/detail_list?dealerId=${d.dealerId}&saleBeginTimeStr=${saleBeginTimeStr}&saleEndTimeStr=${saleEndTimeStr}" target="dialog" height="650" width="900" style="color: blue">销售明细</a>
+				</td>
+			</tr>
+		</#list>
+	</table>
+	
+
+</div>

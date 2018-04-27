@@ -1,0 +1,237 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+</style>
+
+<script type="text/javascript">
+
+//基本价价格日历
+var map = {};
+//经销商的价格日历
+var dealerMap = {};
+
+$(document).ready(function() {
+	
+	var priceStr = $('.priceStr').val();
+	var dealerPriceStr = $('.dealerPriceStr').val();
+	
+	//解析后台返回基本价格价格日历  放入map
+	//格式：20150312:100;20150313:101
+	var priceArr = priceStr.split(";");
+	for(var p in priceArr){
+		var priceArr2 = priceArr[p].split(":");
+		if(priceArr2.length==2)
+			map[priceArr2[0]] = priceArr2[1];
+	}
+	
+	//解析后台返回经销商价格日历  放入map
+	var dealerArr = dealerPriceStr.split(";");
+	for(var p in dealerArr){
+		var arr = dealerArr[p].split(":");
+		if(arr.length==2)
+			dealerMap[arr[0]] = arr[1];
+	}
+	
+})
+
+
+	function addPepole(){
+		
+		if($("#table1 tr").length==11){
+			alert("只能添加10个游玩人信息");
+			return;
+		}
+		
+		if($("#table1 tr").length>0){
+			$("#table1").show();
+		}
+		
+		$("#table1 tr:eq(0)").after("<tr height=\"25px;\">"+
+					"<td align=\"center\"><input   type=\"text\" style=\"width:100px;\" name=\"pepoleName\"  value=\"\" /></td>"+
+					"<td align=\"center\">身份证</td>"+
+					"<td align=\"center\"><input   type=\"text\" style=\"width:150px;\" name=\"idNo\"   maxlength=\"20\"   /></td>"+
+					"<td align=\"center\"><a onclick=\"delTr(this)\" style=\"color:blue; cursor: pointer;\">删除</a></td>"+
+				"</tr>");
+	}
+	
+	/**删除游玩人*/
+	function delTr(obj){
+		
+		$(obj).parent().parent().remove();
+		
+		if($("#table1 tr").length<2){
+			$("#table1").hide();
+		}
+	}
+	
+	function findPrice(obj){
+		//格式20150202
+		var k = $(obj).val().replace(/-/g, "");
+		
+		//未设置经销商价格日历   或   某天没经销商价时   使用基本价格日历
+		if($('.dealerPriceStr').val().length>0 && dealerMap[k]==undefined || $('.dealerPriceStr').val().length==0){
+			if(map[k]==undefined)
+				$("#span1").html("");
+			else
+				$("#span1").html("￥"+map[k]);
+		}else{
+			//经销商价格日历里找价格
+			$("#span1").html("￥"+dealerMap[k]);
+		}
+		
+		sumTotalPrice();
+	}
+	
+	//计算订单金额
+	function sumTotalPrice(){
+		var m = 0;
+		//金额
+		var p = $("#span1").html().replace("￥", "").toString();
+		//数量	
+		var n = $("#buyNum").val().toString();
+		
+		var t = Math.floor(parseFloat(p*100*n))/100
+		
+		$("#span2").html("￥"+t);
+		$("#totalNum").attr("value", t);
+	}
+	
+	
+	function buyTicket(){
+		$("#f1").ajaxSubmit({
+			type:"post",
+			url:'${contextPath}'+"/ticket/submit/order",
+			dataType:"json",
+			beforeSubmit:function(){
+				
+				if($("#table1 tr").length<2){
+					if(confirm("未添加游玩人信息,确定提交订单并付款?"))
+						return true;
+					else
+						return false;
+				}else{
+					if(confirm("确定提交订单并付款?"))
+						return true;
+					else
+						return false;
+				}
+			},
+			success:function(data){
+				if(data.status==100){
+					alertMsg.info("下单成功，订单号："+data.orderNo);
+					$.pdialog.closeCurrent();
+					navTab.reloadFlag("ticket-list");
+				}else if(data.status==500){
+					alertMsg.error(data.msg);
+				}else{
+					alert("系统异常")
+				}
+			}
+		});
+	}
+
+</script>
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="10">
+
+	<input type="hidden" class="priceStr" value="${priceStr}">
+	<input type="hidden" class="dealerPriceStr" value="${dealerPriceStr}">
+	
+	<form id="f1">
+	<#if policy??>
+	
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span><#if policy.type==1>单票预订<#else>联票预订</#if></span></div>
+		
+		<div class="unit">
+			<label>票务名称：</label>
+			<span>${policy.baseInfo.name}</span>
+			<input type="hidden" name="ticketPolicyId" value="${policy.id}"/>
+			<input type="hidden" name="version" value="${policy.version}">
+		</div>
+		
+		<#if policy.type==1>
+		<div class="unit">
+			<label>出游日期：</label>
+			<input name="travelDate" class="date" size="10" minDate=${minDate} readonly="readonly" onchange="findPrice(this);"/>
+		</div>
+		<#else>
+		<div class="unit">
+			<label style="width: 130px;">包含景点(可游玩天数)：</label>
+			<span>${scenicSpotNameStr!''}</span>
+		</div>
+		</#if>
+		
+		<div class="unit">
+			<label>当天结算价：</label>
+			<span id="span1">
+			<#if policy.baseInfo.playPrice??>
+				￥${policy.baseInfo.playPrice}
+			</#if>
+			</span>
+		</div>
+		
+		<div class="unit">
+			<label>数量：</label>
+			<input id="buyNum" name="buyNum" maxlength="8" size="10" 
+			       onkeyup="(this.v=function(){this.value=this.value.replace(/(^[0]+)|(\D+)/,'');}).call(this)" 
+			       onblur="this.v();" 
+			       onchange="sumTotalPrice()";/>
+		</div>
+		
+		<div class="unit">
+			<label>预订人姓名：</label>
+		    <input name="bookMan"/>
+		</div>
+		
+		<div class="unit">
+			<label>预订人手机号：</label>
+		    <input name="bookManMobile"/>
+		</div>
+		
+		<div class="unit">
+			<label>订单金额：</label>
+			<span id="span2">￥0</span>
+			<input type="hidden" id="totalNum" name="totalNum">
+		</div>
+		
+		<div class="unit">
+			<label>&nbsp;</label>
+			<input type="button" value="添加游玩人" onclick="addPepole()"/>
+		</div>
+
+		<div class="unit"  style="padding-left: 130px;">
+			 <table id="table1" border="1" style="display: none;">
+				<thead>
+						<tr height="25px;">
+							<th align="center" width="120px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">游客姓名</th>
+							<th align="center" width="80px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">证件类型</th>
+							<th align="center" width="160px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">证件号码</th>
+							<th align="center" width="60px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">操作</th>
+						</tr>
+					</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>	
+		
+	<#else>
+		该门票已被删除
+	</#if>
+	</form>
+	
+	<div class="formBar">
+			<ul>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close" style="width: 35px;">取消</button>	</div></div>
+				</li>
+				<li>
+					<div class="buttonActive"><div class="buttonContent"><button type="button" style="width: 100px;" onclick="return buyTicket('${policy.id}')">提交订单并付款</button></div></div>
+				</li>
+			</ul>
+	</div>
+</div>
+</div>
+

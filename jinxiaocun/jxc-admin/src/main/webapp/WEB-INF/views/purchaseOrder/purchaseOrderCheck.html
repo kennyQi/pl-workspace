@@ -1,0 +1,33 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageContent">
+	<form method="post" action="${contextPath}/purchase_order/check?purchaseOrderId=${purchaseOrder.id}" class="pageForm required-validate nowrap" onsubmit="return validateCallbackPoAdd(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+			<#include "purchaseOrder/purchaseOrderViewGeneral.html">
+				审核意见<br>
+				<textarea maxlength="200" ></textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">审核</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

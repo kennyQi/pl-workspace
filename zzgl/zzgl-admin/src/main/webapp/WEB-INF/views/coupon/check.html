@@ -1,0 +1,28 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" id="checkForm"  action="${contextPath}/couponActivity/examPermit" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="${id}">
+		<input type="hidden" name="approve" >
+		<div class="pageFormContent" layoutH="58">
+		<p>审核是否通过</p>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" id="app">通过</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" id="notApp">不通过</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script>
+	$(function(){
+		$("#app").on("click",function(){
+			$("input[name=approve]").val(0);
+			$("#checkForm").submit();
+		});
+		$("#notApp").on("click",function(){
+			$("input[name=approve]").val(1);
+			$("#checkForm").submit();
+		});
+	});
+</script>

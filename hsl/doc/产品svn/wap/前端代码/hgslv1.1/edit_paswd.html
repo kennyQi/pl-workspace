@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<link rel="stylesheet" href="css/hgsl_base.css">
+</head>
+<body>
+	<!-- 公共页头  -->
+	<header class="header">
+	  <h1>修改密码</h1>
+	  
+	  <div class="left-head"> 
+	    <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+	        <span class="inset_shadow">
+	            <span class="head-return"></span>
+	        </span>
+	    </a> 
+	  </div>
+	</header>
+	<div class="content">
+		<form action="" class="listForm" method="">
+	        <article class="circle_b bottom_c" id="payInfo">
+	            <section class="secure selectBank" style="position: relative;">
+	                <span class="phone">手机号码:</span>
+	                <span class="fRight">
+	                    <input  name="LoginName" id="name" placeholder="请输入您的用户名/手机号码" type="text" value="">
+	                </span>
+	            </section>
+	            <section class="selectBank" style="position: relative;">
+	                <span class="msg_verify">短信验证:</span>
+	                <span class="fRight">
+	                    <input  name="Verify" id="verify" placeholder="请输入下方的验证码" type="text">
+	                </span>
+	            </section>
+	            <section class="msg_get">
+	            	<a class="get" href="">获取验证码</a>
+	            </section>
+	        </article>
+	        <span class="err">验证码错误!!!
+	        </span>
+
+	        <div class="col_div">
+	            <a href="set_paswd.html" type="submit" class="btn btn-blue" title="">下一步</a>
+	        </div>
+	    </form>
+	</div>
+
+
+</body>
+</html>

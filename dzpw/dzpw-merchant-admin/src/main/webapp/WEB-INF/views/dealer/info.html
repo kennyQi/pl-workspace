@@ -1,0 +1,136 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<style>
+.jq{background:#eee;font-weight:600;}
+.jq span{margin-left:5px;}
+</style>
+
+<div class="pageContent">
+	<div id="dealerContent" class="pageFormContent" layoutH="58">
+		<!--经销商基本信息  -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>经销商基本信息</span></div>
+		<div class="unit">
+			<label>启用状态：</label>
+			<#if dealer.setting.useable>
+			<input type="text" value="已启用" disabled="disabled"/>
+			<span style="line-height: 20px;height:20px;margin-left:5px;">
+			<a target="ajaxTodo" href="${contextPath}/dealer/disableBatch?ids=${dealer.id}" style="color: blue">禁用</a>
+			</span>
+			</#if>
+			<#if !dealer.setting.useable>
+			<input type="text" value="已禁用" disabled="disabled"/>
+			<span style="line-height: 20px;height:20px;margin-left:5px;">
+			<a target="ajaxTodo" href="${contextPath}/dealer/usableBatch?ids=${dealer.id}" style="color: blue">启用</a>
+			</span>
+			</#if>
+		</div>
+		<div class="unit">
+			<label>经销商名称：</label>
+			<input type="text" size="25" readonly="true"  value="${(dealer.baseInfo.name)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>经销商代码：</label>
+			<input type="text"  size="25" readonly="true" value="${(dealer.clientInfo.key)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>经销商简介：</label>
+			<textarea  rows="5" cols="60" readonly="true">${(dealer.baseInfo.intro)!'-'}</textarea>
+		</div>
+		
+		<!-- 经销商联系信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>经销商联系信息</span></div>
+		<div class="unit">
+			<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+			<input type="text"  size="25" readonly="true"  value="${(dealer.baseInfo.linkMan)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>联系电话：</label>
+			<input type="text" size="25" readonly="true" value="${(dealer.baseInfo.telephone)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>联系邮箱：</label>
+			<input type="text" size="25" readonly="true" value="${(dealer.baseInfo.email)!'-'}"/>
+		</div>
+		<div class="unit">
+			<label>联系地址：</label>
+			<input value="${(dealer.baseInfo.province.name)!''}" size="10" readonly="true"/>
+			<span>></span>
+				<input size="12" value="${dealer.baseInfo.city.name}" readonly="true"/>
+			<span>></span>
+				<input size="25" value="${dealer.baseInfo.area.name}" readonly="true"/>
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+			<textarea id="street" name="street" rows="4" cols="55" placeholder="详细地址">${dealer.baseInfo.address}</textarea>
+		</div>
+		<div class="unit" id="imgun0">
+			<label>企业LOGO：</label>
+			<img class="img-polaroid" width="80" alt="企业logo" title="企业logo"
+				src="${(dealer.certificateInfo.dealerLogo)!'resources/image/u39.png'}"/>
+		</div>
+		<!-- 资质信息  -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>资质信息</span></div>
+		<div class="unit" id="imgun1">
+			<label>营业执照：</label>
+			<img class="img-polaroid" width="80" alt="营业执照" title="营业执照"
+				src="${(dealer.certificateInfo.businessLicense)!'resources/image/u39.png'}"/>
+		</div>
+		<div class="unit" id="imgun2">
+			<label>税务登记证：</label>
+			<img class="img-polaroid" width="80" alt="税务登记证" title="税务登记证"
+				src="${(dealer.certificateInfo.taxRegistrationCertificate)!'resources/image/u39.png'}"/>
+		</div>
+		<div class="unit" id="imgun3">
+			<label>组织代码证：</label>
+			<img class="img-polaroid" width="80" alt="组织代码证" title="组织代码证"
+				src="${(dealer.certificateInfo.organizationCodeCertificate)!'resources/image/u39.png'}"/>
+		</div>
+		<div class="unit" id="imgun4">
+			<label>法人身份证：</label>
+			<img class="img-polaroid" width="80" alt="法人身份证" title="法人身份证"
+				src="${(dealer.certificateInfo.corporateIDCard)!'resources/image/u39.png'}"/>
+		</div> 
+		
+		<!--对接信息-->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>对接信息</span></div>
+	    <div class="unit">
+			<label>经销商网址：</label>
+			<input type="text" size="25" readonly="true" value="${(dealer.clientInfo.dealerWebsite)!'-'}"/>
+		</div>
+		<#if dealer.clientInfo.publishAble>
+		<div class="unit">
+			<label>消息推送网址：</label>
+			<input type="text" size="64" maxlength="384" readonly="true" value="${(dealer.clientInfo.publishUrl)!'-'}" placeholder="未配置推送网址"/>
+		</div>
+		</#if>
+		<!-- 结算信息 -->
+		<#--
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>结算信息</span></div>
+		<#if dealer.accountInfo.accountType==1>
+		<div class="unit">
+			<label>用户编号：</label>
+			<input id="cstNo" readonly="readonly"  size="64" value="${dealer.accountInfo.cstNo!''}"/>
+		</div>
+		<div>
+			<label>操作员编号：</label>
+			<input id="operatorNo" readonly="readonly"  size="64" value="${dealer.accountInfo.operatorNo}"/>
+		</div>
+		</#if>
+		<#if dealer.accountInfo.accountType==2>
+		<div class="unit">
+			<label>结算账户：</label>
+			<input type="text" name="payAccount" size="64" readOnly="true" class="required" placeholder="结算账户" maxlength="64" value="136256615@163.com"/>
+		</div>
+		</#if>
+		<div class="unit">
+			<label>账户类型：</label>
+			<input type="text" name="accountType" size="64" readOnly="true" placeholder="账户类型" maxlength="64" value="<#if dealer.accountInfo.accountType==1>汇金宝支付平台账户</#if><#if dealer.accountInfo.accountType==2>支付宝支付平台账户</#if>"/>
+		</div>
+		<div class="unit">
+			<label>结算方式：</label>
+			<input type="text" name="payMethod" size="64" readOnly="true" placeholder="结算方式" maxlength="64" value="入园实时结算"/>
+		</div>
+		-->
+	</div>
+</div>

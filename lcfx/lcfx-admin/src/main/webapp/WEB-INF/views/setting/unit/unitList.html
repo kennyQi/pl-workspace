@@ -1,0 +1,70 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/unit/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'}" />
+		<div class="searchBar dwz_query_box2">
+			<table class="searchContent" border="0">
+				<tr>
+					<td>单位名称：</td>
+					<td>
+					<input type="text" maxlength="4" name="name"  />
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" onclick="querySubmit()">查询</button>
+							</div>
+						</div></li>
+					<li>
+						<div class="button">
+							<div class="buttonContent">
+								<button type="button" onclick="clearForm()">重置</button>
+							</div>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent page_box">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/unit/to_add" target="dialog" width="600" height="370" mask="true">
+					<span>新增</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div layoutH="120">
+		<table class="table" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th width="70"><input type="checkbox" group="ids" class="checkboxCtrl" />
+					</th>
+					<th width="">单位名称</th>
+					<th width="200">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list pagination.list as t>
+				<tr>
+					<td>
+						<input type="checkbox" name="ids" value="${(t.id)!''}" />
+					</td>
+					<td>${t.unitName}</td>
+					<td class="operate_box">
+						<a href="${contextPath}/unit/edit?id=${t.id}" target="dialog" width="600" height="370" mask="true">编辑</a>
+						<a href="${contextPath}/unit/remove?id=${t.id}" target="ajaxTodo" title="确认删除？">删除</a>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+</div>

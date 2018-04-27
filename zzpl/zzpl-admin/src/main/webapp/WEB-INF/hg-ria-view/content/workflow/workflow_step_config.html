@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-red-sunglo bold uppercase">环节列表</span>
+				</div>
+				<div class="actions">
+					<!-- <a href="${contextPath}/hg/auth/project/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="projectIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a> -->
+					<a href="${contextPath}/workflow/workflowStepAdd?workflowID=${workflow.id}" class="btn btn-default btn-sm" target="hgTab"> 
+					 添加环节
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							流程名称：${workflow.workflowName}
+						</label>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover" name='tbl' id="tab" >
+				<thead>
+					<tr>
+						<th>环节名称</th>
+						<th>处理人</th>
+						<th>表单按钮</th>
+						<th>下一环节</th>
+						<th class="text-center">操作</th>
+					</tr>
+					</thead>
+					<tbody id="WorkflowStepGrid" target="grid" data-url="${contextPath}/workflow/workflowConfig?workflowID=${workflow.id}">
+					<tr>
+						<td>{stepName}</td>
+						<td>{executor}</td>
+						<td>{companyName}</td>
+						<td>{nextStepNO}</td>
+						<td>
+							<a href="${contextPath}/workflow/editWorkflowStep?workflowID={workflowID}&workflowStepNO={stepNO}" class="btn default btn-xs blue"target="hgTab"> 修改</a>
+							<a href="${contextPath}/workflow/deleteWorkflowStep?workflowStepID={id}&workflowStepNO={stepNO}" class="btn default btn-xs red"  title="确认删除？" target="ajaxTodo" rel="luos"> 删除</a>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+

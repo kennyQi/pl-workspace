@@ -1,0 +1,239 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#setting date_format="yyyy-MM-dd HH:mm:ss" />
+
+<div class="pageContent">
+<form method="post" enctype="multipart/form-data" action="${contextPath}/viewspot/order/tocancel" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+	<div class="unit">
+		<label>订单信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:100px">订单状态</th>
+				<th style="width:200px">订单编号</th>
+				<th style="width:100px">艺龙订单号</th>
+				<!-- <th style="width:100px">房间数量</th> -->
+				<th style="width:100px">下单时间</th>
+				<th style="width:100px">入住时间</th>
+				<th style="width:100px">离店日期</th>
+			</thead>
+			<tbody>
+				<td><#list orderStatusMap?keys as key>
+				    <#if key==hotelOrder.status>
+				    ${orderStatusMap[key]}
+				    </#if>
+				    </#list>
+				</td>
+				<td>${orderNo}</td>
+				<td>${hotelOrder.orderId?c}</td>
+				<!-- <td>${hotelOrder.numberOfRooms}</td> -->
+				<td>${hotelOrder.creationDate?date}</td>
+				<td>${hotelOrder.arrivalDate?date}</td>
+				<td>${hotelOrder.departureDate?date}</td>
+			</tbody>
+			</table>
+			<table>
+			<thead>
+				<th style="width:100px">直销价格</th>
+				<th style="width:300px">平台卖价</th>
+				<th style="width:80px">实付总金额</th>
+			</thead>
+			<tbody>
+			<td>
+			</td>
+			<td>
+			</td>
+			<td>
+			${hotelOrder.totalPrice?string("#.##")}
+			</td>
+			</tbody>
+		</table>
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>	
+	<div class="unit">
+		<label>酒店名称</label>
+		<label>${hotelOrder.hotelName}</label>
+		
+		<label>房型名称名称</label>
+		<label style="width:200px;">${hotelOrder.roomTypeName}</label>
+	</div>
+	<div class="unit">
+		<label>房间数量</label>
+		<label>${hotelOrder.numberOfRooms}</label>
+		
+		<label>客人数量</label>
+		<label>${hotelOrder.numberOfCustomers}</label>
+	</div>
+	<div class="unit">
+		<label>付款类型</label>
+		<label>${hotelOrder.paymentType}</label>
+	</div>
+	<div class="unit">
+		<label>最早到店时间</label>
+		<label>${hotelOrder.earliestArrivalTime?date}</label>
+	</div>
+	<div class="unit">
+		<label>最晚到店时间</label>
+		<label>${hotelOrder.latestArrivalTime?date}</label>
+	</div>
+	
+		<div class="unit">
+		<label>确认类型</label>
+		<label>${hotelOrder.confirmationType}</label>
+		
+		<label>货币类型</label>
+		<label>${hotelOrder.currencyCode}</label>
+	</div>
+	
+	<div class="unit">
+		<label>最晚取消时间</label>
+		<label></label>
+		
+		<label>当前是否可以取消</label>
+		<label><#if hotelOrder.isCancelable==true>是<#else>否</#if></label>
+	</div>
+	
+	<div class="unit">
+		<label>违约金</label>
+		<label>${hotelOrder.penaltyToCustomer}</label>
+		
+		<label>罚金货币类型</label>
+		<label>${hotelOrder.penaltyCurrencyCode}</label>
+	</div>
+	<div class="unit">
+		<label>是否要开发票</label>
+		<label><#if hotelOrder.hasInvoice==true>是<#else>否</#if></label>
+		
+	</div>
+		<div class="unit">
+		<label>发票信息</label>
+		<label></label>
+	</div>
+		<div class="unit">
+		<label>预付订单的发票开具模式</label>
+		<label>${hotelOrder.invoiceMode}</label>
+	</div>
+	<div class="unit">
+		<label>抬头</label>
+		<label><#if hotelOrder.invoice??>${hotelOrder.invoice.title}</#if></label>
+	</div>
+		<div class="unit">
+		<label>名称</label>
+		<label><#if hotelOrder.invoice??>${hotelOrder.invoice.itemName}</#if></label>
+		
+		<label>金额</label>
+		<label><#if hotelOrder.invoice??>${hotelOrder.invoice.amount}</#if></label>
+	</div>
+	<div class="unit">
+		<label>发票状态</label>
+		<label><#if hotelOrder.invoice??><#if hotelOrder.invoice.status==true>已开票<#else>未处理</#if></#if></label>
+		
+		<label>邮寄状态</label>
+		<label><#if hotelOrder.invoice??><#if hotelOrder.invoice.deliveryStatus==true>已邮寄<#else>未邮寄</#if></#if></label>
+	</div>
+	<div class="unit">
+		<label>收件人</label>
+		<label><#if hotelOrder.invoice??&&hotelOrder.invoice.recipient??>${hotelOrder.invoice.recipient.name}</#if></label>
+	</div>
+	
+	<div class="unit">
+		<label>交易类型</label>
+		<label></label>
+		
+		<label>卡号</label>
+		<label></label>
+	</div>
+	
+	<div class="unit">
+		<label>交易状态</label>
+		<label></label>
+	</div>
+	
+	<div class="unit">
+		<label>担保规则</label>
+		<label>${hotelOrder.guaranteeRule}</label>
+	</div>
+	<div class="unit">
+		<label>预付规则</label>
+		<label>${hotelOrder.prepayRule}</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<label>给酒店备注</label>
+		<label style="width:230px;">${hotelOrder.noteToHotel}</label>
+	</div>
+		<div class="unit">
+		<label>给艺龙备注</label>
+		<label style="width:230px;">${hotelOrder.noteToELong}</label>
+	</div>
+	<div class="unit">
+		<label>政策备注</label>
+		<label style="width:230px;">${hotelOrder.ratePlanName}</label>
+	</div>
+	
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>		
+	<div class="unit">
+		<label>入住人信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:80px">入住姓名</th>
+				<th style="width:80px">Email</th>
+				<th style="width:80px">手机</th>
+				<th style="width:80px">性别</th>
+				<th style="width:80px">国籍</th>
+				<th style="width:80px">证件类型</th>
+				<th style="width:80px">证件号</th>
+				<th style="width:80px">酒店确认号</th>
+			</thead>
+			<tbody>
+				<#list hotelOrder.orderRooms as rooms>
+				<#list rooms.customers as customer>
+				<tr>
+				<td>${customer.name}</td>
+				<td>${customer.email}</td>
+				<td>${customer.mobile}</td>
+				<td>${customer.gender}</td>
+				<td>${customer.nationality}</td>
+				<td></td>
+				<td></td>
+				<td>${customer.confirmationNumber}</td>
+				
+				</tr>
+				</#list>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<div class="unit">
+		<br/>
+		<br/>
+	</div>	
+</div>
+	<div class="formBar">
+			<ul>
+				<#if hotelOrder.status!="E">
+					<li><a class="button" target="dialog" href="${contextPath}/jd/tocancel?orderId=${orderId}"><span>取消订单</span></a></li>
+				</#if>
+			</ul>
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+	</div>
+</form>

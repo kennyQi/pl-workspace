@@ -1,0 +1,33 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<!-- 头部查询信息部分 -->
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/line/sync" method="post">
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">发布时间：</td>
+					<td><input type="text" name="beginTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="" />-
+						<input type="text" name="endTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value=""/></td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" ><span>同步</span></button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- 页面主体 -->
+<div class="pageContent">
+</div>
+<script type="text/javascript">
+</script>

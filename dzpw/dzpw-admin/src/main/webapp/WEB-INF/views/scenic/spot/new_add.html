@@ -1,0 +1,743 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'scenic-spot' />
+<#assign pathUrl = (contextPath+'/scenic-spot') />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+	.myPageContent{
+		width:700px !important;
+		
+	}
+	.imgContext{
+		height:250px !important;
+	}
+	.myUnit{
+		display: inline-block;
+    	margin: 7px;
+	}
+	.myUnit p{
+		width:160px;
+		float:none !important;
+	}
+	.myUnit p input{
+		float:left;
+	}
+</style>
+<link href="${contextPath}/resources/dwz-ria/uploadify/css/uploadify.css">
+<div class="pageContent">
+
+<form method="post" id="addForm" action="${pathUrl}/addSubmit" class="pageForm required-validate" onsubmit="return beforeSubmitForm(this)">
+
+	<div class="pageFormContent" layoutH="58" id="scenicContent">
+		<!-- 景区基本信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>景区基本信息</span></div>
+		<div class="unit">
+			<label>登录账号：</label>
+			<input type="text" name="adminLoginName" size="32" class="alphanumeric required" minlength="4" maxlength="12" value=""/>
+			<div style="padding-top:5px;corlor:orange;">&nbsp;&nbsp;创建账号后密码默认为1234567</div>
+		</div>
+		<div class="unit">
+			<label>景区全称：</label>
+			<input type="text" name="name" size="32" class="isSpec required" maxlength="64" value=""/>
+		</div>
+		<div class="unit">
+			<label>景区简称：</label>
+			<input type="text" name="shortName" size="32" class="isSpec required" maxlength="64" value=""/>
+		</div>
+		<div class="unit">
+			<label>景区别名：</label>
+			<input type="text" name="aliasName" size="32" value=""/>
+		</div>
+		<div class="unit">
+			<label>景区质量等级：</label>
+			<select class="required" name="level" width="200" style="width:200px;">
+				<option value="AAAAA级">AAAAA级</option>
+				<option value="AAAA级">AAAA级</option>
+				<option value="AAA级">AAA级</option>
+				<option value="AA级">AA级</option>
+				<option value="A级">A级</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>建筑部等级：</label>
+			<select class="required" name="buildLevel" width="200" style="width:200px;">
+				<option value="">请选择</option>
+				<option value="国家级风景名胜区">国家级风景名胜区</option>
+				<option value="省级风景名胜区">省级风景名胜区</option>
+				<option value="其他">其他</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>主题类型：</label>
+			<select name="themeValue" onchange="validTheme()">
+				<option vlue="">请选择</option>
+				<#list scenThemeType?keys as key>
+					<option value="${key}">${scenThemeType[key]}</option>
+				</#list>
+			</select>
+			<select name="themeValue" onchange="validTheme()">
+				<option vlue="">请选择</option>
+				<#list scenThemeType?keys as key>
+					<option value="${key}">${scenThemeType[key]}</option>
+				</#list>
+			</select>
+			<select name="themeValue" onchange="validTheme()">
+				<option vlue="">请选择</option>
+				<#list scenThemeType?keys as key>
+					<option value="${key}">${scenThemeType[key]}</option>
+				</#list>
+			</select>
+			<div style="padding-top:5px;corlor:orange;">&nbsp;&nbsp;至少选择一个分类</div>
+		</div>
+		<div class="unit">
+			<label>景区特色：</label>
+			<input type="text" name="feature" size="64" maxlength="32" class="required"/>
+			<div style="padding-top:5px;corlor:orange;">&nbsp;&nbsp;最多32个字符</div>
+		</div> 
+		<div class="unit">
+			<label>开放时间：</label>
+			<input type="text" name="openTime" size="64" maxlength="32" class="required"/>
+			<div style="padding-top:5px;corlor:orange;">&nbsp;&nbsp;最多32个字符</div>
+		</div> 
+		<div class="unit">
+			<label>百度经度：</label>
+			<input name="longitude" type="text" size="64"/>
+		</div>
+		<div class="unit">
+			<label>百度纬度：</label>
+			<input name="latitude" type="text" size="64"/>
+		</div>
+		<div class="unit">
+			<label>景区网址：</label>
+			<input type="url" name="webSite" size="64" placeholder="输入带有HTTP前缀的地址" maxlength="1024" />
+		</div>
+		<div class="unit">
+			<label>景区地址：</label>
+			<select id="provinceId" name="provinceId" onchange="findPCA($('#provinceId', $.pdialog.getCurrent()).val(), '')">
+				<option value="">请选择所在省</option>
+			<#list provinceList as pr>
+				<option value="${pr.id}">${pr.name}</option>
+			</#list>
+			</select>
+			<select id="cityId" name="cityId" onchange="findPCA('', $('#cityId', $.pdialog.getCurrent()).val())">
+				<option value="">请选择所在市</option>
+			</select>
+			<select id="areaId" name="areaId" >
+				<option value="">请选择所在区</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+			<textarea id="street" name="street" class="required" rows="5" cols="50" placeholder="详细地址"></textarea>
+		</div>
+		<div class="unit">
+			<label>景区简介：</label>
+			<textarea class="editor required" name="intro" rows="10" cols="90" 
+			tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+			Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+			Link,Unlink,Hr,Table"></textarea>
+		</div>
+		<div class="unit">
+			<label>交通指南：</label>
+			<textarea class="editor required" name="traffic" rows="10" cols="90" 
+			tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+			Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+			Link,Unlink,Hr,Table"></textarea>
+		</div>
+		<div class="unit">
+			<label>预定须知：</label>
+			<textarea class="editor required" name="preNotice" rows="10" cols="90" 
+			tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+			Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+			Link,Unlink,Hr,Table"></textarea>
+		</div>
+		
+		<div class="unit">
+			<label>企业LOGO：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file_logo" type="file" name="file" data-msg="企业LOGO" data-imgun="imgun_logo" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun_logo">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="企业LOGO" title="企业LOGO" src="resources/image/u39.png"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input class="required" name="imgNames" type="hidden"/>
+		</div>
+		<div class="unit">
+			<label>景区图片：</label>
+			<div class="pageContent myPageContent" style="width:760px;">
+				<div class="panelBar">
+					<ul class="toolBar">
+						<li>
+							<a class="delete" href="#" onclick="delImage();">
+								<span>批量删除</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="imgContext" layoutH="700">
+					<!-- 景区图片，js动态生成 -->
+				</div>
+				<div class="panelBar hover">
+					<div class="pages" style="float:right;">
+						<span>
+							<button type="button" class="checkboxCtrl" group="pictureIds">全选</button>
+						</span>
+						<span>
+							<button type="button" class="checkboxCtrl" group="pictureIds" selectType="invert">反选</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+			<div class="myPageContent pageContent">
+		<!-- 	<form> -->
+				<!-- <input type="hidden" name="scenicSpotId" value="${scenicSpotId}"/> -->
+				<div class="pageFormContent" style="background:#EAF1FD;">
+					<label class="myPageLabel">上传图片</label>
+					<div class="unit">
+						<span class="u-upload">
+							<input type="file" name="fileName" id="file_upload"/>
+						</span>
+						<span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的图片，最大不超过2M</span>
+						<span id="hiddContent"></span>
+					</div>
+				</div>
+		<!-- 	</form> -->
+			</div>
+		</div>
+		<!-- 资质信息  -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>资质信息</span></div>
+		<div class="unit">
+			<label>&nbsp;</label>
+            <span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的营业执照图片，最大不超过2M</span>
+		</div>
+		<div class="unit">
+			<label>营业执照：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file1" type="file" name="file" data-msg="营业执照" data-imgun="imgun1" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun1">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="营业执照" title="营业执照" src="resources/image/u39.png"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input class="required" name="imgNames" type="hidden"/>
+		</div>
+		<div class="unit">
+			<label>税务登记证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file2" type="file" name="file" data-msg="税务登记证" data-imgun="imgun2" 	size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun2">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="税务登记证" title="税务登记证" src="resources/image/u39.png"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input class="required" name="imgNames" type="hidden"/>
+		</div>
+		<div class="unit">
+			<label>组织代码证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file3" type="file" name="file" data-msg="组织代码证" data-imgun="imgun3" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun3">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="组织代码证" title="组织代码证" src="resources/image/u39.png"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input class="required" name="imgNames" type="hidden"/>
+		</div>
+		<div class="unit">
+			<label>法人身份证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file4" type="file" name="file" data-msg="法人身份证" data-imgun="imgun4" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun4">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="法人身份证" title="法人身份证" src="resources/image/u39.png"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input class="required" name="imgNames" type="hidden"/>
+		</div>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>联系信息</span></div>
+		<div class="unit">
+			<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+			<input type="text" name="linkMan" size="32" class="required" maxlength="12" value=""/>
+		</div>
+		<div class="unit">
+			<label>&nbsp;&nbsp;职&nbsp;&nbsp;位&nbsp;&nbsp;：</label>
+			<input type="text" name="job" size="32" class="required" maxlength="20"/>
+		</div>
+		<div class="unit">
+			<label>联系电话：</label>
+			<input type="tel" name="telephone" size="32" class="required phone" maxlength="12"/>
+		</div>
+		<div class="unit">
+			<label>联系邮箱：</label>
+			<input type="email" name="email" size="32" class="required" maxlength="64" value=""/>
+		</div>
+		
+		<!-- 结算信息 -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>结算信息</span></div>
+		<div class="unit">
+			<label>开&nbsp;&nbsp;户&nbsp;&nbsp;行：</label>
+			<select name="depositBank" class="required">
+				<option value="">未选择</option>
+				<option value="中国银行">中国银行</option>
+				<option value="农业银行">农业银行</option>
+				<option value="建设银行">建设银行</option>
+				<option value="工商银行">工商银行</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>开户单位：</label>
+			<input type="text" name="depositOrg" size="32" class="required"/>
+		</div>
+		<div class="unit">
+			<label>&nbsp;&nbsp;帐&nbsp;&nbsp;号&nbsp;&nbsp;：</label>
+			<input type="text" name="depositAccount" size="32" class="required digits"/>
+		</div>
+		<div class="unit">
+			<label>手续费率：</label>
+			<input  class="required number" name="settlementFee" size="12" max="1000"/> 元/人次
+		</div>
+		
+		<!-- 设备信息 -->
+<#--
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>设备信息</span></div>
+		<div class="unit">
+			<label>设备编码：</label>
+			<input id="deviceId" type="text" /><input type="button" value="添加" onclick="addDevice()"/>			
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+			<table id="deviceTable" border="1" style="display: none;">
+				<thead>
+				<tr height="25px;">				
+					<th align="center" width="60px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">序号</th>
+					<th align="center" width="250px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">设备编码</th>
+					<th align="center" width="90px;" style="background-image: url('${contextPath}/resources/image/text2_u118.png');">操作</th>
+				</tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
+			</table>
+		</div>
+-->
+		<div class="formBar">
+		<ul>
+			<li>
+				<div class="buttonActive"><div class="buttonContent">
+					<button type="submit" style="width: 35px;">提交</button>
+				</div></div>
+			</li>
+			<li>
+				<div class="button"><div class="buttonContent">
+					<button type="button" onclick="MyClose('是否取消添加该景区？','monitorDiag')" style="width: 35px;">取消</button>
+				</div></div>
+			</li>
+		</ul>
+	</div>
+	</div>
+	
+</form>
+</div>
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+
+var beforeSubmitForm = function(evt){
+	if($("#imgun_logo").find("input[name=imgNames]").val()==""){
+		alertMsg.error("企业logo不能为空");
+		return false;
+	}
+	if($("#imgun1").find("input[name=imgNames]").val()==""){
+		alertMsg.error("营业执照不能为空");
+		return false;
+	}
+	if($("#imgun2").find("input[name=imgNames]").val()==""){
+		alertMsg.error("税务登记证不能为空");
+		return false;
+	}
+	if($("#imgun3").find("input[name=imgNames]").val()==""){
+		alertMsg.error("组织代码证不能为空");
+		return false;
+	}
+	if($("#imgun4").find("input[name=imgNames]").val()==""){
+		alertMsg.error("法人身份证不能为空");
+		return false;
+	}
+	var themeValue=$("select[name='themeValue']");
+	var themeValueSize=0;
+	numReg=/^[0-9]*$/;
+	$.each(themeValue,function (i,e) { 
+		  if (numReg.test(e.value)) { 
+			  themeValueSize++;
+		  } 
+		});
+	if(themeValueSize<1){
+		alertMsg.error("至少选择一个主题类型");
+		return false;
+	}
+	if(scenpicValid()<1){
+		alertMsg.error("景区图片不能为空！");
+		return false;
+	}
+	if(validTheme()==0){
+		return false;
+	}
+	//调用DWZ的校验
+	return validateCallback(evt,dialogAjaxDone);
+}
+//验证景区图片
+function scenpicValid(){
+	var imgs=$(".myUnit:visible").find("img");
+	console.info(imgs);
+	if(imgs==undefined){
+		return 0;
+	}
+	console.info(imgs.size());
+	return imgs.size();
+	
+}
+/**修改省市区*/
+function findPCA(pid, cid){
+	var ps;
+	if(pid!="" && cid==""){
+		ps = '${contextPath}'+"/baseDate/city?provinceCode="+pid;
+	}
+	if(pid=="" && cid!=""){
+		ps = '${contextPath}'+"/baseDate/area?cityCode="+cid;
+	}
+	
+	$.ajax({
+		type:"post",
+		url: ps,
+		cache: false,
+		dataType: "json",
+		success: function(data){
+			var html = "";
+			$.each(data, function(i, n){
+				html = html + "<option value=\""+n["id"]+"\">"+n["name"]+"</option>";
+			});
+			
+			//修改省时
+			if(pid!="" && cid==""){
+				//重置市选项
+				html = "<option value=\"\">请选择所在市</option>"+html;
+				$("#cityId option", $.pdialog.getCurrent()).remove();
+				$("#cityId", $.pdialog.getCurrent()).append(html);
+				//重置区选项
+				$("#areaId option", $.pdialog.getCurrent()).remove();
+				$("#areaId", $.pdialog.getCurrent()).append("<option value=\"\">请选择所在区</option>");
+			}
+			//修改市时
+			if(pid=="" && cid!=""){
+				//重置区选项
+				html = "<option value=\"\">请选择所在区</option>"+html;
+				$("#areaId option", $.pdialog.getCurrent()).remove();
+				$("#areaId", $.pdialog.getCurrent()).append(html);
+			}
+		}
+	});
+}
+
+
+/**添加设备编码*/
+function addDevice(){
+	
+	if($("#deviceId").val()==""){
+		return;
+	}
+	
+	var insertFlag = true;
+	//检查重复设备编码
+	$("#deviceTable tr").each(function(){
+		if($(this).children().eq(1).text()==$("#deviceId").val()){
+			alert("已存在相同设备编码");
+			insertFlag = false;
+			return insertFlag;
+		}
+	});
+	//是否插入行
+	if(insertFlag){
+		//行数 减去表头 计算序号
+		var x = $("#deviceTable tr").length;
+		
+		$("#deviceTable tr:last").after("<tr height=\"25px;\">"+
+				"<td align=\"center\">"+x+"</td>"+
+				"<td align=\"center\">"+$("#deviceId").val()+"<input type=\"hidden\" name=\"deviceIds\" value=\""+$("#deviceId").val()+"\"></td>"+
+				"<td align=\"center\"><a onclick=\"delTr(this)\" style=\"color:blue; cursor:pointer\">删除</a></td>"+
+			 "</tr>");
+	}
+	
+	if($("#deviceTable tr").length > 1){
+		$("#deviceTable").show();
+	}
+}
+
+/**删除设备编码*/
+function delTr(obj){
+	$(obj).parent().parent().remove();
+	
+	//重新设置序号
+	$("#deviceTable tr").each(function(i){
+		if(i>0){
+			$(this).children().eq(0).text(i)
+		}
+	});
+	
+	if($("#deviceTable tr").length < 2){
+		$("#deviceTable").hide();
+	}
+}
+
+
+/** 图片上传按钮单击事件 */
+function imgUpload(evt){
+	var temp = $(evt);
+	var groupURL = '/group0/';
+	//获取后缀，并校验
+	var vall = temp.val();
+	var fileName = vall.substr(vall.lastIndexOf("\\")+1);
+	var ext = vall.substr(vall.lastIndexOf(".")+1);
+	if(!(ext && /^(jpg|jpeg|png|gif)$/.test(ext.toLowerCase()))){
+		alertMsg.warn("暂不支持jpg、gif、png、bmp以外的图片！");
+		return false;
+	}
+	//发起请求
+	$.ajaxFileUpload({
+		url : '${contextPath}/scenic-spot/imgUpload',
+       	secureuri : false,
+       	fileElementId : temp.attr("id"),
+       	dataType : "json",
+      	success: function (da) {
+        	if(da.rs < 1){
+        		alertMsg.warn("图片上传失败："+da.msg);
+				return false;
+        	}
+        	
+        	//图片显示
+        	var chs = $("#"+temp.data("imgun"));
+        	chs.find("img").attr("src",groupURL+da.imgName);
+        	chs.find("input:eq(0)").val(temp.data("msg"));
+        	chs.find("input:eq(1)").val(fileName);
+        	chs.find("input:eq(2)").val(da.imgName);
+        },
+        error: function (data, status, e) {
+        	alertMsg.warn("图片上传失败，请稍后重试！");
+        }
+    });
+}
+//判断是否有重复主题
+function validTheme(){
+	var themeValues=$("select[name='themeValue']");
+	var empty="请选择";
+	console.info(themeValues.eq(0).val());
+	console.info(themeValues.eq(1).val());
+	console.info(themeValues.eq(2).val());
+	if((themeValues.eq(0).val()!=empty)&&(themeValues.eq(1).val()!=empty)&&themeValues.eq(0).val()==themeValues.eq(1).val()){
+		alertMsg.error("景区主题重复");
+		return 0;
+	}
+	else if((themeValues.eq(2).val()!=empty)&&(themeValues.eq(1).val()!=empty)&&themeValues.eq(2).val()==themeValues.eq(1).val()){
+		alertMsg.error("景区主题重复");
+		return 0;	
+	}
+	else if((themeValues.eq(0).val()!=empty)&&(themeValues.eq(2).val()!=empty)&&themeValues.eq(2).val()==themeValues.eq(0).val()){
+		alertMsg.error("景区主题重复");
+		return 0;
+	}
+	return 1;
+}
+//注册汇金宝账户
+function regHJB(){
+	if($("#cstNo").val()!=""){
+		alertMsg.warn("您已注册过，不允许重复注册！");
+		return;
+	}
+	var province=$("#scenicContent").find("#provinceId").val()==""?"":$("#scenicContent").find(("#provinceId option:selected")).text()+"省";
+	var city=$("#scenicContent").find("#cityId").val()==""?"":$("#scenicContent").find(("#cityId option:selected")).text()+"市";
+	var area=$("#scenicContent").find("#areaId").val()==""?"":$("#scenicContent").find(("#areaId option:selected")).text();
+	var street=$("#scenicContent").find("#street").val();
+	var address=province+city+area+street;
+	
+	var linkMan=$("#scenicContent").find("input[name='linkMan']").val();
+	var telephone=$("#scenicContent").find("input[name='telephone']").val();
+	var email=$("#scenicContent").find("input[name='email']").val();
+	var scenName=$("#scenicContent").find("input[name='name']").val();
+	
+	console.info("address:"+address);
+	console.info("linkMan:"+linkMan);
+	console.info("telephone:"+telephone);
+	console.info("email:"+email);
+	var regHref="${contextPath}/hjbreg/addAccount";
+	console.info(regHref);
+	regHref+="?seril="+getRandomString();
+	console.info("regH="+regHref);
+	if(address!=""){
+		regHref+="&address="+address;
+		console.info(regHref);
+	}
+		if(linkMan!=""){
+		regHref+="&linkMan="+linkMan;
+	}
+	if(telephone!=""){
+		regHref+="&telephone="+telephone;
+	}
+	if(email!=""){
+		regHref+="&email="+email;
+	}
+	if(scenName!=""){
+		regHref+="&scenName="+scenName;
+	}
+	console.info("href:"+regHref);
+	$("#acc_reg").attr("href",regHref);
+	$("#acc_reg").click();
+}
+//切换结算账户类型
+function changeAccounttype(obj){
+	var accType=$(obj).val();
+	//删除name属性值防止参数有值而不必要的提交
+	if(accType==1){
+		//汇金宝账户
+		$(obj).parent().parent().find("#operatorNo").parent().show();
+		$(obj).parent().parent().find("#operatorNo").attr("name","operatorNo");
+		$(obj).parent().parent().find("#cstNo").parent().show();
+		$(obj).parent().parent().find("#cstNo").attr("name","cstNo")
+		$(obj).parent().parent().find("#accountNumber").parent().hide();
+		$(obj).parent().parent().find("#accountNumber").attr("name","");
+		$(obj).parent().parent().find("#accountNumber").removeClass("required");
+	}
+	if(accType==2){
+		//支付宝账户
+		alert("暂不支持支付宝结算！");
+		console.info($(obj).find("option[value='1']").html());
+		$(obj).find("option[value='1']").attr("selected","selected");
+		return;
+		$(obj).parent().parent().find("#operatorNo").parent().hide();
+		$(obj).parent().parent().find("#operatorNo").attr("name","");
+		$(obj).parent().parent().find("#cstNo").parent().hide();
+		$(obj).parent().parent().find("#cstNo").attr("name","");
+		$(obj).parent().parent().find("#accountNumber").parent().show();
+		$(obj).parent().parent().find("#accountNumber").attr("name","accountNumber")
+		$(obj).parent().parent().find("#accountNumber").addClass("required");
+	}
+	
+}
+//获取长度为len的随机字符串  
+function getRandomString(len) {
+    len = len || 16;  
+    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; // 默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1  
+    var maxPos = $chars.length;  
+    var pwd = '';  
+    for (i = 0; i < len; i++) {  
+        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));  
+    }  
+    return pwd;  
+}
+
+/**
+ *景区图片管理
+ */
+
+	var headHtml = '<li class="selected" onclick="getTabsIndex(this);"><a href="#"><span>$name</span></a></li>';
+	var imgHtml = '<div class="myUnit"><img class="img-polaroid" width="160" height="120" alt="$scenPicName" title="$scenPicName" src="$uri"/>'+
+		'<p style="height:25px;line-height:20px;"><input class="checkboxCtrl" type="checkbox" name="pictureIds" class="myInput" value="0"/>'+
+		'<label class="myLabel">$scenPicName</label></p><div class="imgIdContext"><input name="scenPicNames" type="hidden" value="$scenPicName"/><input name="'+
+		'scenPicUrls" type="hidden" value="$scenPicUrl"/><input name="scenPicFlags" type="hidden" value="$scenPicFlag"/></div></div>';
+	var divHtml = '<div class="pageContent" style="width:600px;"><div class="panelBar"><ul class="toolBar"><li>'+
+		'<a class="delete" href="#" onclick="delImage();"><span>批量删除</span></a></li></ul></div><div class="imgContext" layoutH="145">'+
+		'</div><div class="panelBar hover"><div class="pages" style="float:right;"'+
+		'><span><button type="button" class="checkboxCtrl" group="pictureIds">全选</button></span><span><button type="button" class="'+
+		'checkboxCtrl" group="pictureIds" selectType="invert">反选</button></span></div></div></div>';
+
+	$(function() {
+		//渲染编辑器
+		initKindEditor();
+		$("#file_upload").uploadify({
+	         'method'   : 'post',  
+	         'buttonText' : '请选择',  
+	         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+	 		 'uploader'      : '${contextPath}/scenicPic/upload',
+	         'fileObjName'   : 'imgFile', 
+	         'onUploadSuccess' : function(file, data, response) {
+	        	var img=$.parseJSON(data);
+	        	console.debug(img);
+	            var imgContext = $(".imgContext");
+		        if(undefined != imgContext){
+		        		imgContext.append(
+		        			imgHtml.replace(/\$scenPicName/g,img.fileName)
+		        				.replace(/\$scenPicUrl/g, img.url)
+		        				.replace(/\$scenPicFlag/g,"+")
+		        				.replace(/\$uri/g,img.url)
+		        			);
+		        }
+	         }  
+	     });  
+	});	
+	
+	function initKindEditor() {
+		var editor;
+		editor = KindEditor.create('#article_add_editor', {
+			basePath : '${contextPath}/resources/js/kindeditor/',
+			items : [ 'source', '|', 'undo', 'redo', '|', 'preview',
+					'template', 'code', 'cut', 'copy', 'paste',
+					'plainpaste', 'wordpaste', '|', 'justifyleft',
+					'justifycenter', 'justifyright', 'justifyfull',
+					'insertorderedlist', 'insertunorderedlist', 'indent',
+					'outdent', 'subscript', 'superscript', 'clearhtml',
+					'quickformat', 'selectall', '|', 'fullscreen', '/',
+					'formatblock', 'fontname', 'fontsize', '|',
+					'forecolor', 'hilitecolor', 'bold', 'italic',
+					'underline', 'strikethrough', 'lineheight',
+					'removeformat', '|', 'image', 'table', 'hr',
+					'emoticons', 'baidumap', 'pagebreak', 'anchor', 'link',
+					'unlink', '|' ],
+			uploadJson : '${contextPath}/image/upload',
+			afterChange : function() {
+				this.sync();
+			}
+		});
+	}
+	
+
+	/** 图片删除按钮单击事件 */
+	function delImage(){
+		var checks = $(".imgContext").find("input:checked");
+    	if(checks.length < 1){
+    		alertMsg.warn("请选择图片！");
+    		return;
+    	}
+    	//函数变量
+		var formFun = function(){
+    		var tempDiv = null;
+    		var tempUrl;
+			for(var i = 0,len = checks.length;i < len;i++){
+				tempDiv = $(checks[i]).parent().parent();
+				tempUrl = tempDiv.find("img").attr("src");
+				$.ajax({ 
+					url: "${contextPath}/scenicPic/deleteRemotePic", 
+					data:"picUrl="+tempUrl,
+					type:"POST",
+					success: function(){
+						tempDiv.remove();
+					}});
+			}
+		}
+		//确定框
+		alertMsg.confirm("确定要删除图片？",{okCall: formFun});
+	}
+</script>

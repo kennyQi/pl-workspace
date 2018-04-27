@@ -1,0 +1,249 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/hotel/order/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<input type="hidden" id="startingProvinceID" value="${(lineOrderQO.startingProvinceID)!}"/>
+		<input type="hidden" id="startingCityID" value="${(lineOrderQO.startingCityID)!}"/>
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						订单来源：
+					</td>
+					<td>
+						<select name="dealerProjectId">
+                           <option value="">全部</option>
+                           <#if dealerList ??>
+                               <#list dealerList as dealerDto>
+                                   <option  value="${(dealerDto.id)!''}" <#if dealerDto.id == hotelOrderQO.dealerProjectId>selected="selected"</#if>>${(dealerDto.name)!''}</option>
+                               </#list>
+                           </#if>
+                       </select>
+					</td>
+					<td>
+						订单编号：
+					</td>
+					<td>
+						<input type="text" name="orderNo" value="${(hotelOrderQO.orderNo)!''}"/>
+					</td>
+					<td>
+						供应商订单号：
+					</td>
+					<td>
+						<select name="supplierProjectId">
+                           <option value="">全部</option>
+                            <#if supplierList ??>
+                               <#list supplierList as supplierDto>
+                                   <option  value="${(supplierDto.id)!''}" <#if supplierDto.id == hotelOrderQO.supplierProjectId>selected="selected"</#if>>${(supplierDto.name)!''}</option>
+                               </#list>
+                           </#if>
+                       </select>
+						<input name="supplierOrderNo" value="${(hotelOrderQO.supplierOrderNo)!''}" /> 
+					</td>
+					<td>
+						订单状态：
+					</td>
+					<td >
+						<select name="status" id="status">
+							<option value="">--请选择--</option>
+							<#if statusMap??>
+                               <#list statusMap?keys as itemKey>
+                                   <option value="${itemKey}" <#if hotelOrderQO?? ><#if itemKey == hotelOrderQO.status>selected="selected"</#if></#if> >
+                                    	${statusMap[itemKey]}
+                                   </option>
+                               </#list>
+                            </#if>
+						</select>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						酒店编号：
+					</td>
+					<td>
+						<input name = "hotelNo" value = "${(hotelOrderQO.hotelNo)!''}">
+					</td>
+					<td>
+						下单时间:
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="createDateBegin" value="${(hotelOrderQO.createDateBegin)!''}" class="date"/>
+						-
+						<input type="text" readonly="readonly" name="createDateEnd" value="${(hotelOrderQO.createDateEnd)!''}" class="date"/>
+					</td>
+					
+				</tr>
+				<tr>
+					
+				</tr>
+				<tr>
+					<td>
+						入住日期:
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="arrivalDateBegin" value="${(hotelOrderQO.arrivalDateBegin)!''}" class="date"/>
+						-
+						<input type="text" readonly="readonly" name="arrivalDateEnd" value="${(hotelOrderQO.arrivalDateEnd)!''}" class="date"/>
+					</td>
+					<td>
+						离店日期:
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="departureDateBegin" value="${(hotelOrderQO.departureDateBegin)!''}" class="date"/>
+						-
+						<input type="text" readonly="readonly" name="departureDateEnd" value="${(hotelOrderQO.departureDateEnd)!''}" class="date"/>
+					</td>
+					<td>
+						联系人：
+					</td>
+					<td>
+						<input name="contacts" value = "${hotelOrderQO.contacts}">
+					</td>
+					
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" id="searchData_order">查询</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="formReset(this)">重置</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="210"  nowrapTD="false">
+		<thead>
+			<tr>
+				<th width="5%">订单来源</th>
+				<th width="5%">经销商订单号</th>
+				<th width="5%">订单编号</th>
+				<th width="5%">供应商平台订单号</th>
+				<th width="10%">酒店名称</th> 
+				<th width="10%">房型名称</th>
+				<th width="5%">入住日期</th>
+				<th width="5%">离店日期</th>
+				<th width="5%">房间数量</th>
+				<th width="3%">客人数量</th>
+				<th width="10%">入住人姓名</th>
+				<th width="5%">付款类型</th>
+				<th width="1%">确认类型</th>
+				<th width="5%">总价</th>
+				<th width="10%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as hotelOrderDTO>				
+				<tr height="80px">
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.dealer.name)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.dealerOrderNo)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.orderNo)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.supplierOrderNo)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.hotelName)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.roomName)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.arrivalDate)?string("yyyy-MM-dd HH:mm:ss")}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.departureDate)?string("yyyy-MM-dd HH:mm:ss")}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.numberOfRooms)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${(hotelOrderDTO.numberOfCustomers)!''}
+						</#if>
+					</td>
+					<td>
+						<#if hotelOrderDTO?? && hotelOrderDTO.customers??>
+							<#list	hotelOrderDTO.customers as customer>
+							<#if customer.type == 0>
+								${(customer.name)!''}
+								&nbsp;
+							</#if>
+							</#list>
+						</#if>
+					</td>
+					<td>
+						到店支付
+					</td>
+					<td>
+					</td>
+					<td>
+						<#if hotelOrderDTO??>
+						${hotelOrderDTO.totalPrice}
+						</#if>
+					</td>
+					<td>
+						<p>
+							<a target="dialog" href="${contextPath}/hotel/order/detail?orderNo=${hotelOrderDTO.orderNo!''}"  width="1000" height="600" style="color: blue">
+								 订单详情
+							</a>
+						</p>
+						<br/>
+						<p>
+							<a target="dialog" href="${contextPath}/hotel/order/toCancel?orderNo=${hotelOrderDTO.orderNo!''}&orderId=${hotelOrderDTO.id!''}&supplierOrderNo=${hotelOrderDTO.supplierOrderNo!''}" width="600" height="300" style="color: blue">
+								取消订单
+							</a>
+						</p>
+					</td>
+			 </tr>
+			</#list>
+		</tbody>
+	</table>
+	
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+
+</script>

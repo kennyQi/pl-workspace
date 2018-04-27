@@ -1,0 +1,52 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as dk>
+<#import "/public/pagination/pagination.html" as p /> 
+
+<@dk.head "- 管理员帐号管理">
+	
+</@dk.head>
+
+<@dk.defaultFrame "" "admin" "admin" "" "default" "adminBack" "admin" >
+
+</@dk.defaultFrame>
+
+<@dk.end>
+<script src=" http://static.${domain}/misc/js/plug/popUp/popUp.js?v=1344306817" type="text/javascript"></script>			
+<script type="text/javascript">	
+	function delAdmin(id, name){
+		$.confirm("删除提示","您确定要删除管理员帐号 "+name+" 吗? 此操作无法恢复。",function(){
+			$.ajax({
+				type: "post",
+				url: "${contextPath}/admin/delete",
+				cache:false,
+				dataType:"json",
+				data:{
+					"_id":id
+				},
+				success: function(data){
+					if (data['code']==1) {
+						$(this).popUp({
+							width:400,
+							height:40,
+							title:'提示信息',
+							content:'<div class="alertCont">'+data['text']+'</div>',
+							buttons:'<span class="popBtns blueBtn callbackBtn">确定</span>',
+							mask:false,
+							maskMode:true,
+							callback:function(){
+								window.location.reload();
+							}
+						});
+					} else {
+						$.alert(data['text']);
+					}
+				},
+				error:function(e){
+					$.alert("请求发生错误");
+				}
+			});		
+		});
+	}
+	
+</script>
+</@dk.end>

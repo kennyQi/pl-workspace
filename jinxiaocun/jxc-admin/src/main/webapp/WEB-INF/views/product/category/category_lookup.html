@@ -1,0 +1,28 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	fiEffect('cs');
+})
+</script>
+
+<div class="pageContent" fi="cs1">
+	<div class="pageFormContent" layoutH="58" >
+		<ul class="tree expand" fi="cs2">${categoryTreeHTML!}
+		</ul>
+	</div>
+	<div class="formBar">
+		<ul  fi="cs3">
+			<li><div class="button" >
+					<div class="buttonContent">
+						<button onclick="$.bringBack({${(inputName)!}:'', categoryName:''})">清除</button>
+					</div>
+				</div>
+			</li>
+			<li><div class="button">
+					<div class="buttonContent">
+						<button class="close" type="button" >关闭</button>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>

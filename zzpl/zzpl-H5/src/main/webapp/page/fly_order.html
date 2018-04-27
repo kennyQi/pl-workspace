@@ -1,0 +1,106 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>订单</title>
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+    <script  data-main="${contextPath}/resources/js/fly_order"  src="${contextPath}/resources/js/require.min.js" async="async" ></script>
+    <script type="text/javascript">
+		var request_path="${contextPath}";
+	</script>
+</head>
+
+<body>
+<link href="${contextPath}/resources/css/fly.css" rel="stylesheet" />
+<div class="cont" style="position: relative;z-index:1006;">
+    <header class="header box">
+        <h1>订单</h1>
+    </header>
+    <ul class="order_tab box">
+    <#if type==0>
+    	<li class="checked">全部</li>
+    <#else>
+    	<li class="">全部</li>
+    </#if>
+    <#if type==1>
+    	<li class="checked" >待审核</li>
+    <#else>
+    	<li class="">待审核</li>
+    </#if>
+    <#if type==2>
+    	<li class="checked">待出票</li>
+    <#else>
+    	<li class="" >待出票</li>
+    </#if>
+    <#if type==3>
+    	<li class="checked">已出票</li>
+    <#else>
+    	<li class="">已出票</li>
+    </#if>
+    </ul>
+</div>
+<div class="listCont">
+    <div class="loadIngMsg" style="display: none;">
+        <div class="downLoading">正在加载</div>
+    </div>
+    <ul class="fly-order">
+    <#if flightOrders??>
+    	<#list flightOrders as flightOrder>
+    	<a href="${contextPath}/order/topay?orderType=singleOrder&orderID=${flightOrder.orderID!}&orderNO=${flightOrder.orderNO!}&type=${type}">
+            <li class="box">
+                <div class="order-detail">
+                    <div class="city">${flightOrder.orgCityName!}<label></label>${flightOrder.dstCityName!}</div>
+                    <div class="company">${flightOrder.airComp!}-${flightOrder.flightNO!}</div>
+                    <#if flightOrder.startTime??>
+                    <div class="time">出发日期：${flightOrder.startTime?string("yyyy-MM-dd HH:mm")}</div>
+                    <#else>
+                    <div class="time">&nbsp;</div>
+                    </#if>
+                </div>
+                <div class="order-price">
+                    <div class="price">${flightOrder.totalPrice!}</div>
+                    <div class="status">
+                    <#if flightOrder.payStatus==96>
+                    	待支付
+                    <#else>
+	                    <#if flightOrder.status==100||flightOrder.status==102||flightOrder.status==114||flightOrder.status==115>
+	                    	等待出票
+	                    <#elseif flightOrder.status==101>
+	                    	购票审批未通过
+	                    <#elseif flightOrder.status==103>
+	                    	拒绝出票
+	                    <#elseif flightOrder.status==104>
+	                    	出票成功
+	                    <#elseif flightOrder.status==105>
+	                    	出票失败
+	                    <#elseif flightOrder.status==106||flightOrder.status==108>
+	                    	等待退票
+	                    <#elseif flightOrder.status==107>
+	                    	退票审批未通过
+	                    <#elseif flightOrder.status==110>
+	                    	退票成功
+	                    <#elseif flightOrder.status==111>
+	                    	退票失败
+	                    <#elseif flightOrder.status==112>
+	                    	订单作废
+	                    </#if>
+                    </#if>
+                    </div>
+                </div>
+            </li>
+        </a>
+    	</#list>
+    <#else>
+    </#if>
+    </ul>
+</div>
+<nav>
+    <a href="${contextPath}/flight/view" class="index">首页</a>
+    <a href="${contextPath}/order/view?type=0" class="order orderOn" id="allOrders">订单</a>
+    <a href="${contextPath}/user/view" class="home">个人中心</a>
+</nav>
+</body>
+</html>

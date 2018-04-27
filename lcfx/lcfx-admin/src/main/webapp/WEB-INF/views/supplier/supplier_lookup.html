@@ -1,0 +1,77 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader page_header_fix">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/product/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'} " />
+	</form>
+</div>
+<script type="text/javascript">
+	function appendDataSupplierPri(n,id){
+		
+		
+		
+	var t = $("#e1425869023232");
+	if(t.find("[value='"+id+"']").length>0){
+		alertMsg.warn("该供应商已存在");
+		return;
+	}
+	var data = '';
+	var template = getHtmlTemplate('template_supplier_pri_div');
+	dbp(n);
+	dbp(id);
+	dbp(template);
+	template=replaceVal('id',id,template);
+	template=replaceVal('name',n,template);
+	t.append(template);
+}
+</script>
+<div class="pageContent page_box">
+	<div layoutH="50">
+		<table class="table" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th width="">供应商名称</th>
+					<th width="70">供应商类型</th>
+					<th width="70">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list supplierList as t>
+				<tr>
+					<td>${(t.baseInfo.name)!}</td>
+					<td><#if (t.baseInfo.type)??><#if (t.baseInfo.type)==0> 经销 <#else> 代销 </#if></#if></td>
+					<td class="operate_box">
+						<a href="javascript:void(0)" onclick="appendDataSupplierPri('${(t.baseInfo.name)!}','${t.id}')">添加</a>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<div class="formBar">
+		<ul>
+			<li>
+				<div class="button">
+					<div class="buttonContent">
+						<button type="button" class="close">关闭</button>
+					</div>
+				</div></li>
+		</ul>
+	</div>
+</div>
+<table style="display:none" >
+<tbody htmltemplate="template_supplier_pri_div">
+	<tr>
+		<td>
+			@{name}
+			<input type="hidden" name="supplierIdList" value="@{id}" />
+		</td>
+								<td class="operate_box">
+									<a href="#" onclick="up(this)">上移</a>
+									<a href="#" onclick="down(this)">下移</a>
+									<a href="#" onclick="deleteSupplierPriDiv(this)">移除</a>
+								</td>
+	</tr>
+</tbody>
+
+</table>

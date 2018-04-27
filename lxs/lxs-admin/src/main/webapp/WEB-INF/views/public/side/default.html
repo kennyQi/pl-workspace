@@ -1,0 +1,271 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<!-- 
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>系统设置
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a>权限管理</a>
+				<ul>
+					<li><a href="${contextPath}/auth/perm/index" target="navTab"
+						rel="authPerm">资源管理</a></li>
+					<li><a href="${contextPath}/auth/role/list" target="navTab"
+						rel="authRole">角色管理</a></li>
+					<li><a href="${contextPath}/system/operator/list"
+						target="navTab" rel="operator">员工管理</a></li>
+				</ul></li>
+		</ul>
+	</div>
+ -->
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>首页管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+
+			<li><a href="${contextPath}/linkpage/linkpageaddView"
+				target="navTab" rel="pageView">启动页管理</a></li>
+
+			<li><a href="${contextPath}/carousel/carouselList"
+				target="navTab" rel="pageView">轮播图管理</a></li>
+			<li><a href="${contextPath}/recommend/recommendList"
+				target="navTab" rel="pageView">热门推荐管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>线路管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/line/main" target="navTab"
+				rel="line">线路同步</a></li>
+			<li><a href="${contextPath}/line/lineList" target="navTab"
+				rel="lineList">所有线路</a></li>
+			<li><a href="${contextPath}/lineOrder/lineOrderList"
+				target="navTab" rel="lineOrderList">线路订单管理</a></li>
+
+			<li><a href="${contextPath}/lineCarousel/carouselList"
+				target="navTab" rel="pageView">线路轮播图</a></li>
+			<li><a href="${contextPath}/line/lineSelectiveList" target="navTab"
+			rel="lineSelectiveList">精选管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>门票管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/ticket/ticketList" target="navTab"
+				rel="ticketList">门票管理</a></li>
+			<li><a href="${contextPath}/mpCarousel/carouselList"
+				target="navTab" rel="pageView">门票轮播图</a></li>
+			<li><a href="${contextPath}/ticket/mpSelectiveList" target="navTab"
+			rel="ticketSelectiveList">精选管理</a></li>
+			<li><a href="${contextPath}/ticketOrder/list"
+				target="navTab" rel="ticketOrderList">门票订单管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>主题管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/subject/subjectList" target="navTab"
+				rel="subjectList">所有主题</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>会员管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/member/personList" target="navTab"
+				rel="personList">会员管理</a></li>
+		</ul>
+	</div>
+
+
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>关于随心游
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/introduction/gnjsAddView"
+				target="navTab" rel="gnjsAdd">功能介绍</a></li>
+
+
+			<li><a href="${contextPath}/introduction/jqjjAddView"
+				target="navTab" rel="jqjjAdd">浙江景区简介</a></li>
+
+			<li><a href="${contextPath}/introduction/lyxyAddView"
+				target="navTab" rel="lyxyAdd">票量旅游协议</a></li>
+
+			<li><a href="${contextPath}/introduction/jyxkAddView"
+				target="navTab" rel="jyxkAdd">经营许可</a></li>
+
+
+			<li><a href="${contextPath}/introduction/orderNoticeAddView"
+				target="navTab" rel="orderNoticeAdd">订单通知设置</a></li>
+		</ul>
+	</div>
+
+
+	<!-- 
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>订单管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/lineOrder/lineOrderList" target="navTab"
+				rel="lineOrderList">线路订单管理</a></li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>营销管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/advertisement/adList" target="navTab"
+				rel="adList">广告管理</a></li>
+			<li><a href="${contextPath}/line/lineSelectiveList" target="navTab"
+				rel="lineSelectiveList">精选管理</a></li>
+		</ul>
+	</div> -->
+
+
+
+
+	<!-- <div class="accordionHeader">
+		<h2>
+			<span>Folder</span>订单管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/mpOrder/list" target="navTab"
+				rel="mporder">门票管理</a></li>
+			<li><a href="${contextPath}/jp/order/list" target="navTab"
+				rel="jp">机票订单管理</a></li>
+		</ul>
+	</div>
+
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>营销管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/hotspot/list" target="navTab"
+				rel="hotcurrentspot">当前热门景点</a></li>
+			<li><a href="${contextPath}/hotspot/history" target="navTab"
+				rel="historyspot">历史热门景点</a></li>
+		</ul>
+	</div> -->
+	<!-- PC广告开始 -->
+	<!-- <div class="accordionHeader">
+		<h2>
+			<span>Folder</span>PC营销管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/notice/list" target="navTab"
+				rel="notice">公告管理</a></li>
+			<li><a href="${contextPath}/advertisement/list" target="navTab"
+				rel="ADList">网站广告位</a></li>
+			<li><a href="${contextPath}/advertisement/hotList"
+				target="navTab" rel="hotList">热门景点</a></li>
+		</ul>
+	</div> -->
+	<!-- 	PC广告开始结束
+	
+	PC特价门票开始 -->
+	<!-- <div class="accordionHeader">
+		<h2>
+			<span>Folder</span>PC网站页面内容运营
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/advertisement/specList"
+				target="navTab" rel="specList">特价门票活动</a></li>
+			<li><a href="${contextPath}/advertisement/addSpec"
+				target="navTab" rel="addSpec">添加特价门票活动</a></li>
+			<li><a href="${contextPath}/advertisement/specListHistory"
+				target="navTab" rel="hspecList">历史特价门票</a></li>
+		</ul>
+	</div> -->
+	<!-- PC特价门票结束
+	H5广告开始 -->
+	<!-- <div class="accordionHeader">
+		<h2>
+			<span>Folder</span>H5营销管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/advertisement/h5List"
+				target="navTab" rel="H5ADList">H5网站广告位</a></li>
+		</ul>
+	</div> -->
+	<!-- 	H5广告开始结束
+	卡券管理start -->
+	<!-- <div class="accordionHeader">
+		<h2>
+			<span>Folder</span>卡券管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/couponActivity/couponManage"
+				target="navTab" rel="couponManage">卡券活动管理</a></li>
+			<li><a href="${contextPath}/couponActivity/addCoupon"
+				target="navTab" rel="addCoupon">新增卡券活动</a></li>
+			<li><a href="${contextPath}/coupon/list" target="navTab"
+				rel="couponlist">卡券记录管理</a></li>
+		</ul>
+	</div> -->
+	<!-- 	卡券管理end
+	线路管理start -->
+
+	<!-- 	线路管理end -->
+	<!-- <div class="accordionHeader">
+		<h2>
+			<span>Folder</span>邮件管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a
+				href="${contextPath}/mail-template/list?navTabId=mail-template"
+				target="navTab" rel="mail-template">邮件模板管理</a></li>
+			<li><a
+				href="${contextPath}/mail-record/list?navTabId=mail-record"
+				target="navTab" rel="mail-record">邮件记录管理</a></li>
+		</ul>
+	</div> -->
+</div>
+
+
+
+</div>

@@ -1,0 +1,45 @@
+请选择商品要同步给哪个商城和供应商
+<br />
+项目：
+<select name="pdbCode" onchange="getSupplier(this)">
+	<option value="">请选择</option> <#list projectList as t>
+	<option value="${t.pdbName}">${t.name}</option> </#list>
+</select>
+<br />
+供应商：
+<select name="supplier" id="e1433491299710" onchange="hideTabs2345()">
+	<option value="">请先选择项目</option> 
+</select>
+<br />
+<button onclick="prodSyncNext2()">下一步</button>
+<script type="text/javascript">
+//hideTabs2345();
+var pdbCode =  $("[name='pdbCode']");
+var supplier =  $("[name='supplier']");
+
+function getSupplier(e){
+	var v=$(e).val();
+	if(v == ""){
+		alert("该项目未填写商品库参数！");
+		return;
+	}
+	hideTabs2345();
+	var retData = ut.simpleAjax("${contextPath}/prod_sync/get_supplier_options?pdbCode="+v,null);
+	$("#e1433491299710").empty();
+	$("#e1433491299710").append(retData);
+}
+function prodSyncNext2(){
+	if(pdbCode.val() == ""){
+		alert("未选择项目");
+		return;
+	}
+	if(supplier.val() == ""){
+		alert("未选择供应商");
+		return;
+	}
+	
+	$("#ps_div2").empty();
+	$("#ps_div2").append(ut.simpleAjax("${contextPath}/prod_sync/sync_next_2?pdbCode="+pdbCode.val()+"&pdbSupplierId="+supplier.val(),null));
+	$("#pstab2").show();
+}
+</script>

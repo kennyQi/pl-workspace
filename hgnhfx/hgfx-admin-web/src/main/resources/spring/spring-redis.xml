@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+	<bean class="hg.demo.web.component.cache.CacheManager">
+		<constructor-arg value="${redis1Ip}:${redis1Port}"/>
+	</bean>
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- <property name="maxActive" value="${redis_pool_maxActive}" />
+		<property name="maxIdle" value="${redis_pool_maxIdle}" />
+		<property name="maxWait" value="${redis_pool_maxWait}" />
+		<property name="testOnBorrow" value="${redis_pool_testOnBorrow}" />
+		<property name="testOnReturn" value="${redis_pool_testOnReturn}" /> -->
+	</bean>
+	
+ 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool"> 
+ 		<constructor-arg index="0" value="${redis1Ip}" /> 
+ 		<constructor-arg index="1" value="${redis1Port}" /> 
+ 	</bean> 
+	
+<!-- 	<bean id="jedisPool" class="redis.clients.jedis.JedisSentinelPool"> -->
+<!-- 		<constructor-arg index="0" value="hgfxMaster" /> -->
+<!-- 		<constructor-arg index="1"> -->
+<!-- 			<set> -->
+<!-- 				<value>${redis1Ip}:${redis1Port}</value> -->
+<!-- 				<value>${redis2Ip}:${redis2Port}</value> -->
+<!-- 			</set> -->
+<!-- 		</constructor-arg> -->
+<!-- 		<constructor-arg index="2" ref="jedisPoolConfig" /> -->
+
+<!-- 	</bean> -->
+	
+ 	<bean id="jedis" scope="prototype" factory-bean="jedisPool" factory-method="getResource" /> 
+</beans>

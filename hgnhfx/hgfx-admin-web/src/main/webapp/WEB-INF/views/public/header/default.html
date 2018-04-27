@@ -1,0 +1,94 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript" src="${contextPath}/resources/dwz_jui-master/js/jquery.cookie.js"></script>
+<script type="text/javascript">
+
+var skinName = "${skin}";
+var logoUrl = "${logoUrl!}";
+var skinUrl = "${skinUrl!}";
+$(function(){
+	
+	if(logoUrl != ""){
+		$.cookie("logoUrl", logoUrl, { path: '/', expires: 150 });  //保存Cookie
+	}
+	if(skinUrl != ""){
+		$.cookie(skinName, skinUrl, { path: '/', expires: 150 });  //保存Cookie
+	}
+	var cookie_logoUrl = $.cookie("logoUrl");     //获取Cookie的值
+	var cookie_skinUrl = $.cookie(skinName); 
+	if (cookie_logoUrl) {                          //如果确实存在Cookie
+	    switchLogo(cookie_logoUrl);     //执行
+	}
+	if (cookie_skinUrl) {                          //如果确实存在Cookie
+	    switchSkin(cookie_skinUrl);     //执行
+	}
+	function switchLogo(logo) {   
+		var img=$("<img />").attr("src",logo).css({width:"160px",height:"48px"});
+		$(".logo").html(img);
+	}
+	function switchSkin(skin) {   
+		$(".headerNav").css({background:"url("+skin+") no-repeat"});
+	}
+	
+});
+function delSkin(){
+	$(".headerNav").css({background:""});
+	if(skinName != ""){
+		$.ajax({ 
+			url : "${contextPath}/set/delParameter?name="+skinName, 
+			type : "post", 
+			cache : false, 
+			dataType : "json", //返回json数据 
+			error: function(){ 
+			}, 
+			success:function(data){ 
+			}
+		});
+	}
+	
+}
+</script>
+<div id="header">
+			<div class="headerNav">
+				<a class="logo" href="${contextPath}/index">
+					
+					<img src="${contextPath}/resources/dwz_jui-master/themes/default/images/logo.png">
+				</a>
+				<ul class="nav">
+					<li><!-- <a href="http://jifen.jiujiajiu.cn/" target="_blank"> -->商场首页<!-- </a> --></li>
+					<li><a >hello <#if userinfo??>${userinfo.displayName}<#else>游客</#if></a></li>
+					
+					<li><a  href="${contextPath}${(updatePassword.url)!''}" target="dialog" rel="${(updatePassword.rel)!''}">${(updatePassword.displayName)!''}</a></li>
+					
+					<li>
+					
+					<a href="${contextPath}/login/loginout">退出</a></li>
+				</ul>
+				<ul class="themeList" id="themeList" onclick="delSkin();">
+					<li theme="default"><div class="selected">蓝色</div></li>
+					<li theme="green"><div>绿色</div></li>
+					<!--
+					<li theme="red"><div>红色</div></li>
+					<li theme="purple"><div>紫色</div></li>
+					-->
+					<li theme="silver"><div>银色</div></li>
+					<li theme="azure"><div>天蓝</div></li>
+					<li><a href="${contextPath}/set/toSetSkin"  target="navTab" rel="toSetSkin" style="color: purple;">自定义</a></li>
+				</ul>
+				
+			</div>
+		
+			<div id="navMenu">
+				<ul style="display: none;">
+					<li class="selected"><a href="${contextPath}/side/0"><span>全部菜单</span></a></li>
+					<!--
+					<#if sidePerms??>
+						<#list sidePerms as perm>
+							<li><a href="${contextPath}${perm.url}"><span>${perm.displayName}</span></a></li>
+						</#list>
+					</#if>
+					 <li><a href="sidebar_1.html"><span>服务管理</span></a></li>
+					<li><a href="sidebar_2.html"><span>系统设置</span></a></li> -->
+				
+				</ul>
+			</div>
+		</div>

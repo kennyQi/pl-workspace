@@ -1,0 +1,66 @@
+ html,
+body {
+	background:url(../img/login/top.jpg) no-repeat center 0;
+}
+p{text-align:center;}
+
+::-webkit-input-placeholder { /* WebKit browsers */ 
+color: #d5d5d5; 
+} 
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+color: #d5d5d5; 
+} 
+::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+color: #d5d5d5; 
+} 
+:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+color: #d5d5d5; 
+} 
+
+#top{position:relative;}
+.top-wrap{position:relative;width:440px;margin:0 auto;}
+.top-wrap-pure{position:relative;padding-top:200px;}
+#login{      height: 40px;background-color: transparent;width:100%;border:none;color:#d5d5d5;line-height:40px;font-size:18px;  padding-left: 56px;}
+#password,.password input{      height: 40px;background-color: transparent;width:100%;border:none;color:#d5d5d5;line-height:40px;font-size:18px;  padding-left: 56px;}
+.login{position:relative;width:100%;border:1px solid #d5d5d5;}
+.password{position:relative;width:100%;border:1px solid #d5d5d5;}
+.login img{position:absolute;width:22px;  left: 18px;  top: 12px;}
+.password img{position:absolute;width:20px;  left: 18px;  top: 8px;}
+.select,.test-code{overflow:hidden;width:100%;}
+.select-ab{float:left;  margin: 4px 10px 0 0;  width: 16px;  height: 16px;}
+.select-a{float:left;}
+.select-b{float:right;}
+.login-btn{position:relative;width:435px;height:50px;background:url(../img/login/bn.png) no-repeat;cursor:pointer;}
+.reg-btn{position:relative;width:435px;height:50px;background:url(../img/login/reg.png) no-repeat;cursor:pointer;}
+.top-gap-line{width:900px;height:5px;background:url(../img/login/line.png) no-repeat;  margin: 0 auto;}  
+.top-gap{position:relative;}
+.reg{color:#4799ef;cursor:pointer;}
+.reg:hover,.select-b:hover{text-decoration:underline;}
+.tip{font-size:22px;color:#454545}
+
+.test-code-abc{position:relative;}
+.test-code-ab{  border: 1px solid #d5d5d5;}
+.test-code-ab.warnning{border: 1px solid #ea5657;}
+.password.warnning{border: 1px solid #ea5657;}
+.login.warnning{border: 1px solid #ea5657;}
+.test-code *{ float:left;}
+.test-code input{    padding-left: 30px; color: #d5d5d5;width:236px;  line-height: 40px;  font-size: 18px;  background-color: transparent;border:none;height: 40px;}
+.test-code-b{  margin: 0 20px 0 24px; width:95px;height:40px;  border: 1px solid #d5d5d5;background:url(../img/login-tip/code.png) no-repeat;}
+.test-code-c{  margin-top: 10px;cursor:pointer; width:18px;height:20px;background:url(../img/login-tip/refresh.png) no-repeat;}
+
+.tip-show-a{overflow:hidden;position:absolute;  right: 348px;  top: -64px;display:none;}
+.tip-show-b{overflow:hidden;position:absolute;  right:2px;  top: 370px;display:none;}
+.tip-show-a span,.tip-show-b span{  margin-top: -14px;color:#585858;font-size:12px;float:left;}
+.tip-show-a img,.tip-show-b img{float:right;width:14px;  margin-left: 10px;}
+.yellow-tip{position:absolute;color:#ea5657;font-size:12px;background-color:#fffbd0;width:440px;  text-indent: 18px;  top: -32px;left:0;line-height:26px;border:1px solid #ea5657;border-radius:2px;display:none;}
+#code{height:100%;width:130px;position:absolute;background-color:#4799ef;right:0;top:0;color:#fff;line-height:42px;text-align:center;cursor:pointer;}
+#protocol	{  color: #4799ef;}
+#winPane{z-index:998;position:fixed;top:0;left:0;display:none;right:0;bottom:0;background-color:#000;opacity:0.5;-moz-opacity:0.5;filter:alpha(opacity=50);}
+#win{width:710px;height:400px;background-color:#fff;display:none;z-index:999;position:fixed;top:49%;left:49%;margin-left:-300px;margin-top:-198px;}
+.win-m{width:100%;height:81%;border-bottom:1px solid #ddd;  padding-bottom: 1.4%;}
+.m-ier{position:relative;width:100%;height:100%;}
+.m-e-ier{position:relative;width:96%;height:100%;margin:0 auto;}
+.m-e-l-ier{position:absolute;  width: 100%;  height: 86%;  top: 14%;overflow-y:scroll;  color: #555555;  font-size: 14px;}
+.m-e-ier p{text-align:center;  position: absolute;  left: 35%;  top: 5%;font-weight:bold}
+#agree{width:138px;height:40px;line-height:40px;text-align:center;position:relative;margin:0 auto;background-color:#415197;color:#fff;cursor:pointer;  margin-top: 12px;}
+#close{background:url(../img/order/close.png) no-repeat;position:absolute;right:10px;top:12px;width:19px;height:19px;display:block;cursor:pointer;}

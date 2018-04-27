@@ -1,0 +1,85 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent" style="text-align:left;">
+	<form method="post" id="addForm" enctype="multipart/form-data" action="${contextPath}/column/updatePrograma" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input name="id" type="hidden" value="${(columnDto.id)!}"/> 
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>栏目名称：</label>
+				<span>${(columnDto.name)!}</span>
+			</div>
+			
+			<div class="unit">
+				<label>栏目内容：</label>
+				<span>	<a href="#" onclick="addContent()">新增内容</a></span>
+				
+				
+			</div>	
+			<div id="contentDiv">
+				
+				<#if (columnDto??&&columnDto.programaContentList??)> 
+					<#list columnDto.programaContentList as programaContent>
+						
+						<div id="div_${programaContent_index}">
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input id="content_${programaContent_index}" name="content" value="${(programaContent.content)!}" size="50" required="required"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="#" onclick="deleteContent(${programaContent_index},'')">删除</a>
+							<input type="hidden" id="id_${programaContent_index}" name="programaContentId" value="${(programaContent.id)!}"/>
+						</div>
+						<br>
+					</#list>
+				</#if>
+				
+			</div>
+			
+			
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<!-- <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li> -->
+			</ul>
+		</div>
+	</form>
+</div>
+<script>
+
+	//删除栏目内容
+	function deleteContent(index,add){
+		if(confirm("删除后栏目下的广告会一并删除")){
+					var contentId=$("#id_"+index).val();
+					if(add=='add'){
+						$("#div_"+index).remove();
+					}else{
+						$.ajax({
+				  	 		type: "post",
+				  	 		url:"${contextPath}/column/deleteContent?id="+contentId,
+				  	 		async: false,
+				  	 	    error: function(request) {
+				  	 	        alert("连接失败");
+				  	 	    },
+				  	 	    success: function(data) {
+				  	 	    	$("#div_"+index).remove();
+				  	 	    }
+				  	 	});
+						
+					}
+				};
+		
+	}
+	
+	//添加栏目内容div，提交操作数据库
+	function addContent(){
+		var contentNum=$("#contentDiv").children("div").length;
+		var _blank="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		var div_html="<div id='div_"+(contentNum+1)+"'>"+_blank+"<input type='text' id='content_"+(contentNum+1)+"' name='content_' size='50' required='required'/>"
+					+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+					+"<a href='#' onclick='deleteContent("+(contentNum+1)+",/add/)'>删除</a>"
+					+"</div><br/>";
+		$("#contentDiv").append(div_html);
+				
+		
+	}
+
+</script>

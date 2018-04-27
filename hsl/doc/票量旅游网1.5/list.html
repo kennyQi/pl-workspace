@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-周边旅游线路</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+</head>
+
+
+
+<body>
+
+
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb bg_cmd curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1 on">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav3">酒&nbsp;店</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav5">周边游</a>
+        <a href="#" title="" class="h1 yahei nav6">跟团游</a>
+        <a href="#" title="" class="h1 yahei nav7">自由行</a>
+        <a href="#" title="" class="h1 yahei nav8">团&nbsp;购</a>
+        <a href="#" title="" class="h1 yahei nav9">说走就走</a>
+        <a href="#" title="" class="h1 yahei nav10 last">合作专区</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="#top">
+    </a>
+<!--头部-->
+
+<!--内容-->
+<link href="css/list.css" rel="stylesheet" />
+	<div class="g_bd disb ov pl">
+    	<!--条件筛选部分-->
+    	<div class="m_search disb">
+        	<div class="disb m_search_c ">
+            	<div class="load  color6 simsun"><label class="color8">您的位置：</label><a href="#" class="color6">度假</a> > <span  class="color3">海南旅游</span></div>
+                
+                <!--搜索框-->
+                <div class="m_select disb">
+               		<div class="select_box ov disb">
+                        <input type="text"  class="in fl yahei" placeholder="大家都在搜：温泉、滑雪、哈尔滨、三亚"/>
+                        <input type="button"  class="btn fl yahei curp" value="搜 索" />
+                    </div>
+                </div>
+                <!--搜索框-->
+                <!--左侧筛选-->
+                <div class="left fl disb">
+                	<div class="left_h fl pl">
+                    	<span class="left_h_bg pa left_h_box"></span>
+                    	<span class="left_h_txt yahei pl disb left_h_box">三亚</span>
+                    </div>
+                    <div class="left_c fl pl">
+                    	<span class="left_c_bg pa left_c_box"></span>
+                        <span class="left_c_txt yahei h2 pl disb left_c_box listBg curp" id="change_dir">更改目的地</span>
+					<script src="js/city.js" language="javascript"></script>
+                    </div>
+                    <ul class="left_all fl disb">
+                    	<li class="left_all_box1">
+                        	<span class="left_h_bg left_all_box1 pa"></span>
+                        	<dl class="left_all_box1 pl left_choose yahei disb" id="province">
+                            	<dt class="h3 fl">出发城市:</dt>
+                                <dd><a href="javascript:;">全部</a></dd>
+                                <dd class="on"><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd><a href="javascript:;">浙江</a></dd>
+                                <dd class="last pl  listBg" id="more_coutry">更多
+                                	<div class="m_change_dir pa m_more_country" id="more_coutry_box">
+                                        <h3 class="top color6 h3 listBg disb">更多</h3>
+                                        <div class="list disb">
+                                            <dl class="list_detail disb ov">
+                                                <dd class="on"><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                                <dd><a href="javascript:;">三亚</a></dd>
+                                            </dl>
+                                           
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="left_all_box2" style="display:none;"  id="city">
+                        	<span class="left_h_bg left_all_box2 pa" ></span>
+                        	<dl class="left_all_box2 pl left_choose yahei disb left_choose_padding11">
+                            	<dt class="h3 fl">&nbsp;&nbsp;</dt>
+                                <dd><a href="javascript:;">全部</a></dd>
+                                <dd class="on"><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                                <dd><a href="javascript:;">杭州</a></dd>
+                            </dl>
+                        </li>
+                    	<li class="left_all_box2"  id="tripDay">
+                        	<span class="left_h_bg left_all_box2 pa" ></span>
+                        	<dl class="left_all_box2 pl left_choose yahei disb left_choose_padding11">
+                            	<dt class="h3 fl">行程天数:</dt>
+                                <dd><a href="javascript:;">不限</a></dd>
+                                <dd class="on"><a href="javascript:;">1天</a></dd>
+                                <dd><a href="javascript:;">2天</a></dd>
+                                <dd><a href="javascript:;">3天</a></dd>
+                                <dd><a href="javascript:;">4天</a></dd>
+                                <dd><a href="javascript:;">5天</a></dd>
+                                <dd><a href="javascript:;">6天</a></dd>
+                                <dd><a href="javascript:;">7天</a></dd>
+                                <dd><a href="javascript:;">8天</a></dd>
+                                <dd><a href="javascript:;">9天</a></dd>
+                                <dd><a href="javascript:;">10天</a></dd>
+                                <dd><a href="javascript:;">10天以上</a></dd>
+                            </dl>
+                        </li>
+                    	<li class="left_all_box2"  id="hotalstar">
+                        	<span class="left_h_bg left_all_box2 pa"></span>
+                        	<dl class="left_all_box2 pl left_choose yahei disb left_choose_padding11">
+                            	<dt class="h3 fl">酒店星级:</dt>
+                                <dd><a href="javascript:;">不限</a></dd>
+                                <dd class="on"><a href="javascript:;">五星</a></dd>
+                                <dd><a href="javascript:;">四星</a></dd>
+                                <dd><a href="javascript:;">三星</a></dd>
+                            </dl>
+                        </li>
+                    	<li class="left_all_box3">
+                        	<span class="left_h_bg left_all_box3 pa"></span>
+                            
+								<script src="laydate/laydate.js" language="javascript"></script>
+                        	<dl class="left_all_box3 pl left_choose yahei disb left_choose_padding11 left_data">
+                            	<dt class="h3 fl">出游时间:</dt>
+                                <dd><input placeholder="yyyy-mm-dd" class="laydate-icon" onClick="laydate()"></dd>
+                                <dd class="to">一</dd>
+                                <dd><input placeholder="yyyy-mm-dd" class="laydate-icon" onClick="laydate()"></dd>
+                                <dd><span id="select" class="select_btn yahei h3 fl curp">查询</span></dd>
+                               <script>
+								;!function(){
+								
+								//laydate.skin('molv');
+								
+								laydate({
+								   elem: '#demo'
+								})
+								
+								}();
+								</script>
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <!--左侧筛选-->
+                <!--右侧图片位置 图片尺寸是190*100-->
+                <div class="right fr disb">
+                	
+                	<div class="right_img ov disb carousel pl" id="carousel">
+                    		<div class="img_list pa">
+                            	<a href="#"><img src="images/list_ad1.jpg" alt=""></a>
+                            	<a href="#"><img src="images/list_ad2.jpg" alt=""></a>
+                            	<a href="#"><img src="images/list_ad1.jpg" alt=""></a>
+                            </div>
+                    		<ul class="icon pa">
+                            </ul>
+                    </div>
+                    <div class="right_img ov disb">
+                    	<a href="#"><img src="images/list_ad2.jpg" alt=""></a>
+                    </div>
+                </div>
+                <!--右侧图片位置-->
+            </div>
+        </div>
+        
+    	<!--条件筛选部分-->
+        
+        <!--排序部分-->
+        	<div class="m_sort yahei">
+            	<a href="#" class="cmd color6 h2 cmdon curp">推荐</a>
+            	<a href="#" class="cmd color6 h2 curp">销量</a>
+            	<a href="#" class="cmd color6 h2 curp">价格</a>
+            	<span class="price_section color6  h2">价格区间</span>
+            	<input type="text" class="section" />
+                <span class="to">-</span>
+            	<input type="text" class="section" />
+                <span id="select" class="select_btn yahei h3 fl curp">查询</span>
+            	<input type="checkbox" class="lastcheck" />
+                <span class="special color6 h3">特价尾单</span>
+            </div>
+        <!--排序部分-->
+        
+        <!--列表部分-->
+        	<div class="g_list pl">
+                <!--右侧浏览记录-->
+                <div class="g_hist pa">
+                	<h3 class="tt pl color6 h3 yahei">
+                    	您的浏览记录
+                    	<i class="pa listBg curp" id="closeHist"></i>
+                    </h3>
+                    <ul class="hist_list">
+                    	<li>
+                        	<a href="#">
+                        	<img src="images/list_ad2.jpg" class="pic"><!--尺寸是160*116-->
+                            	<span class="detail h4 color6 disb"><海南5日游>漫步分界洲，呼吸呀诺达，3晚挂四海景（当地游）</span>
+                                <span class="price disb h2 yahei">￥1959 起</span>
+                            </a>
+                        </li>
+                    	<li>
+                        	<a href="#">
+                        	<img src="images/list_ad2.jpg" class="pic"><!--尺寸是160*116-->
+                            	<span class="detail h4 color6 disb"><海南5日游>漫步分界洲，呼吸呀诺达，3晚挂四海景（当地游）</span>
+                                <span class="price disb h2 yahei">￥1959 起</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--右侧浏览记录-->
+            	<!--每逢第三列 需要添加额外样式 m_list_boxlast-->
+            	<!--产品列表框-->
+                <div class="m_list_box">
+                	<div class="picshow">
+                    	
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                            <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+            	<!--产品列表框-->
+               
+                <div class="m_list_box">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                           <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                        
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box m_list_boxlast">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                          <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                           <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                        
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                           <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                        
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box m_list_boxlast">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                          <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                           <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                        
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                           <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                        
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box m_list_boxlast">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                          <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                           <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                        
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                           <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                        
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+                <div class="m_list_box m_list_boxlast">
+                	<div class="picshow">
+                            <img src="images/list_img1.jpg" ><!--图片尺寸390*250-->
+                            <span class="title_bg"></span><!--特价标签-->
+                          <a href="#" class="title"><海南5日游>双岛平价热卖，Haikou私密呀诺达，醉美海岛<i class="icon"></i><!--跟团游标签--></a>
+                    </div>
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>独立成团</label><label>独享阳朔2晚</label><label>外宾船游漓江</label><label>特选风味餐</label><label class="no_padding">无购物</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">杭州出发</h3>
+                        	<label class="day">行程天数:<i>5天</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            	<i></i>
+                            </label>
+                        </span>
+                        <span class="start">
+                        	<label>发团日期：</label>
+                            <a href="#" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	<label>行程概览：</label>出发地 > 海口 > 兴隆 > 三亚 > 三亚一地 > 三亚 > 海口 > 兴隆 > 三亚 > 三亚一地 > 海口 > 兴隆 > 出发地
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>1790<i>起</i>
+                        </span>
+                        <span class="btn"><a href="#">预定</a></span>
+                    </div>
+                </div>
+               
+            </div>
+        <!--列表部分-->
+        <!--页脚翻页-->
+        	<div class="g_page ov disb">
+            	<a href="#" class="up"><</a>
+            	<span class="on">1</span>
+            	<a href="#">2</a>
+            	<a href="#">3</a>
+            	<a href="#">4</a>
+            	<a href="#">...</a>
+            	<a href="#">10</a>
+            	<a href="#" class="down">></a>
+            </div>
+        <!--页脚翻页-->
+        <!--底部图片位置-->
+        	<div class="g_adimg disb ov">
+            	<a href="#"><img src="images/list_ad3.jpg" class="fl"></a><!--图片尺寸291*160-->
+            	<a href="#"><img src="images/list_ad3.jpg" class="fl"></a>
+            	<a href="#"><img src="images/list_ad3.jpg" class="fl"></a>
+            	<a href="#"><img src="images/list_ad3.jpg" class="fl last"></a>
+            </div>
+        <!--底部图片位置-->
+	</div>
+    
+<script src="js/list.js" language="javascript"></script>
+
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="" placeholder="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">票量简介</a>
+                	<a href="#" title="" class="simsun h4">法律声明</a>
+                	<a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">友情链接</a>
+                	<a href="#" title="" class="simsun h4">酒店加盟</a>
+                	<a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">帮助中心</a>
+                	<a href="#" title="" class="simsun h4">投诉建议</a>
+                	<a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class="color8 disb h2 yahei">24小时客服热线</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <span class="color8 disb h2 yahei">境外游客紧急联络电话</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <div class="special"></div>
+</div>
+
+<!--页脚-->
+</body>
+</html>

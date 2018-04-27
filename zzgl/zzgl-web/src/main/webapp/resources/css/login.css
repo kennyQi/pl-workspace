@@ -1,0 +1,43 @@
+@charset "utf-8";
+.gd_nav{display:none;}
+.gd_head{padding-bottom:20px;}
+.g_bd{background: url("../images/login_bg.jpg") no-repeat center top;width:100%;}
+.g_bd *{font-family:"Microsoft YaHei","微软雅黑";}
+.g_ct{margin:auto;width:1200px;display: block;overflow: hidden;padding-bottom:380px;}
+.g_ct .m_log{width:320px;margin:140px 70px 0px 0px;box-shadow: 1px 1px 5px #000000;}
+.m_log .m_tab{width: 100%;overflow: hidden;}
+.m_log .m_tab li{float: left;width:320px;height:60px;text-align: center;line-height:60px;color:#fff;font-size:18px;background:url("../images/login_b2.png");color:#cccccc;}
+.m_log .m_tab li.on{background:url("../images/login_b2.png");color:#fff;}
+.m_log .m_tab li:hover{color:#fff;}
+.m_log .ct{width:100%;background:url("../images/login_b1.png");height:380px;}
+.m_log .input_li{margin:30px 25px 0px 30px;background:#fff;width:260px;height:40px;}
+.m_log input{border:0px;}
+.m_log input::-moz-placeholder{font-size: 14px;color:#c9c9c9;}
+.m_log input::-webkit-input-placeholder{font-size:14px;color:#c9c9c9;}
+.m_log input::-input-placeholder{font-size:14px;color:#c9c9c9;}
+.m_log .input_li .name{width:14px;height:16px;background:url("../images/login_i1.jpg") no-repeat;margin:12px 8px 0px 8px;}
+.m_log .input_li .pwd{width:14px;height:16px;background:url("../images/login_i2.png") no-repeat;margin:12px 8px 0px 8px;}
+.m_log .input_li .enter{border:0px;width:230px;height:40px;line-height:40px;}
+.m_log .log_li{margin:30px 25px 0px 30px;width:260px;height:40px;}
+.m_log .log_li .yzm_enter{width:120px;padding:0px 10px;height:40px;line-height:40px;background:#fff;}
+.m_log .log_li .yzm{width:95px;height:40px;}
+.m_log .foget{line-height:12px;margin-top:16px;height:12px;}
+.m_log .foget a{color:#fff;font-size:12px;}
+.m_log .foget a:hover{color:#0073b6;text-decoration: underline}
+.m_log .log_btn{margin-top:16px;}
+.m_log .log{background:#00a0e9;height:40px;width:260px;text-align: center;line-height: 40px;font-size:16px;color:#fff;}
+.m_log .log:hover{background:#0096db;}
+.m_log .reg{background:#dedede;height:40px;width:260px;text-align: center;line-height: 40px;font-size:14px;color:#666666;}
+.m_log .reg:hover{background:#ffffff;}
+
+.g_f{width:620px;margin:auto;overflow:hidden;padding-bottom: 65px;}
+.g_f a{color:#e8e8e8;float:left;padding-right:10px;margin-right: 10px;border-right:1px solid #aaaaaa;font-size:12px;line-height:12px;}
+.g_f a:hover{color:#fff;}
+.g_f a.last{border:0px;}
+
+
+/*提示框*/
+.m_errTips{position:absolute;left:0px;top:0px;overflow:hidden;}
+.m_errTips .l{height:67px;background: url("../images/login_b3.png");}
+.m_errTips .l span{background: url("../images/login_i3.png") no-repeat 0px 0px;padding-left:38px;color:#333333;line-height:24px;font-size:12px;margin:20px 60px 0px 20px;}
+.m_errTips .r{background: url("../images/login_i4.png") no-repeat;height:67px;width:15px;}

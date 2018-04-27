@@ -1,0 +1,46 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/footerAuth/update"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, dialogAjaxDone)">
+		
+		<input type="hidden" name="id" value="${p.id}"/>
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>认证名称：</label>
+				<input type="text" name="name" value="${p.name}"/>
+			</div>
+
+			<div class="unit">
+				<label>认证代码：</label>
+				<input type="text" name="code" style="width: 60%" value="${p.code?html}"/>
+			</div>
+
+			<div class="unit">
+				<label>排序号：</label>
+				<input type="text" name="order" value="${p.order}"/>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+

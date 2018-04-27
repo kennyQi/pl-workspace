@@ -1,0 +1,18 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>帮助中心
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<#list helpSideList as helpSide>
+				<li><a  href="${contextPath}${helpSide.url}" target="navTab" rel="${helpSide.rel}">${helpSide.displayName}</a></li>
+			</#list>
+		</ul>
+	</div>
+</div>
+
+
+

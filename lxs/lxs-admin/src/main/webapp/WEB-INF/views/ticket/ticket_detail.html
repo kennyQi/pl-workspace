@@ -1,0 +1,84 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.pageFormContent p {
+	height: inherit;
+	line-height: 20px
+}
+</style>
+<div class="pageContent">
+
+	<div class="pageFormContent" layoutH="58">
+		<table style="width: 100%;TABLE-LAYOUT: fixed; ">
+			<tr height="40px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">景区名称：</td>
+				<td style="width: 75%" colspan="3">${scenicSpot.baseInfo.name}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>景区代码：</td>
+				<td>${scenicSpot.baseInfo.code} </td>
+				<td style="width: 25%">景区级别：</td>
+				<td style="width: 25%">${scenicSpot.baseInfo.buildLevel!""}</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="40px;">
+				<td>&nbsp;</td>
+				<td>景区主题：</td>
+				<td> ${scenicSpot.baseInfo.theme}</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td>&nbsp;</td>
+				<td>开放时间：</td>
+				<td>${scenicSpot.baseInfo.openTime}</td>
+				<td>景区网址：</td>
+				<td> ${scenicSpot.baseInfo.webSite!""} </td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>景区介绍：</strong></td><td colspan="3"><p><span>${scenicSpot.baseInfo.intro}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>预定须知：</strong></td><td colspan="3"><p><span>${scenicSpot.baseInfo.preNotice}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>景区特色：</strong></td><td colspan="3"><p><span>${scenicSpot.baseInfo.feature}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<!-- <tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>费用说明：</strong></td><td colspan="3"><p><span>单票：${scenicSpot.rackRate}，联票：${scenicSpot.playPrice}</span></p></td><td>&nbsp;</td>
+			</tr> -->
+			<!-- <tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>提示信息：</strong></td><td colspan="3"><p><span>${scenicSpot.baseInfo.noticeDescription}</span></p></td><td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td><td style="vertical-align: top;"><strong>交通信息：</strong></td><td colspan="3"><p><span>${scenicSpot.baseInfo.trafficDescription}</span></p></td><td>&nbsp;</td>
+			</tr> -->
+			<tr>
+				<td colspan="5"><hr></td>
+			</tr>
+			
+			
+		</table>
+</div>

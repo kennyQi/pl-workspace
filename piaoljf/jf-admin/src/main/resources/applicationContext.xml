@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+	<context:component-scan base-package="ucenter,hg,hgtech" />
+
+	<!-- 强制SPRING使用CGLIB动态代理，不使用JDK代理。 -->
+	<aop:config proxy-target-class="true" />
+	
+	<bean id="adminConfigurerListener" class="ucenter.admin.listener.AdminConfigurerListener" />
+	
+	<!-- 远程配置 -->
+	<!-- local config -->
+	<!--  <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+          <property name="locations">
+             <list>
+                 <value>classpath:properties/*.properties</value>
+             </list>
+         </property>
+     </bean>
+     -->
+	<bean id="propertyConfigurer" class="hg.common.component.RemoteConfigurer">
+		<property name="remoteConfigUrl" value="1.com" />
+		<property name="projectId" value="PLJF" />
+		<property name="environmentName" value="${environmentName}" />
+		<property name="loadConfigTimeOut" value="1" />
+		<property name="listener" ref="adminConfigurerListener" />
+	</bean>
+
+	<!-- 验证码 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.image.width">80</prop>
+						<prop key="kaptcha.textproducer.font.size">26</prop>
+						<prop key="kaptcha.image.height">32</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+						<prop key="kaptcha.obscurificator.impl">shop.web.common.util.NoWater</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="hgLogger" class="hg.log.util.HgLogger">
+		<constructor-arg name="projectId" value="PLJF" />
+		<constructor-arg name="envId" value="${environmentName}" />
+		<constructor-arg name="logRepository" ref="logRepository"/>
+	</bean>
+	
+	<!-- service log AOP 日志记录，需要和spring-servelt.xml的hgtech.common.aspect.AdminControllerAspect配合使用-->
+	<bean id="serviceAspectBean" class="hgtech.common.aspect.ServiceAspect" >
+		<property name="serviceAopHglog" value="true" />
+	</bean>
+ 	<aop:config>
+		<aop:aspect id="serviceAspect" ref="serviceAspectBean">
+			<aop:pointcut id="service" expression="execution(* hgtech.jfadmin.service..*.*(..))" />
+			<aop:around pointcut-ref="service" method="doAround" />
+		</aop:aspect>
+	</aop:config> 
+
+	<!-- 账户的交易日志 -->	
+<!-- 	<bean id="accountLog" class="hgtech.jfadmin.interceptor.AccountAspect"/>
+	<aop:config>
+		<aop:aspect id="accountAspect" ref="accountLog">
+			<aop:pointcut id="service1" expression="execution(* hgtech.jfaccount.service.AccountService..*.*(..))" />
+			<aop:around pointcut-ref="service1" method="doAround" />
+		</aop:aspect>
+	</aop:config>
+ -->	
+	
+	<!-- 定时任务 -->
+    <context:component-scan base-package="hgtech.jfadmin.task" />
+	<task:annotation-driven scheduler="qbScheduler" mode="proxy"/>  
+	<task:scheduler id="qbScheduler" pool-size="10" />
+	
+	<!-- sms -->
+	<bean id="smsUtil" class="hg.common.util.SMSUtils">
+		<constructor-arg name="smsAddress" value="http://sms.hjb365.com/hgsms/send" />
+		<constructor-arg name="smsUser" value="plywx" />
+		<constructor-arg name="smsPassword" value="ply365.COM" />
+	</bean>
+  	
+    	
+	<import resource="classpath:spring/spring-hibernate-common.xml"/>
+ 	<import resource="classpath:spring/spring-shiro-config.xml" />
+ 	<import resource="classpath:spring/spring-redis.xml" />
+ 	<import resource="classpath:spring/spring-servlet.xml" />
+ 	<import resource="classpath:spring/spring-mongodb.xml" />
+ 	
+ 	<!--系统初始化类  -->
+ 	<bean id="setup" class="hgtech.jf.piaol.SetupSpiApplicationContext" init-method="init"></bean>
+	<bean id="batch" class="hgtech.jfadmin.task.JfTask" init-method="startit"></bean>
+ 	
+ 	<!-- 积分交易日志 aop -->
+ 	  <bean id="logAccount" class="hgtech.jfadmin.interceptor.AccountInterceptor"></bean>
+ 	<bean id="accountService" class="org.springframework.aop.framework.ProxyFactoryBean">
+ 		<property name="proxyInterfaces">
+ 			<list>
+ 				<value>hgtech.jfaccount.service.IAccountService</value>
+ 			</list>
+ 		</property>
+ 		<property name="interceptorNames">
+ 			<list>
+ 				<value>logAccount</value>
+ 			</list>
+ 		</property>
+ 		 <property name="target">
+ 		 	<ref bean="accountServiceImp"/>
+ 		 </property>
+ 		 
+ 		<property name="proxyTargetClass" value="true"></property>
+ 	</bean> 
+</beans>

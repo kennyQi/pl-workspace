@@ -1,0 +1,31 @@
+#reserve{background:#eeeeee;padding-bottom: 65px;}
+.header{position:fixed;top:0px;left:0px;width: 100%;background:#02b0e8;;background-size:cover;overflow:hidden;z-index:10;}
+.header h1{color:#fff;}
+.header .r{width:20px;}
+header:before{content:"";height:42px;background:-webkit-linear-gradient(top,#24272f,rgba(255, 255, 255, 0));display: block;position:absolute;left:0px;top:0px;
+    width: 100%;z-index: 0;opacity: 0.3;}
+header *{position: relative;z-index: 1;}
+
+.cont{margin-top:42px;margin-bottom: 80px;}
+.orderDetail{padding:5px 15px 15px 15px;border-bottom: 2px solid #e2e8eb;}
+.day,.crossTime{color:#959595;line-height: 24px;}
+.city{font-size:18px;}
+.city .to{display: inline-block;width:30px;height: 9px;background: url("../images/fly_order_to.png") no-repeat;
+background-size: contain;margin:0px 10px;}
+.time{font-size:24px;line-height: 30px;}
+.time .airplace{display: inline-block;margin-left: 15px;}
+.orderBox{background: #eff9fe;border-bottom: 1px solid #e2e8eb;padding-left: 15px;}
+.orderBox .title{font-size: 16px;line-height: 32px;}
+.deList{line-height: 26px;}
+.deList label{color:#949596;width: 84px;display: inline-block;}
+.deList span{color:#333333;}
+.deList .orderType{color:#ff4600;}
+
+.submit{margin:20px 15px;background:#61cef2;color:#fff;text-align: center;height: 42px;line-height: 42px;
+border-radius: 8px;}
+
+.totalPrice{position:fixed;bottom:0px;left:0px;text-align: center;line-height: 50px;height:50px;
+border-top: 1px solid #e2e8eb;color:#757575;width: 100%;background: #fff;}
+.totalPrice .p{font-size:18px;color:#ff5b00;}
+
+.refund{background:#feb614}

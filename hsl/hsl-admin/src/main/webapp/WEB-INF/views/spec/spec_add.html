@@ -1,0 +1,165 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" href="${contextPath}/resources/js/trumbowyg/design/css/trumbowyg.css">
+<script src="${staticPath}/js/jquery-validation-1.9.0/lib/jquery.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var path = '${contextPath}';
+	
+	function checkPosition(){
+		
+		if($("#position2").val()!=$("#positionHide").val() && $("#positionHide").val()!=""){
+			alert('请上传广告图片');
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	var imageAdd = {};
+	
+	imageAdd.imageUpload = function (me) {
+		
+		$.ajaxFileUpload({
+			url : path+"/file/imgUpload",
+	       	secureuri : false,
+	       	fileElementId : 'imgFile',
+	       	dataType : 'json',
+	       	data: {
+	       		//maxHeight: 175,
+	       		//maxWidth: 230,
+	       		maxSize: 20480
+	       	},
+			success: function (data, status) {
+				console.info(data);
+				if ("success" == data.status) {
+		       		$("#addSpecForm #imgView").attr("src", data.imageUrl);
+		       		$("#addSpecForm #imagePath").attr("value",data.imageUrl);
+		       		$("#addSpecForm #fileName").attr("value",data.imageName);
+		       		$("#addSpecForm #imageInfo").attr("value",data.fileInfo);
+	    	  	} else {
+	    	  		alertMsg.info(data.msg);
+	    	  	}
+			},
+	        error: function (data, status, e) {
+	        	alertMsg.info("上传失败");
+	        }
+	    });
+	}
+
+</script>
+<div class="pageContent" style="text-align:left;">
+	<!-- 特价门票form -->
+	<div class="formWarpper" >
+		<form method="post" id="addSpecForm" enctype="multipart/form-data" action="${contextPath}/advertisement/addSpec" class="pageForm required-validate" onsubmit="return custValidateForm(this);">
+		
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>*门票类型：</label>
+				<select id="contentId" name="contentId" class="required"> 
+					<option value="">全部</option>
+					<#list programaContentDTOList as programaContentDTO>
+						<option value="${programaContentDTO.id}">${programaContentDTO.content}</option>
+					</#list>
+				</select>
+			</div>
+			<div class="unit">
+				<label>*门票名称：</label>
+				<input type="text" name="title" size="12"   class="required" maxlength="50 " value=""/>
+			</div>
+			<div class="unit">
+				<label>*广告链接：</label>
+				<input type="text" id="url" name="url" size="45" maxlength="400 "  class="required url"  value="" /> <a style="color:green;"></a>
+			</div>
+			<div class="unit">
+				<label>*优先级：</label>
+				<input type="text" id="priority" name="priority" size="12" min="0" class="required digits"  value="" /> <a style="color:green;"></a>
+			</div>
+			<div class="unit">
+				<label>*原价：</label>
+				<input type="text" id="price" name="price" size="12"  class="required number" min="0"  value="" /> <a style="color:green;"></a>
+			</div>
+			<div class="unit">
+				<label>*特价：</label>
+				<input type="text" id="specPrice" name="specPrice" size="12"  class="required number" min="0"  value="" /> <a style="color:green;"></a>
+			</div>
+			<div class="unit">
+				<label>*广告图片：</label>
+					<span style="color: red">
+						完成上传图片，再次修改广告位时需要重新上传图片，原图会失效!<br/><br/>
+					</span>
+					<span style="color: red">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						建议上传
+						220x160
+						尺寸jpg、gif、png、bmp或JPG、GIF、PNG、BMP格式，单张图片大小不超过2MB<br/><br/>
+					</span>
+					<span>
+						<img id="imgView" width="120" height="120" style="padding-left: 65px;"/>
+					</span>	
+					<span style="padding-left: 60px;">
+						<input id="imgFile" name="file" type="file" onchange="imageAdd.imageUpload(this);" size="60" style="width: 170px;"/><span style="color: red;">*</span>
+						<input id="imageInfo" type="hidden" name="imageInfo" class="required"/>
+						<input id="fileName" type="hidden" name="fileName" class="required"/>
+						<input id="imagePath" type="hidden" name="imagePath" class="required"/>
+					</span>
+			</div>
+			<div class="unit">
+				<label>立即展示：</label>
+				<input type="checkbox" value="true" name="show" checked  />
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	</div>
+</div>
+<script>
+
+	//校验表单
+	function custValidateForm(fr){
+		
+		return validateCallback(fr, custAjaxDone);
+	}
+/**
+ * 自定义处理ajax的方法
+ */
+ function custAjaxDone(json){
+	
+		DWZ.ajaxDone(json);
+		if (json.statusCode == DWZ.statusCode.ok){
+			if (json.navTabId){ //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+				navTab.reloadFlag(json.navTabId);
+			} else { //重新载入当前navTab页面
+				var $pagerForm = $("#pagerForm", navTab.getCurrentPanel());
+				var args = $pagerForm.size()>0 ? $pagerForm.serializeArray() : {}
+				navTabPageBreak(args, json.rel);
+			}
+			
+			if ("closeCurrent" == json.callbackType) {
+				setTimeout(function(){navTab.closeCurrentTab(json.navTabId);}, 100);
+			} else if ("forward" == json.callbackType) {
+				navTab.reload(json.forwardUrl);
+			} else if ("forwardConfirm" == json.callbackType) {
+				alertMsg.confirm(json.confirmMsg || DWZ.msg("forwardConfirmMsg"), {
+					okCall: function(){
+						navTab.reload(json.forwardUrl);
+					}
+				});
+			} else if ("openNew" == json.callbackType) {
+				navTab.openTab(json.navTabId, '${contextPath}/advertisement/specList',{title:"特价门票活动", fresh:true, external:false});
+				navTab.closeTab("addSpec");
+			} else {
+				navTab.getCurrentPanel().find(":input[initValue]").each(function(){
+					var initVal = $(this).attr("initValue");
+					$(this).val(initVal);
+				});
+			}
+		}
+
+	
+ }
+</script>

@@ -1,0 +1,107 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/cal/listTrade" method="get">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<ul class="searchContent">
+			    <li>
+					<label>用户名：</label>
+					<input type="text" name="in_userCode" value="${dto.in_userCode}" />
+				</li>
+				 <li>
+				   <label>开始日期：</label>
+ 				   <input type="text" name="calTime" value="${dto.calTime}" class="date" minDate="2000-01-15" maxDate="2216-12-15" readonly="true"/>
+				   <a class="inputDateButton" href="javascript:;">选择</a>
+				</li>
+				  <li>
+				   <label>结束日期：</label>
+ 				   <input type="text" name="nowTime" value="${dto.nowTime}" class="date" minDate="2000-01-15" maxDate="2216-12-15" readonly="true"/>
+				   <a class="inputDateButton" href="javascript:;">选择</a>
+				</li>
+			</ul>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" >查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+ 
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th>计算时间</th>
+				<th>用户名</th>
+				
+				<th>数据</th>
+				<th>积分</th>
+				<th>交易成功</th>
+				<th>交易结果信息</th>
+			</tr>
+		</thead>
+        <tbody>
+			<#list pagination.list as p>
+			<tr>
+				<td>${p.calTime!?html}</td>
+				<td>${p.in_userCode!?html}</td>
+				 
+				<td>${p.flowText!?html}</td>
+				<td>${p.out_jf!?html}</td>
+				<td>${p.out_resultCode!?html}</td>
+				<td>  
+				<a  > 
+				 <#if p.out_resultText??>   
+                   <#if p.out_resultText?length gt 34> 
+                     ${p.out_resultText?substring(0,31)}   ......  
+                   </#if>  
+                    <#if p.out_resultText?length lt 34> 
+                     ${p.out_resultText}  
+                   </#if>  
+                </#if>  
+                 </a>
+				</td> 
+
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	 <div style="display:none;background-color: white;width: 200px;position: absolute;" id="calFlow_resutText_div" >
+	  <textarea rows="10" cols="50" id="calFlow_resutText" >  </textarea>
+	 </div>
+	<#include "/public/pagination/pagination.html">
+</div>
+
+
+<script type="text/javascript">
+function showInfo(obj,str)
+{
+   alert(str);
+}
+
+
+
+function showCalText(obj,str)
+{
+ $("#calFlow_resutText").html(str);
+ $("#calFlow_resutText_div").css("top", obj.offsetTop);
+ $("#calFlow_resutText_div").css("left", obj.offsetLeft+500	);
+ 
+ $("#calFlow_resutText_div").show();
+}
+function hideCalText()
+{
+  $("#calFlow_resutText_div").hide();
+}
+ 
+</script>
+ 

@@ -1,0 +1,215 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "门票预定">
+
+<link href="${(contextPath)!}/resources/css/jd_reseve.css" rel="stylesheet" />
+<script>
+	window.lock = false;
+	window.min = ${(policy.minTicket)!1};
+	window.max = ${(policy.maxTicket)!1};
+	if(window.min==0){
+		window.min =1;
+	}
+	var dataMoney = [];
+	var dataMoneyTime,dataMoneyOldTime,dataMoneyNow=new Date().getTime();
+	dataMoney
+	<#list (datePrice.dto)!null as datePrice>
+		dataMoneyTime="${(datePrice.saleDate)!}".split("-");
+		dataMoneyOldTime=new Date().setFullYear(dataMoneyTime[0],dataMoneyTime[1]-1,parseInt(dataMoneyTime[2]));
+		if(dataMoneyNow<=dataMoneyOldTime){
+			dataMoney.push({money:'${(datePrice.salePrice)!}',dataM:"${(datePrice.saleDate)!}"});
+		}
+	</#list>
+	function changePrice(obj){
+		if(obj.find(".money").html()==""){
+			console.log(true)
+			setTimeout(function(){
+				$("#J_DepDate").val("");
+			},50)
+		}else{
+			var newPrice=parseInt(obj.find(".money b").html());
+			$("#p_price").val(newPrice);
+			var price = $("#p_price").val();
+		    var selectNum = $("#selectNum").val();
+		    var zj = price*selectNum;
+		    $(".zj").html(zj);
+		    $(".oder_p_val").val(zj);
+		    $("#totalPrice").val(zj);
+		}
+	}
+</script>
+<script src="${(contextPath)!}/resources/js/jd_reseve.js" language="javascript"></script>
+
+
+</@frame.head>
+<@frame.main "default" "3">
+<div class="g_body ov" style="min-height:1100px; display:block;">
+	<div class="g_step disb ov">
+	<ul>
+    	<li class="m_move ticketSU">
+        	<h3 class="h3">填写订单</h3>
+            <span class="tick_order icon">1</span>
+      </li>
+    	<li class="m_move ticketSU">
+        	<h3 >支付订单</h3>
+            <span class="">2</span>
+      </li>
+    	<li class="m_move ticketSU">
+        	<h3>支付成功</h3>
+            <span class="">3</span>
+      </li>
+  </ul>
+</div>
+<input type="hidden" value="${(price)!c}" id="p_price" />
+<!--通讯录选择-->
+<div class="fl companyEmployee">
+                        <div class="com_top wd">
+                            <span class="fl yahei h4">从部门员工通讯录中选择</span><a href="javascript:;" class="close fl"></a>
+                        </div>
+                        <ul class="com_list fl">
+                                <li><span class="comCla fl yahei h3">企业用户名：</span><span class="fl yahei color3 h3">${(user.authInfo.loginName)!}</span></li>
+                                <li><span class="comCla fl yahei h3">请选择公司：</span><span class="comSelect fl yahei color3 h3 companySelect" id="optionValue2">请选择公司</span>
+                                <ul class="selectNav ov com1" for="optionValue2">
+                                    <!--<li class="l">身份证</li>
+                                    <li class="l">军官证</li>
+                                    <li class="l">学生证</li>
+                                    <li class="l">护照</li>-->
+                                </ul>
+                                </li>
+                                <li><span class="comCla fl yahei h3">请选择部门：</span><span class="comSelect fl yahei color3 h3 companySelect" id="optionValue3">请选择部门</span>
+                                <ul class="selectNav ov com2" for="optionValue3">
+                                    <!--<li class="l">身份证</li>
+                                    <li class="l">军官证</li>
+                                    <li class="l">学生证</li>
+                                    <li class="l">护照</li>-->
+                                </ul>
+                                </li>
+                                <li><span class="comCla fl yahei h3">请选择人员：</span><span class="comSelect fl yahei color3 h3 companySelect" id="optionValue4">请选择人员</span>
+                                <ul class="selectNav ov com3" for="optionValue4">
+                                    <!--<li class="l">身份证</li>
+                                    <li class="l">军官证</li>
+                                    <li class="l">学生证</li>
+                                    <li class="l">护照</li>-->
+                                </ul>
+                                </li>
+                        </ul>
+                        <div class="employeeMess fl">
+                            <ul class="yahei color6 h3 fl employeeMessBox">
+                                <!--<li><i>企业信息：</i><span>汇金宝科技</span><span>旅行社</span></li>
+                                <li><i>姓名：</i><span>韩卫娜</span></li>
+                                <li><i>证件信息：</i><span>身份证</span><span>130212222222222</span></li>
+                                <li><i>手机号码：</i><span>1222222222</span></li>-->
+                            </ul>
+                        </div>
+                        <a href="javascript:;" class="com_tj fl yahei h3 tc">确认提交</a>
+             </div>
+<!--通讯录选择-->
+
+
+<div class="tick_ME wd ov fl">
+    <ul class="wd12 ma">
+        <i class="ic"></i>
+        <li class="disb tick_title"><span class="h1 yahei color3">预订门票：</span><a class="h1 linkC" href="javascript:;">${(policy.name)!}</a></li>
+        <li class="disb h4 yahei color6"><span>景点现付：无需提前在线付款，订单提交成功后，游玩时到景点售票窗口付款取票游玩，确保您的资金安全，出游安排更自由，轻松！</span></li>
+        <span class="disb total color3 h2 yahei">费用小计：<i class="zj">￥${(price)!c}</i>；  应付金额：<span class="forange">￥<i class="forange zj" style="font-size:30px;">${(price)!c}</i></span></span>
+    </ul>
+</div>
+<form id="reseveForm" action="${(contextPath)!}/mp/handle" method="post"   >
+	<input type="text"  class="hide" id="oder_p_val" value=""/>
+    <input type="hidden" id="totalPrice" name="price" value="${(price)!c}">
+    <input type="hidden" name="policyId" value="${(id)!}">
+    <input type="hidden" name="policyName" value="${(policy.name)!}">
+   
+   	<input type="hidden" id="I_takeTicketUserInfoId" name="takeTicketUserInfo.id" />
+   	<input type="hidden" id="SPRING_TOKEN" name="SPRING_TOKEN" value="${SPRING_TOKEN}">
+	<div class="tick_box wd12 ma">
+        <ul class="tick_da fl">
+            <li class="fl "><span class="fl tick_ti">游玩日期：</span>
+                <input type="text" class="data fl yahei color3 h3 J_Item" autocomplete="off" id="J_DepDate" name="travelDate" readonly="true" />
+            	<span class="color8 h4 yahei tick_ts J_DepDate" style="color:red;vertical-align:top;display:inline-block"></span>
+            	</li>
+            <li id="data" class="none ov fl"></li>
+            <li class="fl "><span class="fl tick_ti">预定数量：</span><span class="numText"><a class="min" href="javascript:;">-</a><input type="text" id="selectNum" value="1" name="number" readonly="true"><a class="add" href="javascript:;">+</a></span></li>
+        </ul>
+        <div class="tick_people fl wd">
+            <span class="h1 yahei color3 people ">取票人信息</span>
+            <span class="underline wd disb"></span>
+            <ul class="tick_PM fl color6 yahei h3">
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>取票人姓名：</span><input type="text" id="goname" value="" name="takeTicketUserInfo.baseInfo.name" class="name" ><span class="color8 h4 yahei tick_ts">输入姓名须与身份证上一致，取票时须出示身份证</span>
+                <#if user.baseInfo.type==2>
+                <a href="javascript:;" class="yahei color6 h4 companyLink fl tc">从部门员工通讯录中选择</a>
+                </#if>
+                </li>
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>取票人手机号：</span><input type="text" maxlength="11" name="takeTicketUserInfo.contactInfo.mobile" id="tel" class="mobile"><span class="color8 h4 yahei tick_ts">接收订单确认短信，请务必填写填写正确</span></li>
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>预订人姓名：</span><input type="text" name="orderUserInfo.baseInfo.name" id="ydname"  class="name"><span class="color8 h4 yahei tick_ts" style="color:red;"></span></li>
+                <li class="fl wd"><span class="tick_tis fl"><i style="color:#00a0e9; font-weight:bold">*</i>预订人手机号：</span><input type="text" name="orderUserInfo.contactInfo.mobile" id="ytel" maxlength="11"  class="mobile"><span class="color8 h4 yahei tick_ts" style="color:red;"><span class="color8 h4 yahei tick_ts"></span></span></li>
+            </ul>
+        </div>
+        <div class="protocol fl wd ov">
+            <span class="color3 yahei h2 protocol_title">购票协议</span>
+            <div class="protocol_content color6 yahei h4 ">
+            <i class="sj fl"></i>
+            <p style="margin:14px;">
+            <#list (policy.noticeTypes[0].noticeItems)!null as noticeItems>
+            	<b>${(noticeItems_index+1)!}.${(noticeItems.name)!}：</b>${(noticeItems.content)!}<br/>
+            </#list>
+            </p>
+            </div>
+        </div>
+        <div class="fl wd12 ov">
+            <div class="tick_tj">
+                <a class="fr yahei h2" id="tj" href="javascript:" onclick="reseve();">提交订单</a>
+                <span class="disb total color3 h2 yahei fr">费用小计：<i class="zj">￥${(price)!c}</i>；  应付金额：<span class="forange">￥<i class="forange zj" style="font-size:30px;">${(price)!c}</i></span></span>
+             </div>
+        </div>
+    </div>
+   </form>
+</div>
+
+
+</@frame.main>
+<@frame.end "default"></@frame.end>	
+<script src="${(contextPath)!}/resources/js/Yui_date/yui-min.js"></script>
+<script>
+
+    YUI({
+        modules: {
+            'trip-calendar': {
+                fullpath: '${(contextPath)!}/resources/js/Yui_date/trip-calendar.js',
+                type    : 'js',
+                requires: ['trip-calendar-css']
+            },
+            'trip-calendar-css': {
+                fullpath: '${(contextPath)!}/resources/js/Yui_date/trip-calendar.css',
+                type    : 'css'
+            }
+        }
+    }).use('trip-calendar', function(Y) {
+
+        /**
+         * 弹出式日历实例
+         * 将日历与指定的触发元素绑定
+         * 日历可根据浏览器窗口大小，自动调整显示位置
+         */
+        var oCal = new Y.TripCalendar({
+            //绑定日历的节点，支持选择器模式，可批量设置（必选）
+            triggerNode: '.J_Item'
+        });
+
+        oCal.on('dateclick', function(e) {
+            this.getCurrentNode().setAttribute('data-date', e.date);
+        });
+
+        //显示日历时自定义事件
+        oCal.on('show', function() {
+            var v = this.getCurrentNode().getAttribute('data-date');
+            this.set('date', v || new Date);
+            this.set('selectedDate', v).render();
+        });
+
+        //解决chrome的foucs事件bug
+        Y.on('click', function(e) {
+            e.currentTarget.focus();
+        }, 'button, .J_Link');
+    });
+</script>

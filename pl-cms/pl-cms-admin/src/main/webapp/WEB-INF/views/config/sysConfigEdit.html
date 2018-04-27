@@ -1,0 +1,38 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/config/save" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+		
+			<#if sc.id??>
+				<input type="hidden" name="sc.id" value="${sc.id}" />
+			</#if>
+
+			<div class="unit">
+				<label>配置名：</label>
+				<input type="text" name="sc.confName" size="64" minlength="1" maxlength="128" class="required" value="${sc.confName!?html}" />
+			</div>
+			<div class="unit">
+				<label>配置值：</label>
+				<input type="text" name="sc.confValue" size="64" maxlength="1024" value="${sc.confValue!?html}" />
+			</div>
+			<div class="unit">
+				<label>是否可用：</label>
+				<label><input type="radio" name="sc.enable" value="0" <#if !sc.enable()>checked="checked"</#if> />禁用</label>
+				<label><input type="radio" name="sc.enable" value="1" <#if sc.enable()>checked="checked"</#if> />可用</label>
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<input type="text" name="sc.remark" size="64" maxlength="2048" value="${sc.remark!?html}" />
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

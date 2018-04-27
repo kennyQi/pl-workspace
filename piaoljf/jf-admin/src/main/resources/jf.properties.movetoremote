@@ -1,0 +1,12 @@
+#read by JfProperty.java
+
+#where to save small data,ex:rule template, object db
+jfPath=D\:\\gitwork\\piaoljf\\jf-admin\\jfPath
+#jfPath={jfPath}
+
+#\u79EF\u5206\u6709\u6548\u671F ,jf valid year
+jfValidYear=3
+
+#the piaol ip, which call service
+
+clientip=

@@ -1,0 +1,80 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src="${staticPath}/js/jquery-validation-1.9.0/lib/jquery.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+</style>
+<div class="pageContent">
+
+	<form action="${contextPath}/lineSubject/saveLineSubject" method="post" enctype="multipart/form-data" class="pageForm required-validate" 
+	      id="add" onsubmit="return validateCallback(this, dialogAjaxDone)">
+	<table>
+			<tr style="float:left;"> 
+				<td>主题1
+				<input hidden="hidden" type="text" name="lineID" value="${line.id}" />
+					<select name="subjectID" id="subject1">
+						<option value="0">请选择主题</option>
+						<#list subjects as subject>
+							<option value="${subject.id}" <#if subjectID0?? && subjectID0 == subject.id>selected="selected"</#if>>${subject.subjectName}</option>
+						</#list>
+					</select>
+				</td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr style="float:left;"> 
+				<td>主题2
+					<select name="subjectID" id="subject2">
+						<option value="0">请选择主题</option>
+						<#list subjects as subject>
+							<option value="${subject.id}"<#if subjectID1?? && subjectID1 == subject.id>selected="selected"</#if>> ${subject.subjectName}</option>
+						</#list>
+					</select>
+				</td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr style="float:left;"> 
+				<td>主题3
+					<select name="subjectID" id="subject3">
+						<option value="0">请选择主题</option>
+						<#list subjects as subject>
+							<option value="${subject.id}" <#if subjectID2?? && subjectID2 == subject.id>selected="selected"</#if>>${subject.subjectName}</option>
+						</#list>
+					</select>
+				</td>
+			</tr>
+			
+			<tr height="10px;"/> 
+			<tr>
+				<td style="float: right;">
+					<div class="buttonActive"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+					<div class="buttonActive"><div class="buttonContent"><button type="button" onclick="check();">保存</button></div></div>
+				</td>
+			</tr>
+	</table>
+	</form>
+	
+</div>
+<script>
+function check(){
+	var subject1 = $("#subject1").val();
+	var subject2 = $("#subject2").val();
+	var subject3 = $("#subject3").val();
+	if(subject1 == "0" && subject2 == "0" && subject3 == "0" ){
+		alert("至少选择一种主题");
+		return false;
+	}
+	
+	if(subject1 == subject2 && subject1 != "0"){
+		alert("请勿选择相同主题");
+		return false;
+	}
+	if(subject2 == subject3 && subject2 != "0"){
+		alert("请勿选择相同主题");
+		return false;
+	}
+	if(subject3 == subject1 && subject1 != "0"){
+		alert("请勿选择相同主题");
+		return false;
+	}
+	
+	$("#add").submit();
+}
+</script>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hg.demo.member.service.dao.mybatis.DistributorMyBatisDao">
+
+	<select id="getDistributorNum"  resultType="Integer">
+	 select count(1) from hgfx_distributor
+	</select>
+	
+	<select id="getPhoneCount" parameterType="String" resultType="Integer">
+	 select count(1) from hgfx_distributor d,hgfx_distributor_user u
+	  where d.id = u.distributor_id and u.removed='N' and u.status=1
+	  and d.mobile = #{phone}
+	</select>
+
+</mapper>

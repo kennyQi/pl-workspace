@@ -1,0 +1,10 @@
+消费送积分：
+
+http://localhost:8082/hjf-admin/service/calcommitjf?data={"date":"20150930","birthday":"20141011","tradeName":"consumption","user":"15305153869","money":"100","level":"silver","tradeWay":"computer","merchant":"shop1"}
+
+其中的level（会员等级）有：diamond，pt，gold，silver，normal
+tradeWay(下单方式)有：电脑下单（computer）,手机下单（wireless）
+
+
+查看积分的h5
+http://localhost:8080/hg-hjf-app/imuser/transferMemo?user=15305153869

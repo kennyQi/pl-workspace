@@ -1,0 +1,18 @@
+/*重置密码*/
+.bg1_header{width:100%;height:42px;background:url(../images/hd_bg.png);}
+.bg2_header{width:100%;height:42px;background:url(../images/person_bg.jpg);background-size:cover;}
+.header .back_iconfont{position:absolute;left:0px;top:0px;font-size:18px;color:#fff;}
+.header h1{font-size:16px;font-family:'黑体';color:#fff;text-align:center;}
+.input_wrap{width:100%;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;padding-left:14px;border-bottom:1px solid #f1f1f1;overflow:hidden;}
+.input_wrap.input_wrap_1{height:135px;}
+.input_wrap.input_wrap_2{height:90px;}
+.content_form dl{display:-moz-box;display:-webkit-box;display:box;width:100%;height:44px;line-height:44px;border-bottom:1px solid #f1f1f1;position:relative;}
+.content_form dt{width:85px;color:#206b94;}
+.content_form dd{-moz-box-flex:1;-webkit-box-flex:1;box-flex:1;}
+.content_form dd input{font-size:18px;color:#333;width:100%;}
+.valide_code{position:absolute;top:3px;right:14px;display:block;width:74px;height:36px;border:1px solid #e7e7e7;}
+.btn_wrap{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;width:100%;height:97px;border-left:14px solid transparent;border-right:14px solid transparent;}
+.btn_submit{width:100%;height:43px;background:#9ace45;border-radius:6px;margin-top:27px;font-size:16px;color:#fff;}
+.tip{font-size:11px;color:#999;line-height:40px;padding-left:14px;}
+.btn_valid_wrap{position:absolute;top:11px;right:15px;width:76px;height:24px;line-height:24px;border:1px solid #dddddd;border-radius:3px;overflow:hidden;text-align:center;}
+#btn_getCode{font-size:12px;color:#00b7f1;text-align:center;width:100%;}

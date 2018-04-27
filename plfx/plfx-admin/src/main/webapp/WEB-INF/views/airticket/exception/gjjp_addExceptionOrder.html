@@ -1,0 +1,128 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div id="aeoBox">
+<div class="pageContent">
+	<form id="pagerForm"  onsubmit="return dialogSearch(this);" target="dialog" 
+		action="${contextPath}/gjjp/exception/toAddExceptionOrder" method="post">
+		
+		<input type="hidden" id ="pageNo" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+			<tr>
+				<td>异常订单号：</td>
+				<td><input name="orderNo" id="orderNo" value="<#if gjjpOrderQo??>${(gjjpOrderQo.id)!''}</#if>"></td>
+				<td>供应商订单号：</td>
+				<td><input name="supplierOrderId" id="supplierOrderId" value="<#if gjjpOrderQo??>${(gjjpOrderQo.supplierOrderId)!''}</#if>"/></td>
+				<td>乘机人：</td>
+				<td><input name="passengerName" id="passengerName" value="<#if gjjpOrderQo??>${(gjjpOrderQo.passengerName)!''}</#if>"/></td>
+			</tr>
+			<tr>
+				<td>供应商：</td>
+				<td colspan="2">
+					<select name="fromSupplierQo.code" id="fromSupplierQo.code">
+						<option value="">出票平台</option>
+						<#if supplierList??>
+						 <#list supplierList as supplier>
+							<option value="${(supplier.number)!''}" <#if gjjpOrderQo?? && gjjpOrderQo.fromSupplierQo?? &&gjjpOrderQo.fromSupplierQo.code== supplier.number>selected="selected"</#if>>${(supplier.name)!''}</option>
+					     </#list>
+					     </#if>	
+					</select>
+				</td>
+				<td>供应商订单号：</td>
+				<td>
+					<input type="text" name="supplierOrderId" id="supplierOrderId" value="<#if gjjpOrderQo??>${(gjjpOrderQo.supplierOrderId)!''}</#if>"/>
+				</td>
+				<td colspan="2"><button type="submit" >查询</button></td>
+			</tr>
+		</table>
+		</div>
+	</form>	
+</div>
+
+<div class="pageContent" id="table_c">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>	
+	<table class="table" width="100%" layoutH="210"  nowrapTD="false">
+		<thead>
+			<tr>
+				
+ 				<th width="150">订单号</th>
+				<th width="150">供应商单号</th>
+				<th width="150">经销商单号</th>
+				<th width="150">乘机人</th>
+				<th width="80">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#if pagination??>
+		<#list pagination.list as order>
+				<tr height="21px">
+				<td>${order.id}</td>
+				<td>${order.baseInfo.supplierOrderId}</td>
+				<td>${order.baseInfo.dealerOrderId}</td>				
+				<td>
+					<#if order.passengers??>
+						<#list order.passengers as passanger>
+							<#if passanger??>
+								${passanger.baseInfo.passengerName}
+							</#if>
+						 </#list>
+					</#if>
+				</td>
+	
+				<td>
+					<a class="edit" href="${contextPath}/gjjp/exception/toAdjustExceptionOrder?id=${order.id}" target="dialog"
+				  mask="true" width="650" height="350" rel="adjustErrorOrder"  style="color: blue">新增</a>
+				</td>
+			</tr>
+		</#list>
+		</#if>	
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span> <select class="combox" name="numPerPage"
+				onchange="dialogPageBreak({numPerPage:this.value})">
+				<option value="10" <#if pagination.pageSize==10>selected="selected"</#if>>10</option>
+				<option value="20" <#if pagination.pageSize==20>selected="selected"</#if>>20</option>
+				<option value="50" <#if pagination.pageSize==50>selected="selected"</#if>>50</option>
+				<option value="100" <#if pagination.pageSize==100>selected="selected"</#if>>100</option>
+				<option value="200" <#if pagination.pageSize==200>selected="selected"</#if>>200</option>
+			</select> <span>条，共${pagination.totalCount}条</span>
+		</div>
+		<div class="pagination" rel="aeoBox" targetType="dialog" totalCount="${pagination.totalCount?c}" numPerPage="${pagination.pageSize?c}" pageNumShown="10" currentPage="${pagination.pageNo?c}"  ></div>
+	</div>
+</div>
+</div>
+<script>
+//分页方法
+function nextPage(options){
+	var op = $.extend({ targetType:"navTab", rel:"", data:{pageNum:"", numPerPage:"", orderField:"", orderDirection:""}, callback:null}, options);
+	var $parent = op.targetType == "dialog" ? $.pdialog.getCurrent() : navTab.getCurrentPanel();
+	if (op.rel=="aeoBox") {
+		var $box = $parent.find("#" + op.rel);
+		var form =  _getPagerForm($box, op.data);
+		if (form) {
+			$box.ajaxUrl({
+				type:"POST", url:$(form).attr("action"), data: $(form).serializeArray(), callback:function(){
+					$box.find("[layoutH]").layoutH();
+				}
+			});
+		}
+	} else {
+		var form = _getPagerForm($parent, op.data);
+		var params = $(form).serializeArray();
+		if (op.targetType == "dialog") {
+			if (form) $.pdialog.reload($(form).attr("action"), {data: params, callback: op.callback});
+		} else {
+			if (form) navTab.reload($(form).attr("action"), {data: params, callback: op.callback});
+		}
+	}
+}
+
+</script>

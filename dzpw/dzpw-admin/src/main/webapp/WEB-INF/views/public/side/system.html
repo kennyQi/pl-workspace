@@ -1,0 +1,25 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>系统设置
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a>权限管理</a>
+				<ul>
+					<li><a href="${contextPath}/auth/perm/index" target="navTab"
+						rel="authPerm">资源管理</a>
+					</li>
+					<li><a href="${contextPath}/auth/role/list" target="navTab"
+						rel="authRole">角色管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/system/operator/list" target="navTab" rel="operator">员工管理</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

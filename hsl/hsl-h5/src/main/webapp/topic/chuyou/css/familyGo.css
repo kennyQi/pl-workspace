@@ -1,0 +1,7 @@
+*{box-sizing:border-box;}
+img{display:block;}
+
+.cont{width:100%;overflow:hidden;position:relative;}
+.slider-wrap{width:100%;overflow:hidden;background:url(../images/bg.jpg);background-size:cover;position:relative;}
+.slider{width:100%;position:absolute;top:0;left:0;}
+.slider-wrap .ui-slider{margin-bottom:5px;}

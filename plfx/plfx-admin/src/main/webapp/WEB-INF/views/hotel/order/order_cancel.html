@@ -1,0 +1,28 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/hotel/order/cancel" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+		    <input type="hidden" value="${orderId}" name="orderId"/> 
+		    <input type="hidden" value="${orderNo}" name="orderNo"/> 
+		    <input type="hidden" value="${supplierOrderNo}" name="supplierOrderNo"/> 
+			<div class="unit">
+				<label>订单编号</label>
+				${orderNo}
+			</div>
+			<div class="unit">
+				<p>取消原因:</p>
+			   <textarea rows="6" cols="60"  name="reason"></textarea>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+</script>

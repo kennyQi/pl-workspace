@@ -1,0 +1,105 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" type="text/css"
+	href="${contextPath}/resources/js/kindeditor/themes/default/default.css" />
+<script type="text/javascript"
+	src="${contextPath}/resources/js/kindeditor/kindeditor.js"></script>
+<script type="text/javascript"
+	src="${contextPath}/resources/js/kindeditor/lang/zh_CN.js"></script>
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/article/update"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, navTabAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" value='${article.id!""}' name="articleId" />
+			<div class="unit">
+				<label>标题：</label>` <input type="text" name="title" size="100" class="required" value='${(article.baseInfo.title)!""}'/>
+			</div>
+			<div class="unit">
+				<label>作者：</label> <input type="text" name="author" size="100" class="required" value='${(article.baseInfo.author)!""}'/>
+			</div>
+			<div class="unit">
+				<label>资讯类型：</label> <select name="showChannelIds" class="required">
+					<option value="">请选择</option> <#list articleChannels as b>
+					<option value="${b.id}" <#if b.id=article.showChannels[0].id > selected</#if> > ${b.name}</option>
+					</#list>
+				</select>
+			</div>
+			<!-- 资讯没有标题图片 隐藏 -->
+			<div class="unit" style="height: 100px">
+				<label>标题图片：</label>
+				<p style="width:160px">
+				<img alt="" src="${fileUploadPath}${(article.baseInfo.titleImage.urlMaps['default'])!""}" id="editArticleTitleImage" width="100" height="100">
+				<input type="hidden" readonly="readonly" name="fdfsFileInfoJSON" value='${titleImageFileInfoJSON}' /></p>
+				<p><input type="file" name="fileName" id="edit_article_file_upload"/></p>
+				<p>建议尺寸580*300</p>
+			</div><br/>
+
+			<div class="unit">
+				<label>正文：</label>
+				<textarea name="content" id="article_edit_editor" style="width:700px;height:425px;" class="required" maxlength="10000"> ${(article.baseInfo.content)!""}</textarea>
+			</div>
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+		$(function() {
+			//渲染编辑器
+			initKindEditor();
+			$("#edit_article_file_upload").uploadify({
+		         'method'   : 'post',  
+		         'buttonText' : '请选择',  
+		         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+		 		 'uploader'      : '${contextPath}/image/upload',
+		         'fileObjName'   : 'imgFile', 
+		         'onUploadSuccess' : function(file, data, response) {
+		        	 var img=$.parseJSON(data)
+		             $('input[name=fdfsFileInfoJSON]').val(JSON.stringify(img.fdfsFileInfo));
+		             $('#editArticleTitleImage').attr('src',img.url);
+		         }  
+		     });  
+		});
+		function initKindEditor() {
+			var editor;
+			editor = KindEditor.create('#article_edit_editor', {
+				basePath : '${contextPath}/resources/js/kindeditor/',
+				items : [ 'source', '|', 'undo', 'redo', '|', 'preview',
+						'template', 'code', 'cut', 'copy', 'paste',
+						'plainpaste', 'wordpaste', '|', 'justifyleft',
+						'justifycenter', 'justifyright', 'justifyfull',
+						'insertorderedlist', 'insertunorderedlist', 'indent',
+						'outdent', 'subscript', 'superscript', 'clearhtml',
+						'quickformat', 'selectall', '|', 'fullscreen', '/',
+						'formatblock', 'fontname', 'fontsize', '|',
+						'forecolor', 'hilitecolor', 'bold', 'italic',
+						'underline', 'strikethrough', 'lineheight',
+						'removeformat', '|', 'image', 'table', 'hr',
+						'emoticons', 'baidumap', 'pagebreak', 'anchor', 'link',
+						'unlink', '|' ],
+				uploadJson : '${contextPath}/image/upload',
+				afterChange : function() {
+					this.sync();
+				}
+			});
+		}
+	</script>
+</div>
+

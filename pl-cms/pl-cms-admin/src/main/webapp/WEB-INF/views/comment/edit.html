@@ -1,0 +1,44 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/comment/update"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="${comment.id}"/>
+		<input type="hidden" name="proId" value="${comment.proId}"/>
+        <input type="hidden" name="nickName" value="${comment.nickName}"/>
+        <input type="hidden" name="comment" value="${comment.comment}"/>
+        <input type="hidden" name="commentTime" value="${comment.commentTime}"/>
+        <input type="hidden" name="logo" value="${comment.logo}"/>
+        <input type="hidden" name="supportCount" value="${comment.supportCount}"/>
+        <input type="hidden" name="pid" value="${comment.pid}"/>
+        <input type="hidden" name="isShow" value="${comment.isShow}"/>
+        <input type="hidden" name="type" value="${comment.type}"/>
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				${comment.comment}
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">
+                                <#if comment.isShow == -1>前台显示<#else>前台隐藏</#if></button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+

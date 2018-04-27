@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-景点订单</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+<script src="js/laydate/laydate.js" language="javascript"></script>   
+<script>
+(function(){   //调用日期插件
+ ;!function(){								
+laydate.skin('dahong');							
+      laydate({
+         elem: '#demo'
+      });							
+   }();
+ })();
+</script>
+</head>
+
+
+
+<body>
+
+
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1 on">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav3">酒&nbsp;店</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav5">周边游</a>
+        <a href="#" title="" class="h1 yahei nav6">跟团游</a>
+        <a href="#" title="" class="h1 yahei nav7">自由行</a>
+        <a href="#" title="" class="h1 yahei nav8">团&nbsp;购</a>
+        <a href="#" title="" class="h1 yahei nav9">说走就走</a>
+        <a href="#" title="" class="h1 yahei nav10 last">合作专区</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="javascript:;" style="display: block;"></a>
+<!--头部-->
+
+<!--内容-->
+<link href="css/company_allOrderTourism.css" rel="stylesheet" />
+<link href="css/company.css" rel="stylesheet" />
+<script src="js/company.js" language="javascript"></script>
+<div class="g_bd disb yahei">
+	<div class="g_banner disb">
+    	<div class="m_banner_c wd12 ma">
+        	<span class="pic fl ov pl">
+            	<img src="images/user.jpg" alt="" class="user">
+                <i class="icon Bg pa"></i>
+                <i class="hoverIcon Bg pa curp"></i>
+            </span>
+            <span class="word fl h4">
+            	<h2 class="welc fl wd">尊敬的" xujy "，欢迎来到您的账户中心</h2>
+                <span class="phone fl ">绑定手机：159****9636</span><a href="#" class="changePhone fl curp">[更换手机号码]</a>
+            </span>
+        </div>
+    </div>
+    <div class="g_cont disb ov">
+    	<div class="m_nav ov fl">
+        	<h1 class="home Bg"><a href="company_home.html" class="color3 h2">我的企业账户中心</a></h1>
+            <dl class="navList Ba top ov">
+            	<dt class="h3">交易管理</dt>
+            	<dd class="on"><a href="company_allOrder.html" class="color3 h2 order">所有订单</a></dd>
+            	<dd ><a href="company_cardCoupons.html" class="color3 h2 card">我的卡券</a></dd>
+            	<dd ><a href="company_travel.html" class="color3 h2 cl">差旅管理</a></dd>
+            	<dd><a href="company_list.html" class="color3 h2 connect">部门员工通讯录</a></dd>
+            </dl>
+            <dl class="navList Ba ov">
+            	<dt  class="h3">资料管理</dt>
+            	<dd ><a href="company_accountInf.html" class="color3 h2 user_d">账户资料</a></dd>
+            	<dd ><a href="company_changePWD.html" class="color3 h2 pwd">修改密码</a></dd>
+            </dl>
+        </div>
+        <div class="m_cont ov fl">
+        <!--右侧呈现页-->
+            <div class="ri">
+                <span class="rih1 yahei order_p"><a href="company_allOrder.html">机票订单</a><i></i></span>
+                <span class="rih1 yahei order_p onc"><a href="company_allOrderTourism.html">景点订单</a><i></i></span>
+                <span class="rih1 yahei order_p"><a href="company_allOrderLine.html">旅游订单</a><i></i></span>
+                <span class="rih1 yahei order_p"><a href="javascript:;">酒店订单</a><i></i></span>
+                <div class="navsbox"></div>
+                <!--有订单-->
+                <div class="yesOrder">
+                <div class="orderBox">
+                    <ul class="order">
+                            <li><span class="selti h3">订单编号：</span>
+                            <input type="text" class="border slor optionValue input_p" >
+                            </li>
+                            <li style="width:370px; line-height:30px;"><span class="selti h3">下单时间：</span><span class="numTextRight"><input class="border changeTime input_p" onClick="laydate()"></span><i style=" margin:0 5px; float:left;">-</i><span class="numTextRight"><input class="border changeTime input_p" onClick="laydate()"></span></li>
+                            <li><span class="selti h3">预订人：</span><input type="text" class="border input_p sl optionValue"></li>
+                            <li><span class="selti h3">景点名称：</span><input type="text" class="border input_p sl optionValue"></li>
+                            <li><span class="selti h3">支付类型：</span><span class="dd companySelect"><span class="optionValue"  id="optionValue" style="line-height:30px;">请选择</span></span>
+                            <ul class="selectNav" for="optionValue">
+                                <li class="l">请选择</li>
+                                <li class="l">已取消</li>
+                                <li class="l">出票失败待退款</li>
+                                <li class="l">待支付</li>
+                                <li class="l">出票处理中</li>
+                                <li class="l">出票失败已退款</li>
+                                <li class="l">已出票</li>
+                                <li class="l">退票处理中</li>
+                                <li class="l">退票成功待退款</li>
+                                <li class="l">退票成功已退款</li>
+                                <li class="l">退票失败</li>
+                            </ul>
+                            </li>
+                            <li style="width:325px; margin-left:20px;"><span class="selti h3">订单状态：</span><span class="dd companySelect"><span class="optionValue"  id="optionValue1" style="line-height:30px;">请选择</span></span>
+                            <ul class="selectNav" for="optionValue1">
+                                <li class="l">请选择</li>
+                                <li class="l">已取消</li>
+                                <li class="l">出票失败待退款</li>
+                                <li class="l">待支付</li>
+                                <li class="l">出票处理中</li>
+                                <li class="l">出票失败已退款</li>
+                                <li class="l">已出票</li>
+                                <li class="l">退票处理中</li>
+                                <li class="l">退票成功待退款</li>
+                                <li class="l">退票成功已退款</li>
+                                <li class="l">退票失败</li>
+                            </ul>
+                            <a href="javascript:;" class="cx">查询</a></li>
+                        </ul>
+                </div>
+                <div class="tableBox"  >
+                        <ul class="tableUl">
+                            <li class="topBox"><span class="order">订单号</span><span class="name">景点名称</span><span class="type">门票类型</span><span class="payType">支付类型</span><span class="status">订单状态</span><span class="money">订单金额</span><span class="people">下单人</span><span class="operation">操作</span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation"><a href="javascript:;">取消订单</a></span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation"><a href="javascript:;">取消订单</a></span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation">已取消</span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation"><a href="javascript:;">取消订单</a></span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation"><a href="javascript:;">取消订单</a></span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation"><a href="javascript:;">取消订单</a></span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation"><a href="javascript:;">取消订单</a></span></li>
+                            <li><span class="order"><a href="javascript:;">B415170448110000</a></span><span class="name">南江大峡谷</span><span class="type">成人票</span><span class="payType">景点现付</span><span class="status">已预订待消费</span><span class="money"><b style="font-size:16px;">￥350</b></span><span class="people"><i style="margin-top:15px;">xujy</i><i>2015-04-24</i></span><span class="operation"><a href="javascript:;">取消订单</a></span></li>
+                            <li class="bottomBox"><span class="moneys h3 color3">合计金额: <b style="font-size:20px;">￥690</b></span></li>
+                        </ul>
+                    </div>
+                 </div>
+                <!--搜索无结果-->
+                <div class="noResult pl" style="display:none;">
+                    <label>&nbsp;</label>
+                    没有符合条件的订单，请尝试其他查询条件。
+                </div>
+                <!--搜索无结果-->
+                <!--有订单-->
+                <!--没有订单-->
+                <div class="noOrder" style="display:none;">
+                    <span class="noIcon" style="background:url(images/ic_script.png) 0 -543px;"></span>
+                    <span class="in">您目前还没有景点订单哦~</span>
+                </div>
+                <!--没有订单-->
+            </div>
+            </div>
+            
+        <!--右侧呈现页-->
+        </div>
+    </div>
+</div>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">票量简介</a>
+                	<a href="#" title="" class="simsun h4">法律声明</a>
+                	<a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">友情链接</a>
+                	<a href="#" title="" class="simsun h4">酒店加盟</a>
+                	<a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">帮助中心</a>
+                	<a href="#" title="" class="simsun h4">投诉建议</a>
+                	<a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class=" disb h2 yahei yj">意见反馈</span>
+                    <span class=" disb h2 yahei kf">客服电话</span>
+                    <label class="yahei abt color6  disb">0571-23288385</label>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <div class="special"></div>
+</div>
+<!--页脚-->
+</body>
+</html>

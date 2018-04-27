@@ -1,0 +1,352 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>hg-service</groupId>
+		<artifactId>hg-image-parent</artifactId>
+		<version>1.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<artifactId>hg-image-application</artifactId>
+	<packaging>war</packaging>
+	<name>hg-image-application</name>
+
+	<!-- 配置项目依赖 -->
+	<dependencies>
+		<dependency>
+			<groupId>hg</groupId>
+			<artifactId>hg-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hg</groupId>
+			<artifactId>hg-log</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>hg-service</groupId>
+			<artifactId>hg-image-domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hg-service</groupId>
+			<artifactId>hg-image-pojo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hg-service</groupId>
+			<artifactId>hg-image-spi</artifactId>
+		</dependency>
+
+		<!-- j2ee web -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+		</dependency>
+
+		<!-- dubbo -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>2.5.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			</dependency>
+	</dependencies>
+
+	<!-- 插件配置 -->
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>system.properties</include>
+					<include>log4j.properties</include>
+					<include>applicationContext.xml</include>
+					<include>spring/spring-hibernate-common.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.svn</exclude>
+					<exclude>**/Thumbs.db</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
+			<!-- compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+						<manifestEntries>
+							<url>${project.url}</url>
+							<SVN-Revision>${buildNumber}</SVN-Revision>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- resource -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<!-- 打包生成源代码jar -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-maven-plugin</artifactId>
+				<configuration>
+					<verbose>true</verbose>
+					<overwrite>true</overwrite>
+				</configuration>
+			</plugin>
+
+			<!-- clean -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+			</plugin>
+
+			<!-- eclipse -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<sourceExcludes>
+						<sourceExclude>**/.svn/</sourceExclude>
+					</sourceExcludes>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+					<useProjectReferences>true</useProjectReferences>
+					<additionalConfig>
+						<file>
+							<name>.settings/org.eclipse.core.resources.prefs</name>
+							<content>encoding/&lt;project&gt;=${project.build.sourceEncoding}</content>
+						</file>
+					</additionalConfig>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<profiles>
+		<!-- 开发 -->
+		<profile>
+			<id>LOCALHOST</id>
+			<properties>
+				<!-- log -->
+				<logger_level>DEBUG</logger_level>
+				<logger_file>/main/apps/logs/hg-image.log</logger_file>
+				<remoteConfigUrl>http://192.168.2.85:9999/cc-admin/property-config/map</remoteConfigUrl>
+				<environmentName>HG-IMAGE-SERVICE-DEV</environmentName>
+				<!-- JDBC配置 -->
+				<driverClassName>com.mysql.jdbc.Driver</driverClassName>
+				<hibernate_dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate_dialect>
+				<maxIdle>10</maxIdle>
+				<maxActive>20</maxActive>
+				<maxWait>10000</maxWait>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<!-- 预览 -->
+		<profile>
+			<id>PREVIEW</id>
+			<properties>
+				<!-- log -->
+				<logger_level>DEBUG</logger_level>
+				<logger_file>/main/apps/logs/hg-image.log</logger_file>
+				<remoteConfigUrl>http://115.238.43.245:10010/cc-admin/property-config/map</remoteConfigUrl>
+				<environmentName>HG-IMAGE-SERVICE-PREVIEW</environmentName>
+				<!-- JDBC配置 -->
+				<driverClassName>com.mysql.jdbc.Driver</driverClassName>
+				<hibernate_dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate_dialect>
+				<maxIdle>10</maxIdle>
+				<maxActive>20</maxActive>
+				<maxWait>10000</maxWait>
+			</properties>
+		</profile>
+       <!-- 测试 -->
+       <profile>
+           <id>TEST</id>
+           <properties>
+           		<!-- log -->
+				<logger_level>DEBUG</logger_level>
+				<logger_file>/main/apps/logs/hg-image.log</logger_file>
+                <remoteConfigUrl>http://10.1.12.12:15007/cc-admin/property-config/map</remoteConfigUrl>
+                <environmentName>HG-IMAGE-SERVICE-TEST</environmentName>
+               <!-- JDBC配置 -->
+				<driverClassName>com.mysql.jdbc.Driver</driverClassName>
+				<hibernate_dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate_dialect>
+				<maxIdle>10</maxIdle>
+				<maxActive>20</maxActive>
+				<maxWait>10000</maxWait>
+           </properties>
+       </profile>
+       
+       <!-- 生产 -->
+       <profile>
+           <id>RELEASE</id>
+           <properties>
+          		<!-- log -->
+				<logger_level>DEBUG</logger_level>
+				<logger_file>/main/apps/logs/hg-image.log</logger_file>
+                <remoteConfigUrl>http://183.129.207.7:8180/property-config/map</remoteConfigUrl>
+                <environmentName>HG-IMAGE-SERVICE-RELEASE</environmentName>
+                <!-- JDBC配置 -->
+				<driverClassName>com.mysql.jdbc.Driver</driverClassName>
+				<hibernate_dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate_dialect>
+				<maxIdle>10</maxIdle>
+				<maxActive>20</maxActive>
+				<maxWait>10000</maxWait>
+           </properties>
+       </profile>
+       
+	</profiles>
+</project>

@@ -1,0 +1,92 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+	function checkTimeStr(){
+		
+		if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()=="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()!=""){
+		
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}else if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()!="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()==""){
+			
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()>$("#saleEndTimeStr", navTab.getCurrentPanel()).val()){
+			
+			alert("销售开始时间不能大于销售结束时间!");
+			return false
+		}else{
+			return true;
+		}
+	}
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/report/ticket_use_count" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						联票名称：<input type="text" id="name" name="name" value="${name}" size="25"/>
+					</td>
+					<td>
+						销售日期：
+						<input type="text" id="saleBeginTimeStr" name="saleBeginTimeStr" value="${saleBeginTimeStr}" class="date" readonly="true"/>-
+						<input type="text" id="saleEndTimeStr" name="saleEndTimeStr" value="${saleEndTimeStr}" class="date" readonly="true" />
+					</td>
+					<td>
+						<span onclick="getYesteday()" style="cursor: pointer;">昨天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getToday()" style="cursor: pointer;">今天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getLastWeek()" style="cursor: pointer;">上周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentWeek()" style="cursor: pointer;">本周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getPreviousMonth()" style="cursor: pointer;">上月</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentMonth()" style="cursor: pointer;">本月</span>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkTimeStr()">查询</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" target="dwzExport" href="${contextPath}/report/ticket_use_count/export"><span>导出EXCEL</span></a>
+			</li>
+		</ul>
+	</div>
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="85" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="50px;">排名</th>
+				<th width="350px;">联票名称</th>
+				<th width="150px;">入园人次</th>
+				<th width="150px;">日均入园人次</th>
+				<th width="180px;">操作</th>
+			</tr>
+		</thead>
+		<#list pagination.list as t>
+			<tr>
+				<td>${t.rank!?html}</td>
+				<td>${t.ticketPolicyName!?html}</td>
+				<td>${t.useCount!?html}</td>
+				<td>${t.dayCount!?html}</td>
+				<td>
+					<a href="${contextPath}/report/ticket_use_count/detail_list?ticketPolicyId=${t.ticketPolicyId}&saleBeginTimeStr=${saleBeginTimeStr}&saleEndTimeStr=${saleEndTimeStr}" target="dialog" height="650" width="1100" style="color: blue">用户明细</a>
+				</td>
+			</tr>
+		</#list>
+	</table>
+	
+</div>

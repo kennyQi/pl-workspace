@@ -1,0 +1,426 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/traveline/salepolicy/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" /> 
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" /> 
+<!-- 		<input type="hidden" id="provinceOfType_salepolicy" value="${(salePolicyLineQO.provinceOfType)!''}"/> -->
+<!-- 		<input type="hidden" id="cityOfType_salepolicy" value="${(salePolicyLineQO.cityOfType)!''}"/> -->
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						政策编号：
+					</td>
+					<td>
+						<input type="text"  size="20" maxlength="40"  id="number"  name="salePolicyLineNumber"  value="${(salePolicyLineQO.salePolicyLineNumber)!''}"/>
+					</td>
+					<td>
+						政策状态：
+					</td>
+					<td>
+						<select  name="salePolicyLineStatus"  id="salePolicyLineStatus">
+								<option value="">全部</option>
+								<#if policyStatusMap??>
+                                <#list policyStatusMap?keys as itemKey>
+                                   <option value="${itemKey}" <#if itemKey == salePolicyLineQO.salePolicyLineStatus>selected="selected"</#if>>
+                                    	${policyStatusMap[itemKey]}
+                                   </option>
+                                </#list>
+                                </#if>
+						</select>
+					</td>
+					<td>
+						创建人：
+					</td>
+					<td>
+						<input type="text" name="createName" value="${(salePolicyLineQO.createName)!''}"/>
+					</td>
+					<td>
+						适用经销商：
+					</td>
+					<td>
+					    <select name="lineDealerID" id="lineDealerID">
+					    		<option value="">--请选择--</option>
+					    		<option value="0" <#if salePolicyLineQO.lineDealerID == "0">selected="selected"</#if>>全站</option>
+					    		<#if lineDealerList??>
+		                   		<#list lineDealerList as dealer>
+		                   		   <#if salePolicyLineQO.lineDealerID == dealer.id>
+		                   		   		<option value="${dealer.id}" selected="selected">${dealer.name}</option>
+		                   		   	<#else>
+		                   		   		<option value="${dealer.id}" >${dealer.name}</option>
+		                   		   </#if>
+		                   		</#list>
+		              			</#if>
+					    </select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						使用时间：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" id="beginTime" value="${(salePolicyLineQO.startDate?string('yyyy-MM-dd'))!''}" class="date"/>
+						-
+						<input type="text" readonly="readonly" name="endTimeStr" id="endTime" value="${(salePolicyLineQO.endDate?string('yyyy-MM-dd'))!''}" class="date"/>
+					</td>
+					
+				</tr>
+				<tr>
+					<td>
+						适用线路类别：
+					</td>
+					<td colspan="10">
+						<select  name="type" id="type">
+							<option value="">全部</option>
+							<#if typeMap??>
+                               <#list typeMap?keys as itemKey>
+                                   <option  value="${itemKey}"  <#if itemKey == salePolicyLineQO.type>selected="selected" </#if>>${typeMap[itemKey]}</option>
+                               </#list>
+                            </#if>
+						</select>
+						<select  name="domesticLine" id="domesticLine_salepolicy">
+                            <option value="">全部</option>
+							<#if gradeMap??>
+                               <#list gradeMap?keys as itemKey>
+                                   <option value="${itemKey}" <#if itemKey == salePolicyLineQO.domesticLine>selected="selected"</#if> >
+                                    	${gradeMap[itemKey]}
+                                   </option>
+                               </#list>
+                            </#if>
+
+<!-- 							<option value="">全部</option> -->
+<!-- 							<option value="1"  <#if  salePolicyLineQO.domesticLine=="1"> selected="selected"</#if>>国内线</option> -->
+							
+						</select>
+						<#if salePolicyLineQO.provinceOfType??>
+						    <#if salePolicyLineQO.domesticLine == 1>
+						    <span id="province_of_type_span">
+								<select name="provinceOfType" id="province_of_type_salepolicy" style="width:120px;">
+								<option value="">--请选择省份--</option>
+								<#list provinceList as province>
+									<option value="${province.id}" <#if salePolicyLineQO.provinceOfType == province.id>selected="selected"</#if>>
+									${province.name} 
+								    </option>
+								</#list>
+								</select>
+							</span>
+							<#elseif salePolicyLineQO.domesticLine == 2>
+							   <span id="province_of_type_span">
+								<select name="provinceOfType" id="province_of_type_salepolicy" style="width:120px;">
+								<option value="">--请选择国家--</option>
+								<#list countryList as country>
+									<option value="${country.id}" <#if salePolicyLineQO.provinceOfType == country.id>selected="selected"</#if>>
+									${country.name} 
+								    </option>
+								</#list>
+								</select>
+							</span>
+							</#if>
+						<#else>
+							<span id="province_of_type_span" style="display:none">
+									<select name="provinceOfType" id="province_of_type_salepolicy"></select>
+							</span>
+						</#if>
+						
+						<#if salePolicyLineQO.cityOfType??>
+						    <#if salePolicyLineQO.domesticLine == 1>
+						    <span id="city_of_type_span">
+							<select name="cityOfType"  id="city_of_type_salepolicy" style="width:120px;">
+								<option value="">--请选择城市--</option>
+								<#list typeCityList as city>
+									<option value="${city.id}" <#if salePolicyLineQO.cityOfType==city.id > selected="selected" </#if>>
+									${city.name}
+								    </option>
+								</#list>
+					        </select>
+					        </span>
+					        <#elseif salePolicyLineQO.domesticLine == 2>
+					         <span id="city_of_type_span">
+							<select name="cityOfType"  id="city_of_type_salepolicy" style="width:120px;">
+								<option value="">--请选择城市--</option>
+								<#list typeCityList as city>
+									<option value="${city.id}" <#if salePolicyLineQO.cityOfType==city.id > selected="selected" </#if>>
+									${city.name}
+								    </option>
+								</#list>
+					        </select>
+					        </span>
+					        </#if>
+						<#else>
+							<span id="city_of_type_span" style="display:none">
+									<select name="cityOfType"  id="city_of_type_salepolicy"></select>
+							</span>
+						</#if>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="formReset(this)">重置</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			 <li>
+               <a width="800" height="600" rel="salepolicy" class="add" href="${contextPath}/traveline/salepolicy/toadd" target="dialog" maxable="false" resizable="false"><span>新增价格政策</span></a>
+           </li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210"  nowrapTD="false">
+		<thead>
+			<tr>
+				<th width="120">优先级</th>
+				<th width="120">政策编号</th>
+				<th width="120">政策名称</th>
+				<th width="120">价格</th>
+				<th width="120">使用时间</th>
+ 				<th width="120">适用经销商范围</th>
+ 				<th width="120">状态</th>
+ 				<th width="120">创建时间</th>
+				<th width="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as salePolicyLineDTO>
+				<tr height="80px">
+					<td>${(salePolicyLineDTO.priority)!''}</td>
+					<td>
+					<a target="dialog" href="${contextPath}/traveline/salepolicy/detail?id=${salePolicyLineDTO.id}" width="800" height="700" style="color: blue">
+								${(salePolicyLineDTO.salePolicyLineNumber)!''}
+					</a>
+					</td>
+					<td>
+					<#if (salePolicyLineDTO.salePolicyLineName)?length lt 25>
+						${(salePolicyLineDTO.salePolicyLineName)!''}
+					<#else>
+						 ${(salePolicyLineDTO.salePolicyLineName[0..24])}......
+					</#if>
+					</td>
+					<td>
+							<#if  (salePolicyLineDTO.rise == true) && (salePolicyLineDTO.unit == 1)>
+							       增加${(salePolicyLineDTO.improvePrice)?c}%
+							</#if>
+							<#if  (salePolicyLineDTO.rise == true) && (salePolicyLineDTO.unit == 2)>
+							       增加${(salePolicyLineDTO.improvePrice)?c}元
+							</#if>
+							<#if  (salePolicyLineDTO.rise == false) && (salePolicyLineDTO.unit == 1)>
+							       减少${(salePolicyLineDTO.improvePrice)?c}%
+							</#if>
+							<#if  (salePolicyLineDTO.rise == false) && (salePolicyLineDTO.unit == 2)>
+							       减少${(salePolicyLineDTO.improvePrice)?c}%
+							</#if>
+					</td>
+					<td>
+						<#if salePolicyLineDTO && salePolicyLineDTO.startDate??><p>${salePolicyLineDTO.startDate?string("yyyy-MM-dd HH:mm:ss")}</p></#if>
+						-
+						<#if salePolicyLineDTO && salePolicyLineDTO.endDate??><p>${salePolicyLineDTO.endDate?string("yyyy-MM-dd HH:mm:ss")}</p></#if>
+					</td>
+					<td>${(salePolicyLineDTO.lineDealer.name)!'全站'}</td>
+					<td>
+						<#if policyStatusMap??>
+                   			<#list policyStatusMap?keys as itemKey>
+                       			<#if itemKey == salePolicyLineDTO.salePolicyLineStatus.salePolicyLineStatus>
+                                     ${policyStatusMap[itemKey]}
+                        		</#if>
+                   			</#list>
+                		</#if>
+					</td>
+					<td><#if salePolicyLineDTO && salePolicyLineDTO.salePolicyLineCreateDate??><p>${salePolicyLineDTO.salePolicyLineCreateDate?string("yyyy-MM-dd HH:mm:ss")}</p></#if></td>
+					<td>
+						<p>
+							<a target="dialog" href="${contextPath}/traveline/salepolicy/detail?id=${salePolicyLineDTO.id}" width="800" height="700" style="color: blue">
+								政策详情
+							</a>
+						</p>
+						<br/>
+						<p>
+						  <#if  salePolicyLineDTO.salePolicyLineStatus.salePolicyLineStatus == 1>
+							<a target="dialog" href="${contextPath}/traveline/salepolicy/toRelease?id=${salePolicyLineDTO.id}" width="550" height="250" style="color: blue">
+								发布
+							</a>
+						  </#if>
+						  <#if  salePolicyLineDTO.salePolicyLineStatus.salePolicyLineStatus == 4 || salePolicyLineDTO.salePolicyLineStatus.salePolicyLineStatus == 3> 
+							<a target="dialog" href="${contextPath}/traveline/salepolicy/toCancel?id=${salePolicyLineDTO.id}" width="550" height="250" style="color: blue">
+								取消
+							</a>
+						  </#if>
+						   <#if  salePolicyLineDTO.salePolicyLineStatus.salePolicyLineStatus == 2>
+							<a  target="dialog" href="${contextPath}/traveline/salepolicy/cancleRemark?id=${salePolicyLineDTO.id}" width="500" height="200" style="color: blue">
+								取消原因
+							</a>
+						  </#if>
+						</p>
+					</td>
+			 </tr>
+		  </#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+//当线路类型下拉框选择“国内线”时，联动出省市下拉框
+$("#domesticLine_salepolicy").change(function(){
+   var selectOption = $("#domesticLine_salepolicy").val();
+   if(selectOption == 1){
+	   $.post("${contextPath}/traveline/line/searchProvince",function(data){
+			if (data.length > 0) {  
+	            var layer = "<option value=''>--请选择省份--</option>";  
+	            var initCity = "<option value=''>--请选择城市--</option>";
+	            $.each(data, function (idx, item) {  
+	                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+	            });
+	            
+				$("#province_of_type_salepolicy").empty();
+				$("#province_of_type_salepolicy").append(layer);
+				$("#city_of_type_salepolicy").empty();
+				$("#city_of_type_salepolicy").append(initCity);
+				
+				//展现省市下拉框
+				$("#province_of_type_span").show();
+				$("#city_of_type_span").show();
+	        }  
+	},"json"); 
+   }else{
+	   $.post("${contextPath}/traveline/line/searchCountry",function(data){
+			if (data.length > 0) {  
+	            var layer = "<option value=''>--请选择国家--</option>";  
+	            var initCity = "<option value=''>--请选择城市--</option>";
+	            $.each(data, function (idx, item) {  
+	                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+	            });
+	            
+				$("#province_of_type_salepolicy").empty();
+				$("#province_of_type_salepolicy").append(layer);
+				$("#city_of_type_salepolicy").empty();
+				$("#city_of_type_salepolicy").append(initCity);
+				
+				//展现省市下拉框
+				$("#province_of_type_span").show();
+				$("#city_of_type_span").show();
+	        }  
+	},"json"); 	
+   }
+  
+});
+
+//当选择了指定的省份时，则该省份的城市列表初始化出来
+$("#province_of_type_salepolicy").change(function(){
+	  var selectValue = $("#domesticLine_salepolicy").val();
+	  if(selectValue == 1){
+		  $.post("${contextPath}/traveline/line/searchCity",{'province':$("#province_of_type_salepolicy").val()},function(data){
+				if (data.length > 0) {  
+		           var layer = "<option value=''>--请选择城市--</option>";  
+		           $.each(data, function (idx, item) {  
+		               layer += "<option value="+item.code +">"+ item.name + "</option>";  
+		           });
+		           
+					$("#city_of_type_salepolicy").empty();
+					$("#city_of_type_salepolicy").append(layer);
+		       }  
+			},"json");
+	  }else{
+		    var  countryCode = $("#province_of_type_salepolicy").val();
+			$.post("${contextPath}/traveline/line/searchCountryCity",{'countryCode':countryCode},function(data){
+		 		if (data.length > 0) {  
+		             var layer = "<option value=''>--请选择市--</option>";  
+		             $.each(data, function (idx, item) {  
+		            	 layer += "<option value="+item.code + ">"+ item.name + "</option>";
+		             });
+		             
+		            $("#city_of_type_salepolicy").empty();
+		  			$("#city_of_type_salepolicy").append(layer);
+		         }  
+		 	},"json");
+	  }
+	
+}); 
+
+
+// var  provinceOfType = $("#provinceOfType_salepolicy").val();
+// var  cityOfType = $("#cityOfType_salepolicy").val();
+// var  domesticLine = $("#domesticLine_salepolicy").val();
+// 当线路类型下拉框选择“国内线”时，联动出省市下拉框,重新加载页面的时候
+// /*=========================线路类别查询之后重新加载页面时会调用===============================*/
+// if(provinceOfType != null && provinceOfType != "" && domesticLine == 1){
+// 	$.post("${contextPath}/traveline/line/searchProvince",function(data){
+// 			if (data.length > 0) {  
+// 	            var layer = "<option value=''>--请选择省份--</option>";  
+// 	            var initCity = "<option value=''>--请选择城市--</option>";
+// 	            $.each(data, function (idx, item) {  
+// 	                layer += "<option value="+item.code  + (item.code == provinceOfType ? " selected=selected": " ") + ">"+ item.name + "</option>";  
+// 	            });
+	            
+// 	            $("#province_of_type_salepolicy").empty();
+//  				$("#province_of_type_salepolicy").append(layer);
+//  				$("#city_of_type_salepolicy").empty();
+//  				$("#city_of_type_salepolicy").append(initCity);
+ 				
+//  				展现省市下拉框
+//  				$("#province_of_type_span").show();
+//  				$("#city_of_type_span").show();
+// 	        }  
+// 	},"json"); 
+// }
+
+// if(cityOfType != null && cityOfType != "" && domesticLine == 1){
+// 	$.post("${contextPath}/traveline/line/searchCity",{'province':provinceOfType},function(data){
+//  		if (data.length > 0) {  
+//              var layer = "<option value=''>--请选择城市--</option>";  
+//              $.each(data, function (idx, item) {  
+//             	 layer += "<option value="+item.code  + (item.code == cityOfType ? " selected=selected" : " ") + ">"+ item.name + "</option>";
+//              });
+             
+//             $("#city_of_type_salepolicy").empty();
+//   			$("#city_of_type_salepolicy").append(layer);
+//          }  
+//  	},"json");
+// }
+
+// $("#number").bind("blur",function() {
+// 	var  reg=new  RegExp("[0-9]");
+// 	 var  number = $("#number").val();//取得开始价格的值
+// 	 if(!reg.test(number)){
+// 		 alertMsg.error("您填写的查询条件政策编号有误，只能为数字！", number);
+// 		 return false;
+// 	 }
+// });
+
+function validate(){
+	var  reg=new  RegExp("[0-9]");
+	var  number = $("#number").val();//政策编号
+	if(number != "" && number !=null &&!reg.test(number)){
+		 alertMsg.error("您填写的查询条件政策编号有误，只能为数字！", number);
+		 return false;
+	}
+	var beginTime = $("#beginTime").val(); //开始时间
+	var endTime = $("#endTime").val(); //结束时间
+	if(beginTime != null && beginTime !="" && endTime != null && endTime !=""){
+		if(beginTime > endTime){
+			alertMsg.error("您填写的查询条件使用时间有误，开始时间不能大于结束时间！");
+			return false;
+		}
+	}
+	return true;
+}
+</script>

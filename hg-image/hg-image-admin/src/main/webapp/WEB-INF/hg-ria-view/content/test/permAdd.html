@@ -1,0 +1,177 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-gift"></i>资源添加
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+							<a href="#portlet-config" data-toggle="modal" class="config">
+							</a>
+							<a href="javascript:;" class="reload">
+							</a>
+							<a href="javascript:;" class="remove">
+							</a>
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/auth/perm/save" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input name="perm.id" value="${permId}" type="hidden"/>
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">资源名称：</label>
+									<div class="col-md-4">
+										<input type="text" id="displayName" name="perm.displayName" class="form-control required" 
+											placeholder="资源名称" maxlength="22"/>
+										<input type="text" name="perm.displayName" class="form-control required" 
+											placeholder="资源名称" maxlength="22" equalTo="#displayName"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">URL：</label>
+									<div class="col-md-4">
+										<input type="text" name="perm.url" class="form-control url" placeholder="url"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">资源类型：</label>
+									<div class="col-md-4">
+										<select class="form-control select2me" target="dropDown" name="perm.permType" class="required">
+											<#list permTypeList as permType>
+												<option value="${permType.key!?html}">${permType.value!?html}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">角色：</label>
+									<div class="col-md-4">
+										<input type="text" name="perm.permRole" class="form-control" placeholder="角色" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">上级资源：</label>
+									<div class="col-md-4">
+										<select class="form-control select2me" target="dropDown" name="perm.parentId">
+											<option value="">顶级资源</option>
+											<#list parentPermList as parentPerm>
+												<option value="${parentPerm.id!0}">${parentPerm.displayName!?html}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试日期组件：</label>
+									<div class="col-md-4">
+										<input class="form-control form-control-inline" 
+											target="datepicker" size="16" type="text" value="1992-04-05"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试日期段组件：</label>
+									<div class="col-md-4">
+										<div class="input-group input-large" target="datepicker">
+											<input type="text" class="form-control" name="startDate">
+											<span class="input-group-addon">
+											到 </span>
+											<input type="text" class="form-control" name="endDate">
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试时间组件：</label>
+									<div class="col-md-4">
+										<div class="input-group">
+											<input type="text" class="form-control" 
+												target="timepicker" data-show-seconds="false" data-show-meridian="true">
+											<span class="input-group-btn">
+											<button class="btn default" type="button"><i class="fa fa-clock-o"></i></button>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试spinner：</label>
+									<div class="col-md-4">
+										<div class="input-group input-small" target="spinner"
+											 data-disabled="false" data-value="20" data-step="5">
+											<input type="text" class="spinner-input form-control" maxlength="3" readonly>
+											<div class="spinner-buttons input-group-btn btn-group-vertical">
+												<button type="button" class="btn spinner-up btn-xs blue">
+												<i class="fa fa-angle-up"></i>
+												</button>
+												<button type="button" class="btn spinner-down btn-xs blue">
+												<i class="fa fa-angle-down"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试spinner：</label>
+									<div class="col-md-4">
+										<div class="input-group input-small" target="spinner"
+											 data-disabled="false" data-value="20" data-step="5">
+											<input type="text" class="spinner-input form-control" maxlength="3" readonly>
+											<div class="spinner-buttons input-group-btn btn-group-vertical">
+												<button type="button" class="btn spinner-up btn-xs blue">
+												<i class="fa fa-angle-up"></i>
+												</button>
+												<button type="button" class="btn spinner-down btn-xs blue">
+												<i class="fa fa-angle-down"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试textarea：</label>
+									<div class="col-md-4">
+										<textarea class="form-control" maxlength="500" rows="5" placeholder="请入内容."></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试tags：</label>
+									<div class="col-md-4">
+										<input type="text" class="form-control tags" target="tags" data-on-add="function(value) {console.info(value);}" value="标签1,标签2,标签3"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试临时图片上传：</label>
+									<div class="col-md-4">
+										<div target="imageUploadTemp" max-size="2400" 
+											name="imageId" value="${imageId}" class="required"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">测试编辑器：</label>
+									<div class="col-md-4">
+										<script id="permEditor"
+											type="text/plain" target="editor"
+											style="width:770px;height:500px;"
+											name="intro" markId="${permId}" useType="${useType}"
+											imgIdRef="permImageIds"></script>
+										<input name="imageIds" id="permImageIds" type="hidden" class="required"/>
+									</div>
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="btn-set pull-left">
+									<a class="btn green" target="submit">提交</a>
+									<a class="btn blue" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

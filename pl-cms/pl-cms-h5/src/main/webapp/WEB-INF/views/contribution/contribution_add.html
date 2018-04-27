@@ -1,0 +1,189 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>我也要投稿</title>
+<link href="${contextPath}/resources/css/new.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/submission.css" rel="stylesheet" />
+</head>
+
+<body>
+<form class="gd_detail" action="${contextPath}/contribution/create" method="post" id="submission" >
+	<label class="lab paT">文章标题</label>
+    <input type="text"  placeholder="请填写标题"   id="title" name="title"  class="inp"/>
+    
+    
+	<label class="lab paT">作者</label>
+    <input type="text" placeholder="请填写作者名称" id="author" name="author"  class="inp"/>
+    
+    
+	<label class="lab paT">联系电话</label>
+    <input type="text" placeholder="请填写联系方式" id="mobile" name="mobile"  class="inp"/>
+    
+    
+	<label class="lab paT">正文</label>
+    <textarea  class="inp"  rows="3" name="content" id="content"></textarea>
+    
+    <input class="gd_submit" type="button" value="立即投稿" onclick="checkForm()"/>
+</form>
+	<!--弹出框-->
+    <div class="tm_bg"></div>
+    <div class="tm">
+        <div id="msg" class="tm_ct">
+            	请填写信息提交
+        </div>
+    </div>
+    <!--弹出框-->
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${contextPath}/resources/js/submission.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var ss=${success};
+		if(ss){
+			var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("提交成功，等待审核!");
+			setTimeout(function(){
+				$(".tm_bg").add(".tm").hide();
+			}, 1000);
+		}
+	});
+	function checkForm(){
+		var title=$.trim($("#title").val());
+		var mobile=$.trim($("#mobile").val());
+		var author=$.trim($("#author").val());
+		var content=$.trim($("#content").val());
+		var reg=new RegExp(/^((0?1\d{10})|(\d{3,4}-\d{7,8}))$/);
+		var textreg=/[\'*~`@#$%^&+={}\[\]\<\>\(\)]/;
+		if(title==""){
+			showBox("请输入标题");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("请输入标题"); */
+			return false;
+		}
+		if(title.length>50){
+			showBox("标题名称过长");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("标题名称过长"); */
+			return false;
+		}
+		if(textreg.test(title)){
+			showBox("标题包含有特殊字符！");
+		/* 	var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_ct").html("标题包含有特殊字符！");
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2,}); */
+			return false;
+		}
+		if(author==""){
+			showBox("请输入作者名称");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("请输入作者名称"); */
+			return false;
+		}
+		if(author.length>10){
+			showBox("作者名称过长");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("作者名称过长"); */
+			return false;
+		}
+		if(textreg.test(author)){
+			showBox("作者名称包含有特殊字符！");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_ct").html("作者名称包含有特殊字符！");
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2,}); */
+			return false;
+		}
+		if(mobile==""){
+			showBox("请输入联系方式");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("请输入联系方式"); */
+			return false;
+		}
+		if (reg.test(mobile)) {
+		} else {
+			showBox("请输入正确联系方式");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("请输入正确联系方式"); */
+			return false;
+		}
+		if (content.length>1000) {
+			showBox("内容过长！");
+			/* var hei = document.documentElement.clientHeight;
+			var tm_box = $(".tm_ct").height();
+			$(".tm_bg").show().css("height", hei);
+			$(".tm").show().css({
+				"height" : hei,
+				"top" : (hei - tm_box) / 2
+			});
+			$("#msg").html("内容过长！"); */
+			return false;
+		}
+		if(content=="请填写投稿文章"||content==""){
+			showBox("请输入内容");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html("请输入内容"); */
+			return false;
+		}
+		if(textreg.test(content)){
+			showBox("投稿内容包含有特殊字符！");
+			/* var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_ct").html("投稿内容包含有特殊字符！");
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2,}); */
+			return false;
+		}
+		showBox("提交成功，等待审核!");
+		/* $(".tm_bg").add(".tm").hide();
+		var hei=document.documentElement.clientHeight;
+		var tm_box=$(".tm_ct").height();
+		$(".tm_bg").show().css("height",hei);
+		$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+		$("#msg").html("提交成功，等待审核!"); */
+		setTimeout(function(){
+			$(".tm_bg").add(".tm").hide();
+			$("#submission").submit();
+		}, 2000);
+	}
+	function showBox(title){
+		setTimeout(function(){
+			var hei=document.documentElement.clientHeight;
+			var tm_box=$(".tm_ct").height();
+			$(".tm_bg").show().css("height",hei);
+			$(".tm").show().css({"height":hei,"top":(hei-tm_box)/2});
+			$("#msg").html(title);
+		}, 200);
+	}
+</script>
+</body>
+</html>

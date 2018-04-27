@@ -1,0 +1,77 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">角色列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/hg/auth/role/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="roleIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a>
+					<a href="${contextPath}/hg/auth/role/add" class="btn btn-default btn-sm" target="hgTab"> <i
+						class="fa fa-plus"></i> 添加
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							角色名：
+							<input class="form-control input-small input-inline" name="roleName" id="roleName">
+						</label>
+					</div>
+					<div class="col-md-4">
+						<label>
+							显示名：
+							<input class="form-control input-small input-inline" name="displayName" id="displayName">
+						</label>
+					</div>
+					<div class="col-md-4 text-right">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#roleGrid" data-ref-param="{roleName: $('#roleName').val(), displayName: $('#displayName').val()}"><i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" group="roleIds"
+								class="checkboxCtrl"/></th>
+							<th>角色名</th>
+							<th>显示名</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="roleGrid" target="grid" data-url="${contextPath}/hg/auth/role/rolelist">
+						<tr class="odd gradeX">
+							<td>
+								<input type="checkbox" name="roleIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td>
+							<td>
+								{roleName}
+							</td>
+							<td>
+								{displayName}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/hg/auth/role/del?roleIds={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/auth/role/edit?id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

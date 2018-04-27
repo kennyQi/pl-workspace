@@ -1,0 +1,64 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>票务预订
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/ticket/list" target="navTab" rel="ticket-list">票务查询</a></li>
+		</ul>
+	</div>
+	
+	
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>订单管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a href="${contextPath}/order/list" target="navTab" rel="orderList">全部订单</a></li>
+			<li><a href="${contextPath}/order/activeList" target="navTab" rel="activeList">待激活票务</a></li>
+		</ul>
+	</div>
+	
+	
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>财务统计
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/finance/detail" target="navTab" rel="">财务明细</a></li>
+		</ul>
+	</div>
+	
+	
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>游客信息
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/tourist/list" target="navTab" rel="touristInfo">游客信息</a></li>
+		</ul>
+	</div>
+	
+	
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>经销商信息
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder">
+			<li><a href="${contextPath}/dealerInfo" target="navTab" rel="dealerInfo">经销商基本信息</a></li>
+		</ul>
+	</div>
+	
+</div>

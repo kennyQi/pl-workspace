@@ -1,0 +1,304 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="unit">
+				<h2>订单信息(订单号:${order.baseInfo.orderNo}) </h2>
+			</div>
+			<div class="unit">
+				<hr/>
+			</div>
+			<div class="unit">
+				<table class="table" width="100%">
+					<thead>
+						<th width="10%">旅客姓名</th>
+						<th width="15%">应付</th>
+						<th width="15%">实付</th>
+						<th width="15%">应退</th>
+						<th width="15%">实退</th>
+						<th width="15%">供应商实退</th>
+						<th width="15%">供应商退款手续费</th>
+					</thead>
+					<tbody>
+						<#if (order.passengers)??>
+							<#list order.passengers as p>
+								<tr>
+									<td>${p.baseInfo.name}</td>
+									<td><#if p.ticket.status==2>0.00<#else>${(p.payInfo.price?string('0.00'))!}</#if></td>
+									<td>${(p.payInfo.payAmount?string('0.00'))!}</td>
+									<td>${(p.payInfo.needRefundAmount?string('0.00'))!}</td>
+									<td>${(p.payInfo.refundAmount?string('0.00'))!}</td>
+									<td>${(p.payInfo.supplierRefundAmount?string('0.00'))!}</td>
+									<td>${(p.payInfo.supplierProceduresAmount?string('0.00'))!}</td>
+								</tr>
+							</#list>
+						</#if>
+					</tbody>
+				</table>
+			</div>
+			<br/>
+			<div  class="unit">
+				<table class="table" width="100%">
+					<tbody>
+						<td>废票时间（周一至周五）${order.flight.policyInfo.workReturnTime}</td>
+						<td>废票时间（周六、周日）${order.flight.policyInfo.restReturnTime}</td>
+						<td>工作时间（周一至周五）${order.flight.policyInfo.workTime}</td>
+						<td>工作时间（周六、周日）${order.flight.policyInfo.restWorkTime}</td>
+					</tbody>
+				</table>
+			</div>
+			<br/>
+			<div class="unit">
+				<span>政策备注：</span>
+			</div>
+			<div class="unit">
+				${order.flight.policyInfo.memo}
+			</div>
+			<br/>
+			<br/>
+			<br/>
+			<div class="unit">
+				<h2>机票信息</h2>
+			</div>
+			<div class="unit">
+				<hr/>
+			</div>
+			<div class="unit">
+				<table class="table" width="100%">
+					<thead>
+					<th width="20%">行程</th>
+					<th width="30%">起飞</th>
+					<th width="30%">抵达</th>
+					<th width="10%">航班信息</th>
+					<th width="10%">舱位</th>
+					</thead>
+
+					<tbody>
+					<td>
+						${(order.flight.baseInfo.orgCityName)!}&nbsp;&nbsp;-&nbsp;&nbsp;${(order.flight.baseInfo.dstCityName)!}
+					</td>
+					<td>
+						${order.flight.baseInfo.startTime!}
+						<br/>
+						${order.flight.baseInfo.departAirport!?html}
+						<#if order.flight.baseInfo.departTerm == "--" >
+							T1
+						<#else>
+							${order.flight.baseInfo.departTerm!}
+						</#if>
+					</td>
+					<td>
+						${order.flight.baseInfo.endTime!}
+						<br/>
+						${order.flight.baseInfo.arrivalAirport!?html}
+						<#if order.flight.baseInfo.arrivalTerm == "--" >
+							T1
+						<#else>
+							${order.flight.baseInfo.arrivalTerm!}
+						</#if>
+					</td>
+					<td>
+						${(order.flight.baseInfo.flightNo)!}
+						<br/>
+						${(order.flight.baseInfo.airCompanyName)!}
+					</td>
+					<td>
+						${order.flight.baseInfo.cabinCode!}
+						<br/>
+						${order.flight.baseInfo.cabinName!}
+					</td>
+					</tbody>
+				</table>
+
+				<br/>
+				<table class="table" width="100%">
+					<thead>
+					<th width="20%">旅客姓名</th>
+					<th width="20%">类型</th>
+					<th width="20%">证件号码</th>
+					<th width="20%">票号</th>
+					<th width="20%">状态</th>
+					</thead>
+
+					<tbody>
+						<#if (order.passengers)??>
+							<#list order.passengers as p>
+								<tr>
+									<td>${(p.baseInfo.name)!}</td>
+									<td>身份证</td>
+									<td>${(p.baseInfo.idNo)!}</td>
+									<td>${(p.ticket.ticketNo)!}</td>
+									<td>${(yxOrderStatusMap[(p.ticket.status)?c])!}</td>
+								</tr>
+							</#list>
+						</#if>
+					</tbody>
+				</table>
+				<br/>
+				<div>
+					<table class="table" width="100%">
+						<tbody>
+							<td>单张合计：${(order.flight.policyInfo.payPrice?string('0.00'))!}元</td>
+							<td>票面价：<#if (order.flight.policyInfo.ibePrice)??>${((order.flight.policyInfo.ibePrice)?string('0.00'))!}元</#if></td>
+							<td>机建+燃油：${((order.flight.policyInfo.buildFee+order.flight.policyInfo.oilFee)?string('0.00'))!}元</td>
+						</tbody>
+					</table>
+				</div>
+				<div class="unit">
+					<h2>支付信息</h2>
+				</div>
+				<div class="unit">
+					<hr/>
+				</div>
+				<div>
+					<table class="table" width="100%">
+						<thead>
+							<th width="10%">订单应付</th>
+							<th width="10%">订单实付</th>
+							<th width="10%">订单实退</th>
+							<th width="10%">供应商实退</th>
+							<th width="10%">供应商退款手续费</th>
+							<th width="10%">卡券总计</th>
+							<th width="10%">卡券使用</th>
+						</thead>
+						<tr>
+							<td>${(order.payInfo.totalPrice - order.payInfo.totalCancelPrice)?string('0.00')}元</td>
+							<td>${order.payInfo.totalPayAmount?string('0.00')}元</td>
+							<td>${order.payInfo.totalRefundAmount?string('0.00')}元</td>
+							<td>${order.payInfo.totalSupplierRefundAmount?string('0.00')}元</td>
+							<td>${order.payInfo.totalSupplierProceduresAmount?string('0.00')}元</td>
+							<td>${order.payInfo.totalCouponAmount?string('0.00')}元</td>
+							<td>${order.payInfo.totalCouponUsedAmount?string('0.00')}元</td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<table class="table" width="100%">
+						<thead>
+						<th width="40%">卡券名称</th>
+						<th width="30%">卡券编号</th>
+						<th width="15%">卡券面额（元）</th>
+						<th width="15%">卡券分类</th>
+						</thead>
+						<#list couponDTOs as coupon>
+							<tr>
+								<td>${coupon.baseInfo.couponActivity.baseInfo.name!?html}</td>
+								<td>${coupon.id!}</td>
+								<td>${coupon.baseInfo.couponActivity.baseInfo.faceValue?string("0.00")}</td>
+								<td>
+									<#if (coupon.baseInfo.couponActivity.baseInfo.couponType ==1)>
+										代金券
+									</#if>
+									<#if (coupon.baseInfo.couponActivity.baseInfo.couponType ==2)>
+										现金券
+									</#if>
+								</td>
+							</tr>
+						</#list>
+					</table>
+				</div>
+				<div>
+					<table class="table" width="100%">
+						<thead>
+							<th width="10%">支付时间</th>
+							<th width="30%">支付订单号</th>
+							<th width="10%">支付金额</th>
+							<th width="10%">卡券使用</th>
+							<th width="30%">支付流水号</th>
+							<th width="10%">支付帐号</th>
+						</thead>
+						<#list payRecords as record>
+							<tr>
+								<td>${record.payDate?string("yyyy-MM-dd HH:mm")}</td>
+								<td>${record.payOrderNo}</td>
+								<td>${record.payAmount?string('0.00')}元</td>
+								<td>${record.couponUsedAmount?string('0.00')}元</td>
+								<td>${record.tradeNo}</td>
+								<td>${record.fromAccount}</td>
+							</tr>
+						</#list>
+					</table>
+				</div>
+				<div class="unit">
+					<h2>操作日志</h2>
+				</div>
+				<div class="unit">
+					<hr/>
+				</div>
+				<div id="operateLogDiv">
+					<table class="table" width="100%">
+						<thead>
+							<th width="20%">时间</th>
+							<th width="20%">操作人</th>
+							<th width="40%">操作信息</th>
+							<th width="20%">调试信息</th>
+						</thead>
+						<#list operateLogs as operateLog>
+							<tr>
+								<td>${operateLog.oprateDate}</td>
+								<td>${operateLog.operator}</td>
+								<td>${operateLog.content}</td>
+								<td><a href="#" style="color: blue;" onclick="showOperateLog('${operateLog.id}');" id="${operateLog.id}">显示调试信息</a><span style="display: none;" id="${operateLog.id}_debugInfo">${operateLog.debugInfo}</span></td>
+							</tr>
+						</#list>
+					</table>
+				</div>
+			</div>
+			<br/>
+			<br/>
+			<br/>
+		</div>
+		<div id="showDebugInfo">
+
+		</div>
+		<div class="formBar">
+			<ul>
+				<#list order.passengers as p2>
+					<div>
+						<#if (p2.ticket.status ==1)>
+							<li>
+								<a href="${contextPath}/yxjp/order/cancel?orderNo=${(order.baseInfo.orderNo)!}" class="button" target="dialog" style="color: blue"><span>取消订单</span></a>
+							</li>
+							<#break>
+						</#if>
+						<#if (p2.ticket.status ==4)>
+							<li>
+								<a href="${contextPath}/yxjp/order/refund?orderNo=${(order.baseInfo.orderNo)!}" class="button" target="dialog" max="true" style="color: blue"><span>申请退废票</span></a>
+							</li>
+							<#break>
+						</#if>
+						<#if (p2.ticket.status ==8)>
+							<li>
+								<a href="${contextPath}/yxjp/order/refund?orderNo=${(order.baseInfo.orderNo)!}" class="button" target="dialog" max="true" style="color: blue"><span>申请退废票</span></a>
+							</li>
+							<#break>
+						</#if>
+					</div>
+				</#list>
+				<!--<li>
+					<div class="button">
+						<div class="buttonContent" onclick="showOperateLog();" rel="1" id="showOperateLogDiv">
+							<button type="button">显示日志</button>
+						</div>
+					</div>
+				</li>-->
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">关闭</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+	</form>
+</div>
+
+<script type="text/javascript">
+	function showOperateLog(a){
+		var log = $("#"+a+"_debugInfo").html();
+		alert(log);
+	}
+</script>

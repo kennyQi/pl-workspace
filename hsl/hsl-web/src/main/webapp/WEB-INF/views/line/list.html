@@ -1,0 +1,696 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "旅游线路">
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/laydate.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/list.js" type="text/javascript"></script>
+
+<link  href="${contextPath}/resources/css/list.css" type="text/css" rel="stylesheet" />
+
+<script src="${(contextPath)!}/resources/js/lib/time/yui-min.js"></script> 
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtil.js"></script>
+<script src="${(contextPath)!}/resources/js/lib/city/city.js"></script>
+
+<link  href="${contextPath}/resources/css/common.css" type="text/css" rel="stylesheet" />
+<link  href="${contextPath}/resources/css/list.css" type="text/css" rel="stylesheet" />
+</@frame.head>
+<body>
+<@frame.main "default" 4>
+
+<!--头部-->
+<!--锚点-->
+<!--内容-->
+	<div class="g_bd disb ov pl">
+    	<!--条件筛选部分-->
+    	<div class="m_search disb">
+        	<div class="disb m_search_c ">
+            	<div class="load  color6 simsun"><label class="color8">您的位置：</label><a href="#" class="color6">线路</a> > <span  class="color3">线路列表</span></div>
+                    <!--搜索框-->
+                <div class="m_select disb">
+               		<div class="select_box ov disb">
+                        <input type="text"  class="in fl yahei biaoti" placeholder="大家都在搜：温泉、滑雪、哈尔滨、三亚" value="${(hslLineQO.searchName)!}"/>
+                        <input type="button"  class="btn fl yahei curp tosave" value="搜 索" />
+                    </div>
+                </div>
+                <!--搜索框-->
+                <!--左侧筛选-->
+                <div class="left fl disb">
+                	<div class="left_h fl pl">
+                    	<span class="left_h_bg pa left_h_box"></span>
+                    	<span class="left_h_txt yahei pl disb left_h_box mdd">${(endCity)!'全部'}</span>
+                    </div>
+                    <div class="left_c fl pl">
+                    	<span class="left_c_bg pa left_c_box"></span>
+                        <span class="left_c_txt yahei h2 pl disb left_c_box listBg curp" id="change_dir">更改目的地</span>
+                    </div>
+                    <ul class="left_all fl disb">
+                    	<li class="left_all_box1">
+                        	<span class="left_h_bg left_all_box1 pa"></span>
+                        	<dl class="left_all_box1 pl left_choose yahei disb">
+                            	<dt class="h3 fl">出发城市:</dt>
+                                <dd><a name ="0" class="on citys startcitys" id="9">全部</a></dd>
+ 								<#list (provinces)!null as province>
+ 								<#if (province_index>12)><#break></#if>
+		      					<dd id="${(province.code)!}"><a class="startcitys" >${(province.name)!}</a></dd>
+		      		 			</#list>
+                                <dd class="last pl  listBg" id="more_coutry">更多
+                                	<div class="m_change_dir pa m_more_country" id="more_coutry_box">
+                                        <h3 class="top color6 h3 listBg disb">更多</h3>
+                                        <div class="list disb">
+                                            <dl class="list_detail disb ov">
+                                                 <#list (provinces)!null as province>
+                                                 <#if (province_index>12)>
+		      										<dd  id="${(province.code)!}"><a class="startcitys">${(province.name)!}</a></dd>
+		      										</#if>
+		      		 							</#list>
+                                            </dl>
+                                           
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </li>
+                        <!-- style="display:none;" -->
+                           <li class="left_all_box2" style="display:none;"   id="city">
+                        	<span class="left_h_bg left_all_box2 pa" ></span>
+                        	<dl class="left_all_box2 pl left_choose yahei disb left_choose_padding11">
+                            	<dt class="h3 fl">&nbsp;&nbsp;</dt>
+                                <dd  class="city"   id="chengshis"></dd>
+                            </dl>
+                        </li>
+                    	<li class="left_all_box2">
+                        	<span class="left_h_bg left_all_box2 pa" ></span>
+                        	<dl class="left_all_box2 pl left_choose yahei disb left_choose_padding11">
+                            	<dt class="h3 fl">行程天数:</dt>
+                            	<dd><a  class="countday countsday" name="">不限</a></dd>
+                                <dd><a  class="countday" name="1">1天</a></dd>
+                                <dd><a  class="countday"name="2">2天</a></dd>
+                                <dd><a  class="countday"name="3">3天</a></dd>
+                                <dd><a  class="countday"name="4">4天</a></dd>
+                                <dd><a  class="countday"name="5">5天</a></dd>
+                                <dd><a class="countday"name="6">6天</a></dd>
+                                <dd><a class="countday"name="7">7天</a></dd>
+                                <dd><a class="countday"name="8">8天</a></dd>
+                                <dd><a class="countday"name="9">9天</a></dd>
+                                <dd><a class="countday"name="10">10天以上</a></dd>
+                            </dl>
+                        </li>
+                    	<li class="left_all_box2">
+                        	<span class="left_h_bg left_all_box2 pa"></span>
+                        	<dl class="left_all_box2 pl left_choose yahei disb left_choose_padding11">
+                            	<dt class="h3 fl">酒店星级:</dt>
+                                <dd><a class="houses housess">不限</a></dd>
+                                <dd ><a class="houses" level="3">五星</a></dd>
+                                <dd><a class="houses" level="2">四星</a></dd>
+                                <dd><a class="houses" level="1">三星</a></dd>
+                            </dl>
+                        </li>
+                    	<li class="left_all_box3">
+                        	<span class="left_h_bg left_all_box3 pa"></span>
+                            
+                        	<dl class="left_all_box3 pl left_choose yahei disb left_choose_padding11 left_data">
+                            	<dt class="h3 fl">出游时间:</dt>
+                                <dd><input placeholder="yyyy-mm-dd" class="laydate-icon startdate" onClick="laydate()" value="${beginDateTime!}"></dd>
+                                <dd class="to">一</dd>
+                                <dd><input placeholder="yyyy-mm-dd" class="laydate-icon lastdate" onClick="laydate()" value="${endDateTime!}"></dd>
+								<dd><span id="select" class="select_btn yahei h3 fl curp tosave">查询</span></dd>
+                              <!--  <script>
+								;!function(){
+								
+								//laydate.skin('molv');
+								
+								laydate({
+								   elem: '#demo'
+								})
+								
+								}();
+								</script> -->
+                            </dl>
+                        </li>
+                    </ul>
+                </div>
+                <!--左侧筛选-->
+                <!--右侧图片位置 图片尺寸是190*100-->
+                <div class="right fr disb">
+                	
+                	<div class="right_img ov disb carousel pl" id="carousel">
+                    		<div class="img_list pa">
+                            	<a href="#"><img src="${contextPath}/resources/images/list_ad1.jpg" alt=""></a>
+                            	<a href="#"><img src="${contextPath}/resources/images/list_ad2.jpg" alt=""></a>
+                            </div>
+                    		<ul class="icon pa">
+                            </ul>
+                    </div>
+                    <div class="right_img ov disb carousel pl" id="carousel_b">
+                    		<div class="img_list pa">
+                    	<a href="#"><img src="${contextPath}/resources/images/list_ad3.jpg" alt=""></a>
+                    	<a href="#"><img src="${contextPath}/resources/images/list_ad4.jpg" alt=""></a>
+                    	</div>
+                    		<ul class="icon pa">
+                            </ul>
+                    </div>
+                </div>
+                <!--右侧图片位置-->
+            </div>
+        </div>
+        
+    	<!--条件筛选部分-->
+        
+        <!--排序部分-->
+        	<div class="m_sort yahei">
+            	<a  class="cmd color6 h2  curp tuijian <#if ((recommend)!)==1>cmdon</#if>">推荐</a>
+            	<a  class="cmd color6 h2 curp salesvolume <#if ((salesorder)!)==1>cmdon</#if>">销量</a>
+            	<a  class="cmd color6 h2 curp priceob <#if ((picorder)!)==1>cmdon</#if>" >价格</a>
+            	<span class="price_section color6  h2">价格区间</span>
+            	<input type="text" class="section minPrice" value="${(hslLineQO.minPrice)!}" />
+                <span class="to">-</span>
+            	<input type="text" class="section maxPrice" value="${(hslLineQO.maxPrice)!}"/>
+            	 <span id="select" class="select_btn yahei h3 fl curp tosave">查询</span>
+            	<!-- <input type="checkbox" class="lastcheck" />
+                <span class="special color6 h3">特价尾单</span> -->
+            </div>
+        <!--排序部分-->
+        <!--列表部分-->
+        	<div class="g_list pl">
+                <!--右侧浏览记录-->
+                <#if user??>
+                 <div class="g_hist pa">
+                	<h3 class="tt pl color6 h3 yahei">
+                    	您的浏览记录
+                    	<i class="pa listBg curp" id="closeHist"></i>
+                    </h3>
+                    <ul class="hist_list">
+                    	<#list (browseLines)!null as line>
+                    		<#if line??>
+                    		<li>
+	                        	<a href="${contextPath}/line/detail?id=${line.id}">
+	                        	<#list (line.lineImageList)!null as headImage>
+	                            	<#if headImage_index==0>
+	                           		<img src="${image_host}${(headImage.urlMaps['default'])!''}" class="pic">
+	                           		</#if>
+                            	</#list>
+	                            	<span class="detail h4 color6 disb">${(line.baseInfo.name)!}</span>
+	                                <span class="price disb h2 yahei">￥${(line.minPrice)!0}起</span>
+	                            </a>
+	                        </li>
+                    		</#if>
+                    	</#list>
+                    	<!-- 
+                    	<li>
+                        	<a href="#">
+                        	<img src="${contextPath}/resources/images/list_ad2.jpg" class="pic">
+                            	<span class="detail h4 color6 disb"><海南5日游>漫步分界洲，呼吸呀诺达，3晚挂四海景（当地游）</span>
+                                <span class="price disb h2 yahei">￥1959 起</span>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+                </#if>
+            	<!--每逢第三列 需要添加额外样式 m_list_boxlast-->
+            	<!--产品列表框-->
+            	 <#list (pagination.list)!null as line >
+				
+				<div class="m_list_box <#if (((line_index+1)%3)==0)>m_list_boxlast</#if>">
+                	<div class="picshow" >
+                            <#list (line.lineImageList)!null as headImage>
+                            	<#if headImage_index==0>
+                           		<a href="${contextPath}/line/detail?id=${line.id}"><img src="${image_host}${(headImage.urlMaps['default'])!''}" style="position:absolute; top:0px; left:0px;"></a>
+                           		</#if>
+                            </#list>
+                            <span class="title_bg"></span><!--特价标签-->
+                            <input type="hidden" id="baseInfoname" value="${(line.baseInfo.name)!}"/>
+                             
+                             <#if (line.baseInfo.name)?length gt 40>
+                             <a href="${contextPath}/line/detail?id=${line.id}" class="title">${(line.baseInfo.name)?substring(0,39)}....
+                             <#if (line.baseInfo.type)==1>
+                             <i class="icon"></i><!--跟团游标签-->
+                             	<#else>
+                             <i class="iconFree"></i>
+                             </#if>
+                             </a>
+                             <#else>
+                             <a href="${contextPath}/line/detail?id=${line.id}" class="title">${(line.baseInfo.name)!}
+								<#if (line.baseInfo.type)==1>
+                             <i class="icon"></i><!--跟团游标签-->
+                             	<#else>
+                             <i class="iconFree"></i>
+                             </#if>
+							</a>
+                             </#if>
+                    </div>
+                    
+                	<div class="xcdetail">
+                    	<span class="tese">
+                        	<label>${(line.routeInfo.routeName)!}</label>
+                        </span>
+                        <span class="option">
+                        	<h3 class="from">${cityMap[line.baseInfo.starting]}出发</h3>
+                        	<label class="day">行程天数:<i>${(line.routeInfo.routeDays)!}</i></label>
+                        	<label class="level">
+                            <!--几颗星 放几个i标签-->
+                            <#if (((line.baseInfo.recommendationLevel)!"")==1)>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==2)>
+                            <i></i>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==3)>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==4)>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <#elseif (((line.baseInfo.recommendationLevel)!"")==5)>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                            </#if>	
+                            </label>
+                        </span>
+                        
+                        <span class="start">
+                        	<label>发团日期：
+                        	<#list (line.dateSalePriceList)! as dateSale>
+                        		${(dateSale.saleDate)?date}
+                        		<#if dateSale_index gt 1>
+                        			<#break>
+                        		</#if>
+                        	</#list>
+                        	</label>
+                            <a  href="${contextPath}/line/detail?id=${line.id}" class="more">更多</a>
+                        </span>
+                        <span class="trip">
+                        	
+                        	<label>行程概览：
+                        	</label>
+                        	 ${cityMap[line.baseInfo.starting]}
+                        	  <!-- 通过主键获取Map的值 -->
+                        	  <#if line.baseInfo.destinationCity?exists>
+                        	  <#list (line.baseInfo.destinationCity)?split(",") as destinationCity>
+                        	  		>${cityMap[destinationCity]}
+                        	  </#list>
+                        	</#if>
+                        </span>
+                    </div>
+                	<div class="lastPrice">
+                    	<span class="pri">
+                        	<i>￥</i>${(line.minPrice)!0}<i>起</i>
+                        </span>
+                        <span class="btn"><a href="${contextPath}/line/detail?id=${line.id}">预定</a></span>
+                    </div>
+                </div>
+			
+           		</#list>
+           		
+              </div> 
+			<form id="pageForm" class="pageForm" action="${contextPath}/line/list" method="post">
+            <input type="hidden" name="tab" value="${(tab)!}"/>
+          	<input type="hidden" class="pageNum" name="pageNum" value="${(pagination.pageNo)!}"/>
+          	<input type="hidden" class="pageSize" name="pageSize" value="${(pagination.pageSize)!}"/>
+			<input type="hidden" name="level" value="" class="level"/>
+			<input type="hidden" name="dayCount" value="" class="countdays" />
+			<input type="hidden" name="endCity" value="" class="endCity"/>
+			<!-- 出发城市-->
+			<input type="hidden" name="hideprovince" value="" class="hideprovince"/>
+			<input type="hidden" name="startCity" value="" class="startCity"/>
+			<input type="hidden" name="beginDateTime" class="beginDateTime"/>
+			<input type="hidden" name="endDateTime"  class="endDateTime"/> 
+			<!-- 排序方式  1升序 2降序-->
+			<input type="hidden" name="picorder" value="${picorder!0}" class="picorder"/> 
+			<input type="hidden" name="salesorder" value="${salesorder!0}" class="salesorder"/> 
+			<input type="hidden" name="recommend" value="${recommend!0}" class="recommend"/> 
+			<!-- 价格区间 -->
+			<input type="hidden" name="minPrice"  class="minPrices"/> 
+			<input type="hidden" name="maxPrice"  class="maxPrices"/> 
+			<!-- 标题查询 -->
+			<input type="hidden" name="searchName"  class="searchName"/> 
+			
+    	 </form>
+    	 
+		<div class="g_page ov disb">
+        	 <div id="page">
+         </div>
+		</div>
+        <!--页脚翻页-->
+        <!--底部图片位置-->
+        	<div class="g_adimg disb ov">
+            	<span ><img src="${contextPath}/resources/images/list_ad5.jpg" class="fl"></span><!--图片尺寸291*160-->
+            	<span ><img src="${contextPath}/resources/images/list_ad6.jpg" class="fl"></span>
+            	<span ><img src="${contextPath}/resources/images/list_ad7.jpg" class="fl"></span>
+            	<span ><img src="${contextPath}/resources/images/list_ad8.jpg" class="fl last"></span>
+            </div>
+        <!--底部图片位置-->
+	</div>
+<!--内容-->
+
+<!--页脚-->
+ <@frame.end "default"> </@frame.end>
+</@frame.main>
+<script type="text/javascript">
+$(function(){
+	//记录销量点击次数
+	var salesvolume=$(".salesorder").val();
+	//记录推荐点击次数
+	var recommend=$(".recommend").val();
+	var priceob=$(".picorder").val();
+//页面加载得到出发城市省级
+<#if (hideprovince)!=null>
+	var startcitys=${(hideprovince)!};
+	$(".startcitys").each(function(){
+		if(startcitys==$(this).parent().attr("id")){
+			$(".hideprovince").val(startcitys);
+			$(this).css({"background":"#ff9900","color":"#333"});	
+		}/* else{
+			alert(2)
+			$("#9").css({"background":"#ff9900","color":"#333"});
+		} */
+	})
+	//发送请求查询市级
+	var citys="";
+	$.ajax({type:"post",
+			contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			url : "${contextPath}/line/searchCity?province="+startcitys+"",
+			dataType : "json",
+			async:false,
+			success : function(data) {
+				$.each(data,function(i,item){
+					citys+="<a name="+item.id+" class='cityss' onclick='cityss("+item.id+")'>"+item.name+"</a>";
+					/* if(i==12){
+						citys+="</br>";
+					} */
+				});
+				$("#chengshis").html(citys);
+			}
+	})	
+	<#else>
+	$(".hideprovince").val(${(hideprovince)!});
+	$(".citys").css({"background":"#ff9900","color":"#333"});	
+</#if>
+//页面加载得到出发城市市级
+<#if (hslLineQO.startCity)!=null>
+var startCity=${(hslLineQO.startCity)!};
+$("#city").css("display","");
+$(".cityss").each(function(){
+	if($(this).attr("name")==startCity){
+		$(this).css({"background":"#ff9900","color":"#333"});
+	}
+	$(".startCity").val(startCity);
+})
+
+//$("#city").css("display","none");
+</#if>
+//页面加载得到行程天数
+<#if (hslLineQO.dayCount)!>
+//得到天数
+var day=${(hslLineQO.dayCount)!};
+$(".countday").each(function(){
+	if($(this).attr("name")==day){
+		$(".countdays").val(day);
+		$(this).css({"background":"#ff9900","color":"#333"});
+	}
+})
+<#else>
+$(".countdays").val("");
+$(".countsday").css({"background":"#ff9900","color":"#333"});
+</#if>
+//页面加载得到酒店星级
+<#if (hslLineQO.level)!>
+var level=${(hslLineQO.level)!};
+$(".houses").each(function(){
+	if($(this).attr("level")==level){
+		$(".level").val(level);
+		$(this).css({"background":"#ff9900","color":"#333"});
+	}
+})
+<#else>
+$(".level").val("");
+$(".housess").css({"background":"#ff9900","color":"#333"});
+</#if>
+//给销量添加样式
+/* <#if ((salesorder)!)==1>
+salesvolume=1;
+$(".salesorder").val("1");
+$(".salesvolume").css({"color":"#ff541e","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px","background-position":"43px -278px"})
+<#elseif ((salesorder)!)==2>
+salesvolume=2;
+$(".salesorder").val("2");
+$(".salesvolume").css({"color":"#666666","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px"})
+<#elseif ((salesorder)!)==0>
+salesvolume=0;
+$(".salesorder").val("0");
+$(".salesvolume").css({"color":"#666666","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px"})
+
+</#if>	 */
+//给推荐添加样式
+/* 
+<#if ((recommend)!)==1>
+recommend=1;
+$(".recommend").val("1");
+$(".tuijian").css({"color":"#ff541e","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px","background-position":"43px -278px"})
+<#elseif ((recommend)!)==2>
+recommend=2;
+$(".recommend").val("2");
+$(".tuijian").css({"color":"#666666","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px"})
+<#elseif ((recommend)!)==0>
+recommend=0;
+$(".recommend").val("0");
+$(".tuijian").css({"color":"#666666","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px"})
+</#if>
+
+//价格添加样式
+<#if ((picorder)!)==1>
+priceob=1;
+$(".picorder").val("1");
+$(".priceob").css({"color":"#ff541e","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px","background-position":"43px -278px"})
+<#elseif ((picorder)!)==2>
+priceob=2;
+$(".picorder").val("2");
+$(".priceob").css({"color":"#666666","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px"})
+<#elseif ((picorder)!)==0>
+priceob=0;
+$(".picorder").val("0");
+$(".priceob").css({"color":"#666666","padding-right":"18px;margin-right:30px","background":"url(${contextPath}/resources/images/list_script.png) no-repeat 43px -302px"})
+</#if> */
+//推荐
+$(".tuijian").click(function(){
+	setDate();
+	$(".salesorder").val("0");
+	$(".picorder").val("0");
+	if(recommend==1){
+		$(".recommend").val("2");
+		$("#pageForm").submit();
+	}else if(recommend==0){
+		$(".recommend").val("1");
+		$("#pageForm").submit();
+	}else if(recommend==2){
+		$(".recommend").val("1");
+		$("#pageForm").submit();
+	}
+})
+//价格
+$(".priceob").click(function(){
+	setDate();
+	$(".salesorder").val("0");
+	$(".recommend").val("0");
+	if(priceob==0){
+		$(".picorder").val("1");
+	}else if(priceob==2){
+		$(".picorder").val("1");
+	}else if(priceob==1){
+		$(".picorder").val("2");
+	}
+	$("#pageForm").submit();
+})
+//销量
+$(".salesvolume").click(function(){
+	setDate();
+	$(".recommend").val("0");
+	$(".picorder").val("0");
+	if(salesvolume==0){
+		$(".salesorder").val("1");
+	}else if(salesvolume==2){
+		$(".salesorder").val("1");
+	}else if(salesvolume==1){
+		$(".salesorder").val("2");
+	}
+	$("#pageForm").submit();
+})
+<#if (endCity)!=null>
+var endCity="${(endCity)!}";
+$(".mdd").html(endCity);
+$(".endCity").val(endCity);
+</#if>
+		setDate();
+		//给隐藏域的价格区间赋值
+		$(".minPrices").val($(".minPrice").val().replace(",",""));
+		$(".maxPrices").val($(".maxPrice").val().replace(",",""));
+		//给标题赋值
+		$(".searchName").val($(".biaoti").val());
+		if(${(((pagination.totalCount-1)/9 +1)?int)!1}>1){
+		$("#page").pageBar({
+			pageNum:"pageNum",//页码class
+			pageSize:"pageSize",//页面大小class
+			pageCount:${(((pagination.totalCount-1)/9 +1)?int)!1},//总页数
+			formClass:"pageForm",//分页表单class
+	  	});
+		}
+		
+
+		//设置表单提交的按钮监听
+			$("#sendForm").on("click",function(){
+				$("#pageNo").val(1);
+				$("#searchform").submit();
+			});
+			$(".pre").on("click",function(){
+				var currentPageNo = parseInt($("#pageNo").val());
+				if(currentPageNo>1){
+					$("#pageNo").val(currentPageNo-1);
+					$("#searchform").submit();
+				}else{
+					alert("已经是第一页了");
+				}
+			});
+			$(".next").on("click",function(){
+				var currentPageNo = parseInt($("#pageNo").val());
+				var total = parseInt($("#totalPage").val());
+				if(currentPageNo>=total){
+					alert("已经是最后一页了");
+				}else{
+					$("#pageNo").val(currentPageNo+1);
+					$("#searchform").submit();
+				}
+			});
+
+	$(".tosave").bind("click",function(){
+		//给隐藏域的价格区间赋值
+		$(".minPrices").val($(".minPrice").val().replace(",",""));
+		$(".maxPrices").val($(".maxPrice").val().replace(",",""));
+		//给标题赋值
+		$(".searchName").val($(".biaoti").val());
+		setDate();
+		//点击查询条件时初始化为第一页
+		$(".pageNum").val("1");
+		$("#pageForm").submit();
+	})
+	//点击省
+	$(".startcitys").click(function(){
+		//获取城市id
+		var city=city=$(this).parent().attr("id");
+		$(".startcitys").each(function(){
+			$(this).css({"background":"","color":""});	
+			})
+		$(this).css({"background":"#ff9900","color":"#333"});
+		if($(this).html()=="全部"){
+			$(".startCity").val(null);
+			//$(".recommend").val("2");
+			//recommend=0;
+			$(".hideprovince").val(city);
+			$("#pageForm").submit();
+		}else{
+			
+			//给隐藏的省级赋值
+			$(".hideprovince").val(city);
+			if(city==undefined){
+				city=null;
+				$("#city").css("display","none");
+				$(".startCity").val("");
+				$("#pageForm").submit();
+			}else{
+				$("#city").css("display","");
+				$(".hideprovince").val(city);
+
+				var citys="";
+				$.ajax({type:"post",
+						contentType:"application/x-www-form-urlencoded; charset=utf-8",
+						url : "${contextPath}/line/searchCity?province="+city,
+						dataType : "json",
+						async:false,
+						success : function(data) {
+							$.each(data,function(i,item){
+								citys+="<a name="+item.id+" class='cityss' onclick='cityss("+item.id+")'>"+item.name+"</a>";
+								/* if(i==12){
+									citys+="</br>";
+								} */
+							});
+							$("#chengshis").html(citys);
+						}
+				})	
+			
+			}
+		}
+			
+		
+	})	
+	//点击行程
+	$(".countday").click(function(){
+		var day=$(this).attr("name");
+		$(".countdays").val(day);
+		$(".countday").each(function(){
+		$(this).css({"background":"","color":""});	
+		})
+		$(this).css({"background":"#ff9900","color":"#333"});
+		//点击查询条件时初始化为第一页
+		$(".pageNum").val("1");
+		$("#pageForm").submit();
+	})
+	//点击酒店星级
+	$(".houses").click(function(){
+		var houses=$(this).html();
+		$(".houses").each(function(){
+			$(this).css({"background":"","color":""});	
+		})
+		if(houses=="不限"){
+			$(".level").val("");	
+			$(this).css({"background":"#ff9900","color":"#333"});
+		}else{
+		    $(this).css({"background":"#ff9900","color":"#333"});
+			$(".level").val($(this).attr("level"));
+		}
+		//点击查询条件时初始化为第一页
+		$(".pageNum").val("1");
+		$("#pageForm").submit();
+	})
+})
+	//给时间框赋值
+	function setDate(){
+		//给隐藏域的时间框赋值
+		if($(".startdate").val()!=""){
+		$(".beginDateTime").val($(".startdate").val());
+		}else{
+			$(".beginDateTime").val("1983-01-01");
+		}
+		if($(".lastdate").val()!=""){
+			$(".endDateTime").val($(".lastdate").val());
+		}else{
+			$(".endDateTime").val("1983-01-01");
+		}
+	}
+//点击城市查询
+function cityss(name){
+	setDate();
+	if(name==0){
+	//$(".startCity").val("");	
+	}else{
+	$(".startCity").val(name);
+	}
+	//点击查询条件时初始化为第一页
+	$(".pageNum").val("1");
+	$("#pageForm").submit();
+
+}
+//获得目的地 进行相关操作
+function changeDirect(val){
+	setDate();
+	$(".mdd").html(val);
+	$(".endCity").val(val);
+	//点击查询条件时初始化为第一页
+	$(".pageNum").val("1");
+	$("#pageForm").submit();
+}
+</script>
+</body>
+</html>

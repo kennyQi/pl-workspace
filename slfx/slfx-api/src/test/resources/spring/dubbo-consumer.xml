@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+    <dubbo:application name="slfx-admin-comsumer-dev"  />
+ <dubbo:consumer proxy="jdk"></dubbo:consumer>
+    <!-- 使用multicast广播注册中心暴露发现服务地址 -->
+    <dubbo:registry address="${dubbo_register_center}"/>
+ 
+    <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+
+    <!-- =============机票类接口============== -->
+    <dubbo:reference id="jpFlightStopService" interface="slfx.jp.spi.inter.FlightStopService"  timeout="60000" retries="0"/>
+    
+    <dubbo:reference id="jpPlatformAskOrderTicketService" interface="slfx.jp.spi.inter.PlatformAskOrderTicketService"  timeout="60000" retries="0"/>
+    
+    <dubbo:reference id="jpPlatformOrderService" interface="slfx.jp.spi.inter.JPPlatformOrderService"  timeout="60000" retries="0"/>
+    
+    <dubbo:reference id="flightPolicyService" interface="slfx.jp.spi.inter.FlightPolicyService"  timeout="60000" retries="0"/>
+    
+    <dubbo:reference id="webFlightService" interface="slfx.jp.spi.inter.WebFlightService"  timeout="60000" retries="0"/>
+    
+    <dubbo:reference id="jpPlatformGetRefundActionTypeService" interface="slfx.jp.spi.inter.PlatformGetRefundActionTypeService"  timeout="60000" retries="0"/>
+   						 
+	<dubbo:reference id="cityAirCodeService" interface="slfx.jp.spi.inter.CityAirCodeService"  timeout="60000" retries="0"/>
+   
+    <!-- =============门票类接口============== -->
+    <!-- 平台政策 -->
+    <dubbo:reference id="salePolicyServiceImpl" interface="slfx.mp.spi.inter.AdminSalePolicyService" timeout="120000" />
+    <!-- 供应商政策 -->
+    <dubbo:reference id="adminSupplierPolicyService" interface="slfx.mp.spi.inter.AdminSupplierPolicyService" timeout="120000" />
+    <!-- 平台订单 -->
+    <dubbo:reference id="platformOrderService" interface="slfx.mp.spi.inter.PlatformOrderService" timeout="120000"/>
+	<!-- 门票价格日历 -->
+	<dubbo:reference id="apiMPDatePriceServiceImpl" interface="slfx.mp.spi.inter.api.ApiMPDatePriceService" timeout="120000" />
+	<!-- 门票订单 -->
+	<dubbo:reference id="apiMPOrderServiceImpl" interface="slfx.mp.spi.inter.api.ApiMPOrderService"  timeout="120000" />
+	<!-- 门票政策 -->
+	<dubbo:reference id="apiMPPolicyServiceImpl" interface="slfx.mp.spi.inter.api.ApiMPPolicyService" timeout="120000" />
+	<!-- 景点 -->
+	<dubbo:reference id="apiMPScenicSpotsServiceImpl" interface="slfx.mp.spi.inter.api.ApiMPScenicSpotsService" timeout="120000" />
+    
+    <!-- =============线路类接口============== -->
+	<dubbo:reference id="lineService" interface="slfx.xl.spi.inter.LineService" timeout="60000" retries="0" />
+	
+	<dubbo:reference id="lineOrderService" interface="slfx.xl.spi.inter.LineOrderService" timeout="60000" retries="0" />
+    
+</beans>

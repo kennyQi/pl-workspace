@@ -1,0 +1,83 @@
+body{background:#faf6d4;}
+.banner{width:100%;display: block;}
+.g_title{background: #fff;  border-top: 1px solid #dddddd;line-height:28px;text-align: center;font-size:13px;}
+.g_ms_icon{width: 50px;margin:-23px auto 0px auto;display: block;}
+
+/*秒杀*/
+.msList{background: #fff;}
+.msBox{padding: 0px 8px 5px 8px;position: relative;}
+.msBox .imgBox{width: 100%;}
+.msBox .imgBox img{width: 100%;display: block;border-radius: 4px 4px 0px 0px;}
+.msBox .btnBox{background: #fc4a4f;height:34px;border-radius: 0px 0px 4px 4px;
+    overflow: hidden;}
+.msBox .product{line-height: 34px;color: #fff;font-size:13px;float:right;display: block;height:34px;padding-right: 15px;letter-spacing: 1.2px;}
+.msBox .product:before{content:"";display: inline-block;height: 34px;width:32px;background: url("../images/ms_price_tap.png") no-repeat left center; background-size: contain;
+vertical-align: middle;}
+.msBox .timework{float: left;line-height: 34px;padding-left: 8px;color:#fff;}
+.msBox .timework label{background: #000;display: inline-block;vertical-align: middle;height: 16px;width: 20px;margin:0px;line-height: 16px;border-radius: 4px;text-align: center;}
+
+.lineType{position:absolute;left:10px;top:10px;z-index: 3;border-radius: 10px;padding: 0px 10px;overflow: hidden;color:#fff;}
+.lineType:before{content: "";width: 100%;height: 100%;position: absolute;left:0px;top:0px;background: #000;
+    opacity:0.35;z-index: -1;}
+.imgBox .detail{width:100%;position: absolute;left:0px;top:0px;height: 100%;vertical-align: middle;text-align: center;}
+.imgBox .detail:before{content: "";width: 100%;height: 100%;background: #000;
+    opacity:0.35;position: absolute;left:0px;top:0px;z-index: 1}
+.imgBox .t,.imgBox .price,.imgBox .s{z-index: 2;position: relative;}
+.imgBox .t{color: #fff; font-size: 18px;text-align: center;line-height: 35px;margin-top: 40px;}
+.imgBox .price{text-align: center;display:inline;padding:2px 15px;border-radius: 20px;background: #fc4a4f;color:#fff;margin: auto;font-size: 30px;font-weight: bold;}
+.imgBox .price:before{content: "￥";font-size: 10px;colot:#fff;}
+.imgBox .price_off{display: inline-block;vertical-align: middle;}
+.imgBox .of{background: url("../images/ms_price_tip2.png") no-repeat top right;width:32px;line-height:14px;padding-right:2px;background-size: contain;display: block;color:#fc4a4f;font-size: 10px;text-align: right;}
+.imgBox .oldPrice{font-size:8px;text-align: right;font-weight:normal;text-decoration:line-through;display: block;line-height: 12px;}
+.imgBox .s{text-align: center;color:#fff;font-size: 12px;line-height: 35px;}
+.lineType_follow{color: #000;}
+.lineType_follow:before{background: #fff;opacity: 0.75;}
+
+.msOver:before{content: "";background:  #fff;background-size: 40%;position: absolute;left: 0px;top:0px;
+width: 100%;height: 100%;opacity: 0.75;z-index: 4;}
+.msOver:after{content: "";background:url("../images/ms_closed.png") no-repeat center center;background-size: 40%;position: absolute;left: 0px;top:0px;
+    width: 100%;height: 100%;z-index: 5;}
+
+.msBegin .detail:before{content: "";width: 100%;height: 100%;background: #000;
+    opacity:0.60;position: absolute;left:0px;top:0px;z-index: 5}
+.msBegin .detail:after{content: "";z-index: 6;background: url("../images/ms_begin.png") no-repeat;background-size: contain;width:140px;height:26px;position: absolute;left: 10px;bottom: 10px;}
+.msBegin .product{background-color:#aaaaaa; }
+
+.msFooter{height:26px;margin-bottom: 10px;margin-top: 10px;background:#faf6d4;}
+.msFooter img{height:25px;display: block;}
+.msFooter:before,.msFooter:after{content:"";display: block;-webkit-box-flex: 1;box-flex:1;border-bottom: 1px solid #dddddd;background: #fff; }
+
+/*团购*/
+.tgTips{background: #ffeef3;font-size: 12px;color:#ff5887;text-align: center;line-height: 18px;}
+
+
+.tgBox{padding: 10px 8px 5px 8px;position: relative;background: #fff;}
+.tgBox .imgBox{width: 100%;position: relative;overflow: hidden;border-radius: 4px 4px 0px 0px;}
+.tgBox .imgBox img{width: 100%;display: block;border-radius: 4px 4px 0px 0px;}
+.detailBox{border-radius: 0px 0px 4px 4px;background: #f7f7f7;border:1px solid #dddddd;border-top: 0px;text-align: center;}
+.detailBox div{text-align: center;}
+.detailBox .t{font-size: 18px;padding-top: 5px;}
+.detailBox .de{color:#999999;font-size: 10px;padding-top: 5px;}
+.detailBox .num{color:#ff5887;padding-top: 8px;}
+.detailBox .timework{line-height: 34px;padding-left: 8px;color:#000;}
+.detailBox .timework label{background: #000;display: inline-block;color:#fff;vertical-align: middle;height: 16px;width: 20px;margin:0px;line-height: 16px;border-radius: 4px;text-align: center;}
+
+
+.detailBox  .price{text-align: center;display:inline-block;height:28px;padding:2px 25px 2px 15px ;border-radius: 20px;background: #ff5887;color:#fff;margin: auto;font-size: 30px;font-weight: bold;line-height: 28px;
+margin-top:10px;}
+.detailBox .price:before{content: "￥";font-size: 10px;colot:#fff;}
+.detailBox .price_off{display: inline-block;vertical-align: middle;}
+.detailBox .of{background: url("../images/ms_price_tip2.png") no-repeat top right;width:32px;line-height:14px;padding-right:2px;background-size: contain;display: block;height:14px;color:#fc4a4f;font-size: 10px;text-align: right;}
+.detailBox .oldPrice{font-size:8px;text-align: right;font-weight:normal;text-decoration:line-through;display: block;line-height: 12px;height:14px;}
+.detailBox .buyBtn{width:38px;height:34px;padding-top:4px;border-radius: 50px;border: 1px solid #f7f7f7;right:-20px;top:-4px;background: #ff5887;font-size: 12px;line-height: 14px;color:#fff;}
+.tgBegin .imgBox:before{content: "";width: 100%;height: 100%;background: #ff5887;
+    opacity:0.75;position: absolute;left:0px;top:0px;z-index: 5}
+.tgBegin .imgBox:after{content: "";z-index: 6;background: url("../images/tg_begin.png") no-repeat center center;background-size: 40%;width:100%;height:100%;position: absolute;left: 0px;bottom: 0px;}
+
+.tgOver .imgBox:before{content: "";background:  #fff;background-size: 40%;position: absolute;left: 0px;top:0px;
+    width: 100%;height: 100%;opacity: 0.75;z-index: 4;}
+.tgOver .imgBox:after{content: "";background:url("../images/ms_closed.png") no-repeat center center;background-size: 40%;position: absolute;left: 0px;top:0px;
+    width: 100%;height: 100%;z-index: 5;}
+
+.tgBegin .num,.tgBegin .of,.tgOver .num,.tgOver .of{color:#aaaaaa;}
+.tgBegin .price,.tgBegin .buyBtn,.tgOver .price,.tgOver .buyBtn{background:#aaaaaa;}

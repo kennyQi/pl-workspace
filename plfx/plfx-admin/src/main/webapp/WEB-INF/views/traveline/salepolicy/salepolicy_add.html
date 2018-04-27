@@ -1,0 +1,443 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div id="pageContent" class="pageContent">
+	<form id="pagerForm1" method="post" enctype="multipart/form-data" action="${contextPath}/traveline/salepolicy/addSalePolicy" 
+	class="pageForm1 required-validate" onsubmit="return validateCallback(this,dialogAjaxDone)">
+		
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>请填写政策名称：</label>
+				<input type="text"  size="40" maxlength="40"    name="name"     class="required"/>
+			</div>
+			<div class="unit">
+				<label>优先级：</label>
+				<input type="text"  size="20" maxlength="40"    name="priority"   class="isInject number required" />
+			</div>
+			<div class="unit">
+				<label>请选择线路：</label>
+			    <select  id="lineID" onchange="selectline(this.options[this.options.selectedIndex])" name="selectLineType" class="required">
+			           <option  value="">--请选择--</option>
+			            <#if salePolicyLineTypeMap??>
+	                       <#list salePolicyLineTypeMap?keys as itemKey>
+	                             <#if  itemKey == 1>
+	                                    <option value="${itemKey}"  data-rel="jbsxBox" data-href="${contextPath}/traveline/salepolicy/toLine">${salePolicyLineTypeMap[itemKey]}</option>
+	                             <#else>
+	                             		<option value="${itemKey}">${salePolicyLineTypeMap[itemKey]}</option>
+	                             </#if>
+	                             
+	                       </#list>
+                     </#if>
+			    </select>
+			    <div id="jbsxBox" class="unit" style="background-color:#dcdcdc;display:none"></div>
+			    <input  type="hidden"  name ="ids"   id="selectedLineID" value="">
+			    <div id="selectTypeBox" class="unit" style="background-color:#dcdcdc;display:none">
+			    	 <!-- 按线路类别  begin-->
+				       <div class="unit" style="margin-left:0px;display:none" id="lineTypeBox">
+				           <label>适用线路类别：</label>
+				            <select  name="lineType" id="type">
+								<option value="">全部</option>
+								<#if typeMap??>
+	                               <#list typeMap?keys as itemKey>
+	                                   <option  value="${itemKey}">${typeMap[itemKey]}</option>
+	                               </#list>
+	                            </#if>
+							</select>
+							<select id="domesticLine_salepolicy_add">
+								<option value="">全部</option>
+								<option value="1">国内线</option>
+							</select>
+							<span id="province_of_type_span_add" style="display:none">
+									<select id="province_of_type_salepolicy_add"></select>
+							</span>
+							<span id="city_of_type_span_add" style="display:none">
+									<select name="cityOfLineType"  id="city_of_type_salepolicy_add"></select>
+							</span>
+				       </div>
+				       <!-- 按线路类别  end-->
+				       	
+				       <!-- 按成人价格 begin -->
+				       <div class="unit" style="margin-left:0px;display:none" id="audltPriceBox">
+				       		<label>成人价格范围</label>
+				       		<input name="adultPriceMin" min="0" class="number" id="adultPriceMin"/>
+				       		 -
+				       		<input name="adultPriceMax" min="0" class="number" id="adultPriceMax"/>
+				       </div>
+				       <!-- 按成人价格 end -->
+				       
+				       <!-- 按出发地 begin -->
+				        <div class="unit" style="margin-left:0px;display:none" id="startCityBox">
+				        	<label>出发地</label>
+					       <select  id="startingType">
+								<option  value="">--请选择--</option>
+								<option  value="1" >国内</option>
+								<!-- <option>国外</option> -->
+							</select>
+							<span id="start_province_salepolicy_span_add" style="display:none">
+									<select  id="start_province_salepolicy_add"></select>
+							</span>
+							<span id="start_city_salepolicy_span_add" style="display:none">
+									<select name="startingCityID"  id="start_city_salepolicy_add"></select>
+							</span>
+				       <!-- 按出发地 end -->
+				       </div>
+			    </div>
+			</div>
+			<div id="selectedLine" style="display:none" class="unit">
+						<fieldset>
+									<legend>已选线路</legend>
+								    <div id="line1"  style="color:#4876FF; padding-top:10px;"> </div>
+					     </fieldset>
+			</div>
+			<div class="unit">
+				<label>请选择适用经销商：</label>
+			    <select  name="dealerId">
+			          <option value="">全站</option>
+			          	<#if lineDealerList??>
+		                   <#list lineDealerList as lineDealer>
+		                   		 <option value="${lineDealer.id}">${lineDealer.name}</option>
+		                   </#list>
+		                </#if>
+			    </select>
+			</div>
+			<div class="unit">
+				<label>请选择适用时间：</label>
+				<input type="text" readonly="readonly" name="beginTimeStr" id="beginTimeStr" value="" class="date required" style="float:none;"/>
+			     -
+			    <input type="text" readonly="readonly" name="endTimeStr" id="endTimeStr" value="" class="date required"  style="float:none;"/>      
+			</div>
+			<div class="unit">
+				<label>请选择价格政策：</label>
+				<select  name="priceType">
+<!-- 				     <option>全部</option> -->
+				     <#if salePolicyPriceTypeMap??>
+	                       <#list salePolicyPriceTypeMap?keys as itemKey>
+					               <option value="${itemKey}">${salePolicyPriceTypeMap[itemKey]}</option>
+					       </#list>
+                     </#if>
+				</select>
+				
+				<div id="policyId">
+						<span style="margin-left:12px">
+							<input type="radio" name="rise" value="true" class="addSpan" checked="checked"/>&nbsp;增加
+							<input type="radio" name="unit" value="2" checked="checked" style="display:none;"/>
+							<input type="text"   size="15" name="improvePrice"  class="number" value="0"  min="0" style="float:none">&nbsp;元
+						</span>
+						<span>
+							<input type="radio" name="rise" value="true" class="addSpan"/>&nbsp;增加
+							<input type="radio" name="unit" value="1" style="display:none;"/>
+							<input type="text"   size="15"  value="0" class="number" style="float:none" min="0" >&nbsp;%
+						</span>
+						<span  style="margin-left:5px">
+							<input type="checkbox"  name="hide" readonly="readonly"  value="true"/>&nbsp;隐藏资源
+			    		</span>
+						<br/>
+						<span style="margin-left:220px;">
+							<input type="radio" name="rise" value="false" class="addSpan"/>&nbsp;减少
+							<input type="radio" name="unit" value="2" style="display:none;"/>
+							<input type="text"   size="15"  value="0" class="number" style="float:none" min="0">&nbsp;元
+						</span>
+						<span>
+							<input type="radio" name="rise" value="false" class="addSpan"/>&nbsp;减少
+							<input type="radio" name="unit" value="1" style="display:none;"/>
+							<input type="text"   size="15"  value="0" class="number" style="float:none" min="0">&nbsp;%
+						</span>
+				</div>
+				
+			  
+			    
+			    
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<textarea rows="6" cols="60"   name="description" maxlength="512"></textarea>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				 <li><div class="buttonActive"><div class="buttonContent"><button type="button" onClick="validate();">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+</form>
+</div>
+<script type="text/javascript">
+var sale = {};
+/* //当请选择线路的下拉框选择的是按线路名称，则弹出一个搜索图标
+$("#lineID", $.pdialog.getCurrent()).change(function(){
+	//alert(121);
+	var  name = "按线路名称";
+	var  lineVal = $("#lineID option:selected=selected").text().trim();
+	//alert(name+":"+lineVal);
+	if(lineVal == name){
+		 $("#lookBack").show();
+	}else{
+		 $("#lookBack").hide();
+	}
+}); */
+//选择线路
+function selectline(el){
+		var $this = $(el);
+		type = el.value;
+		if(type == 1){  //按线路名称添加价格政策
+			var rel = $this.attr("data-rel");
+			if (rel) {
+				var $rel = $("#"+rel);
+				$rel.loadUrl($this.attr("data-href"), {}, function(){
+					$rel.find("[layoutH]").layoutH();
+				});
+			}
+			$("#jbsxBox").show();
+			$("#selectTypeBox").hide();
+		}
+		if(type == 2){ //按线路类别添加价格政策
+			$("#jbsxBox").hide();
+			$("#audltPriceBox").hide();
+			$("#startCityBox").hide();
+// 			$("#adultPriceMin").removeClass("required");
+// 			$("#adultPriceMax").removeClass("required");
+// 			$("#start_city_salepolicy_add").removeClass("required");
+			
+// 			$("#city_of_type_salepolicy_add").addClass("required");
+// 			$("#type").addClass("required");
+			$("#lineTypeBox").show();
+			$("#selectTypeBox").show();
+		}
+		if(type == 3){	//按成人价格添加价格政策
+			$("#jbsxBox").hide();
+			$("#lineTypeBox").hide();
+			$("#startCityBox").hide();
+// 			$("#start_city_salepolicy_add").removeClass("required");		
+// 			$("#city_of_type_salepolicy_add").removeClass("required");
+// 			$("#type").removeClass("required");
+			
+// 			$("#adultPriceMin").addClass("required");
+// 			$("#adultPriceMax").addClass("required");
+			
+			$("#audltPriceBox").show();
+			$("#selectTypeBox").show();
+			
+		}
+		if(type ==4){ //按出发城市添加价格政策
+			$("#jbsxBox").hide();
+			$("#lineTypeBox").hide();
+			$("#audltPriceBox").hide();
+// 			$("#city_of_type_salepolicy_add").removeClass("required");
+// 			$("#type").removeClass("required");
+// 			$("#adultPriceMin").removeClass("required");
+// 			$("#adultPriceMax").removeClass("required");
+			
+// 			$("#start_city_salepolicy_add").addClass("required");
+			
+			
+			$("#startCityBox").show();
+			$("#selectTypeBox").show();
+			
+		}
+		if(type == 5 || type == ""){
+			$("#jbsxBox").hide();
+			$("#selectTypeBox").hide();
+		}
+		
+		
+		
+}
+
+
+
+/**价格政策单选框更改事件*/
+$(".addSpan").on("change",function(){
+	var paren = $(this).parent();
+	var vali = $(this).attr("checked");
+	
+	//重置所有政策的input框
+	$("#policyId span").each(function(){
+		$(this).find("input:eq(1)").attr("checked",false);
+		$(this).find("input:eq(2)").attr("name","");
+		$(this).find("input:eq(2)").removeClass("required");
+	});
+	//如果为true时，设置attr属性
+	if($(this).attr("checked")){
+		paren.find("input:eq(1)").attr("checked",true);
+		paren.find("input:eq(2)").attr("name","improvePrice");
+		paren.find("input:eq(2)").addClass("required");
+	}
+});
+
+//提交之后回调函数，弹出提示框
+ /* sale.dialogAjaxDone = function(json){
+	/* console.info(json);
+	DWZ.ajaxDone(json);
+	if (json.statusCode == DWZ.statusCode.ok){
+		if (json.navTabId){
+			navTab.reload(json.forwardUrl, {navTabId: json.navTabId});
+		} else if (json.rel) {
+			var $pagerForm = $("#pagerForm", navTab.getCurrentPanel());
+			var args = $pagerForm.size()>0 ? $pagerForm.serializeArray() : {}
+			navTabPageBreak(args, json.rel);
+		}
+		if ("closeCurrent" == json.callbackType) {
+			$.pdialog.closeCurrent();
+		} 
+	}*/
+	/* console.info(json);
+	alertMsg.confirm(json.message, {
+			okCall: function(){
+				alert(123);
+				console.info(123);
+				    $("#pagerForm",$.pdialog.getCurrent()).attr("action","${contextPath}/traveline/salepolicy/addSalePolicy");
+					initUI(pageContent);
+			    console.info($("#pagerForm",$.pdialog.getCurrent()).attr("action"));
+			        $("#pagerForm",$.pdialog.getCurrent()).submit();
+			         //var $pagerForm = $("#pagerForm", navTab.getCurrentPanel());
+					//var args = $pagerForm.size()>0 ? $pagerForm.serializeArray() : {}
+					//navTabPageBreak(args, json.rel);
+		
+			},
+			 cancelCall:function() {
+				/*  if ("closeCurrent" == json.callbackType) {
+						$.pdialog.closeCurrent();
+			/* 	 } */
+			/*  },
+			 okName:"忽略并继续操作",
+			 cancelName:"关闭"
+	   }); 
+}  */
+
+//ajax验证是否弹出提示框“忽略并继续操作”
+ function  validate(){
+	console.log("into Validate");
+	//校验适用时间
+	var beginTime = $("#beginTimeStr").val(); 
+	var endTime = $("#endTimeStr").val(); 
+	if(beginTime != null && beginTime !="" && endTime != null && endTime !=""){
+		if(beginTime > endTime){
+			alertMsg.error("适用时间的开始时间不能大于结束时间！");
+			return false;
+		}
+	}
+	var selectLine = $("#line1");
+	if(selectLine.children("div").length>0){
+		$("#lineID").removeClass("required");
+	}
+	var  ids = $("#selectedLineID").val();
+	console.log("start ajax");
+	console.log(ids);
+	 $.ajax({
+			    type:"post",
+				async: false,
+				dataType:"json",
+				data:$("#pagerForm1").serialize(),
+				url:'${contextPath}/traveline/salepolicy/validateSalePolicyAdd',
+				success:function(data){
+						var  isconfirm = eval('(' + data + ')');
+						if(isconfirm == "1"){
+								alertMsg.confirm("您选择的内容里有部分内容已存在价格政策，如果继续操作将会覆盖之前的价格政策，请确认", {
+									okCall: function(){
+											console.log(ids);
+									        $("#pagerForm1",$.pdialog.getCurrent()).submit();
+									},
+									 okName:"忽略并继续操作",
+									 cancelName:"关闭"
+							   }); 
+						}else if(isconfirm == "2"){
+							$("#pagerForm1",$.pdialog.getCurrent()).submit();
+						}else if(isconfirm == "3"){
+							 alertMsg.confirm("您选择的内容里没有对应的线路，请重新筛选线路", {
+							    cancelName:"关闭"
+					         }); 
+						}else if(isconfirm == "4"){
+							 alertMsg.confirm("请先选择线路", {
+								 cancelName:"关闭"
+						      }); 
+						}else{
+							$("#pagerForm1",$.pdialog.getCurrent()).submit();
+						}
+				}
+	 });
+}
+
+//当线路类型下拉框选择“国内线”时，联动出省市下拉框
+$("#domesticLine_salepolicy_add").change(function(){
+   $.post("${contextPath}/traveline/line/searchProvince",function(data){
+			if (data.length > 0) {  
+	            var layer = "<option value=''>--请选择省份--</option>";  
+	            var initCity = "<option value=''>--请选择城市--</option>";
+	            $.each(data, function (idx, item) {  
+	                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+	            });
+	            
+				$("#province_of_type_salepolicy_add").empty();
+				$("#province_of_type_salepolicy_add").append(layer);
+				$("#city_of_type_salepolicy_add").empty();
+				$("#city_of_type_salepolicy_add").append(initCity);
+				
+				//展现省市下拉框
+				$("#province_of_type_span_add").show();
+				$("#city_of_type_span_add").show();
+	        }  
+	},"json"); 
+});
+
+//当选择了指定的省份时，则该省份的城市列表初始化出来
+$("#province_of_type_salepolicy_add").change(function(){
+	$.post("${contextPath}/traveline/line/searchCity",{'province':$("#province_of_type_salepolicy_add").val()},function(data){
+		if (data.length > 0) {  
+           var layer = "<option value=''>--请选择城市--</option>";  
+           $.each(data, function (idx, item) {  
+               layer += "<option value="+item.code +">"+ item.name + "</option>";  
+           });
+           
+			$("#city_of_type_salepolicy_add").empty();
+			$("#city_of_type_salepolicy_add").append(layer);
+       }  
+	},"json");
+});
+
+//当出发地下拉框选择“国内”时，联动出省市下拉框
+$("#startingType").change(function(){
+   $.post("${contextPath}/traveline/line/searchProvince",function(data){
+			if (data.length > 0) {  
+	            var layer = "<option value=''>--请选择省份--</option>";  
+	            var initCity = "<option value=''>--请选择城市--</option>";
+	            $.each(data, function (idx, item) {  
+	                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+	            });
+	            
+				$("#start_province_salepolicy_add").empty();
+				$("#start_province_salepolicy_add").append(layer);
+				$("#start_city_salepolicy_add").empty();
+				$("#start_city_salepolicy_add").append(initCity);
+				
+				//展现省市下拉框
+				$("#start_province_salepolicy_span_add").show();
+				$("#start_city_salepolicy_span_add").show();
+	        }  
+	},"json"); 
+});
+
+//当选择了指定的省份时，则该省份的城市列表初始化出来
+ $("#start_province_salepolicy_add").change(function(){
+	$.post("${contextPath}/traveline/line/searchCity",{'province':$("#start_province_salepolicy_add").val()},function(data){
+		if (data.length > 0) {  
+            var layer = "<option value=''>--请选择城市--</option>";  
+            $.each(data, function (idx, item) {  
+                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+            });
+            
+			$("#start_city_salepolicy_add").empty();
+			$("#start_city_salepolicy_add").append(layer);
+        }  
+	},"json");
+}); 
+
+//取消回车键能提交表单的功能
+ document.onkeydown = function(event_e){  
+  if(window.event) {  
+      event_e = window.event;  
+  }  
+  var int_keycode = event_e.charCode||event_e.keyCode;  
+  if(int_keycode =='13') {  //13是回车键
+      return false;  
+  }  
+ }
+</script>

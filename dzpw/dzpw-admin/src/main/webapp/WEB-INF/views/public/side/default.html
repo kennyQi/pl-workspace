@@ -1,0 +1,138 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>系统设置
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a>权限管理</a>
+				<ul>
+					<li><a href="${contextPath}/auth/perm/index" target="navTab"
+						rel="authPerm">资源管理</a>
+					</li>
+					<li><a href="${contextPath}/auth/role/list" target="navTab"
+						rel="authRole">角色管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/system/operator/list" target="navTab" rel="operator">员工管理</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+		
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>经销商管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li>
+					<a href="${contextPath}/dealer/list" target="navTab" rel="dealer">经销商管理</a>
+				</li>
+			</ul>
+		</div>
+		
+		<!-- 用户管理 -->
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>常用信息管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+		<ul class="tree">
+			<li>
+				<a href="${contextPath}/tourist/list" target="navTab" rel="tourist">游客信息管理</a>
+			</li>
+		</ul>
+		</div>
+		
+		<!-- 订单管理 -->
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>订单管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+		<ul class="tree">
+			<li>
+			<a href="${contextPath}/order/ticketOrder/list" target="navTab"
+						rel="ticketOrder">订单管理</a>
+			</li>
+		</ul>
+		</div>
+		
+		<!-- 财务对账 -->
+<!-- 		<div class="accordionHeader"> -->
+<!-- 			<h2> -->
+<!-- 				<span>Folder</span>财务对账 -->
+<!-- 			</h2> -->
+<!-- 		</div> -->
+<!-- 		<div class="accordionContent"> -->
+<!-- 		<ul class="tree"> -->
+<!-- 			<li> -->
+<!-- 			<a href="${contextPath}/checkAccountAll/list2" target="navTab" -->
+<!-- 						rel="ticketOrder">财务对账汇总</a> -->
+<!-- 			</li> -->
+<!-- 			<li> -->
+<!-- 			<a href="${contextPath}/checkAccount/list2" target="navTab" -->
+<!-- 						rel="ticketOrder">支付对账单</a> -->
+<!-- 			</li> -->
+<!-- 		</ul> -->
+<!-- 		</div> -->
+		
+		<!-- 景区管理 -->
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>景区管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li><a href="${contextPath}/scenic-spot/list?navTabId=scenic-spot" target="navTab" rel="scenic-spot">景区管理</a></li>
+			</ul>
+		</div>
+		
+		<!-- 联票管理 -->
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>票务管理 
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li><a href="${contextPath}/ticket-single/list" target="navTab" rel="ticket-single">单票管理</a></li>
+				<li><a href="${contextPath}/ticket-group/list?navTabId=ticket-group" target="navTab" rel="ticket-group">联票管理</a></li>
+			</ul>
+		</div> 
+		
+		<!-- 统计报表 -->
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>统计报表
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				 <li><a href="${contextPath}/report/finance/list" target="navTab" rel="financeReport">财务明细</a></li>
+				<li><a href="${contextPath}/report/ticket_sale_count" target="navTab" rel="saleReport">销售统计</a></li>
+				<!-- <li><a href="${contextPath}/report/dealer_sale_count" target="navTab" rel="dealerReport">经销商销售统计</a></li> -->
+				<li><a href="${contextPath}/report/enter_scenicspot_count" target="navTab" rel="enterScenicspotReport">景区入园统计</a></li>
+			</ul>
+		</div>
+		
+		<!--转账记录 -->
+<!-- 		<div class="accordionHeader"> -->
+<!-- 			<h2> -->
+<!-- 				<span>Folder</span>转账记录 -->
+<!-- 			</h2> -->
+<!-- 		</div> -->
+<!-- 		<div class="accordionContent"> -->
+<!-- 			<ul class="tree"> -->
+<!-- 				<li><a href="${contextPath}/hjb/transrecord" target="navTab" rel="hjbtrans">HJB转账记录</a></li> -->
+<!-- 			</ul> -->
+<!-- 		</div> -->
+</div>

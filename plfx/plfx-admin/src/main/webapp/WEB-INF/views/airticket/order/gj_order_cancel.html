@@ -1,0 +1,61 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/gjjp/order/cancel"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<!-- 参数为供应商订单号和平台订单号以及取消类型-->
+<!-- 		<input type="hidden" name="id" value="${orderDetail.baseInfo.supplierOrderId}" />-->
+			 <input type="hidden" name="platformOrderId" value="${orderDetail.id}" />
+			<div class="unit">
+				<span>乘机人：</span>
+				 <#if (orderDetail.passengers?size > 0)>
+				 	 <#list orderDetail.passengers as passenger>
+				   		<span> ${passenger.baseInfo.passengerName}</span>
+				    </#list>
+				 <#else>
+					没有可以取消订单的乘机人
+				 </#if>
+			</div>
+			<span>取消原因：</span>
+			<div style="width:320px;margin-left:50px;">
+				
+<!-- 				<input type="radio" name="cancelReasonType" value="1">扣率过低</input>
+				<input type="radio" name="cancelReasonType" value="2">舱位过高</input>
+				<input type="radio" name="cancelReasonType" value="3">价格不正确</input>
+				<input type="radio" name="cancelReasonType" value="4">客人证件不齐</input>
+				<input type="radio" name="cancelReasonType" value="5">行程未确定</input>
+				<input type="radio" name="cancelReasonType" value="6">其他原因</input>
+ -->				<#if CANCEL_ORDER_TYPE??>
+		                   <#list CANCEL_ORDER_TYPE?keys as itemKey>
+		                   <input type="radio" name="cancelReasonType" value="${itemKey}" style="margin:10px 15px;">${CANCEL_ORDER_TYPE[itemKey]}</input>
+		                   	
+		                   </#list>
+		         </#if>
+		         
+		         <div class="unit">
+					<span>取消订单理由</span>
+				</div>
+				<div class="unit">
+					<textarea name="cancelOtherReason" clos="80" rows="5">
+					</textarea>
+				</div>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">确定</button>
+						</div>
+					</div></li>
+				<li><div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">关闭</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>

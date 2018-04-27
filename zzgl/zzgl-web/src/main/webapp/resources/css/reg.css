@@ -1,0 +1,79 @@
+/* liwei */
+/* 2015-05-26 */
+.gd_nav{display:none;}
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+.transparent_white{ background:#FFFFFF; background-color:rgba(255,255,255,0.98) !important;filter:Alpha(opacity=98); color:#333;}
+.transparent_white .per{background:url(../images/regScript_bg2.png) 0 0;}
+.transparent_white .com{background:url(../images/regScript_bg2.png) -42px -36px;}
+.transparent_black{ background:#000000; background-color:rgba(0,0,0,0.6) !important;filter:Alpha(opacity=60); color:#aaa;}
+.transparent_black .per{background:url(../images/regScript_bg2.png) -42px 0;}
+.transparent_black .com{background:url(../images/regScript_bg2.png) 0 -36px;}
+
+
+.reg_bg .reg_box .reg{ width:1040px; height:716px;  }
+.reg_bg .reg_box .reg .reg_top a{ width:1040px;  background-color:#E4F7FF !important;  float:left; height:50px; line-height:50px; font-size:18px; font-family:"微软雅黑";cursor:text;}
+.reg_bg .reg_box .reg .reg_top .transparent_black:hover{color:#fff;}
+.reg_bg .reg_box .reg .reg_top a i{width:29px;height:30px; margin-left:446px; margin-right:10px; margin-top:10px;}
+.reg_bg .reg_box .reg .reg_top{height:50px;}
+.reg_bg .reg_box .reg .regs{ height:666px; display:none;}
+.reg_bg .reg_box .reg .reg_personal{display:block;}
+
+/*个人注册*/
+.per_box{ width:450px; height:486px; margin-top:60px; margin-left:221px;}
+.per_box li{ float:left; width:450px; border:1px solid #e0dfdf; display:block; height:48px; line-height:48px; background:#FFFFFF;}
+.per_box li span{float:left; margin-left:10px; line-height:48px; font-size:16px;}
+.per_box li input{float:left; height:48px; line-height:48px;  border:0; width:210px; padding:0 10px; font-family:"微软雅黑"; font-size:16px; color:#333;}
+.per_box li .yzm{ width:140px; height:48px; border-left:1px solid #e0dfdf; text-align:center; background:#f9f8f8;}
+.per_box li a:hover{ color:#0073b6;}
+.per_box li .change{ width:48px; height:32px; border-left:1px solid #e0dfdf; padding:8px 20px; line-height:15px;}
+.per_box li .change:hover{ text-decoration:underline;}
+.per_box li .change i{ line-height:20px; color:#0073b6;}
+.per_box .btns{ width:450px; margin-top:10px; *margin-left:0;}
+.per_box .agr{ margin-top:60px;}
+.per_box .agr a{color:#555; *margin-top:-15px;}
+.per_box .agr a:hover{ text-decoration:underline; color:#555;}
+.per_box .agr i{width:16px;height:16px; background:url(../images/hotel_script.png) -326px -48px; margin:2px 5px 0 0;}
+.per_box .agr .click{ background:url(../images/hotel_script.png) -301px -48px;}
+.per_box .submit a{ width:450px; background:#00a0e9; height:50px; color:#fff; line-height:50px; *margin-top:-14px; *font-size:18px;}
+.per_box .submit a:hover{ color:#fff;}
+
+
+/*注册页面主体*/
+.reg_bg{ height:1059px; margin-top:0px; background:url("../images/login_bg.jpg") no-repeat center center; min-width:1200px;}
+.reg_bg .reg_box{  height:716px; margin-top:80px; padding-bottom: 185px;}
+/*注册页面主体*/
+
+/*注册页面页脚*/
+.g_f{width:620px;margin:auto;overflow:hidden;padding-bottom: 65px;}
+.g_f a{color:#e8e8e8;float:left;padding-right:10px;margin-right: 10px;border-right:1px solid #aaaaaa;font-size:12px;line-height:12px;}
+.g_f a:hover{color:#fff;}
+.g_f a.last{border:0px;}
+/*注册页面页脚*/
+/*提示框*/
+.m_errTips{position:absolute;left:0px;top:0px;overflow:hidden;}
+.m_errTips .l{height:67px;background: url("../images/login_b3.png");border:1px solid #e0e0e0;border-left:0px;}
+.m_errTips .l span{background: url("../images/login_i3.png") no-repeat 0px 0px;padding-left:38px;color:#333333;line-height:24px;font-size:12px;margin:20px 60px 0px 20px;}
+.m_errTips .r{background: url("../images/login_i5.png") no-repeat;height:66px;width:14px;}
+
+
+
+/*弹出层*/
+.alertCodeBoxBg{background: #000;position: fixed;top:0px;left:0px;z-index: 99;width:100%;height:100%;
+    opacity:0.5;
+}
+.alertCode{position: fixed;top:280px;left:0px;z-index: 100;
+    width:100%;overflow: hidden;
+}
+.alertCodeBox{margin:auto;background: #fff;
+    padding:30px;overflow: hidden;width: 300px;position: relative;
+}
+.alertCodeBox a{    width: 18px;
+    height: 18px;position: absolute;right: 5px;top:5px;
+    background: url(../images/company/ic_script.png) 0 -828px;}
+.alertCodeBox img{border:1px solid #dedede;height: 32px;width: 100px;float:left;display: block}
+.alertCodeBox input{border:1px solid #dedede;height: 32px;width: 80px;float:left;display: block}
+.alertCodeBox button{    width:80px;border:none;
+    background: #00a0e9;
+    height: 34px;
+    color: #fff;
+    line-height: 34px;float:left;display: block}

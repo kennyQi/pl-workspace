@@ -1,0 +1,563 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量-线路预定">
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js" ></script>
+<script type="text/javascript"  src="${(contextPath)!}/resources/js/common.js"></script>
+<script type="text/javascript"  src="${contextPath}/resources/js/jquery.min.js"></script>
+<link href="${(contextPath)!}/resources/css/common.css"  rel="stylesheet"/>
+<link href="${(contextPath)!}/resources/css/reseve.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" 4>
+<body>
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+<div class="g_body">
+<div class="g_step disb ov">
+	<ul>
+    	<li class="m_move">
+        	<h3 class="h3">填写订单</h3>
+            <span class="icon">1</span>
+      </li>
+    	<li class="m_move">
+        	<h3 >支付订金</h3>
+            <span >2</span>
+      </li>
+    	<li class="m_move">
+        	<h3 >确认名单</h3>
+            <span >3</span>
+      </li>
+    	<li class="m_move">
+        	<h3 >支付尾款</h3>
+            <span >4</span>
+      </li>
+    	<li class="m_move m_move_last">
+        	<h3 >预订成功</h3>
+            <span >5</span>
+      </li>
+  </ul>
+</div>
+<!--出游信息-->
+<div class="g_title">
+<div class="tt">
+<span class="color3 h1 yahei">出游信息</span>
+</div>
+</div>
+<div class="g_cont ov disb pl">
+<div class="g_tabel boxCenter ov">
+    <div class="travel ov">
+       <ul class="ov disb">
+           <li class="tt"><span class="travelTitle">产品名称：</span><a href="${(contextPath)!}/line/detail?id=${(line.id)!}" >${(line.baseInfo.name)!}</a></li>
+           <li><span class="travelTitle">出发城市：</span><span>${(cityMap[(line.baseInfo.starting)!])!}</span></li>
+           <li><span class="travelTitle">出发日期：</span><span><i id="startDate">${(startdate)!}</i></span></li>
+           <li><span class="travelTitle">行程天数：</span><span>${(line.routeInfo.routeDays)!}天</span></li>
+           <li><span class="travelTitle general">人数：</span><span>
+           <input type="text" name="" id="adult" value="0" rel="${(adults)!}"  style="width:90px;padding:0 8px 0 8px;" disabled="disabled">
+           <span class="adultNum">成人</span>
+           <input type="text" name="" id="children" value="0" rel="${(chidrens)!}" style="width:90px;padding:0 8px 0 8px;"disabled="disabled">
+           <span class="adultNum">儿童</span>
+           </span></li>
+           <li class="inp"><span class="travelTitle general"><span style="color:red">* </span>联系人：</span><input type="text" name="" class="linkName" id="check" value="" style="width:240px;padding:0 8px 0 8px;" value="${(user.companyName)!}"></li>
+           <li class="inp"><span class="travelTitle general"><span style="color:red">* </span>手机：</span><input type="text" id="check" name="" class="linkMobile mobile tom" style="width:240px;padding:0 8px 0 8px;" value="${(user.mobile)!}"><span style="color:red; margin-left:9px;" class="mo ts">请填写正确的手机号码</span></li>
+           <li class="inp"><span class="travelTitle general"><span style="color:red">* </span>邮箱：</span><input type="text"class="email" id="check"  name="" class="email" style="width:240px;padding:0 8px 0 8px;" value=""><span style="color:red; margin-left:9px;" class="mo ts">请填写正确的邮箱地址</span></li>
+       </ul>
+    </div>
+</div>
+<!--出游信息-->
+<!--游客信息-->
+<div class="g_titles yahei yktips">
+	<div class="tt disb ov"><span class="h1 yahei disb t">游客信息</span></div>
+    <div class="tt disb ov"><p class="disb  tips color6">为了保障您的合法权益，请<span style="color:red;">准确、完整</span>的填写出游人信息，出游人信息不完整会延误您的正常出游。<br>因填写信息不完整、不准确造成的保险拒赔等问题，我司不承担相应责任。</p></div>
+</div>
+    <div id="g_information" class="g_information boxCenter yahei">
+        
+        <span class="line "></span>
+     <div id="tourists">
+    <ul class="tourist ov">
+        <li class="touristName yahei"><span>游客1</span><a href="javascript:;" id="addTourist" name="addTourist" rel="1" >+ 增加一位</a><a href="javascript:;" class="delTourist"  rel="first">删除</a></li>
+        <li class="inp touristInp"><span class="travelTitle"><span style="color:red">* </span>姓名：</span><input type="text" name="" id="check" class="youkename" style="width:240px;padding:0 8px 0 8px;"><span style="color:red; margin-left:9px;" class="mo ts">请填写真实姓名</span></li>
+        <li class="inp touristInp"><span class="travelTitle"><span style="color:red">* </span>手机：</span><input type="text" id="check" name="" class="mobile youkeshouji" style="width:240px;padding:0 8px 0 8px;"><span style="color:red; margin-left:9px;" class="mo ts">请填写正确的手机号码</span></li>
+        <li class="inp touristInp"><span class="travelTitle"><span style="color:red">* </span>身份证号码：</span><input type="text" id="check" name="" class="ID youkeid" style="width:240px;padding:0 8px 0 8px;"><span style="color:red; margin-left:9px;" class="mo ts">请填写正确的身份证号码</span></li>
+        <li class="ov"><span class="line line1"></span></li>
+    </ul>
+    </div>
+     <div id="childrens">
+    <ul class="children ov">
+        <li class="touristName yahei"><span>儿童1</span><a href="javascript:;" id="addChildren" rel="1" >+ 增加一位</a><a href="javascript:;" class="delTourist" rel="first">删除</a></li>
+        <li class="inp touristInp"><span class="travelTitle"><span style="color:red">* </span>姓名：</span>
+        <input type="text" name="" class="youkename" id="check" style="width:240px;padding:0 8px 0 8px;"><span style="color:red; margin-left:9px;" class="mo ts">请填写真实姓名</span></li>
+        <li class="inp touristInp"><span class="travelTitle"><span style="color:red">* </span>手机：</span><input type="text" name="" id="check" class="mobile youkeshouji" style="width:240px;padding:0 8px 0 8px;"><span style="color:red; margin-left:9px;" class="mo ts">请填写正确的手机号码</span></li>
+		<li class="inp touristInp"><span class="travelTitle"><span style="color:red">* </span>身份证号码：</span><input type="text" id="check" name="" class="ID youkeid" style="width:240px;padding:0 8px 0 8px;"><span style="color:red; margin-left:9px;" class="mo ts">请填写正确的身份证号码</span></li>
+    </ul>
+   </div>
+</div>
+<!--游客信息-->
+<!--优惠信息-->
+<div class="g_titles yahei yktips hiyh">
+	<div class="tt disb ov"><span class="h1 yahei disb t subt">优惠信息</span></div></div>
+<div class="g_discount boxCenter">
+        <span class="line line2"></span>
+    <div class="discount">
+        <span class="general  position" >账户里可使用卡券 <i id="position"></i>张
+       </span><br/>
+      
+      <#--  <#if (couponNoUsed?size>0) > -->
+        <span id="use" class="radio">使用</span>
+        <div class="boxDiscount pl" id="boxDiscount">
+        	<i class="icon comBg pa"></i>
+            <ul id="discount">
+                <li>
+               		<span class="discount choice djqcb orderbox" orderbox="orderbox"></span>
+                    <!-- <input type="checkbox" class="djqcb checkboxq orderbox" id="use" /> -->&nbsp;&nbsp;使用代金券
+                    <span class="select" id="select"  >
+                    	<span id="chek">请选择优惠券</span>
+                    	<span class="option" id="option" style=" disabled" ></span>
+                    </span>
+                    <ul class="options" id="options">
+						<!--  <#list couponNoUsed as couponList>
+						  <#if
+						(((couponList.baseInfo.couponActivity.baseInfo.couponType?c)!0)==1)>
+                            <li class="checekdfaceValue"   name="${couponList.id}">${couponList.baseInfo.couponActivity.baseInfo.faceValue}元优惠券</li>
+                          </#if>
+                          </#list> -->
+                     </ul>
+           			 
+				 <span id="useCondition"></span>
+                </li>
+ 
+				 <li id="cashcoupon"></li>
+            </ul>
+        </div>
+        <span id="notUse" class="radio radio_on" onclick="notUse()">不使用</span>
+    </div>
+</div>
+
+<#-- </#if> -->
+<input type="hidden" class="daijinquan"/>
+<input type="hidden" class="downPayment" value="${(line.payInfo.downPayment)!}"/>
+<input type="hidden" class="hiddiyongquans"/>
+
+<input type="hidden" id="onpay" value="${(onpay!)}"/>
+<input type="hidden" id="frontmoney" value="${(frontmoney)!}"/>
+	<!--<div class="g_titles yahei yktips yhq_bottom">
+		<div class="tt disb ov"><span class="h1 yahei disb t subt">发票信息</span></div>
+	</div>
+<div class="g_invoice boxCenter">
+        <span class="line line2"></span>
+    <div class="invoice">
+        <ul>
+            <li><span id="notNeed" class="radio  radio_on">不需要发票</span><span class="general point">如您出游归来后需要发票，可以在两个月内前往会员中心-查看订单中填写发票信息，索取发票。</span></li>
+            <li><span id="need" class="radio">需要发票</span><input type="text" name="" id="" class="receipt" placeholder="请填写发票抬头" style=" width:240px;padding:0 8px 0 8px;"></li>
+
+        </ul>
+    </div>
+</div>-->
+<div class="g_titles yahei yktips">
+	<div class="tt disb ov"><span class="h1 yahei disb t subt">预定须知</span></div></div>
+<div class="g_explain boxCenter">
+        <span class="line line2"></span>
+    <div class="explain h3 ">
+           ${(line.baseInfo.bookDescription)!}
+    </div>
+</div>
+<div class="g_titles yahei yktips">
+	<div class="tt disb ov"><span class="h1 yahei disb t subt">费用说明</span></div></div>
+<div class="g_explain boxCenter">
+        <span class="line line2"></span>
+    <div class="explain h3 ">
+            ${(line.baseInfo.feeDescription)!}
+    </div>
+</div>
+<div class="g_titles yahei yktips">
+	<div class="tt disb ov"><span class="h1 yahei disb t subt">违约责任提示</span></div></div>
+<div class="g_explain boxCenter boxBottom">
+        <span class="line line2"></span>
+    <div class="explain h3 ">
+             ${(line.baseInfo.noticeDescription)!}
+    </div>
+</div>
+
+<div id="float" class="float">
+    <span class="yahei floatTitle">结算信息</span>
+    <div class="cost boxFloat">
+        <strong class="h3">团费</strong><br/>
+        <span class="number"><i id="adultPricenumber">0</i>成人</span><span>×</span><span class="money">¥ 
+       <i id="adultPrice"> 
+        <#list (line.dateSalePriceList)! as dateSalePriceList>
+        	<#if ((dateSalePriceList.saleDate?date)==(startdate))>
+        		${(dateSalePriceList.adultPrice)?c}
+				<#break/>
+        	</#if>
+        </#list> 
+       
+        </i>
+        </span><span class="moneys ov">¥<i id="SumadultPrice"></i></span><br/>
+        <span class="number"><i id="childPricenumber">0</i>儿童</span><span>×</span><span class="money">¥
+ 			<i id="childPrice">
+ 			<#list (line.dateSalePriceList)! as dateSalePriceList>
+        	<#if ((dateSalePriceList.saleDate?date)==(startdate))>
+        		${(dateSalePriceList.childPrice)?c}
+				<#break/>
+        	</#if>
+        	</#list>
+        	</i>
+</span><span class="moneys ov" >¥<i  id="SumchildPrice"></i></span><br/>
+    </div>
+ <!--   <div class="preferential boxFloat">
+        <strong class="h3">优惠</strong><br/>
+        <span class="number">抵用劵</span><span class="moneys">¥<i id="diyongquan">0</i></span><br/>
+    </div>-->
+    <div class="order boxFloat">
+        <span class="number">订单总金额</span><span class="moneys ov">¥<i id="zongjine"></i></span><br/>
+        <span class="number">定金</span><span class="moneys ov">¥<i id="earnestmoney"></i></span><br/>
+        <span class="number">尾款</span><span class="moneys ov">¥<i id="finalpayment"></i></span><br/>
+    </div>
+    <div class="settleAccounts boxFloat">
+        <span class="SATitel">应付金额:</span><span class="SAMoney"><span>¥</span><i id="shouldmoney"></i></span><br/>
+        <a  class="next curp" type="button">下一步</a>
+    </div>
+</div>
+</div>
+
+</div>
+<!--内容-->
+   <form id="myform" action="${contextPath}/line/saveOrder" method="post">
+   <input type="hidden" id="SPRING_TOKEN" name="SPRING_TOKEN" value="${SPRING_TOKEN}">
+    <input type="hidden" class="hideadultNo" name="baseInfo.adultNo"/>
+    <input type="hidden" class="hidechildNo" name="baseInfo.childNo"/>
+    <input type="hidden" class="hideadultUnitPrice" name="baseInfo.adultUnitPrice"/>
+    <input type="hidden" class="hidechildUnitPrice" name="baseInfo.childUnitPrice"/>
+    <input type="hidden" class="hidesalePrice" name="baseInfo.salePrice"/>
+    <input type="hidden" class="hidebargainMoney" name="baseInfo.bargainMoney"/>
+ 	<input type="hidden" class="hidetravelDate" name="travelDate"/>
+ 	<!-- 定金总额 -->
+ 	<input type="hidden" class="shouldmoneys" name="shouldmoneys"/>
+	<!--     联系人信息 -->
+    <input type="hidden" class="hidelinkName" name="linkInfo.linkName"/>
+    <input type="hidden" class="hidelinkMobile" name="linkInfo.linkMobile"/>
+    <input type="hidden" class="hideemail" name="linkInfo.email"/>
+  	 <!--  游客信息 -->
+  	 <input type="hidden" class="touristname" name="touristname"/>
+   	 <input type="hidden" class="touristphone" name="touristphone"/>
+   	 <input type="hidden" class="touristid" name="touristid"/>
+   	 <!-- 线路ID -->
+   	 <input type="hidden" class="id" name="lineID" value="${line.id}"/>
+   	 <!-- 卡券id -->
+   	 <input type="hidden" class="useCouponIDs" name="useCouponIDs"/>
+   	 <!-- 卡券金额 -->
+   	  <input type="hidden" class="moneyCoupon" name="moneyCoupon"/>
+   	<!--   行程天数 -->
+   	<input type="hidden" class="routeDay" name="routeDay" value="${(line.routeInfo.routeDays)!}"/>
+   	 	<!-- 是否全款支付 -->
+   	 <input type="hidden" class="frontmoney" value="${(frontmoney)!}" name="frontmoney"/>
+    </form>
+<!--页脚-->
+ <@frame.end "default"> </@frame.end>
+</@frame.main>
+<script type="text/javascript">
+$(function(){
+	//设置卡券Id为空
+	/* 页面加载判断儿童是否为0 */
+	if($("#children").attr("rel")=="0"){
+		$("div").remove("#childrens");
+	}
+	var onpay="${onpay!''}";
+	/*			 提交订单			 */
+	$(".curp").click(function(){
+		/* 结算信息 */
+		$(".hideadultNo").val($("#adultPricenumber").html());
+		$(".hidechildNo").val($("#childPricenumber").html());
+		$(".hideadultUnitPrice").val($("#adultPrice").html());
+		$(".hidechildUnitPrice").val($("#childPrice").html());
+		$(".hidesalePrice").val($("#zongjine").html());
+		$(".hidebargainMoney").val($("#earnestmoney").html());
+		$(".hidetravelDate").val($("#startDate").html()+" 00:00:00");
+		/* 联系人信息 */
+		$(".hidelinkName").val($(".linkName").val());
+		$(".hidelinkMobile").val($(".linkMobile").val());
+		$(".hideemail").val($(".email").val());
+		/* 卡券金额  */
+		$(".moneyCoupon").val($("#diyongquan").html());
+		/* 游客信息 */
+		//遍历游客姓名
+		var youkename="";
+		$(".youkename").each(function(){
+			youkename+=$(this).val()+",";
+		})
+		$(".touristname").val(youkename);
+		//遍历游客手机号码
+		var youkeshouji="";
+		$(".youkeshouji").each(function(){
+			youkeshouji+=$(this).val()+",";
+		})
+		$(".touristphone").val(youkeshouji);
+		//遍历游客身份证号码
+		var youkeid="";
+		$(".youkeid").each(function(){
+			youkeid+=$(this).val()+",";
+		})
+		$(".touristid").val(youkeid);
+		//遍历得到所有的卡券id
+		var orderbox="";
+		$(".orderbox").each(function(){
+			if($(this).hasClass("choice_on")){
+				orderbox+=$(this).attr("value")+",";
+			}
+		})
+		/* if($(".djqcb ").val()!="on"){
+			orderbox=orderbox+",";
+		}  */
+		//遍历所有的input判断是否有为空的
+		var check="";
+		$(":input[id='check']").each(function(){
+			if($(this).val().trim()==""||$(this).val()==null){
+				check="1";
+			}
+			if($(this).attr("judge")=="false"){
+				check="1";
+			}
+		})
+		$(".useCouponIDs").val(orderbox);
+		if(onpay==2){
+			alert("已到最晚预定时间,订单不能支付");
+		}else{
+			var adultPricenumber=parseInt($("#adultPricenumber").html());
+			var childPricenumber=parseInt($("#childPricenumber").html());
+			if(check==""&&adultPricenumber>=0&&childPricenumber>=0){
+			$("#myform").submit();
+			}else{
+			alert("请检查输入的值是否有误");
+			} 
+		}
+	})
+	/* 清空所有的复选框的值 */
+	/* $(".orderbox").each(function(){
+		alert()
+		$(this).val("");
+	}) */
+	
+	
+	/*           卡券                            */
+	//页面加载隐藏现金券下拉框
+	$("#select").hide();
+	$("#useCondition").hide();
+	//页面刷新去掉所有复选框禁用
+	$(":input[type='checkbox']").each(function(){
+	$(this).removeAttr("disabled");
+	$(this).removeAttr("checked");
+	})
+	//设置卡券Id为空
+	$(".useCouponIDs").val("");
+	/* 点击现金券 */
+	
+	//点击代金券单选框
+$(".djqcb").click(function(){
+	//禁用
+	if($(this).attr("can")=="false") return;
+	var djqcb=!$(this).hasClass("choice_on");
+	if(djqcb==true){
+	$("#select").show();
+	}else{
+	$("#chek").html("请选择优惠券");	
+	$("#select").hide();
+	$("#useCondition").hide();
+	//$(".hiddiyongquans").html("");
+	$("[issharenotsametype='false']").each(function(){
+		$(this).attr("can","");
+	});
+	/* 计算减去代金券之后的金额 */
+	//得到抵用券的值
+	var diyongquan=$("#diyongquan").html();
+	//得到应付金额
+	var shouldmoney=$("#shouldmoney").html();
+	//得到当前代金券的金额
+	var daijinquan=$(".daijinquan").val();
+	//得到应付总金额
+	var earnestmoney=$("#earnestmoney").html();
+	if(frontmoney==2){
+		earnestmoney=$("#zongjine").html();
+	}
+	$("#options").hide();
+	var daijinquan= $(".daijinquan").val();
+	if(daijinquan!=""){
+	$(".daijinquan").val("");	
+	diyongquan=diyongquan-daijinquan
+	$("#diyongquan").html(diyongquan.toFixed(2));
+	if(diyongquan>earnestmoney){
+		$("#shouldmoney").html("0.00");
+		$(".shouldmoneys").val("0.00");
+	}else{
+		$("#shouldmoney").html((earnestmoney-diyongquan).toFixed(2));	
+		$(".shouldmoneys").val((earnestmoney-diyongquan).toFixed(2));
+	 }
+	}
+  }
+})
+})
+
+$(".daijinquan").val("");//页面刷新清空代金券金额
+$(document).on("click",".checekdfaceValue",function(){
+	var couponId=$(this).attr("name");
+	var selectd = $(".selectd").html();
+	var couponValuess=$(".daijinquan").val();
+	var that=$(this);
+	if(couponValuess==""||couponValuess==null){
+		couponValuess=0;
+	}
+	//禁止掉现金券不能和代金券同时使用的
+	$("[issharenotsametype='false']").each(function(){
+		$(this).attr("can","false");
+		// $(this).attr("disabled","disabled");
+	})
+		//保存卡券id
+	 $(".djqcb").val(couponId);
+		//异步访问得到卡券的使用条件
+		$.ajax({
+			type : "post",
+			async : false,
+			url : '${contextPath}/line/getCouponCondition?couponId='+ couponId,
+			success : function(data) {
+				var coupons = eval('(' + data+ ')');
+				var couponValue = coupons.baseInfo.couponActivity.baseInfo.faceValue;//取得选中卡券的面值
+				//若选择了优惠券，则应付金额应该减去优惠券的面值
+				var pay = $("#shouldmoney").html();//取得减去优惠券面值之前订单的实际金额
+				var youhui=$("#diyongquan").html();
+				var real = pay*1 -couponValue*1+couponValuess*1;//计算优惠之后的金额
+				var couponValues=parseFloat(youhui)+parseFloat(couponValue)-parseFloat(couponValuess);
+				$(".daijinquan").val(couponValue);//保存一个优惠券的金额
+				real<0?real=0:real=real;
+				$("#shouldmoney").text(real.toFixed(2));//减去优惠券的面值后得到的应付金额
+				$(".shouldmoneys").val(real.toFixed(2));
+				$("#diyongquan").html(couponValues.toFixed(2));//给优惠券赋值
+				$(".hiddiyongquans").html(couponValues.toFixed(2));
+				//取得卡券使用条件的最低值，即订单满多少可以使用
+				var conditions = coupons.baseInfo.couponActivity.useConditionInfo.minOrderPrice;
+				var endDate = coupons.baseInfo.couponActivity.useConditionInfo.endDate;
+				var date = new Date(endDate);
+				$("#useCondition").text("订单满"+ conditions+ "可使用，有效期至："+ getTime(date));
+				$("#useCondition").show();
+				
+				var optionsValue=that.html();
+				$("#chek").html(optionsValue);
+				$("#options").css({"display":"none"});
+			}
+		});
+});
+
+//时间格式化
+function getTime(date) {
+	var now = "";
+	now = date.getFullYear() + "-"; //读英文就行了
+	var month = (date.getMonth() + 1).toString();
+	if (month.length == 1) {
+		month = "0" + month;
+	}
+	now = now + month + "-";//取月的时候取的是当前月-1如果想取当前月+1就可以了
+	var d = date.getDate().toString();
+	if (d.length == 1) {
+		d = "0" + d;
+	}
+	now = now + d + " ";
+	var hour = date.getHours().toString();
+	if (hour.length == 1) {
+		hour = "0" + hour;
+	}
+	now = now + hour + ":";
+	var minute = date.getMinutes().toString();
+	if (minute.length == 1) {
+		minute = "0" + minute;
+	}
+	now = now + minute + ":";
+	var sec = date.getSeconds().toString();
+	if (sec.length == 1) {
+		sec = "0" + sec;
+	}
+	now = now + sec + "";
+	return now;
+}
+function selectCoupon(orderPrice){
+	/* 发送ajax请求查询卡券列表 */
+	$("#options").empty();
+	$("#cashcoupon").empty();
+	
+	 $.ajax({
+		type : "post",
+		async : false,
+		url : "${contextPath}/coupon/selectCoupon?orderPrice="+ orderPrice,
+		success : function(data) {
+			var coupons=eval('(' + data+ ')');
+			var voucher="";
+			var cashcoupon="";
+			var count=0;
+			$.each(coupons,function(msg,item){
+				count+=1;
+				if(item.baseInfo.couponActivity.baseInfo.couponType==1){
+					voucher+=" <li class='checekdfaceValue' name='"+item.id+"'>"+item.baseInfo.couponActivity.baseInfo.faceValue+"元优惠券</li>";
+				}else{
+					var date = new Date(item.baseInfo.couponActivity.useConditionInfo.endDate);
+					cashcoupon+=
+						/* "<input type='checkbox' class='checkboxq usecoupons orderbox' re='false' value='"+item.id+"' ondblclick='this.click()'"
+							+"isShareNotSameType='"+item.baseInfo.couponActivity.useConditionInfo.isShareNotSameType+"'"
+							+"isShareSameKind='"+item.baseInfo.couponActivity.useConditionInfo.isShareSameKind+"'/>" */
+							"<span class='discount choice checkboxq usecoupons orderbox' orderbox='orderbox'"
+							+"isShareNotSameType='"+item.baseInfo.couponActivity.useConditionInfo.isShareNotSameType+"'"
+							+"isShareSameKind='"+item.baseInfo.couponActivity.useConditionInfo.isShareSameKind+"' value='"+item.id+"'>"
+							+"</span>"
+							+" <span class='money'>"+item.baseInfo.couponActivity.baseInfo.faceValue+"</span>元现金券:"
+							+"<span class='grey'>订单满 "+item.baseInfo.couponActivity.useConditionInfo.minOrderPrice+"</span>元可使用,"
+							+"有效期至"+getTime(date)+""
+							if(item.baseInfo.couponActivity.useConditionInfo.isShareNotSameType!=true){
+								cashcoupon+="不能与代金券同时使用";
+							}else if(item.baseInfo.couponActivity.useConditionInfo.isShareSameKind!=true){
+								cashcoupon+="不能与现金券同时使用"	;
+							}else if(item.baseInfo.couponActivity.useConditionInfo.isShareSameKind!=true&&item.baseInfo.couponActivity.useConditionInfo.isShareNotSameType!=true){
+								cashcoupon+="不能与其他券同时使用";
+							}
+							cashcoupon+="</br>";
+				}
+			})
+			$("#position").html(count);
+			$("#cashcoupon").append(cashcoupon);
+			if(voucher!=""){
+				$("#options").append(voucher);
+			}else{
+				$("#options").remove();
+			}
+		 }
+	})
+}
+//点击不使用时
+function notUse(){
+	$("[orderbox='orderbox']").each(function(){
+		$(this).removeClass("choice_on");
+		$(this).removeAttr("can","false");
+		
+		/* $(this).removeAttr("disabled");
+		$(this).removeAttr("checked"); */
+	});
+	$("#chek").html("请选择优惠券");
+	$("#boxDiscount").hide();
+	$("#select").hide();
+	$("#useCondition").hide();
+	var earnestmoney=$("#earnestmoney").html();
+	
+	if(frontmoney==2){
+		earnestmoney=$("#zongjine").html();
+	}
+	$("#shouldmoney").html(parseFloat(earnestmoney).toFixed(2));
+	$(".shouldmoneys").val(parseFloat(earnestmoney).toFixed(2));
+	//设置抵用券
+	$("#diyongquan").html("0.00")
+	//设置卡券Id为空
+	$(".useCouponIDs").val("");
+	$("#use").removeClass("radio_on");
+	$("#notUse").addClass("radio_on");
+}
+</script>
+<script type="text/javascript" src="${(contextPath)!}/resources/js/reseve.js"></script>
+</body>
+</html>

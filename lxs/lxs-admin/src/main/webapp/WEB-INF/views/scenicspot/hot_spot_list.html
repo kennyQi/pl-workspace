@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<a class="button" target="dialog" href="${contextPath}/hotspot/tocreate"><span>添加热门景点</span></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="115" >
+		<thead>
+			<tr>
+				<th width = "100">景点名称</th>
+				<th width = "80">景点展示时间</th>				
+				<th width = "80">景点添加时间</th>
+				<th width = "95">景点缩略图</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#if (scenicSpotDTOList?size>0)>
+			<#list scenicSpotDTOList as hotScenicSpot>
+			<tr height="21px">
+				<td>${hotScenicSpot.scenicSpotBaseInfo.name}</td>
+				<td>${hotScenicSpot.openDate}</td>
+				<td>${hotScenicSpot.createDate}</td>
+				<td><image src="${hotScenicSpot.scenicSpotBaseInfo.image}"/></td>
+			</tr>
+			</#list>
+			</#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

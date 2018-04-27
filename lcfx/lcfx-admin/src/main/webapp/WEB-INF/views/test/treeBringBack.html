@@ -1,0 +1,61 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+function clean(){
+	alert('clean');
+	$('#specificationSelect').empty();
+	$('#specificationSelect').append("<p>aaaaaa</p>");
+	$('#specificationSelect').append("<p>bbbbbb</p>");
+}
+
+function aa(){
+	$.ajax({
+		url: "${contextPath}/specification/query_by_category",
+		cache : false,
+		type: "post",
+		dataType:"html",
+		data:{"categoryId":1},
+		success: function(data){
+			$('#specificationSelect').empty();
+
+			$('#specificationSelect').append(data);
+		},
+		error:function(){
+		}
+		
+	});
+	
+}
+
+
+</script>
+<h2 class="contentTitle">tree查找带回</h2>
+<div class="pageContent">
+<form action="${contextPath}/test/revice" method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone)">
+
+	<div class="pageFormContent" layoutH="97">
+	<a onclick="clean()">clean</a>
+	<a onclick="aa()">aa</a>
+<div  id="specificationSelect">
+
+
+
+<input type="text" value="sp1" name="sp" />
+<input type="checkbox" />
+<input name="sp1" type="checkbox" value="" />
+<input name="sp1" type="checkbox" value="" />
+<input name="sp1" type="checkbox" value="" />
+<input name="sp1" type="checkbox" value="" />
+
+
+
+</div>
+	
+	</div>
+	<div class="formBar">
+		<ul>
+			<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button class="close" type="button">关闭</button></div></div></li>
+		</ul>
+	</div>
+</form>
+</div>

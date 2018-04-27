@@ -1,0 +1,105 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<form method="post" action="${contextPath}/hjborder/order">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>客户端编号：</label>
+				<input type="text" name="payOrderCreateDTO.paymentClientId" size="40" maxlength="60" value="425078243aae407da092aaf3d4ab255b" />(必填)
+			</div>
+			<div class="unit">
+				<label>客户端密钥：</label>
+				<input type="text" name="payOrderCreateDTO.paymentClienKeys" size="40" maxlength="60" value="e10adc3949ba59abbe56e057f20f883e" />(必填)
+			</div>
+			<div class="unit">
+				<label>商城用户ID：</label>
+				<input type="text" name="payOrderCreateDTO.payerClientUserId" size="40" maxlength="60" value="1" />
+			</div>
+			<div class="unit">
+				<label>订单编号：</label>
+				<input type="text" name="payOrderCreateDTO.clientTradeNo" size="40" maxlength="60" value="" />(可不填，后台生成)
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>付款方姓名：</label>
+				<input type="text" name="payOrderCreateDTO.name" size="40" maxlength="60" value="张三" />
+			</div>
+			<div class="unit">
+				<label>付款方身份证号：</label>
+				<input type="text" name="payOrderCreateDTO.idCardNo" size="40" maxlength="60" value="360723199107114111" />
+			</div>
+				<div class="unit">
+				<label>付款方手机号：</label>
+				<input type="text" name="payOrderCreateDTO.mobile" size="40" maxlength="60" value="15279107876" />
+			</div>
+			<div class="unit">
+				<label>付款方银行卡所属银行代码：</label>
+				<input type="text" name="payerBankType" size="40" maxlength="60" value="1051000" />(必填)
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>收款方姓名：</label>
+				<input type="text" name="payOrderCreateDTO.payeeName" size="40" maxlength="60" value="浙江票量云数据科技股份有限公司" />(必填)
+			</div>
+			<div class="unit">
+				<label>收款方银行卡号：</label>
+				<input type="text" name="payOrderCreateDTO.payeeAccount" size="40" maxlength="60" value="33001616127053013216" />(必填)
+			</div>
+			<div class="unit">
+				<label>收款方银行卡开户名：</label>
+				<input type="text" name="payeeBankAccountName" size="40" maxlength="60" value="浙江票量云数据科技股份有限公司" />(必填)
+			</div>
+			<div class="unit">
+				<label>收款方银行卡所属银行代码：</label>
+				<input type="text" name="payeeBankType" size="40" maxlength="60" value="1051000" />(必填)
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>支付金额：</label>
+				<input type="text" name="payOrderCreateDTO.amount" size="40" maxlength="60" value="0.02" />(必填)
+			</div>
+			<div class="unit">
+				<label>支付渠道：</label>
+				<input type="text" name="payOrderCreateDTO.payChannelType" size="40" maxlength="60" value="3" />(必填)
+			</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>商户渠道编号：</label>
+				<input type="text" name="channelId" size="40" maxlength="60" value="LHBANK60" />(必填)
+			</div>
+			<div class="unit">
+				<label>商户编号：</label>
+				<input type="text" name="merCode" size="40" maxlength="60" value="8888888888" />(必填)
+			</div>
+			<div class="unit">
+				<label>付款方用户类型 ：</label>
+				<input type="text" name="customerType" size="40" maxlength="60" value="1" />(必填)
+			</div>
+			<div class="unit">
+				<label>服务IP：</label>
+				<input type="text" name="callerIp" size="40" maxlength="60" value="192.168.10.91" />(必填)
+			</div>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="unit">
+				<label>交易名称：</label>
+				<input type="text" name="tradeName" size="40" maxlength="60" value="交易名称" />(必填)
+			</div>
+			<div class="unit">
+				<label>商品名称 ：</label>
+				<input type="text" name="subject" size="40" maxlength="60" value="商品名称" />(必填)
+			</div>
+			<div class="unit">
+				<label>商品描述 ：</label>
+				<input type="text" name="description" size="40" maxlength="60" value="商品描述" />(必填)
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" >提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+
+

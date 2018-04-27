@@ -1,0 +1,101 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css'
+	rel='stylesheet' />
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" 
+		action="${contextPath}/subject/subjectList" method="post">
+		
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo?c)!20}"/>
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!1}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">
+						主题名称：
+					</td>
+					<td><input type="text" name="subjectName" value="${subjectQO.subjectName!}" ></td>
+					<td style="text-align: left">
+						主题分类：
+					</td>
+					<td>
+						<select  name="subjectType">
+								<option value="" 
+								<#if subjectQO.subjectType == "0">selected="selected"</#if>
+								>全部</option>
+								<option value="1" 
+								<#if subjectQO.subjectType == "1">selected="selected"</#if>
+								>线路主题</option>
+								<option value="2" 
+								<#if subjectQO.subjectType == "2">selected="selected"</#if>
+								>门票主题</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" ><span>查询</span></button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+							<a target="dialog" rel="addH5AD" href="${contextPath}/subject/addSubject" width="300" height="130" style="color: blue"><span>新增主题</span></a>					
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="150">
+		<thead>
+			<tr>
+				<th width="100">主题名称</th>
+				<th width="100">主题分类</th>
+				<th width="100">包含产品</th>
+				<th width="100">排序</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#if (pagination.list?size>0)> <#list pagination.list as subject>
+			<tr>
+				<td>${subject.subjectName}</td>
+				<td><#if subject.subjectType==1>线路主题<#else>门票主题</#if></td>
+				<td>${subject.productSUM!"0"}</td>
+				<td><table style="height: 100%;width: 100%">
+						<tr style="height: 100%">
+							<td style="width: 50%"><a target="ajaxTodo"
+								href="${contextPath}/subject/changeSort?id=${(subject.id)}&type=up"
+								style="color: blue">上移</a></td>
+							<td style="width: 50%"><a target="ajaxTodo"
+								href="${contextPath}/subject/changeSort?id=${(subject.id)}&type=down"
+								style="color: blue">下移</a></td>
+						</tr>
+					</table></td>
+				<td><table style="height: 100%;width: 100%" border="0">
+						<tr style="height: 50%">
+							<td style="width: 50%"><#if subject.subjectType==1><a target="dialog"
+								href="${contextPath}/subject/editSubject?subjectID=${subject.id}"
+								width="300" height="130" style="color: blue">修改</a><#else>&nbsp;</#if></td>
+							
+						</tr>
+					</table>
+				</td>
+			</tr>
+			</#list></#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

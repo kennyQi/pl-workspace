@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wxmenu>
+
+	<!-- 配置说明：系统URL用${system}代替 -->
+	<!-- 
+	<p_menu sub="true" name="预订">
+		<s_menu name="订机票" type="view" url="${system}/jp/init"/>
+		<s_menu name="订门票" type="view" url="${system}/mp/init" />
+		<s_menu name="订线路" type="view" url="${system}/line/list" />
+	</p_menu>
+	<p_menu sub="false" name="我的订单" type="view" url="${system}/user/jpos" />
+	<p_menu sub="false" name="我的账户" type="view" url="${system}/user/center" />
+	-->
+
+	<!--
+	<p_menu sub="false" name="红包聚变" type="view" url="${system}/topic/2015zqdyb" />
+	
+	<p_menu sub="false" name="庆典签到" type="view" url="${system}/activity/sign" />
+	
+	<p_menu sub="true" name="我要旅行">
+		<s_menu name="在线预定" type="view" url="${system}/index"/>
+		<s_menu name="个人中心" type="view" url="${system}/user/center" />
+	</p_menu>
+	-->
+
+	<p_menu sub="true" name="在线预定">
+		<s_menu name="机票预定" type="view" url="${system}/jp/init"/>
+		<s_menu name="线路预定" type="view" url="${system}/line/list" />
+		<s_menu name="门票预定" type="view" url="${system}/mp/list" />
+	</p_menu>
+
+	<p_menu sub="true" name="个人中心">
+		<s_menu name="订单管理" type="view" url="${system}/user/jpos"/>
+		<s_menu name="线路订单" type="view" url="${system}/hslH5/line/lineOrderListPage" />
+	</p_menu>
+	
+</wxmenu>

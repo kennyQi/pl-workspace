@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+	<!-- 消息工具 -->
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="plfxExchange_${rmq_env_name}" 
+		encoding="UTF-8" message-converter="jsonMessageConverter" />
+
+	<!-- 队列声明，未指定ID时使用name作为ID -->
+	<!-- 易行国内接口通知消息队列 -->
+	<rabbit:queue name="plfxGNJPNotifySyncQueue_${rmq_env_name}" />
+	<!-- 易行国际接口通知消息队列 -->
+	<rabbit:queue name="plfxGJJPSupplierNotifyQueue_${rmq_env_name}" />
+	<!-- 平台通知经销商消息队列 -->
+	<rabbit:queue name="plfxGJJPPlatformNotifyQueue_${rmq_env_name}" />
+	<!-- 分销线路通知消息队列 -->
+	<rabbit:queue name="plfxLineNotifySyncQueue_${rmq_env_name}" />
+	
+	<!-- 交换机与队列的绑定 -->
+	<rabbit:topic-exchange name="plfxExchange_${rmq_env_name}">
+		<rabbit:bindings>
+			<rabbit:binding queue="plfxGNJPNotifySyncQueue_${rmq_env_name}" pattern="plfx.gnjp.#" />
+			<rabbit:binding queue="plfxGJJPSupplierNotifyQueue_${rmq_env_name}" pattern="plfx.gjjp.supplier.#" />
+			<rabbit:binding queue="plfxGJJPPlatformNotifyQueue_${rmq_env_name}" pattern="plfx.gjjp.platform.#" />
+			<rabbit:binding queue="plfxLineNotifySyncQueue_${rmq_env_name}" pattern="plfx.xl.#" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+	
+	<!-- 消息监听器 -->
+	<bean id="yxgnNotifyMessageListener" class="plfx.gnjp.app.listener.YXGNNotifyMessageListener" />
+	<bean id="yxgjNotifyMessageListener" class="plfx.gjjp.app.component.listener.YXGJNotifyMessageListener" />
+	<bean id="platformNotifyMessageListener" class="plfx.gjjp.app.component.listener.PlatformNotifyMessageListener" />
+	<bean id="lineNotifyMessageListener" class="plfx.xl.app.listener.LineNotifyMessageListener" />
+	
+	<!-- 监听器容器配置 -->
+	<rabbit:listener-container connection-factory="connectionFactory" message-converter="jsonMessageConverter" concurrency="10">
+		<rabbit:listener ref="yxgnNotifyMessageListener" method="listen" queue-names="plfxGNJPNotifySyncQueue_${rmq_env_name}"/>
+		<rabbit:listener ref="yxgjNotifyMessageListener" method="listen" queue-names="plfxGJJPSupplierNotifyQueue_${rmq_env_name}"/>
+		<rabbit:listener ref="platformNotifyMessageListener" method="listen" queue-names="plfxGJJPPlatformNotifyQueue_${rmq_env_name}"/>
+		<rabbit:listener ref="lineNotifyMessageListener" method="listen" queue-names="plfxLineNotifySyncQueue_${rmq_env_name}"/>
+	</rabbit:listener-container>
+</beans>

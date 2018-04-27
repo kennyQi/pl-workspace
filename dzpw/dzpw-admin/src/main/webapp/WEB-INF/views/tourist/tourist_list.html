@@ -1,0 +1,145 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/tourist/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+		<ul class="searchContent" style="overflow: inherit;">
+			
+			<li style="width: 250px;">
+					<label>游客姓名：</label>
+					<input type="text" id="name" name="name" value="${touristQo.name?html}" />
+			</li>
+		
+			<li style="width: 250px;">	
+					<label>证件类型：</label>
+						<select name="idType" id="idType">
+							<option value="0">全部</option>
+							<option value="1"  <#if 1 == touristQo.idType>selected="selected"</#if>>身份证</option>
+							<option value="3"  <#if 3 == touristQo.idType>selected="selected"</#if>>军官证</option>
+							<option value="2"  <#if 2 == touristQo.idType>selected="selected"</#if>>护照</option>
+							<option value="4"  <#if 4 == touristQo.idType>selected="selected"</#if>>其他</option>
+						</select>
+			</li>
+			
+			<li style="width: 250px;">
+					<label>证件号：</label>
+					<input type="text" id="idNo" name="idNo" value="${touristQo.idNo?html}" />
+			</li>
+			
+			<li style="width: 250px;">
+					<label>手机号：</label>
+					<input type="text" id="telephone" name="telephone" value="${touristQo.telephone?html}" />
+			</li>
+			
+			<li style="width: 500px;">
+					<label style="width: 100px;">首次购买时间：</label>
+					<input type="text" id="firstBuyDateStartStr" name="firstBuyDateStartStr" value="${(touristQo.firstBuyDateStart?string('yyyy-MM-dd'))!''}"
+						class="date" readonly="true"/> -
+					<input type="text" id="firstBuyDateEndStr" name="firstBuyDateEndStr" value="${(touristQo.firstBuyDateEnd?string('yyyy-MM-dd'))!''}"
+						class="date" readonly="true" />
+				</li>
+			
+		</ul>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit"  onclick="return checkTimeStr()">查询</button>
+							</div>
+						</div>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="initText()">重置</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="160">
+		<thead>
+			<tr>
+				<th width="30">序号</th>
+				<th width="60">姓名</th>
+				<th width="50">证件类型</th>
+				<th width="30">证件号码</th>
+				<th width="40">手机号</th>
+				<th width="60">首次购买时间</th>
+				<th width="40">购买次数</th>
+				<th width="40">消费总和(￥)</th>
+				<th width="50">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#assign i=1 />
+			<#list pagination.list as tourist>
+			<tr>
+				<td>${i}</td>
+				<#assign i=i+1 />
+				<td>
+					${tourist.name!?html}
+				</td>
+				<td>
+					<#if tourist.idType == 1>
+						身份证
+					<#elseif tourist.idType == 2>
+						护照
+					<#elseif tourist.idType == 3>
+						军官证
+					<#elseif tourist.idType == 4>
+						其他
+					</#if>		
+				</td>
+				<td>
+					${tourist.idNo!?html}
+				</td>
+				<td>
+					${tourist.telephone!?html}
+				</td>
+				<td>
+					${(tourist.firstBuyDate?string("yyyy-MM-dd HH:mm"))!''}
+				</td>
+				<td>
+					${tourist.buyTimes!?html}
+				</td>
+				<td>
+					${tourist.buyAmountTotal!?html}
+				</td>
+				<td>
+					<a title="修改" target="dialog" rel="editTourist" mask="true" href="${contextPath}/tourist/edit/${tourist.id}" height="500" width="400" style="color: blue">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a title="查看详情" target="dialog" rel="touristPre" mask="true" href="${contextPath}/tourist/view/${tourist.id}" height="600" width="400" style="color: blue">查看详情</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+   function checkTimeStr(){
+       if($("#firstBuyDateStartStr").val()>$("#firstBuyDateEndStr").val() && $("#firstBuyDateEndStr").val()!=""){
+           alert("首次购买开始时间不能大于首次购买结束时间!");
+           return false
+       }else{
+           return true;
+       }
+   }
+   
+   function initText(){
+       $("#idType", navTab.getCurrentPanel()).attr("value","0");
+       $("#idNo", navTab.getCurrentPanel()).attr("value","");
+       $("#firstBuyDateStartStr", navTab.getCurrentPanel()).attr("value","");
+       $("#firstBuyDateEndStr", navTab.getCurrentPanel()).attr("value","");
+       $("#name", navTab.getCurrentPanel()).attr("value","");
+       $("#telephone", navTab.getCurrentPanel()).attr("value","");
+   }
+</script>

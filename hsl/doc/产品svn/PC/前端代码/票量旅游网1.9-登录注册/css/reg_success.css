@@ -1,0 +1,41 @@
+/* liwei */
+/* 2015-05-26 */
+.transparent_white{ background:#FFFFFF; background-color:rgba(255,255,255,0.98) !important;filter:Alpha(opacity=98); color:#333;}
+.reg_pwd{ width:1040px; height:333px;}
+.reg_pwd .suc{ width:231px; height:50px; margin-top:80px; margin-left:352px; margin-bottom:20px;}
+.reg_pwd .suc i{width:50px;height:50px; float:left; background:url(../images/regScript_bg.png) 0 -75px;}
+.reg_pwd .suc span{ font-size:26px; color:#00a252; margin-top:5px; margin-left:15px;}
+.reg_pwd .prompt{ width:340px; height:120px;line-height:28px; margin:2px 0 0 418px;}
+.reg_pwd .prompt a{color:#0073b6;}
+.reg_pwd .prompt a:hover{ text-decoration:underline;}
+
+
+/*注册页面主体*/
+.reg_bg{ height:1059px; margin-top:20px; background:url("../images/login_bg.jpg") no-repeat center center; min-width:1200px;}
+.reg_bg .reg_box{  height:716px; margin-top:80px; padding-bottom:200px;}
+/*注册页面主体*/
+
+/*注册页面页脚*/
+.g_f{width:620px;margin:auto;overflow:hidden;padding-bottom: 65px;}
+.g_f a{color:#e8e8e8;float:left;padding-right:10px;margin-right: 10px;border-right:1px solid #aaaaaa;font-size:12px;line-height:12px;}
+.g_f a:hover{color:#fff;}
+.g_f a.last{border:0px;}
+/*注册页面页脚*/
+/*提示框*/
+.m_errTips{position:absolute;left:0px;top:0px;overflow:hidden;}
+.m_errTips .l{height:67px;background: url("../images/login_b3.png");border:1px solid #e0e0e0;border-left:0px;}
+.m_errTips .l span{background: url("../images/login_i3.png") no-repeat 0px 0px;padding-left:38px;color:#333333;line-height:24px;font-size:12px;margin:20px 60px 0px 20px;}
+.m_errTips .r{background: url("../images/login_i5.png") no-repeat;height:66px;width:14px;}
+
+/* liwei */
+/* 2015-05-26 */
+.reg_success{ width:1040px; height:559px;}
+.reg_success .suc{ width:180px; height:50px; margin-top:80px; margin-left:396px; margin-bottom:25px;}
+.reg_success .suc i{width:50px;height:50px; float:left; background:url(../images/regScript_bg.png) 0 -75px;}
+.reg_success .suc span{ font-size:26px; color:#00a252; margin-top:5px; margin-left:20px;}
+.reg_success .succes_ts{ display:block; clear:both;}
+.reg_success .email{width:392px;height:77px; background:url(../images/regScript_bg.png) 0 -130px; margin:60px 0 0 315px;}
+.reg_success .email a{color:#fff; margin:27px 0 0 177px;}
+.reg_success .prompt{ width:340px; height:120px; margin:60px 0 0 340px; line-height:26px;}
+.reg_success .prompt a{color:#0073b6;}
+.reg_success .prompt a:hover{ text-decoration:underline;}

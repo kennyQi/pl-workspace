@@ -1,0 +1,79 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return dialogSearch(this);" action="${contextPath}/report/ticket_use_count/detail_list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						用户姓名：<input type="text" id="userName" name="userName" value="${userName}" size="25"/>
+					</td>
+					<td>
+						证件号码：<input type="text" id="cerNo" name="cerNo" value="${cerNo}" size="25"/>
+								 <input type="hidden" id="ticketPolicyId" name="ticketPolicyId" value="${ticketPolicyId}">
+								 <input type="hidden" name="saleBeginTimeStr" value="${saleBeginTimeStr}">
+								 <input type="hidden" name="saleEndTimeStr" value="${saleEndTimeStr}">
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit">查询</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" target="dwzExport" href="${contextPath}/report/ticket_use_count/export/detail" ><span>导出EXCEL</span></a>
+			</li>
+		</ul>
+	</div>
+	
+	<table class="table" width="100%" layoutH="85" id="table_caiwu" nowrapTD="false">
+		<thead>
+			<tr>
+				<th width="100px;">证件类型</th>
+				<th width="200px;">证件号码</th>
+				<th width="150px;">用户姓名</th>
+				<th width="220px;">票务名称</th>
+				<th width="220px;">入园景区</th>
+				<th width="420px;">入园时间</th>
+			</tr>
+		</thead>
+		<#list pagination.list as d>
+			<tr height="110px;">
+				<td>
+					<#list cerMap?keys as k>
+						<#if k==d.cerType>
+							${cerMap[k]}
+						</#if>
+					</#list>
+				</td>
+				<td>${d.cerNo}</td>
+				<td>${d.name}</td>
+				<td>${d.ticketPolicyName}</td>
+				<td>${d.scenicSpotName}</td>
+				<td >
+					<p style="max-height: 80px; max-width: 400px; overflow: scroll;">
+					<#list d.useDates as ud>
+						${ud?string("yyyy-MM-dd HH:mm:ss")}&nbsp;&nbsp;
+						<#if (ud_index+1)%2==0>
+							<br/><br/>
+						</#if>
+					</#list>
+					</p>
+				</td>
+			</tr>
+		</#list>
+	</table>
+</div>

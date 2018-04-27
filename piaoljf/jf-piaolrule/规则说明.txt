@@ -1,0 +1,21 @@
+﻿PiaolConsumptionLogic.java  下单消费规则
+测试data为 {"date":"20140110","birthday":"20141011","tradeName":"consumption","user":"tom","money":"100","level":"白银会员","tradeWay":"computer"} 
+其中的level（会员等级）有：钻石会员，白金会员，金牌会员，白银会员，普通会员。
+tradeWay(下单方式)有：电猫下单（computer）,手机下单（wireless）
+
+PiaolDealLogic.java   统计每月消费天数规则
+测试data为{"date":"20140110","tradeName":"deal","user":"tom"}
+
+PiaolEventLogic。java   事件规则（完善规则，邮箱绑定，手机绑定）
+测试data为{"tradeName":"perfectInfo","user":"tom"}
+测试的tradeName:perfectInfo（完善资料）,phoneBinding（手机绑定）,mailBinding（邮箱绑定）
+
+
+PiaolInviteFriendslogic.java  邀请好友规则
+测试data为{"tradeName":"inviteFriends","user":"tom"}
+
+
+PiaolSignLogic.java  签到规则
+测试data为{"date":"20140110","tradeName":"sign","user":"tom","level":"白银会员"}
+其中的level（会员等级）有：钻石会员，白金会员，金牌会员，白银会员，普通会员。
+

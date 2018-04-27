@@ -1,0 +1,20 @@
+body{background: #fff;}
+.order_list{border-bottom: 1px solid #f2f2f2;padding:20px;}
+
+.order_detail{-webkit-box-flex:9;box-flex:9;}
+.price{-webkit-box-flex:5;box-flex:5;color:#999999;line-height:28px;text-align: center;}
+.right_bar{width: 10px;}
+.order_detail i{color:#33ccff;margin-right: 10px;font-size:20px;vertical-align: middle;}
+.order_detail span{display: block;}
+.order_detail .date{color:#999999;}
+.price label{color:#ff6666;display: block;}
+.right_bar{line-height:60px;color:#999999;font-size:20px;}
+
+.tips{text-align: center;
+    position: absolute;top:160px;left:0px;width: 100%;font-size:20px;color:#e4e5e6;}
+.tips i{display:inline-block;width: 51px;height: 31px;background: url("../images/logo.png") no-repeat;
+    background-size: contain;vertical-align: middle; margin-right: 10px;}
+
+.choose{display: block;margin: 20px auto 0px auto;width: 160px;height:40px;background:#33ccff;color:#fff;
+font-size:17px;text-align: center;line-height: 40px;}
+

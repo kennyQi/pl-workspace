@@ -1,0 +1,47 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>呵护名胜</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/historic.css" rel="stylesheet" />
+
+</head>
+
+<body>
+<h1 class="gd_tt">
+	<label class="t">呵护名胜</label>
+    <i class="i bgSize"></i>
+</h1>
+<article class="cont">
+	<input id="fileUploadPath" type="hidden" value="${fileUploadPath}"/>
+	<input id="contextPath" type="hidden" value="${contextPath}"/>
+	<p class="cont_detail paT paB">为什么要保护名胜古迹及怎样保护名胜古迹。<br/>
+	1、知道我国的名胜古迹是中华民族文明的象征<br/>2、懂得爱护名胜古迹是热爱祖国的表现，人人 都应爱护名胜古迹。</p>
+	<!--名胜古迹列表-->
+	<ul class="hist_list">
+		<#list pagination.list as scenic>
+			<li class="box paT">
+			<a href="${contextPath}/scenic/details/${scenic.id}" style="text-decoration:none;">
+	        	<img src="${fileUploadPath}${(scenic.scenicSpotBaseInfo.titleImage.urlMaps['MIDDLE'])!''}" alt="湖南3家新晋5A景区揭牌" class="pic">
+	        	<p class="tt">${scenic.scenicSpotBaseInfo.name}</p></a>
+        	</li>
+        	
+		</#list>
+    </ul>
+    
+	<!--名胜古迹列表-->
+</article>
+<a href="${contextPath}/scenic/add" title="加入名胜" class="gd_submit">加入名胜</a>
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${contextPath}/resources/js/sceniclist.js"></script>
+<script type="text/javascript">
+var pageNo=${pagination.pageNo},pageSize=${pagination.pageSize};
+/* var pullUpEl = document.getElementById('pullUp');	
+var pullUpOffset = pullUpEl.offsetHeight; */
+
+</script>
+</body>
+</html>

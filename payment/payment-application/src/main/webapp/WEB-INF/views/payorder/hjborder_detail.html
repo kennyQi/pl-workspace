@@ -1,0 +1,125 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58" >
+			<div class="unit">
+			  <label>平台订单编号：</label>
+			  ${order.id!?html}
+			</div>
+			<div class="unit">
+			  <label>商户订单编号：</label>
+			  ${order.clientTradeNo!?html}
+			</div>
+			<div class="unit">
+			  <label>支付金额：</label>
+			  ${order.amount!?html}
+			</div>
+			<div class="unit">
+			  <label>创建时间：</label>
+			  ${order.createDate?string('yyyy-MM-dd HH:mm:ss')}
+			</div>
+			<div class="unit">
+			  <label>支付渠道：</label>
+                                                              汇金宝
+			</div>
+			<div class="unit">
+			  <label> 汇金宝交易订单号：</label>
+			   ${order.thirdPartyTradeNo!?html}
+			</div>
+			<div class="unit">
+			  <label>收款账号：</label>
+			   ${order.payeeInfo.payeeAccount}
+			</div>
+			<div class="unit">
+			  <label>收款户名：</label>
+			   ${order.payeeInfo.payeeName}
+			</div>
+			<div class="unit">
+			  <label>收款户方银行卡类型：</label>
+			   ${order.payeeBankType}
+			</div>
+			<div class="unit">
+			  <label>付款方帐号：</label>
+			   ${order.payerInfo.payerAccount!?html}
+			</div>
+			<div class="unit">
+			  <label>付款方姓名：</label>
+			   ${order.payerInfo.name}
+			</div>
+			<div class="unit">
+			  <label>付款方银行卡类型：</label>
+			  ${order.payerBankType!?html}
+			</div>
+			<div class="unit">
+			  <label>付款方手机号码：</label>
+			   ${order.payerInfo.mobile}
+			</div>
+			<div class="unit">
+			  <label>付款方身份证号：</label>
+			   ${order.payerInfo.idCardNo}
+			</div>
+			<div class="unit">
+			  <label>客户端用户ID：</label>
+			   ${order.payerInfo.payerClientUserId}
+			</div>
+			
+			<div class="unit">
+			  <label>客户端名称：</label>
+			   ${order.paymentClient.name}
+			</div>
+			<div class="unit">
+			  <label>支付状态：</label>
+			   ${payStatus}
+			</div>
+			<div class="unit">
+			  <label>通知状态：</label>
+			   ${notifyStatus}
+			</div>
+			<div class="unit">
+			  <label>备注：</label>
+			   ${order.orderRemark}
+			</div>
+			
+			<div class="unit">
+				<label>订单名称：</label>
+				${order.tradeName!?html}
+			</div>
+			<div class="unit">
+			  <label>商品名称：</label>
+			  ${order.subject!?html}
+			</div>
+			<div class="unit">
+			  <label>商品描述：</label>
+			  ${order.description!?html}
+			</div>
+			<div class="unit">
+			  <label>商城汇金宝渠道编号：</label>
+			  ${order.channelId!?html}
+			</div>
+			<div class="unit">
+			  <label>商城汇金宝商户编号：</label>
+			  ${order.merCode!?html}
+			</div>
+			<div class="unit">
+			  <label>商城IP：</label>
+			  ${order.callerIp!?html}
+			</div>
+			<div class="unit">
+			  <label>付款方用户类型 ：</label>
+			   <#if order.customerType==1>
+			      	个人
+			   <#elseif order.customerType==2>
+			   		企业
+			   </#if>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">确定</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+

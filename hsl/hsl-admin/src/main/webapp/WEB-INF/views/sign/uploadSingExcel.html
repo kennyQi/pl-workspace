@@ -1,0 +1,37 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	//上传文件 表单验证
+	function uploadSignDataExcelCheck(that){
+		try{
+			iframeCallback(that, dialogAjaxDone);
+		 }catch(e){
+		  	console.info(e);
+		 }
+	  return false;
+	}
+</script>
+<div>
+<!-- 	<form action="${contextPath}/sign/activity/uploadSignDataExcel" method="post" onsubmit="return uploadSignDataExcelCheck(this);" enctype="multipart/form-data"> -->
+	<form action="${contextPath}/sign/activity/uploadSignDataExcel" method="post" onsubmit="return iframeCallback(this, dialogAjaxDone);" enctype="multipart/form-data">
+		<input type="file" value="点击上传文件" name="file"/>
+			<!--按钮区域  -->
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+						   <button class="close" type="button">取消</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+						   <button type="submit">确定</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

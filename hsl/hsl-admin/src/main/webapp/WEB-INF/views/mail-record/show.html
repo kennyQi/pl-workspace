@@ -1,0 +1,60 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'mail-remail' />
+<#assign pathUrl = (contextPath+'/mail-remail') />
+
+<div class="pageContent">
+		<div class="pageFormContent" layoutH="30">
+			<div class="unit">
+				<label>邮箱服务器：</label>
+				<input size="64" readonly="readonly" value="${mail.host}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>邮件协议：</label>
+				<input size="64" value="${mail.protocol}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>用户名：</label>
+				<input size="64" value="${mail.userName}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>密码：</label>
+				<input size="64" value="${mail.password}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>邮件标题：</label>
+				<input size="64" value="${mail.title}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>邮件内容：</label>
+				<textarea style="width: 72%;" rows="5">${mail.content}</textarea>
+			</div>
+			<div class="unit">
+				<label>发送人：</label>
+				<input size="64" value="${mail.sender}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>接收人：</label>
+				<input size="64" value="${mail.acceptStr}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>错误信息：</label>
+				<textarea style="width: 72%;" rows="5">${mail.errorStack}</textarea>
+			</div>
+			<div class="unit">
+				<label>SSL认证：</label>
+				<input size="64" value="${(mail.isSSL())?string('是','否')}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>邮件状态：</label>
+				<input size="64" value="${(mail.status == 0)?string('成功','失败')}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>发送时间：</label>
+				<input size="64" value="${mail.createDate?string('yyyy-MM-dd HH:mm:ss')}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>发送时间：</label>
+				<input size="64" value="${mail.endTime?string('yyyy-MM-dd HH:mm:ss')}" readonly="readonly"/>
+			</div>
+		</div>
+</div>

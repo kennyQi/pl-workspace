@@ -1,0 +1,32 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+   <form method="post" enctype="multipart/form-data" action="${contextPath}/airtkt/policy/cancel" 
+       class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+       <input type="hidden" name="policyId" value="${(policyId)!''}"/>
+       
+       <div class="pageFormContent" layoutH="58">
+           <input type="hidden" name="id" value="${policyId}">
+           <div class="unit">
+               <span>请填写取消原因</span>
+           </div>
+           <div class="unit">
+               <textarea rows="4" cols="20" name="cancleReason" class="required">
+               </textarea>
+           </div>
+       </div>
+       <div class="formBar">
+           <ul>
+               <li><div class="buttonActive">
+                       <div class="buttonContent">
+                           <button type="submit">提交</button>
+                       </div>
+                   </div></li>
+               <li><div class="button">
+                       <div class="buttonContent">
+                           <button type="button" class="close">取消</button>
+                       </div>
+                   </div></li>
+           </ul>
+       </div>
+   </form>
+</div>

@@ -1,0 +1,128 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-4">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption font-green-sharp">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">资源树</span>
+				</div>
+				<div class="tools">
+					<a href="javascript:;" class="collapse"> </a>
+					<!-- <a href="#portlet-config" data-toggle="modal" class="config">
+					</a> -->
+					<a href="javascript:;" class="reload"> </a>
+					<!-- <a href="javascript:;" class="remove">
+					</a> -->
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div target="tree" data-url="${contextPath}/hg/auth/perm/permTree"
+					data-param="parentId" data-ref="#permGrid" data-ref-param="{parentId: node.id}"
+					data-callback="function(data) { $('#addBtn').attr('href', $('#addBtn').attr('org-href') + '?parentId=' + data.node.id) }"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">资源列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/hg/auth/perm/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="permIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a>
+					<a href="${contextPath}/hg/auth/perm/add" org-href="${contextPath}/hg/auth/perm/add"
+						class="btn btn-default btn-sm" target="hgTab" id="addBtn"> <i
+						class="fa fa-plus"></i> 添加
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							资源路径：
+							<input class="form-control input-small input-inline" name="url" id="url">
+						</label>
+					</div>
+					<div class="col-md-4">
+						<label class="control-label col-md-5" 
+							style="height:32px; line-height:32px;">类型：</label>
+						<div class="col-md-7">
+							<select class="form-control select2me" target="dropDown" name="permType" id="permType">
+								<option value="">所有类型</option>
+								<option value="0">检查权限</option>
+								<option value="1">检查角色</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-4 text-right">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#permGrid" data-ref-param="{urlLike: $('#url').val(), permType: $('#permType').val()}"><i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" group="permIds"
+								class="checkboxCtrl"/></th>
+							<th>名称</th>
+							<th>资源路径</th>
+							<th>类型</th>
+							<th>需要检查的角色名</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="permGrid" target="grid" data-url="${contextPath}/hg/auth/perm/permlist" 
+						data-setData="function(record) {
+							var result = this.result;
+							if (result) {
+								var condition = result.condition;
+								var permType = record.permType;
+								for (var i in condition) {
+									var item = condition[i];
+									if (item.key == permType) {
+										record.permTypeCn = item.value;
+										break;
+									}
+								}
+							}
+						}">
+						<tr class="odd gradeX">
+							<td>
+								<input type="checkbox" name="permIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td>
+							<td>
+								{displayName}
+							</td>
+							<td>
+								{url}
+							</td>
+							<td>
+								{permTypeCn}
+							</td>
+							<td>
+								{permRole}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/hg/auth/perm/del?permIds={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/auth/perm/edit?id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

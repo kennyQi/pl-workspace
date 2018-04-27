@@ -1,0 +1,9 @@
+/* CSS Document */
+/*liwei 2015-4-28     emailVerification.html right*/
+.emailBox{ background:#fff; border:1px solid #dfe8ef; min-height:460px; margin-top:20px;}
+.emailBox .boxTitle{color:#98abbc; background:#f5f9fb; height:60px; line-height:60px; font-size:24px;}
+.emailBox .boxTs{ margin-top:30px;}
+.emailBox .openEmail{ width:391px;height:76px; float:left; margin-left:400px; margin-top:60px; background:url(../images/popup_script.png) 0 -1146px; color:#fff; line-height:76px;}
+.emailBox .prompt{ clear:both; margin-left:420px; margin-top:60px; width:360px; line-height:26px; margin-bottom:60px;}
+.emailBox .prompt a{ color:#0073b6; margin-left:5px;}
+.emailBox .prompt a:hover{ text-decoration:underline;}

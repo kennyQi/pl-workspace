@@ -1,0 +1,34 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageHeader" layoutH="26">
+
+		<div>
+			<table border="0" >
+				<tr height="25px;">
+					<td style="width:400px" align="left">事件发生时间：</td>
+					<td style="width:600px;">${e.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				</tr>
+				<tr height="25px;">
+					<td style="width:400px" align="left">事件类型：</td>
+					<td style="width:600px;">${e.type}</td>
+				</tr>
+				<tr height="25px;">
+					<td style="width:400px" align="left">事件文字说明：</td>
+					<td style="width:600px;">${e.remark}</td>
+				</tr>
+				<tr height="25px;">
+			 		<td style="width:400px;" align="left">主体JSON：</td>
+			 		<td style="width:600px;"><textarea rows="6" cols="80">${e.payloadJson}</textarea></td>
+			 	</tr>
+			 	<tr height="25px;"/>
+			 	<tr height="25px;">
+			 		<td style="width:400px;" align="left">旧值主体JSON：</td>
+			 		<td style="width:600px;"><textarea rows="6" cols="80">${e.payloadOldJson}</textarea></td>
+			 	</tr>
+			 	
+		</div>
+
+
+
+</div>

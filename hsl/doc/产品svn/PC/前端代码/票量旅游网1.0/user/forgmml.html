@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>忘记密码</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/flogin.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+   <!--content-->
+  <div class="content">
+  <div class="h40"></div>
+    <div class="contpic">
+       <div class="wj">忘记密码</div>
+       <div class="mid">
+         <div class="usranm">用户名:<input class="dp kung txt_focus" id="dp"type="text" value="请输入您的用户名找回密码" /> 
+         <span class="red">该用户不存在</span>
+         </div>
+         <div  class="dp"><input type="radio" name="cback" checked="checked" class="email_p"/>邮箱找回
+              <input type="radio"name="cback" class="iph" id="tel_p" />手机找回
+         <span class="yznum" style="display:none;">验证码发送到您绑定的手机189****4889</span>
+         </div>
+        
+         <div>
+              <div class="tjao"><div class="ttj"><a href="#">提交</a></div></div>
+         </div>
+       </div>
+    </div>
+  </div>
+  <!--end content-->
+   <!--footer-->
+  <div id="footer" class="mt20">
+    <div class="fooerBD">
+      <div class="L about">
+        <dl>
+          <dt><a href="#">关于我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">加盟合作</a></dt>
+          <dd><a href="#">友情链接</a><a href="#">网站联盟</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">联系我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+        </dl>
+      </div>
+      <div class="L w260">
+        <div class="hot_phone">
+          <p><i class="tel"></i>24小时客服热线：4008-117-117</p>
+          <p><i class="tel"></i>境外游客紧急联络电话：4008-117-117</p>
+          <p><i class="QQ"></i>在线客服：QQ1</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript">
+$(".iph").click(function(){
+	$(".yznum").show();
+	})
+$(".email_p").click(function(){
+	$(".yznum").hide();
+	})	 
+ </script>
+<script type="text/javascript" src="../js/gb.js"></script>
+
+</body>
+</html>
+

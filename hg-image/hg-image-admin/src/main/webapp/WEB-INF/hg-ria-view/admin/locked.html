@@ -1,0 +1,59 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<title>锁屏模板页</title>
+<#include "/include/meta_include.html" /> 
+<#include "/include/css_include.html" /> 
+<link href="${contextPath}/resources/hg-ria/assets/admin/pages/css/lock.css" rel="stylesheet" type="text/css"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<div class="page-lock">
+	<div class="page-logo">
+		<a class="brand" href="index.html">
+		<img src="${contextPath}/resources/hg-ria/assets/admin/layout/img/logo-big.png" alt="logo"/>
+		</a>
+	</div>
+	<div class="page-body">
+		<img class="page-lock-img" src="${contextPath}/resources/hg-ria/assets/admin/pages/media/profile/profile.jpg" alt="">
+		<div class="page-lock-info">
+			<h1><#if Session["_SESSION_USER_"]??>${Session["_SESSION_USER_"].loginName}</#if></h1>
+			<!-- <span class="email">
+			bob@keenthemes.com </span> -->
+			<span class="locked">
+			<#if message>
+				${message}
+			<#else>
+				锁定的用户
+			</#if> </span>
+			<form class="login-form" action="${contextPath}/lockedLogin" method="post">
+				<div class="input-group input-medium">
+					<input type="hidden" name="loginName" value="<#if Session["_SESSION_USER_"]??>${Session["_SESSION_USER_"].loginName}</#if>">
+					<input type="password" class="form-control" name="password" placeholder="密码">
+					<span class="input-group-btn">
+						<button type="submit" class="btn blue icn-only"><i class="m-icon-swapright m-icon-white"></i></button>
+					</span>
+				</div>
+				<!-- /input-group -->
+				<div class="relogin">
+					<a href="${contextPath}/logout">
+					不是  <#if Session["_SESSION_USER_"]??>${Session["_SESSION_USER_"].loginName}</#if> ? </a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="page-footer-custom">
+		 2014 &copy; HG - Admin Dashboard Template.
+	</div>
+</div>
+<#include "/include/js_include_login.html" /> 
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,122 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<!-- 头部查询信息部分 -->
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/notice/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">公告标题：</td>
+					<td><input type="text" name="title" value="${noticeQO.title}"></td>
+					<td style="text-align: left">发布时间：</td>
+					<td><input type="text" name="beginTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="${(noticeQO.beginTime)!}" />-
+						<input type="text" name="endTime" class="date textInput readonly" datefmt="yyyy-MM-dd" value="${(noticeQO.endTime)!}"/></td>
+					<td style="text-align: left">审核状态：</td>
+					<td style="text-align: left">
+						<select name="checkedStatus">
+								<#if noticeQO.checkedStatus ??>
+					    	     	<#if noticeQO.checkedStatus ==1>
+						            	<option value=""  >全部</option>
+						                <option value="1"  selected="selected">待审核</option>
+						                <option value="2"  >审核通过</option>
+						                <option value="3"  >审核不通过</option>
+						            <#elseif noticeQO.checkedStatus ==2>
+						            	<option value=""  >全部</option>
+						            	<option value="1"  >待审核</option>
+						                <option value="2"  selected="selected">审核通过</option>
+						                <option value="3"  >审核不通过</option>
+					    	       	<#elseif noticeQO.checkedStatus ==3>
+						            	<option value=""  >全部</option>
+						            	<option value="1"  >待审核</option>
+						                <option value="2"  >审核通过</option>
+						                <option value="3" selected="selected">审核不通过</option>
+					    	        </#if>
+				    	        <#else>
+						            	<option value="" selected="selected">全部</option>
+						            	<option value="1" >待审核</option>
+						                <option value="2" >审核通过</option>
+						                <option value="3" >审核不通过</option>
+					            </#if>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button onclick="return checkQuery();">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<!-- 页面主体 -->
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<button type="button" group="ids" class="checkboxCtrl">全选</button>
+			</li>
+			<li>
+				<button type="button" group="ids" class="checkboxCtrl" selectType="invert">反选</button>
+			</li>
+			<li class="line hover">line</li>
+			<li><a class="add" href="${contextPath}/notice/addNotice" target="dialog" mask="true" width="905" height="600" ><span>添加公告</span></a></li>
+			<li><a title="确实要删除这些公告吗？" target="selectedTodo" postType="string" rel="ids" href="${contextPath}/notice/deleteAll" class="delete"><span>批量删除</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="170">
+		<thead>
+			<tr>
+				<th width="50"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="100">标题</th>
+				<th width="150">截止时间</th>
+				<th width="150">发布时间</th>
+				<th width="100">审核状态</th>
+				<th width="150">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#if (pagination.list?size>0)> 
+			<#list pagination.list as noticeDto>
+			<tr>
+				<td><input name="ids" value="${(noticeDto.id)!}" type="checkbox"></td>
+				<td>${(noticeDto.baseInfo.title)!}</td>
+				<td>${noticeDto.baseInfo.cutOffTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+				<td>${noticeDto.baseInfo.createTime?string('yyyy-MM-dd HH:mm:ss')}</td>
+				<td>
+					<#if noticeDto.status.checkedStatus==1>
+						未审核 
+					<#elseif noticeDto.status.checkedStatus==2>
+						审核通过
+					<#else>
+						审核不通过
+					</#if>
+				</td>
+				<td>
+					<a href="${contextPath}/notice/modifyNotice?id=${(noticeDto.id)!}" target="dialog" width="905" height="600" title="公告修改">修改</a>
+					<a href="${contextPath}/notice/delete?id=${(noticeDto.id)!}" target="ajaxTodo" title="确定要删除该公告吗？删除后将不可恢复">删除</a>
+					<#if noticeDto.baseInfo.cutOffTime?datetime gt nowDate?datetime>
+						<a href="${contextPath}/notice/toCheck?id=${(noticeDto.id)!}" target="dialog" height="800" width="1000" title="公告审核">审核</a>
+					</#if>
+				</td>
+			</tr> 
+			</#list> 
+			</#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+//检查查询条件
+function checkQuery(){
+}
+</script>

@@ -1,0 +1,33 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> <@frame.head "中智票量 -网站公告">
+<link href="${contextPath}/resources/css/cart.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-2.1.0.min.js"></script>
+<style  type="text/css">
+.main{ background:#fff; padding:19px;}
+.notice h1{ padding:17px 0; text-align:left; font-size:14px; color:#333; font-family:"微软雅黑"}
+.notice_info{ padding:20px 50px}
+.notice_info .green{ color:#74a900;  font-weight:bold;text-align:center;font-size:24px; }
+.notice_info h3{ padding:15px 0; color:#999; font-weight:normal;line-height: 18px;font-size: 12px;}
+.notice p{ color:#999; margin-bottom:6px;font-size:12px;line-height: initial;}
+.online{ height:1px; width:100%; background:url(${contextPath}/resources/img/online.jpg) repeat-x }
+ </style>
+</@frame.head> <@frame.main "default" >
+<div class="wrapper">
+	<div class="content">
+	<div class="main mt10">
+			<div class="notice">
+				<h1>网站公告</h1>
+				<div class="online"></div>
+				<div class="notice_info">
+					<p class="green">${(noticeDto.baseInfo.title)!}</p>
+					${(noticeDto.baseInfo.details)!"暂无信息..."}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</@frame.main> <@frame.end "default"></@frame.end>
+<script type="text/javascript"
+	src="${contextPath}/resources/js/common.js">
+	
+</script>

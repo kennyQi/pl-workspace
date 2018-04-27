@@ -1,0 +1,80 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm"
+		onsubmit="return divSearch(this,'${handleType}MpTable');"
+		action="${contextPath}/recommend/mpList" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo?c)!20}" /> 
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!1}" />
+		<input type="hidden" name="handleType" value="${handleType}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">门票名称：</td>
+					<td><input type="text" name="name"
+						value="${scenicSpotQO.name}">
+					</td>
+					<td>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit" style="width: 32px">查询&nbsp;&nbsp;</button>
+						</div>
+					</div>
+				</td>
+				</tr>
+
+
+				<tr>
+					<td style="text-align: left"></td>
+					<td></td>
+				</tr>
+			</table>
+
+
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="150">
+		<thead>
+			<tr>
+				<th width="100">门票名称</th>
+				<th width="100">添加时间</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list scenicSpotList as scenicSpot>
+			<tr>
+				<td>${scenicSpot.baseInfo.name}</td>
+				<td>${scenicSpot.baseInfo.createDate?date}</td>
+				<td><#if recommend.recommendAction==scenicSpot.id> 
+				<input type="radio" name="recommendActionCheck" value="${scenicSpot.id}" checked="checked"
+					onclick="checkMp(this.value);">选取 <#else>
+					<input type="radio" name="recommendActionCheck" value="${scenicSpot.id}"
+					onclick="checkMp(this.value);">选取 </#if>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span> <select class="combox" name="numPerPage"
+				onchange="navTabPageBreak({numPerPage:this.value},'${handleType}MpTable')">
+				<option value="20"<#if
+					pagination.pageSize==20>selected="selected"</#if>>20</option>
+				<option value="50"<#if
+					pagination.pageSize==50>selected="selected"</#if>>50</option>
+				<option value="100"<#if
+					pagination.pageSize==100>selected="selected"</#if>>100</option>
+				<option value="200"<#if
+					pagination.pageSize==200>selected="selected"</#if>>200</option>
+			</select> <span>条，共${pagination.totalCount}条</span>
+		</div>
+		<div class="pagination" rel="${handleType}MpTable"
+			totalCount="${pagination.totalCount?c}"
+			numPerPage="${pagination.pageSize?c}" pageNumShown="10"
+			currentPage="${pagination.pageNo?c}"></div>
+	</div>
+</div>

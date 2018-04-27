@@ -1,0 +1,32 @@
+body{padding-bottom:80px;background:#f8f8f8;}
+.gd_tt{width:100%;min-width:320px;border-bottom:1px solid #a4a4a4;padding:30px 0px 20px 0px;position:relative;background:#fff;}
+.gd_tt .t{width:90.625%;margin:auto;color:#212121;font-size:3.6rem;display:block;line-height:1em;vertical-align:middle;font-weight:normal;}
+.gd_tt .i{background:url(../images/news_icon.png) -3px 38px;;width:22px;height:12px;position:absolute;left:100px;bottom:-12px;left:6.5625%;}
+
+/*名胜列表*/
+.cont{width:90.625%;margin:auto;display:block;}
+.cont .cont_detail{font-size:2.8rem;color:#3c3c3c;line-height:1.4em;}
+
+.hist_list{display:block;}
+.hist_list .box{border-top:1px dashed #929292;}
+.hist_list .tt{color:#242424;font-size:2.8rem;line-height:1.7em;}
+.hist_list .box .pic{width:100%;}
+
+.gd_submit{width:100%;background:#009400;color:#fff;font-size:3.6rem;line-height:2.2em;border:none;position:fixed;width:100%;bottom:0px;left:0px;text-align:center;text-decoration:none;}
+
+@media screen and (max-width:380px){
+	.gd_tt{padding:15px 0px 10px;}
+	.gd_tt .i{background-position:-3px 23px;background-size:800%;width:11px;height:6px;bottom:-6px;}
+}
+
+@media screen and (min-width:380px) and (max-width:460px){
+	.gd_tt{padding:18px 0px 12.5px;}
+	.gd_tt .i{background-position:-3px 25px;background-size:742%;width:13px;height:8px;bottom:-8px;}
+}
+
+
+@media screen and (min-width:460px) and (max-width:540px){
+	.gd_tt{padding:23px 0px 15px;}
+	.gd_tt .i{background-position:-3px 27px;background-size:671%;width:15px;height:10px;bottom:-10px;}
+}
+

@@ -1,0 +1,56 @@
+/* CSS Document */
+/*liwei 2015-4-20     travel right*/
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+a{ color:#333;}
+.ri{ margin:24px 32px 30px 29px;}
+.ri .rih1{ font-size:20px; line-height:28px; color:#333;}
+.ri .rih1 span{color:#666; font-size:14px; margin-left:19px; font-weight:normal;}
+.ri .navsbox{width:100%; height:3px; background:#dfe8ef;  margin-top:16px;}
+
+.infBox{ width:360px; height:230px; margin-top:30px;}
+.infBox li{float:left; height:30px; line-height:30px; margin-top:10px;}
+.infBox .infTitle{font-weight:normal; color:#666; width:95px; text-align:right; float:left; margin-right:5px;}
+.infBox .textBox{ float:left; width:228px; height:28px; border:1px solid #dfe8ef; padding:0 10px; font-weight:bold; font-family:"微软雅黑";}
+.infBox .checkMobi{ width:118px; height:28px; border:1px solid #dfe8ef; background:#f8fbff; float:left;margin-left:16px;}
+.infBox .hover:hover{ border:1px solid #00a0e9; color:#00a0e9;}
+.infBox .select{width:100px;height:30px; background:url(../../images/company/ic_tr.png) 0 -105px; padding:0 10px;}
+/*下拉列表*/
+.infBox .selectNav{ float:left; width:116px; position:absolute; z-index:999; background:#fff; border:2px solid #55bfef;  margin-left:85px; display:none; max-height:500px; overflow-y:auto;overflow-x:hidden;}
+.infBox .province{*margin-left:-250px;}
+.infBox .city{  *position:relative; *margin-top:0px;}
+
+.infBox .selectNav .l{ float:left; width:96px; height:28px;  margin:0; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.infBox .selectNav .l:hover{ background:#55bfef; color:#fff;}
+/*下拉列表*/
+
+
+
+.preservation{ width:250px; height:30px; color:#fff; background:#00a0e9; text-align:center; line-height:30px; clear:both; margin-top:40px; margin-left:85px; *margin-top:50px;}
+
+
+
+/*修改手机弹出层*/
+.checkMobileBox{ width:100%; height:100%; top:0; float:left; position:fixed; z-index:999; display:none;}
+.checkMobileBox .boxMessage{  width:516px;height:319px; background:url(../../images/company/popup_script.png) 0 -363px;}
+.checkMobileBox .boxMessage .boxTitle{ height:40px;  color:#fff; font-size:14px; font-family:"微软雅黑"; text-align:center; line-height:40px;}
+.checkMobileBox .boxMessage .boxTitle a{width:18px;height:18px; position:absolute; float:right; margin-left:180px; margin-top:12px; *margin-top:2px; background:url(../../images/company/ic_script.png) 0 -800px;}
+.checkMobileBox  .boxMessage .checkBox { width:500px; margin-top:25px;}
+.checkMobileBox  .boxMessage .checkBox span{ width:500px; margin:0 40px; float:left; height:30px; line-height:30px; margin-top:15px;}
+.checkMobileBox  .boxMessage .checkBox span i{ float:left;}
+.checkMobileBox  .boxMessage .checkBox span .yz{ width:98px; height:28px; float:left; margin:0 10px; padding:0 10px; font-size:14px; font-family:"微软雅黑"; border:1px solid #dfe8ef;}
+.checkMobileBox  .boxMessage .checkBox .determine{width:60px; height:30px; color:#fff; line-height:30px; background:#00a0e9; margin-left:190px; margin-top:25px;}
+.checkMobileBox    .boxMessage .checkBox .mobile{ width:210px; height:28px;  border:1px solid #dfe8ef; margin:0 10px; padding:0 10px;}
+.checkMobileBox	.boxMessage .checkBox .verification{ width:100px; height:28px; border:1px solid #dfe8ef; line-height:28px; background:#f8fbff;}
+/*修改手机弹出层*/
+/*修改成功弹出层*/
+.successBox{width:100%; height:100%; top:0; float:left; position:fixed; z-index:999; display:none;}
+.successBox .boxMessage{  width:516px;height:198px; background:url(../../images/company/popup_script.png) 0 -683px;}
+.successBox .boxMessage .boxTitle{ height:40px;  color:#fff; font-size:14px; font-family:"微软雅黑"; text-align:center; line-height:40px;}
+.successBox .boxMessage .boxTitle a{width:18px;height:18px; position:absolute; float:right; margin-left:180px; margin-top:12px; *margin-top:2px; background:url(../../images/company/ic_script.png) 0 -800px;}
+.successBox  .boxMessage .checkBox span{ width:500px; margin:0 40px; float:left; height:30px; line-height:30px; margin-top:10px;}
+.successBox  .boxMessage .checkBox span i{ float:left;}
+.successBox  .boxMessage .checkBox .determine{width:60px; height:30px; color:#fff; line-height:30px; background:#00a0e9; margin-left:190px; margin-top:15px;}
+/*修改成功弹出层*/
+
+
+.sendCode1{border: 1px solid #dfe8ef;  background: #00A0E9;color:#fff;float: left;display: block;padding: 0px 5px;}

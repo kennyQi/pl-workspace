@@ -1,0 +1,21 @@
+1.notic接口 通知分销系统
+需要提供一个MileOrder对象
+属性：
+String orderCode 分销商订单号
+String csairCard 南航卡号
+String csairName 南航姓名
+String count 数量
+Date checkDate 审核时间
+Date payDate 支付时间
+Date toCsairDate 发送南航处理时间
+例：http://localhost:8080/lcfx-admin/hjfOrder/notice?orderCode=test1&csairCard=07777777777&csairName=gao&count=100&payDate=2016-2-18&toCsairDate=2016-2-18
+2.success接口  成功时调用
+属性
+String orderCode
+String csairInfo
+例：http://localhost:8080/lcfx-admin/hjfOrder/success?orderCode=test1
+2.fail接口 失败时调用
+属性
+String flowCode
+String csairInfo
+例：http://localhost:8080/lcfx-admin/hjfOrder/fail?orderCode=test2&csairInfo=%E5%8D%A1%E5%8F%B7%E9%94%99%E8%AF%AF

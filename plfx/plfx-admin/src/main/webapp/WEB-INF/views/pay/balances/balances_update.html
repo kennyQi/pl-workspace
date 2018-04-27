@@ -1,0 +1,50 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<form method="post" action="${contextPath}/pay/balances/update" 
+   class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone);">
+    <input type="hidden" id="id"  name="id"  value="${(payBalancesDTO.id)!''}"/>
+   <style>
+   .pageContent tr td{position: relative;}
+   </style>
+   <div class="pageContent">
+       <table>
+           <tr>
+				<td width="200"><span style="color:red">*</span>预警类型：</td>
+				<td><select name="type" id="type"> 
+					<#list PAY_BALANCES_TYPE_MAP?keys as itemKey>
+						<option value="${itemKey}"
+							<#if itemKey == payBalancesDTO.type>selected="selected"</#if>>
+							${PAY_BALANCES_TYPE_MAP[itemKey]}
+						</option> 
+					</#list>
+				</select></td>
+			</tr>
+			<tr>
+				<td width="200"><span style="color:red">*</span>预警余额：</td>
+				<td><input type="text" name="warnBalances" maxlength="11"
+					class="required" value="${payBalancesDTO.warnBalances?c}"/></td>
+			</tr>
+			<tr>
+				<td width="200"><span style="color:red">*</span>余额：</td>
+				<td><input type="text" name="balances" maxlength="11"
+					class="required" value="${payBalancesDTO.balances?c}"/></td>
+			</tr>
+       </table>
+   </div>
+   
+   <div class="formBar">
+       <ul>
+           <li>
+               <div class="buttonActive">
+                   <div class="buttonContent">
+                       <button type="submit">确认</button>
+                   </div>
+               </div>
+               <div class="buttonActive">
+	               <div class="buttonContent">
+	                   <button type="button" class="close">关闭</button>
+	               </div>
+               </div>
+           </li>
+       </ul>
+   </div>
+</form>

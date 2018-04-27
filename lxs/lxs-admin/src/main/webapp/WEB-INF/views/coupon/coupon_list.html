@@ -1,0 +1,142 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/coupon/list" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}"/>
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">
+						卡券编号：
+					</td>
+					<td><input type="text" name="couponId" value="${couponQO.couponId}" ></td>
+					<td style="text-align: left">
+						账户名：
+					</td>
+					<td><input type="text"  name="loginName" value="${couponQO.loginName}" ></td>
+					<td style="text-align: left">
+						卡号状态：
+					</td>
+					<td style="text-align: left">
+						<select  name="currentValue">
+							<option value="0" >全部</option>
+							<option value="1" <#if couponQO.currentValue==1> selected="selected" </#if>>未使用</option>
+							<option value="2" <#if couponQO.currentValue==2> selected="selected" </#if>>已使用</option>
+							<option value="3" <#if couponQO.currentValue==3> selected="selected" </#if>>已过期</option>
+							<option value="4" <#if couponQO.currentValue==4> selected="selected" </#if>>已作废</option>
+						</select>
+					</td>
+					<td style="text-align: left">
+						发放渠道：
+					</td>
+					<td style="text-align: left">
+						<select name="issueWay">
+							<option value="0" >全部</option>
+							<option value="1" <#if couponQO.issueWay==1> selected="selected" </#if>>注册</option>
+							<option value="2" <#if couponQO.issueWay==2> selected="selected" </#if>>订单满</option>
+							<option value="3" <#if couponQO.issueWay==3> selected="selected" </#if>>指定人员发放</option>
+							<option value="4" <#if couponQO.issueWay==4> selected="selected" </#if>>赠券</option>
+						</select>					
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button onclick="return checkQuery();">查询</button>							
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			   <button type="button" group="ids" class="checkboxCtrl">全选	</button>		
+		   </li>
+		   <li>
+			   <button type="button" group="ids" class="checkboxCtrl"  selectType="invert">反选	</button>
+		  </li>
+		  <li class="line hover">line</li>
+		  <li>
+			  <a title="确实要作废这些卡券记录吗？" target="selectedTodo" postType="string" rel="ids"  href="${contextPath}/coupon/cancelAll" class="delete"><span>批量作废</span></a>
+		  </li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="136" >
+		<thead>
+			<tr>
+				<th width="100">
+					<input type="checkbox" group="ids"  class="checkboxCtrl" title="全选">
+				</th>
+ 				<th width="100">卡券编号</th>
+ 				<th width="100">面值</th>
+				<th width = "100">来源渠道</th>
+				<th width = "100">类别</th>
+				<th width = "300">有效期</th>
+				<th width = "150">状态</th>
+				<th width = "150">账户名</th>
+				<th width="150">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#if (pagination.list?size>0)>
+		<#list pagination.list as couponDto>
+			<tr>
+				<td><input name="ids" value="${couponDto.id}" type="checkbox"></td>
+				<td>${couponDto.id}</td>
+				<td>${couponDto.baseInfo.couponActivity.baseInfo.faceValue}</td>
+				<td>${(issueWayMap[couponDto.baseInfo.couponActivity.issueConditionInfo.issueWay?c])!}</td>
+				<td>${(couponTypeMap[couponDto.baseInfo.couponActivity.baseInfo.couponType?c])!}</td>
+				<td>${couponDto.baseInfo.couponActivity.useConditionInfo.beginDate?string('yyyy-MM-dd HH:mm:ss')} —— ${couponDto.baseInfo.couponActivity.useConditionInfo.endDate?string('yyyy-MM-dd HH:mm:ss')}</td>			
+				<td>
+					<#if couponDto.status.currentValue==1>未使用
+					<#elseif couponDto.status.currentValue==2>已使用
+					<#elseif couponDto.status.currentValue==3>已过期
+					<#elseif couponDto.status.currentValue==4>已废弃</#if> 
+				</td>				
+				<td>${couponDto.holdingUser.loginName}</td>				
+				<td>				
+				   		<a href="${contextPath}/coupon/detail?id=${(couponDto.id)!}" target="dialog" height="370" title="卡券记录详情">详情</a>
+				   		
+				   		<#if ((couponDto.status.currentValue)??&&couponDto.status.currentValue==1)>
+				   		<a title="确定要作废该卡券吗？卡券作废后将不可使用" target="ajaxTodo"
+							 href="${contextPath}/coupon/cancel?couponId=${(couponDto.id)!}">作废</a>
+					    </#if> 
+							 
+					    <#if ((couponDto.status.currentValue)??&&couponDto.status.currentValue==2)> 
+					        <a target="dialog" href="${contextPath}/jp/order/detail?id=${(couponDto.consumeOrder.orderId)!}" max="true">查看订单</a>
+					    </#if>		
+					    	  
+				</td>
+			</tr>
+		</#list>
+		</#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+//检查查询条件
+function checkQuery(){
+   var couponId = document.getElementByName("id").value;
+   var couponstatus = document.getElementByName("couponStatus").value;
+   var couponqd = document.getElementByName("issueWay").value;
+   var loginname = document.getElementByName("loginName").value;
+   if(couponId == "" && couponstatus=="" && couponqd=="" && loginname==""){
+         alert("查询条件为空,请填写查询条件");
+         return false;
+   }
+}
+</script>

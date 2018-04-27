@@ -1,0 +1,57 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form id="activityform" method="post" enctype="multipart/form-data" action="${contextPath}/line/setActivity"	class="pageForm required-validate" 	onsubmit="return validateCallback(this, dialogAjaxDone)">
+			<div class="pageFormContent" layoutH="58">
+				<input type="hidden" name="lineID" value="${lineID}">
+				<table class="searchContent" style="width: 100%;height: 100%">
+					<tr style="height: 20%">
+							<#if lineActivity??>
+							<td style="text-align: left;width: 50%" colspan="2">
+								<strong style="color: red">注：该线路已为<#if lineActivity.activityType==2>${lineActivity.travlerNO}人出行活动</#if><#if lineActivity.activityType==1>价格活动</#if></strong>
+							</td>
+							<td style="text-align: left;width: 50%" colspan="2">		
+								<a title="确定取消该活动线路吗？" target="ajaxTodo" onclick="delActivity()" style="color: blue">取消活动</a>
+							</td>
+							</#if>
+					</tr>
+					<tr style="height: 80%">
+						<td style="text-align: left;width: 20%">
+							活动类型：
+						</td>		
+						<td style="text-align: left;width: 30%">
+							<select name="activityType" id="activityType" onchange="chageType()">
+								<option value="1">价格活动</option>
+								<option value="2">多人出行活动</option>
+							</select>
+						</td>
+						<td style="text-align: left;width: 20%">
+							<span id="span1"></span>
+						</td>
+						<td style="text-align: left;width: 30%">
+							<span id="span2"><input type="hidden" name="travlerNO" value=""></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+	function chageType(){
+		if($('#activityType').val()==2){
+			$('#span1').html("出行人数");
+			$('#span2').html("<select name='travlerNO'><option value='1' >1人</option><option value='2' >2人</option><option value='3' >3人</option></select>");
+		}else{
+			$('#span1').html("");
+			$('#span2').html("");
+		}
+	}
+	function delActivity(){
+		$("#activityform").attr("action","${contextPath}/line/delActivity?id=${(lineActivity.id)!""}");
+		$("#activityform").submit();
+	}
+	</script>

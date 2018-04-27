@@ -1,0 +1,130 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	function exportExcel(){
+	var parmStr = $("#pagerForm",navTab.getCurrentPanel()).serialize();
+	var url = "${contextPath}/supplier/export?"+parmStr;
+	window.location.href=url;
+}
+</script>
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/supplier/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'}" />
+		<div class="searchBar dwz_query_box2">
+			<table class="searchContent">
+				<tr>
+					<td >供应商名称：</td>
+					<td>
+						<input name="supplierName" type="text" value="${(pagination.condition.supplierName)!}" placeholder="请输入供应商名称" onchange="this.value=(trim(this.value))" />
+					</td>
+					<td>供应商编号：</td>
+					<td>
+						<input type="text" maxlength="20" name="supplierCode" value="${(pagination.condition.supplierCode)!}" placeholder="可模糊查询" />
+					</td>
+					<td >供应商类型：</td>
+					<td>
+						<select name="supplierType">
+							<option value="">所有</option>
+							<option value="0"<#if (pagination.condition.supplierType == 0)> selected="selected" </#if> >经销</option>
+							<option value="1"<#if (pagination.condition.supplierType == 1)> selected="selected" </#if> >代销</option>
+						</select>
+					</td>
+					<#--
+					<!-- 
+					<td class="label">供应商状态：</td>
+					<td><select name="supplierStatus" class="combox">
+							<option value="">所有</option>
+							<option value="0"<#if (pagination.condition.supplierStatus == 0)> selected="selected" </#if> >待审核</option>
+							<option value="1"<#if (pagination.condition.supplierStatus == 1)> selected="selected" </#if> >已审核</option>
+							<option value="2"<#if (pagination.condition.supplierStatus == 2)> selected="selected" </#if> >审核不通过</option>
+					</select></td> -->
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div></li> <#if supplierto_import>
+					<li>
+						<div class="buttonActive">
+							<a href="${contextPath}/supplier/to_import" target="dialog" mask="true" width=600 height="367">
+								<span>导入</span>
+							</a>
+						</div></li> </#if> <#if supplierexport>
+					<li>
+						<div class="buttonActive">
+							<a onclick="exportExcel()">
+								<span>导出</span>
+							</a>
+						</div></li> </#if>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<#if supplierdelete>
+			<li><a title="如果供应商已设置优先级，供应商优先级会同时删除，确认删除选中供应商？" target="selectedTodo" rel="supplierListId" href="${contextPath}/supplier/delete" class="delete">
+					<span>删除</span>
+				</a></li> </#if> <#if supplierto_add>
+			<li><a href="${contextPath}/supplier/to_add" target="navTab" class="add">
+					<span>添加</span>
+				</a></li> </#if>
+		</ul>
+	</div>
+	<div>
+		<table class="table" cellpadding="0" cellspacing="0" width="100%" layoutH="137">
+			<thead>
+				<tr>
+					<th><input type="checkbox" group="supplierListId" class="checkboxCtrl" title="批量删除" /></th>
+					<th width="">供应商名称</th>
+					<th width="">供应商类型</th>
+					<th width="">供应商编码</th>
+					<th width="">联系人</th>
+					<th width="">联系电话</th>
+					<th width="">供应商地址</th>
+					 <#--
+					<!-- 
+					<th width="">供应商状态</th>
+					 -->
+					<th width="150">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<#list pagination.list as t>
+				<tr>
+					<td>
+						<input type="checkbox" name="supplierListId" value="${(t.id)!''}" />
+					</td>
+					<td>${(t.baseInfo.name)!}</td>
+					<td><#if (t.baseInfo.type)==0> 经销 <#else> 代销 </#if></td>
+					<td>${(t.supplierCode)!}</td>
+					<td><#if (t.linkManList)??> <#list (t.linkManList) as l> ${(l.name)!} </#list> </#if></td>
+					<td>${(t.contact.phone)!}</td>
+					<td>${(t.contact.address)!}</td>
+					<#--
+					<!-- 
+					<td><#if (t.status.status)==0> 待审核 </#if> <#if (t.status.status)==1> 审核通过 </#if> <#if (t.status.status)==2 > 审核不通过 </#if></td> -->
+					<td class="a_button2">
+						<#if supplieredit>
+						<a target="navTab" href="${contextPath}/supplier/edit?id=${(t.id)!''}" mask="true" width="900" height="650">编辑</a>
+						&nbsp;&nbsp;&nbsp;&nbsp; </#if> <#--
+						<!--  <#if supplierto_check> <#if (t.status.status == 0) > <a target="navTab" href="${contextPath}/supplier/to_check?id=${(t.id)!''}">审核</a> &nbsp;&nbsp;&nbsp;&nbsp; <#else> <a style="color:#CCCCCC">审核</a> &nbsp;&nbsp;&nbsp;&nbsp; </#if> </#if> -->
+						<#if supplierdelete>
+						<a target="navTab" href="${contextPath}/supplier/view?id=${(t.id)!''}">查看</a>
+						&nbsp;&nbsp;&nbsp;&nbsp; </#if> <#if productexport>
+						<a target="ajaxTodo" href="${contextPath}/supplier/delete?supplierListId=${(t.id)!''}" title="如果该供应商已设置优先级，供应商优先级会同时删除，确认删除该供应商？">删除</a>
+						</#if>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+</div>

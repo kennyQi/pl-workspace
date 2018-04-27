@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;审批不通过
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/tasklistwait/${taskListWaitDto.actionValue}" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" value="${taskListWaitDto.id}" name="tasklistWaitID"/>
+							<input type="hidden" value="N" name="opinion" />
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">审批不通过：</label>
+									<div class="col-md-4">
+										<input type="checkbox"  value="机票行程不对" name="comment" />机票行程不对
+										<input type="checkbox"  value="出差日期不对" name="comment"/>出差日期不对
+										<input type="checkbox"  value="高于出差预算" name="comment"/>高于出差预算
+										<input type="text" value="" name=""  class="form-control isSpec"  placeholder="输入其他原因 "/>
+									</div>
+								</div>
+						
+								<div class="form-group">
+										<label class="col-md-3 control-label">审批部门：</label>
+										<div class="col-md-4">
+										${user.departmentName}
+										</div>
+								</div>
+								<div class="form-group">
+										<label class="col-md-3 control-label">审批人：</label>
+										<div class="col-md-4">
+										${user.name}
+										</div>
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn yellow" target="submit">提交</a>
+									<a class="btn yellow" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

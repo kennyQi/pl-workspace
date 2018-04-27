@@ -1,0 +1,226 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.min.js'></script>
+<link href='${contextPath}/resources/css/fullcalendar.css' rel='stylesheet' />
+<link href='${contextPath}/resources/css/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='${contextPath}/resources/js/calendar/moment.min.js'></script>
+<script src='${contextPath}/resources/js/calendar/jquery-ui.custom.min.js'></script>
+<script src='${contextPath}/resources/js/calendar/fullcalendar.min.js'></script>
+<script src='${contextPath}/resources/js/calendar/new/fullcalendar.js'></script>
+
+<script>
+
+	$(document).ready(function() {
+		
+		$('#external-events .fc-event').each(function() {
+
+			$(this).data('event', {
+				title: $.trim($(this).text()), 
+				stick: true 
+			});
+			
+			$(this).draggable({
+				zIndex: 999,
+				revert: true,      
+				revertDuration: 0 
+			});
+			
+
+		});
+		
+		var selectElement = showSelectYearMonth();
+		$('#select').html(selectElement);
+		
+		
+		//查询该路线当前年月的团期
+// 		var lineID = $('#lineID').val();
+// 		queryDateSalePriceList(-1,0,lineID);
+		
+		
+		/**
+		* 选择年月查询团期
+		*/
+		$("#select_button").click(function(){
+			 var lineID = $('#lineID').val();
+			 var fcsYear = $("#fcs_date_year").val();
+		     var fcsMonth = $("#fcs_date_month").val();
+		     $('#calendar').fullCalendar('gotoDate',fcsYear,fcsMonth);
+//  			 queryDateSalePriceList(fcsMonth,fcsYear,lineID);
+		});
+
+
+		var date=new Date();
+		//获取当前年份
+		var str=date.getFullYear()+'-';
+		//判断月份是否是一位数，若是则前加0
+		var month=(date.getMonth()+1);
+		if((''+month).length==1){
+			str+='0'+(month)+'-';
+		}else{
+			str+=(month)+'-';
+		}
+		//判断日期是否是一位数，若是则前加0
+		if((''+date.getDate()).length==1){
+			str+='0'+date.getDate();
+		}else{
+			str+=date.getDate();
+		}
+		$('#calendar').fullCalendar({
+			editable:true,
+			open:true,
+			fixed:5,
+			disableDragging:true,
+			eventClick:function(event){
+				var date = new Date(event.start);
+				var str = date.getFullYear()+'-';
+				var month=(date.getMonth()+1);
+				if((''+month).length==1){
+					str+='0'+(month)+'-';
+				}else{
+					str+=(month)+'-';
+				}
+				if((''+date.getDate()).length==1){
+					str+='0'+date.getDate();
+				}else{
+					str+=date.getDate();
+				}
+	          parent.editPrice(event.id,str);
+		    },
+		    drop:function(){
+			   
+			},
+			events:function(start,end,timezone,callback){ 
+				var nowDate = $('#calendar').fullCalendar('getDate');
+				var year = nowDate.getFullYear();
+				var month = nowDate.getMonth();
+				var lineID = $('#lineID').val();
+				queryDateSalePriceList(month,year,lineID);
+			}
+		    
+
+		});
+		
+		  
+	});
+	
+	/**
+	* 显示选择年月下拉框
+	*/
+	function showSelectYearMonth(){
+		var date=new Date();
+		//获取当前年份
+		var year=date.getFullYear();
+		//判断月份是否是一位数，若是则前加0
+		var month=(date.getMonth()+1);
+		var selectHtml = '';
+		var i = 0;
+		selectHtml +="<span id='fc-dateSelect' class='fc-header-title'>";
+		selectHtml +="<select name='fcs_date_year' id='fcs_date_year'>";
+		// 循环年份
+		for(i=2000;i<=2100;i++){
+			if(i == year){
+				selectHtml +="<option value='"+i+"' selected='selected'>"+$.trim(i)+"</option>"; 
+			}else{
+				selectHtml +="<option value='"+i+"'>"+$.trim(i)+"</option>"; 
+			}
+			                   
+		}
+		selectHtml +="</select>";
+		selectHtml +="<select name='fcs_date_month' id='fcs_date_month'>";
+		// 循环月份
+		var monthDigitCN = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+		for(i=0;i<=11;i++){
+			if(monthDigitCN[i] == month){
+				selectHtml +="<option value='"+i+"' selected='selected'>" +$.trim(monthDigitCN[i]+"月") + "</option>";
+			}else{
+				 selectHtml +="<option value='"+i+"'>" +$.trim(monthDigitCN[i]+"月") + "</option>";
+			}
+		}
+		selectHtml +="</select>";
+		selectHtml +="</span>&nbsp;&nbsp;&nbsp;&nbsp;<button id='select_button'>查询</button>";
+		return selectHtml;
+	}
+	
+	/**
+	*查询团期列表
+	*/
+	function queryDateSalePriceList(month,year,lineID){
+		//清空上次加载的团期数据
+		$('#calendar').fullCalendar('removeEvents');
+		$.getJSON('${contextPath}/traveline/price/query',
+				{
+			      month:month,
+			      year:year,
+			      lineID:lineID
+				},
+			function(data){
+			for(var i=0;i<data.length;i++){
+				var eventObject=new Object();
+				eventObject.start=data[i].saleDate;
+				var adultPrice = data[i].adultPrice;
+				if(adultPrice == null){
+					adultPrice = '';
+				}
+				var childPrice = data[i].childPrice;
+				if(childPrice == null){
+					childPrice = '';
+				}
+				var number = data[i].number;
+				if(number == null){
+					number = '';
+				}
+				eventObject.title='\n成人价格     '+adultPrice+'\n' + '\n' +'儿童价格    '+childPrice+'\n'+'\n'+'剩余人数     '+number;
+				var id = data[i].id;
+				if(id == null){
+					eventObject.backgroundColor='#FFFFFF';
+					eventObject.textColor = '000000';
+					eventObject.id = "";
+				}else{
+					eventObject.id = id;
+				}
+				$('#calendar').fullCalendar('renderEvent',eventObject,true)
+			}
+		});
+	}
+	
+
+</script>
+<style>
+
+	body {
+		margin: 0;
+		padding: 0;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+		font-size: 14px;
+	}
+
+	#calendar {
+		width: 900px;
+		margin: 40px auto;
+	}
+	
+	#external-events {
+		float: left;
+		width: 100px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+	}
+		
+		
+	#external-events .fc-event {
+		margin: 10px 0;
+		cursor: pointer;
+	}
+	
+
+</style>
+
+<div class="pageContent">
+    
+    <input type="hidden" id="lineID" value="${lineID}">
+    <div id="select" style="text-align: center;padding-top:20px;"></div>
+	<div id="calendar"></div>
+	
+        
+</div>

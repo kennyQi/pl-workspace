@@ -1,0 +1,163 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageContent">
+<form method="post" enctype="multipart/form-data" action="${contextPath}/viewspot/order/tocancel" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+	<div class="unit">
+		<label>订单信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:100px">状态</th>
+				<th style="width:160px">PNR</th>
+				<th style="width:160px">订单号</th>
+				<th style="width:160px">易购订单号</th>
+				<th style="width:160px">商家订单号</th>
+				<th style="width:80px">支付金额</th>
+				<th style="width:100px">返点/佣金</th>
+				<th style="width:100px">商家信息</th>
+ 			</thead>
+			<tbody>
+				<td>${(orderDetail.order.status)!''}</td>
+				<td>${(orderDetail.order.pnr)!''}</td>
+				<td>${(orderDetail.order.id)!''}</td>
+				<td>${(orderDetail.order.ygId)!''}</td>
+				<td>${(orderDetail.order.suppId)!''}</td>
+				<td>${(orderDetail.order.payAmount)?string('0.00')}</td>
+				<td>${(orderDetail.order.commision)?string('0.00')}/${(orderDetail.order.commAmount)?string('0.00')}</td>
+				<td>${(orderDetail.order.agencyName)!''}</td>
+			</tbody>
+		</table>
+		
+	</div>
+	
+	<br/>
+	<br/>
+	<br/>
+	<div>
+		<div>废票时间  ${orderDetail.flight.refundTime!?string("yyyy-MM-dd HH:mm:ss")}</div>
+		<div>退票时间  00：00-23：59</div>
+		<div>工作时间  00：00-23：59</div>
+	</div>
+	
+	
+	<br/>
+	<br/>
+	<br/>
+	<div>
+		政策备注
+		<div>
+			${(orderDetail.flight.policyRemark)!''}
+		</div>
+	</div>
+	
+	
+	<br/>
+	<br/>
+	<br/>
+	<div class="unit">
+		<label>机票信息</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:100px">行程</th>
+				<th style="width:160px">起飞</th>
+				<th style="width:160px">抵达</th>
+				<th style="width:160px">航班信息</th>
+				<th style="width:160px">舱位</th>
+ 			</thead>
+ 			
+			<tbody>
+				<td>
+					${(orderDetail.flight.startCity)!''} - ${(orderDetail.flight.endCity)!''}
+					<br/>
+					${(orderDetail.flight.startCityCode)!''} - ${(orderDetail.flight.endCityCode)!''}
+
+				</td>
+				<td>
+					${(orderDetail.flight.startDate)!''} ${(orderDetail.flight.startTime)!''}
+					<br/>
+					${(orderDetail.flight.startPortName)!''}
+				</td>
+				<td>
+					${(orderDetail.flight.endDate)!''} ${(orderDetail.flight.endTime)!''}
+					<br/>
+					${(orderDetail.flight.endPortName)!''}
+				</td>
+				<td>
+					国航
+					<br/>
+					${(orderDetail.flight.flightNo)!''}
+					
+				</td>
+				<td>${(orderDetail.order.classNo)!''}</td>
+			</tbody>
+		</table>
+		
+		<br/>
+		<table>
+			<thead>
+				<th style="width:100px">旅客姓名</th>
+				<th style="width:160px">类型</th>
+				<th style="width:160px">证件号码</th>
+				<th style="width:160px">票号</th>
+ 			</thead>
+ 			
+			<tbody>
+				<td>${(orderDetail.order.passenger.name)!''}</td>
+				<td>${(orderDetail.order.passenger.identityType)!''}</td>
+				<td>${(orderDetail.order.passenger.identityCard)!''}</td>
+				<td>${(orderDetail.order.tktNo)!''}</td>
+			</tbody>
+		</table>
+		<br/>
+		<div>
+			单张合计：${(orderDetail.order.payAmount)!''}
+			票面价：${(orderDetail.order.tktAmount)!''}
+			税款：${(orderDetail.order.commAmount)!''}
+		</div>
+	</div>
+	
+	<br/>
+	<br/>
+	<br/>
+	<div class="unit">
+		<label>操作日志</label>
+	</div>
+	<div class="unit">
+		<hr/>
+	</div>
+	<div class="unit">
+		<table>
+			<thead>
+				<th style="width:100px">时间</th>
+				<th style="width:160px">操作</th>
+				<th style="width:160px">操作人</th>
+				<th style="width:160px">操作信息</th>
+ 			</thead>
+ 			
+			<tbody>
+				<td>xxxxx</td>
+				<td>xxxxxxx</td>
+				<td>xxxxxx</td>
+				<td>xxxxxxx</td>
+			</tbody>
+		</table>
+		
+	</div>
+</div>
+<div class="formBar">
+		<ul>
+			<li><a class="button" target="dialog" href="${contextPath}/airtkt/order/tocancel?id=${(mpOrder.id)!''}"><span>取消订单</span></a></li>
+		</ul>
+</div>
+</form>

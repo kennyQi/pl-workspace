@@ -1,0 +1,19 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/payment_method/<#if edit??>update<#else>create</#if>" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<input type="hidden" name="id" />
+				<table border="0" class="my_form">
+					<tr>
+						<td>结款方式：</td>
+						<td>
+							<input type="text" maxlength="50" name="paymentMethodName" value="" class="required" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<#include "/public/general/formBar.html">
+	</form>
+</div>

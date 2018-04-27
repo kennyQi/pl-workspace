@@ -1,0 +1,497 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+		<div class="pageFormContent" layoutH="58" id="allDiv">
+		 <form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/line/modifyRouteInfo" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+ 			<input type="hidden" name="lineID" value="${lineId}" />
+ 			<div class="unit" >
+				<label>行程名称</label>
+				<input type="text" name="routeName" size="20" maxlength="100" value="${lineRoute.routeName}"  class="required"/>
+			</div>
+			<div class="unit" >
+				<label>行程天数</label>
+				<input type="text" name="routeDays" size="20" value="${lineRoute.routeDays}" min="1" class="digits required"/>天
+			</div>
+			<div class="unit" >
+				<label>购物时间</label>
+				<input type="text" name="shoppingTimeHour" size="20" value="${lineRoute.shoppingTimeHour}" class="digits required" min="0"/>小时
+				<div style="float:right">
+					<button type="submit"  >保存</button>
+				</div>
+			</div>
+		  </form>
+		  
+			<div style="float:right">
+					<button type="button" onclick="addRoute();" >增加行程</button>
+			</div>
+			<div class="unit"> 
+				<hr style="border:1px dotted;width:96%"/>
+			</div>
+			
+			<#if lineRoute.dayRouteList??>
+			 <input type="hidden" id="size" value="${lineRoute.dayRouteList?size}" />
+			 <div id="routeContent">
+			 <#list lineRoute.dayRouteList as dayRouteDTO>
+				<form method="post" id="form${dayRouteDTO.days}">
+				<div id="eachRoute">
+				   <input type="hidden" name="id" value="${dayRouteDTO.id}" id="dayRoute${dayRouteDTO.days}"/>
+				   <input type="hidden" name="lineID" value="${lineId}" />
+					<div class="unit">
+					<b>第${dayRouteDTO.days}天</b>
+					<input type="hidden" name="days" value="${dayRouteDTO.days}"/>
+				   </div>
+					<div class="unit">
+						<label>出发地</label>
+						<input type="text" name="starting" size="20" value="${dayRouteDTO.starting}"/>
+					</div>
+					<div class="unit">
+						<label>目的地</label>
+						<input type="text" name="destination" value="${dayRouteDTO.destination}"/>
+					</div>
+					<div class="unit">
+						<label>交通方式</label>
+						<#if vehicleMap??>
+			                   <#list vehicleMap?keys as itemKey>
+			                       <#if dayRouteDTO.vehicle??>
+			                       		<input type="checkbox" ${dayRouteDTO.vehicle?contains(itemKey)?string('checked','')}   value="${itemKey}" name="vehicle"/> ${vehicleMap[itemKey]}
+			                       <#else>
+			                       	    <input type="checkbox" value="${itemKey}" name="vehicle"/> ${vehicleMap[itemKey]}
+			                       </#if>
+			                      
+			                   </#list>
+				        </#if>
+					</div>
+					<div class="unit">
+						<label>行程安排</label>
+						<textarea rows="6" cols="60"  name="schedulingDescription" >${dayRouteDTO.schedulingDescription}</textarea>
+					</div>
+					<div class="unit">
+						<label>住宿</label>
+						<select  id="hotellevel${dayRouteDTO.days}">
+							<#if stayLevelMap??>
+				                   <#list stayLevelMap?keys as itemKey>
+				                       <option value="${itemKey}">
+				                        ${stayLevelMap[itemKey]}</option>
+				                   </#list>
+				             </#if>
+		                </select>
+		                <input type="text"  size="40" id="hotelname${dayRouteDTO.days}" maxlength="100"/>
+		                <button type="button" onclick="addHotel(${dayRouteDTO.days});">增加酒店</button>
+		                <div id="hotel${dayRouteDTO.days}" style="padding-left:130px; color:#4876FF;padding-top:10px;">
+		                  <#if (dayRouteDTO.hotelList?size>0)>
+		                   		<#list dayRouteDTO.hotelList as hotel>
+		                   		  <div style="border:1px solid #63B8FF; padding-bottom:5px;margin-right:10px;margin-bottom:5px;float:left;" id="name${hotel_index}${dayRouteDTO.days}">
+		                			 <span style="margin-right:5px;margin-left:2px;">
+		                			 <#if stayLevelMap??>
+					                   <#list stayLevelMap?keys as itemKey>
+					                      <#if itemKey == hotel.stayLevel>
+					                         ${stayLevelMap[itemKey]}
+					                       </#if>
+					                   </#list>
+				                    </#if>
+		                			 ${hotel.hotelName}</span>
+		                			 <img src="resources/image/mp/u233.png" style="margin-right:5px;" id="cancle${hotel_index}${dayRouteDTO.days}" onclick="removeElementNew('cancle${hotel_index}${dayRouteDTO.days}');"><img/>
+		               	   		  </div>
+		               	   		  <input type="hidden" name="hotelList[${hotel_index}].hotelName" id="hotelnameinput${hotel_index}${dayRouteDTO.days}" value="${hotel.hotelName}"/>
+		               	   		  <input type="hidden" name="hotelList[${hotel_index}].stayLevel" id="hotellevelinput${hotel_index}${dayRouteDTO.days}" value="${hotel.stayLevel}"/>
+		                   		</#list>
+		                  </#if>
+		                </div>
+		                <input id="hotelindex${dayRouteDTO.days}" type="hidden" value="${dayRouteDTO.hotelList?size}"/>
+					</div>
+					<div class="unit">
+						      	<label>餐饮</label>
+						      	<span>早餐</span>
+								<input type="radio" name="includeBreakfast" value="1" ${dayRouteDTO.includeBreakfast?string('checked','')}/>包含
+								<input type="radio" name="includeBreakfast" value="0" ${dayRouteDTO.includeBreakfast?string('','checked')}/>自理
+					      		<span style="padding-left:80px;">午餐</span>
+								<input type="radio" name="includeLunch" value="1" ${dayRouteDTO.includeLunch?string('checked','')}/>包含
+								<input type="radio" name="includeLunch" value="0" ${dayRouteDTO.includeLunch?string('','checked')}/>自理
+					      		<span style="padding-left:80px;">晚餐</span>
+							    <input type="radio" name="includeDinner" value="1" ${dayRouteDTO.includeDinner?string('checked','')}/>包含
+							    <input type="radio" name="includeDinner" value="0" ${dayRouteDTO.includeDinner?string('','checked')}/>自理
+					</div>
+					<div style="float:right" id="button${dayRouteDTO.days}">
+						<button type="button" onclick="saveDayRoute(${dayRouteDTO.days});" >保存</button>
+						<#if (dayRouteDTO_index + 1) ==  lineRoute.dayRouteList?size>
+							<button type="button" id="deleteDayRoute" onclick="deleteRouteInfo(${dayRouteDTO.days});" >删除</button>
+						</#if>
+				    </div>
+					<div class="unit">
+						<hr style="border:1px dotted;width:96%"/>
+					</div>
+				</div>
+				</form>
+			</#list>
+			</div>
+			<#else>
+			    <input type="hidden" id="size" value="1" />
+				<div id="routeContent">
+				<form method="post" id="form1">
+				<input type="hidden" name="id" value="" id="dayRoute1"/> <!-- 保存时 每日行程id为空 -->
+				<input type="hidden" name="lineID" value="${lineId}" />
+				<div id="eachRoute">
+					<div class="unit">
+					<b>第1天</b>
+					<input type="hidden" name="days" value="1"/>
+				   </div>
+					<div class="unit">
+						<label>出发地</label>
+						<input type="text" name="starting" size="20" />
+					</div>
+					<div class="unit">
+						<label>目的地</label>
+						<input type="text" name="destination" size="20"/>
+					</div>
+					<div class="unit">
+						<label>交通方式</label>
+						<#if vehicleMap??>
+			                   <#list vehicleMap?keys as itemKey>
+			                       <input type="checkbox" value="${itemKey}" name="vehicle"/> ${vehicleMap[itemKey]}
+			                   </#list>
+				        </#if>
+					</div>
+					<div class="unit">
+						<label>行程安排</label>
+						<textarea rows="6" cols="60"  name="schedulingDescription"></textarea>
+					</div>
+					<div class="unit">
+						<label>住宿</label>
+						<select  id="hotellevel1">
+							<#if stayLevelMap??>
+				                   <#list stayLevelMap?keys as itemKey>
+				                       <option value="${itemKey}">
+				                        ${stayLevelMap[itemKey]}</option>
+				                   </#list>
+				             </#if>
+		                </select>
+		                <input type="text"  size="40" id="hotelname1"/>
+		                <button type="button" onclick="addHotel(1);">增加酒店</button>
+		                <div id="hotel1" style="padding-left:130px; color:#4876FF; padding-top:10px;">
+		                </div>
+		                <input id="hotelindex1" type="hidden" value="1"/> 
+					</div>
+					<div class="unit">
+						      	<label>餐饮</label>
+						      	<span>早餐</span>
+								<input type="radio" name="includeBreakfast" value="1" checked="checked"/>包含
+								<input type="radio" name="includeBreakfast" value="0"/>自理
+					      		<span style="padding-left:80px;">午餐</span>
+								<input type="radio" name="includeLunch" value="1" checked="checked"/>包含
+								<input type="radio" name="includeLunch" value="0"/>自理
+					      		<span style="padding-left:80px;">晚餐</span>
+							    <input type="radio" name="includeDinner" value="1" checked="checked"/>包含
+							    <input type="radio" name="includeDinner" value="0"/>自理
+					</div>
+					<div style="float:right" id="button1">
+						<button type="button" onclick="saveDayRoute(1);" >保存</button>
+						<button type="button" id="deleteDayRoute"  onclick="deleteRouteInfo(1);" >删除</button>
+				    </div>
+					<div class="unit">
+						<hr style="border:1px dotted;width:96%"/>
+					</div>
+				</div>
+				</form>
+		   </div>
+			</#if>
+			
+		</div>
+	
+					
+					
+</div>
+<script type="text/javascript">
+
+
+/**
+ * 修改头部线路行程信息
+ */
+function updateRouteInfo(){
+	var lineID = document.getElementsByName("lineID")[0].value;
+	var routeName = document.getElementsByName("routeName")[0].value;
+	var routeDays = document.getElementsByName("routeDays")[0].value;
+	var shoppingTimeHour = document.getElementsByName("shoppingTimeHour")[0].value;
+	if(routeDays == ""){
+		alert("请输入行程天数");
+		return;
+	}
+	if(routeName == ""){
+		alert("请输入行程名称");
+		return;
+	}
+	$.post("${contextPath}/traveline/line/modifyRouteInfo",
+			{lineID:lineID,
+		     routeName:routeName,
+		     routeDays:routeDays,
+		     shoppingTimeHour:shoppingTimeHour},
+			 function(data){
+				alert("保存成功");
+             },
+            "json").Error(function(){
+            	alert("保存失败");
+            });
+}
+
+/**
+ * 添加行程
+ */
+function addRoute(){
+	var index = $("#size").val(); //获取页面已显示的日程天数
+	index = Number(index) + 1; //要添加的第几天行程
+	
+	//判断行程天数输入框是否输入
+	var routeDays = document.getElementsByName("routeDays")[0].value;
+	if(routeDays == ""){
+		alert("请输入行程天数");
+		document.getElementsByName("routeDays")[0].focus();
+		return ;
+	}
+	
+	//添加的日程天数大于行程天数
+	if(Number(routeDays) < index){
+		alert("已大于行程天数，不能再添加日程");
+		return ;
+	}
+	var deleteDayRoute = document.getElementById("deleteDayRoute");  //删除前一天日程的删除按钮，在新添加的日程中添加删除按钮
+	if(deleteDayRoute != null){
+		deleteDayRoute.parentNode.removeChild(deleteDayRoute);
+	}
+	addRouteElement(index);
+	
+	document.getElementById("size").value = index; //更新页面已显示的日程天数
+	
+}
+
+/**
+ * 添加第index天的酒店信息
+ */
+function addHotel(index){  
+	
+	var newElementFontColor = "#4876FF";
+    var cancle_img_margin_right = "5px";
+    var hotel_name_span_margin_right = "5px";
+    var hotel_name_span_margin_left = "2px";
+    var hotel_name_span_margin_bottom = "5px";
+    var hotel_name_div_margin_right = "10px";
+    var cancleImgSrc = "resources/image/mp/u233.png"
+    var borderStyle = "1px solid #63B8FF";
+    
+    var hotelindex = $("#hotelindex" + index).val(); //酒店序号
+    var hotelname = $("#hotelname" + index).val(); //酒店名称
+	var hotellevel = $("#hotellevel" + index).val(); //酒店星级
+	var hotellevelname = $("#hotellevel" + index).find("option:selected").text(); //酒店星级显示名称
+	
+   var nameSpan = document.createElement("span");
+   nameSpan.innerHTML =  hotellevelname + hotelname;
+   nameSpan.style.marginRight = hotel_name_span_margin_right;
+   nameSpan.style.marginLeft = hotel_name_span_margin_left;
+   
+   var cancleImg = document.createElement("img");
+   cancleImg.src = cancleImgSrc;
+   cancleImg.style.marginRight = cancle_img_margin_right;
+   cancleImg.id = "cancle" + hotelindex + index  ; //酒店删除图标ID为“cancle” + 酒店序号 + 第几天
+   
+   cancleImg.onclick = function(){
+      removeElementNew(this.id);
+   };
+   
+   var hotelNameDiv = document.createElement("div");
+   hotelNameDiv.style.cssFloat = "left";
+   hotelNameDiv.style.border = borderStyle;
+   hotelNameDiv.style.paddingBottom = hotel_name_span_margin_bottom;
+   hotelNameDiv.style.marginRight = hotel_name_div_margin_right;
+   hotelNameDiv.style.marginBottom = hotel_name_span_margin_bottom;
+   hotelNameDiv.id = "name" + hotelindex + index;
+   
+   hotelNameDiv.appendChild(nameSpan);
+   hotelNameDiv.appendChild(cancleImg);
+   
+   
+   var hotelDiv =  document.getElementById("hotel" + index);
+   hotelDiv.style.color = newElementFontColor;
+   hotelDiv.appendChild(hotelNameDiv);
+   
+   var hotelNameInput = document.createElement("input");
+   hotelNameInput.name = "hotelList[" + hotelindex + "].hotelName";
+   hotelNameInput.value = hotelname;
+   hotelNameInput.id = "hotelnameinput" + hotelindex + index; //酒店名称隐藏域ID为“hotelnameinput” + 酒店序号 + 第几天
+   hotelNameInput.type = "hidden";
+   
+   var hotelLevelInput = document.createElement("input");
+   hotelLevelInput.name = "hotelList[" + hotelindex + "].stayLevel";
+   hotelLevelInput.value = hotellevel;
+   hotelLevelInput.id = "hotellevelinput" + hotelindex + index; //酒店星级隐藏域ID为“hotellevelinput” + 酒店序号 + 第几天
+   hotelLevelInput.type = "hidden";
+   
+   hotelDiv.appendChild(hotelNameDiv);
+   hotelDiv.appendChild(hotelNameInput);
+   hotelDiv.appendChild(hotelLevelInput);
+   
+   hotelindex = Number(hotelindex) + 1;
+   $("#hotelindex" + index).val(hotelindex) ;
+   
+}
+
+/**
+ * 删除酒店显示DIV
+ */
+function removeElementNew(cancleId){
+	
+   var index = cancleId.replace("cancle","");
+   var labelNew = document.getElementById("name" + index);
+   if(labelNew != null){
+     labelNew.parentNode.removeChild(labelNew);
+   }
+   
+   var hotelnameInput = document.getElementById("hotelnameinput" + index);
+   if(hotelnameInput != null){
+	   hotelnameInput.parentNode.removeChild(hotelnameInput);
+   }
+   
+   var hotellevelInput = document.getElementById("hotellevelinput" + index);
+   if(hotellevelInput != null){
+	   hotellevelInput.parentNode.removeChild(hotellevelInput);
+   }
+		
+}
+
+/**
+ * 添加一日行程DIV
+ */
+function addRouteElement(index){
+	
+	
+	$.post("${contextPath}/traveline/route/queryconstants",{},function(data){
+		
+		if (data.length > 0) { 
+			
+			var vehicle = data[0];
+			var stayLevel = data[1];
+			var vehicleMap = JSON.parse(vehicle);
+			var stayLevelMap = JSON.parse(stayLevel);
+			
+			var jtHtml = "<div class='unit'><label>交通方式</label>";
+			for(var key in vehicleMap){
+				jtHtml = jtHtml + "<input type='checkbox' value=" + key + " name='vehicle'/>" + vehicleMap[key];
+			}
+			jtHtml = jtHtml + "</div>";
+			var zsHtml = "<div class='unit'><label>住宿</label><select name='' id='hotellevel" + index + "' >";
+            for(var key in stayLevelMap){
+            	zsHtml = zsHtml + "<option value=" + key + ">" + stayLevelMap[key] + "</option>";
+            }
+            zsHtml = zsHtml + "</select> <input type='text' name='' size='40' id='hotelname" + index + "'/>" +
+            				  "<button type='button' onclick='addHotel(" + index + ");'>增加酒店</button>" +
+            				  "<div id='hotel" + index + "' style='padding-left:130px; color:#4876FF; padding-top:10px;'></div>" +
+            				  "<input id='hotelindex" + index + "' type='hidden' value='0'/>" ;
+            var cfhtml = "<form method='post' id='form" + index + "' >" + 
+                         "<input type='hidden' name='lineID' value='${lineId}'/>" +
+                         "<input type='hidden' name='id' value='' id='dayRoute" + index + "'/>" + 
+            	         "<div class='unit'><b>第" + index + "天</b><input type='hidden' name='days' value='" + index + "'/></div>"  + 
+						 "<div class='unit'><label>出发地</label><input type='text' name='starting' size='20'/></div>" + 
+						 "<div class='unit'><label>目的地</label><input type='text' name='destination' size='20'/></div>";
+        	var xchtml = "<div class='unit'><label>行程安排</label><textarea  class='editor'rows='6' cols='60' name='schedulingDescription'></textarea></div>";
+        	var cyhtml = "<div class='unit'><label>餐饮</label>" +
+	 					 "<span>早餐</span><input type='radio' name='includeBreakfast' value='1' checked='checked'/>包含<input type='radio' name='includeBreakfast'  value='0'/>自理" +
+	 					 "<span style='padding-left:80px;' >午餐</span><input type='radio' name='includeLunch' value='1' checked='checked'/>包含<input type='radio' name='includeLunch' value='0'/>自理" +
+	 					 "<span style='padding-left:80px;'>晚餐</span><input type='radio'  name='includeDinner' value='1' checked='checked'/>包含<input type='radio' name='includeDinner' value='0'/>自理</div>"; 
+			var buttonHtml = "<div style='float:right' id='button'" + index + "'>" +
+			                 "<button type='button' onclick='saveDayRoute(" + index + ");' >保存</button>" + 
+							 "<button type='button' id='deleteDayRoute' onclick='deleteRouteInfo(" + index + ");'>删除</button> </div>";
+	 	    var hrhtml = "<div class='unit'><hr style='border:1px dotted;width:96%'/></div></form>";
+        	var eachRouteDiv = document.createElement("div");
+        	eachRouteDiv.innerHTML =  cfhtml + jtHtml + xchtml + zsHtml + cyhtml + buttonHtml + hrhtml;
+        	
+        	var routeContentDiv =  document.getElementById("routeContent");
+        	routeContentDiv.appendChild(eachRouteDiv);
+        }  
+		
+	},"json");
+	
+}
+
+
+/**
+ * 保存第index天行程信息
+ */
+function saveDayRoute(index){
+	
+	var dayRouteID = $("#dayRoute" + index).val();
+	var ajaxUrl = "";
+	if(dayRouteID == ""){ //保存
+		ajaxUrl = "${contextPath}/traveline/route/add";
+	}else{
+		ajaxUrl = "${contextPath}/traveline/route/modify";
+	}
+	$.ajax({
+		type:"POST",
+		dataType:"json",
+		url: ajaxUrl,
+		data:$("#form" + index).serialize(),
+		async:false,
+		error:function(request){
+			alertMsg.error("操作失败！");
+		},
+		success:function(data){
+			if(dayRouteID == ""){
+				eval(data);
+				if(data.success == "false"){
+					alertMsg.error(data.message);
+				}else{
+					//新增一日行程后将ID回传到页面中
+					document.getElementById("dayRoute" + index).value = data.message;
+					alertMsg.correct("添加行程成功");
+				}
+				
+			}else{
+				eval(data);
+				if(data.success == "false"){
+					alertMsg.error(data.message);
+				}else{
+					alertMsg.correct(data.message);
+				}
+				
+			}
+		}
+	});
+	
+	
+}
+
+/**
+ * 删除一日行程
+ */
+function deleteRouteInfo(index){
+	
+	var dayRouteID = $("#dayRoute" + index).val(); //已经是否有ID判断是否已保存
+	if(dayRouteID == ""){
+		var formDiv = document.getElementById("form" + index);
+		if(formDiv != null){
+			formDiv.parentNode.removeChild(formDiv);
+		}
+	}else{
+		$.ajax({
+			type:"POST",
+			url: "${contextPath}/traveline/route/delete",
+			data:$("#form" + index).serialize(),
+			async:false,
+			error:function(request){
+				alert("删除失败");
+			},
+			success:function(data){
+				var formDiv = document.getElementById("form" + index);
+				if(formDiv != null){
+					formDiv.parentNode.removeChild(formDiv);
+				}
+			}
+		});
+	}
+	var index = $("#size").val(); //获取页面已显示的日程天数需减1
+	index = Number(index) - 1; 
+	document.getElementById("size").value = index;
+	
+	//删除后 页面中最后一天行程添加删除按钮
+	var deleteRouteHtml= "<button type='button' id='deleteDayRoute' onclick='deleteRouteInfo(" + index + ");'>删除</button> </div>";
+	document.getElementById("button" + index).innerHTML = document.getElementById("button" + index).innerHTML  + deleteRouteHtml;
+}
+
+
+</script>

@@ -1,0 +1,49 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<form method="post" action="${contextPath}/traveline/dealer/update" 
+   class="pageForm required-validate" onsubmit="return validateCallback(this,dialogAjaxDone);">
+    <input type="hidden" id="price"  name="id"  value="${(dto.id)!''}"/>
+   <style>
+   .pageContent tr td{position: relative;}
+   </style>
+   <div class="pageContent">
+       <table>
+           <tr>
+               <td width="200"><span style="color:red">*</span>请填写经销商名称：</td>
+               <td>
+                   <input type="text" name="name" maxlength="10" class="required" value="${(dto.name)!''}"/>
+               </td>
+           </tr>
+          <tr>
+               <td width="200"><span style="color:red">*</span>请填写经销商代码：</td>
+               <td>
+                   <input type="text" name="code" maxlength="10" class="required" value="${(dto.code)!''}"/>
+               </td>
+           </tr>
+          <tr>
+               <td width="200"><span style="color:red">*</span>请填写经销商商城访问地址：</td>
+               <td>
+                   <input type="text" name="dealerUrl" maxlength="255" class="required" value="${(dto.dealerUrl)!''}"/>
+               </td>
+           </tr>
+       </table>
+   </div>
+   
+   <div class="formBar">
+       <ul>
+           <li>
+               <div class="buttonActive">
+                   <div class="buttonContent">
+                       <button type="submit">确认</button>
+                   </div>
+               </div>
+           </li>
+           <li>
+               <div class="buttonActive">
+                   <div class="buttonContent">
+                       <button type="button" class="close">关闭</button>
+                   </div>
+               </div>
+           </li>
+       </ul>
+   </div>
+</form>

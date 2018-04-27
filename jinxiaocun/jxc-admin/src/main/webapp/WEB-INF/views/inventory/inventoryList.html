@@ -1,0 +1,75 @@
+<#assign contextPath = springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/inventory/list" method="get">
+		
+		<input type="hidden" name="pageNo" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="pageSize" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<ul class="searchContent">
+				<li>
+					<label>仓库：</label>
+					<input type="text" name="warehouse" value="${qo.warehouseId!?html}" />
+				</li>
+				<li>
+					<label>sku商品信息：</label>
+					<input type="text" name="skuProduct" value="${qo.skuProductId!?html}" />
+				</li>
+				<li>
+					<label>供应商：</label>
+					<input type="text" name="supplier" value="${qo.supplierId!?html}" />
+				</li>
+			</ul>
+			
+			<div class="subBar">
+				<ul><li><div class="buttonActive"><div class="buttonContent">
+					<button type="submit">检索</button>
+				</div></div></li></ul>
+			</div>
+			
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+			</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="20">良品可用数</th>
+				<th width="20">良品锁定数</th>
+				<th width="20">仓库</th>
+				<th width="20">次品可用数</th>
+				<th width="20">sku商品信息</th>
+				<th width="20">次品锁定数</th>
+				<th width="20">供应商</th>
+				<th width="20">良品锁定数</th>
+				<th width="20">次品在库数</th>
+				<th width="20">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as entity>
+			<tr target="sid_Inventory" rel="${entity.id}">
+				<td>${entity.qualifiedProductAvailable!?html}</td>
+				<td>${entity.qualifiedProductInstock!?html}</td>
+				<td>${entity.warehouse!?html}</td>
+				<td>${entity.defectiveProductAvailable!?html}</td>
+				<td>${entity.skuProduct!?html}</td>
+				<td>${entity.defectiveProductLocked!?html}</td>
+				<td>${entity.supplier!?html}</td>
+				<td>${entity.qualifiedProductLocked!?html}</td>
+				<td>${entity.defectiveProductInstock!?html}</td>
+				<td>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

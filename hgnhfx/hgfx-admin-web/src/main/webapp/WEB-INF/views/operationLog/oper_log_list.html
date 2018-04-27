@@ -1,0 +1,85 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+    <form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/operationlog/list" method="get">
+
+        <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+        <input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+
+        <div class="searchBar">
+            <table class="searchContent" style="width: 70%;">
+                <tr>
+                	<td align="right">操作时间：</td>
+                    <td colspan="">
+                        <input type="text" name="startDate" class="date textInput readonly" readonly="true" placeholder="开始时间" value="${startDate}">
+                        -
+                        <input type="text" name="endDate" class="date textInput readonly" readonly="true" placeholder="结束时间" value="${endDate}">
+                    </td>
+                    
+                    <td>
+                    	操作人：
+                        <select name="operatorId" style="width: 100px;">
+                            <option value="">全部</option>
+                            <#list staffList as st>
+                            	<option value="${st.id}" <#if sqo.operatorId==st.id> selected='selected' </#if> >${st.staffBaseInfo.realName}</option>
+                    		</#list>
+                        </select>
+                    </td> 
+                    
+                    <td>
+                        <button type="submit">查询</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="170">
+		<thead>
+			<tr>
+				<th width="10%">操作人</th>
+				<th width="30%">操作时间</th>
+				<th width="20%">操作对象</th>
+				<th width="40%">操作内容</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as operLog>
+			<tr>
+				<td>${operLog.operator.displayName}</td>
+				<td>${operLog.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<td>
+					<#if operLog.type==1>
+						后台添加商户
+					<#elseif operLog.type==2>
+						审核商户正式申请
+					<#elseif operLog.type==3>
+						对商户启用禁用
+					<#elseif operLog.type==4>
+						对商户的商品启用停用
+					<#elseif operLog.type==5>
+						申请积分添加
+					<#elseif operLog.type==6>
+						积分添加审核
+					<#elseif operLog.type==7>
+						申请可欠费积分修改
+					<#elseif operLog.type==8>
+						可欠费积分修改审核
+					<#elseif operLog.type==9>
+						预警积分设置操作
+					<#elseif operLog.type==10>
+						异常订单审核操作
+					<#elseif operLog.type==11>
+						商户注册申请审核
+					</#if>
+				</td>
+				<td>${operLog.content}</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+	
+</div>

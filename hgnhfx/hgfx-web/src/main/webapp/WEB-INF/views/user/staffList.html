@@ -1,0 +1,252 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as dk>
+<@dk.head "" >
+</@dk.head>
+
+<@dk.main "" "userManage">
+<script src="${contextPath}/resources/js/account-window.js" charset="utf-8"></script>
+<div class="right-content">
+		<div class="right-content-pure">
+			<div class="right-content-title">
+				<span class="tt">
+					<img style="  float: left;  margin-top: 2px;  margin-right: 8px;" src="${contextPath}/resources/img/order/wd2.png">
+					<span class="tl">用户管理<span>>> 用户管理</span></span>
+				</span>
+				
+			</div>
+			
+			<div class="condition">
+				<div class="condition-wrap">
+					<div class="condition-c">
+						<a href="javascript:void(0);" onclick="toAdd();"><div id="addSubAccount" ></div></a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="table-content">
+				<div class="table-content-wrap">
+					<form action="${contextPath}/userManager/staffList" method="post" id="paginationForm">
+										<input type="hidden" value="${pageNum}" name="pageNum" id="pageNum"/>
+										<input type="hidden" value="${totalPageNum}" name="totalPageNum"/>
+										</form>
+						<!-- <span class="text2">查询结果</span> -->
+						
+					
+					<div  class="table-content-pure">
+						<table>
+							<tr class="thd"><th style="  width: 36%;">用户名</th><th style="  width: 36%;">姓名</th><th>操作</th></tr>
+							    <#list pagination.list as user>
+								<tr class="ta" >
+								<td>${user.loginName}</td>
+								<td>${user.name}</td>
+								<td><span class="password-reset" onclick="toReset('${user.id}')">密码重置</span>
+								<span class="del2" onclick="toDel('${user.id}')">删除</span></td>
+								</tr>
+								</#list>
+							</table>
+						</div>
+					</div>
+				</div>
+				<#include "/public/pagination/pagination.html">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="winP" style="display:none;"></div>
+	<div id="winAccount" style="display:none;">
+		<div class="win-p" >
+			<div class="table-pure">
+				<div class="table-pure-content" style="  border-bottom: 1px dashed #d5e2ef; margin-bottom:20px;">新增子账号
+					<div id="closeWin"><img src="${contextPath}/resources/img/order/close.png"></div>
+				</div>
+				
+				<div class="win-account">
+					<div class="win-account-content">
+						<div id="user"><img src="${contextPath}/resources/img/order/user2.png">
+						<input type="text" placeholder="用户名" id="loginName"></div>
+						<div id="name" style="  margin: 24px 0 40px 0;"><img src="${contextPath}/resources/img/order/name.png">
+						<input type="text" placeholder="姓名" id="userName"></div>
+						<a href="javascript:void(0);" onclick="saveStaff();"><div id="addAccount2"></div></a>
+					
+						<div class="tip-show-a" ><img src="${contextPath}/resources/img/login-tip/red-warning.png"><span></span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="resetAccount" style="display:none;">
+		<div class="win-p" >
+			<div class="table-pure">
+				<div class="table-pure-content" style="  border-bottom: 1px dashed #d5e2ef; margin-bottom:20px;">重置密码
+					<div id="closeWin3"><img src="${contextPath}/resources/img/order/close.png"></div>
+				</div>
+				<p class="tip123">确定要重置密码？</p>
+				<div class="btn-box">
+					<div class="btn-box-wrap">
+						<a href="javascript:void(0);" onclick="reset()"><div id="yes"></div></a>
+						<a href="javascript:void(0);" onclick="hideWin3()"><div id="no" ></div></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="delAccount" style="display:none;">
+		<div class="win-p" >
+			<div class="table-pure">
+				<div class="table-pure-content" style="  border-bottom: 1px dashed #d5e2ef; margin-bottom:20px;">删除账号
+					<div id="closeWin2"><img src="${contextPath}/resources/img/order/close.png"></div>
+				</div>
+				<p class="tip123">此删除操作不可恢复，是否确认删除？</p>
+				<div class="btn-box">
+					<div class="btn-box-wrap">
+						<a href="javascript:void(0);" onclick="del()"><div id="yes"></div></a>
+						<a href="javascript:void(0);" onclick="hideWin2()"><div id="no" ></div></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</@dk.main>
+	<@dk.end "">
+</@dk.end>
+	
+	
+	<script>
+	var token = '${token}';
+	var resetId;
+	function toReset(id)
+	{
+	resetId = id;
+	$("#winP").show();
+	$("#resetAccount").show();
+	}
+	
+	function reset()
+	{
+	$.post("${contextPath}/userManager/resetStaffPwd",
+	{"staffId":resetId,"token":token},
+	function(data)
+	{
+	if(data=="success")
+	{
+	location.reload();
+	}
+	else
+	{
+	alert("重置密码失败");
+	}
+	});
+	}
+	
+	function toAdd()
+	{
+	$("#loginName").val("");
+	$("#userName").val("");
+	showWin();
+    tipHide();
+	}
+	
+	function saveStaff()
+	{
+	tipHide();
+	var loginName = $("#loginName").val();
+	if(loginName.replace(/[ ]/g,"")=="")
+	{
+	$(".tip-show-a span").text("用户名不能为空");
+	$(".tip-show-a").css({"top":"65px"}).show();
+	$("#user ").css("border","1px solid #ea5657");
+	return false;
+	}
+	if(loginName.length>20)
+	{
+	$(".tip-show-a span").text("用户名长度超出限制,长度限为20以内");
+	$(".tip-show-a").css({"top":"65px"}).show();
+	$("#user ").css("border","1px solid #ea5657");
+	return false;
+	}
+	var name = $("#userName").val();
+	if(name.replace(/[ ]/g,"")=="")
+	{
+	$(".tip-show-a span").text("姓名不能为空");
+	$(".tip-show-a").css({"top":"130px"}).show();
+	$("#name ").css("border","1px solid #ea5657");
+	return false;
+	}
+	if(name.length>32)
+	{
+	$(".tip-show-a span").text("姓名超出长度限制,长度限制32字以内");
+	$(".tip-show-a").css({"top":"130px"}).show();
+	$("#name ").css("border","1px solid #ea5657");
+	return false;
+	}
+	$.post("${contextPath}/userManager/saveStaff",
+	{"loginName":loginName,"name":name,"token":token},
+	function(data)
+	{
+	if(data=="1")
+	{
+	$(".tip-show-a span").text("已有该用户");
+	$(".tip-show-a").css({"top":"65px"}).show();
+	$("#user ").css("border","1px solid #ea5657");
+	}else if(data=="2")
+	{
+	$(".tip-show-a span").text("用户名格式错误,以字母开头，字母/数字任意");
+	$(".tip-show-a").css({"top":"65px"}).show();
+	$("#user ").css("border","1px solid #ea5657");
+	}else if(data=="3")
+	{
+	$(".tip-show-a span").text("姓名格式错误，格式为：汉字/字母/数字任意");
+	$(".tip-show-a").css({"top":"130px"}).show();
+	$("#name ").css("border","1px solid #ea5657");
+	}
+	else if(data=="success")
+	{
+	location.reload();
+	}
+	else if(data.indexOf("error")>=0)
+	{
+	alert("添加失败")
+	}
+	},"text");
+	}
+	
+	var delId;
+	function toDel(id)
+	{
+	delId = id;
+	showWin2();
+	}
+	
+	function del()
+	{
+	$.post("${contextPath}/userManager/deleteStaff",
+	{"staffId":delId,"token":token},
+	function(data)
+	{
+	if(data=="success")
+	{
+	location.reload();
+	}
+	else
+	{
+	$("#closeWin2").click();
+	if(data.indexOf("error")>=0)
+	alert("删除失败");
+	else
+	alert(data)
+	}
+	});
+	
+	}
+	$(function(){
+		var botm_zz_a=$(".bottom-box").height();
+		var w_aa_zz=$(window).height();
+		var d_aa_zz=$(document).height();
+		if(w_aa_zz == d_aa_zz){
+			$(".bottom-box").css("margin-top",(w_aa_zz-botm_zz_a-$("#mininav").height()+96)+"px");
+		}
+		
+	});
+	</script>

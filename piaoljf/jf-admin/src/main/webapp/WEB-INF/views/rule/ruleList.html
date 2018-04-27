@@ -1,0 +1,96 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/rule/list" method="get">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<ul class="searchContent">
+				<li>
+					<label>规则名称：</label>
+					<input type="text" name="name" value="${dto.name}" />
+				</li>
+				<li>
+					<label>作废状态：</label>
+					<select class="combox" name="status" >
+						<option value="">所有类型</option>
+						<option value="N"  <#if dto.status == 'N'>selected="selected"</#if>>作废</option>
+						<option value="Y" <#if dto.status == 'Y'>selected="selected"</#if>>正常</option>
+				    </select>
+				</li>
+				<li>
+					<label>期限状态：</label>
+					<select class="combox" name="isLimit" >
+						<option value="">所有类型</option>
+						<option value="0"  <#if dto.isLimit == '0'>selected="selected"</#if>>未到期限</option>
+						<option value="1" <#if dto.isLimit == '1'>selected="selected"</#if>>已过期</option>
+						<option value="2" <#if dto.isLimit == '2'>selected="selected"</#if>>在期内</option>
+				    </select>
+				</li>
+			</ul>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" >查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/rule/creat"  lookupgroup="orgLookup" mask="true"><span>新建规则</span>
+			</a>
+			</li>
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th>规则编码</th>
+				<th>规则名称</th>
+				<th>模板名称</th>
+				<th>积分类型</th>
+				<th>有效起日期</th>
+				<th>有效止日期</th>
+				<th>期限状态</th>
+				<th>是否作废</th>
+				<th>操作 </th>
+			</tr>
+		</thead>
+        <tbody>
+			<#list pagination.list as t>
+			<tr>
+				<td>${t.code!?html}</td>
+				<td>${t.name!?html}</td>
+				<td>${t.templateName!?html}</td>
+				<td>${t.jfAccountType.name}</td>
+				<#assign startDate="${t.startDate}"?date("yyyy-MM-dd")> 
+				<#assign endDate="${t.endDate}"?date("yyyy-MM-dd")> 
+				<td>${startDate}</td>
+				<td>${endDate}</td>
+				<td><#if t.isLimit == '0'>未到期限</#if><#if t.isLimit == '1'>已过期</#if><#if t.isLimit == '2'>在期内</#if></td>
+				<td><#if t.status == 'N'>作废</#if><#if t.status == 'Y'>正常</#if> </td>
+                <td> 
+                    <a title="查看"  lookupgroup="orgLookup" mask="true"  href="${contextPath}/rule/check?code=${t.code}" style="color: blue" >查看&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a title="编辑"  <#if t.isLimit == '0' && t.status == 'Y' >   lookupgroup="orgLookup" mask="true"   href="${contextPath}/rule/toEdite?code=${t.code}" style="color: blue"  </#if>>编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    
+                    <a title="升级"  <#if t.isLimit == '2' && t.status == 'Y' > lookupgroup="orgLookup" mask="true"  href="${contextPath}/rule/toUpgrade?code=${t.code}"  style="color: blue" </#if> >升级&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					<a title="确认作废？"  <#if t.status == 'Y'> target="ajaxTodo"  href="${contextPath}/rule/cancel?code=${t.code}"  style="color: blue"  </#if>>作废</a>
+				 </td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+ 
+</div>
+ 

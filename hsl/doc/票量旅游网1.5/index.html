@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-首页</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+
+</head>
+
+
+
+<body>
+
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1 on">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav3">酒&nbsp;店</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav5">周边游</a>
+        <a href="#" title="" class="h1 yahei nav6">跟团游</a>
+        <a href="#" title="" class="h1 yahei nav7">自由行</a>
+        <a href="#" title="" class="h1 yahei nav8">团&nbsp;购</a>
+        <a href="#" title="" class="h1 yahei nav9">说走就走</a>
+        <a href="#" title="" class="h1 yahei nav10 last">合作专区</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+<link href="css/index.css" rel="stylesheet" />
+<script src="js/index.js" language="javascript"></script>
+<div class="g_bd">
+	<!--轮播图部分-->
+	<div class="g_carousel ov pl disb" id="carousel">
+        <div class="img_list pa">
+        <!--图片宽度最少1200-->
+            <a href="#" style="background-image:url(images/index_banne1.jpg)" class="turn"></a>
+            <a href="#" style="background-image:url(images/index_img1.jpg)" class="turn"></a>
+            <a href="#" style="background-image:url(images/index_img2.jpg)" class="turn"></a>
+        </div>
+        <div class="m_select pl diab">
+                <ul class="icon pa">
+                </ul>
+                <div class="select_box pa ">
+                	<div class="select_items fl disb">
+                        <div class="tab disb ov" id="select_tab">
+                            <span class="yahei h1 first fl on curp">机票</span>
+                            <span class="yahei h1 fl curp">景点</span>
+                            <span class="yahei h1 last fl curp">线路</span>
+                            <label class="line fl"></label>
+                        </div>
+                        <div class="tab_box disb">
+                        	<span class="labe fl dis h3 yahei">出发城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon" id="citySelect_from" name="from" placeholder="请输入您的出发地名称">
+                        	<span class="labe fl dis h3 yahei">到达城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon" id="citySelect_to" name="to" placeholder="请输入您的目的地名称">
+                        	<span class="labe fl dis h3 yahei">出发日期:</span>
+                            <input placeholder="时间/日期" class="cityinput time_input yahei fl indexIcon" onClick="laydate()">
+                            
+							<script src="laydate/laydate.js" language="javascript"></script>
+                              <script>
+							  (function(){
+							   ;!function(){
+								
+								//laydate.skin('molv');
+								
+								laydate({
+								   elem: '#demo'
+								})
+								
+								}();
+							   })();
+								
+								</script>
+                        </div>
+                        <div class="tab_box disb" style="display:none;">
+                        	<span class="labe fl dis h3 yahei">景点名称:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon jd_input" id="citySelect" name="jd_name" placeholder="景点名称搜索">
+                        </div>
+                        <div class="tab_box disb" style="display:none;">
+                        	<span class="labe fl dis h3 yahei">出发城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon line_input" id="citySelect_line_from" name="line_from" placeholder="请输入您的出发地名称">
+                        	<span class="labe fl dis h3 yahei">到达城市:</span>
+                            <input type="text" class="cityinput yahei fl indexIcon line_input" id="citySelect_line_to" name="line_to" placeholder="请输入您的目的地名称">
+                        </div>
+                     </div>
+                     <a href="#" class="select_btn fl di ov yahei h2">搜&nbsp;索</a>
+                     
+                </div>
+        </div>
+    </div>
+	<!--轮播图部分-->
+    <div class="g_cont disb ov pl">
+    	<!--右部导航-->
+        	<div class="m_airNav pa" id="m_airNav">
+            	<span class="up pa indexIcon curp"></span>
+                	<div class="lin">
+                	<a href="javascript:;" rel="anchor_thzq" class="on">特惠专区</a>
+                	<a href="javascript:;" rel="anchor_jd">景点</a>
+                	<a href="javascript:;" rel="anchor_zby">周边游</a>
+                	<a href="javascript:;" rel="anchor_gty">跟团游</a>
+                    </div>
+            	<span class="down pa indexIcon curp"></span>
+            </div>
+    	<!--右部导航-->
+        <!--公告-->   	
+		<div class="m_notice disb ov">
+        	<span class="title pl fl yahei bold">公告
+            	<i class="icon indexIcon pa"></i>
+            </span>
+            <div class="text_carousel fl ov pl" id="text_carousl" rel="0">
+            	<div class="group pa">
+                    <span class="news">1票量旅游与澳大利亚新州旅游局在京签署战略合作协议票量旅游与澳大利亚新州旅游局在京签署战略合作协议1</span>
+                    <span class="news">2票量旅游与澳大利亚新州旅游局在京签署战略合作协议票量旅游与澳大利亚新州旅游局在京签2署战略合作协议</span>
+                    <span class="news">3票量旅游与澳大利亚新州旅游局在京签署战略合作协议票量旅游与澳大利亚新州旅游局在京签署战略合作协议</span>
+                    <span class="news">4票量旅游与澳大利亚新州旅游局在京签署战略合作协议票量旅游与澳大利亚新州旅游局在京签署战略合作协议</span>
+                </div>
+            </div>
+            <a href="#" class="more"></a>
+        </div> 
+        <!--公告-->   	
+        <!--标题-->
+        <div class="m_title disb ov" id="anchor_thzq">
+        	<h2 class="t yahei fl normal">特惠专区</h2>
+            <label class="en yahei h3  fl">Preferential Area</label>
+            <a href="#" class="more yahei fr">查看更多 》</a>
+        </div>
+        <!--标题-->
+        
+        <!--特惠专区-->
+        <div class="m_prefe diab ov">
+        	<!--专区的一个容器-->
+        	<div class="prefe_box pl fl">
+            	<a href="#">
+               		<img src="images/index_img1.jpg">
+                    <div class="flag pa indexIcon">
+                    	<span class="time disb yahei bold">13<label class="h4">/2月</label></span>
+                        <span class="trip disb h4">自助游</span>
+                    </div>
+                    <div class="masking pa">
+                    	<div class="masking_bg pa"></div>
+                    	<div class="masking_cont pa">
+                        	<span class="tt h1 yahei">                           
+                            	<label class="address">斯里兰卡</label><label class="">4晚5天半自助游</label>
+                            </span>
+                            <span class="price fr h1 yahei">
+                            	<label class="old_price">原价：<i>13,999/人起</i></label>
+                            	<label class="price_t">即时特价</label>
+                                <label class="price_num">
+                                	￥<i class="num">8,999</i>/人起
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        	<!--专区的一个容器-->
+        	<div class="prefe_box pl fl">
+            	<a href="#">
+               		<img src="images/index_img1.jpg">
+                    <div class="flag pa indexIcon">
+                    	<span class="time disb yahei bold">13<label class="h4">/2月</label></span>
+                        <span class="trip disb h4">自助游</span>
+                    </div>
+                    <div class="masking pa">
+                    	<div class="masking_bg pa"></div>
+                    	<div class="masking_cont pa">
+                        	<span class="tt h1 yahei">                           
+                            	<label class="address">斯里兰卡</label><label class="">4晚5天半自助游</label>
+                            </span>
+                            <span class="price fr h1 yahei">
+                            	<label class="old_price">原价：<i>13,999/人起</i></label>
+                            	<label class="price_t">即时特价</label>
+                                <label class="price_num">
+                                	￥<i class="num">8,999</i>/人起
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        	<div class="prefe_box pl fl">
+            	<a href="#">
+               		<img src="images/index_img1.jpg">
+                    <div class="flag pa indexIcon">
+                    	<span class="time disb yahei bold">13<label class="h4">/2月</label></span>
+                        <span class="trip disb h4">自助游</span>
+                    </div>
+                    <div class="masking pa">
+                    	<div class="masking_bg pa"></div>
+                    	<div class="masking_cont pa">
+                        	<span class="tt h1 yahei">                           
+                            	<label class="address">斯里兰卡</label><label class="">4晚5天半自助游</label>
+                            </span>
+                            <span class="price fr h1 yahei">
+                            	<label class="old_price">原价：<i>13,999/人起</i></label>
+                            	<label class="price_t">即时特价</label>
+                                <label class="price_num">
+                                	￥<i class="num">8,999</i>/人起
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        	<div class="prefe_box pl fl">
+            	<a href="#">
+               		<img src="images/index_img1.jpg">
+                    <div class="flag pa indexIcon">
+                    	<span class="time disb yahei bold">13<label class="h4">/2月</label></span>
+                        <span class="trip disb h4">自助游</span>
+                    </div>
+                    <div class="masking pa" >
+                    	<div class="masking_bg pa"></div>
+                    	<div class="masking_cont pa">
+                        	<span class="tt h1 yahei">                           
+                            	<label class="address">斯里兰卡</label><label class="">4晚5天半自助游</label>
+                            </span>
+                            <span class="price fr h1 yahei">
+                            	<label class="old_price">原价：<i>13,999/人起</i></label>
+                            	<label class="price_t">即时特价</label>
+                                <label class="price_num">
+                                	￥<i class="num">8,999</i>/人起
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!--特惠专区-->
+        <div class="m_title disb ov"  id="anchor_jd">
+        	<h2 class="t yahei fl normal">景 点</h2>
+            <label class="en yahei h3  fl">Attractions</label>
+            <a href="#" class="more yahei fr">查看更多 》</a>
+            <span class="link_group fr ov">
+            	<a href="#" class="link yahei">主题乐园</a>
+            	<a href="#" class="link yahei">古镇迷情</a>
+            	<a href="#" class="link yahei">山水园林</a>
+            	<a href="#" class="link yahei">美景人文</a>
+            	<a href="#" class="link yahei">约泡温泉</a>
+            </span>
+        </div>
+        <!--景点轮播-->
+        <div class="m_carousel disb pl">
+        	<div class="m_carou_bg pa"></div>
+        	<div class="m_carou_bg pa m_carou_bg2"></div>
+            <div class="m_carou_box disb pl" id="m_carousel">
+            	<span class="pa left indexIcon curp"></span>
+                <div class="list pa">
+                
+        			<!--景点轮播容器-->
+                	<div class="list_box">
+                    	<div class="base pl fl">
+                        	<a href="#">
+                            	<img src="images/index_img2.jpg" alt="">
+                                <span class="pa t_box yahei">
+                                	<i class="bg pa"></i>
+                                	<label class="title yahei disb pl">北京故宫</label>
+                                    <label class="price"><i>￥: </i><i class="n">40</i>起</label>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        	
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+        			<!--景点轮播容器-->
+                    
+        			<!--景点轮播容器2222222222222222222222222222222-->
+                	<div class="list_box">
+                    	<div class="base pl fl">
+                        	<a href="#">
+                            	<img src="images/index_img2.jpg" alt="">
+                                <span class="pa t_box yahei">
+                                	<i class="bg pa"></i>
+                                	<label class="title yahei disb pl">北京故宫</label>
+                                    <label class="price"><i>￥: </i><i class="n">40</i>起</label>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        	
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+        			<!--景点轮播容器2222222222222222222222222222222-->
+        			<!--景点轮播容器3333333333333333333333333333333-->
+                	<div class="list_box">
+                    	<div class="base pl fl">
+                        	<a href="#">
+                            	<img src="images/index_img2.jpg" alt="">
+                                <span class="pa t_box yahei">
+                                	<i class="bg pa"></i>
+                                	<label class="title yahei disb pl">北京故宫</label>
+                                    <label class="price"><i>￥: </i><i class="n">40</i>起</label>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        	
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+        			<!--景点轮播容器3333333333333333333333333333333-->
+        			<!--景点轮播容器3333333333333333333333333333333-->
+                	<div class="list_box">
+                    	<div class="base pl fl">
+                        	<a href="#">
+                            	<img src="images/index_img2.jpg" alt="">
+                                <span class="pa t_box yahei">
+                                	<i class="bg pa"></i>
+                                	<label class="title yahei disb pl">北京故宫</label>
+                                    <label class="price"><i>￥: </i><i class="n">40</i>起</label>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        	
+                        </div>
+                        <div class="rightBase fl ov">
+                        	<div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="normal_box pl fl yahei">
+                                <a href="#">
+                                    <img src="images/index_img2.jpg" alt="">
+                                    <label class="bg pa"></label>
+                                    <span class="tt pa">
+                                    	<label class="t fl">北京故宫</label>
+                                        <label class="p fl h4">
+                                        	<i class="h1">￥:</i><i class="n">40</i> 起
+                                        </label>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+        			<!--景点轮播容器3333333333333333333333333333333-->
+                </div>
+            	<span class="pa right indexIcon curp"></span>
+            </div>
+        </div>
+        <!--景点轮播-->
+        
+        <div class="m_title disb ov" id="anchor_zby">
+        	<h2 class="t yahei fl normal">周边游</h2>
+            <label class="en yahei h3  fl"> Tour around</label>
+            <a href="#" class="more yahei fr">查看更多 》</a>
+            <span class="link_group fr ov">
+            	<a href="#" class="link yahei">乌镇</a>
+            	<a href="#" class="link yahei">绍兴</a>
+            	<a href="#" class="link yahei">上海</a>
+            	<a href="#" class="link yahei">温州</a>
+            </span>
+        </div>
+        <!--周边游-->
+        <div class="m_closeTrip disb ov">
+        	<div class="m_closeTrip_box fl ov disb yahei">
+            	<a href="#">
+                	<img src="images/index_img3.png" alt="">
+                    <h2 class="h2 tt c1">随心随行台湾12天深度自驾游 </h2>
+                    <span class="price c1 b1 disb">￥<i>31080</i>起/人
+                    </span>
+                </a>
+                <a href="#" class="more disb color9">more></a>
+            </div>
+            <div class="m_closeTrip_box fl ov disb yahei">
+            	<a href="#">
+                	<img src="images/index_img3.png" alt="">
+                    <h2 class="h2 tt c2">随心随行台湾12天深度自驾游 </h2>
+                    <span class="price c2 b2 disb">￥<i>31080</i>起/人
+                    </span>
+                </a>
+                <a href="#" class="more disb color9">more></a>
+            </div>
+            <div class="m_closeTrip_box fl ov disb yahei">
+            	<a href="#">
+                	<img src="images/index_img3.png" alt="">
+                    <h2 class="h2 tt c3">随心随行台湾12天深度自驾游 </h2>
+                    <span class="price c3 b3 disb">￥<i>31080</i>起/人
+                    </span>
+                </a>
+                <a href="#" class="more disb color9">more></a>
+            </div>
+            <div class="m_closeTrip_box fl ov disb yahei">
+            	<a href="#">
+                	<img src="images/index_img3.png" alt="">
+                    <h2 class="h2 tt c4">随心随行台湾12天深度自驾游 </h2>
+                    <span class="price c4 b4 disb">￥<i>31080</i>起/人
+                    </span>
+                </a>
+                <a href="#" class="more disb color9">more></a>
+            </div>
+            <div class="m_closeTrip_box m_closeTrip_box_last fl ov disb yahei">
+            	<a href="#">
+                	<img src="images/index_img3.png" alt="">
+                    <h2 class="h2 tt c5">随心随行台湾12天深度自驾游 </h2>
+                    <span class="price c5 b5 disb">￥<i>31080</i>起/人
+                    </span>
+                </a>
+                <a href="#" class="more disb color9">more></a>
+            </div>
+        </div>
+        
+        <!--周边游-->
+        <div class="m_title disb ov" id="anchor_gty">
+        	<h2 class="t yahei fl normal">跟团游</h2>
+            <label class="en yahei h3  fl">Travel with the group</label>
+            <a href="#" class="more yahei fr">查看更多 》</a>
+            <span class="link_group fr ov">
+            	<a href="#" class="link yahei">跟团游</a>
+            	<a href="#" class="link yahei">周边游</a>
+            	<a href="#" class="link yahei">国内游</a>
+            	<a href="#" class="link yahei">出境游</a>
+            </span>
+        </div>
+        
+        <!--跟团游-->
+        <div class="m_follow ov pl" id="m_follow">
+        	<!--容器-->
+        	<div class="m_follow_box pa">
+            	<div class="tips fl c1">
+            		<h3 class="fl">奢华泰国苏梅岛康</h3>
+                    <i class="pa">￥14300</i>
+                </div>
+            	<a href="#">
+                <img src="images/index_img4.png" alt="" class="fl">
+                </a>
+            </div>
+        	<!--容器-->
+            <div class="m_follow_box pa">
+            	<div class="tips fl c1">
+            		<h3 class="fl">奢华泰国苏梅岛康</h3>
+                    <i class="pa">￥14300</i>
+                </div>
+            	<a href="#">
+                <img src="images/index_img4.png" alt="" class="fl">
+                </a>
+            </div>
+            <div class="m_follow_box pa">
+            	<div class="tips fl c1">
+            		<h3 class="fl">奢华泰国苏梅岛康</h3>
+                    <i class="pa">￥14300</i>
+                </div>
+            	<a href="#">
+                <img src="images/index_img4.png" alt="" class="fl">
+                </a>
+            </div>
+             <div class="m_follow_box pa">
+            	<div class="tips fl c1">
+            		<h3 class="fl">奢华泰国苏梅岛康</h3>
+                    <i class="pa">￥14300</i>
+                </div>
+            	<a href="#">
+                <img src="images/index_img4.png" alt="" class="fl">
+                </a>
+            </div>
+             <div class="m_follow_box pa">
+            	<div class="tips fl c1">
+            		<h3 class="fl">奢华泰国苏梅岛康</h3>
+                    <i class="pa">￥14300</i>
+                </div>
+            	<a href="#">
+                <img src="images/index_img4.png" alt="" class="fl">
+                </a>
+            </div>
+             <div class="m_follow_box pa">
+            	<div class="tips fl c1">
+            		<h3 class="fl">奢华泰国苏梅岛康</h3>
+                    <i class="pa">￥14300</i>
+                </div>
+            	<a href="#">
+                <img src="images/index_img4.png" alt="" class="fl">
+                </a>
+            </div>
+        </div>
+        <!--跟团游-->
+    </div>
+</div>
+									
+													
+
+<script src="js/city.js" language="javascript"></script>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">票量简介</a>
+                	<a href="#" title="" class="simsun h4">法律声明</a>
+                	<a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">友情链接</a>
+                	<a href="#" title="" class="simsun h4">酒店加盟</a>
+                	<a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">帮助中心</a>
+                	<a href="#" title="" class="simsun h4">投诉建议</a>
+                	<a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class="color8 disb h2 yahei">24小时客服热线</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <span class="color8 disb h2 yahei">境外游客紧急联络电话</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <div class="special"></div>
+</div>
+<!--页脚-->
+</body>
+</html>

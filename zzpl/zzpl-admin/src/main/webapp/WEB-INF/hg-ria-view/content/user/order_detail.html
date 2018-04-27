@@ -1,0 +1,114 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;订单详情
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="" 
+							class="form-horizontal pageForm required-validate"  style="margin-left: 60px;">
+							<hr>
+							<h3 style="background-color: #CCE7F5;color:#0a5c88;font-size: 18px;"><strong>出差人员基本信息</strong></h3>
+							<hr>
+							<div style="font-size: 16px;">
+								<table  class="table table-striped table-bordered table-hover">
+									<tr>
+										<th>姓名</th>
+										<th>证件号</th>
+										<th>手机号</th>
+										<th>机票类型</th>
+										<th>成本中心</th>
+									</tr>
+									<tr>
+										<#list passengers as passenger>
+											<td>${passenger.passengerName}</td>
+											<td>${passenger.idNO}</td>
+											<td>${passenger.telephone}</td>
+											<td><#if passenger.orderType==2>国际机票<#else>国内机票</#if></td>
+											<td>${(costCenter!).costCenterName}</td>
+										</#list>
+									</tr>
+								</table> 
+							</div>
+							<hr>
+							<h3 style="background-color: #CCE7F5;color:#0a5c88;font-size: 18px;"><strong>订单信息</strong></h3>
+							<hr>
+							<div style="font-size: 16px;">
+								<table  class="table table-striped table-bordered table-hover">
+									<tr>
+										<th>订单编号</th>
+										<th>票号</th>
+										<th>订单状态</th>
+									</tr>
+									<tr>
+										<#list passengers as passenger>
+											<td>${flightOrder.orderNO}</td>
+											<td>${passenger.airID}</td>
+											<td>${statusMSG}</td>
+										</#list>
+									</tr>
+								</table> 
+							</div>
+							<hr>
+							<h3 style="background-color: #CCE7F5;color:#0a5c88;font-size: 18px;"><strong>计划机票基本信息</strong></h3>
+							<hr>
+							<div  style="font-size: 16px;">
+								<table  class="table table-striped table-bordered table-hover">
+									<tr>
+										<th>航班信息</th>
+										<th>起降时间</th>
+										<th>起降机场</th>
+										<th>舱位信息</th>
+										<th>票价</th>
+										<th>机建燃油</th>
+										<th>实际支付价</th>
+										<#if role == "success">
+											<th>出票渠道</th>
+										</#if>
+									</tr>
+									<tr>
+										<td>航空公司:${flightOrder.airCompanyName}
+											<br/>航班:${flightOrder.flightNO}
+											<br/>机型:${flightOrder.planeType}</td>
+										<td>${flightOrder.startTime}<br/>${flightOrder.endTime}</td>
+										<td>${flightOrder.departAirport}${flightOrder.departTerm}<br/>${flightOrder.arrivalAirport}${flightOrder.arrivalTerm}</td>
+										<td>${flightOrder.cabinName}${flightOrder.cabinCode}</td>
+										<td>${flightOrder.ibePrice}</td>
+										<td>${flightOrder.buildFee+flightOrder.oilFee}</td>
+										<td>${flightOrder.platTotalPrice}</td>
+										<#if role == "success">
+											<td>${flightOrder.ticketChannelName}</td>
+										</#if>
+									</tr>
+								</table> 
+							</div>
+							<hr>
+							<h3 style="background-color: #CCE7F5;color:#0a5c88;font-size: 18px;"><strong>出差说明</strong></h3>
+							<hr>
+							<div style="font-size: 16px;">
+								<table  class="table table-striped table-bordered table-hover">
+									<tr>
+										<th>出差说明</th>
+									</tr>
+									<tr>
+										<td>${flightOrder.note}</td>
+									</tr>
+								</table> 
+							
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

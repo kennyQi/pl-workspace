@@ -1,0 +1,76 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<span class="caption-subject font-red-sunglo bold uppercase">部门列表</span>
+				</div>
+				<div class="actions">
+					<!-- <a href="${contextPath}/hg/auth/project/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="projectIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a> -->
+					<a href="${contextPath}/department/add" class="btn btn-default btn-sm" target="hgTab">  添加部门
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							部门名称：
+							<input class="form-control input-small input-inline" name="departmentName" id="name">
+						</label>
+					</div>
+					<div class="col-md-4 text-right" style="float: right;">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#departmentGrid" data-ref-param="{departmentName: $('#name').val()}"> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<!-- <th class="table-checkbox"><input type="checkbox" group="projectIds"
+								class="checkboxCtrl"/></th> -->
+							<th>部门名称</th>
+							<th>部门简介</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="departmentGrid" target="grid" data-url="${contextPath}/department/departmentList">
+						<!-- <tr class="odd gradeX"  onclick="getDetail('{id}')"> -->
+						<tr class="odd gradeX" >
+							<!-- <td>
+								<input type="checkbox" name="projectIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td> -->
+							<td>
+								{departmentName}
+							</td>
+							<td>
+								{description}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/department/del?departmentID={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/department/edit?departmentID={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function getDetail(departmentID){
+	$.hgtab.open("${contextPath}/department/detail?departmentID="+departmentID+"","detail","部门详情",false);
+}
+
+</script>

@@ -1,0 +1,329 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+</style>
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="58">
+
+	<form action="${contextPath}/dealer/update" method="post"  class="pageForm required-validate" onsubmit="return beforeSubmitForm(this)">
+		<input type="hidden" name="dealerId" value="${(dealer.id)!''}"/>
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>基本信息</span></div>
+		<div class="unit">
+			<label>经销商名称：</label>
+			<input  name="dealerName" readonly="true" value="${(dealer.baseInfo.name)!''}" />
+		</div>
+		<div class="unit">
+			<label>登录账号：</label>
+			<input type="text"  readonly="true" name="adminLoginName" class="alphanumeric" minlength="4" maxlength="12" value="${dealer.clientInfo.adminLoginName}"/>
+		</div>
+		<div class="unit">
+			<label>登录密码：</label>
+			<input type="password" name="adminPassword" class="alphanumeric" placeholder="不填写时则不修改原有密码" minlength="6" maxlength="20"/>
+		</div>
+		<div class="unit">
+			<label>经销商代码：</label>
+			<input readonly="true" value="${(dealer.clientInfo.key)!''}"/>
+		</div>
+		<div class="unit">
+			<label>经销商简介：</label>
+			<textarea class="editor required" name="intro" rows="10" cols="90" class="required" 
+			tools="Fullscreen,Source,|,SelectAll,Cut,Copy,Pastetext,Blocktag,|,Fontface,FontSize,Bold,
+			Italic,Underline,Strikethrough,FontColor,BackColor,|,Removeformat,Align,List,Outdent,Indent,
+			Link,Unlink,Hr,Table">${(dealer.baseInfo.intro)!''}</textarea>
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+            <span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的企业logo图片，最大不超过2M</span>
+		</div>
+		<div class="unit">
+			<label>企业logo：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file0" type="file" name="file" data-msg="企业logo" 
+					   data-imgun="imgun0" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun0">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="企业logo" title="企业logo" src="${(dealer.certificateInfo.dealerLogo)!'resources/image/u39.png'}"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input name="imgNames" type="hidden"/>
+          	<input name="imgSrcs" type="hidden" value="${(dealer.certificateInfo.dealerLogo)!'resources/image/u39.png'}"/>
+		</div>
+		<!-- 资质信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>资质信息</span></div>
+		<div class="unit">
+			<label>&nbsp;</label>
+            <span style="color:gray;">请上传JPG/PNG/GIF/BMP格式的营业执照图片，最大不超过2M</span>
+		</div>
+		<div class="unit">
+			<label>营业执照：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file1" type="file" name="file" data-msg="营业执照" 
+					   data-imgun="imgun1" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun1">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="营业执照" title="营业执照" src="${(dealer.certificateInfo.businessLicense)!'resources/image/u39.png'}"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input name="imgNames" type="hidden"/>
+          	<input name="imgSrcs" type="hidden" value="${(dealer.certificateInfo.businessLicense)!'resources/image/u39.png'}"/>
+		</div>
+		<div class="unit">
+			<label>税务登记证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file2" type="file" name="file" data-msg="税务登记证" 
+				       data-imgun="imgun2" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun2">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="税务登记证" title="税务登记证" src="${(dealer.certificateInfo.taxRegistrationCertificate)!'resources/image/u39.png'}"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input name="imgNames" type="hidden"/>
+          	<input name="imgSrcs" type="hidden" value="${(dealer.certificateInfo.taxRegistrationCertificate)!''}"/>
+		</div>
+		<div class="unit">
+			<label>组织代码证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file3" type="file" name="file" data-msg="组织代码证" 
+				       data-imgun="imgun3" size="60" onchange="imgUpload(this);"/>
+            </span>
+		</div>
+		<div class="unit" id="imgun3">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="组织代码证" title="组织代码证" src="${(dealer.certificateInfo.organizationCodeCertificate)!'resources/image/u39.png'}"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input name="imgNames" type="hidden"/>
+          	<input name="imgSrcs" type="hidden" value="${(dealer.certificateInfo.organizationCodeCertificate)!''}"/>
+		</div>
+		<div class="unit">
+			<label>法人身份证：</label>
+			<span class="u-upload">
+				<input class="upFile" id="file4" type="file" name="file" data-msg="法人身份证" 
+				       data-imgun="imgun4" size="60" onchange="imgUpload(this);"/><br/>
+            </span>
+		</div>
+		<div class="unit" id="imgun4">
+			<label>&nbsp;</label>
+			<img class="img-polaroid" width="80" alt="法人身份证" title="法人身份证" src="${(dealer.certificateInfo.corporateIDCard)!'resources/image/u39.png'}"/>
+          	<input name="titles" type="hidden"/>
+          	<input name="fileNames" type="hidden"/>
+          	<input name="imgNames" type="hidden"/>
+          	<input name="imgSrcs" type="hidden" value="${(dealer.certificateInfo.corporateIDCard)!''}"/>
+		</div>
+		<!-- 资质信息   -->
+		
+		
+		<!-- 联系信息   -->
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>联系信息</span></div>
+		<div class="unit">
+			<label>联&nbsp;&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;人：</label>
+			<input name="linkMan" class="required" value="${(dealer.baseInfo.linkMan)!''}"/>
+		</div>
+		<div class="unit">
+			<label>手&nbsp;&nbsp;&nbsp;机&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
+			<input name="telephone" class="required phone" value="${(dealer.baseInfo.telephone)!''}"/>
+		</div>
+		<div class="unit">
+			<label>联&nbsp;系&nbsp;邮&nbsp;箱：</label>
+			<input id="email2" name="email" class="isInject required email" value="${(dealer.baseInfo.email)!''}"/>
+		</div>
+		<div class="unit">
+			<label>联系地址：</label>
+			<select id="provinceId" name="provinceId" onchange="findPCA($('#provinceId', $.pdialog.getCurrent()).val(), '')">
+			<#list provinceList as pr>
+				<option value="${pr.id}" <#if pr.id==dealer.baseInfo.province.id> selected="selected" </#if> >${pr.name}</option>
+			</#list>
+			</select>
+			<select id="cityId" name="cityId" onchange="findPCA('', $('#cityId', $.pdialog.getCurrent()).val())">
+				<option value="${dealer.baseInfo.city.id}">${dealer.baseInfo.city.name}</option>
+			</select>
+			<select id="areaId" name="areaId">
+				<option value="${dealer.baseInfo.area.id}">${dealer.baseInfo.area.name}</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>&nbsp;</label>
+			<textarea id="address" name="address" class="required" rows="4" cols="55">${(dealer.baseInfo.address)}</textarea>
+		</div>
+		
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>经销商网址</span></div>
+		<div class="unit">
+			<label>经销商网址：</label>
+			<input type="url" name="dealerUrl" class="required" size="64" maxlength="1024" placeholder="输入带有HTTP前缀的地址" value="${(dealer.clientInfo.dealerWebsite)!''}"/>
+		</div>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>消息推送</span></div>
+		<div class="unit">
+			<label>是否使用消息推送：</label>
+			<input type="radio" value="true" name="publishAble" <#if dealer.clientInfo.publishAble?? && dealer.clientInfo.publishAble>checked="checked"</#if>>开启
+			<input type="radio" value="false" name="publishAble" <#if dealer.clientInfo.publishAble?? && !dealer.clientInfo.publishAble>checked="checked"</#if>>关闭
+		</div>
+		<div class="unit">
+			<label>消息推送网址：</label>
+			<input type="url" name="publishUrl" size="64" maxlength="384" placeholder="输入带有HTTP[s]前缀的地址" value="${(dealer.clientInfo.publishUrl)!''}"/>
+		</div>
+		
+		
+		<div class="jq unit" style="padding:8px 10px;margin-top:20px;margin-bottom:10px;"><span>经销商结算信息</span></div>
+		<div class="unit">
+			<label>账户类型：</label>
+			<select name="accountType" class="required" disabled="disabled">
+				<option value="">未选择</option>
+				<option value="1" <#if dealer.accountInfo.accountType==1>selected="selected"</#if> >汇金宝支付平台账户</option>
+				<option value="2" <#if dealer.accountInfo.accountType==2>selected="selected"</#if> >支付宝账户</option>
+			</select>
+		</div>
+		<div class="unit">
+			<label>手续费率：</label>
+			<input  class="required" name="settlementFee" value="${((dealer.accountInfo.settlementFee)!0)?c}"/> 元/张
+		</div>
+		<#--
+		<div class="unit">
+			<label>操作员编号：</label>
+			<input id="operatorNo" class="required" name="operatorNo" disabled="disabled" value="${(dealer.accountInfo.operatorNo)!''}"/>
+		</div>
+		 <div class="unit">
+			<label>预付款金额：</label>
+			<input id="advancePayment" class="required" name="advancePayment" disabled="disabled" value="${(dealer.accountInfo.advancePayment)!''}" /> 元
+		</div>
+		<div class="unit">
+			<label>警戒阀值：</label>
+			剩余<input id="warnBalance" class="required" name="warnBalance" size="16" disabled="disabled" value="${(dealer.accountInfo.warnBalance)!''}" />元提醒
+		</div> -->
+		
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" onclick="cancleAdd()">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+
+</div>
+</div>
+
+<script type="text/javascript">
+
+var beforeSubmitForm = function(evt){
+	
+	$("input[name='provinceId']").val($("#provinceQoCode").val());
+	$("input[name='cityId']").val($("#cityQoCode").val());
+	$("input[name='areaId']").val($("#areaQoCode").val());
+	//移除账户类型禁用属性，使该字段可提交
+	$("select[name='accountType']").removeAttr("disabled");
+	//调用DWZ的校验
+	return validateCallback(evt,dialogAjaxDone);
+}
+
+function cleanCityArea(){
+	$("input[name='city.code']").val();
+	$("input[name='city.name']").val();
+	$("input[name='area.code']").val();
+	$("input[name='area.name']").val();
+}
+
+function cancleAdd(){
+	if(confirm("是否取消添加该经销商")){
+		$.pdialog.closeCurrent();
+	}
+}
+
+function checkEmail(){
+	var e = $("#email2").val();
+	alert(e);
+}
+
+
+/** 图片上传按钮单击事件 */
+function imgUpload(evt){
+	var temp = $(evt);
+	var groupURL = '/group0/';
+	//获取后缀，并校验
+	var vall = temp.val();
+	var fileName = vall.substr(vall.lastIndexOf("\\")+1);
+	var ext = vall.substr(vall.lastIndexOf(".")+1);
+	if(!(ext && /^(jpg|jpeg|png|gif)$/.test(ext.toLowerCase()))){
+		alertMsg.warn("暂不支持jpg、gif、png、bmp以外的图片！");
+		return false;
+	}
+	//发起请求
+	$.ajaxFileUpload({
+		url : '${contextPath}/imgUpload',
+       	secureuri : false,
+       	fileElementId : temp.attr("id"),
+       	dataType : "json",
+      	success: function (da) {
+        	if(da.rs < 1){
+        		alertMsg.warn("图片上传失败："+da.msg);
+				return false;
+        	}
+        	
+        	//图片显示
+        	var chs = $("#"+temp.data("imgun"));
+        	chs.find("img").attr("src",groupURL+da.imgName);
+        	chs.find("input:eq(0)").val(temp.data("msg"));
+        	chs.find("input:eq(1)").val(fileName);
+        	chs.find("input:eq(2)").val(da.imgName);
+        },
+        error: function (data, status, e) {
+        	alertMsg.warn("图片上传失败，请稍后重试！");
+        }
+    });
+}
+
+
+/**修改省市区*/
+function findPCA(pid, cid){
+	var ps;
+	if(pid!="" && cid==""){
+		ps = '${contextPath}'+"/baseDate/city?provinceCode="+pid;
+	}
+	if(pid=="" && cid!=""){
+		ps = '${contextPath}'+"/baseDate/area?cityCode="+cid;
+	}
+	
+	$.ajax({
+		type:"post",
+		url: ps,
+		cache: false,
+		dataType: "json",
+		success: function(data){
+			var html = "";
+			$.each(data, function(i, n){
+				html = html + "<option value=\""+n["id"]+"\">"+n["name"]+"</option>";
+			});
+			
+			//修改省时
+			if(pid!="" && cid==""){
+				//重置市选项
+				html = "<option value=\"\">请选择所在市</option>"+html;
+				$("#cityId option", $.pdialog.getCurrent()).remove();
+				$("#cityId", $.pdialog.getCurrent()).append(html);
+				//重置区选项
+				$("#areaId option", $.pdialog.getCurrent()).remove();
+				$("#areaId", $.pdialog.getCurrent()).append("<option value=\"\">请选择所在区</option>");
+			}
+			//修改市时
+			if(pid=="" && cid!=""){
+				//重置区选项
+				html = "<option value=\"\">请选择所在区</option>"+html;
+				$("#areaId option", $.pdialog.getCurrent()).remove();
+				$("#areaId", $.pdialog.getCurrent()).append(html);
+			}
+		}
+	});
+}
+</script>

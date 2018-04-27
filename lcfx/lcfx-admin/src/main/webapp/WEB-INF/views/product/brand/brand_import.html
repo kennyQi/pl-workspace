@@ -1,0 +1,36 @@
+
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+
+	<form method="post" action="${contextPath}/brand/import" class="pageForm required-validate nowrap" method="POST" enctype="multipart/form-data" onsubmit="return importSubmitValidate(this,dialogAjaxDone);">
+
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>请选择导入文件：</dt>
+					<dd>
+						<input id="importFile" name="file" type="file" onchange="checkExcelFile(this)"></input>
+						<a class="a_link" href="${contextPath}/sys/common/download?fileName=brand_template.xlsx">下载模板</a>
+
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div></li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

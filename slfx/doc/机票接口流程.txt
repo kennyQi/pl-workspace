@@ -1,0 +1,50 @@
+﻿=================用户查询航班=========================
+
+查询航班 QueryWebFlights_1_3                              api
+
+=================选择航班，进入预订页面================
+
+   查询价格明细       api
+
+采用拼接PNR查询政策成功后发出比价command     
+
+通过PNR比价 YeeGo.QueryPolicyByPNR_1_0
+
+
+   查询经停信息 QueryFlightStop_1_0   api 
+
+
+
+
+==============填写订单信息====================
+
+商城向平台发送下单command
+                                                api
+验价 PatByFlights_1_0
+
+ABE下单 OrderFlight  _2_0
+
+（提取PNR记录）
+
+发出易购下单command
+
+易购下单 YeeGo.OrderByPnr_1_0
+
+
+=============支付===================
+                                               api
+通知平台支付成功，请求出票 command
+
+出票 YeeGo.AskOrderTicket_1_0
+
+=============看到订票结果===============
+
+退废票原因qo
+
+申请退废票command
+                                              api
+
+=============订单详情查询是===============
+
+QueryOrder_1_0订单查询接口
+admin 订单 qo

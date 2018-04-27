@@ -1,0 +1,85 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">工程列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/hg/auth/project/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="projectIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a>
+					<a href="${contextPath}/hg/auth/project/add" class="btn btn-default btn-sm" target="hgTab"> <i
+						class="fa fa-plus"></i> 添加
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							工程id：
+							<input class="form-control input-small input-inline" name="id" id="id">
+						</label>
+					</div>
+					<div class="col-md-4">
+						<label>
+							工程名称：
+							<input class="form-control input-small input-inline" name="name" id="name">
+						</label>
+					</div>
+					<div class="col-md-4 text-right">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#projectGrid" data-ref-param="{id: $('#id').val(), name: $('#name').val()}"><i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" group="projectIds"
+								class="checkboxCtrl"/></th>
+							<th>工程id</th>
+							<th>工程名称</th>
+							<th>工程环境</th>
+							<th>描述</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="projectGrid" target="grid" data-url="${contextPath}/hg/auth/project/projectlist">
+						<tr class="odd gradeX">
+							<td>
+								<input type="checkbox" name="projectIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td>
+							<td>
+								{id}
+							</td>
+							<td>
+								{name}
+							</td>
+							<td>
+								{envName}
+							</td>
+							<td>
+								{desc}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/hg/auth/project/del?projectIds={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/auth/project/edit?id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

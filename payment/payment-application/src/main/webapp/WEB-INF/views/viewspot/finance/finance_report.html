@@ -1,0 +1,129 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/viewspot/order/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="" />
+		<input type="hidden" name="numPerPage" value="" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						下单时间：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="createDateFrom" value="" class="date"/>至<input type="text" readonly="readonly" name="createDateTo" value="" class="date"/>
+					</td>
+					<td>
+						订单状态：
+					</td>
+					<td>
+						<select name="orderStatus">
+							<option value="">全部</option>
+							<option value="1">订单已提交</option>
+							<option value="2">订单已受理</option>
+							<option value="3">交易成功</option>
+							<option value="4">交易失败</option>
+						</select>
+					</td>
+					<td>
+						下单人：
+					</td>
+					<td>
+						<input type="text" name="bookMan" value="">
+					</td>	
+				</tr>
+				<tr>
+					<td>
+						景点名称：
+					</td>
+					<td>
+						<input type="text" name="scenicSpotsName" value="">
+					</td>						
+					<td>
+						省市区：
+					</td>
+					<td>
+						<select name="province">
+							<option value="">全部</option>
+							<option value="1">浙江</option>
+							<option value="2">河南</option>
+						</select>
+						<select name="city">
+							<option value="">全部</option>
+							<option value="1">杭州</option>
+							<option value="2">郑州</option>
+						</select>
+						<select name="area">
+							<option value="">全部</option>
+							<option value="1">滨江区</option>
+							<option value="2">中原区</option>
+						</select>
+					</td>
+					<td>
+						经销商渠道：
+					</td>
+					<td>
+						<select name="dealerId">
+							<option value="">全部</option>
+							<option value="1">南航</option>
+							<option value="2">南传</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="#"><span>导出数据</span></a></li>
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210" >
+		<thead>
+			<tr>
+				<th width = "50">序号</th>
+ 				<th width="50">经销商渠道</th>
+				<th width="60">平台订单号</th>
+				<th width="80">供应商订单号</th>
+				<th width="80">经销商订单号</th>
+				<th width = "50">订单状态</th>
+				<th width = "50">省</th>
+				<th width = "50">市</th>
+				<th width = "50">区</th>
+				<th width = "50">下单时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input name="ids" value="${mpOrder.id}" type="checkbox">
+				</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

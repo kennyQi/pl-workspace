@@ -1,0 +1,40 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "投诉建议">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/foot_about.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" 6>
+<body>
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+<div class="g_bd wd ov com">
+    <div class="foot_complain ma">
+        <div class="top_nav h4 color8 fl">
+             您的位置：<a href="${contextPath}/home" class="color6 top_nav1">中智票量首页</a> > <a class="color3">投诉建议</a>
+        </div>
+        <span class="foot_bt yahei fl">投诉建议</span>
+        <span class="yahei bold h2 ti1 fl">中智票量的成长需要您的关爱！ </span>
+        <span class="yahei h3 ti2 fl color6">如果对网站有好的建议，在浏览网站时有疑问，或是在订购过程中需要投诉，请发邮件给我们，或直接联系我们。</span>
+        <ul class="foot_C_navs fl tc ov clear">
+            <li><i class="phone fl"></i><span class="yahei">010—65912283</span></li>
+            <li><i class="email fl"></i><span class="yahei">airservice@ciic.com.cn</span></li>
+        </ul>
+    </div>
+</div>
+<!--内容-->
+
+ <@frame.end "default"> </@frame.end>
+ </@frame.main> 
+</body>
+</html>

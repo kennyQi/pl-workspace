@@ -1,0 +1,164 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*reset*/
+*{padding:0px;margin:0px;list-style:none;font-style: inherit;font-size: 100%;}
+
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+button{cursor:pointer;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+
+/*reset*/
+
+/*common*/
+.fl{float:left;}
+.fr{float:right;}
+.pl{position:relative;}
+.pa{position:absolute;}
+.ov{overflow:hidden;}
+.disb{display:block;}
+.bold{font-weight:bold;}
+.normal{font-weight:normal;}
+
+.yahei{font-family:"Microsoft YaHei","微软雅黑";}
+.simsun{font-family:"simsun","宋体";}
+.tom{font-family:"Tahoma";}
+.h1{font-size:18px;}
+.h2{font-size:16px;}
+.h3{font-size:14px;}
+.h4{font-size:12px;}
+.color3{color:#333333;}
+.color9{color:#999999;}
+.color6{color:#666666;}
+.color8{color:#888;}
+.linkC{color:#0073b6;}
+.f_red{color:#ff0000;}
+.forange{color:#ff6600;}
+.btn{background:#ff6600;}
+.curp{cursor:pointer}
+.wd{width:100%;}
+.wd12{width:1200px;}
+.tc{text-align:center;}
+.ma{margin:auto;}
+/*common*/
+
+/*head*/
+.bg_cmd{background-image:url(../images/cmdScript.png);background-repeat:no-repeat;}
+.gd_head{width:1200px;display:block;height:86px;margin:auto;}
+.gd_head .logo{margin:34px 342px 0px 25px;}
+.gd_head .connet .mobile{padding-left:52px;background-position:0px -416px;color:#ff6c67;height:40px;margin:38px 31px 0px 0px;}
+.gd_head .connet .mobile i{line-height:20px;color:#ff9900;}
+.gd_head .connet .mobile .ewm{background-position:-9px -462px;padding-right:15px;}
+.gd_head .connet .phone{padding-left:52px;background-position:0px -365px;color:#0146c4;height:40px;margin:38px 0px 0px 0px;width:115px;}
+.gd_head .connet .phone .phone_list{padding-right:10px;background-position:107px -461px;}
+.gd_head .connet .phone .tips{line-height:18px;color:#0146c4;}
+.gd_head .connet *{font-size:15px;}
+.gd_head .ewm_box{padding:5px;background:#fff;width:96px;height:96px;left:54px;top:86px;z-index:1000;display:none;}
+
+.gd_head .login{margin:64px 0px 0px 42px;}
+.gd_head .login a{padding-right:15px;border-right:1px solid #a0a0a0;font-size:12px;float:left;padding-left:5px;}
+.gd_head .login a:hover{color:#ef970a;}
+.gd_head .login a.last{border:0px;}
+
+.gd_nav{height:62px;background:#00a0e9;width:100%;min-width:1200px;overflow:hidden;}
+.gd_nav .nav{width:1182px;margin:auto;padding:24px 0px 18px 18px;overflow:hidden;}
+.gd_nav .nav a{color:#fff;margin-right:36px;padding-left:26px;background-image:url(../images/cmdScript.png);background-repeat:no-repeat;float:left;line-height:20px;}
+
+.gd_nav .nav a.nav1{background-position:0px 0px;}
+.gd_nav .nav a.nav2{background-position:0px -28px;}
+.gd_nav .nav a.nav3{background-position:0px -56px;}
+.gd_nav .nav a.nav4{background-position:0px -84px;}
+.gd_nav .nav a.nav5{background-position:0px -112px;}
+.gd_nav .nav a.nav6{background-position:0px -140px;}
+.gd_nav .nav a.nav7{background-position:0px -168px;}
+.gd_nav .nav a.nav8{background-position:0px -196px;}
+.gd_nav .nav a.nav9{background-position:0px -224px;}
+.gd_nav .nav a.nav10{background-position:0px -252px;}
+.gd_nav .nav a.last{margin:0px;}
+.gd_nav .nav a:hover{color:#eac55b;}
+.gd_nav .nav a.nav1:hover{background-position:-180px 0px;}
+.gd_nav .nav a.nav2:hover{background-position:-180px -28px;}
+.gd_nav .nav a.nav3:hover{background-position:-180px -56px;}
+.gd_nav .nav a.nav4:hover{background-position:-180px -84px;}
+.gd_nav .nav a.nav5:hover{background-position:-180px -112px;}
+.gd_nav .nav a.nav6:hover{background-position:-180px -140px;}
+.gd_nav .nav a.nav7:hover{background-position:-180px -168px;}
+.gd_nav .nav a.nav8:hover{background-position:-180px -196px;}
+.gd_nav .nav a.nav9:hover{background-position:-180px -224px;}
+.gd_nav .nav a.nav10:hover{background-position:-180px -252px;}
+.gd_nav .nav a:visited{}
+.gd_nav .nav a.on{background-image:url(../images/cmdScript_on.png);color:#eac55b;}
+
+.g_totop{height:41px;width:27px;background-position:-161px -282px;position:fixed;right:0px;bottom:55px;z-index:10000;display:none;background-color:#fff;border:1px solid #e6e6e6;border-right:0px;color:#00a0e9;font-family:"simsun","宋体";padding:13px 10px 0px 16px;font-size:12px;}
+.g_totop_on{background:#fff;}
+/*head*/
+
+
+/*foot*/
+
+.gd_foot{width:100%;min-width:1200px;position:relative;z-index:100;}
+.gd_foot .nav{background:url(../images/goot_bg.png) no-repeat center center #e5e5e5;height:460px;}
+.gd_foot .special{background:url(../images/foot_command.png) no-repeat center center #00a0e9;height:105px;}
+.m_nav_c{width:1200px;margin:auto;}
+.m_nav_c .left{width:239px;margin:140px 9px 0px 0px;}
+.m_nav_c .left .free{line-height:24px;font-family:"Microsoft YaHei","微软雅黑";}
+.m_nav_c .left .inpu{margin-top:4px;}
+.m_nav_c .left .inpu .input_text{border:1px solid #dddddd;height:16px;padding:7px 0px 7px 26px;width:161px;border-right:0px;color:#a9a9a9;background:url(../images/cmdScript.png) no-repeat 4px -1055px #fff;line-height:16px;font-size:12px;}
+.m_nav_c .left .inpu .input_btn{background-color:#00a0e9;width:51px;height:32px;line-height:32px;color:#fff;text-align:center;}
+
+.m_nav_c .left .ewm{width:100%;margin-top:40px;}
+.m_nav_c .left .ewm li{text-align:center;line-height:26px;font-family:"Microsoft YaHei","微软雅黑";}
+.m_nav_c .left .ewm li img{border:1px solid #e7e7e7;padding:9px;width:96px;}
+
+.m_nav_c .right{width:952px;padding-top:83px;}
+.m_nav_c .right li{width:234px;height:193px;margin-right:4px;background-color:#e5e5e5;text-align:center;padding-top:112px;}
+.m_nav_c .right li a{color:#a5a5a5;display:block;margin:auto;padding-bottom:19px;}
+.m_nav_c .right li a:active{}
+.m_nav_c .right li a:hover{color:#666666;}
+.m_nav_c .right li a:visited{}
+.m_nav_c .right li .abt{font-size:22px;margin-top:11px;}
+.m_nav_c .right li .icon{width:100px;height:139px;position:absolute;left:65px;top:-53px;background-position:0px -484px;}
+
+.m_nav_c .right li .i2{background-position:0px -627px;}
+.m_nav_c .right li .i3{background-position:0px -769px;}
+.m_nav_c .right li .i4{background-position:0px -911px;}
+.m_nav_c .right .last span{font-size:15px;line-height:28px;color:#a5a5a5}
+.m_nav_c .right .last .yj{margin-top:20px;}
+.m_nav_c .right .last .kf{margin-top:10px;padding-bottom:13px;}
+.m_nav_c .right li .num{font-size:22px;}
+/*foot*/
+
+
+/********城市控件*******/
+.citySelector{font:12px/1.5 tahoma,arial,\5b8b\4f53;background:#fff;text-align:left;}
+.cityslide{width:250px;list-style:none;margin:0;padding:0;border:1px solid #85BEE5;border-right-color:#3485C0;border-bottom-color:#3485C0;box-shadow:2px 2px 3px rgba(0,0,0,0.3);margin-top:-2px;}
+.cityslide li{list-style:none;overflow:hidden;height:16px;padding:4px 5px;}
+.cityslide li.on{background:#9CD9FF;color:#fff;}
+.cityslide li b{font-weight:normal;}
+.cityslide li.empty{background:#fff2e8;color:#666;}
+.cityslide li.empty em{color:red;font-style:normal;}
+.cityname{float:left;}
+.cityspell{float:right;}
+.cityBox{width:320px;border:1px solid #85BEE5;overflow:hidden;box-shadow:2px 2px 3px rgba(0,0,0,0.3);}
+.cityBox ul{margin:0;padding:0;overflow:hidden;}
+.cityBox ul li{float:left;list-style:none;padding:2px 4px;border:1px solid #85BEE5;cursor:pointer;margin-left:4px;display:inline;background:#E1EFFE;}
+.cityBox ul li.on{background:#fff;border-bottom-color:#fff;position:relative;}
+.hide{display:none;}
+p.tip{color:#666;line-height:20px;padding:5px;margin:0;text-indent:3px;}
+.hotCity{border-top:1px solid #85BEE5;margin-top:-1px;clear:left;overflow:hidden;padding-bottom:5px;padding-top:5px;_margin-bottom:8px;}
+.cityTab{overflow:hidden;}
+.cityTab dl{margin:0;padding:0;overflow:hidden;}
+.cityTab dl dt{float:left;padding-left:3px;color:#F30;text-indent:5px;font-family:"Lucida console","consolas","courier new";line-height:22px;font-size:14px;width:20px;}
+.cityTab dl dd{margin-left:2px;float:left;width:290px;}
+.cityTab dl dd a{padding-left:5px;width:66px;line-height:22px;display:inline-block;color:#000;text-decoration:none;}
+.cityTab dl dd a:hover{text-decoration:underline;color:red}
+.cityinput{border:2px solid #d9d9d9;line-height:24px;width:175px;padding-right:18px;font-size:14px;padding-left:5px;height:30px;color:#d5d5d5;background-position:181px -380px;color:#444444;}
+.time_input{background-position:180px -353px;}
+.line_input{width:300px;background-position:304px -353px;}

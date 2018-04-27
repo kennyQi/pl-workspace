@@ -1,0 +1,10 @@
+* 修复：新用户，对应有2个相同模版的规则，计算时候2次insert into jf_user导致错误。
+		if (true && user == null) {
+			user = userDao.newEntity(userid);
+			userDao.saveEntity(user);
+			//由于 StringUK是每次new出来的，hibernate认为是不同的（即使同一usercode），导致hibernate.get出来为空对象。使用flush会对数据库做insert
+			userDao.flush();
+		}
+		
+* 2014-12
+增加 模拟久加久用户管理模块。JiuJiuUserController.java		

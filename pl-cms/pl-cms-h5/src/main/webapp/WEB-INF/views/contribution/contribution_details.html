@@ -1,0 +1,81 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>公众投稿</title>
+<link href="${contextPath}/resources/css/new.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+
+</head>
+
+<body>
+<article class="cont">
+        <h1 class="cont_t paT paB">${(contribution.baseInfo.title)!"暂无标题"}</h1>
+        <span class="cont_time paB">${(contribution.createDate)!"暂无时间"}&nbsp;&nbsp;&nbsp;&nbsp;浙江省风景名胜区协会</span>
+        <!--新闻内容-->
+        <div class="cont_text paB paT">
+        	<!-- <img src="images/new_img.jpg" alt="湖南3家新晋5A景区揭牌" class="paB"> -->
+            <p class="t">
+            	${(contribution.baseInfo.content)!"暂无标题"}
+            </p>
+        </div>
+        
+        <!--新闻内容结束-->
+</article>
+        
+<!--热门评论-->
+<div class="pl_nav">
+	<div class="n">
+        <span class="head fl">热门评论</span>
+        <span class="zan fr" id="zan" path="${contextPath}" conV="${(contribution.id)!"0"}">${(contribution.status.supportCount)!"0"}</span>
+        <i class="icon"></i>
+    </div>
+</div>
+	<!--评论列表-->
+    	<ul class="cont new_list">
+    		<input type="hidden" id="comment_count" value="${comments?size}"/>
+    		<#assign count=comments?size>
+    		<#list comments as comment>
+	    		<li class="box">
+	            	<div class="box_cont">
+	                    <span class="flo fl">${count-comment_index}楼</span>
+	                    <div class="main fl paT paB">
+	                        <span class="tip fl">
+	                            <!-- <label class="come fl">来自iphone</label> -->
+	                            <i class="time fr">${comment.createDate}</i>
+	                        </span>
+	                        <span class="msg fl">
+	                        	${comment.content}
+	                        </span>
+	                    </div>
+	                 </div>
+	            </li>
+    		</#list>
+        </ul>
+	<!--评论列表-->
+    <!--评论输入框-->
+    <div class="rel_box">
+    	<div class="rel">
+        	<input type="text" placeholder="说点什么..." class="rel_input fl" id="msg" />
+        	<span class="rel_submit fr" id="submit"></span>
+        </div>
+    </div>
+    <!--评论输入框-->
+    
+    <!--弹出框-->
+    <div class="tm_bg"></div>
+    
+    <div class="tm">
+        <div class="tm_ct">
+            请填写信息提交
+        </div>
+    </div>
+    <!--弹出框-->
+<!--热门评论-->
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${contextPath}/resources/js/new.js"></script>
+<script src="${contextPath}/resources/js/common.js"></script>
+</body>
+</html>

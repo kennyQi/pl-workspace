@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<link rel="stylesheet" href="css/hgsl_base.css">
+</head>
+<body>
+	<!-- 公共页头  -->
+	<header class="header">
+	  <h1>设定密码</h1>
+	  
+	  <div class="left-head"> 
+	    <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+	        <span class="inset_shadow">
+	            <span class="head-return"></span>
+	        </span>
+	    </a> 
+	  </div>
+	</header>
+	<div class="content">
+		<p>请填写新密码</p>
+		<form action="" class="listForm" method="">
+	        <article class="circle_b bottom_c" id="payInfo">
+	            <section class="secure selectBank" style="position: relative;">
+	                <span class="phone">新密码:</span>
+	                <span class="fRight">
+	                    <input  name="LoginName" id="name" placeholder="请输入新的密码" type="text" value="">
+	                </span>
+	            </section>
+	            <section class="selectBank" style="position: relative;">
+	                <span class="msg_verify">确认密码:</span>
+	                <span class="fRight">
+	                    <input  name="Verify" id="verify" placeholder="请再次输入新的密码" type="text">
+	                </span>
+	            </section>
+	        </article>
+
+	        <p class="err">密码修改成功</p>
+	        
+	        <div class="col_div">
+	            <a href="login.html" type="submit" class="btn btn-blue" title="">确定</a>
+	        </div>
+	    </form>
+
+
+	</div>
+
+
+</body>
+</html>

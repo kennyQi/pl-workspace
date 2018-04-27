@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css"/>
+<link rel="stylesheet" href="css/ticket.css"/>
+<link rel="stylesheet" href="css/mCal.css" />
+
+ 
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/ticket.js"></script>
+<script type="text/javascript" src="js/rili_price.js"></script>
+
+<script>
+	$(function(){
+		rili();//日历
+		dateTime();//日历显示隐藏
+		dateDay();//选择日期
+	})
+</script>
+</head>
+<body class="order">
+  	<!--start 公共页头  -->
+	<header class="header">
+	  <div class="header1"><h1>填写订单</h1>	  
+	  <div class="left-head"> 
+	    <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+	        <span class="inset_shadow">
+	            <span class="head-return"></span>
+	        </span>
+	    </a> 
+	  </div>
+    </div>
+    
+    <div class="header2" style="display:none">
+    <h1>组织部门</h1>	  
+	  <div class="left-head"> 
+	    <a id="zzBack" class="tc_back head-btn">
+	        <span class="inset_shadow">
+	            <span class="head-return"></span>
+	        </span>
+	    </a> 
+	  </div>
+    </div>
+     <div class="header3" style="display:none">
+    <h1>组织成员</h1>	  
+	  <div class="left-head"> 
+	    <a id="zzBack01" class="tc_back head-btn">
+	        <span class="inset_shadow">
+	            <span class="head-return"></span>
+	        </span>
+	    </a> 
+	  </div>
+    </div>
+	  <!-- <div class="right-head">
+	    <a href="/home/index.html" class="head-btn fn-hide">
+	        <span class="inset_shadow">
+	            <span class="head-home"></span>
+	        </span>
+	    </a> 
+	  </div> -->
+	</header>
+	<!--end 公共页头  -->
+ 	<!--start 页面内容 -->
+	<div id="tickerContent" class="content">
+
+		<div class="msg">
+			<p>门票：<span>苏州乐园水上世界成人票</span></p>
+			<p>优惠价格：&yen;<span>140</span></p>
+			<p>支付方式：<span>景区支付</span></p>
+			<p>取票地址：<span>苏州乐园水上世界大门售票处</span></p>
+		</div>
+		<div class="time">
+			<ul>
+				<li class="select"><span>选择时间日期</span><em></em></li>
+				<li>
+					<div>选择购买张数</div>
+					<span id="minus">-</span>
+					<input id="amount" type="text" value="1">
+					<span id="plus">+</span>
+				</li>
+			</ul>
+		</div>
+		<form class="people">
+			<h3>取票人信息 <span>选择登记人</span></h3>
+			<div class="name">
+				<ul>
+					<li>
+						<label for="">姓名：</label>
+						<input type="text" placeholder="所持证件姓名">
+					</li>
+					<li>
+						<label for="">手机号码：</label>
+						<input type="text" placeholder="联系方式">
+					</li>
+				</ul>
+			</div>
+			<p class="del"></p>
+		</form>
+		<a href="javascript:;">立即预定</a>
+	</div>
+	<!-- 日历 -->
+   <div id="calContainer" class="slider" style="display:none;"></div>
+	<!--end 页面内容 -->
+  
+<!-- 页头 -->
+<section id="zhizu" style="display:none"> 
+<section class="zuzhi_search">
+  <form action="" id="zuzhi_form1">
+      <div class="user_name">
+         <input type="text" value="搜索" class="txt_search"  id="J_txt_s" autocomplete="off">
+         <em id="z_sea_icon"></em>
+      </div>
+  </form>
+	</section>
+ 	<section class="zuzhi_style">
+  <h2>组织</h2>
+  </section>
+	<!--start 页面内容 -->
+	<section class="plist pzuzhi" id="zhizu_list">
+		<a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+ 		<a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>部门<em><u>5</u>></em></div></a>
+ 	</section>
+	<!--end 页面内容 -->
+</section>
+  <section id="chengyuan" style="display:none">
+	<section class="zuzhi_style">
+  <h2>成员  <span>完成</span></h2>
+  </section>
+	<!--start 页面内容 -->
+	<section class="plist pzuzhi">
+		<a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+ 		<a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+ 		<a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;"><div><i></i><input type="radio" name="cy" class="cy">成员名称<em><u>职务</u></em></div></a>
+ 	</section>
+	<!--end 页面内容 -->
+</section>
+
+<!--<script type="text/javascript">
+$(".people span").click(function(){
+ 	 $("#tickerContent,.header1").hide();
+	 $("#zhizu").show();	 
+	 $(".header2").show();
+	});	
+$("#zhizu .pzuzhi a").click(function(){
+	$("#zhizu").hide();
+	$("#chengyuan").show();	
+ 	});		
+  
+$("#chengyuan .pzuzhi a").click(function(){
+	$(this).addClass("hover").siblings().removeClass("hover")
+ $("input[name=cy]").attr("checked",false); 
+ $($(this).find('.cy')[0]).attr("checked",true)
+ })	
+ 
+$(".zuzhi_style h2 span").on("click",function(){
+	$("#chengyuan").hide();
+	$("#tickerContent").show();	
+	})
+
+$("#zzBack").click(function(){
+	$("#zhizu").hide();
+	$("#tickerContent").show();
+ 	});
+$("#zzBack01").on("click",function(){
+	$("#chengyuan,.header3").hide();
+	$(".header2,#zhizu").show();
+	})		
+
+$("#zhizu_list a").on("click",function(){
+	$("#zhizu,.header2").hide();	
+	$("#chengyuan,.header3").show();		
+	})	
+	
+$(".zuzhi_style span").on("click",function(){
+	$("#chengyuan").hide();
+	})	
+</script>
+-->
+
+</body>
+</html>

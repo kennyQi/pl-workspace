@@ -1,0 +1,41 @@
+
+-- 生产环境地址 --
+
+base_url_admin = http://accounts.ply365.com
+base_url_web = http://www.ply365.com
+base_url_h5 = http://m.ply365.com
+
+-- 测试环境地址 --
+
+base_url_admin = http://101.71.39.36:15002
+base_url_web = http://101.71.39.36:15000
+base_url_h5 = http://hsltest.ply365.com
+
+-- 开发环境地址 --
+
+base_url_admin = http://dev.ply365.com:9080/hsl-admin
+base_url_web = http://dev.ply365.com:9080/hsl-web
+base_url_h5 = http://dev.ply365.com:9080/hsl-h5
+
+
+-- hsl-web不要https的地址 --
+
+/line/async/paymentRequest
+/line/sync/paymentRequest
+/jp/getclient
+/jp/getOrderStatus
+
+-- 定时任务通知地址（开发） --
+
+# 检查易行机票订单状态并做相应处理
+http://192.168.10.168:8081/hsl-admin/gate/yxjp/check-order
+
+-- 定时任务通知地址（测试） --
+
+# 检查易行机票订单状态并做相应处理
+http://10.1.12.12:15002/gate/yxjp/check-order
+
+
+
+
+

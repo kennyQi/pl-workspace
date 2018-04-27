@@ -1,0 +1,202 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> <#assign td_style1 = " style=\"padding-right: 5px;\" " />
+<div class="pageHeader page_header_fix">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/prod_sync/list" method="post">
+		<input type="hidden" name="pageNum" value="${(pagination.pageNo)!'0'}" />
+		<input type="hidden" name="numPerPage" value="${(pagination.pageSize)!'20'} " />
+		<div class="searchBar dwz_query_box2">
+			<table class="searchContent" border="0">
+				<tr>
+					<td>商品名称：</td>
+					<td>
+						<input name="name" type="text" value="${(pagination.condition.name)!}" onchange="this.value=(trim(this.value))" />
+					</td>
+					<td>商品品牌：</td>
+					<td>
+						<select name="brandId">
+							<option value="">所有</option> <#list brandList as brand>
+							<option value="${brand.id}"<#if (pagination.condition.brandId)??> <#if (pagination.condition.brandId == brand.id)> selected="selected" </#if> </#if> >${brand.chineseName}</option> </#list>
+						</select>
+					</td>
+					<td>添加时间：</td>
+					<td colspan="2">
+						<input name="createDateStart" type="text" class="date" readonly="readonly" datefmt="yyyy-MM-dd HH:mm" value="${(pagination.condition.createDateStart)!}" placeholder="选择开始时间" />
+						&nbsp;--&nbsp;
+						<input name="createDateEnd" type="text" class="date" readonly="readonly" datefmt="yyyy-MM-dd HH:mm" value="${(pagination.condition.createDateEnd)!}" placeholder="选择结束时间" />
+					</td>
+				</tr>
+				<tr>
+					<td>商品编号：</td>
+					<td>
+						<input name="productCode" type="text" value="${(pagination.condition.productCode)!}" />
+					</td>
+					<td>商品属性：</td>
+					<td>
+						<select name="attribute">
+							<option value="">所有</option>
+							<option value="0"<#if (pagination.condition.attribute)??> <#if (pagination.condition.attribute == "0")> selected="selected" </#if> </#if>>普通商品</option>
+							<option value="1"<#if (pagination.condition.attribute)??> <#if (pagination.condition.attribute == "1")> selected="selected" </#if> </#if> >虚拟商品</option>
+						</select>
+					</td>
+					<td style="width: 130px;padding-right:0px">已设置出库重量/体积：</td>
+					<td>
+						<select name="settingOutStockParam">
+							<option value="">所有</option>
+							<option value="true"<#if (pagination.condition.settingOutStockParam)??> <#if (pagination.condition.settingOutStockParam == true)> selected="selected" </#if> </#if> >是</option>
+							<option value="false"<#if (pagination.condition.settingOutStockParam)??> <#if (pagination.condition.settingOutStockParam == false)> selected="selected" </#if> </#if> >否</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>商品状态：</td>
+					<td>
+						<select name="status">
+							<option value="">所有</option>
+							<option value="true"<#if (pagination.condition.status)??> <#if (pagination.condition.status == true)> selected="selected" </#if> </#if> >启用</option>
+							<option value="false"<#if (pagination.condition.status)??> <#if (pagination.condition.status == false)> selected="selected" </#if> </#if> >禁用</option>
+						</select>
+					</td>
+					<td>参考供应商：</td>
+					<td>
+						<select name="supplierId">
+							<option value="">所有</option> <#list supplierList as ss>
+							<option value="${ss.id}">${(ss.baseInfo.name)!}</option> </#list>
+						</select>
+					</td>
+					<td>商品类别：</td>
+					<td style="width: 130px;">
+						<input name="productCategoryId" value="${(pagination.condition.productCategoryId)!}" type="hidden" />
+						<input name="categoryName" type="text" readonly placeholder="点击右侧按钮查找" value="${(pagination.condition.categoryName)!}" />
+					</td>
+					<td>
+						<a class="btnLook" href="${contextPath}/category/lookup?inputName=productCategoryId&mode=0&findUsing=1&onlyShowUsing=1" lookupGroup width="367" height="600">查找商品分类</a>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="clearFormProdSyncList()">重置</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent page_box">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a target="dialog" href="javascript:;" rel="idList" class="edit" width="900" height="555" mask="true" onclick="changeHref1432868298615('${contextPath}/prod_sync/sync?',this)">
+					<span>商品同步</span>
+				</a>
+			</li> <#--
+			<!--
+
+			<li><a class="add" href="${contextPath}/product/to_add" target="navTab">
+					<span>新增</span>
+				</a></li>
+			<li class="line">line</li>
+			<li><a href="${contextPath}/product/change_status?using=true" rel="idList" class="edit" target="selectedTodo">
+					<span>启用</span>
+				</a></li>
+			<li><a href="${contextPath}/product/change_status?using=false" rel="idList" class="edit" target="selectedTodo">
+					<span>禁用</span>
+				</a></li>
+-->
+		</ul>
+	</div>
+	<div layoutH="175">
+		<table class="table" cellpadding="0" cellspacing="0" width="100%">
+			<thead>
+				<tr>
+					<th width=""><input type="checkbox" group="idList" class="checkboxCtrl" /></th>
+					<th width="">商品编号</th>
+					<th width="">商品名称</th>
+					<th width="">商品分类</th>
+					<th width="">商品品牌</th>
+					<th width="">单位</th>
+					<th>商品新增时间</th>
+					<th width="">商品状态</th>
+					<th width="">商品属性</th>
+					<th width="">操作</th>
+					<#--
+					<!--
+
+					<th width="">操作</th>
+-->
+				</tr>
+			</thead>
+			<tbody id="e1437631485965">
+				<#list pagination.list as t>
+				<tr>
+					<td>
+						<input type="checkbox" name="idList" value="${(t.id)!''}" product_id="${(t.id)}" />
+					</td>
+					<td>${t.productCode!}</td>
+					<td>${t.productName!}</td>
+					<td>${(t.productCategory.name)!}</td>
+					<td>${(t.productBrand.chineseName)!}</td>
+					<td>${(t.unit.unitName)!}</td>
+					<td>${(t.createDate)!}</td>
+					<td><#if (t.status.using)?? > <#if (t.status.using)> 启用 <#else> 禁用 </#if> </#if></td>
+					<td><#if (t.attribute == 0)> 普通商品 <#else> 虚拟商品 </#if></td>
+					<#--
+					<!--
+
+					<td class="operate_box">
+						<#if (t.status.using)?? > <#if (t.status.using)>
+						<a target="ajaxTodo" href="${contextPath}/product/change_status?idList=${t.id}&using=false">禁用</a>
+						<#else>
+						<a target="ajaxTodo" href="${contextPath}/product/change_status?idList=${t.id}&using=true">启用</a>
+						</#if> </#if>
+						<a target="navTab" href="${contextPath}/product/edit?id=${(t.id)!''}">编辑</a>
+						<a target="navTab" href="${contextPath}/product/view?id=${(t.id)!''}">查看</a>
+						<a target="ajaxTodo" href="${contextPath}/product/delete?idList=${(t.id)!''}" title="确认删除？">删除</a>
+					</td>
+-->
+					<td class="operate_box">
+						<a target="navTab" href="${contextPath}/product/view?id=${(t.id)!''}">查看</a>
+					</td>
+				</tr>
+				</#list> <#if noSelBrandAndCategory??>
+				<tr>
+					<td colspan="10" style="height: 50px;text-align: center;color: #e00;">请先选择商品类别和商品品牌</td>
+				</tr>
+				</#if>
+			</tbody>
+		</table>
+	</div>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+<!--
+	function changeHref1432868298615(s,e){
+	var p="";
+	$("input:checked[product_id]").each(function(i,ee){
+		p = p+"idList="+$(ee).val()+"&";
+	})
+	p = p+"no_cache="+(new Date()).getTime();
+	p = p+"&brandId="+getCurrentDiv().find("[name='brandId']").val()
+	p = p+"&productCategoryId="+getCurrentDiv().find("[name='productCategoryId']").val()
+	$(e).attr("href",s+p);
+	
+}
+
+
+
+function clearFormProdSyncList(){
+	clearForm();
+	$("#e1437631485965").empty();
+}
+//-->
+</script>

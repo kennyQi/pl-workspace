@@ -1,0 +1,48 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form method="post"
+			action="${contextPath}/airtkt/order/refundTicket"
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, dialogAjaxDone)">
+			
+			<div class="pageFormContent" layoutH="58">
+				<input type="hidden" name="id" value="${(id)!}">
+				<input type="hidden" name="refundType" value="F">
+				<div class="unit">
+					<input type="checkbox" name="ticketNos" value=""/>张三
+					<input type="checkbox" name="ticketNos" value="" />李四
+					<input type="checkbox" name="ticketNos" value="" />王二
+					<input type="checkbox" name="ticketNos" value="" />赵五
+					<#if orderDetail.passangerList ??>
+					<#list orderDetail.passangerList as passenger>
+						<input type="checkbox" name="ticketNos" value="${(passenger.ticket.ticketNo)!''}"/>${(passenger.name)!''}
+					</#list>
+					</#if>
+				</div>
+				<div class="unit">
+					<span>请选择废票类型</span>
+				</div>
+				<div class="unit">
+					<select name="reason">
+						<#if actionTypeList??>
+							<#list actionTypeList as refundActionTypeDTO>
+							<option value="${(refundActionTypeDTO.actionTypeCode)!}">${(refundActionTypeDTO.actionTypeTxt)!}</option>
+							</#list>
+						</#if>
+					</select>
+				</div>
+				<div class="unit">
+					<span>请填写废票原因</span>
+				</div>
+				<div class="unit">
+					<textarea name="" class="required" clos="80" rows="5">
+					</textarea>
+				</div>
+			</div>
+			<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+		</form>

@@ -1,0 +1,148 @@
+#reserve{background:#eeeeee;padding-bottom: 65px;}
+.header{position:fixed;top:0px;left:0px;width: 100%;background: url("../images/fly_bg.jpg") no-repeat;background-size:cover;overflow:hidden;z-index:10;}
+.header h1{color:#fff;}
+header:before{content:"";height:42px;background:-webkit-linear-gradient(top,#24272f,rgba(255, 255, 255, 0));display: block;position:absolute;left:0px;top:0px;
+    width: 100%;z-index: 0;opacity: 0.3;}
+header *{position: relative;z-index: 1;}
+body,#reserve,#editor,#checkFlow{width:100%;overflow-x: hidden;}
+
+.cont{margin-top:42px;}
+.lineDetail{padding:25px 0px 40px 0px;border-bottom: 2px solid #e6e6e6;
+    position: relative;background: #fff;}
+.lineTime{width:115px;margin:0px 5px;}
+.lineL{text-align: right;-webkit-box-flex: 1;}
+.lineR{text-align: left;-webkit-box-flex: 1;}
+.lineType{position: absolute;bottom: 15px;left:0px;width: 100%;font-size:12px;color:#888888;
+    text-align: center;}
+.flyLine span{display:block;}
+.flyLine span.time{font-size:18px;}
+.flyLine span.day{font-size:12px;}
+.flyLine span.flyCompany{font-size:12px;color:#888888;line-height: 16px;margin-top: 4px;}
+.crossTime,.flyCode{display: block;  text-align: center;color:#888888;font-size:12px;}
+.crossTime:before{content: "";display: inline-block;width:12px;height:12px;
+    background: url("../images/flyListTime.png") no-repeat;background-size: contain;
+    margin:0px 4px;}
+.flyCode:before{content:"";width: 100%;height:14px;display: block;background: url("../images/flyLine.png")
+no-repeat;background-size: contain;margin:5px 0px;}
+
+.flyMargin{margin-top:17px;background: #fff;}
+.flyPassenger .title{height:40px;line-height: 40px;color:#075a88;padding-left: 15px;display: block;}
+.flyPassenger .title:before{content:"+";display: inline-block;width:20px;height:20px;
+    margin:10px;color:#9ccf48;border:1px solid #9ccf48;border-radius: 50px;text-align: center;
+    float: right;font-size: 24px;line-height: 20px;}
+
+#passengerList{margin-left:15px;}
+.passengerBox{border-top:1px solid #dddddd;height:57px;width: 100%;}
+.passengerBox .del{width:30px;display: block;height:33px;margin-top:17px;}
+.passengerBox .del:before{content:"-";width:20px;height:20px;border-radius: 50px;border: 1px solid #feb511;
+    color:#feb511;display: inline-block;font-size: 40px;line-height: 14px;text-align: center;}
+
+.passengerDetail{-webkit-box-flex: 1;margin-top:8px;
+    position: relative;}
+.passengerDetail .name{color:#035886;}
+.passengerDetail .group{color:#858585;font-size:12px;}
+.passengerBox .cardDetail{display: block;color:#035886;font-size:12px;}
+.passengerBox .cardDetail i{font-size:12px;}
+.passengerDetail label{display: block;width:18px;height:27px;
+    position: absolute;  right:10px;top:5px;color:#e1e1eb;font-size:20px;
+    -webkit-transform: rotate(180deg);}
+.labelInput{height:36px;line-height: 36px;margin-left: 15px;}
+.labelInput:before{display: block;width:74px;content: "手机号";line-height: 36px;color:#035886;}
+.connect .people:before{content: "联系人";}
+.connect .people{border-bottom: 1px solid #dddddd;}
+.labelInput .inputfor{height:24px;display: block;margin-top:6px;-webkit-box-flex: 1;
+line-height:24px; }
+
+.connect .order:before{content: "订单编号";}
+.connect .airID:before{content: "票号";}
+
+.payType .labelInput:before{content:"支付方式:"}
+.checkFlow{margin-left: 15px;border-bottom: 1px solid #dddddd;position: relative;}
+.checkFlow span{display: block;color:#035886;font-size:13px;line-height: 22px;}
+.checkFlow label{display: inline-block;color:#797979;margin-left:22px;}
+.checkR{display: block;width:18px;height:27px;
+    position: absolute;  right:10px;top:10px;color:#e1e1eb;font-size:20px;
+    -webkit-transform: rotate(180deg);}
+
+
+.remark .title{height:40px;line-height: 40px;color:#075a88;margin-left: 15px;border-bottom: 1px solid #dddddd;}
+.remark .remarkWord{margin-left: 15px;height:70px;margin-right:10px;}
+.remark textarea{width: 100%;height: 70px;line-height: 22px;}
+
+.priceBtn{position: fixed;bottom:0px;left: 0px;width: 100%;background: #fff;}
+.priceBtn .pBox{height:50px;-webkit-box-flex: 1;display: block;margin-left: 15px;}
+.priceBtn .submitBtn{width:133px;height:50px;text-align: center;
+font-size: 16px;line-height: 50px;display: block;background: #ff6600;color:#fff;}
+.priceBtn .p{color:#ff4c00;font-size:18px;}
+.priceBtn .other{display: block;font-size:10px;color:#888888;}
+
+.labelSelect i{display: block;color: #e1e1eb;width:18px;height:36px;vertical-align:middle;
+    -webkit-transform: rotate(180deg);font-size:20px;margin-right:10px;}
+
+
+
+
+
+/*乘机人*/
+#connect{width:100%;background: #fff; position: absolute;left:0px;top:0px;overflow:hidden;-webkit-transform:translateX(505px)}
+
+#connect .header{background:#02b0e8;}
+.addConnect{background:#eefefe;width:100%;position: fixed;top:42px;left:0px;}
+.addConnect .addNew{border:1px solid #51ccf2;border-radius: 6px;background: #fff;
+color:#51ccf2;height:34px;display: block;margin:8px 15px;text-align: center;line-height: 34px;}
+
+#connectList{margin-top:92px;}
+#connect .connectBox{border-bottom:1px solid #f3f3f3;height:57px;padding:0px 15px;}
+/*删除*/
+.connectBox .del{width:30px;display: block;height:33px;margin-top:17px;}
+.connectBox .del:before{content:"-";width:20px;height:20px;border-radius: 50px;border: 1px solid #feb511;
+    color:#feb511;display: inline-block;font-size: 40px;line-height: 14px;text-align: center;}
+/*选择*/
+.connectBox .choose{width:30px;display: block;height:33px;margin-top:17px;}
+.connectBox .choose:before{content:"";width:20px;height:20px;border-radius: 50px;border: 1px solid #9ACE45;
+    display: inline-block;}
+.connectBox .chooseOn:before{background:url("../images/flySerachChecked.png") no-repeat;background-size: contain;}
+.passengerDetail{-webkit-box-flex: 1;margin-top:8px;
+    position: relative;}
+.passengerDetail .name{color:#333;font-size:16px;}
+.passengerDetail .group{color:#858585;}
+.connectBox .cardDetail{display: block;color:#333;}
+.connectBox .cardDetail i{color:#333;}
+.passengerDetail .editor{display: block;width:29px;height:27px;
+    position: absolute;  right:10px;top:5px;-webkit-transform: rotate(0deg)}
+.passengerDetail .editor img{width:100%;}
+
+
+
+/*编辑乘机人*/
+#editor{width:100%;background: #fff; position: absolute;left:0px;top:0px;overflow:hidden;-webkit-transform:translateX(505px)}
+#editor .header{background:#02b0e8;position: absolute;}
+#editorConnect{margin-top:42px;}
+
+#editor .connectInput{height:46px;line-height: 46px;margin-left: 15px;border-bottom: 1px solid #dedede;}
+#editor .connectInput:before{display: block;width:74px;content: "手机号";line-height: 46px;color:#035886;font-size:16px;}
+#editor .connectInput .inputfor{height:24px;display: block;margin-top:11px;-webkit-box-flex: 1;font-size:16px;
+    line-height:24px; }
+#editor .name:before{content:"姓名";}
+#editor .cardNo:before{content:"身份证号";}
+#editor .center:before{content: "成本中心";}
+#editor .center i{font-size: 20px;color:#b4b7ce;width:30px;display: block;-webkit-transform: rotate(180deg);
+text-align:right;}
+#editorConnect{background: #fff;}
+
+/*审批流程*/
+#checkFlow{width:100%;background: #fff; position: absolute;left:0px;top:0px;overflow:hidden;-webkit-transform:translateX(505px)}
+#checkFlow .header{background:#02b0e8;position: absolute;}
+#checkPointer{margin-top:42px;}
+#checkFlow .r{width: 20px;}
+.checkSelect dt{height:40px;line-height: 40px;margin-left: 15px;border-bottom: 1px solid #e2f0f7;font-size:16px;
+color:#32779c;position: relative;}
+.checkSelect dt label{position: absolute;right:15px;height: 40px;line-height: 40px;top:0px;}
+.checkSelect dt label:after{content:"";width:14px;height: 9px;background: url("../images/flyListSearchUp.png") no-repeat;
+background-size: contain;display: inline-block;margin-left:5px;}
+.checkSelect dt label.down:after{background-image: url("../images/flyListSearchDown.png");}
+.checkSelect dd{height: 32px;line-height: 32px;font-size: 14px;border-bottom: 1px solid #e2f0f7;position: relative;
+margin-left: 25px;color:#666666;display: none;}
+.checkSelect dd.on{color:#48aa00;}
+.checkSelect dd.on:after{content:"";float: right;display: inline-block;width:16px;height:16px;margin:8px 15px 0px 0px;background: url("../images/flySerachChecked.png") no-repeat;background-size: contain;}
+

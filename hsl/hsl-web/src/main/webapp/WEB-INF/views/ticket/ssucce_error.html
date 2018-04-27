@@ -1,0 +1,18 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#import "/public/frame/default.html" as frame />
+<@frame.head "票量 - 机票预订">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/fly_success.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" "2">
+<div class="wd12 ma pay_success disb pay_fail">
+    <div class="payfor_box ov">
+        <span class="reg_order fl yahei color6 tc">预定失败!</span>
+        <span class=" reg_mes fl yahei color8 h2 rexian">如需帮助请拨打客服热线0571-28280813</span>
+    </div>
+</div>
+</@frame.main>
+<@frame.end "default"></@frame.end>

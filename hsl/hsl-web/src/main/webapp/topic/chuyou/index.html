@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>合家出游</title>
+    <link href="css/familyGo.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <a href="javascript:;" class="btn_go"></a>
+      <div class="content" name="1F">
+        <!-- 景点门票 -->
+        <div class="cont cont_01">
+          <div class="cont_inner">
+            <a href="https://www.ply365.com/line/detail?id=889d4c6e90094e2a842c827101ee40e5" target="_blank">
+              <img src="images/01.jpg">
+            </a>
+            <ul class="goodsList">
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=8a85d07f500b432b98ab586ac09e770a" target="_blank">
+                  <img src="images/1.jpg">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=fe0ae4a70318454aaabb0700dc2fb853" target="_blank">
+                  <img src="images/2.jpg">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=88bf6bbbee634fa6b91318f26c7c7b8f" target="_blank">
+                  <img src="images/3.jpg">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=4944d86ed905442a8e695b00485807ef" target="_blank">
+                  <img src="images/4.jpg">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 自由行 -->
+        <div class="cont cont_02">
+          <div class="cont_inner">
+            <a href="https://www.ply365.com/line/detail?id=e9683c57302b4975a2208256e0e14b75" target="_blank">
+              <img src="images/02.jpg">
+            </a>
+            <ul class="goodsList">
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=b6f8908dd6524a9eb6d73a4254d3ef98" target="_blank">
+                  <img src="images/5.jpg">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=24f03e40d5e44889ba5249c1305e713d" target="_blank">
+                  <img src="images/6.jpg">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=c8dbeec7e4b44b9cb6dbd90ec07c2f05" target="_blank">
+                  <img src="images/7.jpg">
+                </a>
+              </li>
+              <li>
+                <a href="https://www.ply365.com/line/detail?id=cc3aa4c0a89e4598897743834ec556d2" target="_blank">
+                  <img src="images/8.jpg">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 热门活动推荐 -->
+        <div class="cont cont_03">
+          <div class="cont_inner">
+            <ul class="hot_list">
+              <li>
+                <a href="https://www.ply365.com/topic/huoguo/" target="_blank"><img src="images/f1.jpg"></a>
+              </li>
+              <li>
+                <a href="https://www.ply365.com/topic/bingxue/" target="_blank"><img src="images/f2.jpg"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 侧导航 -->
+    <div class="sideNav">
+      <a href="javascript:;" class="sideNav_a"></a>
+      <a href="javascript:;" class="sideNav_a"></a>
+      <a href="javascript:;" class="sideNav_a"></a>
+      <a href="https://www.ply365.com/home" class="fhsy"></a>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        // 侧导航
+        var $a_cont = $('.sideNav .sideNav_a');
+        $a_cont.eq(0).click(function(){
+          $('html,body').animate({scrollTop:1120},300);
+        });
+        $a_cont.eq(1).click(function(){
+          $('html,body').animate({scrollTop:2168},300);
+        });
+        $a_cont.eq(2).click(function(){
+          $('html,body').animate({scrollTop:3280},300);
+        });
+        $('.btn_go').click(function(){
+          $('html,body').animate({scrollTop:1120},300);
+        })
+      })
+    </script>
+  </body>
+</html>

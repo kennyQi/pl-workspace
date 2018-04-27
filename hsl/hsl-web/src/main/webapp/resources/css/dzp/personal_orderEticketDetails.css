@@ -1,0 +1,51 @@
+/* CSS Document */
+/*liwei 2015-4-20     orderDetails right*/
+.ri{ margin:24px 32px 30px 29px;}
+.ri .navigation{ width:900px; height:30px; float:left; border:1px solid #dfe8ef; background:#fcfcfc; padding-left:10px; font-size:12px;}
+.ri .navigation a{color:#0073b6; font-family:"微软雅黑"; line-height:30px;}
+.ri .navigation a:hover{ text-decoration:underline;}
+.ri .navigation i{ margin:0 5px;}
+.ri .rih1{ float:left; font-size:20px; line-height:28px; color:#333; margin-right:40px; margin-top:26px;}
+
+.ri .tableBox{float:left;width:908px;margin-top:16px;border:2px solid #dfe8ef;font-size:14px;color:#666;}
+.ri .tableBox a{color:#0073b6;}
+.ri .tableBox a:hover{text-decoration:underline;}
+.ri .tableBox .top{height:56px;background:#fffaf2;padding:20px 15px 0 15px;font-size:14px;color:#666;line-height:35px;}
+.ri .tableBox .top .ddstatus .status{font-size:20px;color:#ff6600;}
+.ri .tableBox .top .ddstatus .btn_pay{display:inline-block;width:110px;height:35px;background:#ff9900;border-radius:3px;font-size:16px;color:#fff;text-align:center;line-height:35px;margin:0 60px 0 20px;text-decoration:none;}
+.ri .tableBox .top .ddmoney i{color:#ff6600;}
+.ri .tableBox .top .ddmoney .acount{font-size:30px;color:#ff6600;}
+.ri .tableBox .mid{padding:15px;line-height:38px;font-size:14px;color:#666;}
+.ri .tableBox .mid .orderId,.ri .tableBox .mid .t3{display:inline-block;width:290px;}
+.ri .tableBox .mid .t1{display:inline-block;width:278px;}
+.ri .tableBox .mid .t2{display:inline-block;width:300px;}
+.ri .tableBox .bottom{padding:0 0 50px 15px;}
+.ri .tableBox .bottom .ydr{font-size:20px;color:#333;}
+.ydr .name{margin:0 20px 0 10px;}
+.ri .tableBox .bottom .acount_wrap{padding:5px 0 0 90px;font-size:16px;color:#666;}
+.ri .tableBox .ticketInfo{padding:15px;}
+.ri .tableBox .ticketInfo p{padding:10px 0;}
+.ticketInfo p span{margin-right:60px;}
+.ri .tableBox.pInfo{border-bottom:none;padd}
+.ri .tableBox table{border-collapse:collapse;}
+.ri .tableBox table th{padding:0 0 0 15px;line-height:38px;background:#f5f9fb;border-bottom:2px solid #dfe8ef;}
+.ri .tableBox table td{padding:20px 15px;border-bottom:2px solid #dfe8ef;}
+.ri .tableBox table td .img_box{margin-right:10px;position:relative;}
+.ri .tableBox table td .img_box .big_code{position:absolute;top:40px;left:0px;display:none;z-index:9999;}
+.m_cont{padding-bottom:260px;}
+
+/*弹框样式*/
+.win_bg{width:100%;height:100%;position:fixed;top:0;left:0;background:#000;opacity:0.5;z-index:9999;filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);}
+.qxdd_box{font-family:'微软雅黑';position:fixed;top:25%;left:50%;margin-left:-194px;width:357px;background:#fff;z-index:10000;box-shadow: 0 0 20px #efefef;}
+.qxdd_box .btn_close{position:absolute;top:0px;right:0;width:20px;height:20px;background:url(../../images/regScript_bg.png) 0 -760px;margin:6px;cursor:pointer;}
+.qxdd_box h1{background:#00a0e9;text-align:center;font-size:16px;font-weight:normal;color:#fff;padding:5px 0;}
+.qxdd_box .qxdd{padding:30px;text-align:center;}
+.qxdd_box .qxdd .btn{display:inline-block;width:48px;height:30px;margin:20px 10px 10px 10px;font-size:15px;color:#fff;line-height:30px;background:#00a0e9;cursor:pointer;}
+
+/*已游玩景点弹框*/
+.win_box{font-family:'微软雅黑';position:fixed;top:25%;left:50%;margin-left:-194px;width:357px;background:#fff;z-index:10000;box-shadow: 0 0 20px #efefef;}
+.win_box .btn_close{position:absolute;top:0px;right:0;width:20px;height:20px;background:url(../../images/regScript_bg.png) 0 -760px;margin:6px;cursor:pointer;}
+.win_box h1{background:#00a0e9;text-align:center;font-size:16px;font-weight:normal;color:#fff;padding:5px 0;}
+.win_box .scenicList{padding:20px 0 30px 92px;height:208px;overflow-y:auto;}
+.win_box .scenicList dl dt{font-size:14px;color:#333;line-height:32px;}
+.win_box .scenicList dl dd{font-size:14px;color:#666;padding-left:30px;}

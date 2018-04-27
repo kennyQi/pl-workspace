@@ -1,0 +1,42 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#macro head title>
+<!DOCTYPE  html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+
+<title>${title}</title>
+<!-- CSS BEGIN-->
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<!-- END -->
+<#nested>
+</head>
+</#macro> 
+<#macro main header sel="1">
+<body>
+	<div class="g-wrap">
+		<!-- header页面 -->
+		<#include "/public/header/${header!'default'}.html"> 
+			
+			<!-- 页面主体 -->
+		<#nested>
+	<!-- layout end -->
+	</#macro> 
+	
+	<#macro end footer>
+	<!-- 页脚 -->
+	<#include "/public/footer/${footer}.html"> 
+</div>
+</body>
+</html>
+<#nested>
+</#macro>
+<#macro top >
+	<#include "/public/usercenter/top.html"> 
+</#macro>
+<#macro nav pos sel>
+	<#include "/public/usercenter/leftnav.html"> 
+</#macro>

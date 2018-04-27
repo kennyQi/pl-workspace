@@ -1,0 +1,110 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src="${staticPath}/js/jquery-validation-1.9.0/lib/jquery.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var path = '${contextPath}';
+	
+	function checkPosition(){
+		
+		if($("#position2").val()!=$("#positionHide").val() && $("#positionHide").val()!=""){
+			alert('请上传广告图片');
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	var imageAdd = {};
+	
+	imageAdd.imageUpload = function (me) {
+		
+		$.ajaxFileUpload({
+			url : path+"/file/imgUpload",
+	       	secureuri : false,
+	       	fileElementId : 'imgFile',
+	       	dataType : 'json',
+	       	data: {
+	       		//maxHeight: 175,
+	       		//maxWidth: 230,
+	       		maxSize: 20480
+	       	},
+			success: function (data, status) {
+				if ("success" == data.status) {
+		       		$("#imgView").attr("src", data.imageUrl);
+		       		$("#imageInfo").attr("value",data.fileInfo);
+		       		$("#imagePath").attr("value",data.imageUrl);
+		       		$("#fileName").attr("value",data.imageName);
+	    	  	} else {
+	    	  		alertMsg.info(data.msg);
+	    	  	}
+			},
+	        error: function (data, status, e) {
+	        	alertMsg.info("上传失败");
+	        }
+	    });
+	}
+	
+	function validate(){
+		var priority = $("#priority").val();
+	    if(!/^\d{1,8}$/.test(priority)){
+	    	$("#priority").val("");
+	       	$("#priorityMsg").html("请输入正确的优先级");
+	    }else{
+	    	$("#priorityMsg").html("");
+	    }
+	}
+</script>
+<div class="pageContent">
+
+	<form method="post" action="${contextPath}/system/operator/update" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			
+			<input type="hidden" name="id" value="${staff.id}" />
+			<input type="hidden" name="authUser.version" value="${staff.authUser.version}" />
+			<input type="hidden" name="authUser.enable" value="${staff.authUser.enable}" />
+			
+			<div class="unit">
+				<label>姓名：</label>
+				<input type="text" name="info.realName" size="64" maxlength="64" class="required" value="${staff.info.realName!?html}" />
+			</div>
+			<div class="unit">
+				<label>登录名：</label>
+				<input readonly="readonly" type="text" name="authUser.loginName" size="64" class="required" minlength="5" maxlength="64" value="${staff.authUser.loginName!?html}" />
+			</div>
+			<div class="unit">
+				<label>电话：</label>
+				<input type="text" name="info.tel" size="64" maxlength="32" value="${staff.info.tel!?html}" />
+			</div>
+			<div class="unit">
+				<label>手机：</label>
+				<input type="text" name="info.mobile" size="64" maxlength="32" value="${staff.info.mobile!?html}" />
+			</div>
+			<div class="unit">
+				<label>Email：</label>
+				<input type="text" name="info.email" size="64" maxlength="64" value="${staff.info.email!?html}" />
+			</div>
+			<div class="unit">
+				<label>角色：</label>
+				<#list authRoleList as role>
+					<#assign hasRoleb = false >
+					<#list hasRoleName as roleName>
+						<#if role.roleName == roleName>
+							<#assign hasRoleb = true >
+							<#break>
+						</#if>
+					</#list>
+				<label><input name="roleIds" type="checkbox" value="${role.id}" <#if hasRoleb>checked="checked"</#if> /> ${role.displayName!'-'?html}</label>
+				</#list>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

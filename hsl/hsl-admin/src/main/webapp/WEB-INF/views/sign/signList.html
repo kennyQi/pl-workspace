@@ -1,0 +1,130 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<script type="text/javascript">
+	//清空表单查询条件
+	function cleanSignListForm(formClass){
+		var selector = "#"+formClass;
+		$(selector+" input[type=text]").val("");
+		$(selector+" option[value=\"\"]").prop("selected","selected");
+	}
+</script>
+<div class="pageHeader">
+
+
+	<span style = "font-size:30px;font-weight:bold;">活动签到</span>
+	
+	<div style = "float:right;">
+      <a href = "${contextPath}/excel/uploadSign.xls">
+         <button  style="height:31px;width:100px;">下载导入格式</button>
+      </a>
+      <a href = "${contextPath}/sign/activity/upLoadSignExcelPage" target="dialog" width="350" height="90">
+         <button  style="height:31px;width:100px;">导入信息</button>
+      </a>
+    </div>
+    
+    <br/>
+    <hr/>
+    
+    <form action="${contextPath}/sign/activity/list" method="post" id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);">
+    
+    	<div class="searchBar">
+    	    <!--页码区域  -->
+			<input type="hidden" name="pageNum" value="${(pagination.pageNo?c)!}" />
+			<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!}" />
+			
+			<!--查询条件区域  -->
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">姓名:  <input name="name" value="${(signQo.name)}" type="text"/></td>
+					<td style="text-align: left">手机号:<input name="mobile" value="${(signQo.mobile)}" type="text"/></td>
+					<td style="text-align: left">单位:  <input name="department" value="${(signQo.department)}" type="text"/></td>
+				</tr>
+				<tr><td>&nbsp;</td></tr>
+				<tr>
+					<td style="text-align: left">职务:<input name="job" value="${(signQo.job)}" type="text"/></td>
+					<td style="text-align: left">是否签到:
+						<select name="signed">
+								<#if signQo.signed ??>
+						    		<#if (signQo.signed)?string('true','false') == "true">
+						            	<option value="">全部</option>
+					            		<option value="true" selected="selected">已签到</option>
+						                <option value="false">未签到</option>
+					                 <#elseif (signQo.signed)?string('true','false') == "false">
+						            	<option value="">全部</option>
+						            	<option value="true">已签到</option>
+						                <option value="false" selected="selected">未签到</option>
+					    	       </#if>
+				    	       <#else>
+					    	        <option value="" selected="selected">全部</option>
+					    	        <option value="true">已签到</option>
+					                <option value="false">未签到</option>
+					            </#if>
+						</select>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+			
+			<!--查询按钮区域  -->
+			<div style = "float:right;">
+		       &nbsp;&nbsp;&nbsp;&nbsp;
+		       <div class="subBar">
+					<ul>
+						<li>
+							<div class="buttonActive">
+								<div class="buttonContent">
+									<button type="submit">查询</button>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="buttonActive">
+								<div class="buttonContent">
+									<button onclick="cleanSignListForm('pagerForm');">条件置空</button>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<br/><br/>
+		    </div>
+		    
+		</div>
+    </form>
+    
+	<!--数据列表区域  -->
+	<table class="table" width="100%" layoutH="233">
+		<thead>
+			<tr style = "background-color:blue;">
+				<th width="40">姓名</th>
+				<th width="30">手机号</th>
+				<th width="40">身份证</th>
+				<th width="25">单位</th>
+				<th width="25">职务</th>
+				<th width="30">活动</th>
+				<th width="25">是否签到</th>
+				<th width="30">签到时间</th>
+				<th width="60">操作</th>
+	  		</tr>
+		</thead>
+		
+		<tbody>
+			<#list signList as sign>
+				<tr>
+					<td>${(sign.name)!}</td>
+					<td>${(sign.mobile)!}</td>
+					<td>${(sign.sID)!}</td>
+					<td>${(sign.department)!}</td>
+					<td>${(sign.job)!}</td>
+					<td>${(sign.activityName)!}</td>
+					<td><#if (sign.signed)>已签到<#else>未签到</#if></td>
+					<td>${(sign.signTime)!}</td>
+					<td><a href="${contextPath}/sign/activity/delActivitySign?signId=${(sign.id)!}" target="ajaxTodo" title="确定要删除该活动吗？" style="color:blue;">删除</a></td>
+				</tr>
+			</#list>
+		</tbody>
+		
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

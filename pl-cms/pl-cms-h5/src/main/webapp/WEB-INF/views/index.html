@@ -1,0 +1,82 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>浙江省名胜</title>
+<link href="${contextPath}/resources/css/index.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+
+</head>
+<script>
+
+var myScroll;
+
+function loaded() {
+	myScroll = new iScroll('wrapper', {
+		snap: true,
+		momentum: false,
+		hScrollbar: false,
+		onScrollEnd: function () {
+			document.querySelector('#indicator > li.active').className = '';
+			document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+		}
+	 });
+}
+document.addEventListener('DOMContentLoaded', loaded, false);
+
+</script>
+<body>
+<div class="bd">
+	
+    <div class="gd_bn">
+        <div id="wrapper" style="overflow: hidden;">
+        <div id="scroller" style="transition-duration: 0ms; -webkit-transition-duration: 0ms; transform-origin: 0px 0px 0px; position: absolute; top: 0px; left: 0px;">
+        
+
+            <ul id="thelist">
+            	<#list indexLunbos as lunbo>
+            		<li class="bn_list">
+	                     <div class="bn_img pl">
+            		<a href="${(lunbo.url)!""}">
+	                        <img src="${fileUploadPath}${(lunbo.urlMaps['H5'])!''}" alt="${(lunbo.title)!""}"></a>
+	                    </div>
+	                    <div class="bn_title">
+	                        <div class="bg"></div>
+	                        <a href="${(lunbo.url)!""}" class="tt">${(lunbo.title)!""}</a>
+	                    </div>
+	                     
+	                </li>
+            	</#list>
+            </ul>
+            
+
+        </div>
+    </div>
+        <div id="nav">
+        	<ul id="indicator">
+                <li class="active">1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+	</div>
+    <nav class="nav paB">
+    	<a href="${contextPath}/article/list?showChannelId=1" title="时政要闻"><img src="${contextPath}/resources/images/btn_new.png" alt="时政要闻"></a>
+    	<a href="${contextPath}/article/list?showChannelId=2" title="名人到访" class="mid"><img src="${contextPath}/resources/images/btn_met.png" alt="名人到访"></a>
+    	<a href="${contextPath}/article/list?showChannelId=3" title="重要活动"><img src="${contextPath}/resources/images/btn_act.png" alt="重要活动"></a>
+    	<a href="${contextPath}/article/list?showChannelId=4" title="自然风光"><img src="${contextPath}/resources/images/btn_nature.jpg" alt="自然风光"></a>
+    	<a href="${contextPath}/article/list?showChannelId=5" title="文化传承" class="mid"><img src="${contextPath}/resources/images/btn_c.jpg" alt="文化传承"></a>
+    	<a href="${contextPath}/article/list?showChannelId=6" title="文物主题"><img src="${contextPath}/resources/images/btn_title.jpg" alt="文物主题"></a>
+    	<a href="${contextPath}/scenic/index" title="呵护名胜"><img src="${contextPath}/resources/images/btn_ms.jpg" alt="呵护名胜"></a>
+    	<a href="${contextPath}/contribution/list" title="公众投稿" class="mid"><img src="${contextPath}/resources/images/btn_tg.jpg" alt="公众投稿"></a>
+    	<a href="${contextPath}/about" title="关于协会"><img src="${contextPath}/resources/images/btn_xh.jpg" alt="关于协会"></a>
+    </nav>
+</div>
+
+<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>
+<script src="${contextPath}/resources/js/iscroll.js"></script>
+<script src="${contextPath}/resources/js/index.js"></script>
+</body>
+</html>

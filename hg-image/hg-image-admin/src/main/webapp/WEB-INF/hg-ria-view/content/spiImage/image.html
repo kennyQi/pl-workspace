@@ -1,0 +1,110 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">图片列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/hg/spiAlbum/spiImage/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="imageIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a>
+					<a href="${contextPath}/hg/spiAlbum/spiImage/add" org-href="${contextPath}/hg/spiAlbum/spiImage/add" 
+						class="btn btn-default btn-sm" target="hgTab" id="addBtn"> <i
+						class="fa fa-plus"></i> 添加
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">								
+					
+					<div class="col-md-4">
+						<label class="control-label col-md-5" >
+							图片标题：
+						</label>
+						<div class="col-md-7">
+							<input class="form-control input-small input-inline" name="title" id="title">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label class="control-label col-md-5" >
+							创建时间：
+						</label>
+						<div class="col-md-7">
+							<div class="input-group input-large" target="datepicker">
+								<input type="text" class="form-control" name="createBeginDate" id="createBeginDate">
+								<span class="input-group-addon">
+								到 </span>
+								<input type="text" class="form-control" name="createEndDate" id="createEndDate">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row margin-top-10">
+					<div class="col-md-4">
+						<label class="control-label col-md-5" 
+							style="height:32px; line-height:32px;">刷新索引：</label>
+						<div class="col-md-7">
+							<input type="checkbox" target="checkbox" name="flushImageCacheUrl" >
+						</div>
+					</div>
+					<div class="col-md-8 text-right">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#imageGrid" data-ref-param="{title: $('#title').val(), albumId:$('#albumId').val()}"><i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" group="imageIds"
+								class="checkboxCtrl"/></th>
+							<th>图片标题</th>
+							<th>创建时间</th>
+							<th>相册</th>
+							<th class="text-center">操作</th>
+						</tr> 
+					</thead>
+					<tbody id="imageGrid" target="grid" data-url="${contextPath}/hg/spiAlbum/spiImage/imagelist?albumQo.id=${(imageQo.albumQo.id)?if_exists}"
+						data-setData="function(record) {
+								if(record && record.createDate)
+									record.createDate = new Date(record.createDate).format('yyyy-MM-dd');
+							}">
+						<tr class="odd gradeX">
+							<td>
+								<input type="checkbox" name="imageIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td>
+							<td>
+								{title}
+							</td>
+							<td>
+								{createDate}
+							</td>
+							<td>
+								{album.title}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/hg/spiAlbum/spiImage/del?imageIds={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/spiAlbum/spiImage/edit?id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑图片
+								</a>
+								<a class="btn default btn-xs yellow" href="${contextPath}/hg/spiAlbum/spiImageSpec/view?image.id={id}"
+									class="btn btn-default btn-sm" target="hgTab" rel="spiImageSpec">
+									<i class="fa fa-edit"></i> 规格图片管理
+
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

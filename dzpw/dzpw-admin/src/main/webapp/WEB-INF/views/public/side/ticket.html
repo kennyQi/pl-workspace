@@ -1,0 +1,14 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>票务管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+				<li><a href="${contextPath}/ticket-single/list" target="navTab" rel="ticket-single">单票管理</a></li>
+				<li><a href="${contextPath}/ticket-group/list?navTabId=ticket-group" target="navTab" rel="ticket-group">联票管理</a></li>
+		</ul>
+	</div>
+</div>

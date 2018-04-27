@@ -1,0 +1,56 @@
+/* Fixes issue here http://code.google.com/p/jcrop/issues/detail?id=1 */
+.jcrop-holder {
+	text-align: left;
+}
+
+.jcrop-vline,.jcrop-hline {
+	font-size: 0;
+	position: absolute;
+	background: white url('Jcrop.gif') top left repeat;
+}
+
+.jcrop-vline {
+	height: 100%;
+	width: 1px !important;
+}
+
+.jcrop-hline {
+	width: 100%;
+	height: 1px !important;
+}
+
+.jcrop-handle {
+	font-size: 1px;
+	width: 7px !important;
+	height: 7px !important;
+	border: 1px #eee solid;
+	background-color: #333;
+	*width: 9px;
+	*height: 9px;
+}
+
+.jcrop-tracker {
+	width: 100%;
+	height: 100%;
+}
+
+.custom .jcrop-vline,.custom .jcrop-hline {
+	background: yellow;
+}
+
+.custom .jcrop-handle {
+	border-color: black;
+	background-color: #C7BB00;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+.img-polaroid {
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

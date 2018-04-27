@@ -1,0 +1,55 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/grade/list" method="get">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		 
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/grade/creat"  lookupgroup="orgLookup" mask="true"><span>新建</span>
+			</a>
+			</li>
+			<li class="line">line</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th>等级编码</th>
+				<th>等级名称</th>
+				<th>依据积分类型</th>
+				<th>达到积分值</th>
+				<th>有限期（年）</th>
+				<th>失效扣减积分值</th>
+				<th>操作 </th>
+			</tr>
+		</thead>
+        <tbody>
+			<#list pagination.list as t>
+			<tr>
+				<td>${t.code!?html}</td>
+				<td>${t.name!?html}</td>
+				<td>${t.accountType!?html}</td>
+				<td>${t.jf}</td>
+				<td>${t.validYear}</td>
+				<td>${t.invalidJf}</td>
+				 
+                <td> 
+                    <a title="编辑"     lookupgroup="orgLookup" mask="true"   href="${contextPath}/grade/toEdit?id=${t.id}" style="color: blue"  >编辑&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                    <a title="确认删除？"   target="ajaxTodo"    href="${contextPath}/grade/delete?id=${t.id}" style="color: blue"  >删除&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                   
+				 </td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+ 
+</div>
+ 

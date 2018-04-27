@@ -1,0 +1,83 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/system_config/update" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, navTabAjaxDone)">
+		<div class="pageFormContent" layoutH="52" style="margin-top: -4px;">
+			<div class="bill">
+				<input type="hidden" name="id" />
+				<table border="0" class="my_form system_config_table">
+					<tr class="bc_c">
+						<td>分类</td>
+						<td>参数名称</td>
+						<td>参数值</td>
+						<td style="width: 300px">参数说明</td>
+					</tr>
+					<tr class="bc_e">
+						<td rowspan="4" class="bc_e">采购商信息</td>
+						<td>联系人：</td>
+						<td>
+							<input type="text" maxlength="5" name="linkmanName" value="${(systemConfig.linkmanName)!}" class="required" />
+						</td>
+						<td>备货单打印时的采购商联系人姓名</td>
+					</tr>
+					<tr class="bc_e">
+						<td>电话：</td>
+						<td>
+							<input type="text" maxlength="20" name="phone" value="${(systemConfig.phone)!}" class="required" />
+						</td>
+						<td>备货单打印时的采购商联系电话</td>
+					</tr>
+					<tr class="bc_e">
+						<td>传真:</td>
+						<td>
+							<input type="text" maxlength="20" name="fax" value="${(systemConfig.fax)!}" class="required" />
+						</td>
+						<td>备货单打印时的采购商联系传真</td>
+					</tr>
+					<tr class="bc_e">
+						<td>联系地址：</td>
+						<td>
+							<input type="text" maxlength="100" name="contactAddress" value="${(systemConfig.contactAddress)!}" class="required" />
+						</td>
+						<td>备货单打印时的采购商联系地址信息</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<#--
+				<!--
+				<li style="padding-right: 70px;">
+-->
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" onclick="systemConfigEditReset()">重置</button>
+						</div>
+					</div>
+				</li> <#--
+				<!--
+
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+-->
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	function systemConfigEditReset(){
+	navTab.reload("${contextPath}/system_config/edit", null);
+}
+</script>

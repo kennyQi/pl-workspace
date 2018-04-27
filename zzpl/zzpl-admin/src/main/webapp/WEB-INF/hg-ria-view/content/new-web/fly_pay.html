@@ -1,0 +1,135 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>机票支付</title>
+<link href="${contextPath}/resources/hg-ria/new-web/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/hg-ria/new-web/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/common.js" language="javascript"></script>
+<script src="${contextPath}/resources/hg-ria/new-web/js/fly_order.js" language="javascript"></script>
+</head>
+<body>
+<!---->
+<div class="head">
+    <div class="head-cont">
+        <a href="${contextPath}/home" class="logo fl">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/logo.jpg" />
+        </a>
+        <ul class="fl nav">
+            <li class="fl"><a href="${contextPath}/home">首页</a></li>
+            <li class="fl"><a href="${contextPath}/CLGLYBookFlight/view">机票</a></li>
+        </ul>
+        <div class="user fr">
+            <span class="out fr"><a href="${contextPath}/logout">
+					退出</a></span>
+            <span class="name fr">${(user.name)!''}</span>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<!--头部-->
+<!--内容-->
+<link href="${contextPath}/resources/hg-ria/new-web/css/fly_pay.css" rel="stylesheet" />
+
+<div class="content_wrap">
+  <div class="plan_info">
+    <h1 class="tit">计划机票信息</h1>
+    <div class="dp_left fl">
+      <div class="l fl">
+        <p class="jc_name">${flightOrder.departAirport}</p>
+        <p class="f_time">${flightOrder.startTime?string("HH:mm")}</p>
+        <p class="f_date">${flightOrder.startTime?date}</p>
+      </div>
+      <div class="m fl">
+        <p class="f_id">${flightOrder.airCompanyName}${flightOrder.flightNO}</p>
+        <p class="f_type">机型：<span class="">${flightOrder.planeType}</span></p>
+        <p class="f_bg"></p>
+        <p class="sum_time">${dates}</p>
+        <p class="f_date">${flightOrder.cabinName}${flightOrder.cabinCode}</p>
+      </div>
+      <div class="r fl">
+        <p class="jc_name">${flightOrder.arrivalAirport}</p>
+        <p class="f_time">${flightOrder.endTime?string("HH:mm")}</p>
+        <p class="f_date">${flightOrder.endTime?date}</p>
+      </div>
+    </div>
+    <div class="dp_right fl">
+      <p class="p_line">
+        <span class="p1">票价</span>
+        <span class="p2">机建燃油</span>
+        <span class="p3">总票价</span>
+        <span class="p4">经销商价</span>
+      </p>
+      <p>
+        <span class="p1">￥${flightOrder.ibePrice}</span>
+        <span class="p2">￥${flightOrder.buildFee+flightOrder.oilFee}</span>
+        <span class="p3 f_cb">￥${flightOrder.buildFee+flightOrder.oilFee+flightOrder.ibePrice?number}</span>
+        <span class="p4 f_cb">￥${flightOrder.platTotalPrice}</span>
+      </p>
+    </div>
+  </div>
+  <div class="order_info">
+    <h1 class="tit">订单信息
+    <span class="c_name_wrap">（<span class="c_name">${company.companyName}</span>）
+    </span>
+    </h1>
+    <ul class="orders">
+    <#assign sum=0 /> 
+    <#list flightOrders as order>
+    	<#assign sum=sum+order.platTotalPrice>
+	    <#list order.passengers as passenger>
+	      <li>
+	        <div class="serial_number fl">1</div>
+	        <div class="detail_info fl">
+	          <p class="l_1">订单号：<span class="order_id">${order.orderNO}</span></p>
+	          <p class="l_2">
+	            乘机人信息：<span class="p_name">${passenger.passengerName}</span>
+	            身份证：<span class="p_id">${passenger.idNO}</span>
+	            手机：<span class="p_tel">${passenger.telephone}</span>
+	            成本中心：<span class="p_center"><#list costCenterDTOs as costCenterDTO><#if costCenterDTO.id==order.costCenterID>${costCenterDTO.costCenterName}</#if></#list></span>
+	          </p>
+	          <p class="l_3">
+	            联系人信息：<span class="l_name">${order.linkName}</span>
+	            联系电话：<span class="l_tel">${order.linkTelephone}</span>
+	          </p>
+	        </div>
+	      </li>
+      	</#list>
+     </#list>
+    </ul>
+  </div>
+  <div class="order_sum">
+  <#if (sum>0)>
+    <p>结算金额：<span class="sum_wrap">￥<i class="sum">${sum}</i></span>&nbsp;&nbsp;(共<span class="p_sum">${flightOrders?size}</span>人)
+    </p>
+    <form action="${contextPath}/CLGLYBookFlight/payOrder" method="post">
+    	<input type="hidden" hidden="hidden" name="flightOrderJSON" value='${flightOrderJSON}'>
+    	<button id="submitAndPay" class="btn_order">提交订单</button>
+    </form>
+   <#else>
+   <p>请尝试其他航班</p>
+   </#if>
+  </div>
+</div>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+    <div class="foot">
+        <div class="l fl">
+            <a href="#">关于智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">联系智行</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">智行荣誉</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">帮助中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">意见与建议</a>
+        </div>
+        <div class="r fr">
+            <img src="${contextPath}/resources/hg-ria/new-web/images/foot_logo.png" />
+        </div>
+    </div>
+</div>
+<!--页脚-->
+</body>
+</html>

@@ -1,0 +1,26 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css'
+	rel='stylesheet' />
+<div class="pageHeader">
+<form id="myform" method="post" action="${contextPath}/fixedPrice/saveFixedPriceInterval" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+<input type="hidden" name="fixedPriceIntervalID" value="${fixedPriceIntervalID!''}">
+	<table style="width: 450px;height: 200px;" border="0">
+	<#assign i=1>
+	<#list qujians as qujian>
+	<tr height="35px;">
+	<td>${i}&nbsp;区间&nbsp;${qujian.qj}<input type="hidden" value="${qujian.qj!''}" name="qj"></td>
+	<td>定价&nbsp;<input type="text" value="${qujian.zk!''}" name="zk"></td>
+	</tr>
+	<#assign i=i+1>
+	</#list>
+	<tr height="35px;">
+	<td style="text-align: right;">
+	</td>
+	<td style="text-align: left;">
+	<button>保存</button>
+	</td>
+	</tr>
+	</table>
+</form>
+</div>

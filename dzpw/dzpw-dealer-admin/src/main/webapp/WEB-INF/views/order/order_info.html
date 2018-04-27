@@ -1,0 +1,257 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<style>
+	.jq{background:#eee;font-weight:600;}
+	.jq span{margin-left:5px;}
+</style>
+<script>
+function closeDialog()
+{
+$.pdialog.closeCurrent();
+}
+</script>
+<div class="pageContent">
+	<div class="pageFormContent" layoutH="58">
+	
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>订单信息</span></div>
+		<table>
+			<tr style="height:6px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">订单状态：</td>
+				<td>
+					<#if groupTicket.status.current==0>
+						等待支付
+					</#if>
+					<#if groupTicket.status.current==1>
+						支付成功
+					</#if>
+					<#if groupTicket.status.current==2>
+						出票成功
+					</#if>
+					<#if groupTicket.status.current==3>
+						交易成功
+					</#if>
+					<#if groupTicket.status.current==4>
+						交易关闭
+					</#if>
+				</td>
+				<td style="width:80px;"/>
+				<td align="center" style="width: 100px;">退款状态：</td>
+				<td>
+					<#if groupTicket.status.refundCurrent==0>
+						可退款
+					<#elseif groupTicket.status.refundCurrent==1>
+						退款成功
+					<#elseif groupTicket.status.refundCurrent==2>
+						部分退款成功
+					<#elseif groupTicket.status.refundCurrent==3>
+						退款处理中
+					</#if>
+				</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">订单编号：</td>
+				<td>${groupTicket.ticketOrder.id!?html}</td>
+				<td style="width:80px;"/>
+				<td align="center" style="width: 100px;">票务号：</td>
+				<td>${groupTicket.ticketNo!?html}</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">经销商：</td>
+				<td>${groupTicket.ticketOrder.baseInfo.fromDealer.baseInfo.name!?html}</td>
+				<td style="width:80px;"/>
+				<td align="center" style="width: 100px;">下单时间：</td>
+				<td>${groupTicket.ticketOrder.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">出票时间：</td>
+				<td><#if  groupTicket.status.current==2||groupTicket.status.current==3||groupTicket.status.current==4>
+						${(groupTicket.ticketOrder.payInfo.payDate?string("yyyy-MM-dd HH:mm:ss"))!""}
+					</#if></td>
+				<td style="width:80px;"/>
+				<td align="center" style="width: 100px;">经销商结算编号：</td>
+				<td >${groupTicket.ticketOrder.baseInfo.dealerOrderId!?html}</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">预定人：</td>
+				<td>${groupTicket.ticketOrder.baseInfo.linkMan!?html}</td>
+				<td style="width:80px;"/>
+				<td align="center" style="width: 100px;">手机号：</td>
+				<td>${groupTicket.ticketOrder.baseInfo.telephone!?html}</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">取消订单时间：</td>
+				<td>
+				${(groupTicket.status.closeDate?string("yyyy-MM-dd HH:mm:ss"))!"--"}
+				</td>
+				<td style="width:80px;"/>
+				<td align="center" style="width: 100px;">经销商手续费：</td>
+				<td>${groupTicket.ticketOrder.payInfo.dealerSettlementFee!?html}元</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">理财退款帐号：</td>
+				<td>
+				</td>
+			</tr>
+			<tr style="height:15px;"/>
+		</table>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>票务信息</span></div>
+		<table border="0">
+			<tr style="height:6px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">票务名称：</td>
+				<td>${(groupTicket.ticketPolicySnapshot.baseInfo.name)!?html}</td>
+				<td align="center" style="width: 100px;">产品编号：</td>
+				<td>${(groupTicket.ticketPolicySnapshot.baseInfo.key)!?html}</td>
+				<td align="center" style="width: 100px;">票务类型：</td>
+				<td>
+					<#if groupTicket.ticketPolicySnapshot.type==1>
+						单票
+					</#if>
+					<#if groupTicket.ticketPolicySnapshot.type==2>
+						联票
+					</#if>
+				</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">包含景点：</td>
+				<td colspan="4">
+				<#list groupTicket.ticketPolicySnapshot.singleTicketPolicies as singlePolicy>
+				${singlePolicy.scenicSpot.baseInfo.name}(${singlePolicy.useInfo.validDays}日)
+				<#if (singlePolicy_index==groupTicket.ticketPolicySnapshot.singleTicketPolicies?size-1)>
+				;
+				<#else>
+				、
+				</#if>
+				</#list>
+				</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">销售价：</td>
+				<td colspan="4">
+				￥${groupTicket.price}
+				</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">退票规则：</td>
+				<td>
+					<#if groupTicket.ticketPolicySnapshot.sellInfo.returnRule==1>
+						不得退票
+					</#if>
+					<#if groupTicket.ticketPolicySnapshot.sellInfo.returnRule==2>
+						无条件退票
+					</#if>
+					<#if groupTicket.ticketPolicySnapshot.sellInfo.returnRule==3>
+						退票收取${groupTicket.ticketPolicySnapshot.sellInfo.returnCost!?html}%手续费
+					</#if>
+					<#if groupTicket.ticketPolicySnapshot.sellInfo.returnRule==4>
+						退票收取${groupTicket.ticketPolicySnapshot.sellInfo.returnCost!?html}元手续费
+					</#if>
+				</td>
+			</tr>
+			<tr style="height:15px;"/>
+			<tr>
+				<td align="center" style="width: 100px;">有&nbsp;&nbsp;效&nbsp;&nbsp;期：</td>
+				<td>
+					<#if groupTicket.useDateStart?string("yyyy-MM-dd")==groupTicket.useDateEnd?string("yyy-MM-dd")>
+					${groupTicket.useDateStart?string("yyy-MM-dd")}
+					<#else>
+					从 ${groupTicket.useDateStart?string("yyy-MM-dd")} 到 ${groupTicket.useDateEnd?string("yyy-MM-dd")} 有效
+					</#if>
+				</td>
+			</tr>
+			<tr style="height:15px;"/>
+		</table>
+		
+		<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>游客信息</span></div>
+		<div class="pageContent">
+			<table class="table" width="100%" layoutH="170">
+		<thead>
+			<tr>
+				<th width="100px;">景区</th>
+				<th width="100px;">游玩人姓名</th>
+				<th width="120px;">游玩人证件类型</th>
+				<th width="150px;">游玩人证件号</th>
+				<th width="100px;">游玩时间</th>
+				<th width="100px;">退款时间</th>
+				<th width="160px;">退款编号</th>
+				<th width="100px;">景区状态</th>
+				<th width="100px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list groupTicket.singleTickets as singleTicket>
+			<tr>
+				<td>${singleTicket.scenicSpot.baseInfo.name}</td>
+				<td><#if singleTicket.tourist??>${singleTicket.tourist.name}<#else>--</#if></td>
+				<td>
+					<#if singleTicket.tourist??>
+						<#if singleTicket.tourist.idType==1>
+							身份证
+						</#if>
+						<#if singleTicket.tourist.idType==2>
+							军官证
+						</#if>
+						<#if singleTicket.tourist.idType==3>
+							驾驶证
+						</#if>
+						<#if singleTicket.tourist.idType==4>
+							护照
+						</#if>
+					</#if>
+				</td>
+				<td> <#if singleTicket.tourist??>${singleTicket.tourist.idNo}<#else>--</#if></td>
+				<td>
+					<#list singleTicket.useRecordList as useRecord>
+						${useRecord.useDate?string("yyyy-MM-dd HH:mm:ss")} 
+					</#list>
+				</td>
+				<td>
+					<#if groupTicket.status.refundDate??&&singleTicket.status.current==7>
+						${groupTicket.status.refundDate?string("yyyy-MM-dd HH:mm:ss")}
+					</#if>
+				</td>
+				<td>${groupTicket.refundBatchNo}</td>
+				<td>
+					<#if singleTicket.status.current==0>
+						待激活
+					<#elseif singleTicket.status.current==1>
+						待游玩
+					<#elseif singleTicket.status.current==2>
+						已游玩
+					<#elseif singleTicket.status.current==3||singleTicket.status.current==4>
+						已失效
+					<#elseif singleTicket.status.current==5>
+						待退款
+					<#elseif singleTicket.status.current==6>
+						无需退款
+					<#elseif singleTicket.status.current==7>
+						已退款
+					<#elseif singleTicket.status.current==8>
+						已结算
+					</#if>
+				</td>
+				<td>
+				<#if singleTicket.status.current==0>
+				<a title="票务激活" target="dialog" href="${contextPath}/order/toActive?singleTicketId=${singleTicket.id}" height="350" width="330" style="color: blue"  targetType="dialog">激活</a>
+				</#if>
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+		</div>
+	</div>
+	
+	
+</div>

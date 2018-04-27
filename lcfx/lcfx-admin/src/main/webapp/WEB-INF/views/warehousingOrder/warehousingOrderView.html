@@ -1,0 +1,32 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageContent">
+	<form method="post" action="${contextPath}/warehousing_order/<#if edit??>update<#else>create</#if>" class="pageForm required-validate nowrap" onsubmit="return validateCallbackPoAdd(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+			<#include "purchaseOrder/purchaseOrderViewGeneral.html">
+				
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

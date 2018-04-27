@@ -1,0 +1,10 @@
+#companyList{width:901px;background:#fff;margin-top:20px;overflow:hidden;}
+.content_wrap{width:861px;padding:20px 20px 30px 20px;}
+.titl{width:100%;height:40px;line-height:40px;font-size:20px;font-weight:normal;color:#333;border-bottom:1px solid #ccc;margin-bottom:3px;}
+.companyList_table{border-collapse:collapse;}
+.companyList_table th{background:#cce7f5;font-size:14px;color:#0a5c88;height:40px;line-height:40px;text-align:center;border:1px solid #cce7f5;}
+.companyList_table th.c_name{width:240px;}
+.companyList_table th.c_disc{width:446px;}
+.companyList_table td{font-size:14px;color:#333;text-align:center;padding:20px;border:1px solid #cce7f5;}
+.companyList_table td.c_disc{text-align:left;}
+.companyList_table tr:hover{background:#eff9fe;}

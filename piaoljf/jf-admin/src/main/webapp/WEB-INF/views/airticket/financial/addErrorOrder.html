@@ -1,0 +1,75 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+		<div id="queryHead" class="pageContent">
+		<form id="queryForm"  onsubmit="return dialogSearch(this);" target="dialog" 
+		action="${contextPath}/airtkt/financial/toAddErrorOrder" method="get">
+		<table>
+			<tr>
+				<td>异常订单号：</td>
+				<td><input name="orderNo" id="orderNo" value="<#if jpOrderQO??>${(jpOrderQO.orderNo)!''}</#if>"></td>
+				<td>易购订单号：</td>
+				<td><input name="ygOrderNo" id="ygOrderNo" value="<#if jpOrderQO??>${(jpOrderQO.ygOrderNo)!''}</#if>"/></td>
+				<td><button type="submit" >&nbsp;&nbsp;&nbsp;查询</button></td>
+			</tr>
+			<tr>
+				<td>乘客人：</td>
+				<td><input name="passenger" id="passenger"/></td>
+				<td>商家订单号：</td>
+				<td colspan="2"><select name="suppShortName" id="suppShortName">
+						<option value="">出票平台</option>
+						<#if supplierList??>
+						 <#list supplierList as supplier>
+							<option value="${(supplier.name)!''}" <#if jpOrderQO??&&jpOrderQO.suppShortName== supplier.name>selected="selected"</#if>>${(supplier.name)!''}</option>
+					     </#list>
+					     </#if>	
+					</select>
+					&nbsp;&nbsp;&nbsp;
+					<input type="text" name="dealerOrderCode" id="dealerOrderCode" value="<#if jpOrderQO??>${(jpOrderQO.dealerOrderCode)!''}</#if>"/>
+				</td>
+			</tr>
+					
+		</table>
+		</form>	
+	
+	<table class="table" width="100%"  >
+		<thead>
+			<tr>
+				
+ 				<th width="150">订单号</th>
+				<th width="150">易购单号</th>
+				<th width="150">商家单号</th>
+				<th width="200">乘机人</th>
+				<th width="50">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#if orderList??>
+		<#list orderList as order>
+				<tr height="21px">
+				<td>${order.orderNo}</td>
+				<td>${order.ygOrderNo}</td>
+				<td>${order.supplierOrderNo}</td>				
+				<td>
+					<#if order.passangerList??>
+						<#list order.passangerList as passanger>
+							
+							<#if passanger??>
+								${passanger.name}
+							</#if>
+						 </#list>
+					</#if>
+				</td>
+				
+				
+				<td>
+					<a class="edit" href="${contextPath}/airtkt/financial/toAdjustErrorOrder?id=${order.id}" target="dialog"
+				  mask="true" width="650" height="350" rel="adjustErrorOrder" >新增异常订单</a>
+				</td>
+			</tr>
+		</#list>
+		</#if>	
+		</tbody>
+	</table>
+	</div>
+	
+

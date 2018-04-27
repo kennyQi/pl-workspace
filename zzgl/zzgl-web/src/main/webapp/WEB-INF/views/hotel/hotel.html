@@ -1,0 +1,397 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "酒店">
+<link href="${contextPath}/resources/css/hotel/hotel.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/city.js" language="javascript"></script>
+<script src="${(contextPath)!}/resources/js/pageUtil/pageUtil.js"></script>
+<script src="${contextPath}/resources/js/hotel/hotel.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/hotel/hotelOne.js" language="javascript"></script>
+</@frame.head>
+<body>
+<@frame.main "default" 5>
+
+
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<!--导航-->
+    <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="#top">
+    </a>
+<!--头部-->
+<!--内容-->
+	<div class="g_bd disb ov pl">
+    	<!--条件筛选部分-->
+    	<div class="m_search disb">
+        	<div class="disb m_search_c ">
+            	<div class="load  color6 simsun"><label class="color8">您的位置：</label><a href="#" class="color6">酒店</a> > <span  class="color3">酒店列表</span></div>
+                
+                <!--搜索框-->
+                <div class="m_select disb pl">
+                	<div class="select_bg pa"></div>
+                	<div class="select_cont pl">
+                       	<input type="text" class="input city Bg" id="citySelect_from" name="from" value="${(cityName)!}">
+                        <span class="pl fl disb ov">
+                        	<label class="pa time_tt h2 color8">入住</label>
+                    		<input class="laydate-icon input Bg time" value="${(jdHotelListQO.arrivalDate)?date}" onClick="laydate()" name="layTime" id="enter"> 
+                        </span>
+                        <span class="pl fl disb ov">
+                        	<label class="pa time_tt h2 color8">退房</label>
+                    		<input  value="${(jdHotelListQO.departureDate)?date}"  class="laydate-icon input Bg time" onClick="laydate()" name="layTime"  id="put">
+                        </span>
+                            <input text="type" class="input hotel"  id="hotelName" name="place" placeholder="酒店名称"  value="${(jdmc)!}"/>
+                            <input text="type" class="input bis"  id="hotelLoaction" name="place" placeholder="商圈位置"  value="${(sqwz)!}"/>
+                        <span class="s_btn h1 yahei Bg curp" onclick="send()">搜&nbsp;索</span>
+                    </div>
+                </div>
+                
+				<script src="${contextPath}/resources/js/laydate/laydate.js" language="javascript"></script>
+                  <script>
+					;!function(){
+					
+					laydate.skin('dahong');
+					
+					laydate({
+					   elem: '#demo'
+					})
+					
+					}();
+					</script>
+                <!--搜索框-->
+                <!--左侧筛选-->
+                <div class="left disb">
+                    <ul class="left_all fl disb">
+                    	<!--位置-->
+                    	<li class="left_all_box1">
+                        	<dl class="pl left_choose yahei disb location" id="location">
+                            	<dt class="h3 fl">位置:</dt>
+                                <dd class="nor on"><a href="javascript:;">不限</a></dd>
+                                <dd rel="0"><a href="javascript:;">商圈</a></dd>
+                                <dd rel="1"><a href="javascript:;">行政区</a></dd>
+
+                                <dd class="location_more pl ov" name="0">
+                                	<div class="fl" id="commericalLocations">
+                                	
+                                    </div>
+                                </dd>
+                                <dd class="location_more pl ov" name="1">
+                                	<div class="fl" id="districts">
+                                	
+                                    </div>
+                               
+                                </dd>
+                            </dl>
+                        </li>
+                    	<!--位置结束-->
+                        
+                    	<!--价格-->
+                        <li class="left_all_box1" id="lowRate">
+                        	<dl class=" pl left_choose yahei disb HousePrice" id="price">
+                            	<dt class="h3 fl">房价:</dt>
+                                <dd class="on" lowRate="0" id="lowRate0"><a href="javascript:;" >不限</a></dd>
+                                <dd lowRate="1" id="lowRate1"><a href="javascript:;" >150元以下</a></dd>
+                                <dd lowRate="2" id="lowRate2"><a href="javascript:;" >150元-300元</a></dd>
+                                <dd lowRate="3" id="lowRate3"><a href="javascript:;" >300元-600元</a></dd>
+                                <dd lowRate="4" id="lowRate4"><a href="javascript:;" >600元以上</a></dd>    
+                                <dd class="priv"><input type="text" class="price_in h3" id="priceMin" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="6"></dd>                   
+                                <dd class="to">-</dd>   
+                                <dd><input type="text" class="price_in h3" id="priceMax" onkeyup="this.value=this.value.replace(/\D/g,'')" maxlength="6"></dd>   
+                                <dd><span class="sure h3 fl curp" id="priceSure">确定</span></dd>                                                     
+                            </dl>
+                        </li>
+                    	<!--价格结束-->
+                    	<li class="left_all_box1">
+                        	<dl class=" pl left_choose yahei disb" id="hotalstar">
+                            	<dt class="h3 fl">星级:</dt>
+                              <dd class="on" starRate="" id="starRate0"><a href="javascript:;">不限</a></dd>
+                                <dd starRate="2" id="starRate2"><a href="javascript:;">二星级及以下/经济</a></dd>
+                                <dd starRate="3" id="starRate3"><a href="javascript:;" >三星级/舒适</a></dd>
+                                <dd starRate="4" id="starRate4"><a href="javascript:;" >四星级/高档</a></dd>
+                                <dd starRate="5" id="starRate5"><a href="javascript:;">五星级/豪华</a></dd>
+                            </dl>
+                        </li>
+                        
+                    	<li class="left_all_box1 left_all_box3" >
+                        	<dl class="pl left_choose yahei disb brand" id="brand">
+                            	<dt class="h3 fl">品牌:</dt>
+                                <dd class="on"><a href="javascript:;">不限</a></dd>
+                                <dd><a href="javascript:;">7天</a></dd>
+                                <dd><a href="javascript:;">如家</a></dd>
+                                <dd><a href="javascript:;">汉庭</a></dd>
+                                <dd><a href="javascript:;">速8</a></dd>
+                                <dd><a href="javascript:;">格林豪泰</a></dd>
+                                <dd><a href="javascript:;">锦江之星</a></dd>
+                                <dd><a href="javascript:;">欣燕都</a></dd>
+                                <dd class="pl">
+                                	<span class="more h3 curp Bg" id="moreBrand">更多</span>
+                                    <!--更多品牌-->
+                                	<div class="m_moreBrand pa ov">
+                                    	<ul>
+                                        	<li class="h2 color3 tt">更多品牌酒店</li>
+                                            <li class="h3 color6 checklist">
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            	<span class="che">格林豪泰</span>
+                                            </li>
+                                        </ul>
+                                        <span class="sure pa h3 curp">确定</span>
+                                        <span class="close pa Bg curp" a="#808080" b="#ffffff"></span>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </li>
+                    </ul>
+                    <div class="m_condBox disb fl Bg" id="condition">
+                    	<h2 class="tt h3 color3 fl">筛选条件：</h2>
+                    </div>
+                </div>
+                <!--左侧筛选-->
+            </div>
+        </div>
+        </div>
+        
+    	<!--条件筛选部分-->
+        
+        <!--排序部分-->
+        	<div class="m_sort yahei pl ov">
+            	<div class="m_sort_box disb">
+                	<span class="total color3 disb">共<i id="totalCount">${(totalCount)?c}</i>条信息</span>
+                	 <a  class="cmd color6 h2 cmdon curp firs" id="priceOB">价格</a>
+                    <a href="javascript:void(0)" class="cmd color6 h2 curp" id="rankOB">星级</a>
+                    <a href="javascript:void(0)" class="cmd color6 h2 curp" id="commentOB">点评数量</a>
+                    <span class="icon_list">
+                    	<span class="icon_list_box">
+                        	<span class="check check_on Bg"></span>
+                    		<label class="icon Bg q"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg f"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg c"></label>
+                        </span>
+                    	<span class="icon_list_box">
+                        	<span class="check Bg"></span>
+                    		<label class="icon Bg l"></label>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        <!--排序部分-->
+        
+        <!--列表部分-->
+        	<div class="g_list pl ov">
+                <!--右侧浏览记录-->
+                <div class="g_hist pa">
+                	<h3 class="tt pl color6 h3 yahei">
+                    	您的浏览记录
+                    	<i class="pa Bg curp close" id="closeHist" a="#808080" b="#ffffff"></i>
+                    </h3>
+                    <ul class="hist_list">
+                    	<li>
+                        	<a href="#">
+                        	<img src="${contextPath}/resources/images/list_ad2.jpg" class="pic"><!--尺寸是160*116-->
+                            	<span class="detail h4 color6 disb"><海南5日游>漫步分界洲，呼吸呀诺达，3晚挂四海景（当地游）</span>
+                                <span class="price disb h2 yahei">￥1959 起</span>
+                            </a>
+                        </li>
+                    	<li>
+                        	<a href="#">
+                        	<img src="${contextPath}/resources/images/list_ad2.jpg" class="pic"><!--尺寸是160*116-->
+                            	<span class="detail h4 color6 disb"><海南5日游>漫步分界洲，呼吸呀诺达，3晚挂四海景（当地游）</span>
+                                <span class="price disb h2 yahei">￥1959 起</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--右侧浏览记录-->
+            	<!--每逢第三列 需要添加额外样式 m_list_boxlast-->
+                <div class="m_list ov">
+            		<!--产品列表框-->
+            		<#if pagination??>
+            		<#list pagination as hotelList>
+                    <div class="m_list_box ov">
+                        <div class="hotel disb ov">
+                        	<span class="pic pl fl">
+                            	<img src="${(hotelList.detail.thumbNailUrl)!}" alt="" >
+                            	<i class="icon Bg pa"></i>
+                            </span>
+                            <div class="detail fl">
+                            	<h3 class="tt bold disb"><a href="#">${(hotelList.detail.hotelName)!}</a>
+                                    <span class="tt_icon">
+                                    <#if hotelList.detail.category??>
+                                    	<#if hotelList.detail.category==3>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                         <#elseif hotelList.detail.category==4>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <#elseif hotelList.detail.category==5>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        <label class="Bg icon">&nbsp;</label>
+                                        </#if>
+                                      </#if>
+                                    </span>
+                               	</h3>
+                                <span class="addres Bg disb">${(hotelList.detail.address)!}</span>
+                                <span class="area disb">区域：<a href="#">${(hotelList.detail.district)!}</a><a href="#">${(hotelList.detail.businessZone)!}</a></span>
+                                <span class="icon_list disb">
+                                <#if (hotelList.facilities)??>
+                                <#list (hotelList.facilities)?split(",") as facilities>
+                                	<#if facilities==1>
+                                	<label class="icon Bg wf"></label>
+                                	<#elseif facilities==3>
+                                	<label class="icon Bg pc"></label>
+                                	<#elseif facilities==5>
+                                	<label class="icon Bg pk"></label>
+                                	<#elseif facilities==7>
+                                	<label class="icon Bg fly"></label>
+                                	<#elseif facilities==9>
+                                	<label class="icon Bg sw"></label>
+                                	<#elseif facilities==11>
+                                	<label class="icon Bg ex"></label>
+                                	<#elseif facilities==12>
+                                	<label class="icon Bg pt"></label>
+                                	<#elseif facilities==13>
+                                	<label class="icon Bg mt"></label>
+                                	<#elseif facilities==14>
+                                	<label class="icon Bg dn"></label>
+                                	</#if>
+                                </#list>
+                                </#if>
+                                </span>
+                            </div>
+                            <div class="price fl">
+                            	￥${(hotelList.lowRate)?c}<i class="up">起</i>
+                            </div>
+                        </div>
+                        <div class="house disb">
+                        	<table class="tb" cellspacing="0" cellpadding="0">
+                            	<tr class="tt">
+                                	<th class="ho">房型</th>
+                                	<!-- <th class="bd">床型</th> -->
+                                	<th class="bf">早餐</th>
+                                	<th class="wf">宽带</th>
+                                	<th class="pr">价格</th>
+                                	<th class="bt"></th>
+                                </tr>
+                                <#if hotelList.rooms??>
+                                <#list (hotelList.rooms)as roomsList>
+                            	<tr><td>${(roomsList.name)!}</td>
+                                	
+	                             <#if (hotelList.valueAdds)??>
+	                             	<#if (hotelList.valueAdds)?size gt 0>
+	                               		 <#list (hotelList.valueAdds) as valueAdd>
+		                               		<#if valueAdd.typeCode=='01'>
+			                                		 <td >有</td>
+			                                		 <#break>
+		                                	 	<#else>
+			                                	<td >无</td>
+			                                	<#break>
+	                                	 	</#if>
+	                                	</#list>
+                                	<#else>
+	                                	<td >无</td>
+                                	</#if>
+                                </#if>
+                                	 <#if (hotelList.facilities)??>
+                               		 <#list (hotelList.facilities)?split(",") as facilities>
+                               		 <#if facilities==1>
+                                		<td>有</td>
+                                		<#break>
+                                		<#else>
+                                		<td>无</td>
+                                		<#break>
+                                	</#if>
+                                	</#list>
+                                	</#if>
+                                	<#if roomsList.ratePlans??>
+                                	<#list (roomsList.ratePlans)as roomsList>
+                                	<#if roomsList_index==0>
+                                	<td class="p">￥${(roomsList.totalRate)?c}</td>
+		                                	<td><a onclick="detail(${(hotelList.hotelId)!})"  class="rever" href="javascript:void(0)">查看</a></td>
+                                	 </#if>
+                                    </#list>
+                                     </#if>
+                                </tr>
+                                 </#list>
+                                </#if>
+                                <tr class="last">
+                                	<td colspan="6">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+               </#list>
+               </#if>
+            </div>
+              <!-- 隐藏域 -->  
+		  <form id="pageForm" class="pageForm" action="${contextPath}/jd/list" method="post">
+			<input type="hidden" class="pageNum" name="pageNum" value="${(pageNo)!}"/>
+		    <input type="hidden" class="pageSize" name="pageSize" value="5"/>
+			<!-- 排序 -->
+			<input type="hidden" value="${(rate)!}" name="prices" id="prices"/>
+			<input type="hidden" value="${(ranks)!}" name="ranks" id="ranks"/>
+			<!-- <input type="hidden" value="0" name="comments" id="comments"/> -->
+			<!--查询条件-->
+			<input type="hidden" id="cityName" name="cityId">
+			<input type="hidden" id="startDate" name="arrivalTime">
+			<input type="hidden" id="endDate" name="departureTime">
+			<!-- <input type="hidden" id="hotelNames" name="queryText" value="${(jdHotelListQO.queryText)!'""'}"> -->
+			<input type="hidden" id="jdmc" name="jdmc" value="${(jdmc)!}">
+			<input type="hidden" id="starRate" name="starRate" value="${(jdHotelListQO.starRate)!}">
+			<input type="hidden" id="lowRates" name="low" value="${(jdHotelListQO.lowRate)?c}">
+			<input type="hidden" id="highRate" name="high" value="${(jdHotelListQO.highRate)?c}">
+			<input type="hidden" id="sqwz" name="sqwz" value="${(sqwz)!}">
+			<input type="hidden" id="sqrido" name="sqrido" value="${(sqrido)!}" >
+			
+			<input type="hidden" id="picIdentifying" name="picIdentifying" value="1" ><!-- 价格区间标识符 1表示点击选择的条件 2标识自定义的区间 -->
+		 </form>
+		 
+	<!--内容-->
+
+        <!--列表部分-->
+        <!--页脚翻页-->
+        <div class="g_page ov disb">
+        	 <div id="page">
+         </div>
+		</div>
+        <!--页脚翻页-->
+        <!--底部图片位置-->
+        	<div class="g_adimg disb ov">
+            	<a href="#"><img src="${contextPath}/resources/images/temporary/list_ad3.jpg" class="fl"></a><!--图片尺寸291*160-->
+            	<a href="#"><img src="${contextPath}/resources/images/temporary/list_ad4.jpg" class="fl"></a>
+            	<a href="#"><img src="${contextPath}/resources/images/temporary/list_ad5.jpg" class="fl"></a>
+            	<a href="#"><img src="${contextPath}/resources/images/temporary/list_ad6.jpg" class="fl last"></a>
+            </div>
+        <!--底部图片位置-->
+	</div>
+<!--页脚-->
+ <@frame.end "default"> </@frame.end>
+</@frame.main>
+
+</body>
+
+</html>

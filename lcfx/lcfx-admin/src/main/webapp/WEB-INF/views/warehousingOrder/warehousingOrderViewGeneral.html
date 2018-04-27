@@ -1,0 +1,93 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /> 基本信息
+<br>
+<table border="1" class="purchaseOrderAdd">
+	<tr>
+		<td>采购单号：</td>
+		<td>${(purchaseOrder.purchaseOrderCode)!}</td>
+		<td>单据日期：</td>
+		<td>${(purchaseOrder.createDate)!}</td>
+		<td>供应商：</td>
+		<td>${(purchaseOrder.supplier.baseInfo.name)!}</td>
+		<td>入库仓库：</td>
+		<td>${(purchaseOrder.warehouse.name)!}</td>
+		<td>预计入库日期：</td>
+		<td>${(purchaseOrder.warehousingDate)!}</td>
+	</tr>
+	<tr>
+		<td>结算方式：</td>
+		<td>${(purchaseOrder.paymentMethod.paymentMethodName)!}</td>
+		<td>项目名称：</td>
+		<td>${(purchaseOrder.project.name)!}</td>
+		<td>制单人：</td>
+		<td>${(purchaseOrder.createUser)!}</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>注意事项：</td>
+		<td colspan="9">
+			<textarea disabled="disabled">${(purchaseOrder.attention.attentionDetail)!}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>备注：</td>
+		<td colspan="9">
+			<textarea>${(purchaseOrder.remark)!}</textarea>
+		</td>
+	</tr>
+</table>
+<div>商品信息</div>
+<table border="1">
+	<tbody>
+		<tr>
+			<td>商品编码</td>
+			<td>sku编码</td>
+			<td>商品名称</td>
+			<td>规格</td>
+			<td>数量</td>
+			
+			<td>单位</td>
+			<td>含税单价</td>
+			<td>税率</td>
+			<td>不含税单价</td>
+			<td>含税总金额</td>
+			
+			<td>不含税总金额</td>
+			<td>物流费</td>
+			<#if check??>
+			<td>完成数</td>
+			<td>差异数</td>
+			<td>完成总金额（不含税）</td>
+			<td>完成总金额（含税）</td>
+			</#if>
+		</tr>
+		<tr>
+		
+		<#list detailList as t>
+					
+			<td>${(t.productCode)!}</td>
+			<td>${(t.skuCode)!}</td>
+			<td>${(t.productName)!}</td>
+			<td>${(t.specificationsName)!}</td>
+			<td>${(t.quantity)!}</td>
+			
+			<td>${(t.unit)!}</td>
+			<td>${(t.unitPriceInclTax)!}</td>
+			<td>${(t.taxRate)!}</td>
+			<td>${(t.unitPriceExclTax)!}</td>
+			<td>${(t.totalPriceInclTax)!}</td>
+			
+			<td>${(t.totalPriceExclTax)!}</td>
+			<td>${(t.logisticCost)!}</td>
+			<#if check??>
+			<td>${(t.finishedQuantity)!}</td>
+			<td>${t.quantity - t.finishedQuantity}</td>
+			<td>${t.finishedQuantity*t.unitPriceExclTax}</td>
+			<td>${t.finishedQuantity*t.unitPriceInclTax}</td>
+			</#if>
+		</tr>
+</#list>
+	</tbody>
+</table>

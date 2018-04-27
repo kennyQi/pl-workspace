@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>公司设置--公司介绍</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+</head>
+<body>
+<!---->
+<div class="head">
+    <div class="head-cont">
+        <a href="#" class="logo fl">
+            <img src="images/logo.jpg" />
+        </a>
+        <ul class="fl nav">
+            <li class="fl"><a href="#">首页</a></li>
+        </ul>
+        <div class="user fr">
+            <span class="out fr">退出</span>
+            <span class="name fr">称韩寒</span>
+        </div>
+    </div>
+</div>
+<div style="clear: both"></div>
+<!--头部-->
+<!--内容-->
+<div class="g-bd"><div class="g-nav fl">
+    <div class="nav_model fr">
+        <div class="nav_title tc">出差审批<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="order_check.html">订单审批</a><label></label></li>
+            <li><a  href="order_settle.html">订单结算</a><label></label></li>
+        </ul>
+    </div>
+    <div class="nav_model fr">
+        <div class="nav_title tc">公司设置<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="company_Info.html">公司介绍</a><label></label></li>
+            <li><a href="company_set.html">设置公司信息</a><label></label></li>
+            <li><a href="company_costCenter.html">成本中心</a><label></label></li>
+            <li><a href="company_group.html">组织架构</a><label></label></li>
+        </ul>
+    </div>
+    <div class="nav_model fr">
+        <div class="nav_title tc">系统设置<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="employee_manage.html">员工管理</a><label></label></li>
+            <li><a href="admin_role.html">角色管理</a><label></label></li>
+            <li><a href="admin_path.html">审批流程</a><label></label></li>
+            <li><a href="admin_company.html">公司管理</a><label></label></li>
+        </ul>
+    </div>
+    <div class="nav_model fr">
+        <div class="nav_title tc">个人设置<label></label>
+        </div>
+        <ul class="nav_op">
+            <li><a href="person_personSetting.html">个人设置</a><label></label></li>
+        </ul>
+    </div>
+</div>
+    <!--左侧内容-->
+    <!--右侧内容-->
+    <script src="js/companyInfo.js" language="javascript"></script>
+    <link href="css/companyInfo.css" rel="stylesheet" />
+    <div class="r_content fr">
+        <div class="g-cont">
+            <!--位置-->
+            <div class="g-load">
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;您所在位置:</label>
+                <a href="#">公司设置</a> >
+                <a href="#">公司介绍</a>
+            </div>
+            <!--位置结束-->
+        </div>
+        <div id="companyInfo_edit">
+          <form>
+          <div class="content_wrap">
+            <h1 class="sub_title">企业信息</h1>
+            <table>
+              <tr>
+                <td class="td_l">公司名称：</td>
+                <td class="td_r"><input id="company_name" type="text" style="width:300px;"></td>
+                <td class="td_l">&nbsp;</td>
+                <td class="td_r">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="td_l">所属行业：</td>
+                <td class="td_r"><input id="industry" type="text"></td>
+                <td class="td_l">公司规模：</td>
+                <td class="td_r"><input id="scale" type="text"></td>
+              </tr>
+              <tr>
+                <td class="td_l">公司电话：</td>
+                <td class="td_r"><input id="tel" type="text"></td>
+                <td class="td_l">公司网站：</td>
+                <td class="td_r"><input id="website" type="text"></td>
+              </tr>
+              <tr>
+                <td class="td_l">公司传真：</td>
+                <td class="td_r"><input id="fax" type="text"></td>
+                <td class="td_l">所属城市：</td>
+                <td class="td_r"><input id="city" type="text"></td>
+              </tr>
+              <tr>
+                <td class="td_l">公司地址：</td>
+                <td class="td_r"><input id="address" type="text"></td>
+                <td class="td_l">&nbsp;</td>
+                <td class="td_r">&nbsp;</td>
+              </tr>
+            </table>
+            <h1 class="sub_title">公司简介</h1>
+            <textarea id="companyDiscription_edit"></textarea>
+          </div>
+            <input type="submit" value="保存" class="sub_btn">
+          </form>
+        </div>
+    </div>
+    <!--右侧内容结束-->
+</div>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+    <div class="nav">
+        <div class="m_nav_c">
+            <div class="left fl">
+                <label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                    <li class="h2 color6 fl">
+                        关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                    <li class="h2 color6 fr">
+                        关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+            <ul class="right fl ov disb">
+                <li class="pl fl disb">
+                    <a href="#" title="" class="simsun h4">票量简介</a>
+                    <a href="#" title="" class="simsun h4">法律声明</a>
+                    <a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                    <a href="#" title="" class="simsun h4">友情链接</a>
+                    <a href="#" title="" class="simsun h4">酒店加盟</a>
+                    <a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                    <a href="#" title="" class="simsun h4">帮助中心</a>
+                    <a href="#" title="" class="simsun h4">投诉建议</a>
+                    <a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class=" disb h2 yahei yj">意见反馈</span>
+                    <span class=" disb h2 yahei kf">客服电话</span>
+                    <label class="yahei abt color6  disb">0571-23288385</label>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--页脚-->
+</body>
+</html>

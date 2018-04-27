@@ -1,0 +1,42 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#import "/public/frame/default.html" as frame />
+<@frame.head "票量 - 酒店预定成功">
+<link href="${contextPath}/resources/css/fly_success.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+</@frame.head>
+<@frame.main "default" 5>
+<!--内容-->
+
+<div class="flySuccess_box disb hotel">
+    <!--支付进程-->
+    <div class="pay_process wd12 ma">
+        <ul class="fl ov">
+            <li class="fly_on"><i class="fl ic yahei h4"></i><span class="fl lm yahei h3">填写订单</span></li>
+            <li class="fly_on"><i class="fl ic yahei h4"></i><span class="fl lm yahei h3">预定成功</span></li>
+            <li class=""><i class="fl ic yahei h4">3</i><span class="fl lm yahei h3">短信确认</span></li>
+        </ul>
+    </div>
+    <!--支付进程-->
+</div>
+<!--支付成功-->
+<div class="wd12 ma pay_success disb">
+    <div class="payfor_box ov">
+        <span class="ic fl"></span>
+        <span class="reg_order reg_mes fl yahei color6 tc" id="dealerOrderCode"></span>
+        <span class="reg_mes fl reg_ts tc yahei color8 h2">酒店预定成功!
+		</span>
+        <span class="reg_mes fl reg_ORD tc yahei color8 h2">预订酒店订单号：<span class="color6" id="xinxi">
+       	${(resultDto.orderId)?c}
+        </span>
+ </span>
+    </div>
+</div>
+<!--支付成功-->
+
+<!--内容-->
+</@frame.main>
+<@frame.end "default"></@frame.end>
+<script type="text/javascript" src="${contextPath}/resources/js/common.js"> </script>

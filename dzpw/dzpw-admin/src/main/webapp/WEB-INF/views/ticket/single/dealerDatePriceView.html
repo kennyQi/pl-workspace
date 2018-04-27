@@ -1,0 +1,94 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<!-- <script src="${contextPath}/resources/js/calendar-widget/jquery.calendar-widget.js" type="text/javascript" charset="utf-8"></script> -->
+
+<style>
+	 #d_showDatePrice td,th{border-left:1px solid #999;border-bottom:1px solid #999;width:90px;padding:10px 0;text-align:center}
+	 #d_showDatePrice table{border-right:1px solid #999;border-top:1px solid #999}th{background:#666;color:#fff}.other-month{background:#eee}
+</style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	
+	var map = {};
+	//台返回基本价格价格日历
+	var dpriceStr = $('.dpriceStr').val();
+	
+	//解析后台返回基本价格价格日历  放入map
+	//格式：20150312:100;20150313:101
+	var priceArr = dpriceStr.split(";");
+	for(var p in priceArr){
+		var priceArr2 = priceArr[p].split(":");
+		if(priceArr2.length==2)
+			map["d_"+priceArr2[0]] = priceArr2[1];
+	}
+	
+	var date=new Date();
+	//当前年份
+	var y = date.getFullYear();
+	var m = date.getMonth()+1;
+	
+	var show = function(){
+		$('#d_showDatePrice').calendarWidget({month:m-1,year:y,cid:'d_'});//cid 日历input id的自定义前缀
+	}
+		
+	var save = function(){
+		$('.date-price').each(function(){
+			if($(this).attr('id').indexOf('c_')>-1){
+				var price = $(this).val();
+				if(price.trim().length>0){
+					map[$(this).attr('id')] = $(this).val();
+				}else{
+					delete map[$(this).attr('id')];
+				}	
+			}
+		});
+	}
+	
+	var read = function(){
+			$('.date-price').each(function(){
+				$(this).val(map[$(this).attr('id')]);
+			});	
+	}
+	
+	//上个月
+	$('#d_preMonthBtn').click(function(){
+		if(--m<=0){
+			y--;
+			m=12;
+		}
+		
+		save();
+		show();
+		read();
+	});
+	
+	//下个月
+	$('#d_nextMonthBtn').click(function(){
+		if(++m>=13){
+			y++;
+			m=1;
+		}
+		save();
+		show();
+		read();
+	});
+	
+	show();
+	read();
+});
+</script>
+
+<div class="pageContent">
+<div class="pageFormContent" layoutH="58" id="singleTicketContent">
+
+    	<input type="hidden" class="dpriceStr" value="${dpriceStr}">
+    	<div class="jq unit" style="padding:8px 10px;margin-bottom:10px;"><span>经销商价格日历</span></div>
+    	
+		<input id="d_preMonthBtn" type="button" value="上个月"/>
+		<input id="d_nextMonthBtn" type="button" value="下个月"/>
+		
+		<div id="d_showDatePrice"/>
+		
+</div> 
+</div>

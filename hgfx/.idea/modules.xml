@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../hgnhfx/hgfx-service/hgfx-admin-common/hgfx-admin-common.iml" filepath="$PROJECT_DIR$/../hgnhfx/hgfx-service/hgfx-admin-common/hgfx-admin-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hgnhfx/hgfx-admin-parent.iml" filepath="$PROJECT_DIR$/../hgnhfx/hgfx-admin-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hgnhfx/hgfx-service/hgfx-admin-service/hgfx-admin-service.iml" filepath="$PROJECT_DIR$/../hgnhfx/hgfx-service/hgfx-admin-service/hgfx-admin-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hgnhfx/hgfx-admin-web/hgfx-admin-web.iml" filepath="$PROJECT_DIR$/../hgnhfx/hgfx-admin-web/hgfx-admin-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hgnhfx/hgfx-api/hgfx-api.iml" filepath="$PROJECT_DIR$/../hgnhfx/hgfx-api/hgfx-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hgnhfx/hgfx-service/hgfx-service.iml" filepath="$PROJECT_DIR$/../hgnhfx/hgfx-service/hgfx-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hgnhfx/hgfx-web/hgfx-web.iml" filepath="$PROJECT_DIR$/../hgnhfx/hgfx-web/hgfx-web.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,83 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return dialogSearch(this);" action="${contextPath}/report/ticket_sale_count/detail_list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						订单编号：<input type="text" id="orderNo" name="orderNo" value="${orderNo}" size="25"/>
+						<input type="hidden" name="ticketPolicyId" value="${ticketPolicyId}">
+						<input type="hidden" name="saleBeginTimeStr" value="${saleBeginTimeStr}">
+						<input type="hidden" name="saleEndTimeStr" value="${saleEndTimeStr}">
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit">查询</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" target="dwzExport" targetType="dialog" href="${contextPath}/report/ticket_sale_count/export/detail"><span>导出EXCEL</span></a>
+			</li>
+		</ul>
+	</div>
+	
+	<table class="table" width="100%" layoutH="85" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="200px;">票号</th>
+				<th width="300px;">游玩人</th>
+				<th width="150px;">证件类型</th>
+				<th width="300px;">证件号码</th>
+				<th width="200px;">游玩状态</th>
+				<th width="200px;">下单时间</th>
+			</tr>
+		</thead>
+		<#list pagination.list as t>
+			<tr>
+				<td>${t.ticketNo}</td>
+				<td>${t.name}</td>
+				<td>
+					<#list cerMap?keys as k>
+						<#if k==t.cerType>
+							${cerMap[k]}
+						</#if>
+					</#list>
+				</td>
+				<td>${t.cerNo}</td>
+				<td>
+					<#if t.status==0>
+						未入园
+					</#if>
+					<#if t.status==1>
+						部分入园 
+					</#if>
+					<#if t.status==2>
+						全部入园
+					</#if>
+					<#if t.status==3>
+						部分失效
+					</#if>
+					<#if t.status==4>
+						全部失效
+					</#if>
+				</td>
+				<td>${t.orderDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+			</tr>
+		</#list>
+	</table>
+</div>

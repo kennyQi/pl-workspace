@@ -1,0 +1,128 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'ticket-group' />
+
+<script type="text/javascript">
+
+function initText(){
+	$("#ticketPolicyName", navTab.getCurrentPanel()).attr("value",'');
+	$("#createBeginDateStr", navTab.getCurrentPanel()).attr("value","");
+	$("#createEndDateStr", navTab.getCurrentPanel()).attr("value","");
+	$("#status", navTab.getCurrentPanel()).attr("value","");
+	$("#scenicSpotName", navTab.getCurrentPanel()).attr("value","");
+	$("#key", navTab.getCurrentPanel()).attr("value","");
+}
+
+</script>
+
+<div class="pageHeader">
+<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/ticket-single/list" method="get">
+	<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+	<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+	
+	<div class="searchBar">
+		<ul class="searchContent" style="overflow: inherit;">
+			
+			<li style="width: 250px;">
+				<label>产品编号：</label>
+				<input type="text" id="key" name="key" value="${key}"/>
+			</li>
+			
+			<li style="width: 250px;">
+				<label>单票名称：</label>
+				<input type="text" id="ticketPolicyName" name="ticketPolicyName" value="${ticketPolicyName}"/>
+			</li>
+			
+			<li style="width: 250px;">
+				<label>所属景区：</label>
+				<input type="text" id="scenicSpotName" name="scenicSpotName" value="${scenicSpotName}"/>
+			</li>
+			
+			<li style="width: 250px;">
+				<label>启用状态：</label>
+				<select id="status" name="status" >
+					<option value="">全部</option>
+					<option value="0" <#if status==0 >selected="selected"</#if> > 启用 </option>
+					<option value="1" <#if status==1 >selected="selected"</#if> > 禁用 </option>
+				</select>
+			</li>
+			
+			<li style="width: 400px;">
+				<label>发布时间：</label>
+				<input type="text" id="createBeginDateStr" style="width: 80px;" name="createBeginDateStr" value="${createBeginDateStr}" class="date" readonly="true"/>&nbsp;到&nbsp;
+				<input type="text" id="createEndDateStr" style="width: 80px;" name="createEndDateStr" value="${createEndDateStr}" class="date" readonly="true"/>
+			</li>
+			
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent">
+						<button type="submit" style="width:35px;">查询</button>
+					</div></div>
+				</li>
+				<li>
+					<div class="buttonActive"><div class="buttonContent">
+						<button type="button" onclick="initText()" style="width:35px;">重置</button>
+					</div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</form>
+</div>
+<div class="pageContent">
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="20">
+		<thead>
+			<tr>
+				<th width="10%">产品编号</th>
+				<th width="20%">单票名称</th>
+				<th width="30%">所属景区</th>
+				<th width="6%" >库存数量(张)</th>
+				<th width="6%" >已售数量(张)</th>
+				<th width="9%" >发布时间</th>
+				<th width="4%" >启用状态</th>
+				<th width="9%;">价格日历</th>
+				<th width="10%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as policy>
+		<tr>
+			<td>${(policy.baseInfo.key)!'-'}</td>
+			<td>${(policy.baseInfo.name)!'-'}</td>
+			<td>
+			<#if (policy.baseInfo.scenicSpotNameStr?length > 38)>
+                ${policy.baseInfo.scenicSpotNameStr?substring(0,38)}………
+            <#else>
+                ${policy.baseInfo.scenicSpotNameStr}
+            </#if>
+			</td>
+			<td>
+					<#if policy.sellInfo.remainingQty == -1>
+						无限
+					<#else>
+						${(policy.sellInfo.remainingQty)!'-'}
+					</#if>
+			</td>
+			<td>${(policy.sellInfo.soldQty)!'-'}</td>
+			<td>${policy.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+			<td>
+				<#if (policy.status.current == 3)>
+					启用
+				<#else>
+					禁用
+				</#if>
+			</td>
+			<td>
+				<a target="dialog" href="${contextPath}/ticket-single/datePrice/page?ticketPolicyId=${policy.id}" width="700" height="700" mask="true" style="color: blue">查看价格日历</a>
+			</td>
+			<td>
+				<a title="查看‘${(policy.baseInfo.name)!'-'}’详情" target="navTab" rel="monitorDiag" mask="true" href="${contextPath}/ticket-single/info?id=${policy.id}"  style="color: blue" width="850" height="800">查看详情</a>
+			</td>
+		</tr>
+		</#list>
+		</tbody>
+	</table>
+	
+</div>

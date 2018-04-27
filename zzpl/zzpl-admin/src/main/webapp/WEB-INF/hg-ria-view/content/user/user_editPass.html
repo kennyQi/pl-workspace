@@ -1,0 +1,74 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;修改密码
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/user/editPasswd" 
+							class="form-horizontal pageForm required-validate"  id="form"
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="userID" value="${(user.id)!''}" />
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">原密码：</label>
+									<div class="col-md-4">
+										<input type="password" name="password" class="form-control required isSpec" maxlength="40" value=""/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">新密码：</label>
+									<div class="col-md-4">
+										<input type="password" name="newPassword" class="form-control isSpec required" maxlength="18" minlength="6" value="" id="newPassword"/>
+										<div id="password" style="color: red;"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">再次输入：</label>
+									<div class="col-md-4">
+										<input type="password" name="newPassword2" onblur="check();" class="form-control isSpec required" maxlength="18"  minlength="6" value="" id="newPassword2"/>
+										<div id="password1" style="color: red;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn yellow" onclick="check1();">提交</a>
+									<a class="btn yellow" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function check(){
+	var newPassword = $("#newPassword").val();
+	var newPassword2 = $("#newPassword2").val();
+	if(newPassword != newPassword2){
+		$("#password1").html("两次密码不一致");
+		$("#newPassword2").focus();
+	}else{
+		$("#password1").html("");
+	}
+}
+
+function check1(){
+	var newPassword = $("#newPassword").val();
+	var newPassword2 = $("#newPassword2").val();
+	if(newPassword != newPassword2){
+		$("#password1").html("两次密码不一致");
+		$("#newPassword2").focus();
+		return;
+	}
+	$("#form").submit();
+}
+</script>

@@ -1,0 +1,27 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>景点管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a href="${contextPath}/viewspot/spots/list"  target="navTab" rel="spots">景点查询</a></li>
+			<li><a href="${contextPath}/viewspot/order/list"  target="navTab" rel="mpOrder">订单管理</a></li>
+			<!-- 
+			<li><a href="javascript:void(0);" >价格管理</a></li>
+			 -->
+			<li><a>财务管理</a>
+				<ul>
+					<li><a href="${contextPath}/viewspot/finance/list" target="navTab"
+                       rel="finance">用户收入/退款明细</a></li>
+					<li><a href="${contextPath}/viewspot/finance/report" target="navTab"
+                       rel="report" > 财务报表</a></li>
+				</ul></li>
+		</ul>
+	</div>
+</div>
+
+
+

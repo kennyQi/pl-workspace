@@ -1,0 +1,22 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css'
+	rel='stylesheet' />
+<div class="pageHeader">
+	<table style="width: 500px;height: 200px;" border="0">
+	<#assign i=1>
+	<#list qujians as qujian>
+	<tr height="35px;">
+	<td style="width: 30%">${i}&nbsp;区间&nbsp;${qujian.qj}</td>
+	<td>定价&nbsp;${qujian.zk}</td>
+	</tr>
+	<#assign i=i+1>
+	</#list>
+	<tr height="35px;">
+	<td style="text-align: right;">
+	</td>
+	<td style="text-align: left;">
+	</td>
+	</tr>
+	</table>
+</div>

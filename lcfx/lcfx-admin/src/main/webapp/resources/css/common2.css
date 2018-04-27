@@ -1,0 +1,59 @@
+table.system_config_table {
+	
+}
+
+table.system_config_table input {
+	width: 300px;
+	border-radius: 0px;
+	margin: 3px 0;
+}
+
+table.system_config_table td {
+	margin: 5px;
+	border-color: #FFF;
+	border-style: solid;
+	border-width: 2px;
+	padding: 0 5px;
+}
+
+table.system_config_table span[for] {
+	margin: 2px 0 5px 0;
+	top: auto;
+	border-radius: 0px;
+	position: static;
+	width: 300px;
+	display: inline-block;
+}
+
+tr.bc_e td {
+	background-color: #EEE;
+}
+
+tr.bc_c td {
+	background-color: #CCC;
+	font-weight: bold;
+}
+
+.supplier_pri_table td {
+	padding: 5px 0px;
+	border-width: 2px;
+	border-style: solid;
+	background-color: #eee;
+	border-color: #fff;
+	text-align: center;
+}
+
+.purchaseOrderAdd td {
+	width: 70px;
+}
+
+.purchaseOrderAdd select,.purchaseOrderAdd input {
+	width: 100px !important;
+}
+
+.errspan_fix1 span[for] {
+	position: static;
+	width: 93px;
+	display: inline-block;
+	margin-top: 5px;
+}

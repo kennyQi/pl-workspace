@@ -1,0 +1,254 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.bidl .t_dl{height:auto!important;padding:10px 0;width:100%}
+.bidl .t_dl dt{height:auto!important}
+.bidl .t_dl dd{width:60%;height:auto!important} 
+.bidl p{width:auto}
+.bidl h2{padding:5px 0;width:100%; border-bottom:#ddd 1px solid}
+.bidl h6{clear: both;}
+.dltb{}
+.dltb table{ margin-bottom:15px}
+.dltb table tr th{ line-height:30px; background:#D1D1D1}
+.dltb table tr td{ line-height:30px; }
+.right_utp{ float:right; width:400px;padding:10px 0  25px 0}
+.right_utp dl dt{ float:left;width:auto}
+.right_utp dl dd{ float:left; width:auto!important}
+.right_utp dl dd p{ float:left; position:relative; position:0!important}
+.right_utp dl dd p strong{ font-size:30px; font-family:Tahoma, Geneva, sans-serif; color:#f30}
+.right_utp dl dd p span{ position:absolute;top:0;left:130px}
+.right_utp dl dd p span em{ font-style:normal; width:200px; line-height:20px;float: left;}
+</style>
+<div class="pageContent">
+	<form method="post" action="demo/common/ajaxDone.html" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+       	<#if orderDetail?? && orderDetail.flightSnapshotJSON ?? >
+			<#assign jsonStr>
+				${(orderDetail.flightSnapshotJSON)!''}
+			</#assign>
+			<#assign json=jsonStr?eval />
+		</#if>
+       <div class="pageFormContent bill" layoutH="56">
+          <div class="bill bidl">
+               <h2>订单信息</h2>
+              <div class="dltb">
+                  <table cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                          <th height="30">状态</th>
+                          <th height="30">经销商订单号</th>
+                          <th height="30">平台订单号</th>
+                          <th height="30">易行订单号</th>
+                          <th height="30">订单总金额</th>
+                       </tr>
+						<tr>
+							<td>
+								<#if orderDetail?? && orderDetail.orderStatus ?? && orderDetail.orderStatus.status??>
+									<#assign status2=orderDetail.orderStatus.status+'' />
+									${STATUS_MAP[status2]} 
+								</#if>
+							</td>
+							<td>${(orderDetail.dealerOrderCode)!''}</td>
+							<td>${(orderDetail.orderNo)!''}</td>
+							<td>${(orderDetail.yeeXingOrderId)!''}</td>
+							<td>${(orderDetail.totalPrice?string('0.00'))!''}</td>
+						</tr>
+					</table>
+              </div>
+              <div class="right_utp"  style="float:right">
+                  <dl>
+                  <dd>
+                  <p>
+                  <span>
+                  <em>供应商周一至周五工作时间 ${(orderDetail.workTime)!''}</em>
+                   <em>供应商周六至周日工作时间 ${(orderDetail.restWorkTime)!''}</em>
+                    </span>
+					</p>
+                   
+                  </dd>
+                  </dl>
+                  </div>
+              <dl class="t_dl"><dt>备注：</dt>
+              	<dd>
+              		<p>${(orderDetail.memo)!''}</p>
+              	</dd></dl>
+               <h6></h6>
+              <h2>机票信息</h2>
+              <div class="dltb">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th>行程</th>
+							<th>起飞</th>
+							<th>抵达</th>
+							<th>航班信息</th>
+							<th>舱位</th>
+						</tr>
+						<tr>
+							<td>${(orderDetail.startCityName)!''} -
+								${(orderDetail.endCityName)!''} <br /> ${(json.orgCity)!''} -
+								${(json.dstCity)!''}
+
+							</td>
+							<td>${(orderDetail.departureTime)!''} <br />
+                            ${(orderDetail.startCityName)!''}
+							</td>
+							<td>${(orderDetail.endTime)!''} <br />
+                             ${(orderDetail.endCityName)!''}
+                                                                            
+							</td>
+							<td>${(orderDetail.airCompName)!''} <br /> ${(json.flightno)!''}
+
+							</td>
+							<td>${(orderDetail.classCode)!''}<br /> ${(orderDetail.cabinName)!''}</td>
+						</tr>
+					</table>
+
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th>旅客姓名</th>
+							<th>类型</th>
+							<th>证件号码</th>
+							<th>票号</th>
+							<th>实退金额</th>
+							<th>退款手续费</th>
+							<th>退废记录</th>
+						</tr>
+						<tr>
+						<#if orderDetail?? && orderDetail.passengerList ??> 
+							<#list orderDetail.passengerList as passenger>
+								<tr>
+									<td>${(passenger.name)!''}</td>
+									<td>
+									<#if DOCUMENT_TYPE_MAP??>
+						                   <#list DOCUMENT_TYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.idType>
+						                       		${DOCUMENT_TYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td>${(passenger.idNo)!''}</td>
+									<td>${(passenger.ticket.ticketNo)!''}</td>
+									<td>${((orderDetail.refundPrice)?string('0.00'))!''}</td>
+									<td>${((orderDetail.procedures)?string('0.00'))!''}</td>
+									<#if orderDetail?? && orderDetail.refundType?? && orderDetail.refundType == "T">
+                                        <#if orderDetail?? && orderDetail.orderStatus ?? && orderDetail.orderStatus.status??>
+										   <#assign status2=orderDetail.orderStatus.status+'' />
+										  <td>  ${STATUS_MAP[status2]} </td>
+								        </#if>
+									</#if>
+									<td></td>
+								</tr>
+							</#list>
+						</#if>
+                      	</tr>
+						
+                  </table>
+					<div class="right_utp" style="float:right;height:80px">
+						<dl>
+							<dt>合计：</dt>
+							<dd>
+								<p>
+									<strong>${(orderDetail.userPayAmount?string('0.00'))!''} </strong> 
+									<span> 
+										<em>票面价：${((orderDetail.ibePrice)?string('0.00'))!''}</em><br /> 
+										<em>机建费：${((orderDetail.buildFee)?string('0.00'))!''}</em><br /> 
+										<em>燃油费：${((orderDetail.oilFee)?string('0.00'))!''}</em>
+									    
+									    <#if orderDetail.serviceCharge??>
+						                    <em>支付宝手续费：${((orderDetail.serviceCharge)?string('0.00'))!''}</em>
+					                    <#else>
+						                     <em>支付宝手续费：0.00</em>
+					                    </#if>
+									  
+									</span>
+								</p>
+
+							</dd>
+						</dl>
+					</div>
+				</div>
+              <h6></h6>
+              <h2>支付信息</h2>
+				<div class="dltb">
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<th>订单总金额</th>
+							<th>机票数量</th>
+							<th>供应商原价（单）</th>
+							<th>分销加价金额（单）</th>
+							<th>返点/佣金</th>
+							<th>支付供应商金额</th>
+						</tr>
+						<tr>
+							<td>${(orderDetail.userPayAmount?string('0.00'))!''}</td>
+							<td>
+								${(orderDetail.passangerCount)!''}
+							</td>
+							<td>
+								<#if orderDetail ?? && orderDetail.ibePrice?? >
+									${(orderDetail.ibePrice-orderDetail.profits)}
+								</#if>
+							</td>
+							<td>
+								${((orderDetail.platPolicyPirce)?string('0.00'))!''}
+							</td>
+							<td>
+								<#if orderDetail ?? && orderDetail.disc?? && orderDetail.commAmount??>
+									${orderDetail.disc?string('0.00')}/${orderDetail.commAmount?string('0.00')}
+								</#if>
+							</td>
+							<td>
+								${(orderDetail.totalPrice?string('0.00'))!''}
+							</td>
+						</tr>
+					</table>
+				</div>
+				
+				<h6></h6>
+				<h2>操作日志</h2>
+				<div class="dltb">
+					<table width="100%" cellpadding="0" cellspacing="0">
+						<tr>
+							<th height="30">时间</th>
+							<th height="30">操作</th>
+							<th height="30">操作人</th>
+							<th height="30">操作信息</th>
+						</tr>
+						<tr><#list LOGS as log>
+						<tr>
+							<td><#if log.logDate ??>
+								${log.logDate!?string("yyyy-MM-dd HH:mm:ss")} </#if></td>
+							<td>${log.logName}</td>
+							<td>${log.logWorker}</td>
+							<td>${log.logInfo}
+							</td>
+						</tr>
+						</#list>
+						</tr>
+
+					</table>
+				</div>
+				<h6></h6>
+			</div>
+       </div>
+	    <div class="formBar">
+			<ul><!-- 这个状态要做处理 -->
+				<#if orderDetail.orderStatus.status == PAY_WAIT>
+					<li><a class="button" target="dialog" href="${contextPath}/airtkt/order/tocancel?id=${(orderDetail.id)!''}&dealerOrderCode=${(orderDetail.dealerOrderCode)!''}"><span>取消订单</span></a></li>
+				</#if>
+				<#if TICKET_SUCC == status2> 
+					<#if IS_WAST_WORK_TIME == "true">
+						<li><a class="button" target="dialog" href="${contextPath}/airtkt/order/toRefundTicket?refundType=F&platCode=${(orderDetail.platCode)!''}&id=${(orderDetail.id)!''}&pnr=${(orderDetail.pnr)!''}"><span>申请废票</span></a></li>
+					<#else>
+						<li><a class="button" target="dialog" href="${contextPath}/airtkt/order/toRefundTicket?refundType=T&platCode=${(orderDetail.platCode)!''}&id=${(orderDetail.id)!''}&pnr=${(orderDetail.pnr)!''}"><span>申请退票</span></a></li>
+					</#if>
+				</#if>
+
+				<button type="button" class="close">关闭</button>
+			</ul>
+		</div>
+	</form>
+</div>
+<script>
+    var a_ckwl_id = "a_" + $("#hidState").val();
+    var a_ckwl_obj = $("#" + a_ckwl_id);
+    a_ckwl_obj.show();
+</script>

@@ -1,0 +1,28 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+
+<div class="pageContent">
+	<form action="${contextPath}/system/operator/self/setPwd" method="post" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+			<div class="pageFormContent" >
+				<div class="unit">
+					<label style="width: 75px;">原&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+					<input name="oldPwd" class="required" type="password"/>
+				</div>
+				<div class="unit">
+					<label style="width: 75px;">新&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+					<input name="newPwdOnce" id="newPwdOnce" class="required" type="password"/>
+				</div>
+				<div class="unit">
+					<label style="width: 75px;">确认新密码：</label>
+					<input name="newPwdTwice" id="newPwdTwice" class="required" equalto="#newPwdOnce" type="password"/>
+				</div>
+			</div>
+			<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

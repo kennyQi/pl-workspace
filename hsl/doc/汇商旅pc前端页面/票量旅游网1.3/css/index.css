@@ -1,0 +1,177 @@
+@charset "utf-8";
+/* CSS Document */
+.m_title .m_i i,.tcon{ background:url(../img/index_icon.png) no-repeat}
+.next_icon span i{ background:url(../img/base_icon.png) no-repeat}
+.ticket_hd h2 i,.t_city_search .t_city_input input,.t_time .t_time_input input,.ticket_hd em{ background:url(../img/jp_icon.png) no-repeat}
+#mp_name{ width:346px; background:#fff}
+
+.submenu{ width:520px; margin-top:-360px; height:356px; border:#d9d9d9 2px solid; background:#fff; position:relative; z-index:99}
+.subnav{ float:left; width:90px; background:#efefef; height:100%}
+.subnav li{ width:89px; height:89px; line-height:89px; text-align:center; background:#efefef; font-size:14px; color:#333; font-weight:bold; cursor:pointer; border-bottom:#ddd 1px solid;border-right:#e5e5e5 1px solid}
+.subnav li.sh{ line-height:26px}
+.subnav li.sh em{ font-style:normal; font-weight:normal; font-size:12px; color:#999}
+.subnav li.sel{ background:#fff; color:#74a900; width:90px; border-right:none}
+.subnav_d{ position:absolute; height:178px; width:90px; bottom:0;left:0}
+.subnav_d p{ height:49px; text-align:center; font-weight:bold; color:#333; line-height:150%; padding:20px 0;border-bottom: #e5e5e5 1px solid;border-right:#e5e5e5 1px solid; line-height:24px; font-size:14px}
+.subnav_d p em{ font-weight:normal; color:#cbcbcb; font-size:12px}
+
+.bar_info{ float:left; padding:20px 20px 10px 34px} 
+.bar_dl{}
+.bar_dl dl{ margin-bottom:15px;width:340px;overflow: hidden;}
+.bar_dl dl dt{color:#999; font-weight:bold; font-size:12px; margin-bottom:13px}
+.bar_dl dl dd a{ padding-right:10px; color:#999; float: left;word-break: break-word;}
+.bar_dl dl.jindian dd a{margin-bottom: 13px;}
+
+#search{ margin:0}
+#search .t_city_search label{ font-size:14px;}
+#search .t_time label{font-size:14px;}
+#search .ji_bth{}
+#search .ji_bth input{ width:254px; margin-left:70px;}
+
+/* 滚动图片 */
+.flexslider{position:relative;height:370px;overflow:hidden;background:url(images/loading.gif) 50% no-repeat;}
+.slides{position:relative;z-index:1;}
+.slides li{height:370px;}
+.slides li a{ width:100%; float:left; height:370px;}
+.flex-control-nav{position:absolute;bottom:80px;z-index:2;width:100%;text-align:center;}
+.flex-control-nav li{display:inline-block;width:14px;height:14px;margin:0 5px;*display:inline;zoom:1;}
+.flex-control-nav a{display:inline-block;width:14px;height:14px;line-height:40px;overflow:hidden;background:url(../img/dot.png) right 0 no-repeat;cursor:pointer;}
+.flex-control-nav .flex-active{background-position:0 0;}
+
+.flex-direction-nav{position:absolute;z-index:3;width:100%;top:45%; }
+.flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute;}
+.flex-direction-nav li a.flex-prev{left:20px;background:url(../img/prev.png) center center no-repeat;}
+.flex-direction-nav li a.flex-next{right:40px;background:url(../img/next.png) center center no-repeat;}
+
+.ticket_hd{ float:left; width:100%; text-align:center; background:url(../img/lie_bg.png) no-repeat 0 bottom; position:relative}
+.ticket_hd h2{ text-align:center;width:80px; margin:0 auto; font-size:14px; color:#74a900; padding-bottom:8px}
+.ticket_hd em{ position:absolute; bottom:-4px; width:9px; height:5px; background-position:-16px -135px;left:50%}
+.ticket{ margin-top:20px;}
+.ticket_hd h2 i{ width:14px; height:14px;; background-position: 0 -134px; float:left;}
+.t_city_search,.t_time{ margin-bottom:15px; display:inline-block}
+.t_city_search label,.t_time label{ float:left; line-height:39px}
+.t_city_search .t_city_input,.t_time .t_time_input{float:left; width:249px;}
+.t_city_search .t_city_input input{ background-position:210px -64px;  }
+.t_time .t_time_input input{background-position:210px -98px; }
+.t_city_search .t_city_input input,.t_time .t_time_input input{ height:35px;}
+.t_bth input{ width:100%; cursor:pointer} 
+
+.t_city_button{position: relative;}
+.city_tips{left: 18%;padding: 0 10px;background: #fff;top: -10px;position: absolute;display: inline-block;border: #f30 1px solid;}
+
+
+/*****版块*****/
+.m{ margin-top:35px; clear:both; overflow:hidden}
+.m .column{width:930px}
+.m1{}
+.m1 .m_title{border-bottom:#74a900 2px solid;}
+.m1 .m_title .m_i1 b{ color:#74a900; font-family:"微软雅黑"; float:left; margin-top:5px}
+.m1 .m_title .m_subm li.sel{background:#74a900;}
+.m1 .sidebar{ border-top:#74a900 2px solid; margin-top:40px}
+.m1 .sidebar h2{}
+.m2{ margin-top:35px; clear:both}
+.m2 .m_title{border-bottom:#319ada 2px solid;}
+.m2 .sidebar{ border-top:#319ada 2px solid; margin-top:40px}
+.m2 .m_title .m_i2 i{ background-position:-32px 0}
+.m2 .m_title .m_i2 b{ color:#319ada; font-family:"微软雅黑";float:left; margin-top:5px}
+.m2 .m_title .m_subm li.sel{background:#319ada;}
+.m3 .m_title{border-bottom:#ff6600 2px solid;}
+.m3 .m_title .m_i3 i{ background-position:-95px 0}
+.m3 .m_title .m_i3 b{ color:#ff6600; font-family:"微软雅黑";float:left; margin-top:5px}
+.m_title{height:41px; line-height:37px; width:100%; position:relative}
+.m_title .m_i{ float:left; width:190px}
+.m_title .m_i i{ float:left;width:30px; height:41px; margin-right:8px}
+.m_title .m_i b{ font-size:20px}
+.m_title .tcon{ position:absolute; width:189px; height:36px; overflow:hidden;right:0;bottom:0}
+.m_title .tcon1{ background-position:0 -51px}
+.m_title .tcon2{background-position:0 -87px}
+.m_title .tcon3{background-position:0 -123px}
+.m_subm {}
+.m_subm li{margin-top: 10px;line-height: 20px;height: 20px;float: left;padding: 3px 5px; margin-left:20px; cursor:pointer}
+.m_subm li.sel{  color:#fff;}
+.m_main{ float:left; width:100%}
+.m_adv{ width:240px; height:340px; overflow:hidden}
+.m_p{ margin-left:10px; _display:inline}
+.p_item {width:700px}
+.p_item .p{ float:left; margin:10px 10px 0 0; position:relative;width:220px;height:160px }
+.p_item .p_cen{display:none}
+.p_item .sel .p_cen{ display:block;width:100%}
+.p_item .p_cen{ position:absolute; bottom:0; height:60px}
+.p_item .p_cen .p_dask{ height:100%; background:#fff; opacity:0.8; width:100%; z-index:0}
+.p_cen_info{ margin-top:-60px; z-index:999; position:relative}
+.p_cen_info .p_title,.p_cen_info .p_title a{ text-align:left;display:inline-block; width:100%;overflow: hidden;  color:#333333; font-family:"微软雅黑"; font-size:14px;}
+.p_cen_info .p_title a{text-indent:10px;padding: 14px 0 10px 0;}
+.p_cen_info .p_price{ color:#F30; font-weight:bold; font-family:Tahoma, Geneva, sans-serif; text-align:center}
+
+.index_m_price{}
+.index_m_price span{pading-bottom:8px}
+.index_m_price .L{ color:#666;font-weight: normal;padding-left:10px;text-decoration: line-through;}
+.index_m_price .red{color:#f30;padding-right:10px;font-size:16px;font-family: "微软雅黑";color: #f02934;}
+
+.m_left{ width:930px}
+.m_right{ width:260PX}
+.sidebar{margin-top:75px; background:#fff; padding:0 10px; width:240px; border-top:#74a900 2px solid}
+.sidebar h2{ height:40px; line-height:40px; }
+
+.tese{ margin-top:10px; background:#fff; border-top:#369edc 2px solid; padding:0 10px; }
+.tese h2{ height:46px; line-height:46px; text-align:left; background:url(../img/online.jpg) repeat-x 0 bottom; color:#333333; font-family:"微软雅黑"; font-weight:bold}
+
+/*****机票*****/
+.m_air{ margin-left:10px}
+.air{ background:url(../img/bg_air.png) top center no-repeat #fff; height:330px; margin-top:10px;   }
+.air ul{}
+.air ul li{width:310px; padding-left:30px; float:left;}
+.air ul li.hover,.air ul li:hover{ background:#e3ebf0}
+.air ul li div{ float:left; font-size:12px; font-family:"宋体";height:40px; line-height:40px}
+.air ul li .a_title{ padding-right:15px; width:100px; }
+.air ul li .a_time{ color:#999}
+.air ul li .a_price{ float:right; text-align:right; padding-right:10px; font-size:20px; font-family:Tahoma, Geneva, sans-serif; color:#f60}
+
+
+/**预定**/
+.hot_p{ overflow:hidden; position:relative}
+.hot_p ul{ margin-top:10px;}
+.hot_p ul li{ float:left; width:175px; background:#fff; box-shadow:0 1px 3px 0 #ddd; margin-right:15px;overflow: hidden;}
+.hot_p ul li .p_img a{height:200px; overflow:hidden; overflow: hidden;display: table-cell;vertical-align: middle; }
+.hot_p ul li .p_img a img{ width:175px;}
+.hot_p ul li .p_city,.hot_p ul li .p_time{ padding:0 5px}
+.hot_p ul li .p_city a,.hot_p ul li .p_time a{ display: block;height: 36px;line-height: 18px;/* overflow: hidden;text-overflow: ellipsis;white-space: nowrap; */} 
+.hot_p ul li .p_time a{ color:#999}
+.hot_p .LeftBotton{height:52px;width:19px;background:url(button.gif) no-repeat 11px 0;overflow:hidden;float:left;display:inline;margin:25px 0 0 0;cursor:pointer;}
+.hot_p .RightBotton{height:52px;width:20px;background:url(button.gif) no-repeat -8px 0;overflow:hidden;float:left;display:inline;margin:25px 0 0 0;cursor:pointer;}
+.hot_p .Cont{width:930px;overflow:hidden;float:left; margin-bottom:30px}
+.hot_p .ScrCont{width:10000000px;}
+.hot_p .Cont  ul{ float:left;}
+.hot_p .Cont  ul li{ float:left; ;}
+.hot_p .Cont .pic{width:132px;float:left;text-align:center;}
+.hot_p .Cont .p_img{width:inherit;height:inherit;} 
+.hot_p .Cont .pic img{padding:4px;background:#fff;border:1px solid #ccc;display:block;margin:0 auto;}
+.hot_p .Cont .pic p{line-height:26px;color:#505050;}
+.hot_p .Cont a:link,.hot_p .Cont a:visited{color:#333;text-decoration:none;}
+.hot_p .Cont a:hover{color:#f00;text-decoration:underline;}
+.hot_p #gdq1,.hot_p #gdq2{float:left;}
+
+
+.next_icon{ position:absolute;top:30%; width:100%}
+.next_icon span{ background:rgba(51,51,51,0.8);  width:50px; height:50px; float:left; cursor:pointer}
+.next_icon span.next_R{right:0; position:absolute}
+.next_icon span i{width: 18px;height: 37px;float: left;margin: 6px 0 0 15px;_display: inline;position: relative;}
+.next_icon span.next_L i{ background-position:0 -288px}
+.next_icon span.next_R i{ background-position:-20px -288px; margin-left:18px}
+
+/*******旅游合作*******/
+.brand{ background:#fff; float:left; width:100%; height:324px}
+.brand h2{ height:30px; line-height:30px; border-bottom:#ddd 2px solid; padding-left: 20px;font-size: 16px;color: #333; margin:10px 10px 0 10px}
+.brand ul{ padding: 15px 30px; display:inline-block}
+.brand ul li{width:84px; float:left; margin:0 15px 10px 0}
+.brand ul li p.b_img{ width:100%; height:40px; overflow:hidden}
+.brand ul li p.b_name{ height:26px; line-height:26px;overflow: hidden;}
+.brand ul li p.b_name a{ font-family:"宋体"; color:#999}
+
+
+
+
+ 
+
+/******广告位*****/
+.sidebar .adv{ margin-left:-10px}

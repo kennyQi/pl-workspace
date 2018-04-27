@@ -1,0 +1,259 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/jp/finance/orderList" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						订单编号：
+					</td>
+					<td>
+						<input name="orderNo" id="orderNo" value="${(platformOrderQO.orderNo)!''}" />
+					</td>
+					
+					<td>
+						下单时间：
+					</td>
+					<td><input type="text" readonly="readonly" name="beginTimeStr" id="beginTimeStr" value="${(beginTimeStr)!''}" class="date"/>
+							&nbsp;&nbsp;&nbsp;——&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="text" readonly="readonly" name="endTimeStr" id="endTimeStr" value="${(endTimeStr)!''}" class="date"/></td>
+					<td>订单状态：</td>
+					<td>
+						<select name="tempStatus" id="tempStatus">
+							<option value="">全部状态</option>
+							 <#list statusList as status>
+								<option value="${(status.key)!''}" 
+
+								<#if platformOrderQO.tempStatus== status.key>selected="selected"</#if>>${status.value!?html}
+								
+								</option>
+						     </#list>
+						</select>
+					</td>
+					<td>支付状态</td>
+					<td>
+						
+                          <select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							 <#list orderPayStatusList as status>
+								<option value="${(status.key)!''}" 
+
+								<#if platformOrderQO.payStatus== status.key>selected="selected"</#if>>${status.value!?html}
+								
+								</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+				</tr>
+				<tr>
+					<td>
+						下单人：
+					</td>
+					<td>
+						<input type="text" name="loginName" id="loginName" value="${(platformOrderQO.loginName)!''}" />
+					</td>
+					<td>
+						出发地:
+					</td>
+					<td>
+						<select name="fromCityCode" id="fromCityCode">
+							<option value="">选择</option>
+							 <#list cities as city>
+								<option value="${(city.cityAirCode)!''}" <#if platformOrderQO.fromCityCode== city.cityAirCode>selected="selected"</#if>>${city.cityName!?html}</option>
+						     </#list>
+						</select>
+						
+						&nbsp;&nbsp;&nbsp;到达地:
+						&nbsp;&nbsp;&nbsp;
+						<select name="toCityCode" id="toCityCode">
+							<option value="">选择</option>
+							 <#list cities as city>
+								<option value="${(city.cityAirCode)!''}" <#if platformOrderQO.toCityCode== city.cityAirCode>selected="selected"</#if>>${city.cityName!?html}</option>
+						     </#list>
+						</select>
+					</td>
+					
+					<td>
+						易行订单号：
+					</td>
+					<td>
+						<input type="text" name="yeeXingOrderId" id="ygOrderNo" value="${(platformOrderQO.yeeXingOrderId)!''}" />
+					</td>
+					
+					
+				</tr>
+				<tr>
+					
+					<td>
+						乘机人：
+					</td>
+					<td><input type="text" name="passengerName" value="${(platformOrderQO.passengerName)!''}" /></td>
+					
+					<td>
+						经销商订单号：
+					</td>
+					<td>
+						<select name="suppShortName" id="suppShortName">
+							<option value="">汇商旅</option>
+							 <#list supplierList as supplier>
+								<option value="${(supplier.code)!''}" 
+								<#if platformOrderQO.suppShortName== supplier.code>selected="selected"</#if>>${(supplier.name)!''}</option>
+						     </#list>
+						</select>
+						&nbsp;&nbsp;&nbsp;
+						<input type="text" name="dealerOrderCode" id="dealerOrderCode" value="${(platformOrderQO.dealerOrderCode)!''}"/>
+					</td>
+					<td>PNR:</td>
+					<td >
+						<input type="text" name="pnr" value="${(platformOrderQO.pnr)!''}" />
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+								
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent" id="table_c">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/jp/finance/toAddErrorOrder" rel="queryHead"  target="dialog"
+				  mask="true" width="800" height="500"><span>新增异常订单</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210"  id="table_caiwu" >
+		<thead>
+			<tr>
+				<th width="22"><input type="checkbox" group="ids" class="checkboxCtrl">
+				</th>
+ 				<th width="70">订单号</th>
+				<th width="100">易行单号</th>
+				<th width="100">经销商订单号</th>
+				<th colspan="5" >
+				    乘机人
+				</th>
+<!-- 				<th width = "60">PNR</th> -->
+				<th width = "60">航程</th>
+				<th width = "70">订单总金额</th>
+				<th width = "70">返点/佣金</th>
+<!-- 				<th width = "60">票号</th> -->
+				<th width = "130">下单时间</th>
+				<th width = "90">订单状态</th>
+				<th width = "90">支付状态</th>
+				<th width="80">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as order>
+				<tr height="60px">
+				<td><input name="ids" value="" type="checkbox"></td>
+				<td>${order.orderNo}</td>
+				<td>${order.yeeXingOrderId}</td>
+				<td>${order.dealerOrderCode}</td>				
+				<td  colspan="5" >
+						<table width="100%" height="100%" border="1">
+						<tr>
+			 				<th width="40">姓名</th>
+			 				<th width="50">乘客类型</th>
+			 				<th width="50">证件类型</th>
+							<th width="80">身份证件号</th>
+							<th width="80">票号</th>		
+						</tr>
+						<#if order.passengerList ??>
+							<#list order.passengerList as passenger>
+								<tr>
+									<td>
+									<p>${passenger.name}</p>
+									</td>
+									<td>
+									<#if PASSENGER_TYPE_MAP??>
+						                   <#list PASSENGER_TYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.psgType>
+						                       		${PASSENGER_TYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td style="width:120px;">
+									<#if DOCUMENT_TYPE_MAP??>
+						                   <#list DOCUMENT_TYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.idType>
+						                       		${DOCUMENT_TYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td>
+									<p>${passenger.idNo}</p>
+									</td>
+									<td>
+									<p>${(passenger.ticket.ticketNo)!''}</p>
+									</td>
+								</tr>
+							</#list>
+						</#if>
+						</table>
+					</td>
+
+				<td>
+					<#if order.startCityName??&&order.endCityName??>
+							<p>${order.startCityName}——${order.endCityName}</p>
+						</#if>
+						<p>${order.flightNo}</p>
+						<p>${order.departureTime}</p>
+				</td>
+				<td>
+					<#if order?? && order.userPayAmount ??>
+						${order.userPayAmount?string('0.00')}
+					</#if>
+				</td>
+				<td>
+				<#if order ?? && order.disc?? && order.commAmount??>
+						${(order.disc)?c}/${(order.commAmount)?c}
+					</#if>
+
+				<td>
+					<#if order.loginName??><p>${order.loginName}</p></#if>
+					<#if order.createTime??>
+					   ${order.createTime}
+					</#if>
+				</td>
+				<td>
+					 <#list statusList as status>
+						<#if order.orderStatus.status== status.key>${status.value!?html}</#if>
+				     </#list>
+				</td>
+				<td>
+					 <#list orderPayStatusList as payStatus>
+						<#if order.orderStatus.payStatus== payStatus.key>${payStatus.value!?html}</#if> 
+				     </#list>
+				</td>
+				<td>
+					<a style="color: blue" target="dialog" href="${contextPath}/jp/order/detail?id=${(order.id)!''}&&type=1" width="1000" height="800">订单详情</a>
+				</td>                                            
+			</tr>
+		</#list>	
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

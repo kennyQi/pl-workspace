@@ -1,0 +1,36 @@
+﻿$axure.loadCurrentPage({
+  "url":"导出报表格式.html",
+  "generationDate":new Date(1448876504513.35),
+  "isCanvasEnabled":false,
+  "variables":["isLeftOpen"],
+  "page":{
+    "packageId":"796a4fb13159449e9f448144c6f09cd1",
+    "type":"Axure:Page",
+    "name":"导出报表格式",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[]}},
+  "masters":{
+},
+  "objectPaths":{
+}});

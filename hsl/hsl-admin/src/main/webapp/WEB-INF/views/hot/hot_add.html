@@ -1,0 +1,141 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" href="${contextPath}/resources/js/trumbowyg/design/css/trumbowyg.css">
+<style>
+.unit_list{ float:left; width:100%;border:#ddd 1px solid}
+.unit_list li{ display:block; height:25px;cursor:pointer;}
+</style>
+<div class="pageContent" style="text-align:left;">
+	<!-- 特价门票form -->
+	<div class="formWarpper" >
+		<form method="post" id="addHotForm" enctype="multipart/form-data" action="${contextPath}/advertisement/addHot" class="pageForm required-validate" onsubmit="return validateCallback(this,custAjaxDone);">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="positionId" value="${positionId}" />
+			<div class="unit">
+				<label>*景点名称：</label>
+				<input type="text" name="title" size="60"  class="required" maxlength="100 " value="" id="J_unit_text" autocomplete="off"/>
+				<div class="unit_list" id="J_unit_list" style="display:none">
+					<ul>
+					</ul>
+				</div>
+			</div>
+			<div class="unit">
+				<label>*优先级：</label>
+				<input type="text" id="priority" name="priority" size="30"  class="required digits" min="0" value="" /> <a style="color:green;"></a>
+			</div>
+			<div class="unit">
+				<label>立即展示：</label>
+				<input type="checkbox" value="true" name="show" checked />
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	  $("#J_unit_text").keyup(function(evt){
+		  var k = window.event ? evt.keyCode : evt.which;  
+		  if(k == 38 || k == 40 || k == 13){
+			  return;
+		  }
+			var jx = $("#J_unit_text").val();
+			if(jx.length>0){
+				refreashPrompt(jx);
+				$("#J_unit_list").show();
+			}
+			else{
+				$("#J_unit_list").hide();
+			}			 
+	 });
+	  
+	  $("#J_unit_text").on("focus",function(){
+		  	var jx = $("#J_unit_text").val();
+			if(jx.length>0){
+				$("#J_unit_list").show();
+			}
+	  });
+	  
+	  function addListener(){
+		  $("#J_unit_list li").on("click",function(){
+			  $("#addHotForm #J_unit_text").val($(this).text());
+			  $("#J_unit_list").hide();
+		  });
+	  }
+	  
+	  function refreashPrompt(spotname){
+		  $.ajax({
+    	 		type: "post",
+    	 		url:"${contextPath}/hotspot/match",
+    	 		async: true,
+    	 		timeout:60000,
+    	 		data:{'spotname':spotname},
+    	 	    error: function(request) {
+    	 	        alert("连接失败");
+    	 	    },
+    	 	    success: function(data) {
+	    	 	console.log(data);
+	    	 	    if(data!=null && data.length > 0){
+	    	 	    	result = eval('('+data+')');
+	    	 	    	if (result!=null && result.length > 0) {  
+	                        var layer = "";  
+	                        $("#J_unit_list ul").empty();
+	                        $.each(result, function (idx, item) { 
+	                            var str = '<li>'+ item.name +'</li>';
+	                            $("#J_unit_list ul").append(str);
+	                        });
+	                        addListener();
+	                    }
+	    	 	    }	
+    	 	    	else{
+    	 	    		//alertMsg.error("没有匹配的景点");
+    	 	    	}
+    	 	    }
+    	 	});
+	  }
+	  
+	  addListener();
+	  
+	  /**
+	   * 自定义处理ajax的方法
+	   */
+	   function custAjaxDone(json){
+	  		DWZ.ajaxDone(json);
+	  		if (json.statusCode == DWZ.statusCode.ok){
+	  			if (json.navTabId){ //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+	  				navTab.reloadFlag(json.navTabId);
+	  			} else { //重新载入当前navTab页面
+	  				var $pagerForm = $("#pagerForm", navTab.getCurrentPanel());
+	  				var args = $pagerForm.size()>0 ? $pagerForm.serializeArray() : {}
+	  				navTabPageBreak(args, json.rel);
+	  			}
+	  			
+	  			if ("closeCurrent" == json.callbackType) {
+	  				setTimeout(function(){navTab.closeCurrentTab(json.navTabId);}, 100);
+	  			} else if ("forward" == json.callbackType) {
+	  				navTab.reload(json.forwardUrl);
+	  			} else if ("forwardConfirm" == json.callbackType) {
+	  				alertMsg.confirm(json.confirmMsg || DWZ.msg("forwardConfirmMsg"), {
+	  					okCall: function(){
+	  						navTab.reload(json.forwardUrl);
+	  					}
+	  				});
+	  			} else if ("openNew" == json.callbackType) {
+	  				navTab.openTab(json.navTabId, '${contextPath}/advertisement/hotList',{title:"热门景点", fresh:true, external:false});
+	  				navTab.closeTab("addHot");
+	  			} else {
+	  				navTab.getCurrentPanel().find(":input[initValue]").each(function(){
+	  					var initVal = $(this).attr("initValue");
+	  					$(this).val(initVal);
+	  				});
+	  			}
+	  		}
+
+	  	
+	   }
+	  
+</script>

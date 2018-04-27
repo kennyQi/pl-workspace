@@ -1,0 +1,41 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageContent">
+
+    <form method="post" action="${contextPath}/rebateSetConfig/saveCurrSet" 
+    	class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+    	 <input type="hidden" name="id" value="${dto.id}">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><span style="padding: 0">当月返利比例设置修改</span>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <tbody>
+        <#list dto.intervalList as item>
+        <tr>
+        <td width="20px"> </td>
+            <td >区间: ${item.qj}</td>
+            <td >返利比例: <input type="text" value="${item.zk}" name="${item.qj}"/></td>
+            
+        </tr>
+        </#list>
+         <tr>
+         <th width="20px"> </th>
+            <th > </th>
+            <th > &nbsp;</th>
+            
+        </tr>
+         <tr>
+         <th width="20px"> </th>
+            <th ><button type="submit">保存</button> </th>
+            <th ></th>
+            
+        </tr>
+        </tbody>
+    </table>
+ </form>
+</div>
+
+

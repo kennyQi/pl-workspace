@@ -1,0 +1,201 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>订单</title>
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+    <script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js" language="javascript"></script>
+
+</head>
+
+<body>
+<link href="${contextPath}/resources/css/fly_topay.css" rel="stylesheet" />
+    <header class="header box">
+        <a href="${contextPath}/order/view?type=${type}" class="l iconfont" style="color:#fff;font-size:20px;">&#xe606;</a>
+        <h1>
+        <#if orderType=="singleOrder">
+        <#if flightOrderInfo.payStatus==96>
+        	订单:待支付
+        <#else>
+	        <#if flightOrderInfo.status==100||flightOrderInfo.status==102||flightOrderInfo.status==114||flightOrderInfo.status==115>
+	         	订单:等待出票
+	         <#elseif flightOrderInfo.status==101>
+	         	订单:购票审批未通过
+	         <#elseif flightOrderInfo.status==103>
+	         	订单:拒绝出票
+	         <#elseif flightOrderInfo.status==104>
+	         	订单:出票成功
+	         <#elseif flightOrderInfo.status==105>
+	         	订单:出票失败
+	         <#elseif flightOrderInfo.status==106||flightOrderInfo.status==108>
+	         	订单:等待退票
+	         <#elseif flightOrderInfo.status==107>
+	         	订单:退票审批未通过
+	         <#elseif flightOrderInfo.status==110>
+	         	订单:退票成功
+	         <#elseif flightOrderInfo.status==111>
+	         	订单:退票失败
+	         <#elseif flightOrderInfo.status==112>
+	         	订单:订单作废
+	         </#if>
+        </#if>
+        <#else>提交订单</#if>
+       	</h1>
+        <a href="javascript:"  class="r"></a>
+    </header>
+    <#if orderType=="singleOrder">
+     <div class="cont">
+            <div class="orderDetail">
+                <div class="day">${flightOrderInfo.startTime?string("yyyy-MM-dd")}|${startCHN!}${flightOrderInfo.airComp!}${flightOrderInfo.flightNO!}</div>
+                <div class="city">${flightOrderInfo.orgCityName!}<span class="to"></span>${flightOrderInfo.dstCityName!}</div>
+                <div class="time">${flightOrderInfo.startTime?string("HH:mm")}<span class="airplace">${flightOrderInfo.departAirport!}&nbsp;${flightOrderInfo.departTerm!}<#if flightOrderInfo.departTerm??>航站楼</#if></span></div>
+                <div class="time">${flightOrderInfo.endTime?string("HH:mm")}<span class="airplace">${flightOrderInfo.arrivalAirport!}&nbsp;${flightOrderInfo.arrivalTerm!}<#if flightOrderInfo.arrivalTerm??>航站楼</#if></span></div>
+                <div class="crossTime">${flightDuration}|机型<#if flightOrderInfo.planeType??><#if flightOrderInfo.planeType?substring(0,1)=="3">空客A<#elseif flightOrderInfo.planeType?substring(0,1)=="7">波音</#if></#if>${flightOrderInfo.planeType!}|${flightOrderInfo.cabinName!}${flightOrderInfo.cabinCode!}</div>
+            </div>
+        <div class="orderBox">
+            <div class="title">订单信息</div>
+            <div class="deList">
+                <label>订单编号</label>
+                <span>${orderNO!}</span>
+            </div>
+            <div class="deList">
+                <label>票号</label>
+                <span class="orderType">
+                <#if flightOrderInfo.payStatus==96>
+        		待支付
+        		<#else>
+                <#if flightOrderInfo.status==100||flightOrderInfo.status==102||flightOrderInfo.status==114||flightOrderInfo.status==115>
+		         	等待出票
+		         <#elseif flightOrderInfo.status==101>
+		         	购票审批未通过
+		         <#elseif flightOrderInfo.status==103>
+		         	拒绝出票
+		         <#elseif flightOrderInfo.status==104>
+		         	出票成功
+		         <#elseif flightOrderInfo.status==105>
+		         	出票失败
+		         <#elseif flightOrderInfo.status==106||flightOrderInfo.status==108>
+		         	等待退票
+		         <#elseif flightOrderInfo.status==107>
+		         	退票审批未通过
+		         <#elseif flightOrderInfo.status==110>
+		         	退票成功
+		         <#elseif flightOrderInfo.status==111>
+		         	退票失败
+		         <#elseif flightOrderInfo.status==112>
+		         	订单作废
+		         </#if>
+		         </#if>
+                </span>
+            </div>
+        </div>
+        <div class="orderBox">
+            <div class="title">乘客信息</div>
+             <#if passengers??>
+   				<#list passengers as passenger>
+            <div class="deList">
+                <label>乘机人</label>
+                <span>${passenger.passengerName!}</span>
+            </div>
+            <div class="deList">
+                <label>身份证号</label>
+                <span>${passenger.idNO!}</span>
+            </div>
+            <div class="deList">
+                <label>成本中心</label>
+                <span>${flightOrderInfo.costCenterName!}</span>
+            </div>
+            <br>
+   				</#list>
+   			</#if>	
+        </div>
+        <div class="orderBox">
+            <div class="title">联系人</div>
+            <div class="deList">
+                <label>姓名</label>
+                <span>${flightOrderInfo.linkName!}</span>
+            </div>
+            <div class="deList">
+                <label>手机号</label>
+                <span>${flightOrderInfo.linkTelephone!}</span>
+            </div>
+        </div>
+        <#if (flightOrderInfo.payStatus==96||flightOrderInfo.payStatus==100)&&flightOrderInfo.payType==2>
+	        <div class="submit" onclick="javascript:window.location.href='${contextPath}/order/pay?orderNO=${flightOrderInfo.orderNO!}'">支付</div>
+        <#elseif flightOrderInfo.status==102||flightOrderInfo.status==104>
+	        <div class="submit refund" onclick="javascript:window.location.href='${contextPath}/order/toCancel?orderID=${flightOrderInfo.orderID!}'">申请退票</div>
+        </#if>
+        <div class="totalPrice">
+            订单总价<span class="p">￥${flightOrderInfo.totalPrice}</span>（共1人）
+        </div>
+    </div>
+    <#else>
+    <div class="cont">
+            <div class="orderDetail">
+                <div class="day">${command.flightGNListDTO.startTime?date}|${command.flightGNListDTO.airCompanyName!}${command.flightGNListDTO.flightNO!}</div>
+                <div class="city">${command.flightGNListDTO.orgCityName!}<span class="to"></span>${command.flightGNListDTO.dstCityName!}</div>
+                <div class="time">${command.flightGNListDTO.startTime?string("HH:mm")}<span class="airplace">${command.flightGNListDTO.departAirport!}</span></div>
+                <div class="time">${command.flightGNListDTO.endTime?string("HH:mm")}<span class="airplace">${command.flightGNListDTO.arrivalAirport!}</span></div>
+                <div class="crossTime">${times!}|机型${command.flightGNListDTO.planeType!}|${command.flightGNListDTO.cabinName!}${command.flightGNListDTO.cabinCode!}</div>
+            </div>
+        <div class="orderBox">
+            <div class="title">订单信息</div>
+            <div class="deList">
+                <label>订单编号</label>
+                <span>${gnBookResponse.orderNO!}</span>
+            </div>
+            <div class="deList">
+                <label>票号</label>
+                <span class="orderType">等待出票</span>
+            </div>
+        </div>
+        <div class="orderBox">
+            <div class="title">乘客信息</div>
+            <#assign sum=0 /> 
+            <#if (command.teamPassengerDTOs)??>
+	            <#list command.teamPassengerDTOs as dto>
+	            <#assign sum=sum+command.flightGNListDTO.ibePrice?number+command.flightGNListDTO.buildFee?number+command.flightGNListDTO.oilFee?number>
+	            <div class="deList">
+	                <label>乘机人</label>
+	                <span>${dto.passengerName!}</span>
+	            </div>
+	            <div class="deList">
+	                <label>身份证号</label>
+	                <span>${dto.idNO!}</span>
+	            </div>
+	            <div class="deList">
+	                <label>成本中心</label>
+	             	<span>${dto.costCenterID!}</span>
+	            </div>
+	            </#list>
+            </#if>
+        </div>
+        <div class="orderBox">
+            <div class="title">联系人</div>
+            <div class="deList">
+                <label>姓名</label>
+                <span>${command.linkName!}</span>
+            </div>
+            <div class="deList">
+                <label>手机号</label>
+                <span>${command.linkTelephone!}</span>
+            </div>
+        </div>
+
+		<#if command.payType=="2">
+        	<div class="submit" onclick="javascript:window.location.href='${contextPath}/order/pay?orderNO=${orderNO!}'">支付</div>
+        <#else>
+        	<div class="submit" onclick="javascript:window.location.href='${contextPath}/order/view?type=0'">支付</div>
+        </#if>
+        <div class="totalPrice">
+            订单总价<span class="p">￥${sum}</span>（共${command.teamPassengerDTOs?size}人）
+        </div>
+    </div>
+    </#if>
+    
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+/* CSS Document */
+/*liwei 2015-4-23     allOrder right*/
+a{ color:#333;}
+.ri{ margin:24px 32px 30px 29px;}
+.ri .rih1{ font-size:20px; line-height:28px; color:#333; margin-right:40px; margin-left:15px;}
+.ri .onc a{ color:#0073b6;}
+.ri .onc i{ width:90px; height:3px; background:#00a0e9; float:left; position:absolute; margin-top:44px; margin-left:-74px;}
+.ri .oncs a{ color:#0073b6;}
+.ri .oncs i{ width:90px; height:3px; background:#00a0e9; float:left; position:absolute; margin-top:44px; margin-left:-74px;}
+.ri .navsbox{width:100%; height:3px; background:#dfe8ef;  margin-top:16px;}
+
+/*没有卡券*/
+.ri .noOrder{ width:165px; height:137px; font-size:14px; font-family:"微软雅黑"; color:#98abbc; margin:0 auto; margin-top:220px;}
+.ri .noOrder span{margin:0 auto;}
+.ri .noOrder .noIcon{width:115px;height:115px; display:block; background:url(../images/ic_script.png) 0 -285px;}
+.ri .noOrder .in{ margin-top:15px; float:left;}
+/*没有卡券*/

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>手机号码判断</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <script src="../hg-util.js"></script>
+	<script type="text/javascript">
+		function checkInput(){
+			var mobile=document.getElementById("mobile").value;
+			if(!isEmpty(mobile)){
+				//校验，返回{code:1,text:'手机号码格式不正确'}形式对象
+				var result=checkMobile(mobile);
+				if(result.code==1)
+					alert(mobile+"是合法手机号");
+				else
+					alert(mobile+"不是合法手机号");
+			}else{
+				alert("输入为空");
+			}
+		}
+	</script>
+	<style type="text/css">
+		li{list-style:none;}
+	</style>
+  </head>
+  
+  <body>
+    <div style="position:absolute;top:50%;left:50%;margin:-200px -150px;height:400px;width:300px;">
+    	<ul>
+  			<li>13323262335</li>
+  			<li>17098541253</li>
+  			<li>15466523566</li>
+  			<li>1302562355</li>
+  			<li>56232562</li>
+  			<li>12235262335</li>
+  			<li>17856265658</li>
+  			<li>15866523511</li>
+  			<li>17236541258</li>
+  			<li>17145852365</li>
+  		</ul>
+    	<table>
+    		<tr>
+    			<td>手机号：</td>
+    			<td><input type="text" id="mobile"/></td>
+    		</tr>
+    		<tr>
+    			<td><button onclick="checkInput()">判断</button></td>
+    		</tr>
+    	</table>
+    </div>
+  </body>
+</html>

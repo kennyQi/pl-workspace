@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>组织成员</title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<link rel="stylesheet" href="css/company.css"/>
+
+<!-- javascript -->
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body class="personal">
+<!-- 页头  -->
+<header class="header">
+	  <h1>组织-部门</h1>	  
+	  <div class="left-head"> 
+	    <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+	        <span class="inset_shadow">
+	            <span class="head-return"></span>
+	        </span>
+	    </a> 
+	  </div>
+	</header>
+<!-- 页头 -->
+<section class="zuzhi_search">
+  <form action="searchresult.html" id="zuzhi_form1">
+      <div class="user_name">
+         <input type="text" value="搜索" class="txt_search"  id="J_txt_s" autocomplete="off">
+         <em id="z_sea_icon"></em>
+      </div>
+  </form>
+	</section>
+ 
+	<section class="zuzhi_style">
+  <h2>成员</h2>
+  </section>
+	<!--start 页面内容 -->
+	<section class="plist pzuzhi">
+		<a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+ 		<a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+ 		<a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+    <a href="javascript:;" class="i10"><div><i></i>成员名称<em><u>职务</u></em></div></a>
+ 	</section>
+	<!--end 页面内容 -->
+  
+<script type="text/javascript">
+	$("#J_txt_s").focus(function(){
+			$(this).val("")
+	 });
+	 $("#J_txt_s").blur(function(){
+		 if($("#J_txt_s").val().length>0){			  
+			}
+			else{
+				$(this).val("搜索")
+				}
+ 	 })
+	
+	$("#z_sea_icon").click(function(){
+			$("#zuzhi_form1").submit();
+	})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/account/jf/flow" method="get">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<ul class="searchContent">
+			    <li>
+					<label>用户名</label>
+					<input type="text" name="code" value="${dto.code}" />
+				</li>
+				 <li>
+				   <label>开始时间</label>
+ 				   <input type="text" name="startDate" value="${dto.startDate}" class="date" minDate="2000-01-15" maxDate="2216-12-15" readonly="true"/>
+				   <a class="inputDateButton" href="javascript:;">选择</a>
+				</li>
+				  <li>
+				   <label>结束时间</label>
+ 				   <input type="text" name="endDate" value="${dto.endDate}" class="date" minDate="2000-01-15" maxDate="2216-12-15" readonly="true"/>
+				   <a class="inputDateButton" href="javascript:;">选择</a>
+				</li>
+			</ul>
+			<div class="subBar">
+				<ul>
+				    <!-- <li><div style="padding-right: 40px;float: right;">
+				        <label>流水状态</label>
+					    <select class="combox" name="status" >
+						    <option value="">流水状态</option>
+						    <option value="NOR" <#if dto.status == 'NOR'>selected="selected"</#if>>正常</option>
+						    <option value="UNDO" <#if dto.status == 'UNDO'>selected="selected"</#if>>撤销</option>
+				        </select>
+				        </div>
+				    </li> -->
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" >查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+			    <th>用户名</th>
+				<th>流水生成时间</th>
+				<th>流水更新时间</th>
+				<th>积分交易类型</th>
+				<th>积分类型</th>
+				<th>积分值</th>
+				<th>已用</th>
+				<th>摘要</th>
+				<th>失效日期</th>
+				<th>状态</th>
+			<!--  <th>操作</th>-->
+			</tr>
+		</thead> 
+        <tbody>
+			<#list pagination.list as p>
+			<tr>
+			    <td>${p.user!?html}</td>  
+				<td>${p.insertTime!?html}</td>
+				<td>${p.updateTime!?html}</td>
+				<td>${p.tradeType.name!?html}</td>
+				<td>${p.account.uk.type.name!?html}</td>
+				<td>${p.jf!?html}</td>
+				<td>${p.usejf!?html}</td>
+				<td>${p.detail!?html} </td>
+			    <td> 
+			        <#if p.validDate??> 
+			        	<#assign vDate="${p.validDate}"?date("yyyy-MM-dd")> 
+			        	${vDate}
+			        </#if> 
+			    </td>
+			    <td>${p.status!?html}</td>
+			    <!--
+			    <td>
+			    	<#if p.status != "撤销">
+			    		<a tiltle="确定撤销吗？"  target="ajaxTodo"    href="${contextPath}/account/jf/undoflow?flowId=${p.flowId}&tradeType=${p.tradeType.code}&jf=${p.jf}" style="color: blue">
+			    		撤销</a>
+			    	</#if>
+			    	
+			    	<#if p.status != "撤销" && p.tradeType.name != "调整">
+			    		<a  class="add" lookupgroup="orgLookup" mask="true" href="${contextPath}/account/jf/toFlowAdjust?flowId=${p.flowId}&accType=${p.account.uk.type.code}&jf=${p.jf}&remark=${p.detail}" style="color: blue">调整</
+			    	</#if>
+			    	</a>
+			    
+			    </td>
+			    -->
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+
+

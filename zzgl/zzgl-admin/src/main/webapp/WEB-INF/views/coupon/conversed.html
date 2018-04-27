@@ -1,0 +1,38 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" id="checkForm"  action="${contextPath}/couponActivity/conversed" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="${id}">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit" >
+				<label>*赠券ID</label>
+				<input name="sendAppendCouponIds"   size="35" value="${sendAppendCouponIds}" onkeydown="if(event.keyCode == 13) return false;"/>
+			</div>
+			<div class="unit" >
+				<label>*获赠用户设置</label>
+				<select name="user" >
+					<option value="新用户">新用户</option><br>
+				</select>
+			</div>
+			<div class="unit" >
+				<label>*注册时间	</label> 	
+				<input type="text" name="userCreateTime" size="24"  class="date textInput readonly required" value="${userCreateTime}"
+				datefmt="yyyy-MM-dd HH:mm:ss" />&nbsp;	&nbsp;&nbsp;&nbsp;之后
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div></li>
+				<li><div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	
+	</form>
+</div>

@@ -1,0 +1,246 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.sa {
+	width: 163px;
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 10px 0px 10px;
+	margin-left: 62px;
+}
+
+.sa ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+.sa li {
+	list-style: none;
+	padding: 10px;
+	margin-top: 5px;
+}
+
+.sa li:hover {
+	background: #ccc;
+}
+
+li.current {
+	background: #ccc;
+}
+}
+</style>
+<script src="${staticPath}/js/jquery-validation-1.9.0/lib/jquery.js" type="text/javascript"></script> 
+<script src="${contextPath}/resources/js/ajaxfileupload.js"
+	type="text/javascript"></script>
+
+<script type="text/javascript">
+	var path = '${contextPath}';
+
+	function checkPosition() {
+
+		if ($("#position2").val() != $("#positionHide").val()
+				&& $("#positionHide").val() != "") {
+			alert('请上传轮播图片');
+			return false;
+		} else {
+			$("#add").submit();
+		}
+
+	}
+	
+	function checkPosition1() {
+
+		
+		$("#add")[0].reset();
+	
+
+}
+
+	var imageAdd = {};
+
+	imageAdd.imageUpload = function(me) {
+
+		$.ajaxFileUpload({
+			url : path + "/file/imgUpload",
+			secureuri : false,
+			fileElementId : 'imgFile',
+			dataType : 'json',
+			data : {
+				//maxHeight: 175,
+				//maxWidth: 230,
+				maxSize : 20480
+			},
+			success : function(data, status) {
+				if ("success" == data.status) {
+					$("#imgView1").attr("src", data.imageUrl);
+					$("#imageInfo").attr("value", data.fileInfo);
+					$("#imagePath").attr("value", data.imageUrl);
+					$("#fileName").attr("value", data.imageName);
+				} else {
+					alertMsg.info(data.msg);
+				}
+			},
+			error : function(data, status, e) {
+				alertMsg.info("上传失败");
+			}
+		});
+	}
+
+	function change(obj) {
+		if (obj.checked) {
+			obj.attr("checked", "false");
+		}
+	}
+</script>
+
+<div class="pageHeader" layoutH="26">
+
+	<form action="${contextPath}/carousel/carouselEdit" method="post" id="add" enctype="multipart/form-data" 	class="pageForm required-validate" 	onsubmit="return validateCallback(this, navTabAjaxDone)">
+
+		<table>
+			<tr style="float:left;">
+				<td><div style="float:left;">
+						轮播图片：<span style="color: red;">*</span>&nbsp;
+					</div>
+
+					<div style="float:left;height:120">
+						<span> <img id="imgView1" width="120" height="120"
+							src="${carousel.imageURL}" />
+						</span>
+					</div>
+
+					<div style="float:right;height: 120px">
+						<div style="margin-top:80px;margin-bottom: 6px">
+
+
+							<span style="margin-left: 10px"> <input id="imgFile"
+								name="file" type="file" onchange="imageAdd.imageUpload(this);"
+								size="60" style="width: 170px;" /><span style="color: red;">*</span>
+								<input id="imageInfo" type="hidden" name="imageInfo" /> <input
+								id="imagePath" type="hidden" name="imagePath" /> <input
+								id="fileName" type="hidden" name="fileName" />
+							</span>
+						</div>
+
+						<div style="margin-left: 8px">
+							<span style="color: red;">建议上传尺寸100*100px，大小不超过500kb的图片；</span>
+						</div>
+					</div></td>
+			</tr>
+			<tr height="20px;" />
+			<tr style="float:left;">
+				<td><div style="float:left;">备注说明：&nbsp;&nbsp;</div> <textarea
+						style="width: 200px;height:100px" name="note">${carousel.note}</textarea>
+					<span style="color: red;">至多输入100个字</span>
+					</div>
+				<td>
+			</tr>
+
+			<tr height="20px;" />
+			<tr style="float:left;">
+				<td></td>
+				<td></td>
+			</tr>
+
+		</table>
+
+		<input name="carouselActionCheck" type="hidden"
+			value="${carousel.carouselAction}"> <input id="linetype"
+			type="hidden" name="linetype" value="${carousel.carouselType}">
+		<input value="${carousel.id}" type="hidden" name="Id"> <input
+			id="carouselAction" type="hidden" name="carouselAction"
+			value="${carousel.carouselAction}">
+	</form>
+	<table>
+		<tr height="20px;" />
+		<tr style="float:left;">
+
+			<td>选择跳转：&nbsp; <span style="color: red">
+					再次修改轮播位时需要重新选择链接，原链接会失效!<br /> <br />
+			</span>
+			
+			<div style="margin-left: 65px">
+				<div class="tabs" currentIndex="2" eventType="click"
+					style="width: 700px;">
+					<div class="tabsHeader">
+						<div class="tabsHeaderContent">
+							<ul>
+								<li><a href="${contextPath}/carousel/lineList?id1=${carousel.id}&handleType=edit1"
+									target="ajax" rel="edit1lineTable"><span>线路</span></a></li>
+								<li><a href="${contextPath}/carousel/mpList?id1=${carousel.id}&handleType=edit2"
+									target="ajax" rel="edit2mpTable"><span>门票</span></a></li>
+								<li><a href="javascript:;"><span>链接</span></a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="tabsContent" style="height:300px;">
+
+						<div id="edit1lineTable" class="page unitBox"></div>
+						<div id="edit2mpTable" class="page unitBox"></div>
+						<div>
+
+							<#if carousel.carouselType==6> <input id="link" type="text"
+								name="carouselAction0" value="${carousel.carouselAction}"
+								placeholder="格式：http://www.baidu.com" class="url" size="30"
+								onblur="checkLine2(this.value)"> <#else> <input
+								id="link" type="text" name="carouselAction0"
+								placeholder="格式：http://www.baidu.com" class="url" size="30"
+								onblur="checkLine2(this.value)"> </#if>
+
+
+						</div>
+					</div>
+					<div class="tabsFooter">
+						<div class="tabsFooterContent"></div>
+					</div>
+				</div>
+			</td></div>
+		</tr>
+
+		<tr height="20px;">
+			<td><br />
+			<div class="" style="float: right">
+					<ul>
+						<li><div class="buttonActive">
+                             <div class="buttonContent">
+									<button type="reset" class="close" style="width: 32px">取消&nbsp;&nbsp;</button>
+								</div>
+								</div>
+								<div class="buttonActive" spellcheck="margin-left: 5px;">
+								<div class="buttonContent">
+									<button type="submit"  onclick="checkPosition()" style="width: 32px">保存&nbsp;&nbsp;</button>
+								</div>
+							</div></li>
+					</ul>
+				</div></td>
+		</tr>
+	</table>
+
+</div>
+<script src="${contextPath}/resources/dwz-ria/js/dwz.ajax.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+	function checkLine1(id) {
+		$("#linetype").attr("value", "2");
+
+		$("input[name=carouselActionCheck]").attr("value", id);
+
+		$("input[name=carouselAction]").attr("value", "");
+
+	}
+
+	function checkLine2(val) {
+		$("input[name=carouselActionCheck]").attr("value", "");
+		$("input[name=carouselActionCheck]").attr("checked", false);
+		$("#linetype").attr("value", "6");
+		$("input[name=carouselAction]").attr("value", val);
+	}
+	
+	function checkMp(id) {
+		$("#linetype").attr("value", "3");
+
+		$("input[name=carouselActionCheck]").attr("value", id);
+
+		$("input[name=carouselAction]").attr("value", "");
+
+	}
+</script>

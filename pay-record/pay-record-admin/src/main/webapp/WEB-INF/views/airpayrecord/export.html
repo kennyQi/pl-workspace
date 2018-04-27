@@ -1,0 +1,54 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+	<div class="pageContent">
+		<form id="myForm"  method="post"
+			action="${contextPath}/payRecord/air/export"
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, dialogAjaxDone)">
+			
+				<div class="unit">
+				    <label>支付时间：</label>
+					<input type="text" readonly="readonly" name="beginTimeStr1"  class="date"/>至
+					<input type="text" readonly="readonly" name="endTimeStr1"  class="date"/>
+				</div>
+				
+			<div class="formBar">
+			
+			<div class="panelBar">
+		      <ul class="toolBar">
+               <li>
+               <div class="button"><div class="buttonContent">
+				 <button type="button"><a class="icon" id="export"   onclick="closeDialog();"><span>导出EXCEL</span></a></button>
+				</div>
+				</div>
+			   </li>
+			   <li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+		     </ul>
+	        </div>
+	</form>
+</div>
+<script type="text/javascript">
+ function closeDialog()
+ {
+    
+	var beginTimeStr = $("input[name='beginTimeStr1']").val();
+ 	var endTimeStr = $("input[name='endTimeStr1']").val();
+    if(beginTimeStr == null || beginTimeStr ==""){
+    	alert("请选择导入开始支付时间");
+    	return false;
+    }
+    if(endTimeStr == null || endTimeStr == ""){
+    	alert("请选择导入结束支付时间");
+    	return false;
+    }
+ 	//$("#export")
+ 	$("#export").attr("href","${contextPath}/payRecord/air/export?beginTimeStr="+beginTimeStr+"&endTimeStr="+endTimeStr);
+	//document.getElementById("export").click();
+	$.pdialog.closeCurrent();//关闭当前活动层
+	//$.pdialog.closeCurrent()
+ 	//window.location.href="${contextPath}/payRecord/air/export?beginTimeStr="+beginTimeStr+"&endTimeStr="+endTimeStr;
+ 	//setTimeout($.pdialog.closeCurrent(),20000);
+ }
+
+</script>
+	
+		

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+	<context:component-scan base-package="slfx" />
+	<!-- 
+	<util:properties id="byfund" location="classpath:byfund.properties" />
+	<util:properties id="byAccount" location="classpath:byAccount.properties" />
+	<util:properties id="settings" location="classpath:sms.properties" />
+	 -->
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:ygconfig.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean name="ygUtil" class="slfx.yg.open.utils.YGUtil">
+		<property name="yjUrl" value="http://yeefreightcenter.oicp.net:8009/AOIS/ysta.asmx/XmlSubmit"/>
+		<property name="yjUserName" value="zjhgkj"/>
+		<property name="yjPwd" value="zjhgkj123"/>
+		<property name="cgUserName" value="hgtech365"/>
+		<property name="cgPwd" value="hgtech365365"/>
+		<property name="cgUrl" value="http://openapitest.yeego.net:8883/yeegoapi.asmx/XmlSubmit"/>
+		<property name="office" value="BJS280"/>
+	</bean>
+	 
+	<bean name="ygXmlUtil" class="slfx.yg.open.utils.YGXmlUtil"/>
+	
+	
+	<bean name="ygFlightService" class="slfx.yg.open.inter.impl.YGFlightServiceImpl">
+		<property name="ygUtil" ref="ygUtil"/>
+		<property name="ygXmlUtil" ref="ygXmlUtil"/>
+	</bean>
+	
+</beans>

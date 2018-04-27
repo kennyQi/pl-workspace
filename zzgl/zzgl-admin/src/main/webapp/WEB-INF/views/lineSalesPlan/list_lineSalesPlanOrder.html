@@ -1,0 +1,106 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+<div class="pageHeader">
+    <form id="pagerForm"  rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/lineSalesPlan/lineSalesOrderList" method="post">
+        <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+        <input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+        <div class="searchBar">
+            <table class="searchContent">
+                <tr>
+                    <td style="text-align: left">
+                        经销商订单号查询：
+                    </td>
+                    <td><input type="text" name="dealerOrderNo" value="${(pagination.condition.dealerOrderNo)!''}" ></td>
+                    <td style="text-align: left">
+                        活动名称：
+                    </td>
+                    <td><input type="text" name="lspName" value="${(pagination.condition.lspName)!''}" ></td>
+                    <td style="text-align: left">
+                        订单类型：
+                    </td>
+                    <td>
+                        <select name="orderType">
+                            <option value="">全部类型</option>
+                            <option value="1" <#if pagination.condition.orderType==1>selected=selected</#if> >团购</option>
+                            <option value="2" <#if pagination.condition.orderType==2>selected=selected</#if>>人气秒杀</option>
+                        </select>
+
+                    </td>
+                </tr>
+            </table>
+            <div class="subBar">
+                <ul>
+                    <li>
+                        <div class="buttonActive">
+                            <div class="buttonContent">
+                                <button onclick="return checkQuery();">查询</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+    <table class="table" width="100%" layoutH="136" >
+        <thead>
+        <tr>
+            <th width="100">经销商订单号</th>
+            <th width="100">活动名称</th>
+            <!--<th width="50">线路编号</th>-->
+            <th width="150">线路名称</th>
+            <th width="50">出发地</th>
+           <!-- <th width="50">游玩人</th>-->
+            <th width="150">订单状态</th>
+            <th width="150">支付状态</th>
+            <th width="50">订单总金额</th>
+            <th width="50">实付款</th>
+            <th width="100">下单时间</th>
+          <!--  <th width="100">联系电话</th>-->
+            <th width="50">订单类型</th>
+            <th width="200">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list pagination.list as lspOrder>
+            <tr>
+                <td width="100">${(lspOrder.orderBaseInfo.dealerOrderNo)!""}</td>
+                <td width="150">${(lspOrder.lineSalesPlan.baseInfo.planName)!""}</td>
+               <#-- <td width="50">${(lspOrder.lineSalesPlan.line.baseInfo.number)!""}</td>-->
+                <td width="100">${(lspOrder.lineSalesPlan.line.baseInfo.name)!""}</td>
+                <td width="50">${cityMap[(lspOrder.line.baseInfo.starting)!]}</td>
+                <#--<td width="50">
+                    <#if lspOrder.travelerList??>
+                        <#list (lspOrder.travelerList) as traveler>
+                            ${(traveler.name)!}</br>
+                            </#list>
+                    </#if>
+
+                </td>-->
+                <td width="150">${orderStatusMap[(lspOrder.orderStatus.orderStatus)?c]!}</td>
+                <td width="150">${orderPayStatusMap[(lspOrder.orderStatus.payStatus)?c]!}</td>
+                <td width="50">${(lspOrder.orderBaseInfo.salePrice)!0}</td>
+                <td width="50">${(lspOrder.orderPayInfo.payPrice)!0}</td>
+                <td width="100">${(lspOrder.orderBaseInfo.createDate)!""}</td>
+               <#-- <td width="100">${(lspOrder.orderLinkInfo.linkMobile)!""}</td>-->
+                <td width="50">
+                    <#if lspOrder.lineSalesPlan.baseInfo.planType==1>
+                        团购
+                        <#elseif lspOrder.lineSalesPlan.baseInfo.planType==2>
+                        人气秒杀
+                    </#if>
+                </td>
+                <td>
+                    <a target="dialog"  width="1050" height="650"  mask="true" title="活动详情" href="${contextPath}/lineSalesPlan/detailSalesOrder?dealerOrderNo=${(lspOrder.orderBaseInfo.dealerOrderNo)!''}" style="color:blue">订单详情</a>
+                    <#if (lspOrder.orderStatus.orderStatus==2001||lspOrder.orderStatus.orderStatus==2005)&&lspOrder.orderStatus.payStatus==2101>
+                    <a target="ajaxTodo" title="确定要取消订单吗？" href="${contextPath}/lineSalesPlan/updateSalesOrder?id=${(lspOrder.id)!''}" style="color:blue">取消订单</a>&nbsp;&nbsp;&nbsp;
+                    </#if>
+                </td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+    <#include "/public/pagination/pagination.html"/>
+</div>

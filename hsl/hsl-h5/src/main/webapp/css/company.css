@@ -1,0 +1,112 @@
+@charset "utf-8";
+/* CSS Document */
+
+ *{margin:0;padding:0;}
+ a{text-decoration:none;}
+ 
+ /********共用**********/
+.plist{clear:both;width:100%}
+.plist a{width:100%;line-height:45px;height:45px;display:block;text-align:left; text-indent:15px;background:#fff;color:#3f3f3f; font-family:"微软雅黑";font-size:15px; position:relative}
+.plist a div{ margin:0 20px 0 75px;border-bottom:1px solid #e0e0e0; height: 44px; position: relative;}
+.plist a div i{ background:url(../img/member/m_icon.png) no-repeat; display:inline-block; width:35px; height:35px;position:absolute;left:-55px; top:5px; background-size:35px}
+.plist a.i01 div i{background-position:0 0}      	     /*我的资料*/
+.plist a.i02 div i{background-position:0 -35px}   	  /*修改密码*/
+.plist a.i03 div i{background-position:0 -70px}     	/*我的订单*/
+.plist a.i04 div i{background-position:0 -105px} 		  /*组织构架*/
+.plist a.i05 div i{background-position:0 -140px}  	 /*我的卡券*/
+.plist a.i06 div i{background-position:0 -175px}     /*手机*/
+.plist a.i07 div i{background-position:0 -210px}    /*呢称*/
+.plist a.i08 div i{background-position:0 -245px}    /*邮箱*/
+.plist a.i09 div i{background-position:0 -280px}    /*所在地*/
+.plist a.i10 div i{background-position:0 -315px}    /*组织架构*/
+.plist a.i11 div i{background-position:0 -360px}    /*身份证号*/
+.plist a em{ position:absolute;right:10px;top: 20px; font-size:12px; color:#999; text-decoration:none;font-family: serif; background: url(../img/member/right_jiantou.png) no-repeat; background-size: 7px; width: 7px; height: 9px; }
+.pmyfile,.pzuzhi{ padding-bottom:45px }
+.pmyfile a,.pzuzhi a{ border-top:none;} 
+
+.personlist a div{margin: 0; padding:0 20px; font-size: 15px}
+.personlist a div i{ margin-right:25px;left:0; float: left;position: inherit; }
+ 
+/**********************************个人中心.html*******************************/
+.personal{width:100%;background:#f2f2f2; }
+.personal .p_header{width:100%;background:url(../img/member/pesron_bg.jpg) repeat-x center;height:80px;-moz-background-size: 100% 80px; /*  Firefox 3.6 */-o-background-size: 100% 80px;/* Opera 9.5 */-webkit-background-size: 100% 80px;/* Safari 3.0 */background-size: 100% 100%;/*  Firefox 4.0 and other CSS3-compliant browsers */}
+.personal .p_header img{margin:5px 20px;width:60px;height:60px;border:2px solid #fff;border-radius:40px;float:left;}
+.personal .p_header .p_name{ float:left; margin:8px 0}
+.personal .p_header h3{float:left; font-size:20px; color:#858585; font-family:"黑体"; width:100%}
+.personal .p_header p{font-size:16px; color:#858585; font-family:"黑体"}
+
+
+/**************我的资料*****************/
+.p_photo{height: 128px; overflow:hidden;}
+.p_photo img{width: 128px}
+.p_myprofile{ width:100%; text-align:center; background:#07b9d9; padding:20px 0 0 0; overflow: hidden;}
+.p_myprofile h3{font-size:16px; color:#fff; font-family:"黑体"; margin:8px 0 10px 0; font-weight: normal;}
+.p_myprofile .p_name p{ font-size:12px; color:#fff; line-height: 25px}  
+.photo_mask{ position: absolute;background: url(../img/member/photos.png) no-repeat;width: 128px;height: 128px;background-size: 128px;}
+.p_name{ padding-bottom:10px;}
+.p_name h3 i{width: 30px; margin-right:10px;vertical-align: middle;background: url(../img/member/ge.png) no-repeat;height: 30px;display: inline-block; background-size:30px; }
+.p_name .p_companyname i{width: 30px; margin-right:10px;vertical-align: middle;background: url(../img/member/duo.png) no-repeat;height: 30px;display: inline-block; background-size:30px;}
+
+.p_login{padding:15px 48px 30px 48px; overflow: hidden;; text-align: left; height: 30px;}
+.p_login a{ font-size: 15px}
+.p_login a:nth-child(1){float: left}
+.p_login a:nth-child(2){float: right}
+.p_name span{}
+
+.hd_myprofile{padding: 8px 25px 8px 20px; height: 60px;font-size: 18px; background: #fff; margin: 15px 0; box-shadow: 0 0 3px #d4d4d4;position: relative; text-align: center;line-height: 60px; color: #929292}
+.hd_myprofile .hd_data_p{ max-width: 70px; position: absolute;left:15px; height: 60px; overflow:hidden;}
+.hd_myprofile .hd_data_pr{right:35px;left:inherit;}
+.hd_myprofile em{position: absolute;right: 10px;top: 30px;font-size: 12px;color: #999;text-decoration: none;font-family: serif;background: url(../img/member/right_jiantou.png) no-repeat;
+background-size: 7px;width: 7px;height: 9px;}
+.personlist{}
+.m_dlog{ cursor:pointer;}
+.name_l{ text-align: left;font-size: 15px;}
+.editplist a{width:100%; background: #fff; display:inline-block;border-bottom:#ddd 1px solid; color: #929292;font-size: 15px  }
+.editplist a div{padding:15px 20px; position: relative;}
+.editplist a div em{position: absolute;right: 10px;top: 30px;font-size: 12px;color: #999;text-decoration: none;font-family: serif;background: url(../img/member/right_jiantou.png) no-repeat;
+background-size: 7px;width: 7px;height: 9px;}
+.editplist a div span{position: absolute;left:20px;}
+.editplist a div p{ margin:0 35px 0 60px;}
+.editplist a div p input{ width:100%;border: none}
+/*********组织架构**********/
+.zuzhi_search{ padding:15px 5%; background:#fff}
+.user_name{ width:100%; position:relative}
+.user_name .txt_search{ width:100%; border:#a6a6a6 1px solid; height:40px; border-radius:3px; text-indent:20px}
+.user_name .txt_search:focus{outline:none;}
+.user_name #z_sea_icon{ background:url(../img/member/hd_search_icon.png) no-repeat; background-size:33px; position:absolute;right:10px; display:inline-block; height:33px;top:5px; z-index:999; width:33px; cursor:pointer; text-indent:2em}
+.pzuzhi a{ font-size:16px;}
+.pzuzhi a div em u{ text-decoration:none; font-size:14px; padding-right:5px}
+.pzuzhi a div em{ background: none!important;top:0;right:0;width: inherit; height:0;}
+.zuzhi_style{ padding:5px 0; border-top:#d7d7d7 1px solid}
+.zuzhi_style h2{ font-size:20px; font-family:"黑体"; padding-left:20px;}
+
+.jiazai{width: 98%;margin: 0 auto; text-align: center;}
+#addjz{border: #ddd 1px solid;background: #fff;text-align: center;display: inline-block;height: 40px;line-height: 40px;width: 100%;border-radius: 3px;margin-top: 15px;
+color: #333;}
+
+/**********搜索结果********/
+.seacrhzuzhi a div i{ background: none}
+.search_info_none{font-size: 14px;padding: 10% 0;text-align: center;font-family: "黑体";}
+#search_list .zuzhi_style{ border-top:none}
+.p_list_info{}
+.p_list_info li{}
+.p_list_info li a{ width:100%}
+.p_list_info li a div{ padding-left:60px}
+.p_list_info li a div i{left:60px; background:}
+
+/**********/
+.people{border-bottom:#dadada 1px solid}
+.people a{ border-bottom:none}
+
+.masck{width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: #000;opacity: .2;-webkit-transform: translate3d(0,0,0);z-index: 97;}
+
+.rc_td {
+	/*width: 205px;*/
+	float: right;
+	position: relative;
+	overflow: hidden;
+	color: #494949; padding:0!important;height:35px;
+}
+.sw1 {	width: 70px;}
+.sel_txt {	float: left;	height: 24px;	line-height: 22px;	margin-right: 5px;	-webkit-appearance: none;	-webkit-box-sizing: content-box;
+	background-size: auto 5px;	border: none;	-webkit-border-radius: 0;	overflow: hidden;	color: #494949;}

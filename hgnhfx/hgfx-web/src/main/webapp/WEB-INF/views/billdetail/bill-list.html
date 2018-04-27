@@ -1,0 +1,164 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<#import "/public/frame/default.html" as dk>
+<@dk.head "" >
+</@dk.head>
+<style>.block{display:block;overflow:hidden;}</style>
+<script type="text/javascript">
+
+	function submitBillForm(){
+		$("#pageNum").attr("value",1);
+		$("#paginationForm").submit();
+	}
+	
+	//分页
+	function jumpPage(pageNum){
+		$("#pageNum").attr("value",pageNum);
+		$("#paginationForm").submit();
+	}
+
+</script>
+
+
+
+<@dk.main "" "accountManage">
+<link  href="css/common.css" type="text/css" rel=stylesheet>
+						<div class="right-content">
+							<div class="right-content-pure">
+								<div class="right-content-title">
+									<span class="tt">
+										<img src="${contextPath}/resources/img/order/wd3.png">
+										<span class="tl">个人管理<span>>> 账号管理>> 账单明细</span></span>
+									</span>
+									
+								</div>
+								
+								<form id="paginationForm" action="${contextPath}/bill/list" method="post" >
+									<input type="hidden" value="${pageNum?c}" name="pageNum" id="pageNum"/>
+									<input type="hidden" value="${pageSize}" name="pageSize"/>
+								
+									<div class="condition">
+										<div class="condition-wrap">
+											<div class="block">
+												<span class="condition-item">
+												<span class="text">交易号</span>
+												<input id="tradeNo" type="text" name="tradeNo" value="${tradeNo}" size="38" style="height: 30px;">
+											</span>
+											
+											<span class="condition-item">
+												<span class="text">商品名称</span>
+												<div class="product-type">
+													<select id="prodName" name="prodName" style="height: 30px;">
+														<option value="">全部</option>
+														<#list pInUse as use>
+															<option value="${use.product.prodName}" <#if use.product.prodName==prodName>selected="selected"</#if> >${use.product.prodName}</option>
+														</#list>
+														<option value="月末返利" <#if '月末返利'==prodName>selected="selected"</#if> >月末返利</option>
+														<option value="积分充值" <#if '积分充值'==prodName>selected="selected"</#if> >积分充值</option>
+													</select>
+													<div class="select-icon">
+														<img src="${contextPath}/resources/img/order/select-a.png">
+													</div>
+												</div>
+											</span>
+											
+											<span class="condition-item">
+												<span class="text">状态</span>
+												<div class="product-type">
+													<select id="status" name="status" style="height: 30px;">
+														<option value="">全部</option>
+														<option value="1" <#if status==1>selected="selected"</#if> >扣款成功</option>
+														<option value="2" <#if status==2>selected="selected"</#if> >充值成功</option>
+														<option value="3" <#if status==3>selected="selected"</#if> >退款成功</option>
+													</select>
+													<div class="select-icon">
+														<img src="${contextPath}/resources/img/order/select-a.png">
+													</div>
+												</div>
+											</span>
+											</div>
+											
+											
+											<span class="condition-item" style="margmargin-left: -50px;">
+												<div class="condition-item-sub" >
+													<span class="text">交易时间</span>
+													<input readonly="readonly" class="Wdate" name="tradeDateStart"  value="${tradeDateStart}" 
+														onfocus="WdatePicker({opposite:false,dateFmt:'yyyy-MM-dd'});" type="text" id="start">
+													<span style="margin-top: 5px;" class="small-gap">-</span>
+													<input readonly="readonly" class="Wdate" name="tradeDateEnd"  value="${tradeDateEnd}" 
+														onfocus="WdatePicker({opposite:false,dateFmt:'yyyy-MM-dd'});" type="text" id="end">
+												</div>
+											</span>
+											
+											<div id="screenBtn" onclick="submitBillForm()" />
+										</div>
+									</div>
+								</form>
+								
+								<div class="table-content">
+									<div class="table-content-wrap">
+										<div class="table-content-title">
+											<span class="text2">筛选结果</span>
+										</div>
+										
+										<div  class="table-content-pure">
+											<table>
+												<tr class="thd"><th>交易时间</th><th>商品</th><th>订单编号</th><th>交易号</th><th>账号</th><th>积分</th><th>状态</th></tr>
+												<#list pagination.list as r>
+												<tr class="ta" >
+													<td>${r.tradeDate?string("yyyy-MM-dd HH:mm")}</td>
+													<td>${r.prodName}</td>
+													<td>${r.orderCode}</td>
+													<td>${r.tradeNo}</td>
+													<td>${r.cardNo}</td>
+													<td>${r.increment}</td>
+													<td>
+													<#if r.status==1>
+														扣款成功
+													<#elseif r.status==2>
+														充值成功
+													<#elseif r.status==3>
+														退款成功
+													</#if>
+													</td>
+												</tr>
+												</#list>
+											</table>
+										</div>
+									</div>
+								</div>
+								
+								<div class="bottom-links">
+									<span class="right-links">
+										<#if pageNum-1!=0>
+										<span class="first" onclick="jumpPage(1)">首页</span>
+										<span class="prev" onclick="jumpPage(${(pageNum-1)?c})"><<</span>
+										<#else>
+										<span class="first"">首页</span>
+										<span class="prev" ><<</span>
+										</#if>
+										<#list [1,2,3,4,5] as i>
+										<#if (pageNum/5)?ceiling*5+i-5<=totalPageNum>
+										<#if pageNum==(pageNum/5)?ceiling*5+i-5>
+										<span class="item-link active"  onclick="jumpPage(${((pageNum/5)?ceiling*5+i-5)?c})">${((pageNum/5)?ceiling*5+i-5)?c}</span>
+										<#else>
+										<span class="item-link "  onclick="jumpPage(${((pageNum/5)?ceiling*5+i-5)?c})">${((pageNum/5)?ceiling*5+i-5)?c}</span>
+										</#if>
+										</#if>
+										</#list> 
+										<#if pageNum+1<=totalPageNum>
+										<span class="next" onclick="jumpPage(${(pageNum+1)?c})">>></span>
+										<span class="last" onclick="jumpPage(${totalPageNum?c})">尾页</span>
+										<#else>
+										<span class="next" >>></span>
+										<span class="last">尾页</span>
+										</#if>
+									</span>
+								</div>
+								
+							</div>
+						</div>
+</@dk.main>
+	 <@dk.end "">
+</@dk.end>

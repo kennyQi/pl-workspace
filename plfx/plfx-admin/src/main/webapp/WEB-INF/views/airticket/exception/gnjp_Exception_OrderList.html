@@ -1,0 +1,266 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.hauto div{height: inherit!important;}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/gnjp/exception/orderList" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						下单时间：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(platformOrderQO.createDateFrom?string('yyyy-MM-dd'))!''}" class="date"/>
+						至
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(platformOrderQO.createDateTo?string('yyyy-MM-dd'))!''}" class="date"/>
+					</td>
+					
+					<td>订单状态</td>
+					<td>
+						
+                          <select name="tempStatus" id="tempStatus">
+							<option value="">全部状态</option>
+							 <#list statusList as status>
+								<option value="${(status.key)!''}" <#if platformOrderQO.tempStatus == status.key> selected="selected"</#if>>${status.value!?html}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					<td>支付状态</td>
+					<td>
+						
+                          <select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							 <#list orderPayStatusList as status>
+								<option value="${(status.key)!''}" <#if platformOrderQO.payStatus== status.key>selected="selected"</#if>>${status.value!?html}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					<td>
+						下单人：
+					</td>
+					<td>
+						<input type="text" name="linkerName" value="${(platformOrderQO.loginName)!''}" />
+					</td>
+					
+					<td>
+						订单类别：
+					</td>
+					<td>
+						<select name="type">
+							<#if TYPE_MAP??>
+                               <#list TYPE_MAP?keys as itemKey>
+                                   <option 
+                                       <#if itemKey == platformOrderQO.type>
+                                           selected="selected"
+                                       </#if>
+                                       value="${itemKey}">${TYPE_MAP[itemKey]}</option>
+                               </#list>
+                           </#if>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						出发地:
+					</td>
+					<td>
+						<select name="fromCityCode" id="fromCityCode">
+							<option value="">选择</option>
+							 <#list cities as city>
+								<option value="${(city.cityAirCode)!''}" <#if platformOrderQO.fromCityCode== city.cityAirCode>selected="selected"</#if>>${city.cityName!?html}</option>
+						     </#list>
+						</select>
+						
+						&nbsp;&nbsp;&nbsp;到达地:
+						&nbsp;&nbsp;&nbsp;
+						<select name="toCityCode" id="toCityCode">
+							<option value="">选择</option>
+							 <#list cities as city>
+								<option value="${(city.cityAirCode)!''}" <#if platformOrderQO.toCityCode== city.cityAirCode>selected="selected"</#if>>${city.cityName!?html}</option>
+						     </#list>
+						</select>
+					</td>
+					<td>
+						航空公司：
+					</td>
+					<td>
+						<input type="text" name="airCompName" value="${(platformOrderQO.airCompName)!''}" />
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="exp()">导出</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210" id="table_caiwu">
+		<thead>
+			<tr>
+ 				<th width="50">序号</th>
+				<th width="100">订单类别</th>
+				<th width="100">平台订单号</th>
+				<th width="90">经销商订单号</th>
+				<th width = "60">供应商订单号</th>
+				<th width = "60">航空公司</th>
+				<th width = "90">出发地</th>
+				<th width = "60">目的地</th>
+				<th width = "70">订单总金额</th>
+				<th width = "70">支付供应商金额</th>
+				<th width = "70">返点/佣金</th>
+				<th width = "80">支付宝手续费</th>
+				<#if EXCEPTION_TYPE == platformOrderQO.type>
+					<th width = "70">调整金额</th>
+				</#if>
+				<th width = "90">订单状态</th>
+				<th width = "90">支付状态</th>
+				<th width = "150">下单时间</th>
+				<th width = "60">合计</th>
+			</tr>
+		</thead>
+			<#assign index=1 />
+			<#assign totalPayAmount=0 />
+			<#assign totalPlatPolicyPirce=0 />
+			<#assign totalAdjust=0 />
+		<tbody>
+			
+			<#list pagination.list as JPOrderDTO >
+			<tr>
+				<td>${index}</td>
+				<td>
+					<#if JPOrderDTO.type??>
+						${TYPE_MAP[JPOrderDTO.type]}
+					</#if>
+				</td>
+				<td>
+					${(JPOrderDTO.orderNo)!''}
+				</td>
+				<td>
+					${(JPOrderDTO.dealerOrderCode)!''}
+				</td>
+				<td>
+					${(JPOrderDTO.supplierOrderNo)!''}
+				</td>
+				<td>
+					<#if JPOrderDTO.flightSnapshotJSON ?? >
+						<#assign jsonStr>
+							${(JPOrderDTO.flightSnapshotJSON)!''}
+						</#assign>
+						<#assign json=jsonStr?eval />
+						${json.airCompName}
+					</#if>
+					
+				</td>
+				<td>
+					${(JPOrderDTO.startCityName)!''}
+				</td>
+				<td>
+					${(JPOrderDTO.endCityName)!''}
+				</td>
+				<td>
+					<#if JPOrderDTO.userPayAmount??>
+						${JPOrderDTO.userPayAmount?string('0.00')}
+					</#if>
+				</td>
+				<td>
+					<#if JPOrderDTO.suppPrice??>
+						${JPOrderDTO.suppPrice?string('0.00')}
+					</#if>
+				</td>
+				<td>
+					<#if JPOrderDTO.commRate?? && JPOrderDTO.commAmount??>
+						${JPOrderDTO.commRate?string('0.00')}/${JPOrderDTO.commAmount?string('0.00')}
+					</#if>
+				</td>
+				<td>
+					<#if JPOrderDTO.serviceCharge??>
+						${JPOrderDTO.serviceCharge?string('0.00')}
+					</#if>
+				</td>
+				<#if EXCEPTION_TYPE == platformOrderQO.type>
+				<td>
+					<#if JPOrderDTO.adjust ??>
+						${JPOrderDTO.adjust?string('0.00')}
+					</#if>
+				</td>
+				</#if>
+				<td>
+					 <#list statusList as status>
+						<#if JPOrderDTO.orderStatus.status== status.key>${status.value!?html}</#if>
+				     </#list>
+				</td>
+				<td>
+					 <#list orderPayStatusList as payStatus>
+						<#if JPOrderDTO.orderStatus.payStatus== payStatus.key>${payStatus.value!?html}</#if> 
+				     </#list>
+				</td>
+				<!--  <td>
+					<#if JPOrderDTO.orderStatus ?? && JPOrderDTO.orderStatus.status??>
+						<#assign status2=JPOrderDTO.orderStatus.status+'' />
+						${STATUS_MAP[status2]}
+					</#if>
+				</td>
+				-->
+				<td class="hauto">
+					<#if JPOrderDTO.loginName??><p>${JPOrderDTO.loginName}</p></#if>
+					<#if JPOrderDTO.createDate??><p>${JPOrderDTO.createDate?string("yyyy-MM-dd HH:mm:ss")}</p></#if>
+				</td>
+					<#assign index=index + 1 />
+					<#if JPOrderDTO.userPayAmount ??>
+						<#assign totalPayAmount=totalPayAmount + JPOrderDTO.userPayAmount />
+					</#if>
+					<#if JPOrderDTO.platPolicyPirce ??>
+						<#assign totalPlatPolicyPirce=totalPlatPolicyPirce + JPOrderDTO.commAmount />
+					</#if>
+					<#if EXCEPTION_TYPE == platformOrderQO.type && JPOrderDTO.adjust ??>
+						<#assign totalAdjust=totalAdjust + JPOrderDTO.adjust />
+					</#if>
+				<td>
+				${totalPayAmount?string('0.00')}
+				</td>
+			</tr>
+				
+			</#list>
+
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+function test() {
+	var joinStr = '{"airCompName":"南方航空公司","aircraftCode":"747"}';
+	var obj = jQuery.parseJSON(joinStr);
+}
+test();
+function exp(){
+	document.forms[0].action="${contextPath}/jp/finance/export.csv";
+	document.forms[0].submit();
+	document.forms[0].action="${contextPath}/jp/finance/list";
+}
+</script>

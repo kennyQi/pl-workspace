@@ -1,0 +1,162 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" 
+	action="${contextPath}/airtkt/gjjp/supplier_outcome_refund/list" method="get">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+		
+			<table class="searchContent">
+				<tr>
+					<td>
+						供应商名称：
+						<select name="fromSupplierQo.code">
+						<option value="">请选择</option>
+						<#if supplierDtoList ??>
+                            <#list supplierDtoList as supplier>
+                                <option 
+                                    <#if gjjpOrderQo.fromSupplierQo?? && supplier.code == gjjpOrderQo.fromSupplierQo.code>
+                                        selected="selected"
+                                    </#if>
+                                value="${(supplier.code)!''}">${(supplier.name)!''}</option>
+                            </#list>
+                        </#if>
+						
+						</select>
+					</td>
+					<td>
+						创&nbsp;&nbsp;&nbsp;&nbsp;建&nbsp;&nbsp;&nbsp;&nbsp;人：<input type="text" name="contactName" value="${gjjpOrderQo.contactName}" />
+					</td>
+					<td>
+						平台订单号：<input type="text" name="id" value="${(gjjpOrderQo.id)!''}" />
+					</td>
+					<td>
+						下单时间：
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(gjjpOrderQo.createDateBegin?string('yyyy-MM-dd'))!''}" class="date"/>
+						至
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(gjjpOrderQo.createDateEnd?string('yyyy-MM-dd'))!''}" class="date"/></td>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						供应商订单号：<input type="text" name="supplierOrderId" value="${gjjpOrderQo.supplierOrderId}" />
+					</td>
+					<td>
+						P&nbsp;N&nbsp;R：&nbsp;<input type="text" name="pnr" value="${gjjpOrderQo.pnr}" />
+					</td>
+					<td>
+						乘机人：<input type="text" name="passengerName" value="${gjjpOrderQo.passengerName}" />
+					</td>
+				</tr>
+			</table>
+		
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="reset" onclick="javascript:document.getElementById('pagerForm').reset()">重置</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent"> <button type="submit">检索</button>	</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	
+	<table class="table" width="100%" layoutH="135" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="130">平台订单号</th>
+				<th width="170">供应商订单号</th>
+				<th width="90">乘机人</th>
+				<th width="60">PNR</th>
+				<th width="100">航程</th>
+				<th width="70">支付金额</th>
+				<th width="70">退款金额</th>
+				<th width="150">流水号</th>
+				<th width="140">下单时间</th>
+				<th width="80">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as GJJPOrder>
+			<tr  height="60px">
+				<!-- 平台订单号 -->
+				<td>
+					${(GJJPOrder.id)!''}
+				</td>
+				<!-- 供应商订单号 -->
+				<td>
+					${(GJJPOrder.baseInfo.supplierOrderId)!''}
+				</td>
+				<!-- 乘机人 -->
+				<td>
+					<#if GJJPOrder.passengers ??>
+						<#list GJJPOrder.passengers as passenger>
+							<p>${passenger.baseInfo.passengerName}</p>
+						</#list>
+					</#if>
+				</td>
+				<td>
+					${(GJJPOrder.baseInfo.pnr)!""}
+				</td>
+				<!-- 航程 -->
+				<td>
+				<p>
+					<!-- 三字码 -->
+					${airPortManager.getAirportName(GJJPOrder.segmentInfo.orgCity)!''}
+                        	-
+                    ${airPortManager.getAirportName(GJJPOrder.segmentInfo.dstCity)!''}
+                    <#if (GJJPOrder.segmentInfo.takeoffFlights ??)&&(GJJPOrder.segmentInfo.takeoffFlights?size>0)>
+                    	<#list GJJPOrder.segmentInfo.takeoffFlights as flightCabin>
+                    		<p>航班号：${flightCabin.flightNo}(${(flightCabin.duration)!''}分钟)</p>
+						</#list>
+					</#if>
+				</p>
+				</td>
+				<!-- 支付金额 ，已支付、待退款、部分退款、全部退款状态-->
+				<td>
+					<#if GJJPOrder.payInfo.status == '2' || GJJPOrder.payInfo.status == '3' || GJJPOrder.payInfo.status == '4' || GJJPOrder.payInfo.status == '5'>
+						${(GJJPOrder.payInfo.totalPrice )?string('0.00')}
+					<#else>
+						0.00
+					</#if>
+				</td>
+				<!-- 退款金额 -->
+				<td>
+					<#if GJJPOrder.payInfo.status == '43'>
+						
+					<#else>
+						0.00
+					</#if>
+				</td>
+				<!-- 流水号 -->
+				<td>
+					${(GJJPOrder.payInfo.supplierPayTradeNo)!""}
+				</td>
+				<!-- 下单时间 -->
+				<td>
+					<p>
+					
+					</p>
+					<p>${(GJJPOrder.baseInfo.createDate)!''}</p>
+				</td>
+				<!-- 操作 -->
+				<td>
+					<a href="${contextPath}/airtkt/gjjp/supplier_outcome_refund/detail?orderNo=${GJJPOrder.id}" style="color: blue" width="1200" height="600" target="dialog">订单详情</a>
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<_AJAX_>
+
+<!-- 数据字典 -->
+<_WORD_ id="confirm"><![CDATA[确认]]></_WORD_>
+<_WORD_ id="mainPage"><![CDATA[主页]]></_WORD_>
+<_WORD_ id="proInfo"><![CDATA[提示信息]]></_WORD_>
+
+<!-- 消息 -->
+<_MSG_ id="statusCode_503"><![CDATA[服务器当前负载过大或者正在维护!]]></_MSG_>
+<_MSG_ id="validateFormError"><![CDATA[提交数据不完整，{0}个字段有错误，请改正后再提交!]]></_MSG_>
+<_MSG_ id="sessionTimout"><![CDATA[会话超时，请重新登录!]]></_MSG_>
+<_MSG_ id="alertSelectMsg"><![CDATA[请选择信息!]]></_MSG_>
+<_MSG_ id="forwardConfirmMsg"><![CDATA[继续下一步!]]></_MSG_>
+<_MSG_ id="fileTooLar"><![CDATA[文件大小太大!]]></_MSG_>
+<_MSG_ id="fileExtError"><![CDATA[文件格式不正确!]]></_MSG_>
+<_MSG_ id="noRecord"><![CDATA[暂无数据!]]></_MSG_>
+
+<_MSG_ id="hgTitle"><![CDATA[模板后台]]></_MSG_>
+<_MSG_ id="mainTabTitle"><![CDATA[我的主页]]></_MSG_>
+</_AJAX_>

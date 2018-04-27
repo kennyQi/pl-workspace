@@ -1,0 +1,7 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<form action="${(contextPath)!}/app/uploading" method="post"	name="uploadForm" enctype="multipart/form-data" 	target="uploadFileIframe">
+		<input type="file" id="f" onchange="txt.value=this.value" name="file" size="1" hidefocus="hidefocus"> <input type="submit"	value="upload">
+	</form>
+
+</div>

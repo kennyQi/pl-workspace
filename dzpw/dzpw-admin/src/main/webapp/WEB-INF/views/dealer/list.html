@@ -1,0 +1,172 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	function checkTimeStr(){
+		
+		if($("#beginTimeStr").val()!="" && $("#endTimeStr").val()!=""){
+			if($("#beginTimeStr").val()>$("#endTimeStr").val()){
+				alert("添加开始时间不能大于添加结束时间!");
+				return false
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+	}
+	
+	function initText(){
+		$("#name", navTab.getCurrentPanel()).attr("value",'');
+		$("#beginTimeStr", navTab.getCurrentPanel()).attr("value","");
+		$("#endTimeStr", navTab.getCurrentPanel()).attr("value","");
+		$("#status", navTab.getCurrentPanel()).attr("value","");
+		$("#linkMan", navTab.getCurrentPanel()).attr("value","");
+		$("#telephone", navTab.getCurrentPanel()).attr("value","");
+		$("#email", navTab.getCurrentPanel()).attr("value","");
+		$("#key", navTab.getCurrentPanel()).attr("value","");
+	}
+
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="checkTimeStr();return navTabSearch(this);" action="${contextPath}/dealer/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						经销商名称：<input type="text" id="name" name="name" value="${name}" size="25"/>
+					</td>
+					<td>
+						经销商代码：<input type="text" id="key" name="key" value="${key}" size="25"/>
+					</td>
+					<td>
+						状态：
+						<select id="status" name="status">
+							<option value="">全部</option>
+							<option value="1" <#if status==1 >selected="selected"</#if> > 已启用 </option>
+							<option value="0" <#if status==0 >selected="selected"</#if> > 已禁用 </option>
+						</select>
+					</td>
+					
+				</tr>
+				<tr>
+					<td>
+						联&nbsp;&nbsp;&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;&nbsp;人：<input type="text" id="linkMan" name="linkMan" value="${linkMan}" size="25"/>
+					</td>
+					<td>
+						联&nbsp;系&nbsp;电&nbsp;&nbsp;话：<input type="text" id="telephone" name="telephone" value="${telephone}" size="25"/>
+					</td>
+					<td>
+						联系邮箱：<input type="text" id="email" name="email" value="${email}" size="25"/>
+					</td>
+					<td>
+						添加时间：
+						<input type="text" id="beginTimeStr" name="beginTimeStr" value="${beginTimeStr}" class="date" readonly="true"/>&nbsp;至
+						<input type="text" id="endTimeStr" name="endTimeStr" value="${endTimeStr}" class="date" readonly="true"/>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkTimeStr()">查询</button></div></div>
+					</li>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="button" onclick="initText()">重置</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="add" width="750" target="dialog"  href="${contextPath}/dealer/toAdd" height="750" width="600"><span>添加经销商</span></a>
+			</li>
+			<li> 
+				<a class="edit" target="selectedTodo"  href="${contextPath}/dealer/usableBatch"
+				   title="确定启用选中经销商吗？" warn="请选择一个经销商"><span>批量启用</span></a>
+			</li>
+			<li>
+				<a class="icon" target="selectedTodo" href="${contextPath}/dealer/disableBatch"
+				   title="确定禁用选中经销商吗？" warn="请选择一个经销商"><span>批量禁用</span></a>
+			</li>
+			<li>
+				<a class="delete" target="selectedTodo" href="${contextPath}/dealer/delBatch"
+				   rel="ids" title="确定删除选中经销商吗？" warn="请选择一个经销商"><span>批量删除</span></a>
+			</li>
+		</ul>
+	</div>
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="180" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="20px;">
+					<input type="checkbox" group="ids" class="checkboxCtrl" title="全选" />
+				</th>
+				<th width="150px;">经销商名称</th>
+				<th width="100px;">经销商代码</th>
+				<th width="100px;">登录账户</th>
+				<th width="120px;">联系人</th>
+				<th width="115px;">联系电话</th>
+				<th width="195px;">联系邮箱</th>
+				<th width="70px;">结算类型</th>
+				<th width="100px;">结算账户</th>
+				<th width="100px;">手续费率(元/张)</th>
+				<th width="120px;">添加时间</th>
+				<th width="50px;">状态</th>
+				<th width="200px;">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as dealer>
+			<tr>
+				<td><input name="ids" value="${dealer.id!?html}" type="checkbox"></td>
+				<td>${dealer.baseInfo.name!?html}</td>
+				<td>${dealer.clientInfo.key!?html}</td>
+				<td>${dealer.clientInfo.adminLoginName!?html}</td>
+				<td>${dealer.baseInfo.linkMan!?html}</td>
+				<td>${dealer.baseInfo.telephone!?html}</td>
+				<td>${dealer.baseInfo.email!?html}</td>
+				<td>
+				<#if dealer.accountInfo.accountType==1>汇金宝
+				<#elseif dealer.accountInfo.accountType==2>支付宝</#if>
+				</td>
+				<td>${(dealer.accountInfo.accountNumber)!?html}</td>
+				<td>${(dealer.accountInfo.settlementFee!0)?c}</td>
+				<td>${dealer.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<td>
+					<#if dealer.baseInfo.status==0>
+						禁用
+					</#if>
+					<#if dealer.baseInfo.status==1>
+						启用
+					</#if>
+				</td>
+				<td>
+					<a target="dialog" href="${contextPath}/dealer/viewInfo?dealerId=${dealer.id}" height="750" width="750" style="color: blue">查看详情</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<#if dealer.baseInfo.status==0>
+						<a target="ajaxTodo" href="${contextPath}/dealer/usableBatch?ids=${dealer.id}" style="color: blue">启用</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a target="dialog" href="${contextPath}/dealer/toUpdate?id=${dealer.id}" height="750" width="750" style="color: blue">修改</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a target="ajaxTodo" href="${contextPath}/dealer/delBatch?ids=${dealer.id}" style="color: blue" title="确定删除该经销商吗？">删除</a>
+					</#if>
+					<#if dealer.baseInfo.status==1>
+						<a target="ajaxTodo" href="${contextPath}/dealer/disableBatch?ids=${dealer.id}" style="color: blue">禁用</a>
+					</#if>
+				</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>
+	
+</div>
+

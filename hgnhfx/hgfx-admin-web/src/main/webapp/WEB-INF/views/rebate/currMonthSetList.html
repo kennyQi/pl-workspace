@@ -1,0 +1,109 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+
+    <form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+          action="${contextPath}/rebateSetConfig/currMonthSetList" method="get">
+         <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+        <input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+        <div class="searchBar">
+            <table class="searchContent" style="width: 100%;">
+                <tr>
+                    <td align="left">
+                       商品名称 ：
+                        <select name="productId">
+                        	<option value="">全部</option>
+                            <#list proList as item>
+                            <option <#if item.id == rebateSetSQO.productId>selected="selected"</#if> value="${item.id }">${item.prodName }</option>
+                       		</#list>
+                       
+                        </select>
+                    </td>
+                  
+         <td>
+                       
+                    </td>      
+        
+                </tr>
+                <tr>
+                  <td align="left">
+                    商户名：
+                        <select  name="distributorId" >
+                        	<option value="">全部</option>
+                        	 <#list distriList as item>
+                            <option <#if item.id == rebateSetSQO.distributorId>selected="selected"</#if> value="${item.id }">${item.name }</option>
+                       		</#list>
+                    
+                        </select>
+                    </td>  
+                    
+                     <td>
+                        <button type="submit">查询</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<div class="pageContent">
+<#include "/public/pagination/pagination.html">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><span style="padding: 0">本月返利比例</span>
+            </li>
+        </ul>
+    </div>
+    <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="15%">商户公司</th>
+            <th width="15%">账号ID</th>
+            <#list qujian as item>
+            	<th width="14%">${item.qj}</th>
+            </#list>
+            <th width="14%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+         		默认
+            </td>
+            <td>
+              -
+            </td>
+            <#list qujian as zks>
+            	<td>${zks.zk}</td>
+            </#list>
+            <td>
+          		--
+            </td>
+        </tr>
+     	<#list dtoList as item>
+        <tr>
+            <td>
+         		${item.distributorName!}
+            </td>
+            <td>
+               ${item.loginName!''}
+            </td>
+            <#list item.intervalList as zks>
+            	<td>${zks.zk}</td>
+            </#list>
+            <td>
+          		<#if item.isCanEdit=='true'>
+          			<a title="修改" lookupgroup="orgLookup" mask="true" href="${contextPath}/rebateSetConfig/modifyCurrMonthSet?id=${item.id}"  style="color: #0066CC;">编辑</a>
+          		<#else>
+          		--
+          		</#if>
+            </td>
+        </tr>
+       </#list>
+        </tbody>
+    </table>
+
+</div>
+<script type="text/javascript">
+<!--
+
+//-->
+</script>

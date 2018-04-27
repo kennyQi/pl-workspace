@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans        http://www.springframework.org/schema/beans/spring-beans.xsd        http://code.alibabatech.com/schema/dubbo        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+ 
+    <dubbo:application name="payment-provider-dev"  />
+ 
+    <dubbo:registry address="${dubbo_register_center}"/>
+ 	
+    <dubbo:protocol name="dubbo" port="${dubbo_register_port}" />
+    
+    <!-- SPI SERVICE -->
+
+<!-- 	<dubbo:service interface="slfx.mp.spi.inter.AdminSalePolicyService" ref="salePolicyServiceImpl" />      -->
+	
+<!-- 	<dubbo:service interface="slfx.mp.spi.inter.PlatformOrderService"  ref="platformOrderServiceImpl"/>       -->
+
+<!-- 	<dubbo:service interface="slfx.mp.spi.inter.AdminSupplierPolicyService" ref="supplierPolicyServiceImpl" /> -->
+	
+    <!-- API SERVICE -->
+	
+<!-- 	<dubbo:service interface="slfx.mp.spi.inter.api.ApiMPDatePriceService" ref="apiMPDatePriceServiceImpl" /> -->
+	
+<!-- 	<dubbo:service interface="slfx.mp.spi.inter.api.ApiMPOrderService" ref="apiMPOrderServiceImpl" /> -->
+	
+<!-- 	<dubbo:service interface="slfx.mp.spi.inter.api.ApiMPPolicyService" ref="apiMPPolicyServiceImpl" /> -->
+	
+<!-- 	<dubbo:service interface="slfx.mp.spi.inter.api.ApiMPScenicSpotsService" ref="apiMPScenicSpotsServiceImpl" /> -->
+
+  	<dubbo:service interface="hg.payment.spi.inter.AlipayPayOrderSpiService" ref="alipayPayOrderSpiService" />  
+  	
+  	<dubbo:service interface="hg.payment.spi.inter.PayOrderSpiService" ref="payOrderSpiService" />
+	
+</beans>

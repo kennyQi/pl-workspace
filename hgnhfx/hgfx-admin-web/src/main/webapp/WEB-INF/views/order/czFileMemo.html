@@ -1,0 +1,125 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+<form id="pagerForm" rel="pagerForm"  onsubmit="return navTabSearch(this);" action="${contextPath}/czfile/getCzFile" method="get"  >
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar" id="e1428656364447">
+			<ul class="searchContent">
+			   	<li>
+			   		<label>数据包名称</label>
+			   		 <input type="text"  id="fileName" name="fileName" value="${dto.fileName}"    />
+					
+			   	</li>
+			   	<li>
+			   		<label>数据包状态</label>
+			   		<select id="status" name="status">
+			   			<option value="">全部</option>
+			   			<option value="TOSEND" <#if dto.status=="TOSEND"> selected="selected"</#if>>待发送</option>
+			   			<option value="SEND" <#if dto.status=="SEND"> selected="selected"</#if>>已发送</option>
+			   			<option value="SENDFAIL" <#if dto.status=="SENDFAIL"> selected="selected"</#if>>发送失败</option>
+			   			<option value="FEEDBACK" <#if dto.status=="FEEDBACK"> selected="selected"</#if>>已反馈</option>
+			   		</select>
+			   	</li>
+			</ul>
+			 <ul class="searchContent">
+			   	
+			   	<li>
+			   		<label>业务类型：</label>
+			   		<select id="type" name="type">
+			   			<option value="">全部</option>
+			   			<option value="SENDFILE" <#if dto.type=="SENDFILE"> selected="selected"</#if>>发送给南航数据包</option>
+			   		</select>
+			   	</li>
+			   	<li>
+				   <label>时间</label>
+ 				   <input type="text" id="startDate" name="startDate" value="${dto.startDate}" class="date" minDate="2000-01-15" maxDate="2216-12-15" readonly="false" placeholder="开始时间"/>
+				</li>
+				<li>
+					<label>-</label>
+ 				   <input type="text" id="endDate" name="endDate" value="${dto.endDate}" class="date" minDate="2000-01-15" maxDate="2216-12-15" readonly="false" placeholder="结束时间"/>
+				</li>	
+			 </ul>  			
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit"  >查询</button>
+								
+							</div>
+							</div>
+							<div class="buttonActive">
+							<div class="buttonContent">
+								<button onclick="clearA()" type="button"  >重置</button>
+
+							</div>
+						</div></li>
+				</ul>
+				
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="200">
+		<thead>
+			<tr>
+				<th width="25%">数据包名称</th>
+				<th width="20%">数据时间</th>
+				<th width="20%">状态</th>
+				<th width="20%">业务类型</th>
+				<th width="15%">操作</th>
+			<!--  <th>操作</th>-->
+			</tr>
+		</thead> 
+        <tbody>
+			<#list pagination.list as p>
+			  
+			<tr>
+				<td> ${p.fileName!?html} </td>
+				<td> ${p.timestamp!?html} </td>
+				<td><#if p.status=="TOSEND">待发送
+				</#if>
+				<#if p.status=="SEND">已发送
+				</#if>
+				<#if p.status=="SENDFAIL">发送失败
+				</#if>
+				<#if p.status=="FEEDBACK">已反馈
+				</#if>
+				</td> 
+				 <td><#if p.type=="SENDFILE">发送给南航数据包<#else>南航回传据包</#if></td> 
+  				<td><a  href="javaScript:download('${p.fileName}')" style="color: #0066CC;">下载原文件</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<#if p.status=="FEEDBACK">
+  					<a  href="javaScript:download('${p.fileName?replace('.', '_CZ.')}')" style="color: #0066CC;">下载反馈文件</a>
+  					</#if>
+  				</td>	
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<script type="text/javascript">
+	function clearA(){
+	$("#fileName").val("");
+	$("#status").val("");
+	$("#type").val("");
+	$("#startDate").val("");
+	$("#endDate").val("");
+	}
+	function download(fileName){
+	$.post("${contextPath}/czfile/checkFile",{"fileName":fileName},
+		 	function(data){
+		 	if(data=="1"){
+		 	window.location.href="${contextPath}/czfile/download?fileName="+fileName;
+		 	}else{
+		 		alertMsg.info("当天未生成南航文件或文件已删除");
+		 	}
+			}
+		);
+}
+	</script>
+	<#include "/public/pagination/pagination.html">
+</div>

@@ -1,0 +1,222 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>选择日期</title>
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+    <script type="text/javascript">
+		var request_path="${contextPath}";
+		var buyOther="${userDTO.buyOthers}";
+		if(buyOther=="1"){
+			var person_no = 0;
+		}else{
+			var person_no = 1;
+		}
+		
+	</script>
+    <script  data-main="${contextPath}/resources/js/fly_reserve"  src="${contextPath}/resources/js/require.min.js" async="async" ></script>
+	<script type="text/javascript">
+		var request_path="${contextPath}";
+	</script>
+</head>
+
+<body>
+
+<link href="${contextPath}/resources/css/fly_reserve.css" rel="stylesheet" />
+<div id="reserve">
+        <header class="header box">
+            <a href="javascript:history.back()" class="l iconfont" style="color:#fff;font-size:20px;">&#xe606;</a>
+            <h1>填写订单</h1>
+            <a href="javascript:"  class="r"></a>
+        </header>
+        <form action="${contextPath}/flight/toPay" method="post" id="order">
+	        <div class="cont">
+	            <div class="lineDetail box">
+	                <div class="lineL flyLine">
+	                    <span class="city">${flightGNDTO.orgCityName}</span>
+	                    <span class="time">${flightGNDTO.startTime?string("HH:mm")}</span>
+	                    <span class="day">${flightGNDTO.startTime?string("MM-dd")}${startCHN!}</span>
+	                    <span class="flyCompany">${flightGNDTO.departAirport}<br>${flightGNDTO.departTerm!}<#if flightGNDTO.departTerm??>航站楼</#if></span>
+	                </div>
+	                <div class="lineTime">
+	                    <span class="crossTime">${flightGNDTO.dateDiff}</span>
+	                    <span class="flyCode">${flightGNDTO.flightNO}</span>
+	                </div>
+	                <div class="lineR flyLine">
+	                    <span class="city">${flightGNDTO.dstCityName}</span>
+	                    <span class="time">${flightGNDTO.endTime?string("HH:mm")}</span>
+	                    <span class="day">${flightGNDTO.endTime?string("MM-dd")}${endCHN!}</span>
+	                    <span class="flyCompany">${flightGNDTO.arrivalAirport}<br>${flightGNDTO.arrivalTerm!}<#if flightGNDTO.arrivalTerm??>航站楼</#if></span>
+	                </div>
+	                <div class="lineType">
+	                ${flightGNDTO.airCompanyName}|机型<#if flightGNDTO.planeType??><#if flightGNDTO.planeType?substring(0,1)=="3">空客A<#elseif flightGNDTO.planeType?substring(0,1)=="7">波音</#if><#else>&nbsp;-&nbsp;</#if>${flightGNDTO.planeType!}|${flightGNDTO.cabinName}${flightGNDTO.cabinCode}
+	                </div>
+	            </div>
+	            <div class="flyPassenger flyMargin">
+	                <!-- <a <#if userDTO.buyOthers==1>href="${contextPath}/flight/queryFrequentFlyer"</#if> class="title">乘机人</a> -->
+	                <a id="choosePer" href="#" class="title">乘机人</a>
+	                <div id="passengerList">
+	                <#if userDTO.buyOthers!=1>
+						 <div class="passengerBox box">
+						     <span class="del" data="${userDTO.id}"></span>
+						     <div class="passengerDetail">
+						     	 <span class="myid" style="display:none">${userDTO.id}</span>
+						     	 <span class="phone" style="display:none">${userDTO.linkMobile}</span>
+						         <input type="hidden" hidden="hidden" name="passengerTel" value="${userDTO.linkMobile}"/>
+						         <span class="name">${userDTO.name}</span>
+						         <input class="name" type="hidden" hidden="hidden" name="passengerName" value="${userDTO.name}"/>
+						         <span class="group" data-value="${costCenterDTO.id}">${costCenterDTO.costCenterName}</span>
+							     <input class="costCenterIDs" type="text" hidden="hidden" name="costCenterIDs" value="${costCenterDTO.id}" id="costCenterIDs">
+						         <span class="cardDetail">身份证 <i>${userDTO.idCardNO}</i></span>
+						         <input  class="cardDetail" type="hidden" hidden="hidden" name="passengeridCardNO" value="${userDTO.idCardNO}"/>
+						         <label class="iconfont">&#xe606;</label>
+						     </div>
+						 </div>
+					</#if>
+	                </div>
+	            </div>
+	            <div class="connect flyMargin">
+	                <label class="people box labelInput">
+	                    <input type="text" placeholder="联系人姓名" class="inputfor" name="linkName" id="passengerName" />
+	                </label>
+	                <label class="box labelInput"><input class="inputfor" type="text" name="linkTelephone"  id="passengerPhone"  placeholder="手机号码"/>
+	                </label>
+	            </div>
+	
+	            <div class="payType flyMargin">
+	                <div class="checkFlow">
+	                    <span>审批流程<label id="checkFlowTips">点击选择</label></span>
+	                    <span>审批人员<label id="checkFlowPerson">点击选择</label></span>
+	                    <div class="checkR iconfont">&#xe606;</div>
+	                </div>
+	                <label class=" labelInput box labelSelect">
+	                    <select class="inputfor" name="payType">
+	                        <option value="1">公司垫付</option>
+	                        <option value="2">个人支付</option>
+	                    </select>
+	                    <i  class="iconfont">&#xe606;</i>
+	                </label>
+	            </div>
+	            <div class="remark flyMargin">
+	                <div class="title">出差说明</div>
+	                <div class="remarkWord">
+	                    <textarea placeholder="请填写备注说明（30字）" name="note" id="note"></textarea>
+	                </div>
+	            </div>
+				<input type="text" hidden="hidden" readonly="readonly" name="flightJSON" value='${flightJSON}'/>
+	        	<input type="text" hidden="hidden" name="currentStepNO" value="1"/>
+	        	<input type="text" hidden="hidden" name="nextStepNO" value="" id="nextStepNO"/>
+	        	<input type="text" hidden="hidden" name="nextUserID" value="" id="nextUserID"/>
+	        	<input type="text" hidden="hidden" name="workflowID" value="" id="workflowID">
+	            <div class="priceBtn box">
+	                <span class="pBox">总价
+	                <label id="sumPrice"style="display: none;">${flightGNDTO.ibePrice}</label>
+	                	<#if buyOther=="0">
+	                		<label id="sumPricePlus" class="p">￥${flightGNDTO.ibePrice}</label>
+	                	<#else>
+	                    	<label id="sumPricePlus" class="p">￥0</label>
+	                    </#if>
+	                    <label class="other">(不含基建燃油)</label>
+	                </span>
+	                  <span class="submitBtn">提交申请</span>
+	            </div>
+	        </div>
+	        
+        </form>
+</div>
+<div id="editor" class="scene" style="display: none;">
+    <header class="header box" style="z-index: 20">
+        <a href="javascript:" class="l iconfont editorBack" style="color:#fff;font-size:20px;">&#xe606;</a>
+        <h1>编辑乘机人</h1>
+        <a href="javascript:"  class="r"  style="color:#fff;" id="fulfil">完成</a>
+    </header>
+    <div id="editorConnect">
+    	<input data-name="myid" type="hidden" class="myid" />
+        <label class="box connectInput name"><input class="inputfor" data-name="name" type="text" placeholder="姓名" <#if userDTO.buyOthers==0>readonly="readonly"</#if>/>
+        </label>
+        <label class="box connectInput cardNo"><input class="cardDetail"  data-name="cardDetail" type="text" placeholder="身份证" <#if userDTO.buyOthers==0>readonly="readonly"</#if>/>
+        </label>
+        <label class="box connectInput phone"><input class="inputfor"  data-name="phone" type="text" placeholder="手机号码" <#if userDTO.buyOthers==0>readonly="readonly"</#if>/>
+        </label>
+        <label class="box connectInput center">
+            <select class="inputfor"  data-name="groupId" value="">
+            	<#list costCenterDTOs as dto>
+                	<option value="${dto.id}">${dto.costCenterName}</option>
+				</#list>
+            </select>
+            <i class="iconfont">&#xe606;</i>
+        </label>
+    </div>
+</div>
+<div id="checkFlow" class="scene"  style="display: none;">
+    <header class="header box">
+        <a href="javascript:" class="l iconfont editorBack" style="color:#fff;font-size:20px;">&#xe606;</a>
+        <h1>审批流程</h1>
+        <a  href="javascript:"  class="" style="color:#fff;">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+    </header>
+    <div id="checkPointer">
+        <dl class="checkSelect" for="checkFlowTips">
+            <dt>审批流程<label>请选择</label></dt>
+            <#list workflowDTOs as workflow>
+            	<dd data = "${workflow.workflowID}">${workflow.workflowName}</dd>
+            </#list>
+        </dl>
+        
+        <dl class="checkSelect" id ="steps" for = "checkStep">
+        	<dt>流程环节<label>请选择</label></dt>
+        </dl>
+        <dl class="checkSelect" for="checkFlowPerson" id="checkExecutor">
+            <dt>审批人员<label>请选择</label></dt>
+        </dl>
+    </div>
+</div>
+<div id="connect" class="scene" style="display: none;">
+	<header class="header box">
+		<a href="javascript:" class="l iconfont editorBack" style="color:#fff;font-size:20px;">&#xe606;</a>
+       	<h1>乘机人</h1>
+		<a href="javascript:" class="r editorBack" style="color:#fff;">完成</a>
+	</header>
+	<div class="addConnect">
+		<span class="addNew">+新增联系人</span>
+	</div>
+	<div id="buyOthers" style="display: none;">${userDTO.buyOthers}</div>
+	<div id="connectList">
+		<#list users as user>
+			<div class="connectBox box">
+			<span class="choose" data="${user.id}"></span>
+				<div class="passengerDetail">
+					<span class="phone" style="display: none">${user.telephone}</span>
+					<span class="myid" style="display: none">${user.id}</span>
+					<span class="name">${user.passengerName}</span> <span class="group"
+						data-value="${user.costCenterID}">${user.costCenterName}</span> <span
+						class="cardDetail">身份证 <i>${user.idNO}</i></span> <label
+						class="editor"><img
+						src="${contextPath}/resources/images/reserveOrder.png" alt="" /></label>
+				</div>
+			</div>
+		</#list>
+	</div>
+</div>
+<!--js模版  -->
+<div id="passengerBoxTemp" style="display:none;">
+ <div class="passengerBox box">
+     <span class="del" data="{myid}"></span>
+     <div class="passengerDetail">
+     	 <span class="myid" style="display:none">{myid}</span>
+     	 <span class="phone" style="display:none">{phone}</span>
+         <input type="hidden" hidden="hidden" name="passengerTel" value="{phone}"/>
+         <span class="name">{name}</span>
+         <input class="name" type="hidden" hidden="hidden" name="passengerName" value="{name}"/>
+         <span class="group" data-value="{groupId}">{group}</span>
+	     <input class="costCenterIDs" type="text" hidden="hidden" name="costCenterIDs" value="{groupId}" id="costCenterIDs">
+         <span class="cardDetail">身份证 <i>{cardDetail}</i></span>
+         <input  class="cardDetail" type="hidden" hidden="hidden" name="passengeridCardNO" value="{cardDetail}"/>
+         <label class="iconfont">&#xe606;</label>
+     </div>
+ </div>
+ </div>
+</body>
+</html>

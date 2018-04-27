@@ -1,0 +1,66 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/config/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		
+		<div class="searchBar">
+			<ul class="searchContent">
+				<li><label>配置名：</label> <input type="text" name="confName"
+					value="${confName?default('')?html}" /></li>
+			</ul>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" href="${contextPath}/config/add"
+				lookupgroup="orgLookup" mask="true"><span>添加</span>
+			</a>
+			</li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+<!-- 				<th width="10" >id</th> -->
+				<th width="50" >配置名</th>
+				<th width="30" >配置值</th>
+				<th width="30" >是否可用</th>
+				<th width="30" >备注</th>
+				<th width="40">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as conf>
+			<tr target="sid_user" rel="${conf.id}">
+<!-- 				<td>${conf.id}</td> -->
+				<td>${conf.confName!?html}</td>
+				<td>${conf.confValue!?html}</td>
+				<td><#if conf.enable()>可用<#else>不可用</#if></td>
+				<td>${conf.remark!?html}</td>
+				<td>
+					<a title="删除" target="ajaxTodo" href="${contextPath}/config/del?id=${conf.id}" class="btnDel">删除</a>
+					<a title="编辑" target="dialog" mask="true" href="${contextPath}/config/edit?id=${conf.id}" class="btnEdit">编辑</a>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	
+	<#include "/public/pagination/pagination.html">
+</div>

@@ -1,0 +1,336 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/payRecord/air/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent"
+				<tr>
+					<td>
+						平台订单号：
+					</td>
+					<td>
+						<input name="platOrderNo" value="${(airPayRecordQO.platOrderNo)!''}"/>
+					</td>
+					
+					<td>
+						经销商订单号：
+					</td>
+					<td>
+						<input name="dealerOrderNo" value="${(airPayRecordQO.dealerOrderNo)!''}"/>
+					</td>
+					
+					<td>
+						供应商订单号订单号：
+					</td>
+					<td>
+						<input name="supplierNo" value="${(airPayRecordQO.supplierNo)!''}"/>
+					</td>
+					
+					</tr>
+					<tr>
+					<td>订单状态：</td>
+					<td>
+						
+                          <select name="orderStatus" id="orderStatus">
+							<option value="">全部状态</option>
+							 <#list statusList as status>
+								<option value="${(status.key)!''}" <#if airPayRecordQO.orderStatus == status.key> selected="selected"</#if>>${status.value!?html}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					<td>支付状态：</td>
+					<td>
+						
+                          <select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							 <#list orderPayStatusList as status>
+								<option value="${(status.key)!''}" <#if airPayRecordQO.payStatus== status.key>selected="selected"</#if>>${status.value!?html}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					<td>
+						订购人：
+					</td>
+					<td>
+						<input type="text" name="booker" value="${(airPayRecordQO.booker)!''}" />
+					</td>
+					</tr>
+	               
+				<tr>
+					
+					<td>
+						来源项目：
+					</td>
+					<td>
+					
+					 <select name="fromProjectCode" id="fromProjectCode">
+					 
+						  <option value="">全部来源项目</option>
+							<#if PAY_RECORD_PROJECT_TYPE_MAP??>
+		                    <#list PAY_RECORD_PROJECT_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}" <#if itemKey == airPayRecordQO.fromProjectCode >selected="selected" </#if>>
+		                        ${PAY_RECORD_PROJECT_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+					</td>
+					<td>
+						支付时间：
+					</td>
+					<td>
+						<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(airPayRecordQO.payDateFrom?string('yyyy-MM-dd'))!''}" class="date"/>
+						至
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(airPayRecordQO.payDateTo?string('yyyy-MM-dd'))!''}" class="date"/></td>
+					</td>
+					
+				</tr>
+				<tr>
+					<td>记录类型：</td>
+					<td>
+						
+                       <select name="recordType" id="recordType">
+						  <option value="">全部记录类型</option>
+							<#if PAY_RECORD_TYPE_MAP??>
+		                    <#list PAY_RECORD_TYPE_MAP?keys as itemKey>
+		                       <option value="${itemKey}"<#if itemKey == airPayRecordQO.recordType>selected="selected" </#if>>
+		                        ${PAY_RECORD_TYPE_MAP[itemKey]}</option>
+		                   </#list>
+		                   </#if>
+						</select>
+                      	
+					</td>
+					<td>
+						支付流水号：
+					</td>
+					<td>
+						<input type="text" name="paySerialNumber" value="${(airPayRecordQO.paySerialNumber)!''}" />
+					</td>
+					
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button"><a target="dialog" href="${contextPath}/payRecord/air/toExport">
+								导出
+							</a></button>
+							</div>
+							
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent" id="table_c">
+	<div class="panelBar">
+		<div class="panelBar">
+		<ul class="toolBar">
+			 <li>
+               <a width="700" height="800" rel="air" class="add" href="${contextPath}/payRecord/air/toAdd" target="dialog" maxable="false" resizable="false"><span>新增机票支付记录</span></a>
+           </li>
+		</ul>
+	</div>
+	</div>
+	<table class="table" width="100%" layoutH="210" id="table_caiwu">
+		<thead>
+			<tr>
+				<!-- <th width="22"><input type="checkbox" group="ids"
+					class="checkboxCtrl"> -->
+				</th>
+ 				<th width = "30">来源项目标识</th>
+<!--  				<th width = "30">来源项目IP</th> -->
+				<th width="40">平台订单号</th>
+				<th width="40">经销商订单号</th>
+				<th width = "30">供应商订单号</th>
+<!-- 				<th width="30">订购人</th> -->
+				<th width = "60">乘机人</th>
+<!-- 				<th width = "90">出发地</th> -->
+<!-- 				<th width = "90">目的地</th> -->
+<!-- 				<th width = "60">航空公司</th> -->
+<!-- 				<th width = "90">航班号</th> -->
+<!-- 				<th width = "70">舱位代码</th> -->
+<!-- 				<th width = "70">舱位名称</th> -->
+<!-- 				<th width = "60">pnr</th> -->
+<!-- 				<th width = "90">创建时间</th> -->
+<!-- 				<th width = "90">支付方式</th> -->
+				<th width = "90">付款帐号</th>
+				<th width = "90">支付流水号</th>
+				<th width = "90">支付时间</th>
+				<th width = "90">订单总金额</th>
+				<th width = "90">收入金额</th>
+				<th width = "90">支出金额</th>
+				<th width = "90">返点/折扣</th>
+				<th width = "90">佣金</th>
+				<th width = "90">订单状态</th>
+				<th width = "90">支付状态</th>
+				<th width = "90">记录类型</th>
+<!-- 				<th width = "90">备注</th> -->
+                <th width = "90">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as airPayRecordDTO>
+				<tr height="60px">
+				<!-- <td><input name="ids" value="" type="checkbox"></td> -->
+				<td>
+				    <#list PAY_RECORD_PROJECT_TYPE_MAP?keys as itemKey>
+				         <#if airPayRecordDTO.fromProjectCode ??>
+			                 <#if itemKey == airPayRecordDTO.fromProjectCode >
+			                        ${PAY_RECORD_PROJECT_TYPE_MAP[itemKey]}
+			                  </#if>
+		                  </#if>
+		            </#list>
+				 </td>
+<!-- 				<td>${(airPayRecordDTO.fromProjectIP)!''}</td> -->
+				<td>${(airPayRecordDTO.platOrderNo)!''}</td>				
+				<td>${(airPayRecordDTO.dealerOrderNo)!''}</td>
+				<td>${(airPayRecordDTO.supplierNo)!''}</td>
+<!-- 				<td> -->
+<!-- 					${(airPayRecordDTO.booker)!''} -->
+<!-- 				</td> -->
+				<td>${(airPayRecordDTO.passengers)!''}</td>
+<!-- 				<td> -->
+<!-- 					${(airPayRecordDTO.startCity)!''} -->
+<!-- 				</td> -->
+			
+<!-- 				<td> -->
+<!-- 					${(airPayRecordDTO.destCity)!''} -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 				    ${(airPayRecordDTO.airCompName)!''} -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					${(airPayRecordDTO.flightNo)!''} -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					${(airPayRecordDTO.classCode)!''} -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 					 ${(airPayRecordDTO.cabinName)!''} -->
+<!-- 				</td> -->
+				
+<!-- 				<td> -->
+<!-- 					 ${(airPayRecordDTO.pnr)!''} -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 				    <#if airPayRecordDTO.createTime ??> -->
+<!-- 					   ${(airPayRecordDTO.createTime)?string("yyyy-MM-dd HH:mm:ss")} -->
+<!-- 					</#if> -->
+<!-- 				</td> -->
+<!-- 				<td> -->
+<!-- 				     <#list PAYMENT_TYPE?keys as itemKey> -->
+<!-- 				         <#if airPayRecordDTO.payPlatform ??> -->
+<!-- 			                 <#if itemKey == airPayRecordDTO.payPlatform > -->
+<!-- 			                        ${PAYMENT_TYPE[itemKey]} -->
+<!-- 			                  </#if> -->
+<!-- 		                  </#if> -->
+<!-- 		            </#list> -->
+<!-- 				</td> -->
+				<td>
+					${(airPayRecordDTO.payAccountNo)!''}
+				</td>
+				<td>
+					${(airPayRecordDTO.paySerialNumber)!''}
+				</td>
+				<td>
+				    <#if airPayRecordDTO.payTime ??>
+					  ${(airPayRecordDTO.payTime)?string("yyyy-MM-dd HH:mm:ss")}
+					</#if>
+				</td>
+				<td>
+				    <#if airPayRecordDTO.orderPrice ??>
+					${(airPayRecordDTO.orderPrice)?string('0.00')}
+					</#if>
+				</td>
+				<td>
+				    <#if airPayRecordDTO.incomeMoney ??>
+					${(airPayRecordDTO.incomeMoney)?string('0.00')}
+					</#if>
+				</td>
+				<td>
+				    <#if airPayRecordDTO.payMoney ??>
+					  ${(airPayRecordDTO.payMoney)?string('0.00')}
+					</#if>
+				</td>
+				<td>
+				    <#if airPayRecordDTO.rebate ??>
+					  ${(airPayRecordDTO.rebate)?string('0.00')}
+					</#if>
+				</td>
+				<td>
+				    <#if airPayRecordDTO.brokerage ??>
+					  ${(airPayRecordDTO.brokerage)?string('0.00')}
+					</#if>
+				</td>
+				<td>
+					 <#list statusList as status>
+					    <#if airPayRecordDTO.orderStatus ??>
+						  <#if airPayRecordDTO.orderStatus== status.key>${status.value!?html}</#if> 
+						</#if>
+				     </#list>
+                                   
+				</td>
+				<td>
+					 <#list orderPayStatusList as payStatus>
+					   <#if airPayRecordDTO.payStatus ??>
+						<#if airPayRecordDTO.payStatus== payStatus.key>${payStatus.value!?html}</#if> 
+						</#if> 
+				     </#list>
+              
+				</td>
+				
+				<td>
+				     <#list PAY_RECORD_TYPE_MAP?keys as itemKey>
+				         <#if airPayRecordDTO.recordType ??>
+			                 <#if itemKey == airPayRecordDTO.recordType >
+			                        ${PAY_RECORD_TYPE_MAP[itemKey]}
+			                  </#if>
+		                  </#if>
+		            </#list>
+				</td>
+<!-- 				<td> -->
+<!-- 					${(airPayRecordDTO.remarks)!''} -->
+<!-- 				</td> -->
+				<td>
+					<a target="dialog" href="${contextPath}/payRecord/air/toChange?id=${airPayRecordDTO.id!''}" width="600" height="800" style="color: blue">
+						修改记录
+					</a>
+				</td>
+			</tr>
+			</#list>
+			
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>
+<script>
+  function getJPPaymentRecordExcel(){
+	  
+	 // $("#pagerForm").attr("action","${contextPath}/pay/jp_record/getJPPaymentRecordExcel");
+	//  $("#pagerForm").submit();
+	  window.location.href="${contextPath}/payRecord/air/getAirPaymentRecordExcel";
+  }
+  function searchJPPaymentRecord(){
+	 // $("#pagerForm").attr("action","${contextPath}/pay/jp_record/list");
+	 // $("#pagerForm").submit();
+  }
+</script>

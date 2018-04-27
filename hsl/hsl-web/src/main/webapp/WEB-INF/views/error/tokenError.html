@@ -1,0 +1,26 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "页面超时">
+<link href="${(contextPath)!}/resources/css/cart.css" type="text/css" rel="stylesheet" />
+</@frame.head>
+    <@frame.main "default" "5">
+  <div class="content">
+  <div class="h40"></div>
+     <div class="h40"></div>
+     <div class="s_myoder">
+     <div class="s_txt">页面超时</i></div>
+     <div class="h40"></div>
+     <div class="s_txt">
+     	表单已经提交，请不要重复提交，请稍后查看表单处理结果<br />
+     </div>
+     <div class="zf-th"></div>
+     </div>
+      
+  </div>
+ <div class="h4"></div>
+  <div class="T_top"> </div>
+  </@frame.main>
+ 	<@frame.end "default"> </@frame.end>
+<script type="text/javascript" src="${(contextPath)!}/resources/js/common.js"> </script>
+</body>
+</html>

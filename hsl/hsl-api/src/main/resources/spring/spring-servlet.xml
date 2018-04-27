@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+    http://www.springframework.org/schema/jee 
+    http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
+	default-autowire="byName">
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean
+					class="org.springframework.http.converter.ResourceHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<mvc:annotation-driven />
+	<context:component-scan base-package="hsl.spi.controller" />
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
+
+	<!-- <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer"> 
+		<property name="resourceLoaderPath" value="/WEB-INF/views/" /> </bean> <bean 
+		id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver"> 
+		<property name="suffix" value=".vm" /> <property name="dateToolAttribute" 
+		value="dateTool" /> <property name="number ToolAttribute" value="numberTool" 
+		/> <property name="exposeRequestAttributes" value="true" /> <property name="exposeSessionAttributes" 
+		value="true" /> <property name="exposeSpringMacroHelpers" value="true" /> 
+		</bean> -->
+
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="viewClass"> <value>org.springframework.web.servlet.view.JstlView</value> 
+		</property> <property name="prefix"> <value>/WEB-INF/views/</value> </property> 
+		<property name="suffix"> <value>.jsp</value> </property> </bean> -->
+
+
+
+	<!-- 拦截器 
+	<mvc:interceptors>
+		<bean class="shop.web.interceptor.CommonInterceptor"></bean>
+	</mvc:interceptors>-->
+</beans>

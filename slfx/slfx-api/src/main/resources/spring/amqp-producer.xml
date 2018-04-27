@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+	<!-- RabbitMQ连接工厂 -->
+	<rabbit:connection-factory id="connectionFactory" host="${rmq_host}" port="${rmq_port}" virtual-host="${rmq_virtual}" 
+		username="${rmq_username}" password="${rmq_password}" />
+		
+	<!-- RabbitMQ管理员 -->
+	<rabbit:admin connection-factory="connectionFactory" />
+		
+	<!-- 消息交换机 -->
+	<rabbit:topic-exchange name="slfxExchange_${rmq_env_name}"/>
+	
+	<!-- 消息转换器 -->
+	<bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.JsonMessageConverter" />
+	 
+	<!-- 消息工具 -->
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory" exchange="slfxExchange_${rmq_env_name}" 
+		encoding="UTF-8" message-converter="jsonMessageConverter" />
+	
+</beans>  
+

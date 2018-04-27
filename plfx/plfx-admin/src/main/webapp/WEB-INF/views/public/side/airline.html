@@ -1,0 +1,51 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>国内机票管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a href="${contextPath}/jp/order/list" target="navTab"
+				rel="order">订单管理</a></li>
+			<li><a>财务管理</a>
+				<ul>
+					<li><a href="${contextPath}/airtkt/gnjp/supplier/income_refund/list"
+						target="navTab" rel="supplier_income_refund">供应商平台支出/退款明细</a></li>
+					<li><a href="${contextPath}/airtkt/gnjp/customer/income_refund/list"
+						target="navTab" rel="customer_income_refund">用户收入/退款明细</a></li>
+					<li><a href="${contextPath}/jp/finance/orderList?type=1"
+						target="navTab" rel="errorOrderList">平台异常订单</a></li>
+					<li><a href="${contextPath}/jp/finance/list" target="navTab"
+						rel="finalncialStatements">财务报表</a></li>
+				</ul></li>
+		</ul>
+	</div>
+	
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>国际机票管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+			<li><a href="${contextPath}/gjjp/order/list" target="navTab"
+				rel="gj_order">订单管理</a></li>
+			<li><a>财务管理</a>
+				<ul>
+					<li><a href="${contextPath}/airtkt/gjjp/supplier_outcome_refund/list"
+						target="navTab" rel="gj_supplier_outcome_refund">供应商平台支出/退款明细</a></li>
+					<li><a href="${contextPath}/airtkt/gj_customer/income_refund/list"
+						target="navTab" rel="gj_customer_income_refund">用户收入/退款明细</a></li>
+					<li><a href="${contextPath}/gjjp/exception/orderList"
+						target="navTab" rel="gj_exception_order_list">平台异常订单</a></li>
+					<li><a href="${contextPath}/gjjp/finance/report" target="navTab"
+						rel="gj_finance_report">财务报表</a></li>
+				</ul></li>
+		</ul>
+	</div>
+</div>
+
+
+

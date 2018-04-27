@@ -1,0 +1,251 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/kindeditor/themes/default/default.css" />
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/kindeditor.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/lang/zh_CN.js"></script>
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/scenic/create"
+		class="pageForm required-validate"
+		onsubmit="return custValidateForm(this);">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>景区名称：</label> <input type="text" name="name" size="100" class="required" maxlength="50" placeholder="输入景区名称"  />
+			</div>
+
+			<div class="unit" style="height:110px">
+				<label>景区地址：</label> 
+				<p><select id="province" name="provinceId" class="required">
+					<option value="">---选择省---</option>
+					<#list provinces as province>
+	      					<option value="${(province.code)!}" >${(province.name)!}</option>
+	      			</#list>
+				</select>
+				<select id="city" name="cityId" class="required">
+					<option value="">---选择市---</option>
+				</select></p>
+				<p style="float:left;width:100%; margin-left:131px; _display:inline"  ><textarea rows="5" cols="50" name="address" ></textarea></p>
+			</div>
+
+			<div class="unit">
+				<label>景区级别：</label> 
+				<select name="grade" class="required">
+					<option value="">---请选择---</option>
+					<#list grades as s>
+						<option value="${s!}">${s!}</option>
+					</#list>
+				</select>
+			</div>
+			<div class="unit">
+				<label>景区联系人：</label>
+				<input type="text" name="linkMan" size="100" class="required" maxlength="20"/>
+			</div>
+			<div class="unit">
+				<label>联系电话：</label> 
+				<input type="text" id="tel" name="tel" size="100" class="required " />
+			</div>
+			<div class="unit">
+				<label>联系邮箱：</label> 
+				<input type="text" name="email" size="100" class="required email"  />
+			</div>
+			<div class="unit" style="height: 100px">
+				<label>封面图片：</label>
+				<p style="width:160px">
+				<img alt="" id="scenicTitleImage" width="100" height="100">
+				<input type="hidden" readonly="readonly" name="fdfsFileInfoJSON" class="required"/></p>
+				<p><input type="file" name="fileName" id="add_scenic_file_upload" /></p>
+				<p>建议尺寸580*300</p>
+			</div>
+			<div class="unit">
+				<label>景区介绍：</label>
+				<textarea name="intro" id="scenic_add_editor" style="width:700px;height:425px;" class="required" maxlength="10000"></textarea>
+			</div>
+			<div class="unit">
+				<label>交通指南：</label>
+				<textarea name="traffic" id="traffic_add_editor" style="width:700px;height:425px;" class="required" maxlength="10000"></textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		//渲染编辑器
+		initKindEditor();
+		$("#add_scenic_file_upload").uploadify({
+	         'method'   : 'post',  
+	         'buttonText' : '请选择',  
+	         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+	 		 'uploader'      : '${contextPath}/image/upload',
+	         'fileObjName'   : 'imgFile', 
+	         'onUploadSuccess' : function(file, data, response) {
+	        	 var img=$.parseJSON(data)
+	             $('input[name=fdfsFileInfoJSON]').val(JSON.stringify(img.fdfsFileInfo));
+	             $('#scenicTitleImage').attr('src',img.url);
+	         }  
+	     });  
+		//页面加载的时候，把城市初始化选中
+		if($("#province").val()!=""){
+			$.ajax({
+			       type: "POST",
+			       url: "${contextPath}/scenic/searchCity?province="+$("#province").val(),
+			       contentType: "application/x-www-form-urlencoded; charset=utf-8",
+			       dataType:"json",
+			       success: function(data) {
+			    	   if (data.length > 0) {  
+				            var layer = "<option value='0'>---请选择---</option>";  
+				            $.each(data, function (idx, item) {
+				            	if($("#cityId").val()==item.code){
+				            		layer += "<option value="+item.code +" selected='selected'>"+ item.name + "</option>"; 
+				            	}else{
+				            		layer += "<option value="+item.code +" >"+ item.name + "</option>"; 
+				            	}
+				            });
+				            
+							$("#city").empty();
+							$("#city").append(layer);
+				        }
+			       }
+			});
+		}
+		$("#province").change(function(){
+			if($("#province").val()==""){
+				var layer = "<option value=''>---请选择---</option>";  
+				$("#city").empty();
+				$("#city").append(layer);
+			}else{
+				$.ajax({
+				       type: "POST",
+				       url: "${contextPath}/scenic/searchCity?province="+$("#province").val(),
+				       contentType: "application/x-www-form-urlencoded; charset=utf-8",
+				       dataType:"json",
+				       success: function(data) {
+				    	   if (data.length > 0) {  
+				    		   var layer = "<option value=''>---请选择---</option>";  
+					            $.each(data, function (idx, item) {  
+					                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+					            });
+								$("#city").empty();
+								$("#city").append(layer);
+					        }
+				       }
+				});
+			}
+		});
+	});
+	function initKindEditor(){
+		var editor;
+		var traffic_editor;
+		editor = KindEditor.create('#scenic_add_editor',{
+			basePath : '${contextPath}/resources/js/kindeditor/',
+			items : [
+			 		'source', '|', 'undo', 'redo', '|', 'preview',  'template', 'code', 'cut', 'copy', 'paste',
+			 		'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			 		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			 		'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			 		'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			 		'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+			 		 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			 		'anchor', 'link', 'unlink', '|'
+			 	],
+			uploadJson : '${contextPath}/image/upload',
+			afterChange : function() {
+				this.sync();
+			}
+		});
+		traffic_editor = KindEditor.create('#traffic_add_editor',{
+			basePath : '${contextPath}/resources/js/kindeditor/',
+			items : [
+			 		'source', '|', 'undo', 'redo', '|', 'preview',  'template', 'code', 'cut', 'copy', 'paste',
+			 		'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			 		'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			 		'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			 		'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			 		'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 
+			 		 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			 		'anchor', 'link', 'unlink', '|'
+			 	],
+			uploadJson : '${contextPath}/image/upload',
+			afterChange : function() {
+				this.sync();
+			}
+		});
+	}
+	function checkForm(){
+		var mobile=$("#").val();
+	}
+	
+	 //自主校验form
+    function custValidateForm(fr){
+		 		 
+		 //校验联系电话
+		 var reg=new RegExp(/^((0?1\d{10})|(\d{3,4}-\d{7,8}))$/);
+    	// var reg = /^0?(13|15|18)[0-9]{9}/;
+		 var tel = $("#tel").val();
+		 if(!reg.test(tel)){
+			 alertMsg.error("手机号码有误");
+   			 return false;
+		 }
+		 		 
+		 
+    	return validateCallback(fr, custAjaxDone);
+	 }
+	 
+    /**
+     * 自定义处理ajax的方法
+     */
+     function custAjaxDone(json){
+  		
+    		DWZ.ajaxDone(json);
+    		if (json.statusCode == DWZ.statusCode.ok){
+    			if (json.navTabId){ //把指定navTab页面标记为需要“重新载入”。注意navTabId不能是当前navTab页面的
+    				navTab.reloadFlag(json.navTabId);
+    			} else { //重新载入当前navTab页面
+    				var $pagerForm = $("#pagerForm", navTab.getCurrentPanel());
+    				var args = $pagerForm.size()>0 ? $pagerForm.serializeArray() : {}
+    				navTabPageBreak(args, json.rel);
+    			}
+    			
+    			if ("closeCurrent" == json.callbackType) {
+    				setTimeout(function(){navTab.closeCurrentTab(json.navTabId);}, 100);
+    			} else if ("forward" == json.callbackType) {
+    				navTab.reload(json.forwardUrl);
+    			} else if ("forwardConfirm" == json.callbackType) {
+    				alertMsg.confirm(json.confirmMsg || DWZ.msg("forwardConfirmMsg"), {
+    					okCall: function(){
+    						navTab.reload(json.forwardUrl);
+    					}
+    				});
+    			} else if ("openNew" == json.callbackType) {
+    				navTab.openTab(json.navTabId, '${contextPath}/scenic/list',{title:"景区列表", fresh:true, external:false});
+    				navTab.closeTab("scenicAdd");
+    			} else {
+    				navTab.getCurrentPanel().find(":input[initValue]").each(function(){
+    					var initVal = $(this).attr("initValue");
+    					$(this).val(initVal);
+    				});
+    			}
+    		}
+
+    	
+     }
+	
+	
+</script>
+</div>
+

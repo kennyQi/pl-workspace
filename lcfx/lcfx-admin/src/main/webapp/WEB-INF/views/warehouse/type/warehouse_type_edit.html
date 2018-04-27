@@ -1,0 +1,79 @@
+ <#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	
+</script>
+<div class="pageContent">
+	<form method="post" action="${contextPath}/warehouse/type/update" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input name="id" type="hidden" readonly value="${warehouseType.id}" />
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>仓库类型名称：</dt>
+					<dd>
+						<input type="text" value="${warehouseType.name}" class="required" maxlength="20" readonly />
+						<input name="warehouseTypeId" type="hidden" value="${warehouseType.id}" required />
+					</dd>
+				</dl>
+				<dl>
+					<dt>物流操作员：</dt>
+					<dd>
+						<input name="operator" type="text" value="${warehouseType.operator}" maxlength="20" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>保价比例：</dt>
+					<dd>
+						<input name="insuredRate" type="text" class="number" value="<#if (warehouseType.insuredRate)>${warehouseType.insuredRate!?c}</#if>" />&nbsp;‰
+					</dd>
+				</dl>
+				<dl>
+					<dt>接口开启：</dt>
+					<dd>
+						<select name="using"> <#if (warehouseType.using) >
+							<option value="false">关闭</option>
+							<option value="true" selected="selected">开启</option> <#else>
+							<option value="false" selected="selected">关闭</option>
+							<option value="true">开启</option> </#if>
+						</select>
+					</dd>
+				</dl>
+				<dl>
+					<dt>渠道商ID：</dt>
+					<dd>
+						<input name="channelId" type="text" readonly value="${warehouseType.channelId}" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>物流接口地址：</dt>
+					<dd>
+						<input name="portUrl" type="text" value="${warehouseType.portUrl}" maxlength="100" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>物流加密串：</dt>
+					<dd>
+						<input name="key" type="text" value="${warehouseType.key}" maxlength="64" />
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

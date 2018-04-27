@@ -1,0 +1,145 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+
+
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>等级管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li>
+					<a href="${contextPath}/grade/list" target="navTab" rel="gradeList">等级设置</a>
+				</li>
+							
+			</ul>
+		</div>
+		
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>账户管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li>
+					<a href="${contextPath}/account/jf/query" target="navTab" rel="jfQuery">积分查询</a>
+				</li>
+				<li>
+					<a href="${contextPath}/account/jf/flow" target="navTab" rel="jfFlow">积分流水查询</a>
+				</li>
+				 <li>
+					<a href="${contextPath}/account/jf/check" target="navTab" rel="jfCheck">积分对账单查询</a>
+				</li> 				
+			</ul>
+		</div>
+		<!-- <div class="accordionHeader">
+			<h2>
+				<span>Folder</span>账户管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li>
+					<a href="${contextPath}/service/toAdjustJF" target="navTab" rel="jfAdjust">积分调整</a>
+				</li>
+		  	<li>
+					<a href="${contextPath}/service/toBatchAdjustJF" target="navTab" rel="jfAdjust">批量调整</a>
+				</li>
+			 
+			</ul>
+		</div>	 -->
+		
+		
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>规则管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li>
+					<a href="${contextPath}/template/list" target="navTab" rel="templateList">模版管理</a>
+				</li>
+				<li>
+					<a href="${contextPath}/rule/list" target="navTab" rel="ruleList">规则管理</a>
+				</li>
+
+			</ul>
+		</div>		
+		<div class="accordionHeader">
+			<h2>
+				<span>Folder</span>交易管理
+			</h2>
+		</div>
+		<div class="accordionContent">
+			<ul class="tree">
+				<li>
+					<a href="${contextPath}/cal/list" target="navTab" rel="calList">计算日志查看</a>
+				</li>
+				<li>
+					<a href="${contextPath}/session/list" target="navTab" rel="sessionList">中间数据查看</a>
+				</li>
+				<li>
+					<a href="${contextPath}/cal/listTrade" target="navTab" rel="calList">交易日志查看</a>
+				</li>
+				
+			</ul>
+		</div>		
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>系统管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+					<li><a href="${contextPath}/system/organ/list" target="navTab"
+						rel="sysOrgan">机构查看</a>
+					</li>
+					<li><a href="${contextPath}/system/trade/lists" target="navTab"
+						rel="sysTrade">交易类型查看</a>
+					</li>
+					<li>
+						<a href="${contextPath}/system/accounttype/list" target="navTab" 
+						rel="sysAccountType">账户类型查看</a>
+					</li>
+		</ul>
+	</div>
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>运维安全管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+
+					<li><a href="${contextPath}/auth/perm/index" target="navTab"
+						rel="authPerm">资源管理</a>
+					</li>
+					<li><a href="${contextPath}/auth/role/list" target="navTab"
+						rel="authRole">角色管理</a>
+					</li>
+					<li>
+						<a href="${contextPath}/system/operator/list" target="navTab" rel="operator">操作员管理</a>
+					</li>
+		</ul>
+	</div>
+	 <div class="accordionHeader">
+		<h2>
+			<span>Folder</span>服务安全管理
+		</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree">
+					<li><a href="${contextPath}/home/list" target="navTab"
+						rel="authRole">机构安全信息查看</a>
+					</li>
+		</ul>
+	</div> 	
+	</div>
+</div>
+
+
+
+

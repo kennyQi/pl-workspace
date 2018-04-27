@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{min-width:320px;}
+*{padding:0px;margin:0px;list-style:none;font-family:"SimHei","黑体","Arail";}
+.fl{float:left;overflow:hidden;}
+.fr{float:right;overflow:hidden;}
+.pl{position:relative;}
+.pa{position:absolute;}
+
+*{font-size:62.5%;line-height:1.2em;}
+
+.paT{padding-top:30px;}
+.paL{padding-left:30px;}
+.paR{padding-right:30px;}
+.paB{padding-bottom:30px;}
+
+@media screen and (max-width:380px){
+*{font-size:31.2%;}
+.paT{padding-top:15px;}
+.paL{padding-left:15px;}
+.paR{padding-right:15px;}
+.paB{padding-bottom:15px;}
+
+}
+
+@media screen and (min-width:380px) and (max-width:460px){
+*{font-size:38%;}
+.paT{padding-top:20px;}
+.paL{padding-left:20px;}
+.paR{padding-right:20px;}
+.paB{padding-bottom:20px;}
+
+}
+@media screen and (min-width:460px) and (max-width:540px){
+*{font-size:47.3%;}
+.paT{padding-top:25px;}
+.paL{padding-left:25px;}
+.paR{padding-right:25px;}
+.paB{padding-bottom:25px;}
+
+}
+

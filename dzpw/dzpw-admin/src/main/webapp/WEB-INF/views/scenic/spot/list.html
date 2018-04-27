@@ -1,0 +1,215 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#assign navTabid = navTabid!'scenic-spot' />
+<#assign pathUrl = (contextPath+'/scenic-spot') />
+
+<style>
+	#suggest ul {
+		max-height: 200px;
+		overflow: scroll;
+	}
+</style>
+<script type="text/javascript" src="resources/js/MyJs.js"></script>
+
+<div class="pageHeader">
+<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${pathUrl}/list" method="get">
+	<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+	<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+	
+	<div class="searchBar">
+		<ul class="searchContent" style="overflow: inherit;">
+			<li style="width: 250px;">
+				<label>登录账户：</label>
+				<input type="text" name="adminLoginName" value="${(scenQo.adminLoginName)!}" />
+			</li>
+			<li style="width: 250px;">
+				<label>景区名称：</label>
+				<input type="text" name="name" value="${(scenQo.name)!}"/>
+			</li>
+<#--			
+			<li style="width: 250px;">
+				<label>景区简称：</label>
+				<input type="text" name="shortName" value="${(scenQo.shortName)!}" />
+			</li>
+			-->
+			<li style="width:200px;">
+				<label>启&nbsp;&nbsp;用&nbsp;&nbsp;状&nbsp;&nbsp;态：</label>
+				<select  name="activated" >
+					<option value="">所有</option>
+					<option value="true" ${((scenQo.activated)?? && scenQo.activated)?string('selected="selected"','')}>已启用</option>
+					<option value="false" ${((scenQo.activated)?? && !scenQo.activated)?string('selected="selected"','')}>已禁用</option>
+				</select>
+			</li>
+			<!-- 
+			<li style="width:250px;">
+				<label>结算类型：</label>
+				<select name="accountType">
+					<option value="">全部</option>
+					<option value="2">支付宝</option>
+					<option value="1">汇金宝</option>
+				</select>
+			</li>
+			 -->
+			<li style="width: 250px;">
+				<label>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</label>
+				<input type="text" name="linkMan" value="${(scenQo.linkMan)!}" />
+			</li>
+			
+			<li style="width: 250px;">
+				<label>联&nbsp;&nbsp;系&nbsp;&nbsp;电&nbsp;&nbsp;话：</label>
+				<input type="text" name="telephone" value="${(scenQo.telephone)!}" />
+			</li>
+			
+			<li style="width: 499px;" id="provcityId">
+				<label>所&nbsp;&nbsp;在&nbsp;&nbsp;地：</label>
+				<select id="provinceId" name="provinceQo.id" onchange="findCity($('#provinceId').val())">
+					<option value="">所在省</option>
+					<#list provinceList as pr>
+						<option value="${pr.id}" <#if pr.id==scenQo.provinceQo.id>selected='selected'</#if> >${pr.name}</option>
+					</#list>
+				</select>
+				
+				<select id="cityId" name="cityQo.id">
+					<option value="">所在市</option>
+					<#list cityList as cl>
+						<option value="${cl.id}" <#if cl.id==scenQo.cityQo.id>selected='selected'</#if> >${cl.name}</option>
+					</#list>
+				</select>
+				
+			</li>
+			<li style="width: 499px;">
+				<label>添加时间：</label>
+				<input type="text"  class="date" readonly="true" name="createDateBegin" 
+					value="${(scenQo.createDateBegin?string('yyyy-MM-dd'))!''}" dateFmt="yyyy-MM-dd"/>
+				&nbsp;&nbsp;-&nbsp;&nbsp;
+				<input type="text"  class="date" readonly="true" name="createDateEnd" 
+					value="${(scenQo.createDateEnd?string('yyyy-MM-dd'))!''}" dateFmt="yyyy-MM-dd"/>
+			</li>
+		</ul>
+		<div class="subBar">
+			<ul>
+				<li>
+					<div class="buttonActive"><div class="buttonContent">
+						<button type="submit" style="width:35px;">查询</button>
+					</div></div>
+				</li>
+				<li>
+					<div class="buttonActive"><div class="buttonContent">
+						<button type="button" onclick="initText()" style="width:35px;">重置</button>
+					</div></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar"><ul class="toolBar">
+		<li><a class="add" href="${pathUrl}/add?navTabid=${navTabid}" target="dialog" rel="monitorDiag" mask="true" width="880" height="800"><span>添加景区</span></a></li>
+		<li>&nbsp;</li>
+		<li><a title="确认启用这些吗？" class="edit" href="${pathUrl}/change1?navTabid=${navTabid}" target="selectedTodo" rel="scenicSpotId"><span>批量启用</span></a></li>
+		<li>&nbsp;</li>
+		<li><a title="确认禁用这些吗？" class="icon" href="${pathUrl}/change2?navTabid=${navTabid}" target="selectedTodo" rel="scenicSpotId"><span>批量禁用</span></a></li>
+		<li>&nbsp;</li>
+		<li><a title="确认删除这些吗？" class="delete" href="${pathUrl}/delete?navTabid=${navTabid}" target="selectedTodo" rel="scenicSpotId"><span>批量删除</span></a></li>
+	</ul></div>
+	<#include "/public/pagination/pagination.html">
+	<table class="table" width="100%" layoutH="170">
+		<thead>
+			<tr>
+			<!-- 登录账号、景点名称、景点简称、联系人、电话、所在地、添加时间、联票数、状态、操作 -->
+				<th width="3%"><input class="checkboxCtrl" group="scenicSpotId" type="checkbox"
+					style="width: 13px;margin: 5px 0px 0px 10px;"/></th>
+				<th width="8%">登录账户</th>
+				<th width="6%">景区代码</th>
+				<th width="10%">景点名称</th>
+				<!-- <th width="5%" >景点简称</th> -->
+				<th width="10%">联系人</th>
+				<th width="10%">联系邮箱</th>
+				<th width="10%">联系电话</th>
+				<th width="8%">手续费(元/人次)</th>
+				<th width="10%">所在地</th>
+				<th width="7%">添加时间</th>
+				<th width="6%">启用状态</th>
+				<th width="15%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#list pagination.list as scen>
+		<tr>
+			<td>
+				<input class="checkboxCtrl" type="checkbox" name="scenicSpotId" style="width:13px;margin:5px 0px 0px 10px;" value="${scen.id}"/>
+			</td>
+			<td>${(scen.superAdmin.adminLoginName)!'-'}</td>
+			<td>${(scen.baseInfo.code)!''}</td>
+			<td>${(scen.baseInfo.name)!'-'}</td>
+			<#--<td>${(scen.baseInfo.shortName)!'-'}</td>-->
+			<td>${(scen.contactInfo.linkMan)!'-'}</td>
+			<td>${(scen.contactInfo.email)!'-'}</td>
+			<td>${(scen.contactInfo.telephone)!'-'}</td>
+			 <#--
+			 <td><#if scen.certificateInfo.accountType==1>汇金宝<#elseif scen.certificateInfo.accountType==2>支付宝</#if></td>
+-->			<td>${(scen.settleInfo.settlementFee)!''}</td>
+			 
+			<td>${(scen.baseInfo.province.name)!}&nbsp;-&nbsp;${(scen.baseInfo.city.name)!}</td>
+			<td>${(scen.baseInfo.createDate?string("yyyy-MM-dd HH:mm:ss"))!'-'}</td>
+			<td>${(scen.status.activated)?string('已启用','已禁用')}</td>
+			<td>
+				<a title="查看‘${(scen.baseInfo.name)!'-'}’详情" target="dialog" rel="monitorDiag" mask="true" href="${pathUrl}/info?id=${scen.id}&navTabid=${navTabid}" style="color: blue" width="850" height="800">查看详情</a>
+				&nbsp;&nbsp;
+				<#if (!scen.status.activated)>
+					<a title="确认启用‘${(scen.baseInfo.name)!'-'}’吗？" target="ajaxTodo" href="${pathUrl}/change1?scenicSpotId=${scen.id}&navTabid=${navTabid}"  style="color: blue" >启用</a>
+					&nbsp;&nbsp;
+					<a title="编辑‘${(scen.baseInfo.name)!'-'}’" target="dialog" rel="monitorDiag" mask="true" href="${pathUrl}/edit?id=${scen.id}&navTabid=${navTabid}" style="color: blue" width="850" height="800">修改</a>
+					&nbsp;&nbsp;
+					<a title="确认删除‘${(scen.baseInfo.name)!'-'}’吗？"  style="color: blue" target="ajaxTodo" href="${pathUrl}/delete?scenicSpotId=${scen.id}&navTabid=${navTabid}">删除</a>
+				</#if>
+				<#if (scen.status.activated)>
+					<a title="确认禁用‘${(scen.baseInfo.name)!'-'}’吗？" target="ajaxTodo" href="${pathUrl}/change2?scenicSpotId=${scen.id}&navTabid=${navTabid}"  style="color: blue" >禁用</a>
+				</#if>
+			</td>
+		</tr>
+		</#list>
+		</tbody>
+	</table>
+	
+</div>
+
+<script type="text/javascript">
+	
+	function initText(){
+		$("input[name='adminLoginName']", navTab.getCurrentPanel()).attr("value",'');
+		$("input[name='name']", navTab.getCurrentPanel()).attr("value","");
+		$("input[name='shortName']", navTab.getCurrentPanel()).attr("value","");
+		$("input[name='telephone']", navTab.getCurrentPanel()).attr("value","");
+		$("input[name='linkMan']", navTab.getCurrentPanel()).attr("value","");
+		$("select[name='activated']", navTab.getCurrentPanel()).attr("value","");
+		$("#provinceId", navTab.getCurrentPanel()).attr("value","");
+		$("#cityId", navTab.getCurrentPanel()).attr("value","");
+		$("input[name='createDateBegin']", navTab.getCurrentPanel()).attr("value","");
+		$("input[name='createDateEnd']", navTab.getCurrentPanel()).attr("value","");
+	}
+	
+	/**修改省市区*/
+	function findCity(pid){
+		var ps = '${contextPath}'+"/baseDate/city?provinceCode="+pid;
+		$.ajax({
+			type:"post",
+			url: ps,
+			cache: false,
+			dataType: "json",
+			success: function(data){
+				var html = "";
+				$.each(data, function(i, n){
+					html = html + "<option value=\""+n["id"]+"\">"+n["name"]+"</option>";
+				});
+				
+				
+				//重置市选项
+				html = "<option value=\"\">请选择所在市</option>"+html;
+				$("#cityId option").remove();
+				$("#cityId").append(html);
+			}
+		});
+	}
+	
+</script>

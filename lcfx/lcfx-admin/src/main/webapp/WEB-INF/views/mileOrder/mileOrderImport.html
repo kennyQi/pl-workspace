@@ -1,0 +1,51 @@
+
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+
+	<form method="post" action="${contextPath}/mileOrder/import" class="pageForm required-validate nowrap" method="POST" enctype="multipart/form-data" onsubmit="return importSubmitValidate(this,dialogAjaxDone);">
+
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>选择分销商：</dt>
+					<dd>
+<select name="distributorId"  >
+<option value="">请选择</option>
+	<#list distributorList as t>
+		<option value="${t.id}">
+		${t.name}
+		</option>
+	</#list>
+</select><b style="color: #e00;">*</b>
+
+					
+					</dd>
+				</dl>
+				<dl>
+					<dt>请选择导入文件：</dt>
+					<dd>
+						<input id="importFile" name="importFile" type="file" onchange="checkExcelFile(this)" ></input>
+						<a class="a_link" href="${contextPath}/sys/common/download?fileName=mileOrder_template.xls">下载模板</a>
+
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">导入</button>
+						</div>
+					</div></li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

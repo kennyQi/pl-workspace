@@ -1,0 +1,36 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量 - 线路订单支付失败">
+<link href="${contextPath}/resources/css/cart.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.min.js"></script>
+</@frame.head>
+<@frame.main "default" 4>
+
+<div class="wrapper"> 
+  <div class="content"><div class="con-c">
+  <div class="h40"></div>
+     <div class="order">
+      <span class="order-f">填写订单</span>
+      <span class="order-t">支付订单</span>
+      <span class="order-th">支付失败</span>
+     </div>
+     <div class="h40"></div>
+    
+          <div style="color:#666; text-align:center">
+          			
+          </div> 
+     
+     <div class="h40"></div>
+    <div class="zhifu">
+    <h2>支付失败</h2>
+    <p>您的订单未支付成功，或由于网络原因未及时刷新状态，请前往个人中心查看订单支付情况。</p>
+    <p> 如须帮助可拨打客服热线：010-65912283</p>
+    </div> 
+    <div class="h40"></div>
+  </div>  
+  </div>
+ <div class="h4"></div>
+ </div>
+</@frame.main>
+<@frame.end "default"></@frame.end>

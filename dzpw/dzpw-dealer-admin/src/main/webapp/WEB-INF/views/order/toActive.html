@@ -1,0 +1,42 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+ <form action="${contextPath}/order/active" onsubmit="return validateCallback(this,dialogAjaxDone)">
+     <input type="hidden" name="singleTicketId" value="${singleTicketId}">
+     <table >
+     <tr style="height:15px;"/>
+     <tr>
+     <td align="center" style="width: 100px;">姓名:</td>
+     <td><input name="touristName"/></td>
+     </tr>
+     <tr style="height:15px;"/>
+     <tr>
+     <td align="center" style="width: 100px;">证件类型:</td>
+     <td ><select  name="idType">
+       <option value="1">身份证</option>
+   <!--     <option value="2">军官证</option>
+       <option value="3">驾驶证</option>
+       <option value="4">护照</option> -->
+     </select></td>
+     </tr>
+     <tr style="height:15px;"/>
+     <tr>
+     <td align="center" style="width: 100px;">证件号码:</td>
+     <td ><input name="idNo"/></td>
+     </tr>
+     <tr style="height:15px;"/>
+     </table>
+     
+     <div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" onclick="cancleActive()">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+ </form>
+ <script>
+ function cancleActive()
+ {
+   $.pdialog.closeCurrent();
+ }
+ </script>

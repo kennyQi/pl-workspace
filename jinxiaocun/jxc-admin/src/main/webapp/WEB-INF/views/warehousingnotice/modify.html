@@ -1,0 +1,67 @@
+<#assign contextPath = springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}warehousing_notice/modify-submit" class="pageForm required-validate" 
+		onsubmit="return validateCallback(this, dialogAjaxDone);">
+		
+		<input type="hidden" name="id" value="${entity.id}" />
+		
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>是否生成入库单：</label>
+				<input type="text" name="generateWarehousingOrder" value="${entity.generateWarehousingOrder}}" />
+			</div>
+			<div class="unit">
+				<label>入库仓库：</label>
+				<input type="text" name="warehouse" value="${entity.warehouse}}" />
+			</div>
+			<div class="unit">
+				<label>通知单编号：</label>
+				<input type="text" name="warehousingNoticeCode" value="${entity.warehousingNoticeCode}}" />
+			</div>
+			<div class="unit">
+				<label>不含税总价格：</label>
+				<input type="text" name="totalPriceExclTax" value="${entity.totalPriceExclTax}}" />
+			</div>
+			<div class="unit">
+				<label>项目名称：</label>
+				<input type="text" name="project" value="${entity.project}}" />
+			</div>
+			<div class="unit">
+				<label>物流费：</label>
+				<input type="text" name="totalLogisticCost" value="${entity.totalLogisticCost}}" />
+			</div>
+			<div class="unit">
+				<label>入库单类型：</label>
+				<input type="text" name="noticeType" value="${entity.noticeType}}" />
+			</div>
+			<div class="unit">
+				<label>通知人：</label>
+				<input type="text" name="noticeUser" value="${entity.noticeUser}}" />
+			</div>
+			<div class="unit">
+				<label>供应商：</label>
+				<input type="text" name="supplier" value="${entity.supplier}}" />
+			</div>
+			<div class="unit">
+				<label>通知时间：</label>
+				<input type="text" name="noticeDate" value="${entity.noticeDate}}" />
+			</div>
+			<div class="unit">
+				<label>采购单编号：</label>
+				<input type="text" name="purchaseOrderCode" value="${entity.purchaseOrderCode}}" />
+			</div>
+			<div class="unit">
+				<label>总数量：</label>
+				<input type="text" name="totalQuantity" value="${entity.totalQuantity}}" />
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent">
+					<button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent">
+					<button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

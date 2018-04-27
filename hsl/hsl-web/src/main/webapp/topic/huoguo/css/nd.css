@@ -1,0 +1,16 @@
+*{padding:0;margin:0;border:0;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+ul li{list-style:none;}
+body{font-size:12px;font-family:'微软雅黑';}
+a,a:hover{text-decoration:none;}
+img{display:block;}
+map area{outline:none;}
+.fl{float:left;}
+.fr{float:right;}
+
+.container{width:100%;height:4000px;background:url(../images/bg.jpg) no-repeat center;}
+.content{width:1200px;overflow:hidden;margin:0 auto;padding:654px 0 0 0;}
+.cont2{margin-top:40px;}
+.cont3{margin-top:50px;}
+/*侧导航*/
+.sideNav{width:224px;height:315px;background:url(../images/side_nav.png);position:fixed;top:160px;right:0px;padding-top:111px;}
+.sideNav a{display:block;width:110px;height:35px;margin:0 0 15px 50px;}

@@ -1,0 +1,94 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/position/person/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+		
+			<table class="searchContent">
+				<tr>
+					<td>
+						姓名：<input type="text" name="name" value="${name}" />
+					</td>
+					<td>
+						身份证号：<input type="text" name="idCard" value="${idCard}" />
+					</td>
+				</tr>
+			</table>
+		
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+
+	<table class="table" width="100%" layoutH="110">
+		<thead>
+			<tr>
+				<th width="30">编号</th>
+				<th width="220">姓名</th>
+				<th width="150">基金名称</th>
+				<th width="70">基金代码</th>
+				<th width="80">当前份额</th>
+				<th width="80">可用份额</th>
+				<th width="80">市值</th>
+				<th width="80">浮动盈亏</th>
+				<th width="60">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as p>
+			  <#assign len = p_index />
+			  <#assign pSize = pagination.pageSize />
+			  <#assign pNo = pagination.pageNo />
+			<tr>
+				<td>
+					${pSize*(pNo-1)+len+1}
+				</td>
+				<td>
+					${(p.person.baseInfo.name)!""}
+				</td>
+				<td>
+					<#if p.fundCode=="213009">
+						宝盈货币A
+					</#if>
+					<#if p.fundCode=="213909">
+						宝盈货币B
+					</#if>
+				</td>
+				<td>
+					${p.fundCode!""}
+				</td>
+				<td>
+					${p.balance?string(',###.##')}
+				</td>
+				<td>
+					${p.avaliable?string(',###.##')}
+				</td>
+				<td>
+					${p.balance?string(',###.##')}<!-- 市值就是当前份额*1元/份 -->
+				</td>
+				<td>
+					${p.totalIncome}
+				</td>
+				<td>
+					<a title="${p.person.baseInfo.name}的交易成功明细" href="${contextPath}/position/person/succ/detail?personId=${p.person.id}" target="navTab" height="550" style="color: blue;">交易成功明细</a>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table> 
+	<#include "/public/pagination/pagination.html">
+	
+</div>

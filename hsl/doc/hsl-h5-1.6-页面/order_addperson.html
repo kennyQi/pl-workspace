@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>添加游玩人</title>
+<!--公共样式部分-->
+<link href="css/common.css" rel="stylesheet" />
+<link href="css/global.css" rel="stylesheet" />
+<script src="js/zepto.min.js" language="javascript"></script>
+    <script src="js/frozen.js" language="javascript"></script>
+
+</head>
+
+<body>
+<!--私有样式-->
+<script src="js/idCard.js" language="javascript"></script>
+<script src="js/person_list.js" language="javascript"></script>
+<link href="css/person_list.css" rel="stylesheet" />
+
+<div class="body">
+<div class="g_addPerson content">
+    <form id="addPersonForm">
+	 <div class="ui-form-item ui-border-b m_input">
+            <label for="#">
+                姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：
+            </label>
+            <input type="text" placeholder="姓名" id="person_name" name="name" />
+        </div>
+    <div class="ui-form-item ui-border-b m_input">
+        <label for="#">
+            手&nbsp;&nbsp;机&nbsp;&nbsp;号：
+        </label>
+        <input type="text" placeholder="手机号" id="person_mobile" name="mobile" />
+    </div>
+      <div class="ui-form-item ui-border-b m_input m_select">
+            <label for="#">
+                证件类型：
+            </label>
+            <select class="select " id="person_select" name="type" >
+           		<option value="1">身份证</option>
+            </select>
+        </div>
+       <div class="ui-form-item ui-border-b m_input">
+            <label for="#">
+                证件号码：
+            </label>
+            <input type="text" placeholder="输入证件号码"  id="person_num" name="cardNumber"/>
+        </div>
+		<div class="m_btn" id="addPersonSure" >
+        	提&nbsp;&nbsp;&nbsp;&nbsp;交
+        </div>
+        </form>
+   <!-- <div class="m_btn m_cancel" id="cancel">
+        返&nbsp;&nbsp;&nbsp;&nbsp;回
+    </div>-->
+</div>
+<div class="g_date content" id="date"  style="display:none">
+        <div id="dateMobile" class="dateMobile">
+        </div>
+		<div class="m_btn" id="sureDate">
+        	确&nbsp;&nbsp;&nbsp;&nbsp;定
+        </div>
+</div>
+    <!--预定失败-->
+    <div class="g_fail content" id="fail" style="display:none;">
+        <h4 class="warm">预订失败，请重试！</h4>
+        <div class="btn">
+            <div  class="back"><a href="#">返回联盟首页</a></div>
+            <div class="continue"><a href="javscript:;" id="continueMack" >继续预定</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

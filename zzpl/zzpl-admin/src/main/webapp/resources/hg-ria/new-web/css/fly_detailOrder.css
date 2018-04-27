@@ -1,0 +1,133 @@
+.detail_order{
+	width:901px;
+	background: #fff;
+	overflow: hidden;
+	text-align:center;
+	padding-top:10px;
+	margin-top:20px;
+}
+.detail_order .detail_title{
+	font-size: 20px;
+	color:#333;
+	font-weight:normal;
+	line-height:40px;
+}
+.detail_order .order_id{
+	font-size: 14px;
+	color:#333;
+	line-height:40px;
+}
+.detail_order .sub_title{
+	width:881px;
+	height:40px;
+	font-size: 16px;
+	color:#0a5c88;
+	font-weight:normal;
+	line-height:40px;
+	text-align:left;
+	background:#eff9fe;
+	padding-left:20px;
+}
+.business_personnelInfo,.linkmanInfo{
+	margin:20px auto 20px 20px;
+}
+.business_personnelInfo td,.linkmanInfo td{
+	width:196px;
+	height:40px;
+	line-height:40px;
+	font-size:16px;
+	color:#0a5c88;
+	text-align:left;
+}
+.ps{
+	font-size: 14px;
+	color:#ff9000;
+	text-align:left;
+	padding-left:20px;
+	margin-bottom:20px;
+}
+.plan_airTicketInfo{
+	border:2px solid #cce7f5;
+	margin:20px;
+}
+.plan_airTicketInfo th{
+	background:#cce7f5;
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	color:#0a5c88;
+	text-align: left;
+}
+.plan_airTicketInfo td{
+	line-height:24px;
+	font-size:16px;
+	color:#0a5c88;
+	padding:10px 0;
+	text-align: left;
+}
+.plan_airTicketInfo td.fc{
+	color:#ff9000;
+	font-weight:bold;
+}
+.p_wrap{
+	width:881px;
+	height:60px;
+	border-top:1px solid #e6e6e6;
+	line-height:60px;
+	padding-left:20px;
+	text-align:left;
+	font-size:14px;
+	color:#666;
+}
+.p_wrap .pass{
+    color:#48aa00;
+}
+.p_wrap .unpass{
+    color:#ff9000;
+}
+.p_wrap .p_left{
+	display:inline-block;
+	width:180px;
+}
+.ticket_style{
+	width:86px;
+	height:30px;
+	font-size:14px;
+	color:#fff;
+	line-height:30px;
+	text-align:center;
+	border:0;
+	background:#feb614;
+	margin:15px 10px 10px 10px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.p_left_wrap .p_left{
+	width:184px;
+}
+
+
+
+.employee_alert_cont{width:460px;background: #fff;margin:0px;}
+.employee_alert_cont .tab{color:#0a5c88;font-size:14px;width:78px;display: inline-block;text-align: right;margin:0px;}
+.employee_alert_cont .input-select{width:80px;}
+.employee_alert_cont .input-selectBox ul{width:113px;}
+.employee_alert_cont .idnum{width:306px;}
+.employee_alert_cont .input-btn{margin: auto;display: block;}
+.employee_alert .title{width: 460px;}
+
+.order_detail .tab{display: block;float: left;width: 150px;}
+
+
+.order_hd {
+    text-align: left;
+    padding-left: 20px;
+    background-color: #f7f7f7;
+    margin: -10px 0 3px 0;
+    height: 60px;
+    line-height: 60px;
+}
+.order_hd .c_name{font-size:20px;color:#333;margin-right:30px;}
+.tp_wrap{width:100%;padding:20px;background:#f7f7f7;}
+.tp_wrap .btn_tp{border:none;width:200px;height:40px;line-height:40px;background:#ff9000;color:#fff;}

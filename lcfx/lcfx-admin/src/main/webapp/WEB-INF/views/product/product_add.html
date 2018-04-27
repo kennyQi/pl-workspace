@@ -1,0 +1,927 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() /><#assign inputType="hidden" /> <#assign requiredTag="
+<a style=\"color:#FF0000\">*</a>
+" />
+<style type="text/css">
+td.fix1425343675281 input {
+	width: 77px;
+}
+
+td.fix1425343675281 {
+	
+}
+
+table.fix1425634300298 td {
+	padding-bottom: 9px;
+	margin: 0;
+}
+
+table.fix1425634300298 {
+	padding-top: 10px;
+	padding-left: 10px;
+}
+</style>
+<link href="${contextPath}/resources/css/ajaxfileupload.css" rel="stylesheet" type="text/css" media="print" />
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+	//
+
+function checkSizeInput(){
+		var c = $("[name='sizeLong']").val();
+		var k = $("[name='sizeWidth']").val();
+		var g = $("[name='sizeHigh']").val();
+		var ckc = $("[name='outstockSizeLong']").val();
+		var ckk = $("[name='outstockSizeWidth']").val();
+		var ckg = $("[name='outstockSizeHigh']").val();
+		
+		var ret = true;
+		if((c=="" && k=="" && g=="") || (c!="" && k!="" && g!="") ){
+		}else{
+			ret = false;
+		}
+		if((ckc=="" && ckk=="" && ckg=="") || (ckc!="" && ckk!="" && ckg!="") ){
+		}else{
+			ret = false;
+		}
+		
+		return ret;
+	}
+	
+var dpmTableNeedReload = true;
+function getPhotoSize(obj){
+	var maxSize = 2000;//单位kb
+	
+    photoExt=obj.value.substr(obj.value.lastIndexOf(".")).toLowerCase();//获得文件后缀名
+    if(photoExt!='.jpg' && photoExt!='.jpeg' && photoExt!='.bmp' && photoExt!='.png'){
+        alertMsg.warn("请上传格式为jpg、jpeg、png、bmp格式且小于2兆的照片!");
+        obj.value='';
+        return false;
+    }
+    var fileSize = 0;
+    var isIE = /msie/i.test(navigator.userAgent) && !window.opera;            
+    if (isIE && !obj.files) {          
+         var filePath = obj.value;            
+         var fileSystem = new ActiveXObject("Scripting.FileSystemObject");   
+         var file = fileSystem.GetFile (filePath);               
+         fileSize = file.Size;         
+    }else {  
+         fileSize = obj.files[0].size;     
+    } 
+    fileSize=Math.round(fileSize/1024*100)/100; //单位为KB
+    if(fileSize>=maxSize){
+    	alertMsg.warn("照片最大尺寸为"+maxSize+"KB，请重新上传!");
+    	obj.value=''
+        return false;
+    }
+    
+    return true;
+}
+
+function getAllDealerProductMappingTable(){
+	if(!dpmTableNeedReload == true){
+		return ;
+	}
+	dpmTableNeedReload = false;
+	var productId = $('#productId').val();
+	var seqList;
+	$.ajax({
+	        url : "${contextPath}/product/query_dealer_product_mapping_seq_list",
+	        cache : false,
+	        type : "post",
+	        dataType : "json",
+	        async : false,
+	        data : {
+	            "productId" :productId,
+	                "_date":(new Date().getTime())
+	        },
+	        success : function(data) {
+	        	seqList = data;
+	        },
+	        error : function() {
+	            alert('error@getAllDealerProductMappingTable()');
+	        }
+
+	    });
+	
+	$("#dealerProductMappingTableDiv").empty();
+	for(i in seqList){
+		getDealerProductMappingTable("",i);
+	}
+	}
+	
+	
+
+
+
+function reloadProductList(){
+	navTab.closeCurrentTab();
+	navTab.openTab("product_list", "${contextPath}/product/list", { title:"商品列表"});
+
+}
+
+function checkSelectUnit(){
+	var v = $("#e1425450452169").val();
+	if(v!=null && v!=''){
+		return true;
+	}
+	return false;
+}
+
+function hideProductSubTab(){
+	$("#pst1").hide();
+	$("#pst2").hide();
+	$("#pst3").hide();
+	$("#pst4").hide();
+}
+function showProductSubTab(){
+	var d=200;
+	var s=300;
+	$("#pst1").fadeIn(s);
+	$("#pst2").delay(d).fadeIn(s);
+	$("#pst3").delay(d*2).fadeIn(s);
+	$("#pst4").delay(d*3).fadeIn(s);
+	
+}
+
+
+	function checkNumber(s){
+		if(!isNaN(s) && parseFloat(s)>=0 &&  parseFloat(s)<=60000){
+		 return s;
+		}
+			alertMsg.warn("请输入一个0至60000的数值");
+			return '';
+	}
+
+	$(document).ready(function(){
+		hideProductSubTab();
+		
+		changeUnit();		
+		if ($("[name='productId']").val() == "") {
+			return;
+		}
+		getSkuTableAjax();
+		getSpecSelTableAjax();
+		showProductSubTab();
+		
+	});
+	
+	function cleanCategorySel() {
+		$('#specificationSelect').empty();
+	}
+	function getSpecSelTableAjax() {
+		var productId = $('#productId').val();
+		if (productId == '') {
+			alertMsg.warn('未保存商品信息');
+			return;
+		}
+		$('#specificationSelect').empty();
+		$.ajax({
+			url : "${contextPath}/specification/get_spec_table",
+			cache : false,
+			type : "post",
+			dataType : "html",
+			async : false,
+			data : {
+				"productId" : productId
+			},
+			success : function(data) {
+
+	//				$('#specificationSelect').append("<a style=\"padding:10px 10px 0px 10px\" >请选择规格：</a>");
+				$('#specificationSelect').append(data);
+			},
+			error : function() {
+
+				alert('error');
+			}
+
+		});
+
+	}
+	function getSkuTableAjax() {
+		if(!checkProductBaseInfoIsSubmit){
+			alertMsg.error("未保存商品信息");
+			return false;
+		}
+		
+		$('#spec_skuTable').empty();
+		$.ajax({
+			url : "${contextPath}/product/sku_table",
+			cache : false,
+			type : "post",
+			async:false,
+			dataType : "html",
+			data : {
+				"productId":$('#productId').val()
+				
+			},
+			success : function(data) {
+				$('#spec_skuTable').append(data);
+			},
+			error : function() {
+				alert('error');
+			}
+
+		});
+		
+		return true;
+
+	}
+	function createSpecIdList() {
+		$('#createSpecList').empty();
+
+		var specId = "";
+		var specIdArr = new Array();
+		$("[name='specification']").each(function() {
+			var specSel = false;
+			$("[name='" + $(this).val() + "']").each(function() {
+				if ($(this).attr('checked')) {
+					specSel = true;
+				}
+			})
+
+			if (specSel) {
+				specIdArr.push($(this).val());
+				specId = specId + $(this).val();
+				specId = specId + ",";
+			}
+
+		})
+
+		if (specIdArr.length == 0) {
+			alertMsg.warn("未选择规格");
+			return false;
+		}
+		$("#createSpecList").append("<input type=\"${inputType}\" name=\"specificationIdList\" id=\"\" value=\""+specId+"\"/>");
+		
+
+
+		var specValListSeq = new Array();
+		specValListSeq.push(0);
+		var t = 0;
+		$("[name='" + specIdArr[t] + "']").each(function() {
+
+			if ($(this).attr('checked')) {
+				var str = $(this).val() + ',';
+				nextSpecValIdList(specIdArr, t + 1, str, specValListSeq);
+			}
+		});
+		
+		
+		return true;
+
+	}
+
+	function nextSpecValIdList(specId, index, str, seq) {
+
+		if (specId[index] == null) {
+
+			$("#createSpecList").append("<input name=\"specValueIdList["+seq+"]\" type=\"${inputType}\" value=\""+str+"\" />");
+			seq[0] = seq[0] + 1;
+			return;
+		}
+		//		alert("f:index="+index);
+		$("[name='" + specId[index] + "']").each(function() {
+			if ($(this).attr('checked')) {
+				var tStr = str + $(this).val() + ',';
+				nextSpecValIdList(specId, index + 1, tStr, seq);
+			}
+		});
+
+	}
+
+	function changeUnit() {
+		if ($('#unitId').val() == 'extraUnit') {
+			$('#extraUnitName').val('');
+			$('#extraUnitName').show();
+		} else {
+			$('#extraUnitName').val('');
+			$('#extraUnitName').hide();
+		}
+	}
+
+	/*
+	function genSpecValIdList(specId,index,str){
+		if(specId[index] == null){
+		//	alert(str);
+			return;
+		}
+		var tStr = str+specId[index]+",";
+		genSpecValIdList(specId,index+1,tStr);
+		
+	}
+	 */
+
+	function ajaxSubmitProdBaseInfo() {
+		checkMsg = '';
+		if($("#categoryId").val()==''){
+			checkMsg = checkMsg +"商品分类不能为空<br>";
+		}
+		if($("#brandId").val()== null || $("#brandId").val()==''){
+			checkMsg = checkMsg +"商品品牌不能为空<br>";
+		}
+		if($("#productName").val()==''){
+			checkMsg = checkMsg +"商品名称不能为空<br>";
+		}
+		if(!checkSelectUnit()){
+			checkMsg = checkMsg +"请选择单位<br>";
+		}
+		if(!checkSizeInput()){
+			checkMsg = checkMsg +"商品尺寸和商品出库尺寸必须都填写或都不填<br>";
+		}
+
+		if(checkMsg!=''){
+			alertMsg.warn(checkMsg);
+			return;
+		}
+		
+
+		
+		if ($("[name='productId']").val() != "") {
+			
+			var oriCategoryId = $("#oriCategoryId").val();
+			if(oriCategoryId!='' && oriCategoryId!=$("#categoryId").val()){
+				alertMsg.confirm("修改商品分类会删除该商品所有sku和平台对照信息，确认修改？",{okCall:function(){
+					ajaxUpdateProductBaseinfo(true);
+				}});
+				return;
+			}
+			
+			ajaxUpdateProductBaseinfo(false);
+			return;
+		}
+
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : "${contextPath}/product/create",
+			data : $('#productBaseInfoForm').serialize(),
+			dataType : 'json',
+			async : false,
+			error : function(request) {
+				alert("发送请求失败！");
+			},
+			success : function(data) {
+				if(data.result=="success"){
+					alertMsg.correct("保存成功");
+					$("[name='productId']").each(function() {
+						$(this).val(data.id);
+					});
+					$("[name='productCode']").val(data.code);
+	
+					if(data.unitId){
+						$("#unitId").append("<option value=\""+data.unitId+"\" selected=\"selected\" >"+data.unitName+"</option>");
+						$("#extraUnitName").hide();
+					}
+					getSpecSelTableAjax();
+					showProductSubTab(); 
+					$("#oriCategoryId").val($("#categoryId").val());
+				}
+				
+				else if(data.result=="error"){
+					alertMsg.error(data.message);
+				}
+
+
+			}
+		});
+	}
+
+	function ajaxUpdateProductBaseinfo(categoryChanged) {
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : "${contextPath}/product/update",
+			data : $('#productBaseInfoForm').serialize(),
+			dataType : 'json',
+			async : false,
+			error : function(request) {
+				alert("发送请求失败！");
+			},
+			success : function(data) {
+				if(data.result=="success"){
+					alertMsg.correct("保存成功");
+					if(data.unitId){
+						$("#unitId").append("<option value=\""+data.unitId+"\" selected=\"selected\" >"+data.unitName+"</option>");
+						$("#extraUnitName").hide();
+					}
+					$("#oriCategoryId").val($("#categoryId").val());
+					
+					if(categoryChanged){
+						getSpecSelTableAjax();
+						$("#spec_skuTable").empty();
+						$("#dealerProductMappingTableDiv").empty();
+					}
+					
+					
+				}
+				else if(data.result=="error"){
+					alertMsg.error(data.message);
+				}
+			}
+		});
+	}
+	function ajaxUpdateSku() {
+		if (!checkProductBaseInfoIsSubmit()) {
+			return;
+		}
+		
+		if(!createSpecIdList()){
+			return;
+		}
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : "${contextPath}/product/create_sku",
+			data : $('#updateSkuForm').serialize(),
+			dataType : 'json',
+			async : false,
+			error : function(request) {
+				alert("发送请求失败！");
+			},
+			success : function(data) {
+				if(data.result=='success'){
+					alertMsg.correct("商品规格保存成功");
+					getSkuTableAjax();
+//					getAllDealerProductMappingTable();
+					dpmTableNeedReload = true;
+				}
+				if(data.result=='error'){
+					alertMsg.error(data.message);
+				}
+				
+			}
+		});
+	}
+
+	function checkProductBaseInfoIsSubmit() {
+		if ($("[name='productId']").val() == "") {
+			alertMsg.error('请先提交商品基本信息');
+			return false;
+		}
+		return true;
+	}
+
+	function ajaxUpdateProductDescribe() {
+		if (!checkProductBaseInfoIsSubmit()) {
+			return;
+		}
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : "${contextPath}/product/update_product_describe",
+			data : $('#productDescribeForm').serialize(),
+			dataType : 'json',
+			async : false,
+			error : function(request) {
+				alert("发送请求失败！");
+			},
+			success : function(data) {
+				alertMsg.correct("保存成功");
+			}
+		});
+	}
+
+
+
+	function getDealerProductMappingTable(projId,seq) {
+		if(seq==null){
+			seq = 0;
+			while( $("table[tableseq='"+seq+"']").length>0 && seq<100){
+				seq++;
+			}
+		}
+		var i = 0
+		while( $("#ptdzId"+i).length>0 ){
+			i++;
+		}
+		//		$('#dealerProductMappingTableDiv').empty();
+		$.ajax({
+			url : "${contextPath}/product/get_dealer_product_table",
+			cache : false,
+			type : "post",
+			dataType : "html",
+			async:false,
+			data : {
+				productId:$('#productId').val(),
+				ptdzId:i,
+				projectId:projId,
+				tableSeq:seq,
+				mode:0
+			},
+			success : function(data) {
+				if(data == "err#0"){
+					alertMsg.error("无平台对照信息 ");
+					return;
+				}
+				if(data == "err#1"){
+					alertMsg.error("没有项目，添加对照表失败 ");
+					return;
+				}
+				
+				jqe=$('#dealerProductMappingTableDiv');
+				jqe.append(data);
+			},
+			error : function() {
+				alert('error');
+			}
+
+		});
+	}
+	
+	function ajaxUploadImg(imgElemntId,imgIdElementId,fileElement,type){
+		if(!getPhotoSize(fileElement)){
+			return;
+		}
+		
+		var imgId = '';
+		var pId = $("#productId").val();
+
+		if(!checkProductBaseInfoIsSubmit()){
+			$(fileElement).val('');
+			return;
+		}
+		$.ajaxFileUpload({
+			url:'${contextPath}/system/upload/upload_img_product',
+			secureuri : false,
+			async:false,
+			fileElementId : $(fileElement).attr('id'),
+			data:{
+				imageType:type,
+				productId:pId,
+				productImageId:$("#"+imgIdElementId).val()
+			},
+			dataType : 'json',
+			success: function (data, status) {
+				$("#"+imgElemntId).attr("src","${contextPath}"+data.imgUrl);
+				$("#"+imgIdElementId).val(data.imgId);
+	        },
+
+	    });
+	}
+	
+	function ajaxUpdateProductPic(json){
+		alert('run ajaxUpdateProductPic()');
+		alert(json.result);
+		
+	}
+	
+	
+	function ajaxUpdateDealerProductMapping() {
+			if (!checkProductBaseInfoIsSubmit()) {
+				return;
+			}
+			$.ajax({
+				cache : false,
+				type : "POST",
+				url : "${contextPath}/product/update_dealer_product_mapping",
+				data : $('#ptdzForm').serialize(),
+				dataType : 'json',
+				async : false,
+				error : function(request) {
+					alert("发送请求失败！");
+				},
+				success : function(data) {
+					if(data.result == "success"){
+						for(key in data){
+							if(key!='result'){
+								$("input[name='"+key+"']").val(data[key]);
+							}
+						}
+						alertMsg.correct("保存成功");
+					}else{
+						alertMsg.error(data.message);
+					}
+				}
+			});
+	}
+	
+	function projectOnChange(element){
+		var s= parseInt($(element).attr("startId"));
+		var e= parseInt($(element).attr("endId"));
+		var v= $(element).val();
+		for(var ii=s;ii<e;ii++){
+			$("input[name='dealerProductMappingList["+ii+"].projectId']").val(v);
+		}
+	}
+	
+	function deletePtdzTable(id,endId){
+		$("#del_ptdz_form").empty();
+		for(var i=id;i<endId;i++){
+			$("#del_ptdz_form").append("<input type=\"${inputType}\" name=\"dealerProductMappingId\" value=\""+$("[name='dealerProductMappingList["+i+"].dealerProductMappingId']").val()+"\" />");
+		}
+		
+		if (!checkProductBaseInfoIsSubmit()) {
+			return;
+		}
+		$.ajax({
+			cache : false,
+			type : "POST",
+			url : "${contextPath}/product/delete_dealer_product_mapping",
+			data : $('#del_ptdz_form').serialize(),
+			dataType : 'json',
+			async : false,
+			error : function(request) {
+				alert("发送请求失败！");
+			},
+			success : function(data) {
+				if(data.result=='success'){
+					$("#PtdzTable"+id).empty();
+					$("#PtdzTable"+id).remove();
+					alertMsg.correct("删除成功");
+				}else if(data.result=="error"){
+					//该对照表未保存
+					if(data.message=="err#0"){
+						
+						$("#PtdzTable"+id).empty();
+						$("#PtdzTable"+id).remove();
+					}
+				}
+				
+			}
+		});
+		
+		$('#del_ptdz_form').empty();
+		
+
+	}
+</script>
+<div class="pageContent">
+	<div class="tabs" currentIndex="0" eventType="click">
+		<div class="tabsHeader">
+			<div class="tabsHeaderContent">
+				<ul>
+					<li><a href="javascript:;">
+							<span>基本信息</span>
+						</a></li>
+					<li id="pst1"><a href="javascript:;">
+							<span>商品规格</span>
+						</a></li>
+					<li id="pst2"><a href="javascript:;" >
+							<span>商品描述</span>
+						</a></li>
+					<li id="pst3"><a href="javascript:;">
+							<span>商品图片</span>
+						</a></li>
+					<li id="pst4"><a href="javascript:;" onclick="getAllDealerProductMappingTable()">
+							<span>平台商品对照</span>
+						</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="tabsContent" layoutH="70" style="background:#F9F9F9">
+			<!-- ------------------------------------------------------------------------- -->
+			<div style="display: block;border-style: dashed;width: 679px;border-width: 1px;border-radius: 3px;border-color: #b8d0d6;margin-bottom: 40px;">
+				<form id="productBaseInfoForm" method="post">
+					<input type="${inputType}" name="productId" id="productId" value="${(product.id)!}">
+					<table border="0" class="my_form fix1425634300298">
+						<tr>
+							<td>商品分类${requiredTag}</td>
+							<td style="width: 240px;">
+								<input name="categoryId" id="categoryId" value="${(product.productCategory.id)!}" type="hidden" />
+								<input name="categoryName" type="text" readonly id="cn" value="${(product.productCategory.name)!}" placeholder="点击右侧按钮查找" />
+								<a class="btnLook" href="${contextPath}/category/lookup?inputName=categoryId&mode=2&findUsing=1" id="btnLookupCategory" lookupGroup width="367" height="600" style="float: none;display: inline-block;display: -ms-inline-flexbox;position: relative;top: -4px;">查找商品分类</a>
+							</td>
+							<td>商品编码</td>
+							<td>
+								<label> <input name="productCode" type="text" readonly value="${(product.productCode)!}" style="background-color: #eee;" /> </label>
+							</td>
+						</tr>
+						<tr>
+							<td>商品名称${requiredTag}</td>
+							<td>
+								<input type="text" name="productName" class="reqiured" id="productName" value="${(product.productName)!}" onchange="this.value=(trim(this.value))" maxlength="30" />
+							</td>
+							<td>商品品牌${requiredTag}</td>
+							<td>
+								<select name="brandId" id="brandId"> <#list brandList as brand>
+									<option value="${brand.id}"<#if (product)?exists> <#if (brand.id == product.productBrand.id)> selected="selected" </#if> <#else> </#if> >${brand.chineseName}</option> </#list>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>计量单位</td>
+							<td>
+								<select name="unitId" id="e1425450452169" style="width: 120px;"> <#list unitList as unit>
+									<option value="${unit.id}"<#if (product.unit)?exists> <#if (unit.id == product.unit.id)> selected="selected" </#if> </#if> >${(unit.unitName)!}</option> </#list>
+								</select>
+								<a href="${contextPath}/unit/to_add" target="dialog" width="600" height="370" mask="true" style="color:#0066CC">添加单位</a>
+							</td>
+							<td>商品状态</td>
+							<td>
+								<select name="using">
+									<option value="true"<#if (product)?exists> <#if (product.status.using) == true> selected="selected" </#if> </#if> >启用</option>
+									<option value="false"<#if (product)?exists> <#if (product.status.using) == false> selected="selected" </#if> </#if> >禁用</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>商品重量</td>
+							<td>
+								<input type="text" name="weight" id="textfield4" class="number" value="<#if product><#if product.weight>${(product.weight)!?c}</#if></#if>" onchange="this.value=checkNumberA(this.value,0,65000)" placeholder="单位：kg" />
+							</td>
+							<td>商品属性</td>
+							<td>
+								<select name="attribute">
+									<option value="0"<#if (product)?exists> <#if (product.attribute) == 0> selected="selected" </#if> </#if> >普通商品</option>
+									<option value="1"<#if (product)?exists> <#if (product.attribute) == 1> selected="selected" </#if> </#if> >虚拟商品</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>商品出库重量</td>
+							<td>
+								<input type="text" name="outStockWeight" id="textfield3" placeholder="单位：kg" value="<#if product><#if product.outStockWeight>${(product.outStockWeight)!?c}</#if></#if>" onchange="this.value=checkNumberA(this.value,0,65000)" />
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>商品尺寸</td>
+							<td colspan="3" class="fix1425343675281">
+								<input type="text" name="sizeLong" value="${(product.sizeLong)!}" maxlength="7" placeholder="长" onchange="checkFloatOrInt(this)" />
+								×
+								<input type="text" maxlength="20" name="sizeWidth" value="${(product.sizeWidth)!}" placeholder="宽" maxlength="7" onchange="checkFloatOrInt(this)" />
+								×
+								<input type="text" maxlength="20" name="sizeHigh" value="${(product.sizeHigh)!}" placeholder="高" maxlength="7" onchange="checkFloatOrInt(this)" />
+								单位：cm
+							</td>
+						</tr>
+						<tr>
+							<td>商品出库尺寸</td>
+							<td colspan="3" class="fix1425343675281">
+								<input type="text" name="outstockSizeLong" value="${(product.outstockSizeLong)!}" maxlength="7" placeholder="长" onchange="checkFloatOrInt(this)" />
+								×
+								<input type="text" maxlength="20" name="outstockSizeWidth" value="${(product.outstockSizeWidth)!}" placeholder="宽" onchange="checkFloatOrInt(this)" maxlength="7" />
+								×
+								<input type="text" maxlength="20" name="outstockSizeHigh" value="${(product.outstockSizeHigh)!}" placeholder="高" onchange="checkFloatOrInt(this)" maxlength="7" />
+								单位：cm
+							</td>
+						</tr>
+						<tr>
+							<td>备注信息</td>
+							<td colspan="3">
+								<label> <textarea name="remark" style="width: 400px;" maxlength="250">${(product.remark)!}</textarea> </label>
+							</td>
+						</tr>
+						<tr>
+							<td>参考供应商</td>
+							<td colspan="3">
+								<div style="border-style: dashed;border-width: 1px;padding: 0;width: 190px;border-radius: 3px;border-color: #b8d0d6;">
+									<input type="checkbox" style="width:auto;height:auto" onchange="selectSupplierCheckBox(this)">
+									全选<br> <#list supplierList as t>
+									<input type="checkbox" value="${t.id}" name="supplierList" style="width:auto;height:auto"
+									<#list suppIdList as id> <#if id == t.id> checked="checked" <#break> </#if> </#list> > ${t.baseInfo.name}<br> </#list>
+								</div>
+							</td>
+						</tr>
+					</table>
+					<input type="${inputType}" value="${(product.productCategory.id)!}" id="oriCategoryId">
+					<div class="divider" style="border-style:dashed"></div>
+					<div style="height: 30px;text-align: center;padding-left: 5px;">
+						<a class="buttonActive" onclick="ajaxSubmitProdBaseInfo()">
+							<span style="width: 70px;text-align: center;">保存</span>
+						</a>
+					</div>
+				</form>
+			</div>
+			<!-- ------------------------------------------------------------------------- -->
+			<div>
+				<div id="specificationSelect"></div>
+				<form id="updateSkuForm" method="post">
+					<input type="${inputType}" name="productId" value="${(product.id)!}">
+					<div id="createSpecList"></div>
+					<div id="spec_skuTable"></div>
+				</form>
+				<div class="divider"></div>
+				<!-- 
+				<a class="buttonActive" onclick="getSpecSelTableAjax()" style="display: inline-block;padding-right: 30px;">
+					<span>选择规格</span>
+				</a>
+				 -->
+				<a class="buttonActive" onclick="ajaxUpdateSku()" style="display: inline-block;padding-right: 30px;">
+					<span>保存</span>
+				</a>
+				<div class="divider"></div>
+			</div>
+			<!-- ------------------------------------------------------------------------- -->
+			<div>
+				<form id="productDescribeForm" method="post">
+					<input type="${inputType}" name="productId" id="id" value="${(product.id)!}">
+					<#--<!--
+
+					<textarea name="zproductDescribe" cols="60" rows="4" class="editor" tools="mini">${(product.productDescribe)!}</textarea>
+					<br>
+-->
+					<div style="width:90%">
+						<textarea name="productDescribe" id="${ueditorId}">${(product.productDescribe)!}</textarea>
+					</div>
+					<div class="divider"></div>
+					<a class="buttonActive" onclick="ajaxUpdateProductDescribe()">
+						<span style="width: 70px;text-align: center;">保存</span>
+					</a>
+					<div class="divider"></div>
+				</form>
+			</div>
+			<!-- ------------------------------------------------------------------------- -->
+			<div>
+				<table border="0" class="pic_view">
+					<tr>
+						<td>
+							<img id="imgSrc0" height="120px" width="120px" src="<#if (imgSrc1)??> ${contextPath}${imgSrc1} <#else>${contextPath}/resources/image/sys/no_img.jpg</#if>" alt="" />
+						</td>
+						<td>
+							正面图：<br />
+							<input id="imageFile1" name="imageFile" type="file" onchange="ajaxUploadImg('imgSrc0','imgId0',this,1)" />
+						</td>
+						<td>
+							<img id="imgSrc1" height="120px" width="120px" src="<#if (imgSrc2)??> ${contextPath}${imgSrc2}  <#else>${contextPath}/resources/image/sys/no_img.jpg  </#if>" alt="" />
+						</td>
+						<td>
+							商品背面图：<br />
+							<input id="imageFile2" name="imageFile" type="file" onchange="ajaxUploadImg('imgSrc1','imgId1',this,2)" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img id="imgSrc2" height="120px" width="120px" src="<#if (imgSrc3)??> ${contextPath}${imgSrc3}  <#else>${contextPath}/resources/image/sys/no_img.jpg </#if>" alt="" />
+						</td>
+						<td>
+							商品细节图：<br />
+							<input id="imageFile3" name="imageFile" type="file" onchange="ajaxUploadImg('imgSrc2','imgId2',this,3)" />
+						</td>
+						<td>
+							<img id="imgSrc3" height="120px" width="120px" src="<#if (imgSrc4)??> ${contextPath}${imgSrc4} <#else>${contextPath}/resources/image/sys/no_img.jpg </#if>" alt="" />
+						</td>
+						<td>
+							商品配件图：<br />
+							<input id="imageFile4" name="imageFile" type="file" onchange="ajaxUploadImg('imgSrc3','imgId3',this,4)" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<img id="imgSrc4" height="120px" width="120px" src="<#if (imgSrc5)??> ${contextPath}${imgSrc5} <#else>${contextPath}/resources/image/sys/no_img.jpg </#if>" alt="" />
+						</td>
+						<td>
+							其他图片：<br />
+							<input id="imageFile5" name="imageFile" type="file" onchange="ajaxUploadImg('imgSrc4','imgId4',this,5)" />
+						</td>
+						<td>
+							<img id="imgSrc5" height="120px" width="120px" src="<#if (imgSrc6)??> ${contextPath}${imgSrc6} <#else>${contextPath}/resources/image/sys/no_img.jpg </#if>" alt="" />
+						</td>
+						<td>
+							其他图片：<br />
+							<input id="imageFile6" name="imageFile" type="file" onchange="ajaxUploadImg('imgSrc5','imgId5',this,6)" />
+						</td>
+					</tr>
+				</table>
+				<input type="${inputType}" name="" id="imgId0" value="${(imgId1)!}">
+				<input type="${inputType}" name="" id="imgId1" value="${(imgId2)!}">
+				<input type="${inputType}" name="" id="imgId2" value="${(imgId3)!}">
+				<input type="${inputType}" name="" id="imgId3" value="${(imgId4)!}">
+				<input type="${inputType}" name="" id="imgId4" value="${(imgId5)!}">
+				<input type="${inputType}" name="" id="imgId5" value="${(imgId6)!}">
+				<input type="${inputType}" name="" value="${(product.id)!}">
+			</div>
+			<!-- ------------------------------------------------------------------------- -->
+			<div>
+				<form id="ptdzForm" method="post">
+					<div id="dealerProductMappingTableDiv"></div>
+					<div class="divider"></div>
+					<a class="buttonActive" onclick="getDealerProductMappingTable('',null)" style="display: inline-block;padding-right: 30px;">
+						<span>添加对照表</span>
+					</a>
+					<a class="buttonActive" onclick="ajaxUpdateDealerProductMapping()" style="display: inline-block;padding-right: 30px;">
+						<span>保存</span>
+					</a>
+					<div class="divider"></div>
+					<input type="${inputType}" name="productId" value="${(product.id)!}">
+				</form>
+				<form method="post" id="del_ptdz_form"></form>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close" onclick="reloadProductList()">关闭</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+		function selectSupplierCheckBox(e){
+		var v =$(e).is(":checked");
+		if(v){
+			$("input[name='supplierList']").attr("checked",true);
+		}else{
+			$("input[name='supplierList']").removeAttr("checked");
+		}
+	}
+	</script>
+	<script type="text/javascript">
+		var ue1 = UE.getEditor('${ueditorId}');
+		
+		
+		console.log(ue1);
+	</script>

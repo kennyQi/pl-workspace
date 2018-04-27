@@ -1,0 +1,169 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "票量旅游网-机票">
+<link href="${contextPath}/resources/css/fly.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/lib/city/citySmall.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/yx/yx_fly.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/laydate/laydate.js" language="javascript"></script>
+
+</@frame.head>
+<body>
+<@frame.main "default" 2>
+<!--导航-->
+<!--快速回顶部-->
+<a class="g_totop bg_cmd curp" href="#top">
+</a>
+<!--头部-->
+
+<div class="fly_loadError">
+	<div class="loadbg"></div>
+	<div class="loadIcon yahei">预定失败</div>
+</div>
+
+
+<div class="fly_loadWait">
+	<div class="loadbg"></div>
+	<div class="loadIcon yahei">正在加载，请稍后。。。</div>
+</div>
+<!--内容-->
+
+<div class="g_bd">
+	<div class="m_search disb ov">
+		<div class="m_select disb pl">
+			<div class="select_cont pl">
+                <span class="pl fl disb ov">
+                    <label class="pa time_tt h2 color8">出发城市</label>
+                    <input class="laydate-icon input time" value="${qo.orgCity}" id="citySelect_from" >
+                    <label class="pa icon1 Bg "></label>
+                </span>
+				<span class="fl change Bg" id="changeCity"></span>
+                <span class="pl fl disb ov">
+                    <label class="pa time_tt h2 color8">到达城市</label>
+                    <input  class="laydate-icon input time" value="${qo.dstCity}" id="citySelect_to">
+                    <label class="pa icon2 Bg "></label>
+                </span>
+                <span class="pl fl disb ov day">
+                    <label class="pa time_tt h2 color8">出发日期</label>
+                    <input class="laydate-icon input time " onClick="laydate()" id="search_time">
+                    <label class="pa icon3 Bg "></label>
+                </span>
+				<span class="s_btn h1 yahei Bg curp pa" id="search">搜&nbsp;索</span>
+			</div>
+		</div>
+
+
+		<script>
+			;!function(){
+				laydate.skin('dahong');
+				laydate({
+					elem: '#demo',
+					istime: true,
+					min:laydate.now()
+				})
+			}();
+		</script>
+	</div>
+	<div class="g_cont ov disb">
+		<div class="m_left fl ov">
+			<h4 class="m_title disb">开始您的旅程吧，享受更超值的机票</h4>
+			<div class="m_date">
+				<div class="turn_l fl curp"  id="day_before"><i class="icon Bg fl"></i></div>
+				<!--放置时间参数-->
+				<input type="hidden" rel="0" id="day_rel" day="" loadDay=""><!--loadDay页面加载时的时间参数，day是js校验用参数-->
+				<ul class="day fl" id="chooseDay">
+					<li rel="">
+						<a href="javascript:;" class="on">
+						</a>
+					</li>
+					<li rel="">
+						<a href="javascript:;">
+						</a>
+					</li>
+					<li rel="">
+						<a href="javascript:;">
+						</a>
+					</li>
+					<li rel="">
+						<a href="javascript:;">
+						</a>
+					</li>
+					<li rel="">
+						<a href="javascript:;">
+						</a>
+					</li>
+					<li rel="">
+						<a href="javascript:;">
+						</a>
+					</li>
+					<li rel="">
+						<a href="javascript:;">
+						</a>
+					</li>
+				</ul>
+				<div class="turn_r fl curp" id="day_after"><i class="icon Bg fl"></i></div>
+			</div>
+			<div class="m_tiao disb">
+				<label class="fl lab">筛选条件：</label>
+				<div class="m_html_sel fl pl"><label>起飞时间</label>
+					<div class="op pa ov">
+						<span value="">全部</span>
+						<span value="上午(6:00-12:00)">上午(6:00-12:00)</span>
+						<span value="下午(12:00-18:00)">下午(12:00-18:00)</span>
+						<span value="晚上(18:00-24:00)">晚上(18:00-24:00)</span>
+					</div>
+					<i class="icon Bg pa"></i>
+				</div>
+				<div class="m_html_sel fl pl"><label>航空公司</label>
+					<div class="op pa ov">
+						<span value="">全部</span>
+						<span value="深圳航空公司">深圳航空公司</span>
+						<span value="中国东方航空公司">中国东方航空公司</span>
+						<span value="中国国际航空公司">中国国际航空公司</span>
+						<span value="中国南方航空公司">中国南方航空公司</span>
+					</div>
+					<i class="icon Bg pa"></i>
+				</div>
+			</div>
+			<div class="m_list disb ov" id="m_list">
+
+				<div class="fly_none" style="display:none;">
+					暂无航班信息！
+				</div>
+				<div class="fly_load" style="display:none;">
+				</div>
+			</div>
+			<div class="m_page disb">
+				<a href="javascript:" class="turn fr" id="nextDay">后一天航班&gt;&gt;</a>
+				<a href="javascript:" class="turn fr" id="preDay">&lt;&lt;前一天航班</a>
+			</div>
+		</div>
+		<input type="hidden" placeholder="游玩城市" class="city disb" id="city" name="city"/><!-- 无用,防止js报错 -->
+		<div class="m_right fr ov">
+			<div class="pinc">
+				<form action="${contextPath}/mp/list" method="post" id="searchMp">
+					<input type="text" placeholder="游玩城市" class="city disb" id="citys" name="city"/>
+					<a href="javascript:void(0)" class="search disb" >搜索景点</a>
+				</form>
+				<h4 class="jd disb">热门景点</h4>
+				<div class="hotLink disb">
+					<#if hotScenicMap??>
+						<#list hotScenicMap.dto as hotspots>
+							<a href="${contextPath}/mp/view?id=${hotspots.scenicSpotId}">${hotspots.scenicSpotBaseInfo.name}</a>&nbsp;&nbsp;
+						</#list>
+					</#if>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<input type="hidden" value="${contextPath}" id="contextPath"/>
+<!--内容-->
+
+<!--页脚-->
+<@frame.end "default"> </@frame.end>
+</@frame.main>
+<!--页脚-->
+</body>
+
+</html>

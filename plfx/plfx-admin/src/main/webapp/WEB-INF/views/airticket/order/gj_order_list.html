@@ -1,0 +1,258 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/gjjp/order/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent"
+				<tr>
+					<td>
+						平台订单编号：
+					</td>
+					<td>
+						<input type="text" name="id" value="${(gjjpOrderQo.id)!''}"/>
+					</td>
+					
+					<td>
+						下单时间：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(gjjpOrderQo.createDateBegin?string('yyyy-MM-dd'))!''}" class="date"/>
+						至
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(gjjpOrderQo.createDateEnd?string('yyyy-MM-dd'))!''}" class="date"/></td>
+					<td>订单状态：</td>
+					<td>
+                          <select name="orderStatus" id="orderStatus">
+							<option value="">全部状态</option>
+							 <#list orderStatusMap?keys as key>
+								<option value="${(key)!''}" <#if gjjpOrderQo.orderStatus == key> selected="selected"</#if>>${orderStatusMap[key]}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+					<td>支付状态：</td>
+					<td>
+                          <select name="payStatus" id="payStatus">
+							<option value="">全部状态</option>
+							 <#list orderPayStatusMap?keys as key>
+								<option value="${(key)!''}" <#if gjjpOrderQo.payStatus== key>selected="selected"</#if>>${orderPayStatusMap[key]}</option>
+						     </#list>
+						</select>
+                      	
+					</td>
+				</tr>
+				<tr>
+					<td>供应商订单号：</td>
+					<td>
+						<input type="text" name="supplierOrderId" value="${(gjjpOrderQo.supplierOrderId)!''}" />
+					</td>
+					<td>
+						乘机人：
+					</td>
+					<td>
+						<input type="text" name="passengerName" value="${(gjjpOrderQo.passengerName)!''}" />
+					</td>
+					<td>
+						下单人：<!-- 即联系人 -->
+					</td>
+					<td>
+						<input type="text" name="contactName" value="${(gjjpOrderQo.contactName)!''}" />
+					</td>	
+					
+				</tr>
+				<tr>
+				    <td>
+						经销商订单号：
+					</td>
+					<td>
+						<input type="text" name="dealerOrderIds" value="<#if gjjpOrderQo.dealerOrderIds ??><#list gjjpOrderQo.dealerOrderIds as dealerId>${dealerId}</#list></#if>" />
+					</td>
+<!-- 					<td>机票状态：</td>
+					<td>
+                          <select name="ticketStatus" id="ticketStatus">
+							<option value="">全部状态</option>
+							 <#if JP_ORDER_TYPE??>
+		                      <#list JP_ORDER_TYPE?keys as itemKey>
+		                       <option value="${itemKey}">
+		                        ${JP_ORDER_TYPE[itemKey]}</option>
+		                      </#list>
+		                   </#if>
+						</select>
+                      	
+					</td>
+ -->				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+				<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="reset" onclick="javascript:document.getElementById('pagerForm').reset()">重置</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent" id="table_c">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="210" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="30">经销商订单号</th>
+				<th width="30">平台订单号</th>
+				<th width="30">供应商订单号</th>
+				<th colspan="5"  class="xianl_w20" width="30%">
+				    乘机人
+				</th>
+				<th width = "90">航程</th>
+				<th width = "70">订单总金额</th>
+				<th width = "70">返点/佣金</th>
+			
+				<th width = "140">下单时间</th>
+				<th width = "90">订单状态</th>
+				<th width = "90">支付状态</th>
+				<th width="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as GJJPOrder>
+				<tr height="60px">
+				<!-- <td><input name="ids" value="" type="checkbox"></td> -->
+				<td>${(GJJPOrder.baseInfo.dealerOrderId)!''}</td>
+				<td>${(GJJPOrder.id)!''}</td>				
+				<td>${(GJJPOrder.baseInfo.supplierOrderId)!''}</td>
+				<td colspan="5"  class="xianl_w20" width="30%">
+						<table width="100%" height="100%" border="1">
+							<tr>
+				 				<th width="40">姓名</th>
+				 				<th width="50">乘客类型</th>
+				 				<th width="50">证件类型</th>
+								<th width="80">证件号</th>
+								<th width="80">票号</th>		
+							</tr>
+							<#if GJJPOrder.passengers ??>
+							<#list GJJPOrder.passengers as passenger>
+								<tr>
+									<td>
+									<p>${passenger.baseInfo.passengerName}</p>
+									</td>
+									<td>
+									<#if PASSENGER_TYPE_MAP??>
+						                   <#list PASSENGER_TYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.baseInfo.passengerType>
+						                       		${PASSENGER_TYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td style="width:120px;">
+									<#if IDTYPE_MAP??>
+						                   <#list IDTYPE_MAP?keys as itemKey>
+						                       <#if itemKey == passenger.baseInfo.idType>
+						                       		${IDTYPE_MAP[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</td>
+									<td>
+									<p>${passenger.baseInfo.idNo}</p>
+									</td>
+									<td>
+									<#if passenger.tickets??>
+										<#list passenger.tickets as ticket>
+											<p>${(ticket.ticketNo)!''}</p>
+										</#list>
+									</#if>
+									</td>
+								</tr>
+							</#list>
+						</#if>
+						</table>
+				</td>
+					<!-- 航程 -->
+				<td>
+                         <p>       
+                         ${dataTransService.getAirportName(GJJPOrder.segmentInfo.orgCity)}
+                        	-
+                        ${dataTransService.getAirportName(GJJPOrder.segmentInfo.dstCity)!''}
+                        </p>
+                    	 <p> 用时：${(GJJPOrder.segmentInfo.takeoffTotalDuration)!''}分钟</p>
+                        
+				</td>	
+				<!-- 订单总额 -->
+				<td>
+					<#if (GJJPOrder?? && GJJPOrder.payInfo?? &&GJJPOrder.payInfo.totalPrice??)>
+						${(GJJPOrder.payInfo.totalPrice)!?c}
+					</#if>
+				</td>
+				<!-- 返点、佣金 -->
+				<td>
+						${(GJJPOrder.payInfo.supplierDisc)!''}/${(GJJPOrder.payInfo.commAmount)!''}
+				</td>
+				<!-- 下单时间 -->
+				<td>
+					   ${(GJJPOrder.baseInfo.createDate)!''}
+				</td>
+				<!-- 订单状态 -->
+				<td>
+					 <#list orderStatusMap?keys as key>
+						<#if GJJPOrder.status.currentValue== key>
+							${orderStatusMap[key]}
+						</#if> 
+				     </#list>
+				</td>
+				<!-- 支付状态 -->
+				<td>
+					 <#list orderPayStatusMap?keys as key>
+						<#if GJJPOrder.payInfo.status== key>${orderPayStatusMap[key]}</#if> 
+				     </#list>
+              
+				</td>
+				<!-- 操作 -->
+				<td>
+					<p><a target="dialog" href="${contextPath}/gjjp/order/detail?id=${(GJJPOrder.id)!''}" width="1000" height="800" style="color: blue">订单详情</a></p>
+					<!-- 未支付 -->
+					<#if GJJPOrder.status.currentValue == PAY_WAIT>
+						<p><a  target="dialog" 
+							href="${contextPath}/gjjp/order/toCancel?id=${(GJJPOrder.id)!''}" style="color: blue">取消订单</a></p>
+					</#if>
+					<!-- 已支付 -->
+					<#if OUT_TICKET_ALREADY == GJJPOrder.status.currentValue> 
+							<p>
+							<a  target="dialog"
+								href="${contextPath}/gjjp/order/toRefund?id=${(GJJPOrder.id)!''}" style="color: blue">
+								申请废票
+							</a>
+							</p>
+					</#if>
+					<#if GJJPOrder.status.currentValue == TICKET_WAIT>
+					<p>
+						<a target="dialog" style="color: blue"
+					href="${contextPath}/gjjp/order/toCancelOrder?id=${(GJJPOrder.id)!''}"><span>申请退票</span>
+					</a></p>
+				</#if>
+				</td>
+			</tr>
+			</#list>
+			
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

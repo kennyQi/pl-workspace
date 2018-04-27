@@ -1,0 +1,6 @@
+appid A00000004
+Ç©Ãûkey 5d356efaa0baef63a416991ff30dcfc9
+
+/api/queryOrder?appId=A00000004&orderCode=20160613&time=1003434&sign=fa21d2bb87f65b423c4f198bf275ad63
+
+/api/submitOrder?appId=A00000004&orderCode=2016061401&csairCard=415305153869&csairName=xlj&num=100&time=33333333&sign=7a72ad4cd7604757fad44938e1d2e4d5

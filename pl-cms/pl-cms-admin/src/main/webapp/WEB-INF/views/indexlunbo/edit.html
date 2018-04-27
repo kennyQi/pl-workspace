@@ -1,0 +1,70 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data"
+		action="${contextPath}/indexlunbo/update"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, navTabAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="lunboId" value="${indexLunbo.id}">
+			<div class="unit">
+				<label>标题名称：</label> <input type="text" name="title" size="100" class="required" placeholder="输入轮播名称"  value="${indexLunbo.title}" />
+			</div>
+
+			<div class="unit" >
+				<label>链接地址：</label> 
+				<input type="text" name="url" size="100" class="required url" placeholder="链接地址" value="${indexLunbo.url}" />
+			</div>
+			<div class="unit" style="height: 100px">
+				<label>图片：</label>
+				<p style="width:160px">
+				<img alt="" src="${fileUploadPath!''}${(indexLunbo.urlMaps['default'])!''}" id="editLunboTitleImage" width="100" height="100">
+				<input type="hidden" readonly="readonly" id="imageUrl" name="imageUrl" value="${(indexLunbo.imageUrl)?html}"/>
+				<input type="hidden" readonly="readonly" name="titleImageFileInfoJSON" value="${(fdfsFileInfoJSON)?html}"/></p>
+				<p><input type="file" name="fileName" id="edit_indexLunbo_file_upload" /></p>
+				<p>建议尺寸640*380</p>
+
+			</div>
+			<div class="unit">
+				<label>启用状态：</label>
+				<input type="radio" name="isShow" value="true" <#if indexLunbo.isShow>checked="checked"</#if> > 启用
+				<input type="radio" name="isShow" value="false" <#if indexLunbo.isShow==false>checked="checked"</#if>>禁用
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">提交</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#edit_indexLunbo_file_upload").uploadify({
+	         'method'   : 'post',  
+	         'buttonText' : '请选择',  
+	         'swf'         : '${contextPath}/resources/dwz-ria/uploadify/scripts/uploadify.swf',
+	 		 'uploader'      : '${contextPath}/image/upload',
+	         'fileObjName'   : 'imgFile', 
+	         'onUploadSuccess' : function(file, data, response) {
+	        	 var img=$.parseJSON(data)
+	             $('input[name=titleImageFileInfoJSON]').val(JSON.stringify(img.fdfsFileInfo));
+	             $('#editLunboTitleImage').attr('src',img.url);
+	         }  
+	     });  
+	});
+</script>
+</div>
+

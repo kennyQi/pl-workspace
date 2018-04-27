@@ -1,0 +1,54 @@
+ html,
+body {
+	background:url(../img/login/top.jpg) no-repeat center 0;
+}
+p{text-align:center;}
+
+::-webkit-input-placeholder { /* WebKit browsers */ 
+color: #d5d5d5; 
+} 
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */ 
+color: #d5d5d5; 
+} 
+::-moz-placeholder { /* Mozilla Firefox 19+ */ 
+color: #d5d5d5; 
+} 
+:-ms-input-placeholder { /* Internet Explorer 10+ */ 
+color: #d5d5d5; 
+} 
+
+#top{position:relative;}
+.top-wrap{position:relative;width:440px;margin:0 auto;}
+.top-wrap-pure{position:relative;padding-top:200px;}
+#login{      height: 40px;background-color: transparent;width:100%;border:none;color:#d5d5d5;line-height:40px;font-size:18px;  padding-left: 56px;}
+#password{      height: 40px;background-color: transparent;width:100%;border:none;color:#d5d5d5;line-height:40px;font-size:18px;  padding-left: 56px;}
+.login{position:relative;width:100%;border:1px solid #d5d5d5;}
+.password{position:relative;width:100%;border:1px solid #d5d5d5;}
+.login img{position:absolute;width:22px;  left: 18px;  top: 12px;}
+.password img{position:absolute;width:20px;  left: 18px;  top: 8px;}
+.select,.test-code{overflow:hidden;width:100%;}
+.select-ab{float:left;  margin: 4px 10px 0 0;  width: 16px;  height: 16px;}
+.select-a{float:left;}
+.select-b{float:right;}
+.login-btn{position:relative;width:435px;height:50px;background:url(../img/login/bn.png) no-repeat;cursor:pointer;}
+.top-gap-line{width:900px;height:5px;background:url(../img/login/line.png) no-repeat;  margin: 0 auto;}  
+.top-gap{position:relative;}
+.reg{color:#4799ef;cursor:pointer;}
+.reg:hover,.select-b:hover{text-decoration:underline;}
+.tip{font-size:22px;color:#454545}
+
+.test-code-abc{position:relative;}
+.test-code-ab{  border: 1px solid #d5d5d5;}
+.test-code-ab.warnning{border: 1px solid #ea5657;}
+.password.warnning{border: 1px solid #ea5657;}
+.login.warnning{border: 1px solid #ea5657;}
+.test-code *{ float:left;}
+.test-code input{    padding-left: 30px; color: #d5d5d5;width:236px;  line-height: 40px;  font-size: 18px;  background-color: transparent;border:none;height: 40px;}
+.test-code-b{  margin: 0 20px 0 24px; width:95px;height:40px;  border: 1px solid #d5d5d5;background:url(../img/login-tip/code.png) no-repeat;}
+.test-code-c{  margin-top: 10px;cursor:pointer; width:18px;height:20px;background:url(../img/login-tip/refresh.png) no-repeat;}
+
+.tip-show-a{overflow:hidden;position:absolute;  right: 174px;  top: -64px;display:none;}
+.tip-show-b{overflow:hidden;position:absolute;  right:2px;  top: 352px;display:none;}
+.tip-show-a span,.tip-show-b span{  margin-top: -1px;color:#585858;font-size:12px;float:left;}
+.tip-show-a img,.tip-show-b img{float:right;width:14px;  margin-left: 10px;}
+.yellow-tip{position:absolute;color:#ea5657;font-size:12px;background-color:#fffbd0;width:440px;  text-indent: 18px;  top: -32px;left:0;line-height:26px;border:1px solid #ea5657;border-radius:2px;}

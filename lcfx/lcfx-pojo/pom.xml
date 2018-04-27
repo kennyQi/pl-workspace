@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>lcfx</groupId>
+		<artifactId>lcfx-parent</artifactId>
+		<version>0.1-SNAPSHOT</version>
+		<relativePath>../lcfx-parent/pom.xml</relativePath>
+	</parent>
+	<artifactId>lcfx-pojo</artifactId>
+	<packaging>jar</packaging>
+	<name>lcfx-pojo</name>
+
+	<repositories>
+		<repository>
+			<id>huigou-nexus</id>
+			<name>Huigou Repository</name>
+			<url>http://192.168.2.81:84/nexus/content/groups/public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://192.168.2.81:84/nexus/content/groups/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<distributionManagement>
+		<repository>
+			<id>huigou-nexus-releases</id>
+			<url>http://192.168.2.81:84/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>huigou-nexus-snapshot</id>
+			<url>http://192.168.2.81:84/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>hg</groupId>
+			<artifactId>hg-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>hg</groupId>
+			<artifactId>hg-log</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>system.properties</include>
+					<include>log4j.properties</include>
+				</includes>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.svn</exclude>
+					<exclude>**/Thumbs.db</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+
+		<plugins>
+			<!-- compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<showWarnings>true</showWarnings>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.6</jdk.version>
+		<maven.test.skip>true</maven.test.skip>
+		<project.build.directory>src/main/webapp/WEB-INF/classes</project.build.directory>
+	</properties>
+</project>

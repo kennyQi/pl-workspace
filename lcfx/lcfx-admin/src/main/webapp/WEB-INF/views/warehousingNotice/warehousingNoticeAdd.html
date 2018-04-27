@@ -1,0 +1,161 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageContent">
+	<form method="post" action="${contextPath}/warehousing_notice/<#if edit??>update<#else>create</#if>" class="pageForm required-validate nowrap" onsubmit="return validateCallbackPoAdd(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				基本信息<br>
+				<table border="1" class="my_form warehousingNoticeAdd">
+					<tr>
+						<td>采购单号：</td>
+						<td><#if edit??>${(warehousingNotice.warehousingNoticeCode)!}<#else>系统生成</#if></td>
+						<td>单据日期：</td>
+						<td>系统生成</td>
+						<td>供应商：</td>
+						<td>
+							<select name="supplierId" tosel="${(warehousingNotice.supplier.id)!}"> <#list supplierList as t>
+								<option value="${t.id}">${t.baseInfo.name}</option> </#list>
+							</select>
+						</td>
+						<td>入库仓库：</td>
+						<td>
+							<select name="warehouseId" tosel="${(warehousingNotice.warehouse.id)!}"> <#list warehouseList as t>
+								<option value="${t.id}">${t.name}</option> </#list>
+							</select>
+						</td>
+						<td>预计入库日期：</td>
+						<td>
+							<input value="${(warehousingNotice.warehousingDate)!}" name="storageDate" rname="storageDate" id="" type="text" class="date" readonly="readonly" onclick="setday(this);" datefmt="yyyy-MM-dd " />
+						</td>
+					</tr>
+					<tr>
+						<td>结算方式：</td>
+						<td>
+							<select name="paymentMethodId" tosel="${(warehousingNotice.paymentMethod.id)!}"> <#list paymentMethodList as t>
+								<option value="${t.id}">${t.paymentMethodName}</option> </#list>
+							</select>
+						</td>
+						<td>项目名称：</td>
+						<td>
+							<select name="projectId" tosel="${(warehousingNotice.project.id)!}"> <#list projectList as t>
+								<option value="${t.id}">${t.name}</option> </#list>
+							</select>
+						</td>
+						<td>制单人：</td>
+						<td><#if edit??>${(warehousingNotice.createUser)!} <#else>根据注意事项自动填写 </#if></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>注意事项：</td>
+						<td>
+							<select name="attentionId" tosel="${(warehousingNotice.attention.id)!}"> <#list attentionList as t>
+								<option value="${t.id}">${t.attentionName}</option> </#list>
+							</select>
+						</td>
+						<td colspan="8">
+							<textarea disabled="disabled" name="attentionDetail"><#if edit??>${(warehousingNotice.attention.attentionDetail)!}<#else>根据注意事项自动填写</#if></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>备注：</td>
+						<td colspan="9">
+							<textarea name="remark">${(warehousingNotice.remark)!}</textarea>
+						</td>
+					</tr>
+				</table>
+				商品信息<br>
+				<table border="1">
+					<tbody id="e1425955249321">
+						<tr>
+							<td>商品编码</td>
+							<td>sku编码</td>
+							<td>商品名称</td>
+							<td>规格</td>
+							<td>数量</td>
+							<td>单位</td>
+							<td>含税单价</td>
+							<td>
+								税率
+								<a href="javascript:;" onclick="selectTaxRateLikeFirst()">匹配第一项</a>
+							</td>
+							<td>不含税单价</td>
+							<td>含税总金额</td>
+							<td>不含税总金额</td>
+							<td>物流费</td>
+							<td>操作</td>
+						</tr>
+						<#include "/warehousingNotice/warehousingNoticeDetailLine.html">
+					</tbody>
+				</table>
+			</div>
+			<br> <br>
+			<a href="${contextPath}/product/sku_product_lookup" target="dialog" width="700" height="430" mask="true" rel="product_lookup">增加行</a>
+		</div>
+		<div class="formBar">
+			<ul>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	function validateCallbackPoAdd(e, cb){
+	
+	
+	checkDateInput("storageDate");
+	$("[skuCode]").each(function(i,e){
+		$(e).attr("name","detailList["+i+"].skuCode");
+		var tr = $(e).parent().parent();;
+		tr.find("[quantity]").attr("name","detailList["+i+"].quantity");
+		tr.find("[unitPrice]").attr("name","detailList["+i+"].unitPriceInclTax");
+		tr.find("[tatalPrice]").attr("name","detailList["+i+"].totalPriceInclTax");
+		tr.find("[logisticCost]").attr("name","detailList["+i+"].logisticCost");
+		
+	})
+	
+	
+	return validateCallback(e, cb)
+}
+
+function selectTaxRateLikeFirst(){
+    var first;
+    $("[selectTaxRate]").each(function(i,e){
+        if(i==0){
+            first = $(e).val();
+        }else{
+            var options = $(e).find("option");
+            options.each(function(){
+                var e = $(this);
+                e.removeAttr("selected");
+                if(e.val() == first){
+                    e.attr("selected",true);
+                }
+            })
+        }
+    })
+}
+
+function getSelectedHtml(s){
+	return $("[name='"+s+"']").find("option:selected").html();
+}
+
+toSelect(currentDlg());
+</script>

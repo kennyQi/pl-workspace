@@ -1,0 +1,137 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+    <form method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+        <div class="pageFormContent" layoutH="58">
+
+            <div class="unit">
+                <h2>订单详情 </h2>
+            </div>
+            <div class="unit">
+                订单信息
+                <hr/>
+            </div>
+            <div class="unit">
+                <table class="table" width="100%">
+                   <tr>
+                       <td>订单状态：${dzpTicketOrderStatusMap[dzpOrder.current?string]}</td>
+                   </tr>
+                    <tr>
+                        <td>订单编号：${dzpOrder.baseInfo.orderNo}</td>
+                        <td>票务号：${dzpOrder.baseInfo.dzpwOrderNo}</td>
+                    </tr>
+                    <tr>
+                        <td>出票时间：${dzpOrder.baseInfo.createDate}</td>
+                        <td>经销商结算编号：${dzpOrder.baseInfo.dzpwOrderNo}</td>
+                    </tr>
+                    <tr>
+                        <td>预订人：${dzpOrder.baseInfo.linkMan}</td>
+                        <td>手机号：${dzpOrder.baseInfo.linkMobile}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            经销商手续费：
+                            <#if dzpOrder.payInfo.userPrice??>
+                                ${dzpOrder.payInfo.userPrice-dzpOrder.payInfo.dealerSettlementFee}
+                            </#if>
+                        </td>
+                    </tr>
+                    <#if dzpOrder.ticketPolicy.type == 2>
+                        <tr>
+                            <td>理财退款帐号：</td>
+                            <td>下单时间：${dzpOrder.baseInfo.orderDate}</td>
+                        </tr>
+                    </#if>
+                </table>
+            </div>
+            <br/>
+            <br/>
+                <div class="unit">
+                    <h2>票务信息</h2>
+                </div>
+                <div class="unit">
+                    <hr/>
+                </div>
+                <table class="table" width="100%">
+                    <tr>
+                        <td>票务名称：${dzpOrder.ticketPolicy.baseInfo.name}</td>
+                        <td>产品编号：</td>
+                        <td>票务类型：
+                            <#if dzpOrder.ticketPolicy.type == 2>
+                                联票
+                            <else>
+                                单票
+                            </#if>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>包含景点：${dzpOrder.ticketPolicy.baseInfo.scenicSpotNameStr}</td>
+                    </tr>
+                    <tr>
+                        <td>销售价：${dzpOrder.ticketPolicy.baseInfo.playPrice}</td>
+                    </tr>
+                    <tr>
+                        <td>退票规则：${dzpOrder.ticketPolicy.sellInfo.returnRule}</td>
+                    </tr>
+                </table>
+                <div class="unit">
+                    <h2>游玩结算信息</h2>
+                </div>
+                <div class="unit">
+                    <hr/>
+                </div>
+                <div id="operateLogDiv">
+                    <table class="table" width="100%">
+                        <thead>
+                            <th width="20%">景区</th>
+                            <th width="40%">经销商结算价（元）</th>
+                            <th width="20%">游玩人姓名</th>
+                            <th width="20%">游玩人证件类型</th>
+                            <th width="20%">游玩人证件号</th>
+                            <th width="40%">游玩时间</th>
+                            <th width="20%">退款时间</th>
+                            <th width="20%">景区状态</th>
+                            <th width="40%">操作</th>
+                        </thead>
+                        <tbody>
+                           <#list dzpOrder.groupTickets as groupTicket>
+                               <#list groupTicket.singleTickets as singleTicket>
+                                   <tr>
+                                       <td>${singleTicket.scenicName}</td>
+                                       <td>${groupTicket.price+groupTicket.dealerSettlementFee}</td>
+                                       <td>${singleTicket.tourist.name}</td>
+                                       <td>${singleTicket.tourist.idType}</td>
+                                       <td>${singleTicket.tourist.idNo}</td>
+                                       <td>${singleTicket.firstTimeUseDate}</td>
+                                       <td>${singleTicket.status.refundDate}</td>
+                                       <td>${dzpSingleTicketStatusMap[singleTicket.status.current?string]}</td>
+                                       <td>
+                                           <#if singleTicket.status.current == 2>
+                                               <a style="color: blue" href ="${contextPath}/dzp/order/refund?orderNo=${groupTicket.ticketNo}" target="ajaxTodo" >结算</a>
+                                           </#if>
+                                           <#if singleTicket.status.current == 5>
+                                               <a style="color: blue" href ="${contextPath}/dzp/ticket/settlement?orderNo=${groupTicket.ticketNo}" target="ajaxTodo" >退款</a>
+                                           </#if>
+                                       </td>
+                                   </tr>
+                               </#list>
+                           </#list>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+        <div>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button type="button" class="close">关闭</button>
+                    </div>
+                </div>
+            </li>
+        </div>
+
+    </form>
+</div>

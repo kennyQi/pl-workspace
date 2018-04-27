@@ -1,0 +1,87 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css' rel='stylesheet' />
+
+<script type="text/javascript">
+
+function autoReplySubmitCheck(that){
+	
+	try{
+		var welcomeReply = $("#autoReplySubmmitForm textarea[name='welcomeReply']").text();
+		var autoReply = $("#autoReplySubmmitForm textarea[name='autoReply']").text();
+		
+		console.info(welcomeReply.length < 6000);
+		if(welcomeReply.length > 6000){
+			alertMsg.error("关注回复至多输入600字")
+			return false;
+		}
+		if(autoReply.length > 6000){
+			alertMsg.error("消息回复至多输入600字");
+			return false;
+		}
+		validateCallback(that, dialogAjaxDone);
+	 }catch(e){
+	  	console.info(e);
+	 }
+	 
+	 return false;
+}
+
+function delCounent(){
+	var tmepDiv = $("#autoReplySubmmitForm .tabsContent").children("div:visible");
+	tmepDiv.find("textarea").html("");
+}
+
+</script>
+<div class ="page unitBox">
+	<h2 class="contentTitle">自动回复</h2>
+    <div class="pageContent">
+          <form action="${contextPath}/admin/weChat/autoReplySubmmit" method="POST" id="autoReplySubmmitForm" onsubmit="return autoReplySubmitCheck(this);">
+	            <div class="tabs">
+				    <div class="tabsHeader">
+				    	<div class="tabsHeaderContent">
+				    		<ul>
+				    			<li class="selected">
+				    				<a href="#" ><span>关注回复</span></a>
+				    			</li>
+				    			<li>
+				    				<a href="#" ><span>消息回复</span></a>
+				    			</li>
+				    		</ul>
+				    	</div>
+				    </div>
+		    
+				    <div class="tabsContent" >
+				    	<div style="display: block;">
+				    		<textarea class="textInput" style="width:95%;height:200px" name="welcomeReply" placeholder="至多输入600字">${(wxAutoReply.welcomeReply)!}</textarea>
+				    	</div>
+				    	<div style="display: none;">
+				    		<textarea rows="" cols="" class="textInput" style="width:95%;height:200px" name="autoReply" placeholder="至多输入600字">${(wxAutoReply.autoReply)!}</textarea>
+				    	</div>
+			      </div>
+	    		</div>
+	    		
+    		   <div>
+			       <div class="subBar">
+						<ul>
+							<li>
+								<div class="buttonActive">
+									<div class="buttonContent">
+										<button type="submit">保存</button>
+									</div>
+								</div>
+							</li>
+							<li></li>
+							<li>
+								<div class="buttonActive">
+									<div class="buttonContent">
+										<button onclick="delCounent()">删除回复</button>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+		   		</div>
+          </form>
+    </div>
+</div>

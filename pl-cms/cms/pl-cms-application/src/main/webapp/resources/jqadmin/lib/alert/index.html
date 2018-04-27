@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+<div id="main">
+  <div class="demo">
+     <h3>1、警告框</h3>
+     <p><a href="#" id="a1">点击这里</a></p>
+  </div>
+  <div class="demo">
+     <h3>2、确认框</h3>
+     <p><a href="#" id="a2">点击这里</a></p>
+  </div>
+  <div class="demo">
+     <h3>3、输入框</h3>
+     <p><a href="#" id="a3">点击这里</a></p>
+  </div>
+  <div class="demo">
+     <h3>4、网页框</h3>
+     <p><a href="#" id="a4">点击这里</a></p>
+  </div>
+  <div class="demo">
+     <h3>5、提示条</h3>
+     <p><a href="#" id="a5">点击这里</a></p>
+  </div>
+  
+</div>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.alert.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#a1").click(function(){
+		hiAlert("欢迎来到helloweba.com","提示");
+	});
+	$("#a2").click(function(){
+		hiConfirm('你确认此操作吗?', '确认框', function(r) {
+           hiOverAlert('你的反馈是: ' + r);
+        });
+	});
+	$("#a3").click(function(){
+		hiPrompt('请填写:', '默认值', '输入框', function(r) {
+			if( r ) hiOverAlert('你填入的内容是“' + r+'”');
+		});
+	});
+	$("#a4").click(function(){
+		hiBox('#showbox', '标题',400,'','','.a_close');
+	});
+	$("#a5").click(function(){
+		hiOverAlert('操作提示条信息',1500);
+	});
+});
+</script>
+</body>
+</html>

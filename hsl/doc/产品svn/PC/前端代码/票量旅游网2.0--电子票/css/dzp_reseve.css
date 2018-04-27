@@ -1,0 +1,191 @@
+@charset "utf-8";
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+.boxCenter{width:1200px; margin:0 auto;overflow:hidden;}
+.general{color:#676767;text-align:right;float:left;}
+.ts{display:none;}
+
+.g_body{font-family:"Microsoft YaHei","微软雅黑";}
+.comBg{background-image:url(../images/payScript.png);background-repeat:no-repeat;}
+.colorfe{color:#fe0000;}
+.bg_f2{background-color:#f2f2f2;}
+
+.g_cont{width:1200px;margin:auto;}
+.g_step{width:1200px;margin:auto;padding:40px 0px 0px 0px;}
+.g_step .m_move{width:232px;height:47px; float:left; padding:0px 10px 55px 0px; text-align:center;}
+.g_step .ticketSU{width:360px;height:47px; float:left; padding:0px 20px 55px 20px; text-align:center;}
+.g_step .m_move_last{padding-right:0px;}
+.g_step .m_move h3{font-size:16px; font-weight:normal;color:#b6b7b6; line-height:14px; margin-bottom:4px;}    /*未完成部分的样式*/
+.g_step .m_move span{ width:232px; height:28px; background:url(../images/payScript.png) 0 0; display:block; line-height:26px; font-size:20px; color:#cdcece;}       /*未完成部分的样式*/
+.g_step .m_move .h3{color:#00a0e9; font-weight:bold;}      /*已完成部分的样式*/
+.g_step .m_move .icon{background:url(../images/payScript.png) 0 -28px; color:#fff;}    /*已完成部分的样式*/
+
+.g_title{width:100%;min-width:1200px; height:50px; background:#F0f0f0;}
+.g_title .tt,.g_titles .tt{width:1200px;margin:auto;}
+.g_title span{line-height:50px;margin-left:40px;}
+.line{border-bottom:2px solid #eeeded; width:890px;height:5px;display:block;overflow:hidden;margin-left:20px;}
+.line1{height:15px;border-bottom:1px solid #eeeded;}
+.line2{height:10px;}
+.adultNum{width:50px;margin-right:10px;}
+.tourist li,.chidrens li{overflow:hidden;float: left;
+  width: 100%;height:30px;}
+
+.yktips{margin-top:42px;}
+
+.g_tabel{ color:#333333;}
+.g_tabel *{font-size:14px;}
+.g_tabel .travel{ width:1200px;margin:0 auto; font-size:14px; line-height:14px;}
+input{ height:30px; border:0; background:#f2f2f2; line-height:14px; border-radius:5px;}
+.g_tabel .travel ul{margin:0px 0px 0px 90px;}
+.g_tabel .travel li{ margin-top:16px;display:block;}
+.g_tabel .travel a{color:#0172b4;}
+.g_tabel .travel .travelTitle{ width:71px;color:#666666;}
+.g_tabel .travel .inp{ margin-top:5px; margin-bottom:5px;}
+.g_tabel .mo{font-size:12px;}
+
+.g_tabel .travel span{color:#333333;}
+.g_titles{width:100%;min-width:1200px;}
+.g_titles .tt span.t{font-size:18px; float:left; margin-left:40px;}
+.g_titles .tips{margin-left:40px;line-height:18px;font-size:12px;}
+.g_titles .tips *{line-height:18px;}
+
+.g_titles .tt span.subt{margin-left:40px;}
+
+.g_information p{ float:left; margin-left:-88px;}
+.g_information .touristName{margin-left:70px; display:block; margin-top:0px;padding-bottom:20px;}
+.g_information .touristName span{font-size:16px; margin-right:20px;}
+.g_information .touristName a{margin-left:30px; font-size:14px; color:#0073b6;}
+.inp{padding:5px 0px;}
+.g_information .travelTitle{color:#676767; width:91px;text-align:right;float:left;font-size:14px;}
+.touristInp{margin-left:70px;}
+#tourists{margin-top:15px;}
+
+.children{margin-top:15px;}
+
+.discount{clear:both; color:#666;}
+.discount .position{ font-size:14px; margin:20px 0 0 70px;}
+.discount .radio{clear:both;float:left; height:16px; margin:20px 0 0 70px; font-size:14px; line-height:16px; background:url(../images/payScript.png) no-repeat -215px -157px; padding-left:21px;}   /*未选中状态的样式*/
+
+.discount .boxDiscount{ width:626px;border:1px solid #e5e5e5; clear:both; margin:70px 0 0 70px; box-shadow:10px 0px 15px #e5e5e5; display:none;}
+.discount .boxDiscount ul{ margin-left:13px; margin-top:9px;}
+.discount .boxDiscount ul li{ height:36px; line-height:31px;}
+.discount .boxDiscount ul li .choice{ width:17px; height:16px; background:url(../images/payScript.png) no-repeat -215px -128px; display:inline-block; float:left; margin-top:7px; margin-right:10px;}   /*未选中状态的样式*/
+.yesChoice{background:url(../images/payScript.png) no-repeat -215px -128px; !important;}
+
+.discount .boxDiscount ul li .choice_on{background:url(../images/payScript.png) no-repeat 1px -128px; !important;}
+.discount .boxDiscount ul li .select{ width:160px; height:30px; border-radius:5px; background:#f2f2f2; display:inline-block; margin:0 6px 0 30px; line-height:30px; padding:0 8px 0 8px;}
+.discount .boxDiscount ul li .select .option{ width:9px; height:5px; background:url(../images/payScript.png) no-repeat 0px -105px; display:inline-block; float:right; margin:13px 0 12px 0; position:relative;}
+
+.discount .boxDiscount ul li .options{ background:#f2f2f2; width:160px; position:absolute; margin:0 0 0 122px; display:none;}
+.discount .boxDiscount ul li .options li{padding:0 8px 0 8px;}
+.discount .boxDiscount ul li .options li:hover{background:#e6e5e5;}
+
+.discount .boxDiscount ul li strong{margin-right:16px; width:100px; display:inline-block;font-weight:normal;}
+
+.g_invoice .invoice .radio{clear:both;float:left; height:16px; margin:20px 0 0 70px; font-size:14px; line-height:16px; background:url(../images/payScript.png) no-repeat -215px -157px; padding-left:21px;cursor:pointer;}   /*未选中状态的样式*/
+.g_invoice .invoice .point{ margin-left:22px; position:absolute; margin-top:16px;}
+.g_invoice .invoice .receipt{ margin-top:50px; color:#999;}
+.g_explain .explain{ width:820px; margin-left:68px; margin-top:20px; color:#666; line-height:23px;}
+.boxBottom{margin-bottom:80px;}
+
+.discount .radio_on,.g_invoice .invoice .radio_on{background:url(../images/payScript.png) no-repeat 1px -157px;} 
+.float{width:270px; background:#f1faff; border:1px solid #cae1ef; position:absolute; top:10px; float:right; right:0px; font-size:12px; font-family:"微软雅黑";padding-bottom:30px;}
+.float .floatTitle{font-size:18px; margin:20px 98px 10px 98px; float:left;}
+.float .boxFloat{ clear:both; border-top:1px solid #ddf0fb; padding:7px 20px;line-height:24px;}
+.float .boxFloat span{float:left;overflow:hidden;}
+.float .boxFloat span.moneys{float:right;overflow:hidden;}
+.float .settleAccounts{padding-top:10px;}
+.number{margin-right:10px;}
+.money{ margin-left:10px;}
+.moneys{ float:right; font-size:14px; color:#ff6600;}
+.settleAccounts .SATitel{font-family:"微软雅黑"; font-size:16px;  margin-right:10px; float:left;}
+.settleAccounts .SAMoney{color:#ff6600; font-size:24px; float:left; margin-top:-2px;font-weight:bold;}
+.settleAccounts .next{ clear:both; float:left; margin-left:39px; background:#ff6600; color:#FFFFFF; border-radius:0; width:160px; height:36px; line-height:36px; font-size:14px; font-family:"微软雅黑"; margin-top:32px;text-align:center;}
+
+.boxDiscount .icon{width:9px;height:6px;background-position:-219px -104px;left:28px;top:-5px;}
+.inp input{line-height:30px;}
+
+/******************景点门票预定页面***************/
+.m_move span{ font-size:14px !important;}
+.g_step .m_move{ width:360px;}
+.g_step .m_move .tick_order{width:360px;height:27px; background:url(../images/payScript.png) 0 -217px;}
+.g_step .ticketSU span{ background:url(../images/payScript.png) 0 -249px;  width:360px;}
+
+.tick_ME{ height:88px; background:#f7fff4; border-top:1px solid #ddd;}
+.tick_ME ul{ margin-top:25px;}
+.tick_ME ul li{ float:left; width:1160px;  padding-left:38px;}
+.tick_ME ul li.scenices{width:45%;padding-top:10px;}
+.tick_ME .tick_title a:hover{ text-decoration:underline;}
+.tick_ME .total{ float:right; margin-top:-32px; margin-right:40px;}
+.ic{width:14px;height:8px; float:left; background:url(../images/payScript.png) 0 -281px; margin-top:-32px; margin-left:193px;}
+
+.tick_box{ height:440px; clear:both;}
+.tick_box .tick_da{ margin-left:33px;  margin-top:10px;}
+.tick_box .tick_da li{ height:30px; width:1000px; margin-top:10px;}
+.tick_box .tick_da li span{height:30px; line-height:30px;}
+.tick_box .tick_da li .data{width:190px;height:30px; background:url(../images/input_script.png) 0 0; padding:0 40px 0 10px; line-height:30px;}
+.tick_ti{ width:110px; text-align:right;}
+.tick_box .tick_da li .numText{ float:left; border:1px solid #cccccc; width:79px; height:23px;}
+.tick_box .tick_da li .numText input{width:33px; height:23px; float:left; border:0; text-align:center;  line-height:23px; background:#FFFFFF;}
+.tick_box .tick_da li .numText .min{ float:left; height:23px; width:22px; line-height:23px; text-align:center; border-right:1px solid #cccccc; color:#ddd;}
+.tick_box .tick_da li .numText .add{ float:right; height:23px; width:22px;  line-height:23px; text-align:center;border-left:1px solid #cccccc; color:#777;}
+.underline{ border:1px solid #eeeded; margin:0 20px; height:0; margin-top:14px;}
+.tick_people{ margin-top:30px;}
+.tick_people .people{ margin-left:40px;}
+.tick_people .tick_PM{margin-left:20px; margin-top:8px;}
+.tick_people .tick_PM li{ width:1000px; margin-top:12px;}
+.tick_people .tick_PM input{width:220px;height:30px; background:url(../images/input_script.png) 0 -34px; padding:0 10px; line-height:30px; float:left; margin-right:10px;color:#888;}
+.tick_people .tick_PM input.playerName{width:120px;font-family:'微软雅黑';}
+.tick_people .tick_PM li .tick_ts{ line-height:30px;}
+.tick_people .tick_PM .tick_tis{ width:125px; text-align:right; line-height:30px;}
+.tick_people .tick_PM .tick_tis.playerName{width:54px;}
+.tick_people .tick_PM .tick_tis.playerId{width:75px;}
+.tick_people .tick_PM .icon_delete{display:block;float:left;width:20px;height:20px;background:url(../images/icon_delete.png);margin:5px 0 0 20px;cursor:pointer;}
+.protocol{ margin-top:40px;}
+.protocol .protocol_title{margin-left:40px;}
+.protocol .protocol_content{ width:1118px; height:198px; border:1px solid #dddddd; background:#f5f5f5; margin-left:40px; margin-top:10px; max-height:198px; overflow-y:auto;overflow-x:hidden; line-height:20px;}
+.sj{width:10px;height:5px; background:url(../images/payScript.png) 0 -295px; margin-top:-5px; margin-left:40px; position:absolute; *margin-left:28px;}
+.tick_tj{ height:90px; background:#f7fff4; margin:0 40px; margin-top:40px; margin-bottom:120px;}
+.tick_tj a{ width:160px; height:36px; background:#ff6600; color:#fff; text-align:center; line-height:36px; margin:27px 20px 0 40px ;}
+.tick_tj .total{ margin-top:27px;}
+#data{ height:auto; margin-left:110px; width:1030px; }
+.none{display:none;}
+
+/*日历样式*/
+.dataBox{ width:72px; height:48px !important; /*border:1px solid #fff;*/ float:left; color:#6fbf4d;}
+.dataBox:hover{background:url(../images/input_script.png) 0 -106px;}
+.dataBox i{float:left; height:15px; font-size:12px; color:#666; font-family:"微软雅黑"; margin-left:4px; margin-top:-5px;}
+.dataBox .money{ font-size:14px; font-family:"微软雅黑"; display:block; position:absolute;  margin-top:20px; margin-left:26px; *float:left; *position:relative; *margin-top:10px;}
+
+/*日历样式*/
+/***************景点门票预定页面***************/
+
+/*新增样式*/
+.tick_people .btn_wrap{padding:20px 0 0 40px;}
+.tick_people .btn_wrap span{display:inline-block;font-size:14px;color:#666;height:30px;line-height:30px;border:1px solid #bbe0ad;padding:0 5px;background:#f7fff4;margin-right:10px;cursor:pointer;}
+.linkCm{color:#00a0e9;}
+
+/*预订须知弹框*/
+.win_bg{width:100%;height:100%;position:fixed;top:0;left:0;background:#000;opacity:0.5;z-index:9999;filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);}
+.ydinfo_box{font-family:'微软雅黑';position:fixed;top:20%;left:50%;margin-left:-194px;width:357px;background:#fff;z-index:10000;padding:30px 15px 80px 15px;}
+.ydinfo_box .btn_close{position:absolute;top:-13px;right:-13px;width:38px;height:38px;background:url(../images/btn-close.png) no-repeat center;}
+.ydinfo_box h1{font-size:18px;color:#6fbf4d;padding-bottom:10px;}
+.ydinfo_box .title{font-size:18px;color:#333;width:378px;height:41px;background:url(../images/tit-bg.png) no-repeat center;margin-left:-21px;padding:14px 0 0 22px;}
+.ydinfo_box .ydxz dl{margin-top:5px;}
+.ydinfo_box .ydxz dl dt{font-size:16px;color:#333;height:24px;padding-left:10px;background:url(../images/icon-dt.png) no-repeat center left;}
+.ydinfo_box .ydxz dl dd{font-size:15px;color:#999;padding:6px 10px;}
+.ydinfo_box .ydxz dl dd span{margin-right:15px;color:#0073b6;}
+
+/*联系人弹框*/
+.win_choosePlayer{font-family:'微软雅黑';position:fixed;top:25%;left:50%;margin-left:-194px;width:357px;background:#fff;z-index:10000;box-shadow: 0 0 20px #efefef;}
+.win_choosePlayer .btn_submit{position:absolute;top:0px;right:0;width:20px;height:20px;background:url(../images/regScript_bg.png) 0 -760px;margin:6px;}
+.win_choosePlayer h1{background:#00a0e9;text-align:center;font-size:16px;font-weight:normal;color:#fff;padding:5px 0;}
+.linksList{padding-top:10px;width:220px;height:160px;margin:20px 0 30px 68px;overflow-y:auto;}
+.linksList li{width:100%;height:30px;}
+.linksList li i{display:block;float:left;width:16px;height:18px;background:url(../images/payScript.png) -216px -126px no-repeat;margin:5px 10px 0px 42px;}
+.linksList li i.on{background-position: 0px -126px;}
+.linksList li span{display:block;float:left;width:120px;height:24px;line-height:24px;font-size:14px;color:#333;padding-top:4px;}
+
+/*有效期*/
+.deadline_box{padding:30px 0 0 40px;font-size:14px;color:#333;}
+.deadline_box .deadline{font-size:20px;}
+.deadline_box .deadline i{color:#ff6600;}

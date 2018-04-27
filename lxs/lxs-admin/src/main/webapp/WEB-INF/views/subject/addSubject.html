@@ -1,0 +1,35 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src="${staticPath}/js/jquery-validation-1.9.0/lib/jquery.js" type="text/javascript"></script>
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+</style>
+<div class="pageContent">
+
+	<form action="${contextPath}/subject/saveSubject" method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+	<table>
+			<tr style="float:left;"> 
+				<td>
+					<select name="subjectType">
+						<option value="1">线路主题</option>
+						<!-- <option value="2">门票主题</option> -->
+					</select>
+				</td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr style="float:left;"> 
+				<td>
+					<input value="" type="text" name="subjectName" placeholder="请输入主题名称，限制四个字" size="25" class="required" maxlength="4">&nbsp;&nbsp;<span style="color: red;">限制在4个字以内</span>
+					</div>
+				<td>
+			</tr>
+			<tr height="10px;"/> 
+			<tr>
+				<td style="float: right;">
+					<div class="buttonActive"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+					<div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div>
+				</td>
+			</tr>
+	</table>
+	</form>
+	
+</div>
+

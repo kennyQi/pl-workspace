@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改密码</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/member.css" type="text/css" rel="stylesheet" />
+<link href="../css/jquery-ui.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.ui.core.js"></script>  
+<script type="text/javascript" src="../js/datepicker.js"></script>  
+  <script type="text/javascript">
+$(function(){
+ 	$( "#start" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 2,
+		onClose: function( selectedDate ) {
+			$( "#end" ).datepicker( "option", "minDate", selectedDate );
+		}
+	});
+	
+	$( "#end" ).datepicker({
+		defaultDate: "+1w",
+		changeMonth: true,
+		numberOfMonths: 2,
+		onClose: function( selectedDate ) {
+			$( "#start" ).datepicker( "option", "maxDate", selectedDate );
+		}
+	});
+  });
+</script>
+</head>
+
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+      <ul id="J_SiteNavBdR" class="L"><li><a href="#">注册</a></li></ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar"><h4>登录<b></b></h4> <h4><i></i>我的订单<b></b></h4></div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单-->
+  <div class="main">
+    <div class="current mt20 clearfix"><strong>企业账户中心：</strong><a href="#">首页</a></div>
+    <div class="sidebar L">
+      <div class="siderbar_title">
+        <h2>账户中心</h2>
+        <h3><a href="#">返回账户中心首页</a></h3>
+      </div>
+      <div class="jiaoyi s_l">
+        <h2><i></i>交易管理</h2>
+        <ul>
+          <li class="sel"><a href="#" class="j1"><i></i>所有订单</a></li>
+          <li><a href="#" class="j2"><i></i>差旅管理</a></li>
+          <li><a href="#" class="j3"><i></i>组织架构</a></li>
+        </ul>
+      </div>
+      <div class="ziliao s_l">
+        <h2><i></i>资料管理</h2>
+        <ul>
+          <li><a href="#" class="z1"><i></i>账户资料</a></li>
+          <li><a href="#" class="z2"><i></i>修改密码</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="M_wrap R">
+       <div class="M_w">
+       <div class="M_m_title chelv">
+       <h2>差旅管理<span>企业用户名：汇购集团</span></h2>
+       </div>
+       <div class="m_hd_search">
+       <form action="">
+        <div class="bthsearch bthsearch01">
+          <ul>
+            <li>
+              <label>请选择公司：</label>
+              <div>
+                <select><option>票量云数据有限公司</option><option>票量云数据有限公司</option><option>票量云数据有限公司</option><option>票量云数据有限公司</option></select>
+              </div>
+            </li>
+            <li>
+              <label>请选择部门：</label>
+              <div> <select><option>部门</option><option>部门</option><option>部门</option><option>部门</option></select></div>
+            </li>
+            <li>
+              <label>请选择人员：</label>
+              <div>
+                <select><option>人员</option><option>人员</option><option>人员</option><option>人员</option></select>
+              </div>
+            </li>
+            <li>
+              <label>请选择差旅：</label>
+              <div> <select><option>全部</option></select></div>
+            </li>
+            <li>
+              <label>请选择日期：</label>
+              <div class="bth_time"> <div>
+                <input type="text" id="start" />
+              </div><span>--</span>
+              <div>
+                <input type="text" id="end" />
+              </div></div>
+            </li>
+            <li>
+            <label>&nbsp;</label>
+            <div class="barnavbth barnavbth1"><a href="#" class="cx">查询</a>  <a href="#" class="cx">导出</a></div>
+            </li>
+           </ul>
+           </form>
+        </div>
+        <div class="m_info">
+        <table cellpadding="0" cellspacing="0" class="tb tb2" width="100%">
+        <tr>
+        <th width="10%">订单号</th>
+        <th width="40%">公司</th>
+        <th width="10%">部门</th>
+        <th width="10%">职位</th>
+        <th width="10%">差旅项目</th>
+        <th width="10%">目的地</th>
+        <th width="10%">金额</th>
+        </tr>
+        <tr>
+        <td>202145</td>
+        <td>票量云数据有限公司</td>
+        <td>前端</td>
+        <td>前端</td>
+        <td>飞机</td>
+        <td>杭州</td>
+        <td>￥2000</td>
+          </tr>
+         <tr>
+        <td>合计</td>
+        <td colspan="5">&nbsp;</td>
+        <td>￥202145</td>
+        </tr>
+           </table>
+          <div id="page"><span class="peve"><a href="#">上一页</a></span><a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <span class="next"><a href="#">下一页</a></span><div class="page—ji">去第<input type="text" />页 <a href="#">GO</a></div></div>
+        </div>  
+        </div>
+       </div>
+    </div>
+  </div>
+</div>
+<script src="../js/gb.js"></script>
+ </body>
+</html>

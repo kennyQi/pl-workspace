@@ -1,0 +1,84 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量-会员中心">
+
+<link href="${(contextPath)!}/resources/css/personal/personal_accountInf.css" rel="stylesheet" />
+
+</@frame.head>
+<@frame.main "default" 6>
+<div class="g_bd disb yahei">
+<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	
+	<div class="g_cont disb ov">
+		<@frame.nav "兑换码充值" 7></@frame.nav>
+		<div class="m_cont ov fl">
+    <!--右侧呈现页-->
+        <div class="ri">
+       		<h1 class="rih1 yahei normal">充值</h1>
+       		<div class="navsbox"></div>
+       
+        <form id="form1" action="${contextPath}/company/recharge" method="post" >
+        	<input type="hidden" id="balance" name="balance" value="${balance}"/>
+        	<input type="hidden" id="suc" value="${succ!}"/>
+             <ul class="infBox color3 yahei h3 bold recharge">
+		      <li>
+		      <span class="infTitle">账户余额：</span><span style="padding:0 11px;">
+		      <#if balance??>${balance?string('0.00')}<#else>0 </#if>元
+		      </span>
+		      </li>
+        	  <li><span class="infTitle">请输入充值码：</span><input  class="textBox inp input_p" type="text" maxlength="32" id="code" name="code" />
+        	  	<span class="tips"></span><br>
+        	  	
+        	  </li>  
+        	</ul>
+                <a class="preservation fl yahei rechargeBtn" href="javascript:"  id="saveBtn">提交</a>
+		 </form>  
+      </div>
+    </div>
+ </div>
+ </div>
+ <div class="alertBox" style="display:none;">
+  <div class="more_float">
+	  <span class="float_title boxTitle floating_p yahei h3">提示<a href="javascript:;"></a></span>
+	  <div class="userCoupan">
+	  			<div>充值成功</div>
+          <a class="preservation yahei" href="javascript:"  id="alertClose">确定</a>
+	  </div>
+  </div>
+  </div>
+</@frame.main> 
+<@frame.end "default"> </@frame.end>
+<script type="text/javascript">
+
+	$(function () {
+		var esg=$.trim($("#suc").val());
+		if(esg!=""){
+			$(".alertBox").show().find(".userCoupan div").html(esg);
+		}
+		
+		$("#alertClose").click(function(){
+			$(".alertBox").hide();
+		});
+	});
+	$("#saveBtn").on("click",function(){
+		var pattern = /^[a-zA-Z0-9_]{4,16}$/;
+		var code=$("#code").val();
+		if(code!=""){
+			if(pattern.test(code)){
+				$("#form1").submit();
+			}else{
+				$("#form1 .tips").html("充值码格式错误");
+			}
+		}else{
+			$("#form1 .tips").html("充值码不能为空");
+		}
+	});
+	
+	$(".textBox").focus(function(){
+		$("#form1 .tips").html("");
+	});
+	
+	
+
+</script>

@@ -1,0 +1,135 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量-会员中心">
+
+<!--添加成员-->
+<link href="${(contextPath)!}/resources/css/personal/personal.css" rel="stylesheet" />
+<link href="${(contextPath)!}/resources/css/personal/personal_connect.css" rel="stylesheet" />
+<script src="${(contextPath)!}/resources/js/personal/connect.js" language="javascript"></script>
+</@frame.head>
+<@frame.main "default" 8>
+<div class="g_bd disb yahei">
+<!-- 个人中心顶部 -->
+	<@frame.top ></@frame.top>
+	
+	<div class="g_cont disb ov">
+		<@frame.nav "常用联系人" 8></@frame.nav>
+		<div class="m_cont ov fl">
+
+			<!--内容-->
+			<!--添加成员-->
+			
+			
+			        <!--右侧呈现页-->
+			            <div class="ri ov">
+			
+			                <div class="bt ov">
+			                    <h1 class="rih1 yahei normal fl">常用联系人</h1>
+			                  <span>
+			                    <a href="javascript:;" class="addMembers" rel="dialog" for="membersBox">添加联系人</a>
+			                  </span>
+			                </div>
+			                    <!--右侧列表开始-->
+			                   <form action="${(contextPath)!}/company/contactList" name="jpQueryForm" id="jpQueryForm" class="jpQueryForm" method="post">
+			                  		 <input type="hidden" class="pageNum" name="pageNum" value="${(pagination.pageNo?c)!1}">
+                					<input type="hidden" name="numPerPage" value="${(pagination.pageSize?c)!5}">
+			                   
+			                    <div class="depart fl">
+			                    
+			                        <ul class="rightTable">
+			                            <li class="title"><span class="all">序号</span><span class="name">姓名</span><span class="position">证件类型</span><span class="id">证件号</span><span class="mobile">手机</span><span class="control">操作</span></li>
+			
+			                          
+										<#list (pagination.list)!null as contact>
+										 <li><span class="all">${contact_index+1}</span>
+			                                <span class="name">${(contact.name)!}</span>
+			                                <span class="position" rel="${(contact.cardType)!}">
+			                                <#if contact.cardType==1>
+			                                	身份证
+			                                <#elseif contact.cardType==2>
+			                                	护照
+			                                </#if>
+			                                </span>
+			                                <span class="id">${(contact.cardNo)!}</span>
+			                                <span class="mobile">${(contact.mobile)!}</span>
+			                                <span class="control">
+		                                	<a href="javascript:;" class="addMembers editContact" rel="dialog" for="membersBox"  forid="${(contact.id)!}" >编辑</a>
+		                                	<a href="javascript:;" class="addMembers delContact" rel="${(contact.id)!}">删除</a>
+											</span>
+										</li>
+										</#list>
+			                         </ul>
+			                            <!--分页导航-->
+			                         <div class="m_pageNav listPageStyle">
+					                   <div id="page" class="m_nums"></div>
+					                 </div>
+						            <!--分页导航-->
+			                    	</div>
+			                    </form>
+			                    <!--右侧列表结束-->
+			            </div>
+			        <!--右侧呈现页-->
+			        
+			<!--内容-->
+		</div>
+	</div>
+</div>
+<div class="membersBox" opt="box">
+			    <form id="contact" >
+			        <input type="hidden" name="cardType" value="1"/>
+			        <input type="hidden" name="id" />
+			       <!--  <input type="hidden" name="type"  value="1"/> -->
+			    <div class="boxMessage">
+			        <div class="boxTitle floating_p">添加成员<a href="javascript:;"></a></div>
+			        <ul class="boxForm">
+			            <li><span>姓名：</span><input class="members input_p" type="text" name="name" id="name" for="姓名不能为空"><span class="error"></span></li>
+			
+			            <li><span>证件类型：</span> <span class="dd companySelect"><span class="optionValue" style="line-height:30px;" id="optionValue">身份证</span></span>
+			                <ul class="selectNav" for="optionValue" forname="cardType" style="display: none;">
+			
+			                    <li class="l" value="1">身份证</li>
+			                    <!-- <li class="l" value="2">护照</li> -->
+			
+			                </ul>
+			                </li>
+			            <li><span>证件号码：</span><input class="members input_p" type="text" name="cardNo" id="cardNo"  for="证件不能为空"><span class="error"></span></li>
+			            <li><span>手机：</span><input class="members input_p" type="text" name="mobile" id="mobile"  for="手机不能为空"><span class="error"></span></li>
+			        	<!-- <li><span>乘客类型：</span> 
+			        	<span class="dd companySelect"><span class="optionValue1" style="line-height:30px;" id="optionValue1">成人</span></span>
+			                <ul class="selectNav" for="optionValue1" forname="type" >
+			                    <li class="l" value="1">成人</li>
+			                    <li class="l" value="2">儿童</li>
+			                </ul>
+			                </li> -->
+			        </ul>
+			        <a class="yes" href="javascript:;">确 定</a>
+			    </div>
+			  </form>
+			</div>
+			<script src="${(contextPath)!}/resources/js/pageUtil/pageUtilforA.js"></script>
+<script type="text/javascript">
+	
+	$(function() {
+		//分页初始化
+		 pageCreate(${(((pagination.totalCount-1)/5+1)?int)!1},"jpQueryForm");
+		
+	});
+	
+	
+	
+	
+</script>	
+<div class="alertBox" style="display:none;">
+  <div class="more_float">
+	  <span class="float_title boxTitle floating_p yahei h3">提示<a href="javascript:;"></a></span>
+	  <div class="userCoupan">
+	  			<div>充值成功</div>
+          <a class="preservation yahei" href="javascript:"  id="cancel">取消</a>
+          <a class="preservation yahei" href="javascript:"  id="sure">确定</a>
+	  </div>
+  </div>
+  </div>
+</@frame.main> 
+<@frame.end "default"> </@frame.end>
+
+

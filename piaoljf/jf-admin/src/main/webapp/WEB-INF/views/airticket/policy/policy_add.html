@@ -1,0 +1,135 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+ 
+<form method="post" action="${contextPath}/airtkt/policy/add" 
+   class="pageForm required-validate" onsubmit="return check(this,dialogAjaxDone);">
+ 
+   <div class="pageContent">
+       <table>
+           <tr>
+               <td width="200">请填写政策名称：</td>
+               <td>
+                   <input type="text" name="name" maxlength="10" class="required"/>
+               </td>
+           </tr>
+           <tr>
+               <td width="200">请选择供应商：</td>
+               <td>
+                   <select name="suppId"  class="required">
+                       <option value="">全部</option>
+                       <#if supplierDtoList ??>
+                           <#list supplierDtoList as supplierDto>
+                               <option value="${(supplierDto.id)!''}">${(supplierDto.name)!''}</option>
+                           </#list>
+                       </#if>
+                   </select>
+               </td>
+           </tr>
+           <tr>
+               <td width="200">请选择适用经销商：</td>
+               <td>
+                   <select name="dealerId" class="required">
+                       <option value="">全部</option>
+                       <#if dealerDtoList ??>
+                           <#list dealerDtoList as dealerDto>
+                               <option value="${(dealerDto.id)!''}">${(dealerDto.name)!''}</option>
+                           </#list>
+                       </#if>
+                   </select>
+               </td>
+           </tr>
+           <tr>
+               <td width="200">请选择适用时间：</td>
+               <td>
+                   <input type="text" readonly="readonly" name="beginTime" value="" class="date required" />
+                   -
+                   <input type="text" readonly="readonly" name="endTime" value="" class="date required"/>
+               </td>
+           </tr>
+           <tr>
+               <td width="200">请选择价格政策：</td>
+               <td>
+                   <input type="radio"value="radioValue01" id="radio01" name="priceType" checked onclick="resetPrice()"> 
+                   <label>增加</label><input id="radioValue01" name="pricePolicy" type="text"  class="number required"/><label>元</label></br>
+                   
+                   <input type="radio"value="radioValue02" id="radio02" name="priceType"  onclick="resetPrice()">
+                   <label>增加</label><input id="radioValue02"  name="percentPolicy" type="text" disabled="true" class="number required"/><label>%</label></br>
+                   
+                   <input type="radio"value="radioValue03" id="radio03" name="priceType"   onclick="resetPrice()">
+                   <label>减少</label><input  id="radioValue03"  name="pricePolicy" type="text" disabled="true" class="number required"/><label>元</label></br>
+                   
+                   <input type="radio" value="radioValue04" id="radio04" name="priceType"  onclick="resetPrice()">
+                   <label>减少</label><input id="radioValue04"  name="percentPolicy" type="text" disabled="true" class="number required"/><label>%</label>
+               </td>
+           </tr>
+           <tr>
+               <td width="200">备注：</td>
+               <td>
+                   <textarea rows="4" cols="20" name="remark">
+                   </textarea>
+               </td>
+           </tr>
+       </table>
+   </div>
+   
+   <div class="formBar">
+       <ul>
+           <li>
+               <div class="buttonActive">
+                   <div class="buttonContent">
+                       <button type="submit">发布</button>
+                   </div>
+               </div>
+           </li>
+       </ul>
+   </div>
+</form>
+<script>
+   function check(obj01,obj02) {
+       setPrice();
+       return validateCallback(obj01,obj02);
+   }
+   
+   function setPrice() {
+       var checkedVal = $('input[name="priceType"]:checked').val();
+       var price = $("#"+checkedVal).val();
+       
+       //如果选择按百分比计算，将其转化成对应的小数
+       if ('radioValue02'==checkedVal || 'radioValue04' == checkedVal) {
+           price = Number(price) * 0.01;
+       }
+       //如果选择减少选项，则转为负数
+       if ('radioValue03'==checkedVal || 'radioValue04' == checkedVal) {
+           price = Number(price) * -1;
+       }
+       
+       $("#"+checkedVal).val(price);
+       
+   }
+   
+   function resetPrice(){
+       var checkedVal = $('input[name="priceType"]:checked').val();
+       var price = $("#"+checkedVal).val();
+   
+       $("#radioValue01").val("");
+       $("#radioValue01").attr("disabled",true);
+       $("#radioValue01").attr("readonly",true);
+       
+       $("#radioValue02").val("");
+       $("#radioValue02").attr("disabled",true);
+       $("#radioValue02").attr("readonly",true);
+       
+       $("#radioValue03").val("");
+       $("#radioValue03").attr("disabled",true);
+       $("#radioValue03").attr("readonly",true);
+       
+       $("#radioValue04").val("");
+       $("#radioValue04").attr("disabled",true);
+       $("#radioValue04").attr("readonly",true);
+   
+       $("#"+checkedVal).val(price);
+       $("#"+checkedVal).attr("disabled",false);
+       $("#"+checkedVal).attr("readonly",false);
+       
+   }
+ 
+</script>

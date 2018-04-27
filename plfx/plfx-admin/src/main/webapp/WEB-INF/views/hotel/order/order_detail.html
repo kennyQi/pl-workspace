@@ -1,0 +1,272 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.bidl .t_dl {
+	height: auto !important;
+	padding: 10px 0;
+	width: 100%
+}
+
+.bidl .t_dl dt {
+	height: auto !important
+}
+
+.bidl .t_dl dd {
+	width: 60%;
+	height: auto !important
+}
+
+.bidl p {
+	width: auto
+}
+
+.bidl h2 {
+	padding: 5px 0;
+	width: 100%;
+	border-bottom: #ddd 1px solid
+}
+
+.bidl h6 {
+	clear: both;
+}
+
+.dltb {
+	
+}
+
+.dltb table {
+	margin-bottom: 15px;
+}
+
+.dltb table tr th {
+	line-height: 30px;
+	background: #F5F5F5
+}
+
+.dltb table tr td {
+	line-height: 30px;
+}
+
+.right_utp {
+	float: right;
+	width: 400px;
+	padding: 10px 0 25px 0
+}
+
+.right_utp dl dt {
+	float: left;
+	width: auto
+}
+
+.right_utp dl dd {
+	float: left;
+	width: auto !important
+}
+
+.right_utp dl dd p {
+	float: left;
+	position: relative;
+	position: 0 !important
+}
+
+.right_utp dl dd p strong {
+	font-size: 30px;
+	font-family: Tahoma, Geneva, sans-serif;
+	color: #f30
+}
+
+.right_utp dl dd p span {
+	position: absolute;
+	top: 0;
+	left: 130px
+}
+
+.right_utp dl dd p span em {
+	font-style: normal;
+	width: 200px;
+	line-height: 20px;
+	float: left;
+}
+</style>
+<div class="pageContent">
+	<form method="post" action="demo/common/ajaxDone.html"
+		class="pageForm required-validate"
+		onsubmit="return validateCallback(this, navTabAjaxDone);">
+
+		<div class="pageFormContent bill" layoutH="56">
+			<div class="bill bidl">
+				<h2>订单详情</h2>
+				<div class="dltb">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th height="30">状态</th>
+							<th height="30">订单号</th>
+							<th height="30">艺龙订单号</th>
+							<th height="30">房间数量</th>
+							<th height="30">下单时间</th>
+							<th height="30">入住时间</th>
+							<th height="30">离店时间</th>
+						</tr>
+						<tr>
+							<td><#if order??>${statusMap[order.status]}
+							</#if>
+							</td>
+							<td><#if order??> ${(order.orderNo)!''} </#if></td>
+							<td><#if order??> ${(order.supplierOrderNo)!''} </#if></td>
+							<td><#if order??> ${(order.numberOfRooms)!''} </#if></td>
+							<td><#if order??> ${(order.creationDate)?string("yyyy-MM-dd
+								HH:mm:ss")} </#if></td>
+							<td><#if order??> ${(order.arrivalDate)?string("yyyy-MM-dd
+								HH:mm:ss")} </#if></td>
+							<td><#if order??> ${(order.departureDate)?string("yyyy-MM-dd
+								HH:mm:ss")} </#if></td>
+						</tr>
+					</table>
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th height="30">供应商价格</th>
+							<th height="30">平台价格</th>
+							<th height="30">实付总金额</th>
+						</tr>
+						<tr>
+							<td><#if order??> ${(order.totalPrice)!''} </#if></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="bill bidl">
+				<h2>酒店信息</h2>
+				<div class="dltb">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th height="30">酒店名称</th>
+							<td><#if order??> ${(order.hotelName)!''} </#if></td>
+							<th height="30">房型名称</th>
+
+							<td><#if order??> ${(order.roomName)!''} </#if></td>
+						</tr>
+						<tr>
+							<th height="30">房间数量</th>
+							<td><#if order??> ${(order.numberOfRooms)!''} </#if></td>
+							<th height="30">客人数量</th>
+							<td><#if order??> ${(order.numberOfCustomers)!''} </#if></td>
+						</tr>
+						<tr>
+							<th height="30">最晚取消时间</th>
+							<td><#if order??> ${(order.cancelTime)?string("yyyy-MM-dd
+								HH:mm:ss")} </#if></td>
+							<th height="30">当前是否可以取消</th>
+							<td><#if order?? & order.isCancelable>是</#if>
+								<#if order?? & !order.isCancelable>否</#if>
+							</td>
+						</tr>
+						<tr>
+							<th>违约罚金</th>
+							<td><#if order??> ${(order.penaltyToCustomer)!''} </#if></td>
+							<th>违约罚金货币类型</th>
+							<td><#if order??> ${(order.penaltyCurrencyCode)!''} </#if></td>
+						</tr>
+					</table>
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<td>是否要开发票</td>
+							<td>是</td>
+						</tr>
+						<tr>
+							<td>发票信息:</td>
+						</tr>
+						<tr>
+							<td>抬头</td>
+							<td><#if order??> ${(order.invoiceMode)!''} </#if></td>
+						</tr>
+						<tr>
+							<th height="10">名称</th>
+							<td><#if order?? && order.invoice??> ${(order.invoice.itemName)!''} </#if></td>
+							<th height="10">金额</th>
+							<td><#if order?? && order.invoice??> ${(order.invoice.amount)!''} </#if></td>
+						</tr>
+						<tr>
+							<th height="10">发票状态</th>
+							<td><#if order?? && order.invoice?? && order.invoice.status>已开</#if>
+								<#if order?? && order.invoice?? && !order.invoice.status>未开</#if>
+							</td>
+							<th height="10">邮寄状态</th>
+							<td><#if order?? && order.invoice?? && order.invoice.deliveryStatus>已邮寄</#if>
+								<#if order?? && order.invoice?? && !order.invoice.deliveryStatus>未邮寄</#if>
+							</td>
+						</tr>
+						<tr>
+							<th>收件人</th>
+							<td>XXX</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<div class="bill bidl">
+				<h2>规则</h2>
+				<div class="dltb">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th height="30">担保规则</th>
+							<td>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>
+						</tr>
+						<tr>
+							<th height="30">预付规则</th>
+							<td>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
+
+			<div class="bill bidl">
+				<h2>入住人信息</h2>
+				<div class="dltb">
+					<table cellpadding="0" cellspacing="0" width="100%">
+						<tr>
+							<th height="30">入住人姓名</th>
+							<th height="30">Email</th>
+							<th height="30">手机</th>
+							<th height="30">性别</th>
+							<th height="30">国籍</th>
+						</tr>
+						<#if order?? && order.customers??>
+						<#list order.customers as customer>
+						<#if customer.type == 0>
+						<tr>
+							<td>${(customer.name)!''}</td>
+							<td>${(customer.email)!''}</td>
+							<td>${(customer.mobile)!''}</td>
+							<td>
+							<#if customer.gender == 2>
+							未知
+							</#if>
+							<#if customer.gender == 1>
+							女
+							</#if>
+							<#if customer.gender == 0>
+							男
+							</#if>
+							</td>
+							<td>${(customer.nationality)!''}</td>
+						</tr>
+						</#if>
+						</#list>
+						</#if>
+					</table>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="formBar">
+			<ul>
+				<button type="button" class="close">关闭</button>
+			</ul>
+		</div>
+	</form>
+</div>

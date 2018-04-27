@@ -1,0 +1,68 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>importHistoryList.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <script src="${contextPath}/resources/dwz_jui-master/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+	<script type="text/javascript">
+		var path = '${contextPath}';
+		function queryDstributorUser(){
+			$.ajax({
+                type: "post",
+                url: path + "/importHistory/queryDstributorUser",
+                dataType: "json",
+                success: function (data) {
+                	var str = "<option value=''>请选择</option>";
+                	for(var i=0;i<data.length;i++){
+                		str+="<option value='"+data[i].split(';')[0]+"'>"+data[i].split(';')[1]+"</option>";
+                	}
+                	$("#dstributorUserID").html(str);
+                }
+            });
+		}
+	</script>
+  </head>
+  
+  <body>
+    This is my HTML page. <br>
+    <form action="${contextPath}/importHistory/importHistoryList" method="post">
+    	2016-12-01
+	    <input type="text" name="startDate" value="${startDate!''}"/>
+	    <input type="text" name="endDate" value="${endDate!''}"/>
+	    <select name="dstributorUserID" id="dstributorUserID">
+	    	<option value="">请选择</option>
+	    	<#list dstributorUsers as dstributorUser>
+	    	<#if dstributorUser?split(';')[0]==dstributorUserID>
+	    	<option value="${dstributorUser?split(';')[0]}" selected="selected">${dstributorUser?split(';')[1]}</option>
+	    	<#else>
+	    	<option value="${dstributorUser?split(';')[0]}" >${dstributorUser?split(';')[1]}</option>
+	    	</#if>
+	    	</#list>
+	    </select>
+	    <input type="submit" />
+    </form>
+    <table border="1">
+    <#list pagination as importHistory>
+    	<tr>
+	    	<td>${importHistory.importDate!""}</td>
+	    	<td>${importHistory.dstributorUser.name!""}</td>
+	    	<td>${importHistory.fileName!""}</td>
+	    	<td><a href="${importHistory.filePath!'#'}">下载</a></td>
+	    </tr>
+    </#list>
+    </table>
+    
+    
+    
+    
+    
+    
+  </body>
+</html>

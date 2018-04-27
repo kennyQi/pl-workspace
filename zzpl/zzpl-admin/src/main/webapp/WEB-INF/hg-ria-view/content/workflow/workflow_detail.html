@@ -1,0 +1,44 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;流程详情
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form
+							class="form-horizontal pageForm required-validate" 
+							>
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">流程名称：</label>
+									<div class="col-md-4">
+										<input type="text" name="workflowName" readonly="readonly" class="form-control required isSpec" placeholder="流程名称" maxlength="40" value="${(workflow.workflowName)!''}"/>
+									</div>
+								</div>
+							</div>
+							<hr>
+							<div class="form-group">
+									<label class="col-md-3 control-label">角色关联：</label>
+									<div class="col-md-4">
+									<#if workflow.roleWorkflows?size lt 1>
+									<input type="text" name="roleName" class="form-control required isSpec" readonly="readonly" placeholder="无角色关联" maxlength="40" value="无角色关联"/>
+									</#if>
+									<#list workflow.roleWorkflows as roleWorkflow>
+										<input type="text" name="roleName" class="form-control required isSpec" readonly="readonly" placeholder="无角色关联" maxlength="40" value="${(roleWorkflow.role.roleName)!''}"/>
+									</#list>
+									</div>
+							</div>
+							<div class="form-actions">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

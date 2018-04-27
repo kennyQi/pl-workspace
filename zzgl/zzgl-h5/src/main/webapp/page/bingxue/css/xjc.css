@@ -1,0 +1,21 @@
+*{padding:0;margin:0;border:none;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+a,img{display: block;}
+
+.container{width:100%;overflow:hidden;}
+.head img{width:100%;}
+.tit img{width:100%;}
+.cont{width:100%;overflow:hidden;padding:0 23px;}
+.cont1{background:url(../img/bg1.jpg);background-size:cover;}
+.cont2{background:url(../img/bg2.jpg);background-size:cover;}
+.cont3{background:url(../img/bg3.jpg);background-size:cover;}
+.cont a img{width:100%;margin-bottom:8px;}
+
+.more_wrap{width:100%;position:relative;}
+.more_wrap img{width:100%;}
+.more_wrap .more img{width:50%;position:absolute;top:25px;left:25%;}
+
+.tip{position:relative;}
+.tip img{width:100%;overflow:hidden;}
+.go{width:100%;height:100%;padding:0 7%;position:absolute;top:0;left:0;}
+.go li{width:33.3%;height:100%;float:left;}
+.go li a{display:inline-block;width:100%;height:100%;}

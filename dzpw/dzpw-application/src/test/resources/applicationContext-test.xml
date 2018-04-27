@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+	<context:component-scan base-package="hg" />
+
+	<!-- 强制SPRING使用CGLIB动态代理，不使用JDK代理。 -->
+	<aop:config proxy-target-class="true" />
+
+	<!-- 验证码 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.image.width">80</prop>
+						<prop key="kaptcha.textproducer.font.size">26</prop>
+						<prop key="kaptcha.image.height">32</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="hgLogger" class="hg.log.util.HgLogger">
+		<constructor-arg name="projectId" value="JQLM" />
+		<constructor-arg name="envId" value="JQLM-DEV" />
+		<constructor-arg name="logRepository" ref="logRepository" />
+	</bean>
+
+	<bean id="configurerListener" class="hg.dzpw.app.component.listener.DZPWConfigurerListener" />
+
+	<bean id="propertyConfigurer1" class="hg.common.component.RemoteConfigurer">
+		<property name="remoteConfigUrl"
+			value="http://192.168.2.85:9999/cc-admin/property-config/map" />
+		<property name="projectId" value="DZPW" />
+		<property name="environmentName" value="DZPW-DEV" />
+		<property name="loadConfigTimeOut" value="30000" />
+		<property name="listener" ref="configurerListener" />
+		<property name="locations">
+			<list>
+				<value>classpath*:system.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="smsUtils" class="hg.common.util.SMSUtils">
+		<property name="smsAddress" value="${sms_address}" />
+		<property name="smsUser" value="${sms_user}" />
+		<property name="smsPassword" value="${sms_password}" />
+	</bean>
+	
+	<!-- 汇金宝支付服务配置 -->
+	<bean id="hjbPayServiceConfig" class="hg.dzpw.pojo.common.HjbPayServiceConfig">
+		<property name="cerPath" value="/WEB-INF/classes/cert/hjbcfca005.cer" />
+		<property name="signPath" value="/WEB-INF/classes/cert/hjbCFCA004.sm2" />
+		<property name="signPassword" value="hjb3651" />
+		<property name="HJBServerUrl" value="121.79.134.210:8912" />
+		<property name="version" value="1.0" />
+		<property name="merchantId" value="M100000894" />
+		<property name="dzpwCstNo" value="C100000642" />
+		<property name="dzpwUserId" value="101042" />
+	</bean>
+
+	<import resource="classpath:spring/spring-hibernate-test.xml" />
+	<import resource="classpath:spring/spring-redis.xml" />
+	<import resource="classpath:spring/spring-mongodb.xml" />
+
+</beans>

@@ -1,0 +1,74 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/ticketOrder/list" method="post">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						景点名称：
+					</td>
+					<td><input type="text" name="name" value="${ticketOrderQO.name}"></td>
+					<td>
+						预定人：
+					</td>
+					<td><input type="text" name="bookMan" value="${ticketOrderQO.bookMan}"></td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">查询</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="190" >
+		<thead>
+			<tr>
+				<th width="110">订单编号</th>
+				<th width = "100">景区名称</th>
+				<th width = "70">预订人</th>
+				<th width = "70">支付状态</th>
+				<th width = "80">下单时间</th>
+				<th width="140">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as mpOrder>
+			<tr height="21px">
+				<td>${mpOrder.orderNO}</td>
+				<td>${mpOrder.name}</td>
+				<td>${mpOrder.bookMan}</td>
+				<td><#if mpOrder.localStatus==10>等待支付<#elseif mpOrder.localStatus==220>出票成功
+					<#elseif (mpOrder.localStatus<400)>等待出票<#elseif (mpOrder.localStatus>400)>交易关闭</#if></td>
+				<td>${mpOrder.creatDate}</td>
+				<td>
+					<#if mpOrder.localStatus==320>
+					<a  target="ajaxTodo" mask="true" style="color:blue;" height="800" width="800" href="${contextPath}/ticketOrder/toOrder?id=${mpOrder.id}">申请出票</a>
+					<#elseif mpOrder.localStatus==723>
+					<a  target="ajaxTodo" mask="true" style="color:blue;" height="800" width="800" href="${contextPath}/ticketOrder/cancle?id=${mpOrder.id}">申请退票</a></#if>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

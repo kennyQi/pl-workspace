@@ -1,0 +1,41 @@
+/*liwei 2015-05-27*/
+/*机票预订成功页面*/
+@charset "utf-8";
+/*支付进程*/
+.flySuccess_box{ height:144px; border-bottom:1px solid #ddd;}
+.flySuccess_box .pay_process ul{ height:32px; margin:55px 0 0 315px;}
+.flySuccess_box .pay_process ul li{ float:left; width:220px;}
+.flySuccess_box .pay_process ul li .ic{ width:37px; height:32px; background:url(../images/regScript_bg.png) 0 -36px; text-align:right; line-height:32px; padding-right:12px; color:#999;}
+.flySuccess_box .pay_process ul li span{ color:#ccc; line-height:32px; margin-left:10px;}
+
+.flySuccess_box .pay_process ul .fly_on .ic{background:url(../images/regScript_bg.png) -73px 0; color:#fff;}
+.flySuccess_box .pay_process ul .fly_fail .ic{background:url(../images/fly_fail.png) 0px 0 no-repeat; color:#fff;}
+.flySuccess_box .pay_process ul .fly_on span{color:#3ebdb6; font-weight:bold;}
+/*支付进程*/
+/*支付成功*/
+.pay_success{ clear:both; height:725px; background:url(../images/reg_successBg.png) no-repeat top center;}
+.pay_success .payfor_box{ height:auto;}
+.pay_success .payfor_box .ic{ width:124px; height:124px; background:url(../images/confirm.png); margin:122px 0 40px 538px;}
+.pay_success .payfor_box .reg_mes{ width:562px; clear:both; margin-left:320px;}
+.pay_success .payfor_box .reg_order{ font-size:24px; margin-bottom:10px; }
+.pay_success .payfor_box .reg_ts{padding:0 10px; width:542px; margin-bottom:50px;}
+.pay_success .payfor_box .reg_ORD{ margin-left:245px; width:685px;}
+.pay_success .payfor_box .reg_ORD b{margin-right:12px;}
+.pay_success .payfor_box .reg_ORD i{width:41px;height:10px; background:url(../images/regScript_bg.png) 0 -77px; display:inline-block; margin:0 8px 0 12px; *padding-bottom:5px;}
+/*支付成功*/
+
+/*支付失败*/
+.pay_success{ clear:both; overflow:hidden; background:url(../images/reg_successBg.png) no-repeat top center;}
+.pay_fail{ background:url(../images/fly_fail_icon.png) no-repeat 462px 23px;padding-top:335px;padding-bottom:170px;height:auto;}
+.pay_fail .payfor_box{ height:auto;}
+.pay_fail .payfor_box span{width:100%;text-align:center;}
+.pay_fail .payfor_box .ic{ width:124px; height:124px; background:url(../images/confirm.png); margin:122px 0 40px 538px;}
+.pay_fail .payfor_box .reg_mes{margin-top:45px;}
+.pay_fail .payfor_box .rexian{margin-top:35px;}
+.pay_fail .payfor_box .reg_order{ font-size:24px; margin-bottom:10px; color:#E13832;}
+.pay_fail .payfor_box .reg_ts{padding:0 10px; width:542px; margin-bottom:50px;}
+.pay_fail .payfor_box .reg_ORD b{margin-right:12px;}
+.pay_fail .payfor_box .reg_ORD i{width:41px;height:10px; background:url(../images/regScript_bg.png) 0 -77px; display:inline-block; margin:0 8px 0 12px; *padding-bottom:5px;}
+/*支付失败*/
+
+/*酒店*/

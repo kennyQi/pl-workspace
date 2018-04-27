@@ -1,0 +1,144 @@
+@charset "utf-8";
+/* CSS Document */
+html{color:#000;background-color:#f8f8f8;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,select,textarea,button,p,blockquote,th,td{margin:0;padding:0}
+table{border-collapse:collapse;border-spacing:0}
+fieldset,img{border:0}
+address,caption,cite,code,dfn,th,var{font-style:normal;font-weight:normal}
+ol,ul{list-style:none}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+q:before,q:after{content:''}
+abbr,acronym{border:0;font-variant:normal}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+input,textarea,select{/*font-family:inherit;*/font-size:inherit;font-weight:inherit}
+input,textarea,select{*font-size:100%}
+legend{color:#000}
+textarea{padding:3px;}
+em{ font-style:normal;}
+.clear{ clear:both;}
+
+/* html 5 reset*/
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    display: block;
+    margin:0;
+    padding:0;
+}
+/*reset end*/
+body{ font-family: Arial,"\5b8b\4f53",sans-serif; font-size:12px; line-height:1.5; color:#4a4a4a;}
+.warp{ background:url(images/wrap-bg.jpg) repeat-x; overflow:hidden}
+
+.clearfix { zoom: 1; clear:left;} 
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.mt20{ margin-top:20px;}
+.h20{ height:20px;}
+.h40{ height:40px;}
+.pt10{ padding-top:10px;}
+.pl10{ padding-left:10px}
+.mb10{ margin-bottom:10px;}
+.mt10{ margin-top:10px;}
+.mb20{ margin-bottom:20px;}
+.mt20{ margin-top:20px;}
+.mt50{ margin-top:50PX}
+.box{ border:#ddd 1px solid}
+a{ outline:none; blr:expression(this.onFocus=this.blur()); text-decoration:none; color:#666;}
+a:link{}
+a:hover{ text-decoration:underline; color:red;}
+a:active{}
+.hide{ display:none;}
+.show{ display:block;}
+.bold{font-weight:bold;}
+
+/******按钮******/
+.sth,.returnsth span{ background:url(images/sth.png) no-repeat}
+.returnsth{height:35px; line-height:35px;text-align:center;}
+.returnsth .sth{float:left;font-family:"微软雅黑"; font-size:16px; color:#fff; background-position:top left}
+.returnsth span{ height:35px; line-height:35px; overflow:hidden; display:inline-block; padding:0 10px; margin-left:2px;background-position:top right}
+
+/***顶部***/
+.sitenav{ background:#f5f5f5; border-bottom:#ddd 1px solid; height:40px; line-height:40px;}
+.s-login a{ padding-left:10px; color:#008cd1; font-size:14px; font-weight:bold}
+.sitenav-l li{float:left; padding-right:10px}
+
+/******头部******/
+.header-hd{ background:url(images/head-bg.png) repeat-x; height:113px;}
+.h-search,.h-iphone{ margin-top:40px;}
+.h-search .s-txt{ border:#1285c6 1px solid; font-size:14px;; padding-left:25px; color:#ddd; float:left}
+.h-search .h-sth{ background:#1086c6; height:42px;border:#1285c6 1px solid; width:100px; cursor:pointer; color:#fff;float:left}
+
+/***分页**/
+.page{ padding:10px 0; margin-bottom:20px;; overflow:hidden; float:right}
+.page ul li{float:left;}
+.page ul li a{ float:left; padding:5px 8px; background:#fff; border:#ddd 1px solid;border-radius:2px; margin-right:5px}
+.page ul li.yeshu{ color:#999; line-height:30px;}
+.page ul li input{ margin-left:5px;}
+.yetxt{ width:50px; border:#ddd 1px solid; height:24px;}
+.yetijiao{ border:#ddd 1px solid; height:24px; background:#fff; padding:0 5px; cursor:pointer}
+
+
+/******尾部******/
+.footer dl{ float:left; width:150px;font-family:"微软雅黑"; margin-left:40px; _display:inline}
+.footer dl dt i{ background:url(images/icon.png) no-repeat; width:31px; height:31px; overflow:hidden; float:left;}
+.footer dl dt{ font-size:18px; height:31px; line-height:31px;}
+.footer dl dd{ padding-left:41px;;}
+.footer dl dd a{ height:22px; line-height:22px;}
+.footer dl.gouwu dt i{ background-position:0 -31px; margin-right:10px;}
+.footer dl.pay dt i{ background-position:-32px -31px; margin-right:10px;}
+.footer dl.peizi dt i{ background-position:-64px -31px; margin-right:10px;}
+.footer dl.shouhou dt i{ background-position:-96px -31px; margin-right:10px;}
+.footer dl.about dt i{ background-position:-127px -31px; margin-right:10px;}
+.footer-nav{ text-align:center; height:40px; line-height:40px;}
+.footer-nav a{ padding-right:10px;}
+.copy{ text-align:center; line-height:26px;}
+.copy img{ vertical-align:middle}
+
+
+/**************/
+.Validform_wrong{ vertical-align:top; color:#f30}
+
+
+
+/*******布局*****/
+/*.tb_cery{ width:100%; overflow:hidden}
+.m_warp{ width:100%;uopqwfloat:left }
+.m_w_mian{  margin:0 0 0 150px;}
+.sub{ float:left; width:150px; margin-left:-100%}
+*/
+/************************************************************************************/
+/*****header start*******/
+.lcol {
+	color: #1494db;
+}
+.loginbar {
+	float: right;
+	line-height: 30px;
+	margin-top: -55px;
+}
+.subheader {
+	padding: 10px 0px;
+}
+.loginbar a {
+	color: #1494db;
+}
+.loginbar a:hover {
+	text-decoration: underline;
+	}
+.logo {
+	width: 350px;
+	height: 65px;
+	background:url(../images/base_icon.png) no-repeat;
+	background-position:0px -95px;
+}
+.loginbar span {
+	margin-left: 15px;
+}
+body{
+	background:url(../images/lanbg.jpg) repeat;}
+.loading {
+	background:url(../images/loading.gif);
+	height: 18px;
+	width: 164px;
+}
+.usrt{margin-left:5px;}

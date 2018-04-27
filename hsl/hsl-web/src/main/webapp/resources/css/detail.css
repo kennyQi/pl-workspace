@@ -1,0 +1,222 @@
+@charset "utf-8";
+
+.indexBg{background-image:url(../images/index.png);background-repeat:no-repeat;}
+
+.g_bd{width:100%;display:block;}
+.g_bd .m_bd_auto{width:1200px;margin:auto;padding-bottom:43px;}
+.g_bd .m_bd_all{width:100%;overflow:hidden;position:absolute;}
+.g_bd .m_load{padding:15px 0px 36px 0px;width:100%;line-height:14px;font-size:12px;}
+.g_bd .m_load *{line-height:14px;}
+.g_bd .m_load a:visited{}
+.g_bd .m_load a:hover{color:#0073b6;}
+.g_bd .m_load a:active{}
+
+.g_bd .pro_left{width:555px;margin-right:25px;}
+.g_bd .pro_right{width:620px;}
+
+.m_carousel{width:100%;height:338px;}
+.m_carousel .carousel_img_box{width:463px;height:338px;margin-right:9px;}
+.m_carousel .carousel_img_box img{width:463px;height:338px;}
+.m_carousel .carousel_img_tab{width:83px;height:338px;}
+.m_carousel .carousel_img_tab .up{height:18px;width:83px;background-color:#d9d9d9;background-position:15px -129px;position:absolute;left:0px;top:0px;z-index:10;}
+.m_carousel .carousel_img_tab .down{height:18px;width:83px;background-color:#d9d9d9;background-position:-63px -150px;position:absolute;left:0px;bottom:0px;}
+.m_carousel .carousel_img_tab .clickOn{background-color:#696969;}
+.m_carousel .carousel_img_tab .list{width:83px;position:absolute;left:0px;top:18px;}
+.m_carousel .carousel_img_tab .list li{cursor:pointer;width:83px;height:58px;position:relative;margin-top:2px;}
+.m_carousel .carousel_img_tab .list li img{width:83px;height:58px;}
+.m_carousel .carousel_img_tab .list li.current i{width:79px;height:54px;border:2px solid #ff9900;position:absolute;left:0px;top:0px;}
+
+
+
+/*日历样式开始*/
+.m_data{width:555px;height:364px;margin-top:10px;}
+.m_data *{line-height:18px;}
+.dateLay .xdsoft_datetimepicker .xdsoft_timepicker{display:none;}
+	.dateLay .xdsoft_datetimepicker{width:555px;border:0px;}
+	.dateLay .xdsoft_datepicker{width:555px;}
+	.dateLay .xdsoft_today_button,.dateLay .xdsoft_select div{display:none;}
+	.dateLay .xdsoft_prev{width:83px;height:62px;background:url(../images/index.png) no-repeat 0px -9px;margin-top:9px;}
+	.dateLay .xdsoft_next{width:83px;height:62px;background:url(../images/index.png) no-repeat -472px -9px;margin-top:9px;}
+	.dateLay .xdsoft_mounthpicker{height:71px;background:url(../images/index.png) no-repeat 0px 0px;position:relative;overflow:hidden;float:left;width:555px;}
+	.dateLay .xdsoft_label{background:#bcdbed;}
+	.dateLay .xdsoft_label span{font-size:14px;}
+	.dateLay .xdsoft_month,.dateLay .xdsoft_year{position:absolute;left:208px;top:25px;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar td{background:#fff;text-align:left;border-color:#eaeaea;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar td div{padding-right:0px;padding-left:5px;height:41px;padding-top:8px;position:relative;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_other_month, .dateLay .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_disabled, .dateLay .xdsoft_datetimepicker .xdsoft_time_box >div >div.xdsoft_disabled{opacity:1;background:#f9f9f9;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default, .dateLay .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current, 
+	.dateLay .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div.xdsoft_current{
+	background:#ff8000;box-shadow: #fff8ee 0px 1px 3px 0px inset;color:#fff;font-weight:normal;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current *{color:#fff;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current div{}
+	
+	.dateLay .xdsoft_date{color:#333333;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar td{height:41px;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_calendar th{height:35px;background:#f1faff;color:#333;border:1px solid #f1faff}
+	.dateLay .data_all{color:#ff6600;font-family:"microsoft Yahei","微软雅黑";font-size:12px;position:absolute;left:23px;top:2px;line-height:12px;width:55px;}
+	.dateLay .data_per{color:#888888;display:block;}
+	.dateLay  .xdsoft_datetimepicker .xdsoft_calendar .data_current{background:#fff8ee;box-shadow: #fff8ee 0px 1px 3px 0px inset;color:#333333;font-weight:normal;}
+	.dateLay .xdsoft_datetimepicker .xdsoft_datepicker{margin:0px;}
+	
+.dateLay .xdsoft_datetimepicker  .xdsoft_calendar td:hover,.dateLay 
+.xdsoft_datetimepicker  .xdsoft_timepicker .xdsoft_time_box >div >div:hover{
+	color: #000 !important;
+    background: #fff8ee !important;
+    box-shadow: none ;
+}
+.xdsoft_datetimepicker  .xdsoft_timepicker .xdsoft_time_box >div >div:hover div,
+.dateLay .xdsoft_datetimepicker  .xdsoft_calendar td:hover div{border:1px solid #febe32;}
+.xdsoft_datetimepicker  .xdsoft_timepicker .xdsoft_time_box >div >div:hover .data_per,
+.dateLay .xdsoft_datetimepicker  .xdsoft_calendar td:hover .data_per,
+.xdsoft_datetimepicker  .xdsoft_timepicker .xdsoft_time_box >div >div:hover div,
+.dateLay .xdsoft_datetimepicker  .xdsoft_calendar td:hover div{color: #000 !important;}
+.xdsoft_datetimepicker  .xdsoft_timepicker .xdsoft_time_box >div >div:hover .data_all,.dateLay .xdsoft_datetimepicker  .xdsoft_calendar td:hover .data_all{color:#ff6600;}
+/*日历样式结束*/
+
+/*顶部右侧*/
+.pro_right .pad15{padding-left:15px;padding-right:15px;}
+.pro_right .title{font-size:22px;color:#404040;line-height:24px;font-weight:normal;padding-top:10px;padding-bottom:11px;}
+.pro_right .id{color:#ff8800;line-height:24px;font-size:12px;}
+.pro_right .id i{padding:0px 7px;background:url(../images/index.png) no-repeat 0px -341px;}
+.pro_right .tips{line-height:12px;}
+.pro_right .special{background:#43bdf5;padding:8px 8px 9px 15px;margin-top:12px;}
+.pro_right .special label{line-height:12px;color:#ffffff;font-family:"simsun","宋体";padding-right:19px;float:left;font-size:12px;}
+.pro_right .price{height:80px;width:100%;background:#fc893d;line-height:80px;margin-top:1px;}
+.pro_right .price .p{padding-left:15px;font-size:30px;font-weight:bold;color:#fff;line-height:81px;}
+.pro_right .price .p i{font-weight:normal;font-size:12px;}
+.pro_right .price .de{color:#fecab0;text-decoration:underline;padding-left:30px;font-size:12px;}
+.pro_right .price .de .price_explain{display:none;background:#fffcf7;left:-90px;top:27px;width:270px;padding:15px 10px;z-index:100;box-shadow:0 0 10px rgba(217, 217, 217, .7);  }
+.pro_right .price .de .price_explain h2{width:100%;text-align:center;color:#ff8800;line-height:14px;padding-bottom:10px;}
+.pro_right .price .de .price_explain p{color:#404040;line-height:20px;}
+.pro_right .price .de .price_explain .icon{width:9px;height:5px;background-position:-542px -433px;left:139px;top:-5px;}
+.pro_right .prefer{padding-left:62px;line-height:20px;margin-top:7px;color:#fd4e4e;font-size:12px;}
+.pro_right .prefer label{line-height:20px;}
+.pro_right .prefer i{width:39px;height:16px;background-position:0px -84px;color:#fff;line-height:16px;text-align:center;left:15px;top:2px;}
+.pro_right .from{margin-top:5px;line-height:20px;font-size:12px;}
+.pro_right .from label{padding-left:19px;background-position:0px -372px;padding-top:7px;line-height:20px;}
+.pro_right .load{line-height:20px;font-size:12px;}
+.pro_right .to{font-size:12px;}
+.pro_right .load label{width:63px;line-height:20px;}
+.pro_right .load span{width:522px;line-height:20px;}
+.pro_right .load i{font-family:"Tahoma";font-weight:bold;color:#888888;line-height:20px;}
+
+/*订单*/
+.pro_right .order{width:585px;height:232px;margin:15px 15px 0px;background:#f4f5f6;}
+.pro_right .condit_box{padding:15px 0px 0px 40px;}
+.pro_right .condit_box .condit{margin-top:15px;display:block;line-height:24px;font-size:12px;}
+.pro_right .condit_box .begin{height:29px;}
+.pro_right .condit_box .condit .t{font-size:12px;color:#666666;font-family:"simsun","宋体";width:55px;float:left;text-align:right;margin-right:10px;}
+.pro_right .condit_box .condit .boy{margin-right:10px;}
+.pro_right .condit_box .btn{width:132px;height:42px;line-height:42px;text-align:center;color:#fff;font-weight:bold;}
+.pro_right .condit_box .totalpt{margin-top:3px;}
+.pro_right .condit_box .totalp{color:#ff541e;font-size:30px;font-weight:bold;}
+.pro_right .condit_box .totalp i{font-weight:normal;}
+.pro_right .condit_box .select{border:1px solid #d6d6d6;width:317px;height:23px;background-color:#fff;padding:0px 16px 0px 5px;
+background-position:-224px -256px;font-family:"Microsoft YaHei","微软雅黑";}
+.pro_right .condit_box .select .select_option{width:338px;border:1px solid #d6d6d6;border-top:0px;background:#fff;left:-1px;display:none;top:24px;}
+.pro_right .condit_box .select .select_option span{height:22px;display:block;margin-top:1px;padding-left:5px;}
+.pro_right .condit_box .select .select_option span.on{background:#efefef}
+.pro_right .condit_box .condit .chooce_num{width:79px;height:23px;border:1px solid #cccccc;margin-right:22px;background:#fff;}
+.pro_right .condit_box .condit .chooce_num .add,.pro_right .condit_box .condit .chooce_num .minus{width:22px;height:23px;text-align:center;line-height:23px;color:#777777;font-weight:bold;}
+.pro_right .condit_box .condit .chooce_num .on{color:#dddddd;}
+.pro_right .condit_box .condit .chooce_num .num{width:33px;height:23px;border-right:1px solid #cccccc;border-left:1px solid #cccccc;text-align:center;line-height:23px;}
+.pro_right .off{height:203px;line-height:203px;font-size:24px;color:#303030;width:400px;text-align:center;}
+/*订单*/
+
+.pro_right .msg{height:66px;margin-top:20px;}
+.pro_right .msg .iconUp{background-position:0px -427px;width:16px;height:12px;left:15px;top:0px;}
+.pro_right .msg .icondown{background-position:0px -404px;width:16px;height:12px;right:15px;bottom:0px;}
+.pro_right .msg .order_news{height:20px;margin:24px 0px 0px 30px;}
+.pro_right .msg .order_new_move{left:0px;top:0px;font-size:12px;line-height:24px;}
+.pro_right .msg .order_new_move a:hover{text-decoration:underline;}
+/*顶部右侧*/
+
+/*中部导航*/
+.m_bd_all{height:55px;width:100%;min-width:1200px;background:#b1e2fb;z-index:100;left:0px;}
+.m_subnav{width:1200px;margin:auto;}
+.m_subnav .nav{width:620px;}
+.m_subnav .nav li{float:left;display:block;overflow:hidden;width:124px;height:45px;}
+.m_subnav .nav a{float:left;line-height:15px;font-size:16px;color:#333333;padding:21px 45px 19px 15px;position:relative;z-index:100;display:block;overflow:hidden;}
+.m_subnav .nav a.on{color:#fff;}
+.m_subnav .nav .icon{width:94px;height:32px;background-position:-156px -84px;left:0px;top:13px;z-index:0;}
+.m_subnav .reserve{width:180px;height:55px;line-height:55px;text-align:center;color:#fff;}
+.m_subnav .help{margin-right:30px;height:55px;line-height:55px;font-size:12px;}
+
+/*详细介绍*/
+.g_detail{width:1200px;margin:auto;padding-bottom:40px;margin-top:60px;}
+.g_detail .m_boxDashed{border-bottom:1px dashed #cccccc;padding:40px 0px 40px 125px;}
+.g_detail .m_boxDashed .title{left:8px;top:40px;height:17px;width:76px;padding-bottom:20px;line-height:17px;background-position:-475px -103px;text-align:center}
+.m_discount_box{background:#fffcf7;border:1px solid #fff5ec;width:896px;padding:20px;font-size:14px;color:#555555;margin:5px 0px 0px 5px;line-height:24px;}
+.m_discount_box span{font-size:14px;font-weight:bold;}
+.m_discount_box .icon{width:83px;height:23px;left:-5px;top:-5px;background-position:-49px -84px;color:#fff;line-height:18px;text-align:center;font-weight:bold;font-size:12px;}
+.m_boxDashed .detail .bt{margin-top:20px;}
+.m_boxDashed .special{margin-top:-3px;color:#555555;line-height:24px;}
+.g_detail .border_none{border-bottom:0px;}
+
+.m_box .title{width:1200px;background:#f8f9f8;height:25px;padding-top:15px;}
+.m_box .title label{height:15px;padding-left:10px;border-left:4px solid #00a0e9;font-weight:normal;margin-left:20px;line-height:15px;}
+.m_box .text{padding:15px 37px;color:#555555;line-height:24px;}
+
+/*行程详细*/
+
+/*行程详细*/
+.m_air_day{width:70px;left:14px;top:100px;}
+.m_air_day a{width:70px;height:25px;display:block;overflow:hidden;font-family:"microsoft Yahei","微软雅黑";font-size:14px;text-align:center;color:#fff;line-height:25px;background:#d7d7d7;margin-top:5px;}
+.m_air_day a:visited{}
+.m_air_day a.on,.m_air_day a:hover{background:#78c5ec;}
+.m_air_day a:active{}
+.m_tips{height:53px;border-left:3px solid #2099d1;}
+.m_tips .tips_line{height:34px;background-color:#b1e2fb;margin-top:5px;}
+.m_tips .tips_line label{line-height:34px;color:#00a0e9;font-family:"microsoft Yahei","微软雅黑";font-size:14px;float:left;margin:0px 10px;}
+.m_tips .tips_line .icon{width:14px;height:34px;background-position:-254px -130px;top:0px;right:-14px;}
+.m_allotTime{height:29px;}
+.m_allotTime .day{height:29px;line-height:29px;padding:0px 8px;color:#fff;background:#78c5ec;}
+.m_allotTime .day i,.m_allotTime .buy i{font-weight:bold;font-size:16px;padding-left:5px;}
+.m_allotTime .day .icon{width:15px;height:7px;background-position:-346px -130px;left:12px;bottom:-7px;}
+.m_allotTime .buy{height:29px;line-height:29px;padding:0px 8px;color:#fff;background:#ff9900;margin-left:10px;}
+.m_detailTrip{width:967px;margin-left:17px;border-left:2px solid #eaeaea;border-bottom:1px solid #eaeaea;padding-top:20px;}
+.m_detailTrip .icon_circle{width:22px;height:22px;background-position:0px -298px;left:-12px;top:30px;}
+.m_detailTrip .icon_box{width:14px;height:20px;background-position:0px -451px;left:-9px;top:118px;background-color:#fff;}
+.m_detailTrip .day_traffic{padding-bottom:32px;margin-left:50px;}
+/*第一天特殊*/
+.m_detailTrip_F .day_traffic{margin-top:-30px;}
+.m_detailTrip_F .icon_box{top:89px;}
+.m_detailTrip_F .icon_circle{top:0px;}
+.m_detailTrip_F{margin-top:46px;}
+
+/*第一天特殊*/
+/*最后一天*/
+.m_detailTrip_L .icon_circle{background-position:0px -264px;top:53px;}
+.m_detailTrip_L .tips{margin-left:84px;color:#888888;margin-top:6px;}
+.m_detailTrip_L .icon_box{width:2px;background:#fff;height:74px;left:-2px;top:75px;}
+/*最后一天*/
+.m_detailTrip .day_traffic .num{font-size:70px;color:#78c5ec;font-family:"Arial";height:54px;line-height:54px;padding-bottom:5px;}
+.m_detailTrip .day_traffic .day{font-size:26px;color:#fff;font-family:"Arial";height:28px;width:70px;line-height:28px;text-align:center;background:#78c5ec;}
+.m_detailTrip .day_traffic .city{padding-top:5px;}
+.m_detailTrip .day_traffic .icon_fly{padding-left:40px;background-position:-522px -283px;}
+.m_detailTrip .day_traffic .icon_bus{padding-left:40px;background-position:-522px -325px;}
+.m_detailTrip .day_traffic .icon_train{padding-left:40px;background-position:-522px -365px;}
+.m_detailTrip .day_traffic .icon_ship{padding-left:40px;background-position:-522px -468px;}
+.m_detailTrip .live,.m_detailTrip .eat{margin-left:82px;padding-left:33px;color:#555555;}
+.m_detailTrip .live{background-position:0px -216px;}
+.m_detailTrip .eat{background-position:0px -174px;margin-top:10px;}
+.m_detailTrip .detail{color:#555555;margin-left:82px;margin-top:23px;}
+.m_detailTrip_L{border-bottom:0px;}
+/*详情页图像轮播*/
+.m_detail_carousl{width:872px;height:182px;margin-left:34px;padding:20px 0px;}
+.m_detail_carousl .left,.m_detail_carousl .right{width:53px;height:182px;top:20px;text-indent:-9999px;}
+.m_detail_carousl .left{left:0px;background-position:-128px -201px;display:none;}
+.m_detail_carousl .right{right:0px;background-position:-217px -201px;}
+.m_detail_carousl .img_show{width:770px;left:53px;top:20px;height:182px;}
+.m_detail_carousl .img_list{left:0px;top:0px;height:182px;width:780px;}
+.m_detail_carousl .img_list img{width:250px;height:182px;float:left;margin-right:10px;}
+.air_img_box{left:0px;top:0px;border:3px solid #fff;z-index:100000;}
+/*详情页图像轮播*/
+/*详细介绍*/
+
+/*联调样式*/
+.m_carousel .carousel_img_tab .list li.current{padding:0px;}
+.pro_right .from{margin-top:15px;}
+body{background:#fff;}
+.pro_right .msg .order_news{width:560px;}
+.pro_right .msg{width:590px;}

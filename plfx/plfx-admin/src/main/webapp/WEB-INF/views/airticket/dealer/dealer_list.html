@@ -1,0 +1,149 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<script>
+   function reset(){
+	   alert();
+       var form = document.getElementById("pagerForm");
+       form.reset();
+   }
+</script>
+<div class="pageHeader">
+   
+   <form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+       action="${contextPath}/airtkt/dealer/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+
+       <div class="searchBar">
+           <table class="searchContent">
+              
+               <tr>
+                 
+                   
+                   <td>
+                      经销商名称：
+                   </td>
+                   <td>
+                       <input type="text" name="name" value="${(dealerQO.name)!''}" />
+                   </td>
+                   <td>
+                     经销商代码：
+                   </td>
+                   <td>
+                       <input type="text" name="code" value="${(dealerQO.code)!''}" />
+                   </td>
+                    
+                    <td>
+                       创建时间：
+                   </td>
+                   <td>
+                       <input type="text" readonly="readonly" name="beginTimeStr" value="${(dealerQO.beginTime?string('yyyy-MM-dd'))!''}" class="date"/>
+                       至
+                       <input type="text" readonly="readonly" name="endTimeStr" value="${(dealerQO.endTime?string('yyyy-MM-dd'))!''}" class="date"/>
+                   </td>
+                   
+                    <td>状态</td>
+                   <td>
+                       <select name="status">
+                           <option value="">全部</option>
+                           <#if STATUS_MAP??>
+                               <#list STATUS_MAP?keys as itemKey>
+                                   <option 
+                                       <#if itemKey == dealerQO.status>
+                                           selected="selected"
+                                       </#if>
+                                       value="${itemKey}">${STATUS_MAP[itemKey]}</option>
+                               </#list>
+                           </#if>
+                       </select>
+                   </td>
+                   
+               </tr>
+           </table>
+           <div class="subBar">
+               <ul>
+                   <li>
+                   		<div class="buttonActive">
+                           <div class="buttonContent">
+                               <button type="submit">查询</button>
+                           </div>
+                        </div>
+                   </li>
+                   <li>
+                   		<div class="buttonActive">
+                           <div class="buttonContent">
+                               <button type="button" onclick="formReset(this)">重置</button>
+                           </div>
+                        </div>
+                   </li>
+               </ul>
+           </div>
+       </div>
+   </form>
+</div>
+<div class="pageContent">
+   <div class="panelBar">
+       <ul class="toolBar">
+           <li>
+               <a width="600" height="400" rel="policy" class="add" href="${contextPath}/airtkt/dealer/toAdd" target="dialog" maxable="false" resizable="false"><span>新增</span></a>
+           </li>
+             <li>
+               <a width="600" height="400"  class="add" href="${contextPath}/airtkt/dealer/multiUse?flag=use" title="确定批量启用选中经销商？" target="selectedTodo" rel="ids" maxable="false" resizable="false"><span>批量启用</span></a>
+           </li>
+             <li>
+               <a width="600" height="400"  class="add" href="${contextPath}/airtkt/dealer/multiUse?flag=noUse" title="确定批量禁用选中经销商？" target="selectedTodo" rel="ids" maxable="false" resizable="false"><span>批量禁用</span></a>
+           </li>
+       </ul>
+   </div>
+   <table class="table" width="100%" layoutH="210" >
+       <thead>
+           <tr>
+                <th width="22"><input type="checkbox" group="ids"
+					class="checkboxCtrl">
+				</th>
+                 <th width="60"> 名称</th>
+               <th width="90">代码</th>
+               <th width="90">密钥</th>
+               <th width="90">通知地址</th>
+               <th width="90">通知字段名</th>
+               <th width="90">创建时间</th>
+               <th width="30">状态</th>
+               <th width="140">操作</th>
+           </tr>
+       </thead>
+       <tbody>
+           <#list pagination.list as dealerDTO>
+               <tr height="21px">
+                   <td><input name="ids" value="${dealerDTO.id}" type="checkbox"></td>
+                   <td>${(dealerDTO.name)!''}</td>
+                   <td>${(dealerDTO.code)!''}</td>
+                   <td>${(dealerDTO.secretKey)!''}</td>
+                   <td>${(dealerDTO.notifyUrl)!''}</td>
+                   <td>${(dealerDTO.notifyValue)!''}</td>
+                   <td>
+                   <#if dealerDTO.createDate ??>
+                   ${(dealerDTO.createDate)!?string("yyyy-MM-dd HH:mm:ss")}
+                    </#if>
+                   </td>
+                    <td>
+                       <#if STATUS_MAP??>
+							${(STATUS_MAP[dealerDTO.status?string])!''}
+                       </#if>
+                   </td>
+                   <td>
+                       <p><a width="1000" height="800" rel="policy" title="确定删除该经销商？"href="${contextPath}/airtkt/dealer/delete?id=${dealerDTO.id}" target="ajaxTodo" maxable="false" resizable="false" style="color: blue"><span>删除</span></a> <a width="1000" height="800" rel="policy" href="${contextPath}/airtkt/dealer/toUpdate?id=${dealerDTO.id}" target="dialog" maxable="false" resizable="false" style="color: blue"><span>修改</span></a><#if dealerDTO.status==0 >
+                         <a width="50" height="50" rel="policy"  title="确定启用该经销商？" href="${contextPath}/airtkt/dealer/use?id=${dealerDTO.id}&status=${use}" target="ajaxTodo" maxable="false" resizable="false" style="color: blue"><span>启用</span></a>
+                      	 <#else>
+                      	 <a width="50" height="50" rel="policy" title="确定禁用该经销商？" href="${contextPath}/airtkt/dealer/use?id=${dealerDTO.id}&status=${pre_use}" target="ajaxTodo" maxable="false" resizable="false" style="color: blue"><span>禁用</span></a>
+                       </#if></p>
+                        
+                  		 
+                   </td>
+               </tr>
+           </#list>
+       </tbody>
+   </table>
+   <#include "/public/pagination/pagination.html">

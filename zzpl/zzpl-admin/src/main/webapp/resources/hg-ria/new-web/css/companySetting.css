@@ -1,0 +1,45 @@
+/*成本中心样式*/
+.cost_center{
+	width:861px;
+	background:#fff;
+	padding:20px;
+}
+.costCenter_title{
+	font-size:18px;
+	font-weight:normal;
+	color:#333;
+	line-height:40px;
+	padding-left:28px;
+}
+.company_costCenter_list{
+	padding-left:40px;
+}
+.company_costCenter_list li{
+    padding-left:32px;
+    background:url('../images/subTitle_icon2.png') no-repeat center left;
+    display: block;
+    overflow: hidden;
+}
+.company_group li{
+    padding-left:32px;
+    background:url('../images/subTitle_icon.png') no-repeat center left;
+}
+.company_costCenter_list li a{
+	font-size:14px;
+	color:#666;
+	line-height:30px;
+    display: block;
+    padding-right: 25px;
+    float: left;
+}
+.company_costCenter_list li a:hover{
+    background:url("../images/icon_close.png") no-repeat right 5px;
+}
+
+.company_costCenter_list li a:hover{
+	text-decoration: underline;
+	color:#009bce;
+}
+.admin_alert .g-search{margin:0px;width: 260px;}
+
+.admin_alert .title{width:260px;}

@@ -1,0 +1,92 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" href="${contextPath}/resources/js/trumbowyg/design/css/trumbowyg.css">
+<div class="pageContent" style="text-align:left;">
+	<form method="post" id="checkForm" enctype="multipart/form-data" action="${contextPath}/notice/checkNotice" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="${noticeDto.id}">
+		<div class="pageFormContent" layoutH="88">
+			<div class="unit">
+				<label>*公告标题：</label>
+				${noticeDto.baseInfo.title}
+			</div>
+			<div class="unit">
+				<label>*公告内容：</label><br>
+				<div  style=" width:750px; height:200px;overflow:auto;">${noticeDto.baseInfo.details}</div>
+			</div>
+			<div class="unit">
+				<label>*发布人：</label><br>
+				<div>${noticeDto.baseInfo.issueUser}</div>
+			</div>
+			<div class="unit">
+				<label>*发布时间：</label>
+				${noticeDto.baseInfo.createTime?string('yyyy-MM-dd HH:mm:ss')}
+			</div>
+			<div class="unit">
+				<label>*截至日期：</label>
+				${noticeDto.baseInfo.cutOffTime?string('yyyy-MM-dd HH:mm:ss')}
+			</div>
+			<div class="unit">
+				<label>*公告状态：</label>
+				<input type="hidden" name="checkedStatus" id="check"/>
+				<#if noticeDto.status.checkedStatus==1>
+					待审核 
+				<#elseif noticeDto.status.checkedStatus==2>
+					审核通过
+				<#else>
+					审核不通过
+				</#if>
+			</div>
+			<div class="unit">
+				<label>*审核说明：</label><br>
+				<textarea id="simple-editor" name="chcekDeclare" >
+					${(noticeDto.status.chcekDeclare)!}
+                </textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button  type="button" onclick="submitPass()">审核通过</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="submitRefuse()">审核驳回</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+		<script src="${contextPath}/resources/js/trumbowyg/trumbowyg.js"></script>
+        <script src="${contextPath}/resources/js/trumbowyg/langs/zh.js"></script>
+        <script src="${contextPath}/resources/js/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+        <script src="${contextPath}/resources/js/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+<script>
+      //全屏提示错误信息的方法
+      //alertMsg.error("xxxx");
+      $(function(){
+      	//初始化数据
+      });
+      function submitPass(){
+    	 $("#check").val("2");
+         $("#checkForm").submit();
+      }
+      function submitRefuse(){
+     	 $("#check").val("3");
+         $("#checkForm").submit();
+       }
+	//编辑器
+      $("#simple-editor").trumbowyg({
+      	fullscreenable:false,
+          lang: 'zh',
+          closable: false,
+          btns: ['viewHTML',
+                 '|', 'formatting',
+                 '|', 'bold',
+                 '|', 'italic',
+                 '|', 'strikethrough',
+                 '|', 'underline',
+                 '|', 'justifyLeft',
+                 '|', 'justifyCenter',
+                 '|', 'justifyRight',
+                 '|', 'justifyFull',
+                 '|', 'unorderedList',
+                 '|', 'orderedList',
+                 '|', 'horizontalRule']
+      });
+
+</script>

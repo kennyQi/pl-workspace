@@ -1,0 +1,25 @@
+drop table  auth_perm;
+drop table  auth_role;
+drop table  auth_role_perm;
+drop table  auth_user;
+drop table  auth_user_role;
+drop table  cal_flow;
+drop table  cal_rule;
+drop table  cal_session;
+drop table  sys_addr_projection;
+drop table jf_account;
+drop table jf_flow;
+drop table jf_user;
+drop table sys_area;
+drop table sys_backlog;
+drop table sys_city;
+drop table sys_kvconfig;
+drop table sys_province;
+drop table  sys_staff;
+drop table   uc_access_token;
+drop table  uc_client;
+drop table uc_money_account;
+drop table uc_person;
+drop table uc_refresh_token;
+drop table  uc_user;
+

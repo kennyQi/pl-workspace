@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<link rel="stylesheet" type="text/css" href="css/ticket.css">
+
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="js/ticket.js"></script>
+<script type="text/javascript" src="js/jquery.slides.min.js"></script>
+
+<script>
+    $(function(){
+      slidesPic();
+    })
+    
+</script>
+</head>
+<body>
+	<!-- 公共页头  -->
+	<header class="header">
+	  <h1>五台山</h1>
+      <div class="left-head"> 
+	    <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn">
+	        <span class="inset_shadow">
+	            <span class="head-return"></span>
+	        </span>
+	    </a> 
+	  </div>
+	</header>
+    
+    <!-- 页面内容 -->
+	<div class="content ticket">
+    	<!--start 图片轮播区域-->
+        	<div class="carousel">
+            	<div class="pic" id="picShow">
+                	<img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                    <img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                    <img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                    <img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                    <img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                    <img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                    <img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                    <img src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                </div>
+                <p><span>共10张图片</span>五台山(AAAAA景区)</p>
+            </div>
+        <!--end 图片轮播区域-->
+        <div class="details">
+        	<ul class="tabs">
+            	<li class="active">门票预订</li>
+                <li>景点介绍</li>
+            </ul>
+             <!--start 门票预订-->
+            <div id="book" class="info_content active" >
+            	<div class="notes open">
+                	<h3><span></span>订票须知</h3>
+                    <div class="info_notes"><!-- 默认不显示，点击展现 -->
+                    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
+                    </div>
+                </div>
+                <div class="reserve">
+                	<h3><span></span>成人票</h3>
+                    <div class="info_reserve">
+                    	<div class="left">
+                            <p>云台山成人票</p>
+                            <p>&yen;25.00元 </p>
+                        </div>
+                        <div class="right"><a href="#">预 订</a></div>
+                    </div>
+                </div>
+            </div>
+            <!--end 门票预订-->
+
+            <!--start 景区介绍-->
+            <div id="in" class="info_content" style="display:none;">
+                <div class="notes open">
+                    <h3>景区介绍</h3> 
+                    <div class="info_notes">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
+                    </div>
+                </div>
+                <div class="notes open">
+                    <h3>交通指南</h3>
+                    <div class="info_notes">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. </p>
+                    </div>
+                </div>
+            </div>
+            <!--end 景区介绍-->
+        </div>
+            
+    </div>
+</body>
+</html>

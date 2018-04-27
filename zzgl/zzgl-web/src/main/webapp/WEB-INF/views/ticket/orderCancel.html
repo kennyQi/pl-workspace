@@ -1,0 +1,28 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#import "/public/frame/default.html" as frame />
+<@frame.head "中智票量 - 机票支付失败">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<link href="${contextPath}/resources/css/fly_success.css" rel="stylesheet" />
+</@frame.head>
+<@frame.main "default" 2>
+<div class="wd12 ma pay_success disb pay_fail">
+    <div class="payfor_box ov">
+        <span class="reg_order fl yahei color6 tc">支付失败</span>
+        <span class="reg_mes fl reg_ORD tc yahei color8 h2">预订机票：
+        <#if jporderList??>
+         <#list  jporderList  as jporder> 
+            <span class="color6">${jporder.flightDTO.airCompName}<b>${jporder.flightDTO.flightNo}</b>${jporder.flightDTO.startDate}
+            <b class="h1" style="margin-left:6px;">${jporder.flightDTO.startTime}</b>${jporder.flightDTO.startCity}<i></i><b class="h1">${jporder.flightDTO.endTime}</b>${jporder.flightDTO.endCity}</span>
+          </#list>
+          </#if>
+        </span>
+        <span class=" reg_mes fl yahei color8 h2 rexian">如需帮助请拨打客服热线400-660-6660</span>
+    </div>
+</div>
+
+<!--内容-->
+</@frame.main>
+<@frame.end "default"></@frame.end>

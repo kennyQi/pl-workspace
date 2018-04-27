@@ -1,0 +1,111 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/project/update" class="pageForm required-validate nowrap" onsubmit="return projectSubmitValidateCallback(this, dialogAjaxDone)">
+		<input name="projectId" value="${project.id}" type="hidden">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>项目名称：</dt>
+					<dd>
+						<input name="name" type="text" value="${project.name}" class="required" maxlength="50" onchange="removeAllEmpty(this)"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>密钥：</dt>
+					<dd>
+						<input name="key" type="text" value="${project.key}" maxlength="49" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>项目类型：</dt>
+					<dd>
+						<select name="projectTypeId" onchange="checkExtraInput(this,'extraPtName')"> <#list projectTypeList as t>
+							<option value="${t.id}"<#if (project.projectType.id == t.id)> selected="selected" </#if> >${t.name}</option> </#list>
+							<option value="">添加+</option>
+						</select>
+						<input type="text" name="extraPtName" style="display: none;">
+					</dd>
+				</dl>
+				<dl>
+					<dt>项目模式：</dt>
+					<dd>
+						<select name="projectModeId" onchange="checkExtraInput(this,'extraPName')"> <#list projectModeList as t>
+							<option value="${t.id}"<#if (project.projectMode.id == t.id)> selected="selected" </#if> >${t.name}</option> </#list>
+							<option value="">添加+</option>
+						</select>
+						<input type="text" name="extraPName" style="display: none;">
+					</dd>
+				</dl>
+				<dl>
+					<dt>联系电话：</dt>
+					<dd>
+						<input name="linkPhone" type="text" value="${project.linkPhone}" class="number" maxlength="11"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>接口开启：</dt>
+					<dd>
+						<select name="using" id="select"> <#if (project.status.using)>
+							<option value="true" selected="selected">开启</option>
+							<option value="false">关闭</option> <#else>
+							<option value="true">开启</option>
+							<option value="false" selected="selected">关闭</option> </#if>
+						</select>
+					</dd>
+				</dl>
+				<dl>
+					<dt>接口地址：</dt>
+					<dd>
+						<input name="postUrl" type="text" value="${project.postUrl}" maxlength="99"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>运行形式：</dt>
+					<dd>
+						<select name="operationFormId" onchange="checkExtraInput(this,'extraOfName')"> <#list operationFormList as t>
+							<option value="${t.id}"<#if (project.operationForm.id == t.id)> selected="selected" </#if> >${t.name}</option> </#list>
+							<option value="">添加+</option>
+						</select>
+						<input type="text" name="extraOfName" style="display: none;">
+					</dd>
+				</dl>
+				<dl>
+					<dt>项目负责人：</dt>
+					<dd>
+						<input name="projectLeader" type="text" value="${project.projectLeader}" maxlength="9"/>
+					</dd>
+				</dl>
+				<dl>
+					<dt>联系邮箱：</dt>
+					<dd>
+						<input name="linkEmail" type="text" value="${project.linkEmail}" class="email" maxlength="99" />
+					</dd>
+				</dl>
+				<dl>
+					<dt>备注信息：</dt>
+					<dd>
+						<textarea name="remark" cols="50" rows="4" maxlength="250"> ${project.remark}</textarea>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,30 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent" style="text-align:left;">
+	<form method="post" id="addForm" enctype="multipart/form-data" action="${contextPath}/member/sendCoupon" 
+		onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label style="width:98%; color:red;">*卡劵id：</label> 
+				<input name="couponId" placeholder="请输入卡劵id"/>
+				<label style="width:98%; color:red;">*用户登录名：(登录名之间用英文的逗号隔开:aaa,bbb)</label> 
+				<textarea layoutH="20" style="width:98%;" name="names"></textarea>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+			    <li><div class="button">
+						<div class="buttonContent">
+							<button type="submit">发送</button>
+						</div>
+					</div>
+				</li>
+				<li><div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>

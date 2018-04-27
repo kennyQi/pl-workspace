@@ -1,0 +1,142 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	function checkTimeStr(){
+		if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()==""||$("#saleEndTimeStr", navTab.getCurrentPanel()).val()=="")
+		{
+		alert("请输入入园开始日期和结束日期!");
+			return false
+		}
+		/* if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()=="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()!=""){
+		
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}else if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()!="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()==""){
+			
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		} */if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()>$("#saleEndTimeStr", navTab.getCurrentPanel()).val()){
+			
+			alert("入园开始时间不能大于入园结束时间!");
+			return false
+		}else{
+			return true;
+		}
+	}
+
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/report/enter_scenicspot_count" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					
+					<td>
+						票务类型：
+						<select name="ticketPolicyType">
+							<option value="">全部</option>
+							<option value="2" <#if ticketPolicyType=='2' >selected="selected"</#if> > 联票 </option>
+							<option value="1" <#if ticketPolicyType=='1' >selected="selected"</#if> > 单票 </option>
+						</select>
+					</td>
+					<td>
+						入园景区：
+						<select name="scenicSpotId">
+							<option value="">全部</option>
+							<#list scenicSpotList as spot>
+							<option value="${spot.id}" <#if spot.id == scenicSpotId>selected="selected"</#if>>${spot.baseInfo.name}</option>
+							</#list>
+						</select>
+					</td>
+					<td>
+						入园日期：
+						<input type="text" id="saleBeginTimeStr" name="saleBeginTimeStr" value="${saleBeginTimeStr}" class="date" readonly="true"/>-
+						<input type="text" id="saleEndTimeStr" name="saleEndTimeStr" value="${saleEndTimeStr}" class="date" readonly="true" />
+					</td>
+				<!-- 	<td>
+						<span onclick="getYesteday()" style="cursor: pointer;">昨天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getToday()" style="cursor: pointer;">今天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getLastWeek()" style="cursor: pointer;">上周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentWeek()" style="cursor: pointer;">本周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getPreviousMonth()" style="cursor: pointer;">上月</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentMonth()" style="cursor: pointer;">本月</span>
+					</td> -->
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkTimeStr()">查询</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" href="${contextPath}/report/enter_scenicspot_count/export" targetType="navTab" target="dwzExport"><span>导出EXCEL</span></a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="panelBar">
+		<ul>
+			<li style="line-height:25px;margin: 0px 15px;">起止时间：${pagination.condition.orderDateBegin?string("yyyy-MM-dd")} 至 ${pagination.condition.orderDateEnd?string("yyyy-MM-dd")}</li>
+			<li style="line-height:25px;margin: 0px 15px;">总计入园次数：<#if (pagination.list?size>0)>${pagination.list[0].useCount}<#else>0</#if> 人次 </li>
+			<li style="line-height:25px;margin: 0px 15px;">单票张数：<#if (pagination.list?size>0)>${pagination.list[0].sigleTicketNum}<#else>0</#if> 张</li>
+			<li style="line-height:25px;margin: 0px 15px;"> 联票张数：<#if (pagination.list?size>0)>${pagination.list[0].groupTicketNum}<#else>0</#if> 张</li>
+		</ul>
+		
+	</div>
+	
+	<table class="table" width="100%" layoutH="170" id="table_caiwu">
+		<thead>
+			<tr>
+				<!-- <th width="50px;">排名</th> -->
+				<th width="150px;">入园景区</th>
+				<th width="150px;">产品名称</th>
+				<th width="150px;">票务类型</th>
+				<th width="150px;">游客信息</th>
+				<th width="180px;">订单编号</th>
+				<th width="180px;">票务编号</th>
+				<th width="100px;">入园日期</th>
+			</tr>
+		</thead>
+		<#list pagination.list as t>
+			<tr>
+				<td>${t.scenicSpotName!''}</td>
+				<!-- 产品名称 -->
+				<td>${t.policyName!''}</td>
+				<td>
+					<#if t.ticketPolicyType==1>
+						单票
+					</#if>
+					<#if t.ticketPolicyType==2>
+						联票
+					</#if>
+				</td>
+				<td>
+					${t.touristName!''}&nbsp;&nbsp;&nbsp;&nbsp;${t.tourisIdNo}
+				</td>
+				<td>
+				<a title="订单详情" target="dialog" href="${contextPath}/order/ticketOrder/view/${t.groupTicketId}" height="700" width="1150" style="color: blue">${t.orderId}</a>
+					
+				</td>
+				<!-- 票务编号 -->
+				<td>${t.ticketNo}</td>
+				<!-- 首次入园日期 -->
+				<td>${(t.enterDate?string('yyyy-MM-dd HH:mm:ss'))!''}</td>
+			</tr>
+		</#list>
+	</table>
+	<#include "/public/pagination/pagination.html">
+
+</div>

@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<YeeGo.QueryPolicyByPNR_1_0>
+	<ErrorCode>0</ErrorCode>
+	<ErrorMsg></ErrorMsg>
+	<SearchInfo>
+		<TotalTime>7.1814032</TotalTime>
+		<TotalPlatforms>7</TotalPlatforms>
+		<SuccessPlatforms>7</SuccessPlatforms>
+		<PolicyCount>10</PolicyCount>
+	</SearchInfo>
+	<Policys>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>12169973</PolicyId>
+			<PlatCode>008</PlatCode>
+			<PlatCodeForShort>Y8</PlatCodeForShort>
+			<PlatformMappingCode>Y8</PlatformMappingCode>
+			<PlatformName>八千翼</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice></TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>5.00</CommRate>
+			<CommMoney>0</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>签转换开跨月改期收回代理费</Remark>
+			<RefundRule />
+			<Efficiency>0分钟19秒</Efficiency>
+			<TktWorktime>00:00-23:59</TktWorktime>
+			<OutWorkTime>08:00-23:59</OutWorkTime>
+			<WastWorkTime>23:59止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime>08:00-23:59</WeekendRefundTime>
+			<SupplierPayType>Alipy|ChinaPnr|TenPay</SupplierPayType>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>10302010</PolicyId>
+			<PlatCode>008</PlatCode>
+			<PlatCodeForShort>Y8</PlatCodeForShort>
+			<PlatformMappingCode>Y8</PlatformMappingCode>
+			<PlatformName>八千翼</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice></TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.80</CommRate>
+			<CommMoney>0</CommMoney>
+			<FareBase />
+			<TktType>BSP</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>授权KMG263，外宾及拼音旅客不享受此政策</Remark>
+			<RefundRule />
+			<Efficiency>8分钟31秒</Efficiency>
+			<TktWorktime>07:30-21:00</TktWorktime>
+			<OutWorkTime>09:00-20:00</OutWorkTime>
+			<WastWorkTime>20:00止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime>09:00-20:00</WeekendRefundTime>
+			<SupplierPayType>Alipy|TenPay</SupplierPayType>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>52147372</PolicyId>
+			<PlatCode>002</PlatCode>
+			<PlatCodeForShort>B5</PlatCodeForShort>
+			<PlatformMappingCode>B5</PlatformMappingCode>
+			<PlatformName>51BOOK</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice>BJS260</TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.70</CommRate>
+			<CommMoney>0</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>B2B电子客票请不要做RR，否则可能无法出票。 此政策所有改期服务需要由原供应商操作br
+				改期、签转，如产生代理费差异，需收回！</Remark>
+			<RefundRule />
+			<Efficiency>58秒钟</Efficiency>
+			<TktWorktime>08:00-21:45</TktWorktime>
+			<OutWorkTime>08:00-21:45</OutWorkTime>
+			<WastWorkTime>21:45止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime></WeekendRefundTime>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>53114348</PolicyId>
+			<PlatCode>002</PlatCode>
+			<PlatCodeForShort>B5</PlatCodeForShort>
+			<PlatformMappingCode>B5</PlatformMappingCode>
+			<PlatformName>51BOOK</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice>BJS407</TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.60</CommRate>
+			<CommMoney>0</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>B2B电子客票请不要做RR，否则可能无法出票。 改期、签转，如产生代理费差异，需收回！</Remark>
+			<RefundRule />
+			<Efficiency>1分钟1秒钟</Efficiency>
+			<TktWorktime>08:00-22:00</TktWorktime>
+			<OutWorkTime>09:00-21:50</OutWorkTime>
+			<WastWorkTime>21:50止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime></WeekendRefundTime>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>10982749|</PolicyId>
+			<PlatCode>004</PlatCode>
+			<PlatCodeForShort>C5</PlatCodeForShort>
+			<PlatformMappingCode>C5</PlatformMappingCode>
+			<PlatformName>517NA</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice>PEK311</TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.60</CommRate>
+			<CommMoney>0</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>无</Remark>
+			<RefundRule />
+			<Efficiency>0分钟20秒</Efficiency>
+			<TktWorktime>00:00-23:59</TktWorktime>
+			<OutWorkTime>00:00-23:59</OutWorkTime>
+			<WastWorkTime>23:59止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime>00:00-23:59</WeekendRefundTime>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>12209977|</PolicyId>
+			<PlatCode>004</PlatCode>
+			<PlatCodeForShort>C5</PlatCodeForShort>
+			<PlatformMappingCode>C5</PlatformMappingCode>
+			<PlatformName>517NA</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice>bjs914</TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.40</CommRate>
+			<CommMoney>0</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>无</Remark>
+			<RefundRule />
+			<Efficiency>1分钟20秒</Efficiency>
+			<TktWorktime>00:00-23:59</TktWorktime>
+			<OutWorkTime>00:00-23:59</OutWorkTime>
+			<WastWorkTime>23:59止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime>00:00-23:59</WeekendRefundTime>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>MU14081413174251051</PolicyId>
+			<PlatCode>012</PlatCode>
+			<PlatCodeForShort>IT</PlatCodeForShort>
+			<PlatformMappingCode>IT</PlatformMappingCode>
+			<PlatformName>纵横天地</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>Y</PlatformType>
+			<TktOffice>BJS914</TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.20</CommRate>
+			<CommMoney>0</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark></Remark>
+			<RefundRule />
+			<Efficiency></Efficiency>
+			<TktWorktime>00:00-23:40</TktWorktime>
+			<OutWorkTime>00:00-23:40</OutWorkTime>
+			<WastWorkTime>23:40止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime></WeekendRefundTime>
+			<Price>710</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>11638803</PolicyId>
+			<PlatCode>007</PlatCode>
+			<PlatCodeForShort>YX</PlatCodeForShort>
+			<PlatformMappingCode>YX</PlatformMappingCode>
+			<PlatformName>易行</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice></TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.80</CommRate>
+			<CommMoney>0.00</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>此客票类型为B2B。签转别的航空公司,跨月签转以及有政策航班改到无政策航班,需收回代理费，A舱只适用高票价。
+			</Remark>
+			<RefundRule />
+			<Efficiency>2分钟38秒</Efficiency>
+			<TktWorktime>08:00-22:00</TktWorktime>
+			<OutWorkTime>08:00-22:00</OutWorkTime>
+			<WastWorkTime>22:00止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime></WeekendRefundTime>
+			<SupplierPayType>Alipy|ChinaPnr</SupplierPayType>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>9850538</PolicyId>
+			<PlatCode>007</PlatCode>
+			<PlatCodeForShort>YX</PlatCodeForShort>
+			<PlatformMappingCode>YX</PlatformMappingCode>
+			<PlatformName>易行</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>P</PlatformType>
+			<TktOffice></TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.10</CommRate>
+			<CommMoney>0.00</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>此客票类型为B2B。</Remark>
+			<RefundRule />
+			<Efficiency>2分钟49秒</Efficiency>
+			<TktWorktime>08:00-24:00</TktWorktime>
+			<OutWorkTime>08:30-22:30</OutWorkTime>
+			<WastWorkTime>22:30止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime></WeekendRefundTime>
+			<SupplierPayType>Alipy|ChinaPnr</SupplierPayType>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+		<Policy>
+			<Flag>Y</Flag>
+			<PolicyId>710.00</PolicyId>
+			<PlatCode>033</PlatCode>
+			<PlatCodeForShort>ST</PlatCodeForShort>
+			<PlatformMappingCode>ST</PlatformMappingCode>
+			<PlatformName>380出票网</PlatformName>
+			<IsVip>10</IsVip>
+			<PlatformType>Y</PlatformType>
+			<TktOffice></TktOffice>
+			<SwitchPnr>N</SwitchPnr>
+			<FltStart />
+			<FltEnd />
+			<PreTkt />
+			<TktStart />
+			<TktEnd />
+			<Fare />
+			<Rebate />
+			<TaxAmount>0</TaxAmount>
+			<CommAmount />
+			<PaymentFee />
+			<CommRate>4.49</CommRate>
+			<CommMoney>31.90</CommMoney>
+			<FareBase />
+			<TktType>B2B</TktType>
+			<AutoTicket />
+			<Receipt />
+			<PaymentType />
+			<Remark>*跨月改期-退票，签转，收回代理费，代理人无权销售VIP客票。 跨月签转收回代理费</Remark>
+			<RefundRule />
+			<Efficiency>1分钟</Efficiency>
+			<TktWorktime>00:00-23:59</TktWorktime>
+			<OutWorkTime>08:00-23:30</OutWorkTime>
+			<WastWorkTime>23:30止</WastWorkTime>
+			<WeekendOutWorkTime></WeekendOutWorkTime>
+			<WeekendRefundTime>08:00-23:30</WeekendRefundTime>
+			<Price>710.00</Price>
+			<SettlePrice>0</SettlePrice>
+			<AduTaxFare>0</AduTaxFare>
+			<AduRewardTicketFare>0</AduRewardTicketFare>
+			<AduRewardDiscount>0</AduRewardDiscount>
+			<AduEtdzFare>0</AduEtdzFare>
+			<AduRewardMoney>0</AduRewardMoney>
+			<ChdBaseDiscount>0</ChdBaseDiscount>
+			<ChdRewardDiscount>0</ChdRewardDiscount>
+			<ChdTaxFare>0</ChdTaxFare>
+			<ChdRewardTicketFare>0</ChdRewardTicketFare>
+			<ChdEtdzFare>0</ChdEtdzFare>
+			<ChdRewardMoney>0</ChdRewardMoney>
+		</Policy>
+	</Policys>
+</YeeGo.QueryPolicyByPNR_1_0>

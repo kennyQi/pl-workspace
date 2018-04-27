@@ -1,0 +1,106 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript">
+	//全选
+
+$("#checkAll").click(function() {
+		$('input[name="projectIdList"]').attr("checked", this.checked);
+	});
+	var $subBox = $("input[name='projectIdList']");
+	$subBox.click(function() {
+		$("#checkAll").attr("checked", $subBox.length == $("input[name='projectIdList']:checked").length ? true : false);
+	});
+	
+	function deleteSupplierPriDiv(e){
+	    $(e).parent().parent().remove();
+
+	}
+
+	function up(obj) {
+		var objParentTR = $(obj).parent().parent();
+		var prevTR = objParentTR.prev();
+		if (prevTR.length > 0) {
+			prevTR.insertAfter(objParentTR);
+		}
+	}
+	function down(obj) {
+		var objParentTR = $(obj).parent().parent();
+		var nextTR = objParentTR.next();
+		if (nextTR.length > 0) {
+			nextTR.insertBefore(objParentTR);
+		}
+	}
+</script>
+<div class="pageContent">
+	<form method="post" action="${contextPath}/supplier/priority/update" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input name="SupplierPriorityPolicyId" type="hidden" value="${(supplierPriorityPolicyId)!}" />
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<dl>
+					<dt>项目：</dt>
+					<dd>
+						<table>
+							<tr>
+								<td>
+									<label> <input type="checkbox" id="checkAll" /> 全选</label>
+								</td>
+							</tr>
+							<tr>
+								<#list projectList as t>
+								<td>
+									<label> <input type="checkbox" name="projectIdList" value="${t.id}"<#if t_index < projectUseSize> checked="checked" </#if> /> ${t.name} </label>
+								</td>
+								<#if (t_index+1)%4 == 0>
+							</tr>
+							<tr></#if> </#list>
+							</tr>
+						</table>
+					</dd>
+				</dl>
+				<dl>
+					<dt>
+						供应商优先级设置：
+					</dt>
+					<dd>
+						<a href="${contextPath}/supplier/lookup" target="dialog" width="430" height="700" mask="true" style="color: #0066CC;display: block;padding-top: 5px;padding-bottom: 15px;padding-left: 5px;" rel="supplier_lookup">选择供应商</a>
+						
+						<table border="0" width="400"  class="supplier_pri_table">
+						<tbody id="e1425869023232">
+													<#list supplierList as t>
+							<tr>
+								<td>
+									${(t.baseInfo.name)!}
+									<input type="hidden" name="supplierIdList" value="${t.id}" />
+								</td>
+								<td class="operate_box">
+									<a href="#" onclick="up(this)">上移</a>
+									<a href="#" onclick="down(this)">下移</a>
+									<a href="#" onclick="deleteSupplierPriDiv(this)">移除</a>
+								</td>
+							</tr>
+							</#list>
+						</tbody>
+
+						</table>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li>
+					<div class="buttonActive">
+						<div class="buttonContent">
+							<button type="submit">保存</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
+							<button type="button" class="close">取消</button>
+						</div>
+					</div></li>
+			</ul>
+		</div>
+	</form>
+</div>

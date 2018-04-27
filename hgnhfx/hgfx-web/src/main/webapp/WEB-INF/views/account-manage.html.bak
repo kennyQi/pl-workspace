@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>账号管理</title>
+	<link  href="css/common.css" type="text/css" rel=stylesheet>
+	<link  href="css/common-b.css" type="text/css" rel=stylesheet>
+    <link  href="css/order.css" type="text/css" rel=stylesheet>
+<script src="js/jquery-1.12.3.min.js" charset="utf-8"></script>	
+<script src="js/WdatePicker.js" charset="utf-8"></script>
+<script src="js/common.js" charset="utf-8"></script>
+<script src="js/left.js" charset="utf-8"></script>
+</head>
+<style>
+
+</style>
+<script>
+	function leftClick(el){
+		alert(el.html());
+	}
+
+	$(function(){
+		
+		var a=$(".table-content-title").find(".time");
+		var b=$(".table-content-title").find(".amount");
+		a.click(function(){
+			$(this).addClass("active");
+			b.removeClass("active");
+			
+			$(this).find("img").hide();
+			b.find("img").show();
+		});
+		
+		b.click(function(){
+			$(this).addClass("active");
+			a.removeClass("active");
+			
+			$(this).find("img").hide();
+			a.find("img").show();
+		});
+		
+	});
+</script>
+<body>
+	<div class="mininav">
+		<div class="banner">
+			<div class="banner-pure">
+				<div class="logo"></div>
+				<div class="logo-gap"></div>
+				<div class="logo2"></div>
+				
+				<div class="banner-right">
+					<img src="img/order/icon.png">
+					<span class="user">admin</span>
+					<a href="javascript:void(0);"><span class="out">退出</span></a>
+				</div>
+			</div>
+		</div>
+		<div id="content">
+			<div class="content-wrap">
+				<div class="content-wrap-pure">
+					<div class="content-control">
+						<div class="left-banner line">
+							<div src1="url(img/order/order-icon.png) no-repeat"  src2="url(img/order/order-icon1.png) no-repeat" class="select-item line select-item1">
+							<div class="select-item-wrap"  style="background:url(img/order/order-icon.png) no-repeat;background-position: 36px 14px;">
+								订单管理<img style="display:none;" class="other other1" src="img/order/d-l.png">
+								<img class="other other2" src="img/order/r-l.png">
+							</div></div>
+							<div class="select-item-sub" style="display:none;">
+								<div data-index=0 class="select-item-sub-li  ">订单列表<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+								<div data-index=1 class="select-item-sub-li ">新建订单<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+								<div data-index=2 class="select-item-sub-li ">历史导入<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+								
+								<div class="parent-light" style="display:none;"></div>
+							</div>
+							<div src1="url(img/order/user.png) no-repeat" src2="url(img/order/user1.png) no-repeat" class="select-item line select-item2"><div class="select-item-wrap">
+								用户管理<img style="display:none;" class="other other1" src="img/order/d-l.png">
+								<img style="display:none;" class="other other2" src="img/order/r-l.png">
+							</div></div>
+							<div src1="url(img/order/personal.png) no-repeat" src2="url(img/order/personal1.png) no-repeat" class="select-item line select-item3">
+							<div class="select-item-wrap" style="background:url(img/order/personal1.png) no-repeat;background-position: 36px 14px;">
+								个人管理<img style="display:none;" class="other other2" src="img/order/r-l.png">
+								<img class="other other1" src="img/order/d-l.png">
+							</div></div>
+							<div class="select-item-sub" style="">
+								<div data-index=0 class="select-item-sub-li selected">账号管理<div style="" class="light"></div><div style="display:none;" class="light2"></div></div>
+								
+								<div class="parent-light" style=""></div>
+							</div>
+						</div>
+						<div class="right-content">
+							<div class="right-content-pure">
+								<div class="right-content-title">
+									<span class="tt">
+										<img src="img/order/wd3.png">
+										<span class="tl">个人管理<span>>> 账号管理>> 账单明细</span></span>
+									</span>
+									
+								</div>
+								
+								<div class="condition">
+									<div class="condition-wrap">
+										<span class="condition-item">
+											<span class="text">交易号</span>
+											<input id="cardno" type="text">
+										</span>
+										<span class="condition-item">
+											<span class="text">商品名称</span>
+											<div class="product-type">
+												<select >
+													<option>南航里程100</option>
+													<option>南航里程101</option>
+												</select>
+												<div class="select-icon">
+													<img src="img/order/select-a.png">
+												</div>
+											</div>
+										</span>
+										<span class="condition-item">
+											<span class="text">状态</span>
+											<div class="product-type">
+												<select >
+													<option>全部</option>
+													<option>全部101</option>
+												</select>
+												<div class="select-icon">
+													<img src="img/order/select-a.png">
+												</div>
+											</div>
+										</span>
+										<span class="condition-item">
+											<div class="condition-item-sub">
+												<span class="text">交易时间</span>
+												<input class="Wdate"  onfocus="WdatePicker({opposite:false,dateFmt:'yyyy-MM-dd',minDate:'%y-%M-%d'});" type="text" id="start">
+												<span style="margin-top: 5px;" class="small-gap">-</span>
+												<input class="Wdate"  onfocus="WdatePicker({opposite:false,dateFmt:'yyyy-MM-dd',minDate:'%y-%M-%d'});" type="text" id="end">
+											</div>
+										</span>
+										
+										<div id="screenBtn"></div>
+									</div>
+								</div>
+								
+								<div class="table-content">
+									<div class="table-content-wrap">
+										<div class="table-content-title">
+											<span class="text2">筛选结果</span>
+											
+											<div style="display:none;" class="export">导出</div>
+											<div style="display:none;" class="time "><div class="time-a">按订单时间排序<img src="img/order/v-i2.png"></div></div>
+											<div  style="display:none;" class="amount active"><div class="amount-a">按数量大小排序<img style="display:none;" src="img/order/v-i2.png"></div></div>
+										</div>
+										
+										<div  class="table-content-pure">
+											<table>
+												<tr class="thd"><th>交易时间</th><th>商品</th><th>订单编号</th><th>交易号</th><th>账号</th><th>金额</th><th>状态</th></tr>
+												<tr class="ta" ><td>2016.05.16 10:23</td><td>南航里程100</td><td>A000000000002</td><td>20160516142038183333123</td><td>明珠卡号：298138978378</td><td>-300.00</td><td>交易成功</td></tr>
+												<tr class="tb"><td>DJ36554235583254</td><td>南航里程1000</td><td>ovelynono</td><td>张三三</td><td>100,000</td><td>2016-05-30 10:30</td><td>lovelynono</td></tr>
+												<tr class="ta " ><td class="">DJ36554235583254</td><td>南航里程1000</td><td>ovelynono</td><td>张三三</td><td>100,000</td><td>2016-05-30 10:30</td><td>lovelynono</td></tr>
+												<tr class="tb"><td>DJ36554235583254</td><td>南航里程1000</td><td>ovelynono</td><td>张三三</td><td>100,000</td><td>2016-05-30 10:30</td><td>lovelynono</td></tr>
+											</table>
+										</div>
+									</div>
+								</div>
+								
+								<div class="bottom-links">
+									<span class="right-links">
+										<span class="first">首页</span>
+										<span class="prev"><<</span>
+										
+										<span class="item-link active">1</span>
+										<span class="item-link ">2</span>
+										<span class="item-link">3</span>
+										<span class="item-link">4</span>
+										<span class="item-link">5</span>
+										
+										<span class="next">>></span>
+										<span class="last">尾页</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="bottom-box">
+					<p style="  padding-top: 20px;">Copyright © 2010 hg365.com All Rights Reserved 浙江汇购科技 版权所有</p>
+					<p style="  padding-top: 4px;">客服热线：28322875</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

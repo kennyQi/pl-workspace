@@ -1,0 +1,37 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/unit/<#if edit??>update<#else>create</#if>" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, unitAddAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<input type="hidden" name="id" />
+				<table border="0" class="my_form">
+					<tr>
+						<td>单位名称：</td>
+						<td>
+							<input type="text" maxlength="4" name="unitName" value="" class="required" />
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<#include "/public/general/formBar.html">
+	</form>
+</div>
+<script type="text/javascript">
+	function reloadUnitAtProdAdd(d){
+	var e=$("#e1425450452169");
+	if(e.length>0){
+		e.append(d.extraData);
+	}
+}
+
+function unitAddAjaxDone(data){
+	dbp(data);
+	if(data.statusCode == DWZ.statusCode.ok){
+		reloadUnitAtProdAdd(data);
+	}
+	
+	dialogAjaxDone(data);
+	
+}
+</script>

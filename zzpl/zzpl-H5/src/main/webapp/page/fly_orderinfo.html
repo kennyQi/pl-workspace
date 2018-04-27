@@ -1,0 +1,142 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>订单详情</title>
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+    <script  data-main="${contextPath}/resources/js/fly_reserve"  src="${contextPath}/resources/js/require.min.js" async="async" ></script>
+	<script type="text/javascript">
+		var request_path="${contextPath}";
+	</script>
+</head>
+
+<body>
+
+<link href="${contextPath}/resources/css/fly_reserve.css" rel="stylesheet" />
+<div id="reserve">
+        <header class="header box">
+            <a href="${contextPath}/order/view" class="l iconfont" style="color:#fff;font-size:20px;">&#xe606;</a>
+            <h1>订单详情</h1>
+            <a href="javascript:"  class="r"></a>
+        </header>
+        <div class="cont">
+            <div class="lineDetail box">
+                <div class="lineL flyLine">
+                    <span class="city">${flightOrderInfo.orgCityName!}</span>
+                    <#if flightOrderInfo.startTime??>
+                    <span class="time">${flightOrderInfo.startTime?string("HH:mm")}</span>
+                    <span class="day">${flightOrderInfo.startTime?string("MM-dd")}${startCHN!}</span>
+                    <#else>
+                    <span class="time">&nbsp;</span>
+                    <span class="day">&nbsp;</span>
+                    </#if>
+                    <span class="flyCompany">${flightOrderInfo.departAirport!}<br>${flightOrderInfo.departTerm!}<#if flightOrderInfo.departTerm??>航站楼</#if></span>
+                </div>
+                <div class="lineTime">
+                    <span class="crossTime">${flightDuration}</span>
+                    <span class="flyCode">${flightOrderInfo.flightNO!}</span>
+                </div>
+                <div class="lineR flyLine">
+                    <span class="city">${flightOrderInfo.dstCityName!}</span>
+                    <#if flightOrderInfo.endTime??>
+                    <span class="time">${flightOrderInfo.endTime?string("HH:mm")}</span>
+                    <span class="day">${flightOrderInfo.endTime?string("MM-dd")}${endCHN!}</span>
+                    <#else>
+                    <span class="time">&nbsp;</span>
+                    <span class="day">&nbsp;</span>
+                    </#if>
+                    <span class="flyCompany">${flightOrderInfo.arrivalAirport!}<br>${flightOrderInfo.arrivalTerm!}<#if flightOrderInfo.arrivalTerm??>航站楼</#if></span>
+                </div>
+                <div class="lineType">
+                ${flightOrderInfo.airComp!}|机型:<#if flightOrderInfo.planeType??><#if flightOrderInfo.planeType?substring(0,1)=="3">空客A<#elseif flightOrderInfo.planeType?substring(0,1)=="7">波音</#if><#else>&nbsp;-&nbsp;</#if>${flightOrderInfo.planeType!}|${flightOrderInfo.cabinName!}${flightOrderInfo.cabinCode!}
+                </div>
+            </div>
+            <div class="connect flyMargin">
+                <label class="order box labelInput">
+                    <input type="text" class="inputfor" name="name" id="passengerName" readonly="readonly" value="${flightOrderInfo.orderNO!}"/>
+                </label>
+                <label class="airID box labelInput">
+                	<input type="text" placeholder="待出票" class="inputfor" name="name" id="passengerName" readonly="readonly" value="${flightOrderInfo.airId!}"/>
+                </label>
+            </div>
+            <div class="flyPassenger flyMargin">
+                <a href="fly_connect.html" class="title">乘机人</a>
+                <div id="passengerList">
+                    <div class="passengerBox box">
+                        <div class="passengerDetail">
+                            <span class="name">${flightOrderInfo.passengerList[0].passengerName!}</span>
+                            <span class="group" data-value="1">${flightOrderInfo.costCenterName!}</span>
+                            <span class="cardDetail">身份证 <i>${flightOrderInfo.passengerList[0].idNO!}</i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="connect flyMargin">
+                 <label class="people box labelInput">
+                    <input type="text" class="inputfor" name="name" id="passengerName" readonly="readonly" value="${flightOrderInfo.linkName!}"/>
+                </label>
+                <label class="box labelInput">
+                	<input type="text"  class="inputfor" name="name" id="passengerName" readonly="readonly" value="${flightOrderInfo.linkTelephone!}"/>
+                </label>
+            </div>
+
+            <div class="priceBtn box">
+                <span class="pBox">总价
+                    <label class="p">￥${flightOrderInfo.totalPrice}</label>
+                    <!-- <label class="other">(不含基建燃油)</label> -->
+                </span>
+                  <span class="submitBtn" <#if flightOrderInfo.payStatus!="96">style="display: none"</#if>>去支付</span>
+                  <a href="${contextPath}/order/topay?type=singleOrder&orderID=${flightOrderInfo.orderID!}&orderNO=${flightOrderInfo.orderNO!}">北方家乡</a>
+            </div>
+        </div>
+</div>
+<div id="editor" class="scene" style="display: none;">
+    <header class="header box" style="z-index: 20">
+        <a href="javascript:" class="l iconfont editorBack" style="color:#fff;font-size:20px;">&#xe606;</a>
+        <h1>编辑乘机人</h1>
+        <a href="javascript:"  class="r" style="color:#fff;">完成</a>
+    </header>
+    <div id="editorConnect">
+        <label class="box connectInput name"><input class="inputfor" data-name="name" type="text" placeholder="姓名"/>
+        </label>
+        <label class="box connectInput cardNo"><input class="cardDetail"  data-name="cardDetail" type="text" placeholder="身份证"/>
+        </label>
+        <label class="box connectInput"><input class="inputfor"  data-name="phone" type="text" placeholder="手机号码"/>
+        </label>
+        <label class="box connectInput center">
+            <select class="inputfor"  data-name="group" >
+                <option value="0">开发中心</option>
+                <option value="1">测试中心</option>
+            </select>
+            <i class="iconfont">&#xe606;</i>
+        </label>
+    </div>
+</div>
+<div id="checkFlow" class="scene"  style="display: none;">
+    <header class="header box">
+        <a href="javascript:" class="l iconfont editorBack" style="color:#fff;font-size:20px;">&#xe606;</a>
+        <h1>审批流程</h1>
+    </header>
+    <div id="checkPointer">
+        <dl class="checkSelect" for="checkFlowTips">
+            <dt>审批流程<label>请选择</label></dt>
+            <dd>购票申请</dd>
+            <dd>购票申请</dd>
+        </dl>
+        <dl class="checkSelect">
+            <dt>审批流程<label>请选择</label></dt>
+            <dd>购票申请</dd>
+            <dd>购票申请</dd>
+        </dl>
+        <dl class="checkSelect" for="checkFlowPerson">
+            <dt>审批人原<label>请选择</label></dt>
+            <dd>购票申请</dd>
+            <dd>购票申请</dd>
+        </dl>
+    </div>
+</div>
+</body>
+</html>

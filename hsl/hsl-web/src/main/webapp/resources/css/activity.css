@@ -1,0 +1,66 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*reset*/
+*{padding:0px;margin:0px;list-style:none;font-style: inherit;font-size: 100%;}
+
+header,footer,section,article,aside,nav,hgroup,address,figure,figcaption,menu,details{display:block;}
+caption,th{text-align:left;font-weight:normal;}
+html,body,fieldset,img,iframe,abbr{border:0;}
+i,cite,em,var,address,dfn{font-style:normal;}
+pre,code,kbd,samp{font-family:inherit;}
+q:before,q:after{content:none;}
+textarea{overflow:auto;resize:none;}
+label,summary{cursor:default;}
+button{cursor:pointer;}
+del,ins,u,s,a,a:hover{text-decoration:none;}
+
+/*reset*/
+
+/*common*/
+.fl{float:left;}
+.fr{float:right;}
+.pl{position:relative;}
+.pa{position:absolute;}
+.ov{overflow:hidden;}
+.disb{display:block;}
+.bold{font-weight:bold;}
+.normal{font-weight:normal;}
+
+.yahei{font-family:"Microsoft YaHei","微软雅黑";}
+.simsun{font-family:"simsun","宋体";}
+.tom{font-family:"Tahoma";}
+.h1{font-size:18px;}
+.h2{font-size:16px;}
+.h3{font-size:14px;}
+.h4{font-size:12px;}
+.color3{color:#333333;}
+.color9{color:#999999;}
+.color6{color:#666666;}
+.color8{color:#888;}
+.linkC{color:#0073b6;}
+.f_red{color:#ff0000;}
+.forange{color:#ff6600;}
+.curp{cursor:pointer}
+.wd{width:100%;}
+.wd12{width:1200px;}
+.tc{text-align:center;}
+.ma{margin:auto;}
+/*common*/
+
+
+/* CSS Document */
+body{background:#b1e700;}
+.bn{background:url("../images/bn.png") no-repeat center top;height:591px;width:100%;min-width: 1200px;}
+.box{margin:auto;width:1311px;background: url("../images/bg.png") no-repeat;height:1090px;}
+.boxlist{width:1200px;margin:50px 0px 0px 84px;}
+.more{width:275px;height:50px;bottom:69px;left:597px;}
+
+.box_list{width:372px;background:#fcfefa;float: left;margin:13px 13px 0px 0px;}
+.box_list .tt{color:#3e3a39;font-size:22px;padding:10px 0px 0px 20px;line-height: 24px;}
+.box_list .btn{border-top:1px solid #e4e5e3;padding:12px 20px 12px 0px;text-align: right;}
+.box_list .price{padding:3px 20px 4px 0px;text-align: right;}
+.box_list .price .p{color:#f10128;font-size: 46px;margin-right:10px;}
+.box_list .price .p label{font-size: 24px;}
+.box_list .price .o{color:#7a7a7a;font-size: 22px;text-decoration: line-through;}
+.box_list .icon{left:24px;top:-8px;}

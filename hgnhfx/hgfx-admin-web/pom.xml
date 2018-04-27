@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>hgfx</groupId>
+		<artifactId>hgfx-admin-parent</artifactId>
+		<version>0.5-SNAPSHOT</version>
+	</parent>
+	<artifactId>hgfx-admin-web</artifactId>
+	<name>${project.artifactId}</name>
+	<packaging>war</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>hgfx</groupId>
+			<artifactId>hgfx-admin-common</artifactId>
+			<version>0.5-SNAPSHOT</version>
+		</dependency>
+
+		<!-- spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<!-- json - jackson2 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+		<!-- dubbox -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+
+		<!-- 序列化工具 kryo -->
+		<dependency>
+			<groupId>com.esotericsoftware.kryo</groupId>
+			<artifactId>kryo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.javakaffee</groupId>
+			<artifactId>kryo-serializers</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.ruedigermoeller</groupId>
+			<artifactId>fst</artifactId>
+		</dependency>
+
+		<!-- zookeeper 客户端 -->
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
+
+		<!-- aspectj -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.logback-extensions</groupId>
+			<artifactId>logback-ext-spring</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.axet</groupId>
+			<artifactId>kaptcha</artifactId>
+			<version>0.0.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>hg</groupId>
+			<artifactId>hg-captcha</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>logback.xml</include>
+					<include>redis.properties</include>
+					<include>mongo.properties</include>
+					<include>sms.properties</include>
+					<include>task.properties</include>
+					<include>fastdfs_client.conf</include>
+					<include>spring/spring-dubbo-consumer.xml</include>
+					<include>spring/spring-redis.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<excludes>
+					<exclude>**/*.svn</exclude>
+					<exclude>**/Thumbs.db</exclude>
+					<exclude>**/.gitkeep</exclude>
+				</excludes>
+			</resource>
+		</resources>
+	</build>
+	
+	<profiles>
+		<profile>
+			<id>DEV</id>
+			<properties>
+				<mongoDBName>hgfxAdminWeb</mongoDBName>
+				<tableName>log</tableName>
+				<logLevel>ERROR</logLevel>
+				<mongoDBIp>192.168.2.214</mongoDBIp>
+				<mongoDBPort>27017</mongoDBPort>
+				<dubbo_registry>zookeeper://localhost:2181?group=dev</dubbo_registry>
+				<redis1Ip>192.168.2.211</redis1Ip>
+				<redis1Port>6379</redis1Port>
+				<redis2Ip>192.168.2.211</redis2Ip>
+				<redis2Port>6379</redis2Port>
+				<sms_address>http://sms.hg365.com/hgsms/send</sms_address>
+				<sms_password>ittest</sms_password>
+				<sms_user>ittest</sms_user>
+				<fastdfs_tracker_server>192.168.2.214:22122</fastdfs_tracker_server>
+				<sendToCzTime>10:09</sendToCzTime>
+				<getFileTime>10</getFileTime>
+				<czPath>/D\:/fenxiao/</czPath>
+				<smsWarnTime>18\:10</smsWarnTime>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		
+		<profile>
+			<id>TEST</id>
+			<properties>
+				<mongoDBName>hgfxAdminWeb</mongoDBName>
+				<tableName>log</tableName>
+				<logLevel>ERROR</logLevel>
+				<mongoDBIp>192.168.7.13</mongoDBIp>
+				<mongoDBPort>21000</mongoDBPort>
+				<dubbo_registry>zookeeper://192.168.7.14:2181?group=hgfx_test</dubbo_registry>
+				<redis1Ip>192.168.7.14</redis1Ip>
+				<redis1Port>6379</redis1Port>
+				<redis2Ip>192.168.7.14</redis2Ip>
+				<redis2Port>6379</redis2Port>
+				<sms_address>http://sms.hg365.com/hgsms/send</sms_address>
+				<sms_password>ittest</sms_password>
+				<sms_user>ittest</sms_user>
+				<fastdfs_tracker_server>192.168.7.16:22122</fastdfs_tracker_server>
+				<sendToCzTime>10:09</sendToCzTime>
+				<getFileTime>10</getFileTime>
+				<czPath>/main/apps/jfPath/cz/fenxiao/</czPath>
+				<smsWarnTime>18\:10</smsWarnTime>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>RELEASE</id>
+			<properties>
+				<mongoDBName>hgfxAdminWeb</mongoDBName>
+				<tableName>log</tableName>
+				<logLevel>ERROR</logLevel>
+				<mongoDBIp>172.18.1.12</mongoDBIp>
+				<mongoDBPort>27017</mongoDBPort>
+				<dubbo_registry>zookeeper://172.18.1.15:2181?group=hgfx_release</dubbo_registry>
+				<redis1Ip>172.18.1.14</redis1Ip>
+				<redis1Port>6379</redis1Port>
+				<redis2Ip>172.18.1.24</redis2Ip>
+				<redis2Port>6379</redis2Port>
+				<sms_address>http://sms.hg365.com/hgsms/send</sms_address>
+				<sms_password>lcfx_sms_001</sms_password>
+				<sms_user>lcfx_sms_001</sms_user>
+				<fastdfs_tracker_server>172.18.1.41:22122</fastdfs_tracker_server>
+				<sendToCzTime>00:10</sendToCzTime>
+				<getFileTime>10</getFileTime>
+				<czPath>/main/apps/jfPath/fenxiao/</czPath>
+				<smsWarnTime>10\:00</smsWarnTime>
+			</properties>
+		</profile>
+	
+	</profiles>
+
+</project>

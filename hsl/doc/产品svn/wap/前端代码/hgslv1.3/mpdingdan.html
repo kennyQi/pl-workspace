@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="version" content="景区联盟 v1.0 20140910">
+<meta http-equiv="Cache-Control" content="must-revalidate,no-cache">
+<meta http-equiv="x-dns-prefetch-control" content="on" />
+<title>门票订单</title>
+<link rel="stylesheet" href="css/base.2.0.css" />
+<link rel="stylesheet" type="text/css" href="css/ticket.css">
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+
+</head>
+<style>
+body{ background:#f8f8f8;}
+</style>
+<body>
+  <!-- 公共页头  -->
+<header class="header">
+  <h1>我的订单</h1>
+  <div class="left-head"> <a id="goBack" href="javascript:history.go(-1);" class="tc_back head-btn"><span class="inset_shadow"><span class="head-return"></span></span></a> </div>
+   
+</header>
+
+<section class="kajuan_nav tabs"> 
+<a href="#" class="sel k_icon">
+  <div><i></i>机票订单</div>
+  </a> 
+  <a href="#" class="k_icon">
+  <div><i></i>门票订单</div>
+  </a> 
+</section>
+<section class="order_info tabs_info ">
+  <div class="jp_info">
+  <ul>     
+    <li>
+      <div class="order_title">
+          <div class="order_icon"></div>
+          <span>处理中...</span>
+      </div>
+       <div class="order_info1 order_line">             
+             <div class="order_info_title"><span>2015-01-16</span><h3>南航航空 CZ6412</h3><em>中型机321</em></div>
+             <ul class="order_i_list">
+              <li><i>06：35</i>北京首都T2航站楼</li>
+              <li><i>08：35</i>北京首都T2航站楼</li>                
+             </ul>             
+           </div>
+           <div class="order_oper"> 
+            <div class="order_n_r"><h4><i>￥</i>410</h4></div>
+           <a href="#" class="m_bth m_org">立即支付</a>
+           <a href="#" class="m_bth m_blue">取消订单</a>
+         </div> 
+    </li> 
+    <li>
+      <div class="order_title">
+          <div class="order_icon"></div>
+          <span>出票处理中</span>
+      </div>
+       <div class="order_info1 order_line">             
+             <div class="order_info_title"><span>2015-01-16</span><h3>南航航空 CZ6412</h3><em>中型机321</em></div>
+             <ul class="order_i_list">
+              <li><i>06：35</i>北京首都T2航站楼</li>
+              <li><i>08：35</i>北京首都T2航站楼</li>                
+             </ul>
+           </div>
+           <div class="order_oper"> 
+            <div class="order_n_r"><h4><i>￥</i>410</h4></div>           
+           <a href="#" class="m_bth m_green01">查看详细</a>
+         </div> 
+    </li>     
+   </ul>
+  </div>  
+  <div style="display:none" class="mp_info">
+  <ul>
+       <li>
+      <div class="order_title ">
+          <div class="order_icon"></div>
+          <span>已游玩</span>
+      </div>
+       <div class="order_info1">             
+            <div class="order_name">
+              <div class="order_nc order_line">
+                <div class="order_n_l">
+                  <h3>西溪湿地西区<i>杭州</i></h3>                  
+                  <p>一般是一次性的而且需要花钱购买，有时被称为入场券。</p>
+                </div>                
+              </div>
+            </div>
+            <div class="order_img"><img src="img/order.jpg"></div>
+           </div>
+           <div class="order_oper"> 
+            <div class="order_n_r"><h4>数量：4张</h4></div>
+           <a href="#" class="m_bth m_green01">查看详情</a>
+         </div> 
+    </li>
+    <li>
+      <div class="order_title ">
+          <div class="order_icon"></div>
+          <span>已游玩</span>
+      </div>
+       <div class="order_info1">             
+            <div class="order_name">
+              <div class="order_nc order_line">
+                <div class="order_n_l">
+                  <h3>西溪湿地西区<i>杭州</i></h3>                  
+                  <p>一般是一次性的而且需要花钱购买，有时被称为入场券。</p>
+                </div>                
+              </div>
+            </div>
+            <div class="order_img"><img src="img/order.jpg"></div>
+           </div>
+           <div class="order_oper"> 
+            <div class="order_n_r"><h4>数量：4张</h4></div>
+           <a href="#" class="m_bth m_green01">查看详情</a>
+         </div> 
+    </li>
+    <li>
+      <div class="order_title ">
+          <div class="order_icon"></div>
+          <span>已游玩</span>
+      </div>
+       <div class="order_info1">             
+            <div class="order_name">
+              <div class="order_nc order_line">
+                <div class="order_n_l">
+                  <h3>西溪湿地西区<i>杭州</i></h3>                  
+                  <p>一般是一次性的而且需要花钱购买，有时被称为入场券。</p>
+                </div>                
+              </div>
+            </div>
+            <div class="order_img"><img src="img/order.jpg"></div>
+           </div>
+           <div class="order_oper"> 
+            <div class="order_n_r"><h4>数量：4张</h4></div>
+           <a href="#" class="m_bth m_green01">查看详情</a>
+         </div> 
+    </li>
+    
+    <li>
+      <div class="order_title ">
+          <div class="order_icon"></div>
+          <span>已游玩</span>
+      </div>
+       <div class="order_info1">             
+            <div class="order_name">
+              <div class="order_nc order_line">
+                <div class="order_n_l">
+                  <h3>西溪湿地西区<i>杭州</i></h3>                  
+                  <p>一般是一次性的而且需要花钱购买，有时被称为入场券。</p>
+                </div>                
+              </div>
+            </div>
+            <div class="order_img"><img src="img/order.jpg"></div>
+           </div>
+           <div class="order_oper"> 
+            <div class="order_n_r"><h4>数量：4张</h4></div>
+           <a href="#" class="m_bth m_green01">查看详情</a>
+         </div> 
+    </li>
+     
+  </ul>
+  </div>
+</section>
+  <script type="text/javascript">
+  $(".tabs a").bind("click",function(){
+    var index = $(this).index(index);
+    var divs = $(".tabs_info > div");
+    $(this).parent().children("a").attr("class", "no");//将所有选项置为未选中
+            $(this).attr("class", "sel");     //设置当前选中项为选中样式
+            divs.hide(); 
+            divs.eq(index).show();     
+   })  
+ </script> 
+</body>
+</html>
+
+

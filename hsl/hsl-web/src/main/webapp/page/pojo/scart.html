@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>门票预定页</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/cart.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/gb.js"></script>
+</head>
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <h4><i></i>我的订单<b></b></h4>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单--> 
+  <!--content-->
+  <div class="content">
+    <div class="h40"></div>
+    <div class="order"> <span class="order-f">填写订单</span> <span class="order-t">支付订单</span> <span class="order-th">支付成功</span> </div>
+    <div class="mian my_coder">
+    <div class="y_title">
+    <h1>预定机票：世界花卉机票</h1>
+    <p>景点现付：无需提前在线付款，订单提交成功后，游玩时到景点售票窗口付款取票游玩，确保您的资金安全，出游安排更自由，轻松！</p>
+    </div>
+    <form action="http://www.baidu.com/" method="post"  onsubmit="return regist();" >
+    <div class="y_time">
+    <dl><dt><label>游玩日期:</label></dt><dd><input type="text" id="J_DepDate" /></dd></dl>
+    <dl><dt><label>预订数量:</label></dt><dd><div class="dic"><i id="selectNumDown">-</i><input type="text" id="selectNum" value="1" /><i id="selectNumUp">+</i></div></dd></dl>
+    <input type="text" value="1500" class="hide" id="oder_p_val" />
+     <div class="order_p">
+    <p>费用小计：￥<i></i></p>
+    <p><strong><em>应付金额：</em>￥<i></i></strong></p>
+    </div>
+    </div>
+    <div class="y_info">
+    <dl><dt>取票人姓名:</dt><dd><input type="text" id="goname" value=""  name="goname" /><div id="username"></div></dd></dl>
+    <dl><dt>取票人手机号:</dt><dd><input type="text" name="tel" id="tel" value=""/></dd><div id="tel_tim"></div></dl>
+    <dl><dt>预订人姓名:</dt><dd><input type="text" name="ydname" id="ydname" value="" /></dd><div id="ydname_tim"></div></dl>
+    <dl><dt>预订人手机号码:</dt><dd><input type="text" name="ytel" id="ytel" value="" /></dd><div id="ytel_tim"></div></dl>
+    </div>
+    
+    <div class="y_deal">
+    <h2>购票协议：</h2>
+    <div class="y_deal_info">
+    本协议，本协议早餐后搭乘内陆段前往北海道札幌，专车前往日本唯一仅存，并富有欧洲风情之【小樽运河】（不少于20分钟），在此可与情人漫步于罗曼蒂克之古
+老运河街道里，周围并排着明治、大正时代由红色砖瓦所建造的仓库群，宁静中漂流着乡愁的气息。之后转往素有玻璃工房盛名的【北一硝子馆】（不少于15分钟）
+参观精巧的彩绘玻璃艺术，此地常吸引无数观光客注目。再前往参观约3千种各式各样的八音盒【音乐钟博物馆】（不少于15分钟）聆听幽美的节奏。想拥有一个
+属于自己的独一无二的八音盒吗？这里让您梦想成真参观精巧的彩绘玻璃艺术，此地常吸引无数观光客注目。再前往参观约3千种各式各样的八音盒【音乐钟博物馆】
+（不少于15分钟）聆听幽美的节奏。想拥有一个属于自己的独一无二的八音盒吗？这里让您梦想成真参观精巧的彩绘玻璃艺术，此地常吸引无数观光客注目。再前往
+参观约3千种各式各样的八音盒【音乐钟博物馆】（不少于15分钟）聆听幽美的节奏。想拥有一个属于自己的独一无二的八音盒吗？这里让您梦想成真
+</div>
+<div class="y_deal_bth"><span class="bth bth1"><input type="submit" value="提交" />
+</span></div>
+    </div>
+    </form>
+      </div>
+    </div>
+   <div class="clear"></div>
+  <!--footer-->
+  <div id="footer" class="mt20">
+    <div class="fooerBD">
+      <div class="L about">
+        <dl>
+          <dt><a href="#">关于我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a><a href="#">网站地图</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">加盟合作</a></dt>
+          <dd><a href="#">友情链接</a><a href="#">酒店加盟</a><a href="#">网站联盟</a></dd>
+        </dl>
+        <dl>
+          <dt><a href="#">联系我们</a></dt>
+          <dd><a href="#">网站简介</a><a href="#">法律规定</a><a href="#">网站地图</a><a href="#">网站地图</a></dd>
+        </dl>
+      </div>
+      <div class="L w260">
+        <div class="hot_phone">
+          <p><i class="tel"></i>24小时客服热线：4008-117-117</p>
+          <p><i class="tel"></i>境外游客紧急联络电话：4008-117-117</p>
+          <p><i class="QQ"></i>在线客服：QQ1</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="T_top"> <a href="#">Top</a> </div>
+</div>
+<script type="text/javascript" src="../js/Reg.js"></script>
+<script src="../lib/time/yui-min.js"></script> 
+  <script type="text/javascript">
+YUI({
+     modules: {
+        'trip-calendar': {
+            fullpath: '../lib/time/trip-calendar.js',
+            type    : 'js',
+            requires: ['trip-calendar-css']
+        },
+        'trip-calendar-css': {
+            fullpath: '../lib/time/trip-calendar.css',
+            type    : 'css'
+        }
+    }
+}).use('trip-calendar', function(Y) {
+    
+    var oCal = new Y.TripCalendar({
+        minDate         : new Date,     //最小时间限制
+        triggerNode     : '#J_DepDate', //第一个触节点
+        finalTriggerNode: '#J_EndDate'  //最后一个触发节点
+    });
+     
+});
+ </script>
+ <script type="text/javascript">
+$(document).ready(function(){  
+var curVal = $("#selectNum");  
+var temp; //得到文本框当前的数据  
+var tipMsg = $(".mark_tip"); //提示信息
+var rmb = $("#oder_p_val").val(); //单价 
+var temp = curVal.val()
+$(".order_p i").html(temp*rmb);  
+$("#selectNumDown").click(function(){ 
+     temp = curVal.val()  
+    if(temp<=1){  
+         return false;  
+    }  
+    if(testNum(temp)){  
+         curVal.val(--temp); //数量减1  
+    }else{  
+        curVal.val(1)  
+		}
+		  $(".order_p i").html(temp*rmb); 
+			  
+});  
+$("#selectNumUp").click(function(){  
+    temp = curVal.val() 
+		 
+    if(testNum(temp)){  
+        curVal.val(++temp); //数量加1  
+ 
+    }else{  
+        curVal.val(1)  
+    } 
+	 
+	$(".order_p i").html(temp*rmb); 
+});  
+doDashed();  
+//得到购买数量，并判断是否是正确格式  
+function testNum(tempNum){  
+    if(/^[0-9]+$/.test(tempNum)){  
+        //tipMsg.text("亲，输入正确哦 *_*").css("color","#03F")  
+        return true;  
+    }  
+   // tipMsg.text("亲，你输入的不是正确数字啦 ^_^").css("color","#F30")  
+    return false;  
+}  
+});  
+	
+	
+//验证
+$("#goname").blur(function(){
+	var g =$(this).val(); 
+	var reg = /^[\u4E00-\u9FA5]+$/;
+  if(reg.test(g)){
+	  $("#username").html("<div class='ok error'><i></i>成功</div>")
+		}
+   else{
+		 $("#username").html("<div class='wrong error'><i></i>请输入中文字</div>")
+		 }
+})
+
+$("#tel").blur(function(){
+	var tel =$(this).val(); 
+ 	var reg = /^(((13|[0-9]{1})|15[0-9]{1}|18[0-9]{1})+\d{8})$/;
+  if(reg.test(tel)){
+	  $("#tel_tim").html("<div class='ok error'><i></i>成功</div>")
+		}
+   else{
+		 $("#tel_tim").html("<div class='wrong error'><i></i>请输入正确手机号码</div>")
+		 }
+})
+ 
+$("#ydname").blur(function(){
+	var g =$(this).val(); 
+	var reg = /^[\u4E00-\u9FA5]+$/;
+  if(reg.test(g)){
+	  $("#ydname_tim").html("<div class='ok error'><i></i>成功</div>")
+		}
+   else{
+		 $("#ydname_tim").html("<div class='wrong error'><i></i>请输入中文字</div>")
+		 }
+})
+$("#ytel").blur(function(){
+	var tel =$(this).val(); 
+ 	var reg =/(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/;
+  if(reg.test(tel)){
+	  $("#ytel_tim").html("<div class='ok error'><i></i>成功</div>")
+		}
+    else{
+		 $("#ytel_tim").html("<div class='wrong error'><i></i>请输入正确手机号码</div>")
+		 }
+})
+
+function regist(){
+	//取票人姓名
+ 	var g =$("#goname").val(); 
+	var reg1 = /^[\u4E00-\u9FA5]+$/;
+  if(reg1.test(g)){
+	  $("#username").html("<div class='ok error'><i></i>成功</div>")
+		}
+   else{
+		 $("#username").html("<div class='wrong error'><i></i>请输入中文字</div>")
+	 }
+ 	//取票人手机号 
+	var tel =$("#tel").val();
+ 	var reg2 = /^(13[0-9]|15[1|0|3|6|7|8|9]|18[6|8|9])\d{8}$/;
+  if(reg2.test(tel)){
+	  $("#tel_tim").html("<div class='ok error'><i></i>成功</div>")
+		}
+   else if(tel.length>11&&tel.length<11){
+		 $("#tel_tim").html("<div class='wrong error'><i></i>请输入正确手机号码</div>")
+		 } 
+		else{
+			$("#tel_tim").html("<div class='wrong error'><i></i>请输入正确手机号码</div>")
+			}
+ 	//预订人姓名		
+	var g =$("#ydname").val(); 
+	var reg3 = /^[\u4E00-\u9FA5]+$/;
+  if(reg3.test(g)){
+	  $("#ydname_tim").html("<div class='ok error'><i></i>成功</div>")
+		}
+   else{
+		 $("#ydname_tim").html("<div class='wrong error'><i></i>请输入中文字</div>")
+	 }
+	var ytel =$("#ytel").val(); 
+ 	var reg4 = /^(((13|[0-9]{1})|15[0-9]{1}|18[0-9]{1})+\d{8})$/;
+  if(reg4.test(ytel)){
+	  $("#ytel_tim").html("<div class='ok error'><i></i>成功</div>")
+		}
+		else{
+			$("#ytel_tim").html("<div class='wrong error'><i></i>请输入正确手机号码</div>")
+		}	 
+		return false
+ 	}
+
+ </script>
+ 
+
+</body>
+</html>

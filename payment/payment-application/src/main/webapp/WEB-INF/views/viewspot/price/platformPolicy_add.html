@@ -1,0 +1,478 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+ #spNameDiv{
+   margin: padding:10px 0px 10px 10px;
+ }
+ 
+ #spNameTd{
+    width:150px;
+    height:30px;
+ }
+ 
+ #spBarTr{
+  width:70%; 
+  text-align: center;
+ }
+</style>
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/viewspot/price/createPlatformPolicy" class="pageForm required-validate" 
+	       onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+
+			<div class="unit" id="byOther">
+				<label>请选择供应商：</label>
+				<select  name="supplierId" onchange="supplyChange(this)">
+				       <option value="1">全站</option>
+				       <option value="2">供应商1</option>
+				       <option value="3">供应商2</option>
+			    </select>
+			    <select onchange="filterChange(this)" id="byOtherFilter" name="filterType" style="display:none">
+			           <option value="1">全平台</option>
+			           <option value="2">按省市区</option>
+				       <option value="3">按价格</option>
+				       <option value="4">按景点名称</option>
+			    </select>
+			    
+			    <select style="display:none" id="provice"  name="scenicSpotProviceCode">
+			           <option value="">省</option>
+			    </select>
+			    
+			    <select  style="display:none" id="city" name="scenicSpotCityCode">
+			           <option value="">市</option>
+			    </select>
+			    
+			    <select  style="display:none" id="address" name="scenicSpotAreaCode">
+			           <option value="">区</option>
+			    </select>
+			    
+			    <div style="display:none" id="priceRange" class="unit">
+			      <input  name="lowPrice" size="10"  /> -
+			      <input  name="highPrice" size="10" />
+			    </div>
+			    
+				
+			</div>
+			
+			<!-- 依据景点添加价格策略 -->
+		 <div id="byName" style="display:none">
+			<div class="unit" >
+			   <label>请选择价格添加方式</label>
+			  <select onchange="filterChange(this)" id="byNameFilter">
+			           <option value="1">全平台</option>
+			           <option value="2">按省市区</option>
+				       <option value="3">按价格</option>
+				       <option value="4">按景点名称</option>
+			    </select>
+			</div>
+			
+				    <div class="unit">
+				     <label>请填写景点名称</label>
+				     <input  type="hidden" name="scenicSpotIds"  id="scenicSpotIds"/>
+				     <input  type="text" name="" size="10"  /> &nbsp;&nbsp;&nbsp;
+				     <a target="ajax"  id="querySpList" href="${contextPath}/viewspot/price/getscenicSpotList?pageNum=1&numPerPage=8" rel="spNameDiv">查询</a>
+				    </div>
+				
+				<br>
+				<div class="unit" id="spNameDiv">
+				 <table>
+					<tbody>
+						<tr>
+						 <td id="spNameTd"><input id="ID11" type="checkbox" name="c1" value="景点名称1" />景点名称1</td>
+						 <td id="spNameTd"><input id="ID21" type="checkbox" name="c1" value="景点名称2" />景点名称2</td>
+						 <td id="spNameTd"><input id="ID31" type="checkbox" name="c1" value="景点名称3" />景点名称3</td>
+						 <td id="spNameTd"><input id="ID41" type="checkbox" name="c1" value="景点名称4" />景点名称4</td>
+						</tr>
+						<tr>
+						 <td id="spNameTd"><input id="ID51" type="checkbox" name="c1" value="景点名称5" />景点名称5</td>
+						 <td id="spNameTd"><input id="ID61" type="checkbox" name="c1" value="景点名称6" />景点名称6</td>
+						 <td id="spNameTd"><input id="ID71" type="checkbox" name="c1" value="景点名称7" />景点名称7</td>
+						 <td id="spNameTd"><input id="ID81" type="checkbox" name="c1" value="景点名称8" />景点名称8</td>
+						</tr>
+
+					</tbody>
+				 </table>
+				</div>
+				
+				<br/>
+				<table>
+				   <tr>
+				      <td id="spBarTr">
+				         <img alt="" src="resources/image/mp/left.png" onclick="prePage()">
+				         <img alt="" src="resources/image/mp/right.png" onclick="nextPage()">
+				          <a  style="display:none"  id="confirmScenicSpots"  class="button" href="${contextPath}/viewspot/price/confirmScenicSpots"
+				            target="dialog"  rel="price" mask="true" width="400" height="160" title="提示"/>
+				      </td>
+				      <td >
+				         <input  type="checkbox" class="checkboxCtrl" group="c1" />全选
+                         <button type="button" class="checkboxCtrl" group="c1" selectType="invert" >反选</button>
+		                 <button type="button"  onclick="addCheckedElementNew()">添加</button>
+				      </td>
+				   </tr>
+				</table>
+				
+				
+				<input type="hidden" id="pageNo" value="1"></input>
+				<input type="hidden" id="pageSize" value="8"></input>
+				
+				
+				
+				 已选景点<br/><br/>
+				 <div  id="content" ></div>
+				
+			 
+			
+			
+	   </div>
+			
+			<br/><br/>
+			<!-- 依据景点添加价格策略 -->
+			
+			<div class="unit">
+				<label>请选择适用经销商：</label>
+				<select  name="dealerId">
+				       <option value="">全站</option>
+				       <option value="">南传</option>
+				       <option value="">其他经销商</option>
+			    </select>
+			</div>
+			<div class="unit">
+				<label>请选择适用时间：</label>
+				<input  id="beginDate_add" name="beginDate" size="30"  class="date" [dateFmt="yyyy-MM-dd"] readonly="readonly"/>
+				 — <input id="endDate_add" name="endDate" size="30"  class="date" [dateFmt="yyyy-MM-dd"] readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>请选择价格政策：</label>
+				<table>
+				  <tr>
+				    <td><input type="radio" name="modifyPriceType" value="" /> 增加<input name="modifyProceValue" size="5"  /> 元 </td> 
+				    <td><input type="radio" name="modifyPriceType" value=""  /> 增加<input  name="" size="5"  /> %</td>
+				    <td><input type="radio" name="modifyPriceType" value=""  />隐藏资源 </td>
+				  </tr>
+				  <tr>
+				     <td><input type="radio" name="modifyPriceType" value=""  /> 减少<input name="" size="5"  /> 元</td>
+				     <td><input type="radio" name="modifyPriceType" value=""  /> 减少<input  name="" size="5"  /> %</td>
+				  </tr>
+				
+			   </table> 
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<textarea name="remark" rows="5" cols="50"></textarea>
+			</div>			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button  class="submit" onclick="return checkAdd()">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	
+</div>
+
+<script type="text/javascript">
+
+      //添加 已选景点DIV
+   function addElementNew(e){
+   
+       var newElementFontColor = "#4876FF";
+       var cancle_img_margin_right = "5px";
+       var jd_name_span_margin_right = "5px";
+       var jd_name_span_margin_left = "2px";
+       var jd_name_span_margin_bottom = "5px";
+       var jd_name_div_padding_bottom = "5px";
+       var jd_name_div_margin_right = "10px";
+       var cancleImgSrc = "resources/image/mp/u233.png"
+       var borderStyle = "1px solid #63B8FF";
+       
+      
+      var nameSpan = document.createElement("span");
+      nameSpan.innerHTML =  e.value;
+      nameSpan.style.marginRight = jd_name_span_margin_right;
+      nameSpan.style.marginLeft = jd_name_span_margin_left;
+      
+      
+      var cancleImg = document.createElement("img");
+      cancleImg.src = cancleImgSrc;
+      cancleImg.style.marginRight = cancle_img_margin_right;
+      cancleImg.onclick = function(){
+         removeElementNew(e);
+      };
+      
+      var jdNameDiv = document.createElement("div");
+      jdNameDiv.style.cssFloat = "left";
+      jdNameDiv.style.border = borderStyle;
+      jdNameDiv.style.paddingBottom = jd_name_div_padding_bottom;
+      jdNameDiv.style.marginRight = jd_name_div_margin_right;
+      jdNameDiv.style.marginBottom = jd_name_span_margin_bottom;
+      
+      jdNameDiv.appendChild(nameSpan);
+      jdNameDiv.appendChild(cancleImg);
+      
+      
+      var allDiv = document.createElement("div");
+      allDiv.id = e.id + "bak";
+      allDiv.style.color = newElementFontColor;
+      
+      allDiv.appendChild(jdNameDiv);
+      
+      document.getElementById("content").appendChild(allDiv);
+      
+   }
+   
+   //删除 已选景点DIV
+   function removeElementNew(e){
+      var labelNew = document.getElementById(e.id + "bak");
+      if(labelNew != null){
+        labelNew.parentNode.removeChild(labelNew);
+        setCheckBoxNotChecked(e);
+      }else{}
+      
+   }
+   
+   //设置checkbox为未选择
+   function setCheckBoxNotChecked(e){
+   
+     var jdID = e.id.replace("bak","");
+     document.getElementById(jdID).checked = false;
+   
+   }
+   
+   //点击全选按钮 显示已选的景点DIV列表
+   function addCheckedElementNew(){
+   
+       var checkeds = document.getElementsByName("c1");
+       
+       for(var i=0;i<checkeds.length;i++){
+          if(checkeds[i].checked){
+             //判断选择的景点是否已经存在景点DIV列表中
+             if(!exist(checkeds[i])){
+                addElementNew(checkeds[i]);
+             }
+          }
+       }
+  
+   }
+   
+   //判断单个选中的景点在景点DIV列表中是否存在
+   function exist(e){
+      var id = e.id + "bak";
+      var div = document.getElementById(id);
+      if(div == null){
+        return false;
+      }else{
+        return true;
+      }
+   }
+   
+   
+   //翻页时判断全部的选中的景点在景点DIV中是否存在
+   function existAll(){
+      
+       var allExist = true;
+       var checkeds = document.getElementsByName("c1");
+       
+       for(var i=0;i<checkeds.length;i++){
+          if(checkeds[i].checked && !exist(checkeds[i])){
+               allExist = false;
+          }
+       }
+      
+       return allExist;
+   }
+   
+   //获取已选择的景点列表
+   function getJDList(){
+      var scenicSpotIds = "";
+      jdList = document.getElementById("content").getElementsByTagName("div");
+      var length = jdList.length;
+      if(length != 0){
+        for(var i=0;i<length;i++){
+          var div = jdList[i];
+          if(div.id != ''){
+              scenicSpotIds = scenicSpotIds + div.id.replace("bak","") +",";
+          }else{}
+        }
+      } 
+      document.getElementById("scenicSpotIds").value = scenicSpotIds.substring(0, scenicSpotIds.length-1);
+      alert(document.getElementById("scenicSpotIds").value);
+   }
+   
+   //供应商下拉框
+   function supplyChange(obj){
+      
+      if(obj.value != "1"){
+         //供应商
+         document.getElementById("byOtherFilter").style.display = "inline";
+      }else{
+         //全站
+         document.getElementById("byOtherFilter").style.display = "none";
+      }
+   }
+   
+   //筛选方式下拉框
+   function filterChange(obj){
+   
+      //全平台
+      if(obj.value == "1"){
+      
+         removeAllElement();
+         document.getElementById("byOther").style.display = "inline";
+         document.getElementById("byOtherFilter").options[0].selected = true;
+         document.getElementById("byNameFilter").options[0].selected = true;
+      
+      }
+      //按省市区
+      if(obj.value == "2"){
+      
+         removeAllElement();
+         document.getElementById("byOther").style.display = "inline";
+         
+          
+         document.getElementById("provice").style.display = "inline";
+         document.getElementById("city").style.display = "inline";
+         document.getElementById("address").style.display = "inline";
+         
+         document.getElementById("byOtherFilter").options[1].selected = true;
+         document.getElementById("byNameFilter").options[1].selected = true;
+         
+      }
+      //按价格
+       if(obj.value == "3"){
+       
+          removeAllElement();
+          document.getElementById("byOther").style.display = "inline";
+          document.getElementById("priceRange").style.display = "inline";
+          
+          document.getElementById("byOtherFilter").options[2].selected = true;
+          document.getElementById("byNameFilter").options[2].selected = true;
+      }
+      
+      //按景点名称
+       if(obj.value == "4"){
+       
+          removeAllElement();
+          document.getElementById("byName").style.display = "inline";
+          
+          document.getElementById("byOtherFilter").options[3].selected = true;
+          document.getElementById("byNameFilter").options[3].selected = true;
+       }
+  }
+  
+  
+  function removeAllElement(){
+  
+     document.getElementById("byOther").style.display = "none";
+     document.getElementById("byName").style.display = "none";
+     
+     
+     document.getElementById("priceRange").style.display = "none";
+     
+     document.getElementById("provice").style.display = "none";
+     document.getElementById("city").style.display = "none";
+     document.getElementById("address").style.display = "none";
+  
+  }
+  
+  
+  //查询景点列表 局部刷新
+  function queryscenicSpotList(){
+         $.ajax({
+			url : contextPath+"/viewspot/price/getscenicSpotList.action",
+			cache : false,
+			type : 'post',    
+			dataType : 'json',
+			data :{"scenicSpotName":""},    
+            error : function() {
+            },
+			success : function(json) {
+            	alert(json[0]);
+			}
+		}); 
+  }
+  
+  
+  //景点列表向前翻页
+  function prePage(){
+      
+       if(!existAll()){
+          var  confirmScenicSpots = document.getElementById("confirmScenicSpots");
+          confirmScenicSpots.click();
+       }
+       var pageNoStr = document.getElementById("pageNo").value;
+       var pageNo = parseInt(pageNoStr);
+       if(pageNo != 1){
+            pageNo = pageNo - 1;
+            document.getElementById("pageNo").value = pageNo;
+       }
+       setHref();
+  }
+  
+  //景点列表向后翻页
+  function nextPage(){
+    if(!existAll()){
+        var  confirmScenicSpots = document.getElementById("confirmScenicSpots");
+        confirmScenicSpots.click();
+     }
+     var pageNoStr = document.getElementById("pageNo").value;
+     var pageNo = parseInt(pageNoStr);
+     var pageNo = pageNo + 1;
+     document.getElementById("pageNo").value = pageNo;
+     setHref();
+  }
+  
+  
+  //设置带分页信息的获取景点列表的url
+  function setHref(){
+      var pageNo = document.getElementById("pageNo").value;
+      var pageSize = document.getElementById("pageSize").value;
+      document.getElementById("querySpList").href = "${contextPath}/viewspot/price/getscenicSpotList?pageNum="+pageNo+"&numPerPage="+pageSize;
+  }
+  
+  //检查新增价格政策的数据
+  function checkAdd(){
+  
+    //获取景点id集
+    getJDList();
+    
+     
+    //检查省市区
+     var provice = document.getElementById("provice");
+     if(provice.style.display == "inline"){
+        if(provice.value == "0"){
+           alert("请选择省");
+           return false;
+        }
+     }
+     
+     //检查开始时间 和 结束时间
+    var beginDate = document.getElementById("beginDate_add").value;
+    var endDate = document.getElementById("endDate_add").value;
+    
+    
+    if(beginDate != "" && endDate != ""){
+       if(beginDate > endDate){
+          alert("结束时间不能小于开始时间");
+          return false;
+       }
+    }
+    
+    if(beginDate == "" && endDate == ""){
+        alert("请选择开始时间和结束时间");
+        return false;
+    }
+    
+    
+    if(beginDate != ""  && endDate == ""){
+       document.getElementById("endDate_add").value = beginDate;
+    }
+    
+    if(endDate != "" && beginDate == ""){
+       document.getElementById("beginDate_add").value = endDate;
+    }
+  }
+  
+  
+</script>
+

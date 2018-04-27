@@ -1,0 +1,140 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<title>注册账户</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+<style>
+tr {
+	text-align: right;
+	height: 35px;
+	line-height: 35px;
+}
+
+td {
+	padding: 5px;
+}
+
+/* label { */
+/* 	font-size: 18px; */
+/* 	color: #565656; */
+/* } */
+
+/* a { */
+/* 	color: blue; */
+/* } */
+/* #lience{ */
+/* 	color:blue; */
+/* } */
+
+/* #lience:hover{ */
+/* 	cursor:pointer; */
+/* 	text-decoration: underline; */
+/* } */
+input[type="text"] {
+	width: 160px;
+}
+</style>
+<script>
+	function check_IsCheck() {
+		if ($("#readed").attr("checked") == "checked") {
+			$("#sub").removeAttr("disabled");
+		} else {
+			$("#sub").attr("disabled", "true");
+		}
+	}
+	function register() {
+		var regForm = $("#regForm");
+
+	}
+	function registerDone(json) {
+		if (json.statusCode == "200") {
+
+		}
+		if (json.callbackType == "closeCurrent") {
+			$.pdialog.closeCurrent();
+		}
+		//if(json.statusCode == DWZ.statusCode.ok){
+		alert(json.message);
+		//}
+		return;
+	}
+</script>
+</head>
+
+<body>
+	<form action="${contextPath}/account/submitAccount" method="post"
+		id="regForm" onsubmit="return validateCallback(this,registerDone)"
+		class="pageForm">
+		<table style="margin:30px auto;">
+			<tr>
+				<td><label>账户类型</label></td>
+				<td><input type="text" name="accountType" readOnly="true"
+					value="汇金宝支付平台电子账户"></input></td>
+			</tr>
+			<tr>
+				<td><label>机构名</label></td>
+				<td><input type="text" name="orgName" readOnly="true"
+					class="required textInput" value="${(scenicSpot.baseInfo.name)!''}" /></td>
+			</tr>
+			<tr>
+				<td><label>登录名</label></td>
+				<td><input type="text" name="loginName"
+					class="required textInput"></input></td>
+			</tr>
+			<tr>
+				<td><label>地址</label></td>
+				<td><input type="text" name="address" readOnly="true"
+					class="required textInput"
+					value="${(scenicSpot.baseInfo.province.name)!''} ${(scenicSpot.baseInfo.city.name)!''} ${(scenicSpot.baseInfo.area.name)!''} ${(scenicSpot.baseInfo.street)!''}" />
+				</td>
+			</tr>
+			<tr>
+				<td><label>联系人邮箱</label></td>
+				<td><input type="text" name="email" readOnly="true"
+					class="required email textInput"
+					value="${(scenicSpot.contactInfo.email)!''}" /></td>
+			</tr>
+			<tr>
+				<td><label>联系人</label></td>
+				<td><input type="text" name="contact" readOnly="true"
+					class="required textInput"
+					value="${(scenicSpot.contactInfo.linkMan)!''}" /></td>
+			</tr>
+			<tr>
+				<td><label>联系方式</label></td>
+				<td><input type="text" name="phone" readOnly="true"
+					value="${(scenicSpot.contactInfo.telephone)!''}"
+					class="required phone textInput"></input></td>
+			</tr>
+			<!-- 			<tr>
+				<td><label>联系人手机</label></td>
+				<td><input type="text" name="mobile" class="required phone textInput" value="${(scenicSpot.contactInfo.telephone)!''}"/></td>
+			</tr>
+ -->
+			<input type="hidden" name="mobile"
+				value="${(scenicSpot.contactInfo.telephone)!''}"></input>
+			<tr>
+				<td><label>组织机构证代码</label></td>
+				<td><input type="text" name="organizationCode"
+					class="required textInput"></input></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:center;"><input
+					type="checkbox" name="readed" id="readed" onclick="check_IsCheck()" />
+					<span>我已阅读</span><span id="lience">《汇金宝支付平台用户协议》</span></td>
+			</tr>
+			<tr>
+				<td><button type="submit" disabled="true" id="sub"
+						onclick="register()">注册</button></td>
+				<td style="text-align:left;"><button class="close">取消</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

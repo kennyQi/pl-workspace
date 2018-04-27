@@ -1,0 +1,80 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;导入成员
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form action="${(contextPath)!}/user/asdaddList" method="post" name="uploadForm" 
+						enctype="multipart/form-data" class="form-horizontal pageForm required-validate"  target="uploadFileIframe">
+							<div class="form-body">
+									<div class="form-group" style="margin-left: 50px;">
+										
+										<label class="col-md-3 control-label">导入的文件(限2003版excel)：</label>
+										<div class="col-md-4">
+											<input type="file" id="f" onchange="txt.value=this.value" name="file" style="position:absolute;filter:alpha(opacity=0);display:none" size="1" hidefocus="hidefocus">
+											<input type="hidden" id="currentDeptId" name="deptId" >	 
+									       <input type="text" id="txt" name="txt" class="buttontxt"> 
+									        <input type="button" id="buttonfile" onmousemove="f.style.pixelLeft=event.x-60;f.style.pixelTop=this.offsetTop;" value="请选择文件" size="30" onclick="f.click()">
+									        <div>${error}</div> 
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 control-label"></label>
+										<div class="col-md-4">
+											<a class="fa fa-download" href="${contextPath}/resources/hg-ria/userTable.xls">下载模板(请按照模版格式填写信息)</a>
+										</div>
+									</div>
+							</div>
+							<div class="form-actions">
+									<div class="btn-set col-md-offset-3 col-md-9">
+										<input type="submit" class="btn yellow"  value="确定"/>
+										<a class="btn yellow" target="cancel">取消</a>
+									</div>
+							</div>
+						</form>
+						<iframe name="uploadFileIframe" id="uploadFileIframe" style="display:none;"></iframe>
+						<script>
+							$("#uploadFileIframe").load(function(){
+								var io=document.getElementById("uploadFileIframe");
+								var xml = {};
+								  if (io.contentWindow) {
+								    xml.responseText = io.contentWindow.document.body ? io.contentWindow.document.body.innerHTML : null;
+								    xml.responseXML = io.contentWindow.document.XMLDocument ? io.contentWindow.document.XMLDocument : io.contentWindow.document;
+
+								  } else if (io.contentDocument) {
+								    xml.responseText = io.contentDocument.document.body ? io.contentDocument.document.body.innerHTML : null;
+								    xml.responseXML = io.contentDocument.document.XMLDocument ? io.contentDocument.document.XMLDocument : io.contentDocument.document;
+								  }
+								  var resultData;
+								  try {
+								    eval("resultData=" + xml.responseText);
+									 
+									  if (resultData.statusCode == HG.statusCode.error) {
+											if (resultData.message)
+												HG.messager(resultData.message, "error");
+										} else if (resultData.statusCode == HG.statusCode.timeout) {
+											// 登陆超时
+											window.location = resultData.forwardUrl;
+										} else {
+											if (resultData.message)
+												HG.messager(resultData.message, "success");
+										}
+								  //  return resultData;
+								  } catch (e) {
+								    console.log(e.msg);
+								    //return resultData;
+								  }
+							});
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

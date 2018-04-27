@@ -1,0 +1,85 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+      <form method="post" action="${contextPath}/rule/check" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58" >
+			<div class="unit">
+				<label>规则编码:</label>
+				<input type="text"  size="64" maxlength="64"  value="${ruleEntity.code}" readonly="readonly"/>
+			</div>
+			<div class="unit">
+				<label>规则名称：</label>
+				<input  type="text" size="64"  minlength="5" maxlength="64" value="${ruleEntity.name}" readonly="readonly"/>
+			</div>
+			    <#assign startDate="${ruleEntity.startDate}"?date("yyyy-MM-dd")> 
+				<#assign endDate="${ruleEntity.endDate}"?date("yyyy-MM-dd")>
+	        <div class="unit">
+				<label>开始日期：</label>
+ 				<input type="text"   value="${startDate}"    readonly="readonly" />
+			</div>
+		   <div class="unit">
+				<label>结束日期：</label>
+			    <input type="text"  value="${endDate}"      readonly="readonly" />
+			</div>
+			<div class="unit">
+				<label>规则模板：</label>
+				<label>${ruleEntity.templateName}</label>
+				<input hidden="hidden"  id="template_logicClass" value="${ruleEntity.logicClass}"/>
+			</div>	
+			<div class="unit"  >
+				<label>模板参数：</label>
+				<table id="rule_template"></table>
+			    <label  id ="template_props"  hidden="hidden">${ruleEntity.props}</label>
+			</div>
+			 <div class="unit">
+				<label>产生积分账户类型：</label>
+				<label>${ruleEntity.jfAccountType.name}</label>
+			</div>
+	    </div>
+		<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+   //获得模板remark
+     $("#rule_template").html("");
+      var code = $("#template_logicClass").val();
+			$.ajax({
+				type: "post",
+				url: "${contextPath}/rule/getParm?code="+code,
+				cache:false,
+				dataType:"json",
+				success: function(data){
+			   jsonL = data.length;
+			  for (var i = 0; i<data.length; i++)
+			  {
+			  	   var ht="<tr><td>"+data[i].remark+"：</td><td><input  id = 'param_props"+i+"'  name="+data[i].name +"  readonly='readonly' ></input></td></tr>";
+	               $("#rule_template").append(ht);
+			  }
+			  	   //模板参数
+		      var props  = $("#template_props").html();
+		      if(props.length > 2)
+		      {
+		       props = props.substr(1,props.length-2);
+		    var arr = new Array();
+		    arr = props.split(",");
+		    for (var i =0 ; i<arr.length; i++)
+		    {
+		       var av = arr[i].split(":");
+		       var vaLen = av[0].length;
+		       var vnLen = av[1].length;
+		       var inputName = av[0].substr(1,vaLen-2);
+		      $("input[name="+inputName+"]").attr("value", av[1].substr(1,vnLen-2));
+		    }
+		      }
+
+		  }, error:function(e){  alert("请求发生错误"); }
+	     });
+
+
+    
+});
+</script>

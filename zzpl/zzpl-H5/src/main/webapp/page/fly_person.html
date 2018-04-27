@@ -1,0 +1,70 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>个人中心</title>
+	<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+    <link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+    <link href="${contextPath}/resources/css/person.css" rel="stylesheet" />
+    <script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js" language="javascript">		var request_path="${contextPath}";</script>
+
+</head>
+
+<body>
+<link href="${contextPath}/resources/css/fly.css" rel="stylesheet" />
+<div class="cont">
+    <header class="header box flyPerson">
+        <a href="javascript:"  ></a>
+        <h1>个人中心</h1>
+        <a href="#"  class="r"></a> 
+    </header>
+    <#if !(user.image)??>
+    <img src="${contextPath}/resources/images/no_userPic.png" class="flyPersonValt">
+  <#else>
+  <#if user.image?substring(0,4)=="http">
+  	<img src="${user.image}" class="flyPersonValt">
+  <#else>
+      <img src="http://${user.image}" class="flyPersonValt">
+  </#if>
+  </#if>
+  <#if (user.gender)??>
+  <#if user.gender==0>
+  <div class="flyPersonName flyPersonBoy">
+    ${user.name}</div>
+  <#else>
+  <div class="flyPersonName flyPersonGirl">
+    ${user.name}</div>
+  </#if>
+  </#if>
+</div>
+<div class="personNav">
+    <a  class="box" href="${contextPath}/user/person_editInfo">
+        <i class="icon"><img src="${contextPath}/resources/images/fly_person_icon.png" alt=""/></i>
+        <label>我的资料</label>
+        <i class="iconR iconfont">&#xe606;</i>
+    </a>
+    <a  class="box" href="${contextPath}/user/fly_connect?editor=true">
+        <i class="icon"><img src="${contextPath}/resources/images/emplooyeeId_icon.png" alt=""/></i>
+        <label>常用联系人</label>
+        <i class="iconR iconfont">&#xe606;</i>
+    </a>
+    <a  class="box" href="${contextPath}/user/person_changePwd">
+        <i class="icon"><img src="${contextPath}/resources/images/fly_person_icon2.png" alt=""/></i>
+        <label>密码修改</label>
+        <i class="iconR iconfont">&#xe606;</i>
+    </a>
+</div>
+<div class="btn_wrap">
+<a href="${contextPath}/logout" >
+      <input type="button" class="btn_sure" value="退出登录">
+</a>
+    </div>
+<nav>
+    <a href="${contextPath}/flight/view" class="index ">首页</a>
+    <a href="${contextPath}/order/view?type=0" class="order">订单</a>
+    <a href="#" class="home homeOn">个人中心</a>
+</nav>
+</body>
+</html>

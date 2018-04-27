@@ -1,0 +1,33 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/traveline/order/cancle" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+		    <input type="hidden" value="${id}" name="lineOrderID"/> 
+			<div class="unit">
+				<label>订单编号</label>
+				${lineOrderDTO.baseInfo.orderNo}
+			</div>
+			<div class="unit">
+			   <label>游客</label>
+			   <#if (travellerList?size > 0)>
+			   	 <#list travellerList as traveler>
+			   	  <input type="checkbox" value="${traveler.id}" name="lineOrderTravelers"/> ${traveler.name}
+			     </#list>
+			   <#else>
+			                 没有可以取消订单的游客
+			   </#if>
+			  
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" onclick="">确认</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+<script type="text/javascript">
+</script>

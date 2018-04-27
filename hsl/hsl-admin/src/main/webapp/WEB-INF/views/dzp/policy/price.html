@@ -1,0 +1,48 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script type="text/javascript" src="${(contextPath)!}/resources/js/dzp/price.js"></script>
+<link href="${contextPath}/resources/css/calendar.css" rel="stylesheet" type="text/css" />
+<script src="${contextPath}/resources/js/calendar/Calendar.js"></script>
+<link rel="stylesheet" type="text/css" href="${contextPath}/resources/js/kindeditor/themes/default/default.css" />
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/kindeditor/lang/zh_CN.js"></script>
+<script type="text/javascript">
+    var jsonDate = document.getElementById("jsonDate").innerHTML;
+    var maxDate = document.getElementById("maxDate").innerHTML;
+    var t = new Date();
+    var da = t.getFullYear() + "-" + (t.getMonth() + 1) + "-" + t.getDate();
+    var para = {
+        'c': 'calendarcontainer',
+        'y': t.getFullYear(),
+        'm': t.getMonth() + 1,
+        'a':{
+        'd1': da,
+        'd2': maxDate
+        },
+        'aa': jsonDate,
+        'f': 0
+    }
+    CreateCalendar(para, "para");
+</script>
+<div class="pageContent">
+    <div id="jsonDate" style="display:none;">
+        ${strJson}
+    </div>
+    <div id="maxDate" style="display:none;">
+        ${maxDate}
+    </div>
+    <div class="calendar" style="float:left;width:100%;overflow:scroll" layouth="50">
+        <div class="outer clearfix" id="calendarcontainer"> </div>
+    </div>
+    <div class="formBar">
+        <ul>
+            <li>
+                <div class="button">
+                    <div class="buttonContent">
+                        <button type="button" class="close">关闭页面</button>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>

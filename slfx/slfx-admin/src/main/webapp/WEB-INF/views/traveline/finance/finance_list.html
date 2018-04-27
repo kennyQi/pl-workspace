@@ -1,0 +1,591 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<div class="pageHeader">
+	
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/traveline/finance/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<input type="hidden" id="startingProvinceID" value="${(lineFinanceQO.startingProvinceID)!}"/>
+		<input type="hidden" id="startingCityID" value="${(lineFinanceQO.startingCityID)!}"/>
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						线路名称：
+					</td>
+					<td>
+						<input name="lineName" type="text" value="${(lineFinanceQO.lineName)!''}"/>
+					</td>
+					<td>
+						订单状态：
+					</td>
+					<td>
+						<select name="status" id="status">
+							<option value="">--请选择--</option>
+							<#if statusMap??>
+                               <#list statusMap?keys as itemKey>
+                                   <option value="${itemKey}" <#if lineFinanceQO?? && lineFinanceQO.status??><#if itemKey == (lineFinanceQO.status)?c>selected="selected"</#if></#if>>
+                                    	${statusMap[itemKey]}
+                                   </option>
+                               </#list>
+                            </#if>
+						</select>
+					</td>
+					<td>
+						支付状态：
+					</td>
+					<td colspan="2">
+						<select name="payStatus" id="payStatus">
+							<option value="">--请选择--</option>
+							<#if payStatusMap??>
+                               <#list payStatusMap?keys as itemKey>
+                                   <option value="${itemKey}" <#if lineFinanceQO?? && lineFinanceQO.payStatus??><#if itemKey == (lineFinanceQO.payStatus)?c>selected="selected"</#if></#if> >
+                                    	${payStatusMap[itemKey]}
+                                   </option>
+                               </#list>
+                            </#if>
+						</select>
+					</td>
+					<td>
+						发团日期：
+					</td>
+					<td>
+						<input type="text" readonly="readonly" name="beginTimeStr" value="${(lineFinanceQO.createDateFrom?string('yyyy-MM-dd'))!''}" class="date"/>
+						-
+						<input type="text" readonly="readonly" name="endTimeStr" value="${(lineFinanceQO.createDateTo?string('yyyy-MM-dd'))!''}" class="date"/>
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td>
+						出发地：
+					</td>
+					<td colspan="10">
+						<select name="startingDepart" id="startingDepart_finace">
+							<option  value="">--请选择--</option>
+							<option  value="1" <#if lineFinanceQO?? && lineFinanceQO.startingDepart=="1"> selected="selected"</#if>>
+							国内
+							</option>
+							<!-- <option>国外</option> -->
+						</select>
+							<#if lineFinanceQO.startingProvinceID??>
+						    
+							<span id="province_finace">
+							<select name="startingProvinceID" id="start_province_finace" style="width:120px;">
+							<option value="">--请选择省份--</option>
+							<#list provinceList as province>
+								<option value="${province.id}" <#if lineFinanceQO.startingProvinceID +"" == province.id +"" >selected="selected"</#if> id="start_province_finace">
+									${province.name} 
+								</option>
+							</#list>
+							</select>
+							</span>
+						<#else>
+							<span id="province_finace" style="display:none">
+								<select name="startingProvinceID" id="start_province_finace" style="width:120px;">--请选择省份--</select>
+							</span>
+						</#if>
+						<#if lineFinanceQO.startingCityID??>
+							<span id="starting_finace">
+							<select name="startingCityID"  id="start_city_finace" style="width:120px;">
+							<option value="">--请选择城市--</option>
+							<#list startCityList as city>
+								<option value="${city.id}" <#if lineFinanceQO.startingCityID==city.id > selected="selected" </#if>>
+									${city.name}
+								</option>
+							</#list>
+							</select>
+							</span>
+						<#else>
+							<span id="starting_finace" style="display:none">
+							<select name="startingCityID"  id="start_city_finace" style="width:120px;">--请选择城市--</select>
+							</span>
+						</#if>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						线路类别：
+					</td>
+					<td>
+						<select  name="type" id="type">
+							<option value="">全部</option>
+							<#if typeMap??>
+                               <#list typeMap?keys as itemKey>
+                                   <option  value="${itemKey}" <#if itemKey == lineFinanceQO.type>selected="selected" </#if>>
+                                       ${typeMap[itemKey]}
+                                   </option>
+                               </#list>
+                            </#if>
+						</select>
+					</td>
+					<td colspan="10">
+						<select  name="domesticLine" id="domesticLine_finace">
+							<option value="">全部</option>
+							<option value="1" <#if lineFinanceQO?? && lineFinanceQO.domesticLine =="1">selected="selected"</#if>>国内线</option>
+							<!-- <option>国外线</option> -->
+						</select>
+						<#if lineFinanceQO.provinceOfType??>
+							<span id="domestic_province_finace">
+								<select name="provinceOfType" id="start_domestic_province_finace" style="width:120px;">
+								<option value="">--请选择省份--</option>
+							<#list  provinceList as province>
+								<option value="${province.id}" <#if lineFinanceQO.provinceOfType==province.id >selected="selected"</#if> id="start_domestic_province_finace">
+									${province.name}
+								</option>
+							</#list>
+								</select>
+							</span>
+						<#else>
+							<span id="domestic_province_finace" style="display:none">
+							   <select name="provinceOfType" id="start_domestic_province_finace" style="width:120px;">--请选择省份--</select>
+							 </span>
+						</#if>
+						</span>
+						
+						
+						<#if lineFinanceQO.cityOfType??>
+							<span id="domestic_starting_finace">
+							<select name="cityOfType"  id="start_domestic_city_finace" style="width:120px;">
+							<option value="">--请选择城市--</option>
+							<#list typeCityList as city>
+								<option value="${city.id}" <#if lineFinanceQO.cityOfType==city.id > selected="selected" </#if>>
+									${city.name}
+								</option>
+							</#list>
+							</select>
+							</span>
+						<#else>
+							<span id="domestic_starting_finace" style="display:none" style="width:120px;">
+							 <select name="cityOfType"  id="start_domestic_city_finace">--请选择城市--</select>
+							</span>
+						</#if>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						订单总额：
+					</td>
+					<td>
+						<input type="text"  name="beginPrice"  id="beginPrice" >
+						-
+						<input type="text"  name="endPrice"  id="endPrice" >
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit" onclick="return validate();" id="searchData_finace">查询</button>
+							</div>
+						</div>
+					</li>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="button" onclick="formReset(this)">导出</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<!-- <div class="panelBar">
+		<ul class="toolBar">
+			 <li>
+               <a width="700" height="800" rel="line" class="add" href="${contextPath}/traveline/line/toadd" target="dialog" maxable="false" resizable="false"><span>新增线路</span></a>
+           </li>
+		</ul>
+	</div>
+	 -->
+	<table class="table" width="100%" layoutH="210"  nowrapTD="false">
+		<thead>
+			<tr>
+				<th width="9%">经销商订单号</th>
+				<th width="9%">订单号</th>
+				<th width="9%">线路编号</th>
+				<th width="9%">线路名称</th>
+				<th width="9%">出发地</th> 
+				<th colspan="5"  class="xianl_w20" width="10%">
+				    <!-- <span>价格</span>
+	 			  	<span>姓名</span>
+					<span style="width:120px;display:inline-block;">身份证件号</span>
+					<span>订单状态</span>
+					<span>支付状态</span>  -->
+				</th>
+				<th width="9%">订单总金额</th>
+				<th width="9%">定金金额</th>
+				<th width="9%">下单时间</th>
+				<th width="9%">联系方式</th>
+				<th width="9%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as lineFinanceDTO>				
+				<tr height="80px">
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.baseInfo??>
+						${(lineFinanceDTO.baseInfo.dealerOrderNo)!''}
+						</#if>
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.baseInfo??>
+						${(lineFinanceDTO.baseInfo.orderNo)!''}
+						</#if>
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.lineSnapshot?? && lineFinanceDTO.lineSnapshot.line?? && lineFinanceDTO.lineSnapshot.line.baseInfo??>
+						${(lineFinanceDTO.lineSnapshot.line.baseInfo.number)!''}
+						</#if>
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.lineSnapshot?? && lineFinanceDTO.lineSnapshot.line?? && lineFinanceDTO.lineSnapshot.line.baseInfo??>
+						${(lineFinanceDTO.lineSnapshot.line.baseInfo.name)!''}
+						</#if>
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.lineSnapshot?? && lineFinanceDTO.lineSnapshot.starting??>
+						    <#list cityList as city>
+		                        <#if city.id == lineFinanceDTO.lineSnapshot.starting>
+		                               ${city.name}    
+		                        </#if>
+		                    </#list>
+		                </#if>
+					</td>
+					
+					<td  colspan="5" >
+						<table width="100%" height="100%" border="1">
+						<tr>
+							<th width="40">价格</th>
+			 				<th width="40">姓名</th>
+							<th width="80">身份证件号</th>
+							<th width="140">订单状态</th>
+							<th width="140">支付状态</th>
+							<th width="140">冻结状态</th>
+						</tr>
+						<#if lineFinanceDTO.travelers??>
+							<#list lineFinanceDTO.travelers as traveler>
+								<tr>
+									<td>
+<!-- 									<#if lineFinanceDTO?? && lineFinanceDTO.baseInfo?? && lineFinanceDTO.baseInfo.adultUnitPrice??> -->
+<!-- 										${(lineFinanceDTO.baseInfo.adultUnitPrice)?string('0.00')} -->
+<!-- 									</#if> -->
+									<#if traveler?? && traveler.singleSalePrice??>
+										${(traveler.singleSalePrice)!''}
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.name??>
+										${(traveler.name)!''}
+									</#if>
+									</td>
+									<td style="width:120px;">
+									<#if traveler?? && traveler.idNo??>
+										${(traveler.idNo)!''}
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.xlOrderStatus??>
+										<#if statusMap??>
+						                   <#list statusMap?keys as itemKey>
+						                       <#if itemKey == traveler.xlOrderStatus.status?c>
+						                       		${statusMap[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</#if>
+									</td>
+									<td>
+									<#if traveler?? && traveler.xlOrderStatus??>
+										<#if payStatusMap??>
+						                   <#list payStatusMap?keys as itemKey>
+						                       <#if itemKey == traveler.xlOrderStatus.payStatus?c>
+						                       		${payStatusMap[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</#if>							
+									</td>
+									
+									<td>
+									<#if traveler?? && traveler.xlOrderStatus??>
+										<#if payStatusMap??>
+						                   <#list payStatusMap?keys as itemKey>
+						                       <#if itemKey == traveler.xlOrderStatus.payStatus?c>
+						                       		${payStatusMap[itemKey]}
+						                       </#if>
+						                   </#list>
+						                </#if>
+									</#if>							
+									</td>
+								</tr>
+							</#list>
+						</#if>
+						</table>
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.baseInfo?? && lineFinanceDTO.baseInfo.salePrice??>
+						${(lineFinanceDTO.baseInfo.salePrice)?string('0.00')}
+						</#if>					
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.baseInfo?? && lineFinanceDTO.baseInfo.bargainMoney??>
+						${(lineFinanceDTO.baseInfo.bargainMoney)?string('0.00')}
+						</#if>
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.baseInfo?? && lineFinanceDTO.baseInfo.createDate??>
+						${(lineFinanceDTO.baseInfo.createDate)?string("yyyy-MM-dd HH:mm:ss")}
+						</#if>
+					</td>
+					<td>
+						<#if lineFinanceDTO?? && lineFinanceDTO.linkInfo??>
+						${(lineFinanceDTO.linkInfo.linkMobile)!''}
+						</#if>
+					</td>
+					<td>
+						<br/>
+						<p>
+							<a target="dialog" href="${contextPath}/traveline/order/detail?id=${lineFinanceDTO.id!''}" width="1000" height="800" style="color: blue">
+								 订单详情
+							</a>
+							&nbsp;&nbsp;
+							<a target="dialog" rel="lineorderfile" href="${contextPath}/traveline/order/filelist?lineOrderID=${lineFinanceDTO.id!''}" width="600" height="400" style="color: blue">
+								查看文件
+							</a>
+						</p>
+						<br/>
+						<p>
+							<a target="dialog" href="${contextPath}/traveline/order/payinfo?lineOrderID=${lineFinanceDTO.id!''}" width="800" height="400" style="color: blue">
+								 查看支付信息
+							</a>
+						</p>
+						<br/>
+						<p>
+							<a target="dialog" href="${contextPath}/traveline/order/toAccount?id=${lineFinanceDTO.id!''}" width="400" height="200" style="color: blue">
+								人工结算操作
+							</a>
+						</p>
+					</td>
+			 </tr>
+			</#list>
+		</tbody>
+	</table>
+	
+	<#include "/public/pagination/pagination.html">
+</div>
+<script type="text/javascript">
+//当出发地下拉框选择“国内”时，联动出省市下拉框
+$("#startingDepart_finace").change(function(){
+   $.post("${contextPath}/traveline/line/searchProvince",function(data){
+			if (data.length > 0) {  
+	            var layer = "<option value=''>--请选择省份--</option>";  
+	            var initCity = "<option value=''>全部</option>";
+	            $.each(data, function (idx, item) {  
+	                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+	            });
+	            
+				$("#start_province_finace").empty();
+				$("#start_province_finace").append(layer);
+				$("#start_city_finace").empty();
+				$("#start_city_finace").append(initCity);
+				
+				//展现省市下拉框
+				$("#province_finace").show();
+				$("#starting_finace").show();
+	        }  
+	},"json"); 
+});
+
+//当选择了指定的省份时，则该省份的城市列表初始化出来
+ $("#start_province_finace").change(function(){
+	$.post("${contextPath}/traveline/line/searchCity",{'province':$("#start_province_finace").val()},function(data){
+		if (data.length > 0) {  
+            var layer = "<option value=''>全部</option>";  
+            $.each(data, function (idx, item) {  
+                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+            });
+            
+			$("#start_city_finace").empty();
+			$("#start_city_finace").append(layer);
+        }  
+	},"json");
+}); 
+
+
+//当线路类型下拉框选择“国内线”时，联动出省市下拉框
+ $("#domesticLine_finace").change(function(){
+    $.post("${contextPath}/traveline/line/searchProvince",function(data){
+ 			if (data.length > 0) {  
+ 	            var layer = "<option value=''>--请选择省份--</option>";  
+ 	            var initCity = "<option value=''>全部</option>";
+ 	            $.each(data, function (idx, item) {  
+ 	                layer += "<option value="+item.code +">"+ item.name + "</option>";  
+ 	            });
+ 	            
+ 				$("#start_domestic_province_finace").empty();
+ 				$("#start_domestic_province_finace").append(layer);
+ 				$("#start_domestic_city_finace").empty();
+ 				$("#start_domestic_city_finace").append(initCity);
+ 				
+ 				//展现省市下拉框
+ 				$("#domestic_province_finace").show();
+ 				$("#domestic_starting_finace").show();
+ 	        }  
+ 	},"json"); 
+ });
+
+ //当选择了指定的省份时，则该省份的城市列表初始化出来
+  $("#start_domestic_province_finace").change(function(){
+ 	$.post("${contextPath}/traveline/line/searchCity",{'province':$("#start_domestic_province_finace").val()},function(data){
+ 		if (data.length > 0) {  
+             var layer = "<option value=''>全部</option>";  
+             $.each(data, function (idx, item) {  
+                 layer += "<option value="+item.code +">"+ item.name + "</option>";  
+             });
+             
+ 			$("#start_domestic_city_finace").empty();
+ 			$("#start_domestic_city_finace").append(layer);
+         }  
+ 	},"json");
+ }); 
+ 
+//判断网站价格只能为数字
+// $("#beginPrice").bind("blur",function() {
+// 	 var  reg=new  RegExp("[0-9]");
+// 	 var  beginPrice = $("#beginPrice").val();//取得开始价格的值
+// 	 if(!reg.test(beginPrice)){
+// 		 alertMsg.error("您填写的网站价格有误，只能为数字！", beginPrice);
+// 		 return false;
+// 	 }
+// });
+// $("#endPrice").bind("blur",function() {
+// 	 var  reg=new  RegExp("[0-9]");
+// 	 var  endPrice = $("#endPrice").val();//取得开始价格的值
+// 	 if(!reg.test(endPrice)){
+// 		 alertMsg.error("您填写的网站价格有误，只能为数字！", endPrice);
+// 		 return false;
+// 	 }
+// });
+
+function validate(){
+	 var  reg=new  RegExp("[0-9]");
+	 var  beginPrice = $("#beginPrice").val();//取得开始价格的值
+	 if(beginPrice !=null && beginPrice != "" &&!reg.test(beginPrice)){
+		 alertMsg.error("您填写的查询条件订单总额有误，只能为数字！", beginPrice);
+		 return false;
+	 }
+	 var  endPrice = $("#endPrice").val();//取得开始价格的值
+	 if(endPrice != null && endPrice != "" && !reg.test(endPrice)){
+		 alertMsg.error("您填写的查询条件订单总额有误，只能为数字！", endPrice);
+		 return false;
+	 }
+	 return true;
+}
+$("#searchData_finace").click(function(){
+	var  startingCityID = $("#start_city_finace").val();
+	var  startingDepart = $("#startingDepart_finace").val();
+	var  domesticLine = $("#domesticLine_finace").val();
+	var  cityOfType = $("#start_domestic_city_finace").val();
+	if(startingDepart != "" && startingCityID == ""){
+		alert("请选择出发地城市");
+		return false;
+	}
+	if(domesticLine != "" && cityOfType == ""){
+		alert("请选择线路类别城市");
+		return false;
+	}
+});
+
+
+
+// var  startingProvinceID_finace = $("#startingProvinceID_finace").val();
+// var  startingCityID_finace = $("#startingCityID_finace").val();
+// var  startingDepart_finace = $("#startingDepart_finace").val();
+// var  domesticLine_finace = $("#domesticLine_finace").val();
+// alert(startingProvinceID+":"+startingCityID+":"+startingDepart);
+// /*=========================出发地查询之后重新加载页面时会调用===============================*/
+// if(startingProvinceID_finace != null && startingProvinceID_finace != "" && startingDepart_finace == 1){
+// 	$.post("${contextPath}/traveline/line/searchProvince",function(data){
+// 		alert(startingCityID_finace);
+// 			if (data.length > 0) {  
+// 	            var layer = "<option value='-1'>--请选择省份--</option>";  
+// 	            var initCity = "<option value='-1'>全部</option>";
+// 	            $.each(data, function (idx, item) {  
+// 	                layer += "<option value="+item.code  + (item.code == startingProvinceID_finace ? " selected=selected" : " ") + ">"+ item.name + "</option>";  
+// 	            });
+	            
+// 	        	$("#start_province_finace").empty();
+// 				$("#start_province_finace").append(layer);
+// 				$("#start_city_finace").empty();
+// 				$("#start_city_finace").append(initCity);
+				
+// 				展现省市下拉框
+// 				$("#province_finace").show();
+// 				$("#starting_finace").show();
+// 	        }  
+// 	},"json"); 
+// }
+
+// if(startingCityID_finace != null && startingCityID_finace != "" && startingDepart_finace == 1){
+// 	$.post("${contextPath}/traveline/line/searchCity",{'province':startingProvinceID_finace},function(data){
+//  		if (data.length > 0) {  
+//              var layer = "<option value='-1'>全部</option>";  
+//              $.each(data, function (idx, item) {  
+//             	 layer += "<option value="+item.code  + (item.code == startingCityID_finace ? " selected=selected" : " ") + ">"+ item.name + "</option>";  
+//              });
+             
+//              $("#start_city_finace").empty();
+//  			 $("#start_city_finace").append(layer);
+//          }  
+//      },"json");
+// }
+
+// 当线路类型下拉框选择“国内线”时，联动出省市下拉框,重新加载页面的时候
+// /*=========================线路类别查询之后重新加载页面时会调用===============================*/
+// if(startingProvinceID_finace != null && startingProvinceID_finace != "" && domesticLine_finace == 1){
+// 	$.post("${contextPath}/traveline/line/searchProvince",function(data){
+// 			if (data.length > 0) {  
+// 	            var layer = "<option value='-1'>--请选择省份--</option>";  
+// 	            var initCity = "<option value='-1'>全部</option>";
+// 	            $.each(data, function (idx, item) {  
+// 	                layer += "<option value="+item.code  + (item.code == startingProvinceID_finace ? " selected=selected": " ") + ">"+ item.name + "</option>";  
+// 	            });
+	            
+// 	            $("#start_domestic_province_finace").empty();
+//  				$("#start_domestic_province_finace").append(layer);
+//  				$("#start_domestic_city_finace").empty();
+//  				$("#start_domestic_city_finace").append(initCity);
+ 				
+//  				展现省市下拉框
+//  				$("#domestic_province_finace").show();
+//  				$("#domestic_starting_finace").show();
+// 	        }  
+// 	},"json"); 
+// }
+
+// if(startingCityID_finace != null && startingCityID_finace != "" && domesticLine_finace == 1){
+// 	alert(startingCityID);
+// 	$.post("${contextPath}/traveline/line/searchCity",{'province':startingProvinceID_finace},function(data){
+//  		if (data.length > 0) {  
+//              var layer = "<option value='-1'>全部</option>";  
+//              $.each(data, function (idx, item) {  
+//             	 layer += "<option value="+item.code  + (item.code == startingCityID_finace ? " selected=selected" : " ") + ">"+ item.name + "</option>";
+//              });
+             
+//             $("#start_domestic_city_finace").empty();
+//   			$("#start_domestic_city_finace").append(layer);
+//          }  
+//  	},"json");
+// }
+
+</script>

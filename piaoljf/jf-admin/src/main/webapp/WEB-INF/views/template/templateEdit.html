@@ -1,0 +1,97 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent" >
+	<form method="post" target="_blank"  id="template_form_t" enctype="multipart/form-data" action="${contextPath}/template/add" class="pageForm required-validate" >
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>显示名</label>
+				<input type="text" name="name" id="template_display_name" size="64" maxlength="64"    class="required" />
+			</div>
+			<div class="unit">
+				<label>上传模版(.class)：</label>
+				<input  type="file" onchange="imageAdd.imageUpload(this);" id="template" name="template"  size="30" pattern=".class" />
+			</div>
+			<div class="unit">
+				<label>已上传模版</label>
+				<input id="filename_template" class="required" name="filename_template" readonly="readonly" size="40">
+			</div>
+			<div class="unit">
+				<label>上传模版源码(.java)：</label>
+				<input type="file" onchange="imageAdd.imageUpload(this);" id="templateSrc" name="templateSrc"   size="30" pattern=".java" />
+			</div>
+			<div class="unit">
+				<label>已上传模版源码</label>
+				<input id="filename_templateSrc" class="required" name="filename_templateSrc" readonly="readonly" size="40">
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button"  onclick="check()">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" id="closetemplate" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+function check()
+{
+   var flag = true;
+   var f = $("#template_form_t");
+   var re = /^[\w\u4e00-\u9fa5]*$/;
+   var name =$("#template_display_name").val();
+   if(!re.test(name))
+	{
+	    alert("显示名不能包括特殊字符！");
+	    flag = false;
+	}
+	if(flag)
+	{
+	 flag = validateCallback(f, dialogAjaxDone);
+	}
+	if(flag)
+	{
+	 f.submit();
+	}
+}
+
+	var uploadUrl = '${contextPath}/template/upload';
+	var imageAdd = {};
+	/**
+	 * 图片上传
+	 */
+	 imageAdd.imageUpload = function (me) {
+		var filen=me.value;
+		var i=filen.indexOf(me.pattern, 1);
+		var reg = /^\w+(.class|.java)$/;
+		if(!reg.test(filen))
+		{
+		    alert("文件名为不正确的格式！");
+			return;
+		}		
+		if((i!=filen.length-me.pattern.length) )
+		{	alert("文件类型错误！");
+			return;
+		}
+		var labelid="#filename_"+me.id;
+		$.ajaxFileUpload({
+			url : uploadUrl,
+	       	secureuri : false,
+	       	fileElementId : me.id,
+	       	dataType : 'json',
+	       	data: {
+	       		//maxHeight: 175,
+	       		//maxWidth: 230,
+	       		maxSize: 20480
+	       	},
+	      	success: function (data, status) {
+	    	  	if ("success" == data.status) {
+		       		$(labelid).val(filen);
+	    	  	} else {
+	    	  		alertMsg.info(data.msg);
+	    	  	}
+	        },
+	        error: function (data, status, e) {
+	        	alertMsg.info("上传失败");
+	        }
+	    });
+	}
+</script>

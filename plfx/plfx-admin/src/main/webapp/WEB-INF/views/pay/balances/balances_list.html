@@ -1,0 +1,60 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style type="text/css">
+.searchContent td{text-align: left}
+</style>
+<script>
+   function reset(){
+	   alert();
+       var form = document.getElementById("pagerForm");
+       form.reset();
+   }
+</script>
+<div class="pageHeader">
+   
+   <form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+       action="${contextPath}/pay/list" method="get">
+		
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+   </form>
+</div>
+<div class="pageContent">
+   <div class="panelBar">
+       <ul class="toolBar">
+           <li>
+               <a width="600" height="400" rel="balances" class="add" href="${contextPath}/pay/balances/toAdd" target="dialog" maxable="false" resizable="false"><span>新增</span></a>
+           </li>
+       </ul>
+   </div>
+   <table class="table" width="100%" layoutH="210" >
+       <thead>
+           <tr>
+               <th width="60">预警类型</th>
+               <th width="90">余额</th>
+               <th width="90">预警余额</th>
+               <th width="140">操作</th>
+           </tr>
+       </thead>
+       <tbody>
+           <#list pagination.list as payBalances>
+               <tr height="21px">
+                   <td>
+				    <#list PAY_BALANCES_TYPE_MAP?keys as itemKey>
+				         <#if payBalances.type ??>
+			                 <#if itemKey == payBalances.type >
+			                        ${PAY_BALANCES_TYPE_MAP[itemKey]}
+			                  </#if>
+		                  </#if>
+		            </#list>
+				   </td>
+                   <td>${payBalances.balances?c}</td>
+                   <td>${payBalances.warnBalances?c}</td>
+                   <td><p>
+                  		<a rel="balances" href="${contextPath}/pay/balances/toUpdate?id=${payBalances.id}" target="dialog" maxable="false" resizable="false" style="color: blue"><span>修改</span></a>
+                  		<a rel="balances" title="确定删除该记录？"href="${contextPath}/pay/balances/delete?id=${payBalances.id}" target="ajaxTodo" maxable="false" resizable="false" style="color: blue"><span>删除</span></a>
+                   </p></td>
+               </tr>
+           </#list>
+       </tbody>
+   </table>
+   <#include "/public/pagination/pagination.html">

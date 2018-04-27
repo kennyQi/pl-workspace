@@ -1,0 +1,37 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<#if (((user.baseInfo.type?c)!0)==2)>
+	<link href="${(contextPath)!}/resources/css/company/company.css" rel="stylesheet" />
+<#elseif (((user.baseInfo.type?c)!0)==1)>
+	<link href="${(contextPath)!}/resources/css/personal/personal.css" rel="stylesheet" />
+	
+</#if>
+	<script src="${(contextPath)!}/resources/js/company/company.js" language="javascript"></script>
+
+<div class="m_nav ov fl">
+ 	<h1 class="home Bg"><a href="${contextPath}/company/main" class="color3 h2">我的
+ 	<#if (((user.baseInfo.type?c)!0)==1)>
+	个人账户中心
+	<#elseif (((user.baseInfo.type?c)!0)==2)>
+	企业账户中心
+	</#if>
+ 	</a></h1>
+     <dl class="navList Ba top ov">
+     	<dt class="h3">交易管理</dt>
+     	
+        <dd <#if (sel==1)>class="on"</#if> ><a href="${contextPath}/company/orderManage?sel=5" class="color3 h2 order"><i></i>所有订单</a></dd>
+     	<#if (((user.baseInfo.type?c)!0)==1)>
+          <dd <#if (sel==6)>class="on"</#if> ><a href="${contextPath}/company/couponList?tab=1" class="color3 h2 card"><i></i>我的卡券</a></dd>
+        <#elseif (((user.baseInfo.type?c)!0)==2)>
+          <dd <#if (sel==6)>class="on"</#if> ><a href="${contextPath}/company/couponList" class="color3 h2 card"><i></i>我的卡券</a></dd>
+          <dd <#if (sel==2)>class="on"</#if> ><a href="${contextPath}/company/travelManage" class="color3 h2 cl"><i></i>差旅管理</a></dd>
+          <dd <#if (sel==3)>class="on"</#if> ><a href="${contextPath}/company/organizeManage" class="color3 h2 connect"><i></i>部门员工通讯录</a></dd>
+          </#if>
+     </dl>
+     <dl class="navList Ba ov">
+     	<dt  class="h3">资料管理</dt>
+     	<dd <#if (sel==4)>class="on"</#if> ><a href="${contextPath}/company/infoManage" class="color3 h2 user_d">账户资料</a></dd>
+     	<dd <#if (sel==5)>class="on"</#if> ><a href="${contextPath}/company/passwordManage" class="color3 h2 pwd">修改密码</a></dd>
+	    <dd <#if (sel==8)>class="on"</#if> ><a href="${contextPath}/company/person/my-contacts" class="color3 h2 connect"><i></i>常用联系人</a></dd>
+     </dl>
+ </div>

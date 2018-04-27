@@ -1,0 +1,6 @@
+# 获取积分系统的 机构、交易、账户类型等全局固定信息，使用
+SetupPiaolApplicationContext。
+如账户体系 使用 SetupPiaolApplicationContext.topAcctType获得。
+# 系统初始化：
+在spring中配置SetupPiaolApplicationContext.init()
+

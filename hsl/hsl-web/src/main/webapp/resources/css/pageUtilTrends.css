@@ -1,0 +1,5 @@
+#page #up a,#next a{color:#9a9b9b;background:#f7f7f7;margin:auto;padding:4px 12px 0;}
+#page #pageBtns a{color:#9a9b9b;background:#fff;margin:auto;padding:4px 12px 0;}
+#page #pageBtns a:hover{background:#ff9900}
+#page #up a:hover{background:#ff9900}
+#page #next a:hover{background:#ff9900}

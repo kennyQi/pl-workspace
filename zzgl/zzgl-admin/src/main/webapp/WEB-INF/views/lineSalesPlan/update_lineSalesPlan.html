@@ -1,0 +1,262 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() xmlns="http://www.w3.org/1999/html"/>
+<script src="${contextPath}/resources/js/trumbowyg/trumbowyg.js"></script>
+<script src="${contextPath}/resources/js/trumbowyg/langs/zh.js"></script>
+<script src="${contextPath}/resources/js/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+<script src="${contextPath}/resources/js/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+<script src="${contextPath}/resources/js/ajaxfileupload.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function(){
+        var  type=$("#type").val();
+        if(type=="2"){
+            $(".colose").hide();
+        }
+    })
+    var path = '${contextPath}';
+    function checkPosition(){
+        if($("#position2").val()!=$("#positionHide").val() && $("#positionHide").val()!=""){
+            alert('请上传广告图片');
+            return false;
+        }else{
+            return true;
+        }
+    }
+    var imageAdd = {};
+    imageAdd.imageUpload = function (me) {
+        $.ajaxFileUpload({
+            url : path+"/file/imgUpload",
+            secureuri : false,
+            fileElementId : 'line_ad_imgFile',
+            dataType : 'json',
+            data: {
+                maxSize: 20480
+            },
+            success: function (data, status) {
+                console.info(data);
+                if ("success" == data.status) {
+                    $("#addForm #imgView").attr("src", data.imageUrl);
+                    $("#addForm #imagePath").attr("value",data.imageUrl);
+                    $("#addForm #fileName").attr("value",data.imageName);
+                    $("#addForm #imageInfo").attr("value",data.fileInfo);
+                } else {
+                    alertMsg.info(data.msg);
+                }
+            },
+            error: function (data, status, e) {
+                alertMsg.info("上传失败");
+            }
+        });
+    };
+    $("#show").click(function(){
+        if($(this).is(":checked")==true){
+            $("#submitShow").val(2)
+        }else{
+            $("#submitShow").val(1)
+        }
+    })
+    //根据线路日期查询线路价格
+    $("#selectLinePrice").click(function(){
+        var lineId=$(".lineId").val();
+        var travelDate=$("#travelDate").val();
+        if(lineId==""){
+            alertMsg.error("请选择线路");
+            return false;
+        }
+        if(travelDate==""){
+            alertMsg.error("请选择日期");
+            return false;
+        }
+        var travelDate=$("#travelDate").val();
+        var date=new  Date();
+        var dateymd=date.getFullYear()+ "-"+(date.getMonth()+1)+"-"+date.getDay();
+        if(!comptime(dateymd,travelDate)){
+            alertMsg.error("出行日期必须大于当天");
+            return false;
+        }
+        $.ajax({
+            global:false,
+            type:"post",
+            url : path+"/lineSalesPlan/selectLinePrice?lineId="+lineId+"&travelDate="+travelDate+"",
+            dataType : "json",
+            success : function(data) {
+                $("#formerPrice").val(data.linePrice);
+                $("#provideNum").val(data.peopleAmount);
+                $(".hideProvideNum").val(data.peopleAmount);
+                $("#expect").val(data.expect);
+            }
+        })
+    })
+    /**
+     *	比较时间
+     */
+    function comptime(beginTime,endTime) {
+        var beginTimes = beginTime.substring(0, 10).split('-');
+        var endTimes = endTime.substring(0, 10).split('-');
+        //火狐不支持日期中间用"-"隔断，要用"/"替换
+        beginTime = beginTimes[1] + '/' + beginTimes[2] + '/' + beginTimes[0] + ' ' + beginTime.substring(10, 19);
+        endTime = endTimes[1] + '/' + endTimes[2] + '/' + endTimes[0] + ' ' + endTime.substring(10, 19);
+
+        var a = (Date.parse(endTime) - Date.parse(beginTime)) / 3600 / 1000;
+        if (a < 0) {
+            return false;
+        } else if (a > 0) {
+            return true;
+        } else if (a == 0) {
+            return false;
+        }
+    }
+    function custValidateForm(fr){
+        var beginDate=$(".beginDate").val();
+        var endDate=$(".endDate").val();
+        var hideProvideNum=parseInt($(".hideProvideNum").val());
+        var provideNum=parseInt($("#provideNum").val());
+        var expect=$("#expect").val();
+        var travelDate=$("#travelDate").val();
+        var date=new  Date();
+        var dateymd=date.getFullYear()+ "-"+(date.getMonth()+1)+"-"+date.getDay();
+        if(!comptime(dateymd,travelDate)){
+            alertMsg.error("出行日期必须大于当天");
+            return false;
+        }
+        if(expect=="1"){
+            alertMsg.error("所选日期没有对应团期");
+            return false;
+        }
+        if(expect==""){
+            alertMsg.error("请先点击查询价格");
+            return false;
+        }
+        if(!comptime(beginDate,endDate)){
+            alertMsg.error("结束时间不能小于开始时间");
+            return false;
+        }
+        console.info(provideNum);
+        console.info(hideProvideNum);
+        console.info(provideNum>hideProvideNum);
+        if(hideProvideNum==""||provideNum>hideProvideNum){
+            alertMsg.error("团购数量不能大于实际人数");
+            return false;
+        }
+        if(provideNum<1){
+            alertMsg.error("团购数量必须大于0");
+            return false;
+        }
+        return validateCallback(fr, dialogAjaxDone);
+    }
+</script>
+<div class="pageContent" style="text-align:left;">
+    <form method="post"  enctype="multipart/form-data"
+          action="${contextPath}/lineSalesPlan/updateLineSales"
+          class="pageForm required-validate" onsubmit="return custValidateForm(this)">
+        <div class="pageFormContent" layoutH="58">
+            <div class="unit">
+                <input type="hidden"  class="lineId" name="lineId" value="${(dto.line.id)!}"/><!--线路id-->
+                <input type="hidden"  class="planId" name="planId" value="${(dto.id)!''}"/><!--活动id-->
+                <input type="hidden"  class="hideProvideNum" value="${(dto.lineSalesPlanSalesInfo.provideNum)!'0'}"/><!--发放数量-->
+                <input type="hidden"  id="expect" /><!--//1标识无团期 2有团期-->
+                <input type="hidden"  id="type" value="${(type)}"/><!--type 1修改 2详情-->
+
+                <label>活动类型：</label>
+                <#if ((dto.baseInfo.planType)!'')&&dto.baseInfo.planType==1>
+                    <input type="radio" value="1" name="planType" checked="checked"/>拼团&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" value="2" name="planType"/>人气秒杀
+                    <#else>
+                        <input type="radio" value="1" name="planType" />拼团&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" value="2" name="planType" checked="checked"/>人气秒杀
+                </#if>
+            </div>
+            <div class="unit">
+                <label>活动名称：</label>
+                <input type="text" name="planName" class="required planName"  size="65" id="planName" value="${(dto.baseInfo.planName)!''}"/>&nbsp;&nbsp;
+            </div>
+            <div class="unit">
+                <label>线路名称：</label>
+                <input type="text"  class="required lineName"  size="65" id="lineName" value="${(dto.line.baseInfo.name)!''}" readonly="readonly"/>&nbsp;&nbsp;
+                <!--  <label>
+                      <a class="button" href="${contextPath}/lineSalesPlan/selectLineName" target="dialog" rel="dlg_page1" mask="true"  title="选择线路(以下线路为全款线路)">
+                          <span>添加活动</span>
+                      </a>
+                  </label>-->
+            </div>
+            <div class="unit" id="isSend">
+                <label>线路类型：</label>
+                <input type="text"  id="lineType" class="readonly required" readonly="true" value="<#if dto.line.baseInfo.type==1>跟团游<#else>自助游</#if>"/>
+            </div>
+            <div class="unit">
+                <label>出行日期：</label>
+                <input type="text" name="travelDate" size="24" id="travelDate"  class="date textInput readonly required " datefmt="yyyy-MM-dd HH:mm:ss" value="${(dto.lineSalesPlanSalesInfo.travelDate?string('yyyy-MM-dd HH:mm:ss'))!''}"/>
+                &nbsp;&nbsp;
+                <label>
+                    <a class="button" href="javaScript:void(0)" id="selectLinePrice">
+                        <span>查询价格</span>
+                    </a>
+                </label>
+            </div>
+            <div class="unit">
+                <label>线路价格：</label>
+                <input type="text"  id="formerPrice"  min="1" max="1000000" name="originalPrice" maxlength="8" size="10" class="required number numberTwo" value="${(dto.lineSalesPlanSalesInfo.originalPrice)!'0'}"/>元
+            </div>
+            <div class="unit">
+                <label>团购价格：</label>
+                <input type="text" id="planPrice"  min="1" max="1000000" name="planPrice"  maxlength="8"  class="required  number numberTwo"  size="10"  value="${(dto.lineSalesPlanSalesInfo.planPrice)!'0'}"/>元 <a style="color:green;"></a>
+            </div>
+            <div class="unit">
+                <label>发放数量：</label>
+                <input type="text" id="provideNum" name="provideNum" max="1000"  maxlength="4"  class="required digits"  size="10" value="${(dto.lineSalesPlanSalesInfo.provideNum)!'0'}"/> <a style="color:green;"></a>
+            </div>
+            <div class="unit">
+                <label>优先级：</label>
+                <input type="text" id="priority" name="priority" max="100000"  maxlength="4"  class="required digits"  size="10" value="${(dto.lineSalesPlanSalesInfo.priority)!'0'}"/> <a style="color:green;"></a>
+            </div>
+            <div class="unit">
+                <label>活动开始时间：</label>
+                <input type="text" name="beginDate" size="24"  class="date textInput readonly required beginDate" datefmt="yyyy-MM-dd HH:mm:ss" value="${(dto.lineSalesPlanSalesInfo.beginDate?string('yyyy-MM-dd HH:mm:ss'))!''}" />
+                <label>活动结束时间:</label>
+                <input type="text" name="endDate" size="24"  class="date textInput readonly required endDate" datefmt="yyyy-MM-dd HH:mm:ss" value="${(dto.lineSalesPlanSalesInfo.endDate?string('yyyy-MM-dd HH:mm:ss'))!''}"/>
+            </div>
+            <div class="unit">
+                <label>*团购图片：</label>
+					<span>
+						<img id="imgView" width="180" height="180" style="padding-left: 0px;" src="${(fileUploadPath)!''}${(dto.baseInfo.imageUri)!''}"/>
+					</span>
+					<span style="padding-left: 60px;">
+						<input id="line_ad_imgFile" name="file" type="file" onchange="imageAdd.imageUpload(this);" size="60" style="width: 170px;"/><span style="color: red;">*</span>
+                        <br/><br/><span style="color: red;padding-left: 130px;">完成上传图片，再次修改广告位时需要重新上传图片，原图会失效!</span><br/><br/>
+						<span style="color: red;padding-left: 130px;">建议上传710x395尺寸jpg、gif、png、bmp或JPG、GIF、PNG、BMP格式，单张图片大小不超过2MB<br/><br/>
+                        </span>
+						<!--<input id="imageInfo" type="hidden" name="imageUri" class="required"/>
+						<input id="fileName" type="hidden" name="fileName" class="required"/>-->
+						<input id="imagePath" type="hidden" name="imageUri" class="required" value="${(dto.baseInfo.imageUri)!''}"/>
+					</span>
+            </div>
+            <div class="unit">
+                <label>抢购规则：</label>
+                <textarea rows="15" cols="70"  class="editor"  name="planRule">${(dto.baseInfo.planRule)!''}</textarea>
+            </div>
+            <div class="unit">
+                <label>是否展示：</label>
+                <input type="radio" value="2" name="showStatus"<#if dto.lineSalesPlanStatus.showStatus==2>
+                checked="checked"
+                    </#if>
+                />展示&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" value="1" name="showStatus"<#if dto.lineSalesPlanStatus.showStatus==1>
+                checked="checked"
+            </#if>/>不展示
+            </div>
+        </div>
+
+        <div class="formBar">
+            <ul>
+                <li><div class="buttonActive colose">
+                    <div class="buttonContent">
+                        <button type="submit">提交</button>
+                    </div>
+                </div></li>
+                <li><div class="button">
+                    <div class="buttonContent">
+                        <button type="button" class="close">取消</button>
+                    </div>
+                </div></li>
+            </ul>
+        </div>
+    </form>
+</div>

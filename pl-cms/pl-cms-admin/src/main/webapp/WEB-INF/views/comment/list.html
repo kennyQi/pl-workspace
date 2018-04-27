@@ -1,0 +1,83 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<form id="pagerForm" method="post"
+	action="${contextPath}/comment/list">
+	<input type="hidden" name="pageNo" value="${pagination.pageNo}" />
+		<input type="hidden" name="pageSize" value="${pagination.pageSize}" />
+		<input type="hidden" name="orderField" value="${param.orderField}" />
+		<input type="hidden" name="orderDirection"
+			value="${param.orderDirection}" />
+</form>
+
+<div class="pageHeader">
+	<form rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/comment/list" method="post">
+
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+				<td><label>文章标题：</label></td>
+				<td> <input type="text" name="title"
+					value="${param.title}" /></td>
+				<td><label>文章作者：</label></td><td><input type="text" name="author" value="${param.author}" /></td>
+				<td><label>评论时间：</label></td>
+				<td><input type="text" name="beginTime" value="${(param.beginTime)!}" class="date" readonly="readonly" />-
+					<input type="text" name="endTime" value="${(param.endTime)!}" class="date" readonly="readonly" /></td>
+			</table>
+
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<div id="w_list_print">
+	<table class="list" width="98%" targetType="navTab" asc="asc" desc="desc" layoutH="116">
+		<thead>
+			<tr>
+				<th width="80">文章标题</th>
+				<th width="80">文章作者</th>
+				<th width="80">评论内容</th>
+				<th width="80">评论时间</th>
+				<th width="80">审核结果</th>
+				<th width="120">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as c> 
+			<#assign len = p_index /> 
+			<#assign pSize = pagination.pageSize /> 
+			<#assign pNo = pagination.pageNo />
+				<tr target="articleId" rel="${a.id}">
+				<td>${(c.article.baseInfo.title)!""}</td>
+				<td>${(c.article.baseInfo.author)!""}</td>
+				<td><textarea readonly="readonly">${(c.content)!""}</textarea></td>
+				<td>${c.createDate!""}</td>
+				<td><#if c.isCheck>已审核 <#else>未审核</#if></td>
+				<td>
+					<div>
+						<a title="删除" target="ajaxTodo" href="${contextPath}/comment/delete/${c.id}" class="btnDel">删除</a> 
+						<a title="确定要审核成功吗" target="ajaxTodo" href="${contextPath}/comment/approve/${c.id}" class="btnInfo" >审核成功</a>
+					</div>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+
+</div>
+</div>

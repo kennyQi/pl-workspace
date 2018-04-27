@@ -1,0 +1,771 @@
+@charset "UTF-8";
+.content .cover {
+	width: 104%
+}
+.content .cover h3 {
+	font-weight: normal
+}
+.content .t_tab {
+	background: #daecff;
+	width: 49%;
+	float: left
+}
+.stop {
+	color: #fff;
+	display: inline-block;
+	font-size: 10px;
+	background: #a6c658;
+	border-radius: 4px;
+	height: 15px;
+	line-height: 15px;
+	padding: 1px 3px;
+	margin-right: 11px;
+	box-shadow: 0 1px 1px #666
+}
+.less_ticket {
+	margin-left: 10px
+}
+.block {
+	display: block;
+	color: inherit;
+	border-bottom: 1px solid #e8ebef
+}
+div.block:active, p.c-more:active {
+	background-color: #e4f5fd
+}
+.active {
+	background-color: #e4f5fd
+}
+.content .t_icon {
+	float: right;
+	border-left: 1px solid #b3d2ef;
+	width: 30px
+}
+.blueFont {
+	color: #0063db
+}
+.colorFont {
+	color: #ff6300
+}
+.none {
+	display: none
+}
+.fan {
+	background-color: #ff9500;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	font-size: 11px;
+	margin-right: 3px;
+	color: White;
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	text-align: center;
+	font-size: 12px;
+	padding: 1px;
+	position: relative;
+	line-height: 16px
+}
+.jian {
+	background-color: #a6c658;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	font-size: 12px;
+	margin-right: 3px;
+	color: White;
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	text-align: center;
+	line-height: 16px;
+	padding: 1px;
+	position: relative
+}
+.clear:after {
+	display: block;
+	content: '';
+	clear: both;
+	visibility: hidden
+}
+.s-fan {
+	float: right;
+	width: 89px;
+	font-size: 12px
+}
+.content .t_tab, .content .t_icon {
+	color: #005bb5;
+	line-height: 30px;
+	font-size: 13px;
+	display: block;
+	height: 30px;
+	text-align: center
+}
+.content .t_tab .iconOuter {
+	font-weight: normal;
+	position: relative;
+	padding-right: 16px;
+	height: 35px;
+	line-height: 35px;
+	display: inline-block
+}
+.content .t_tab .iconIcon {
+	position: absolute;
+	top: 50%;
+	width: 14px;
+	height: 14px;
+	margin-top: -7px;
+	right: 0
+}
+.content .act .order_p_u {
+	background-position: right 0
+}
+.content .act .order_p_d {
+	background-position: right -16px
+}
+.content .order_p_u {
+	background-position: right -32px
+}
+.content .order_p_d {
+	background-position: right -48px
+}
+.list_bg {
+	background-image: url(http://img1.40017.cn/touch/cn/search/hotel_list.png);
+	background-repeat: no-repeat;
+	background-size: 32px 320px
+}
+.h_title {
+	font-size: 12px;
+	color: #757575
+}
+.f_back {
+	font-size: 14px
+}
+.f_time {
+	color: #0843a7;
+	font-size: 18px;
+	font-weight: bold
+}
+.a_time {
+	font-size: 14px;
+	color: #295cb2
+}
+.r_box span {
+	display: inline-block
+}
+.fRight {
+	float: right
+}
+.width_1 {
+	width: 60px;
+	display: inline-block
+}
+.hotels .aHotel .price {
+	font-size: 18px;
+	color: #ff3c00
+}
+.content .act {
+	background-color: #def1ff;
+	height: 36px;
+	color: #0e74de;
+	box-shadow: -1px 1px 1px #6a747c inset
+}
+.content .act_c {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f2f0f0));
+	background-image: -webkit-linear-gradient(#fff, #f2f0f0);
+	background-image: -moz-linear-gradient(#fff, #f2f0f0);
+	background-image: -ms-linear-gradient(#fff, #f2f0f0);
+	background-image: -o-linear-gradient(#fff, #f2f0f0);
+	background-image: linear-gradient(#fff, #f2f0f0);
+	height: 35px;
+	color: black;
+	border-bottom: 1px solid #bfc7c8;
+	border-right: 1px solid #d9dcd0;
+	box-shadow: none
+}
+.count {
+	float: right;
+	color: Gray
+}
+.art_flight {
+	padding: 8px 18px 5px 10px
+}
+.g_font {
+	color: #c2c2c2
+}
+.price_s {
+	font-size: 19px;
+	font-weight: bold;
+	color: #ff6300;
+	padding-right: 25px
+}
+returnFlightBox .price_s {
+	padding-right: 20px
+}
+.col_btn {
+	color: #fff;
+	text-align: center;
+	display: block;
+	height: 44px;
+	line-height: 44px;
+	border: 0;
+	background: #fe932b;
+	width: 100%;
+	font-size: 18px
+}
+.r_box>* {
+	height: 28px;
+	line-height: 28px
+}
+.content h2 {
+	font-weight: normal;
+	font-size: 12px;
+	height: 34px;
+	line-height: 34px;
+	padding-left: 9px;
+	border-bottom: 1px solid #b8b8b8
+}
+.cabins table {
+	width: 100%;
+	background-color: #f6f7f7;
+	text-shadow: none;
+	box-shadow: 0 -2px 3px #c1c6cb inset
+}
+.cabins table td {
+	height: 40px;
+	padding-top: 6px;
+	padding-bottom: 6px
+}
+.cabins table tr {
+	border-top: 1px solid #d4d9de
+}
+.cabins table tr td:first-child {
+	padding-left: 10px
+}
+.cabins table td .col_btn {
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+	font-size: 14px
+}
+.r_font {
+	color: #ff3c00
+}
+.more_p {
+	text-align: center;
+	background-color: #dfefff;
+	line-height: 40px
+}
+.loadingTips {
+	display: block;
+	text-align: center;
+	padding: 0 10px;
+	height: 118px;
+	line-height: 118px;
+	background-color: White
+}
+.queryFilter article {
+	margin: 10px 10px 20px 10px
+}
+.queryFilter section nav {
+	padding-left: 10px
+}
+.queryFilter section p {
+	line-height: 40px;
+	border-bottom: 1px dashed #c7c6c5;
+	background-color: #e9eff5
+}
+.queryFilter section p:first-child {
+	border-top: 1px solid #ccd6e0
+}
+.queryFilter section p:last-child {
+	border-bottom: 0
+}
+.queryFilter section {
+	border-radius: none
+}
+.content section {
+	border: 0
+}
+.queryFilter nav {
+	height: 41px;
+	line-height: 41px;
+	background-color: #eee
+}
+.queryFilter section {
+	margin-bottom: 10px
+}
+.do_sure {
+	padding: 0 10px 20px 10px;
+	text-align: center
+}
+.do_sure button {
+	padding-left: 0
+}
+.a_pad {
+	display: inline-block;
+	width: 65px
+}
+.queryFilter input[type=radio] {
+	width: 25px;
+	height: 20px;
+	margin: 0 0 0 6px
+}
+div.no-info {
+	background-color: #eee;
+	padding: 10px;
+	margin: 10px
+}
+div.no-info p {
+	text-align: center
+}
+div.no-info p.img {
+	width: 100px;
+	height: 100px
+}
+.sorry {
+	text-align: left;
+	margin: 0 0 10px 0
+}
+.p_filter_m {
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	margin-left: 2px;
+	background: url(http://img1.40017.cn/touch/cn/airplane/list/next_02.png) no-repeat center;
+	background-size: 14px 14px;
+	vertical-align: middle;
+	margin-top: -2px
+}
+.f_right {
+	float: right;
+	margin-top: 10px
+}
+.right {
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	transition: all .3s ease-out;
+	margin-top: 14px
+}
+.trans_right {
+	-webkit-transform: rotate(90deg);
+	right: 14px
+}
+.iconMain {
+	display: inline-block;
+	width: 11px;
+	height: 16px;
+	margin-left: 6px;
+	margin-right: 5px;
+	display: inline-block;
+	vertical-align: middle
+}
+.point {
+	background: url(http://img1.40017.cn/touch/cn/airplane/list/jiantou.png) no-repeat
+}
+.p_down {
+	background-position: 0 0;
+	width: 10px;
+	height: 7px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 3px
+}
+.p_up {
+	background-position: 0 -5px;
+	width: 10px;
+	height: 7px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 3px;
+	margin-bottom: 5px
+}
+#content {
+	background-color: White
+}
+.triangle_1 {
+	background: url(http://img1.40017.cn/touch/cn/public/icon_you_blue.png) no-repeat center;
+	background-size: 8px 12px;
+	width: 12px;
+	height: 12px;
+	-moz-transform: rotate(90deg);
+	-moz-transform-origin: 50% 50%;
+	-webkit-transform: rotate(90deg);
+	-webkit-transform-origin: 50% 50%;
+	-o-transform: rotate(90deg);
+	-o-transform-origin: 50% 50%;
+	transform: rotate(90deg);
+	transform-origin: 50% 50%;
+	position: absolute;
+	right: 13px;
+	top: 44px
+}
+#returnFlights .triangle_1 {
+	-moz-transform: rotate(0);
+	-moz-transform-origin: 50% 50%;
+	-webkit-transform: rotate(0);
+	-webkit-transform-origin: 50% 50%;
+	-o-transform: rotate(0);
+	-o-transform-origin: 50% 50%;
+	transform: rotate(0);
+	transform-origin: 50% 50%;
+	right: 10px
+}
+.pcommon {
+	background: url(http://img1.40017.cn/touch/cn/airplane/search/icon_arrows.png) no-repeat;
+	display: inline-block;
+	background-size: 33px 55px;
+	width: 12px;
+	height: 13px;
+	vertical-align: middle;
+	margin-top: -2px
+}
+.pmacl {
+	width: 26px;
+	height: 15px;
+	background-position: -10px -1px;
+	margin-top: -4px
+}
+.prepic_1 {
+	background-position: 0 -15px;
+	margin-right: 3px
+}
+.prepic_2 {
+	background-position: 0 -42px;
+	margin-right: 2px
+}
+.nextpic_1 {
+	background-position: 0 -28px;
+	margin-left: 4px
+}
+#tFilter {
+	background-color: #1a9ed9;
+	line-height: 35px;
+	height: 35px;
+	padding: 5px 0;
+	color: #fff
+}
+#tFilter td>span {
+	min-width: 70px;
+	width: 80%
+}
+#tFilter td {
+	text-align: center;
+	height: 46px
+}
+.enable {
+	color: #adadad
+}
+#tFilterCn .pcommon {
+	background: url(http://img1.40017.cn/touch/cn/airplane/search/icon_arrows.png) no-repeat;
+	display: inline-block;
+	background-size: 33px 55px;
+	width: 12px;
+	height: 13px;
+	vertical-align: middle;
+	margin-top: -2px
+}
+#tFilterCn .pmacl {
+	width: 26px;
+	height: 15px;
+	background-position: -10px -1px;
+	margin-top: -4px
+}
+#tFilterCn .prepic_1 {
+	background-position: 0 -15px;
+	margin-right: 3px
+}
+#tFilterCn .prepic_2 {
+	background-position: 0 -42px;
+	margin-right: 2px
+}
+#tFilterCn .nextpic_1 {
+	background-position: 0 -28px;
+	margin-left: 4px
+}
+#tFilterCn {
+	background-color: #3cafdc;
+	line-height: 35px;
+	height: 35px;
+	padding: 5px 0;
+	color: #434e5a
+}
+#tFilterCn td>span {
+	min-width: 70px;
+	width: 80%;
+	color: #fff
+}
+#tFilterCn td {
+	text-align: center;
+	height: 46px
+}
+#tFilterCn .enable span {
+	color: #adadad
+}
+#t_search tr {
+	border-top: 1px solid #1c80a7
+}
+.blue-btn {
+	color: white;
+	font-size: 16px;
+	text-align: center;
+	display: block;
+	height: 44px;
+	line-height: 44px;
+	background: #4ea3f7
+}
+.g-back {
+	background-color: #eee
+}
+.c-more {
+	text-align: center;
+	color: Gray;
+	line-height: 40px;
+	height: 40px;
+	border-bottom: 1px solid #cdcdce;
+	border-top: 1px dashed #cdcdce
+}
+.h-filter {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(White), to(#e0e1e1));
+	background-image: -webkit-linear-gradient(White, #e0e1e1);
+	background-image: -moz-linear-gradient(White, #e0e1e1);
+	background-image: -ms-linear-gradient(White, #e0e1e1);
+	background-image: -o-linear-gradient(White, #e0e1e1);
+	background-image: linear-gradient(White, #e0e1e1);
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	position: inherit;
+	width: 70%;
+	margin: 2px auto;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	display: block;
+	border: 1px solid #b5b5b6;
+	box-shadow: 1px 1px 1px #b5b5b6
+}
+.listForm section .right {
+	background-position: -24px -104px
+}
+.queryFilter s {
+	position: absolute;
+	width: 18px;
+	height: 14px;
+	display: inline-block;
+	background: url(http://img1.40017.cn/touch/cn/public/selectedIcon.png) no-repeat;
+	background-size: 18px 14px;
+	right: 10px;
+	top: 13px
+}
+.queryFilter div p {
+	position: relative
+}
+.translate3d {
+	-webkit-transform: translate(-100%);
+	-moz-transform: translate(-100%)
+}
+#calDiv {
+	position: absolute;
+	top: 43px;
+	right: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0 0 10px 0;
+	z-index: 9;
+	-webkit-transition-duration: 240ms;
+	-moz-transition-duration: 240ms;
+	background-color: White;
+	min-height: 300px
+}
+#returnFlightBox {
+	position: absolute;
+	top: 43px;
+	right: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	z-index: 9;
+	-webkit-transition-duration: 240ms;
+	-moz-transition-duration: 240ms;
+	background-color: White
+}
+#returnFlights .flight:last-child .block {
+	border-bottom: 0
+}
+#returnFlightBox .bottomBar {
+	height: 31px;
+	line-height: 31px;
+	width: 100%;
+	text-align: center;
+	background: #e1e1e1;
+	font-size: 14px;
+	color: #9e9e9e;
+	border-bottom: 1px solid #999;
+	border-top: 1px solid #c4c4c4
+}
+#calBackDiv {
+	position: absolute;
+	top: 44px;
+	right: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0 0 10px 0;
+	z-index: 9;
+	-webkit-transition-duration: 240ms;
+	-moz-transition-duration: 240ms;
+	background-color: White;
+	min-height: 300px
+}
+#returnFlight {
+	position: absolute;
+	top: 44px;
+	right: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	z-index: 9;
+	-webkit-transition-duration: 240ms;
+	-moz-transition-duration: 240ms;
+	background-color: White;
+	min-height: 300px
+}
+#calBackDiv .backCalIcon {
+	background: url(http://img1.40017.cn/touch/cn/airplane/list/backcal.png) no-repeat;
+	background-size: 53px 44px;
+	width: 53px;
+	height: 44px;
+	position: absolute;
+	top: -2px;
+	left: 10px
+}
+.checkedTime {
+	color: White;
+	background-color: blue
+}
+.fish-failed {
+	display: inline-block;
+	background: url(http://img1.40017.cn/touch/cn/airplane/list/icon_fish.png) no-repeat;
+	background-size: 70px 65px;
+	width: 70px;
+	height: 65px
+}
+#fish-loading {
+	padding: 20px 0
+}
+#allFlights .f_info, #returnFlights .f_info {
+	position: relative
+}
+.promise {
+	line-height: 35px;
+	height: 35px;
+	background-color: #ced8e1;
+	text-align: center;
+	box-shadow: 0 2px 3px #a6aeb5 inset
+}
+.smallFont {
+	font-size: 12px
+}
+.Font_10px {
+	font-size: 10px
+}
+.Font_15px {
+	font-size: 15px
+}
+.vt {
+	vertical-align: top
+}
+.vm {
+	vertical-align: middle
+}
+.rotate90 {
+	-moz-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	top: 42px
+}
+#allFlights .block table, #returnFlights .block table {
+	width: 100%
+}
+#allFlights .block table tr td:first-child, #returnFlights .block table tr td:first-child {
+	width: 60px
+}
+#allFlights .block table tr:first-child td:first-child, #returnFlights .block table tr:first-child td:first-child {
+	text-align: right
+}
+.return-tab ul li {
+	float: left;
+	width: 50%;
+	height: 42px;
+	line-height: 42px;
+	font-size: 16px;
+	vertical-align: middle
+}
+.return-tab ul li:first-child {
+	background: #fd9962 url(http://img1.40017.cn/touch/cn/airplane/list/return-tab.png) no-repeat right -2px;
+	color: #fff;
+	text-indent: 10px;
+	font-size: 16px
+}
+.return-tab ul li:last-child {
+	color: #006edc;
+	text-align: right;
+	font-size: 14px
+}
+.return-tab ul li:last-child img {
+	height: 16px;
+	margin: 0 10px -3px 7px
+}
+#mask {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	height: 0;
+	background: #000;
+	opacity: .5;
+	z-index: 2
+}
+header {
+	position: relative;
+	z-index: 9
+}
+.cabins table tr.odds {
+	border-bottom: 1px solid #63a9ff;
+	border-top: 0
+}
+.cabins table tr.tit {
+	border-bottom: 0
+}
+.cabins table tr.odds td {
+	background: #edf5ff
+}
+.cabins table tr.tit td {
+	height: 28px;
+	padding: 0
+}
+.cabins table tr.tit td p.title {
+height::28px;
+	overflow: hidden
+}
+.odds p.title span {
+	height: 28px;
+	line-height: 28px;
+	display: inline-block;
+	background: #63a9ff;
+	padding-left: 10px;
+	padding-right: 2px;
+	color: #fff;
+	position: relative
+}
+.odds p.title span::after {
+	height: 0;
+	width: 0;
+	content: "";
+	position: absolute;
+	right: -28px;
+	top: -30px;
+	border-style: solid;
+	border-color: transparent transparent transparent #63a9ff;
+	border-width: 28px 14px 28px 14px
+}

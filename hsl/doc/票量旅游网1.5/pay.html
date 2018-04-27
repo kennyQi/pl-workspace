@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" id="viewport" />
+<title>票量旅游网-线路预定</title>
+<link href="css/common.css" rel="stylesheet" />
+<script src="js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="js/common.js" language="javascript"></script>
+
+</head>
+
+
+
+<body>
+
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<div class="gd_head">
+	<a href="#" class="logo fl" title="票量旅游网">
+    	<img src="images/logo.png" alt="票量旅游网">
+    </a>
+    <div class="connet fl simsun pl">
+    	<span class="mobile ov disb fl bg_cmd">
+        	<i class="disb">票量旅游</i>
+            <i class="disb bg_cmd curp ewm" id="ewm">扫码有惊喜</i>
+        </span>
+        <div class="phone fl disb bg_cmd">
+        	<label class="tips color9 disb">客服热线</label>
+            <span class="phone_list h2 disb bg_cmd curp">0571-23288385
+            </span>
+        </div>
+        <span class="ewm_box pa" id="ewmBox">
+       		<img src="images/wx.png">
+       	</span>
+    </div>
+    <div class="login fl">
+    	<a href="#" class="hand color9">登录</a>
+        <a href="#" class="hand color9">免费注册</a>
+        <a href="#" class="hand color9">帮助中心</a>
+        <a href="#" class="hand color9 last">票量简介</a>
+    </div>
+</div>
+
+
+<!--导航-->
+<div class="gd_nav">
+	<div class="nav">
+    	<!--当前页面添加on样式-->
+        <a href="#" title="" class="h1 yahei nav1 on">首&nbsp;页</a>
+        <a href="#" title="" class="h1 yahei nav2">机&nbsp;票</a>
+        <a href="#" title="" class="h1 yahei nav3">酒&nbsp;店</a>
+        <a href="#" title="" class="h1 yahei nav4">景&nbsp;点</a>
+        <a href="#" title="" class="h1 yahei nav5">周边游</a>
+        <a href="#" title="" class="h1 yahei nav6">跟团游</a>
+        <a href="#" title="" class="h1 yahei nav7">自由行</a>
+        <a href="#" title="" class="h1 yahei nav8">团&nbsp;购</a>
+        <a href="#" title="" class="h1 yahei nav9">说走就走</a>
+        <a href="#" title="" class="h1 yahei nav10 last">合作专区</a>
+  	</div>
+</div>
+
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+
+<!--内容-->
+<link href="css/reseve.css" rel="stylesheet" />
+<link href="css/pay.css" rel="stylesheet" />
+<div class="g_body">
+<!--支付进程-->
+<div class="g_step disb">
+	<ul>
+    	<li class="m_move">
+        	<h3 class="h3Complete">填写订单</h3>
+            <span class="iconComplete"></span>
+      </li>
+    	<li class="m_move">
+        	<h3 class="h3">支付订金</h3>
+            <span class="icon">2</span>
+      </li>
+    	<li class="m_move">
+        	<h3 >确认名单</h3>
+            <span >3</span>
+      </li>
+    	<li class="m_move">
+        	<h3 >支付尾款</h3>
+            <span >4</span>
+      </li>
+    	<li class="m_move m_move_last">
+        	<h3>预订成功</h3>
+            <span>5</span>
+      </li>
+  </ul>
+</div>
+<!--支付进程-->
+<!--订单详情-->
+<div class="m_order">
+    <div class="orderTitle yahei">旅游产品订单详情</div>
+</div>
+<div class="details">
+         <ul class="message">
+            <li><span class="name">产品名称：</span><span class="theme">北海道5日游>滑雪度假村，三温泉，1天自由活动，螃蟹自助</span></li>
+            <li><span class="name">出发城市：</span><span>上海</span></li>
+            <li><span class="name">出发日期：</span><span>2014-05-15</span></li>
+            <li><span class="name">行程天数：</span><span>5天</span></li>
+            <li><span class="name">人数：</span><span>3成人</span><span class="children">2儿童</span></li>
+            <li><span class="name">联系人：</span><span>韩卫娜</span></li>
+            <li><span class="name">手机：</span><span>15990129636</span></li>
+            <li><span class="name">邮箱：</span><span>15990129636@163.com</span></li>
+        </ul>
+    </div>
+<!--订单详情-->
+<!--支付详情-->
+<div class="pay">
+    <div class="payTitle yahei">支付详情<div class="detailed"><span class="category">订单总金额：<strong><span id="money"><span id="moneyLogo">￥</span>15500</span></span></strong> <span class="category">优惠卡券：<strong><span id="money"><span id="moneyLogo">￥</span>0</span></span></strong> <span class="category">本次应付定金总额：<strong><span id="moneys"  class="tom"><span id="moneyLogo">￥</span>2697</span></span></strong></div>
+</div></div>
+<div class="payfor">
+    <div class="payBox">
+        <span class="paytitle fl">选择付款方式</span>
+        <span id="need" class="radio curp"></span>
+        <span class="alipay fl"></span>
+        <div class="clearing fr"><span class="moneyLogo fr tom"><i class="yahei h1">￥</i>2697</span><span class="category fr">支付金额：</span></div>
+    </div>
+    <ul class="clause">
+        <li><span id="checkbox" class="checkbox"></span><span class="tiaokuan">服务条款</span></li>
+        <li><span class="button"><a href="#" class="yahei h3">确认无误，前往支付</a></span></li>
+    </ul>
+</div>
+<script>
+//修改服务条款
+	$("#checkbox").click(function(){     //服务条款
+		$(this).toggleClass("yesChoice");
+	});
+	
+	$("#need").click(function(){     //服务条款
+		$(this).toggleClass("radio_on");
+	});
+</script>
+
+    
+<!--支付详情-->
+</div>
+<!--内容-->
+
+<!--页脚-->
+<div class="gd_foot">
+	<div class="nav">
+    	<div class="m_nav_c">
+    		<div class="left fl">
+            	<label class="free h2 color6 disb ov">免费促销信息订阅</label>
+                <span class="inpu disb ov">
+                	<input type="text" value="输入Email(如：a@b.c)" class="input_text fl" />
+                    <span class="h3 input_btn fl">订阅</span>
+                </span>
+                <ul class="ewm disb ov">
+                	<li class="h2 color6 fl">
+                    	关注官方微信
+                        <img src="images/wx.png" alt="官方微信" class="disb">
+                    </li>
+                	<li class="h2 color6 fr">
+                    	关注官方微博
+                        <img src="images/wb.png" alt="官方微博" class="disb">
+                    </li>
+                </ul>
+            </div>
+    		<ul class="right fl ov disb">
+            	<li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">票量简介</a>
+                	<a href="#" title="" class="simsun h4">法律声明</a>
+                	<a href="#" title="" class="simsun h4">网站地图</a>
+                    <label class="yahei abt color6 disb">关于我们</label>
+                    <i class="icon bg_cmd"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">友情链接</a>
+                	<a href="#" title="" class="simsun h4">酒店加盟</a>
+                	<a href="#" title="" class="simsun h4">网站联盟</a>
+                    <label class="yahei abt color6 disb">加盟合作</label>
+                    <i class="icon bg_cmd i2"></i>
+                </li>
+                <li class="pl fl disb">
+                	<a href="#" title="" class="simsun h4">帮助中心</a>
+                	<a href="#" title="" class="simsun h4">投诉建议</a>
+                	<a href="#" title="" class="simsun h4">诚聘英才</a>
+                    <label class="yahei abt color6 disb">联系我们</label>
+                    <i class="icon bg_cmd i3"></i>
+                </li>
+                <li class="pl fl disb last">
+                    <span class="color8 disb h2 yahei">24小时客服热线</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <span class="color8 disb h2 yahei">境外游客紧急联络电话</span>
+                    <span class="color6 disb num yahei">4008-117-117</span>
+                    <i class="icon bg_cmd i4"></i>
+                </li>
+            </ul>
+        </div>
+	</div>
+    <div class="special"></div>
+</div>
+<!--页脚-->
+</body>
+</html>

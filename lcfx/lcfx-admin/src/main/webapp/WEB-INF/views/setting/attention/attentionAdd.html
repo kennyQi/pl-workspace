@@ -1,0 +1,25 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/attention/<#if edit??>update<#else>create</#if>" class="pageForm required-validate nowrap" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="60">
+			<div class="bill">
+				<input type="hidden" name="id" />
+				<table border="0" class="my_form" style="padding-left: 7px;">
+					<tr>
+						<td>注意事项：</td>
+						<td>
+							<input type="text" maxlength="50" name="attentionName" value="" class="required" />
+						</td>
+						</tr>
+						<tr>
+						<td>注意事项详情：</td>
+						<td>
+						<textarea maxlength="255" name="attentionDetail" style="width: 379px;height: 130px;margin-top: 10px;"></textarea>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<#include "/public/general/formBar.html">
+	</form>
+</div>

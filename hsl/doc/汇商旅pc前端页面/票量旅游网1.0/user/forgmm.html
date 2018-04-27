@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>忘记密码-输入验证码</title>
+<link href="../css/gb.css" type="text/css" rel="stylesheet" />
+<link href="../css/flogin.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrapper"> 
+  <!--顶部-->
+  <div id="sitenav">
+    <div class="sitenavBd">
+      <div class="sitenavL L">
+        <div class="login" id="J_sitenav_login">
+          <div class="login_N"></div>
+          <div class="login_Y"></div>
+        </div>
+        <div class="s_notice"> <span>网站公告：</span>
+          <ul>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+            <li><a href="#">网上最大的门票超市，电子票随买随用</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sitenavr R">
+        <ul id="J_SiteNavBdR" class="L">
+          <li><a href="#">注册</a></li>
+        </ul>
+        <div class="s_phone"> <i></i><b>4008-117-117</b> </div>
+      </div>
+    </div>
+  </div>
+  <!--end顶部--> 
+  <!--头部-->
+  <div id="header" class="header">
+    <div class="headerBd">
+      <div class="logo"><a href="#">票量云科技</a></div>
+    </div>
+  </div>
+  <!--end头部--> 
+  <!--菜单-->
+  <div class="mune">
+    <div class="nav">
+      <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">机票</a></li>
+        <li><a href="#">景点门票</a></li>
+        <li><a href="#">帮助中心</a></li>
+      </ul>
+      <div class="my_oder R">
+        <div class="s_nav_bar">
+          <h4>登录<b></b></h4>
+          <h4><i></i>我的订单<b></b></h4>
+        </div>
+        <div class="my_oder_m hide" >
+          <p class="my_img_big"><img src="../temp/90.jpg" /></p>
+          <p class="my_img_min"><img src="../temp/25.jpg" /><a href="#">我的订单</a></p>
+          <span></span> </div>
+      </div>
+    </div>
+  </div>
+  <!--end菜单--> 
+  <!--content-->
+  <div class="content">
+    <div class="h40"></div>
+    <div class="contpic dp_con">
+      <div class="wj">忘记密码</div>
+      <form action="http://www.baidu.com/" id="dp_form">
+        <div class="mid">
+        <div class="usranm">用户名:
+          <input class="dp kung "  id="dp"type="text"  name="C_username"  placeholder="请输入您的用户名找回密码" />
+          <span class="red">该用户不存在</span> </div>
+        <div  class="dp dp_tel">
+          <label>
+            <input type="radio"name="cback" class="iph" />
+            手机找回</label>
+          <div class="tel_re">
+            <button class="click_yz" style="display:none">点击发送验证码</button>
+            <span class="yznum" style="display:none;">验证码发送到您绑定的手机189****4889</span></div>
+        </div>
+        <div>
+          <input class="dp kunm"type="text"  placeholder="输入验证码" />
+        </div>
+        <div>
+          <div class="tjao">
+            <div class="ttj" id="btn-subime"><a href="#">提交</a></div>
+          </div>
+        </div>
+     </div>
+    </form>
+      <form action="http://www.baidu.com/" id="cz_mm">
+     <div class="mod_mm">
+      <div class="wj">重置密码</div>
+      <div class="mid"><ul>
+      <li><label>新密码：</label><input type="password" id="pdw" name="pdw" /><span></span></li>
+      <li><label>确认密码：</label><input type="password"  id="pdw2" name="pdw2" /><span></span></li>
+      <li><label>&nbsp;</label><button id="cz_save">保存</button></li>
+      </ul></div>
+     </div> 
+  </form>
+    
+  </div>
+</div>
+<!--end content--> 
+<!--footer-->
+<div id="footer" class="mt20">
+  <div class="fooerBD">
+    <div class="L about">
+      <dl>
+        <dt><a href="#">关于我们</a></dt>
+        <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+      </dl>
+      <dl>
+        <dt><a href="#">加盟合作</a></dt>
+        <dd><a href="#">友情链接</a><a href="#">网站联盟</a></dd>
+      </dl>
+      <dl>
+        <dt><a href="#">联系我们</a></dt>
+        <dd><a href="#">网站简介</a><a href="#">法律规定</a></dd>
+      </dl>
+    </div>
+    <div class="L w260">
+      <div class="hot_phone">
+        <p><i class="tel"></i>24小时客服热线：4008-117-117</p>
+        <p><i class="tel"></i>境外游客紧急联络电话：4008-117-117</p>
+        <p><i class="QQ"></i>在线客服：QQ1</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+$(".iph").click(function(){
+	$(".click_yz").show();
+	})
+$(".click_yz").click(function(){
+	$(".yznum").show();
+	})
+$("#dp").blur(function(){
+	var reg=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){3,19}/
+	var username = $(this).val();
+	if(reg.test(username)){
+		$(this).next("span").html("ok");
+		}
+	else{
+		 $(this).next("span").html("输入您的用户名")
+		}
+	});	
+	
+$("#btn-subime").click(function(){
+	var reg=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){3,19}/
+	var username = $(this).val();
+		if(reg.test(username)){
+			$("#dp").next("span").html("ok");
+			}
+		else{
+			 $("#dp").next("span").html("输入您的用户名")
+			 return false
+			}
+		$("#dp_form").submit();
+  								});
+ 	$("#pdw").blur(function(){
+	var pdwreg = /^(\w){6,20}$/;
+	var pdw = $("#pdw").val();
+			if(pdwreg.test(pdw)){
+				$(this).next("span").html("<div class='ok error'><i></i>ok</div>");
+				}
+			 else{
+				 $(this).next("span").html("<div class='wrong error'><i></i>请输入6-20字符</div>")
+			}
+ 	})
+ $("#pdw2").blur(function(){
+	 var pdw = $("#pdw").val()
+	 var pdw2 = $("#pdw2").val()
+			 if(pdw === pdw2&&pdw2.length>=6&&pdw2.length<=20){
+				 $(this).next("span").html("<div class='ok error'><i></i>ok</div>");
+				}
+				else{
+				 $(this).next("span").html("<div class='wrong error'><i></i>密码不一致</div>")
+				 }
+ 	})									
+		
+$("#cz_save").click(function(){
+	var pdwreg = /^(\w){6,20}$/;
+	var pdw = $("#pdw").val();
+			if(pdwreg.test(pdw)){
+			 $("#pdw").next("span").html("<div class='ok error'><i></i>ok</div>");
+				}
+			 else{
+				$("#pdw").next("span").html("<div class='wrong error'><i></i>请输入6-20字符</div>")
+			};
+ 
+ 	 var pdw = $("#pdw").val()
+	 var pdw2 = $("#pdw2").val()
+			if(pdw === pdw2&&pdw2.length>=6&&pdw2.length<=20){
+			$("#pdw2").next("span").html("<div class='ok error'><i></i>ok</div>");
+			}
+			else{
+			 $("#pdw2").next("span").html("<div class='wrong error'><i></i>密码不一致</div>")
+			 }
+	
+ 	$("#cz_mm").submit();
+ 	})		
+ </script> 
+<script type="text/javascript" src="../js/gb.js"></script>
+</body>
+</html>

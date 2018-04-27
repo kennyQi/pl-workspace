@@ -1,0 +1,32 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageContent">
+	<form method="post" action="${contextPath}/clientGroup/clientGroup/save" 
+		class="pageForm required-validate" 
+		onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>客户端组名：</label>
+				<input type="text" name="groupName" size="64" 
+					class="required" minlength="2" maxlength="64"/>
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<input  type="text" name="remark"/>
+			</div>
+			<div class="unit">
+				<label>是否生效：</label>
+				<input type="radio" name="valid" value="false" checked="checked">无效
+				<input type="radio" name="valid" value="true">有效
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent">
+					<button type="submit">提交</button></div></div></li>
+				<li><div class="button"><div class="buttonContent">
+					<button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,75 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return dialogSearch(this);"
+		action="${contextPath}/client/client/grouplist" method="post">
+
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" /> 
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						<label>客户组名称：</label>
+						<input type="text" name="groupName" value="${clientGroupQO.groupName}" />
+					</td>
+					<td>
+						<label>备注：</label>
+						<input type="text" name="remark" value="${clientGroupQO.remark}" />
+					</td>
+					<td>
+						<label>是否生效：</label>
+						<select class="combox" name="valid">
+							<option value="">所有</option>
+							<option value="true" <#if clientGroupQO.valid> selected </#if> >生效</option>
+							<option value="false" <#if clientGroupQO.valid?? && !clientGroupQO.valid> 
+								selected </#if> >无效</option>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="40">客户端组名</th>
+				<th width="70">备注</th>
+				<th width="20">是否生效</th>
+				<th width="40" align="center">请选择</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as clientGroup>
+				<tr target="clientGroupId" rel="${clientGroup.id}">
+					<td>${clientGroup.groupName!?html}</td>
+					<td>${clientGroup.remark!?html}</td>
+					<td>
+						<#if clientGroup.valid> 生效  </#if> 
+						<#if clientGroup.valid?? && !clientGroup.valid> 无效</#if>
+					</td>
+					<td>
+						<a class="btnSelect"  href="javascript: $.bringBack({id: '${clientGroup.id}', 
+								groupName: '${clientGroup.groupName}' })" title="查找带回">选择</a>
+					</td>
+				</tr>
+			</#list>
+		</tbody>
+	</table>
+
+	<#include "/public/pagination/pagination.html">
+</div>

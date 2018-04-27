@@ -1,0 +1,124 @@
+@charset "utf-8";
+
+/*支付成功*/
+.g_step .m_move .h3{color:#00a0e9;}        /*未完成部分的样式*/
+.g_step .m_move .icon{background:url(../images/payScript.png) 0 -28px; color:#fff;}   /*未完成部分的样式*/ 
+
+.g_step .m_move .h3Complete{color:#71c287;}     /*已完成部分样式*/
+.g_step .m_move .iconComplete{background:url(../images/payScript.png) 0 -56px; color:#fff;}   
+.success{ width:100%; min-width:1200px; height:730px; border-bottom:1px solid #f0f0f0; background:#fafafa; overflow:hidden;}
+
+.balloon{ width:1200px; height:287px; background:url(../images/balloon.png); margin:0 auto; min-width:1200px;}
+.confirm{ width:124px; height:124px; background:url(../images/confirm.png); display:block; position:absolute; margin-top:124px; margin-left:538px;}
+.success .information{width:1200px; margin:0 auto; min-width:1200px;}
+.success .information span{ font-size:32px; color:#03af69; display:block; text-align:center; line-height:32px;}
+.success .information .order{font-size:24px; color:#666; text-align:center; line-height:23px; margin-top:16px;}
+.success .information .route{ font-size:16px; color:#888; text-align:center; line-height:15px; margin-top:35px;}
+
+/*支付订单页面*/
+.g_step .m_move span{ width:232px; height:28px; background:url(../images/payScript.png) 0 0; display:block; line-height:25px; font-family:Arial Regular; font-size:20px; color:#cdcece;}   
+.g_step .m_move .h3{color:#00a0e9;}        /*未完成部分的样式*/
+.g_step .m_move .icon{background:url(../images/payScript.png) 0 -28px; color:#fff;}   /*未完成部分的样式*/ 
+
+.g_step .m_move .h3Complete{color:#71c287;}     /*已完成部分样式*/
+.g_step .m_move .iconComplete{background:url(../images/payScript.png) 0 -56px; color:#fff;}   
+
+.g_title{width:100%;min-width:1200px; height:50px; background:#F0f0f0;}
+.g_title span{ font-size:22px; float:left; margin:17px 0 16px -1190px;}
+
+.m_order{ clear:both; width:100%; min-width:1200px; background:#f0f0f0; height:50px;}
+.m_order .orderTitle{ width:1200px; margin:0 auto; font-size:18px; line-height:50px; padding-left:80px;}
+.details{width:1200px; min-width:1200px; margin:0 auto; padding-bottom:20px;}
+.details .message{ padding-left:75px; padding-top:24px; color:#666;}
+.details .message li{height:30px;}
+.details span{ line-height:30px; font-size:14px; }
+.details .name{ width:80px; text-align:right; float:left; padding-right:3px;}
+.details .theme{ color:#0073b6;}
+.details .children{ padding-left:29px;}
+
+.pay{clear:both; width:100%; min-width:1200px; background:#e8f4fb; height:68px;}
+.pay .payTitle{width:1160px; margin:0 auto; font-size:18px; line-height:68px; padding-left:40px;}
+.pay .detailed{ float:right; padding-right:40px; }
+.detailed span{ font-size:14px;line-height:68px; background:none;}
+.category{color:#666;}
+#money{color:#000000; margin-right:30px; font-family:"Tahoma";}
+#moneys{color:#ff6600; font-size:20px; margin-left:5px;}
+.payfor{ height:330px; width:1200px; min-width:1200px; margin:0 auto;}
+.payBox{width:1114px; height:100px; background:#fff4d9; border:3px solid #fd893e; margin:0 auto;  margin-top:10px;}
+.paytitle{ font-family:"微软雅黑"; font-size:16px; color:#333; line-height:100px; padding-left:20px; padding-right:36px;}
+.alipay{ width:126px; height:58px; position:absolute; margin-top:21px; margin-left:10px; background:url(../images/Alipay.png); }
+.clearing{ float:right; margin-top:54px; margin-right:20px;}
+.clearing .category{font-size:14px; font-family:"宋体";margin-top:5px; background:none;}
+.clearing .moneyLogo{font-size:18px; color:#ff6600;font-size:30px;font-weight:bold;}
+.clearing .moneys{ font-size:30px; color:#ff6600; font-family:"Tahoma";}
+
+
+.clause{ float:right; padding-right:40px; width:227px; margin-top:20px;}
+.clause .checkbox{width:16px; height:16px; background:url(../images/payScript.png) -216px -128px; display:inline-block;}
+.clause .tiaokuan{ height:16px; font-family:"宋体"; font-size:14px; float:right; line-height:16px; color:#666; margin-right:145px;}
+.clause li{ height:16px;}
+.clause .button{width:227px; height:40px; background:#ff6600; float:left; margin-top:10px; text-align:center;}
+.clause .button a{color:#FFFFFF; line-height:40px;}
+.yesChoice{background:url(../images/payScript.png) 0 -128px !important; }
+
+.payBox_radio{margin-top:45px;width:12px;height:12px;}
+.radio{float:left; height:16px;width:17px;margin-top:45px;font-size:14px; line-height:16px; background:url(../images/payScript.png) no-repeat -215px -157px;} 
+.radio_on{background:url(../images/payScript.png) no-repeat 1px -157px;}
+
+
+
+
+
+
+/*机票支付*/
+.fly_pay_box{ clear:both; width:750px;}
+.fly_pay_box .fly_pasInf{ height:30px; line-height:30px; margin:15px 0 0 31px;}
+.fly_pay_box .fly_pasInf i{width:30px;height:30px; background:url(../images/fly_script2.png) 0 -160px; margin-right:20px;}
+.fly_pay_box .fly_pasInf .fly_payBt{ margin:0 10px 0 0;}
+.fly_pay_box .fly_pasInf .ids{ margin-left:80px;}
+.fly_pay_box .fly_pasInf .pays{ margin-left:50px;}
+.fly_pay_box .fly_payOrder{padding-left:50px; margin-bottom:50px;}
+.fly_pay_box .fly_sale{ margin:20px 0 0 30px;}
+.fly_pay_box .fly_saleSel{ margin:20px 0 0 28px; width:700px; line-height:16px; height:16px; }
+.fly_pay_box .fly_saleSel i{width:16px;height:16px; margin-right:5px; float:left; background:url(../images/fly_script2.png) 0 -197px;}
+.fly_pay_box .fly_saleSel .fly_pay_cli{background:url(../images/fly_script2.png) -25px -197px;}
+.fly_pay_box .Triangle{width:8px;height:6px; float:left; background:url(../images/fly_script2.png) 0 -251px; position:absolute; margin:-16px 0 0 20px;}
+.fly_pay_box .fly_sales{ width:606px;height:auto; border:1px solid #e5e5e5; padding:10px; margin:13px 0 0 28px; -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-box-shadow: #f3f3f3 0px 4px 10px;
+    -moz-box-shadow: #f3f3f3 0px 4px 10px;
+    box-shadow: #f3f3f3 4px 4px 10px;}
+.fly_pay_box .fly_sales li{height:30px; line-height:30px;}
+.fly_pay_box .fly_sales  li i{width:16px;height:16px; float:left; background:url(../images/fly_script2.png) 0 -225px; margin:6px 10px 0 3px;}
+.fly_pay_box .fly_sales #cashcoupon li i{width:16px;height:16px; float:left; background:url(../images/fly_script2.png) 0 -225px; margin:6px 10px 0 3px;}
+.fly_pay_box .fly_sales li .VouchersClick{ background:url(../images/fly_script2.png) -25px -225px !important;}
+.fly_pay_box .fly_sales li span{ float:left;}
+.fly_pay_box .fly_sales li .companySelect{width:150px;height:30px; background:url(../images/input_script2.png) 0 -421px; line-height:30px; padding-left:10px; margin:0 0 0 29px;}
+.fly_pay_box .fly_sales li .selectNav{width:160px; overflow-y:auto;max-height:150px; margin:25px 0 0 128px; *margin:25px 0 0 -388px;}
+.fly_pay_box .fly_sales li .selectNav li{ height:30px; line-height:30px; font-size:12px;width:120px !important;}
+.fly_pay_box .fly_sales li .fly_payTs{ margin-left:12px;font-size:12px;}
+.fly_pay_box .fly_sales li .tips{ margin-left:12px; color:#D25353;}
+/**支付**/
+.fly_pay_box .fly_payBox{ width:743px; height:142px; border:2px solid #cbe0de; background:#f5fefd; margin:60px 0 0 0;}
+.fly_pay_box .fly_payBox .fly_payMethod{ margin:14px 0 9px 30px;}
+.fly_pay_box .fly_payBox .fly_payPlatform{ border-top:1px solid #cbe0de; clear:both;}
+.fly_pay_box .fly_payBox .fly_payPlatform span{ margin:38px 0 0 30px;}
+.fly_pay_box .fly_payBox .fly_payPlatform i{width:16px;height:16px; background:url(../images/fly_script2.png) 0 -197px; margin:40px 0 0 30px;}
+.fly_pay_box .fly_payBox .fly_payPlatform .alipay{background:url(../images/fly_script2.png) -25px -197px;}
+.fly_pay_box .fly_payBox .fly_payPlatform img{ margin:20px 0 0 15px;}
+.fly_pay_box .fly_Clause{margin:52px 0 0 510px; height:16px; line-height:16px;}
+.fly_pay_box .fly_Clause i{width:16px;height:16px; background:url(../images/fly_script2.png) 0 -225px; margin-right:10px;}
+.fly_pay_box .fly_Clause .Agreement{background:url(../images/fly_script2.png) -25px -225px;}
+.fly_pay_box .fly_payFor{ width:745px; height:74px; border:1px solid #3ebdb6; background:#f5fefd; margin:15px 0 100px 0;}
+.fly_pay_box .fly_payFor span{ height:28px; line-height:28px; margin-left:20px;}
+.fly_pay_box .fly_payFor .fly_payCard{ margin:25px 0 0 25px;}
+.fly_pay_box .fly_payFor .fly_payMon{ margin-top:19px; *margin-top:21px;}
+.fly_pay_box .fly_payFor a{ width:239px; height:74px; background:#3ebdb6; color:#fff; line-height:74px;}
+.fly_pay_box .fly_payFor a:hover{background:#7ed5d1;}
+/*机票支付*/
+
+/*下拉列表*/
+.selectNav{ float:left; width:240px; position:absolute; z-index:999; background:#f2f2f2; border-top:0; margin-top:29px; margin-left:69px; display:none; *margin-left:-240px;}
+.selectNav .l{ float:left; width:220px !important; height:28px; margin:0 !important; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.selectNav .l:hover{ background:#e5e5e5;}
+/*下拉列表*/

@@ -1,0 +1,86 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/event/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+		
+			<table class="searchContent">
+				<tr>
+					<td>
+						发生时间：<input type="text" readonly="readonly" name="createDateFrom" value="${createDateFrom}" class="date"/>至<input type="text" readonly="readonly" name="createDateTo" value="${createDateTo}" class="date"/>
+					</td>
+					
+					<td>
+						<#if type?? >
+							<#assign t = type?string.number>
+							事件类型：<input type="text" name="type" value="${t?replace(',','')}"/>
+						<#else>
+							事件类型：<input type="text" name="type"/>
+						</#if>
+						
+					</td>
+				</tr>
+			</table>
+		
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+
+<div class="pageContent">
+ 
+	<table class="table" width="100%" layoutH="110">
+		<thead>
+			<tr>
+				<th width="35">序号</th>
+				<th width="100">事件发生时间</th>
+				<th width="70">事件类型</th>
+				<th width="250">事件文字说明</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			
+			<#list pagination.list as e>
+			  <#assign len = e_index />
+			  <#assign pSize = pagination.pageSize />
+			  <#assign pNo = pagination.pageNo />
+			<tr>
+				<td>
+					${pSize*(pNo-1)+len+1}
+				</td>
+				<td>
+					<#if e.createDate??>
+						${e.createDate?string("yyyy-MM-dd HH:mm:ss")}
+					</#if>
+				</td>
+				<td>
+					${e.type?c}
+				</td>
+				<td>
+					${e.remark}
+				</td>
+				<td>
+					<a title="详情" target="dialog" href="${contextPath}/event/info?id=${e.id}" style="color: blue;" width="650" height="390">详情</a>
+				</td>
+			</tr>
+			</#list>
+		</tbody>
+	</table> 
+	<#include "/public/pagination/pagination.html">
+	
+</div>

@@ -1,0 +1,67 @@
+/*相关新闻*/
+.g_bd{width:100%;display:block;min-width:320px;}
+.new_list{width:90.625%;display:block;overflow:hidden;margin:auto;min-width:290px;}
+.new_list li{display:block;overflow:hidden;padding:10px 0px;border-bottom:1px solid #d5d5d5;}
+.new_list li img{width:88.8888888888%;}
+.new_list li .tt{float:left;line-height:1.4em;width:69%;}
+.new_list li .tt h2{color:#323232;font-size: 3rem;padding-top:20px;height:2.5em;font-weight:normal;}
+.new_list li .tt span{color:#595959;font-size:2.8rem;}
+.m_load{margin:auto;display:block;text-align:center;color:#909090;font-size:2.4rem;line-height:2em;}
+.m_load .pl{padding-left:8%;font-size:2.8rem;line-height:3em;}
+.m_load .pl i{width:25%;height:195%;position:absolute;left:0px;top:-53%;background:url(../images/load.gif);background-size:cover;}
+.new_list .picBox{width:31%;}
+
+/*css3动画开始*/
+/*.m_load .pl i{
+	
+	animation:myfirst 1s infinite;
+	-moz-animation:myfirst 1s infinite; 
+	-webkit-animation:myfirst 1s infinite; 
+	transform: rotate(0deg);
+	-webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+
+
+@-moz-keyframes myfirst
+{
+0%   {transform: rotate(0deg)}
+100% {transform: rotate(360deg)}
+}
+
+@-webkit-keyframes myfirst
+{
+0%   {transform: rotate(0deg)}
+100% {transform: rotate(360deg)}
+}
+
+@keyframes myfirst
+{
+0%   {transform: rotate(0deg)}
+100% {transform: rotate(360deg)}
+}*/
+
+
+@media screen and (max-width:380px){
+.new_list li .tt h2{padding-top:10px;}
+/*.m_load .pl i{width:25%;height:195%;position:absolute;left:0px;top:-6px;background:url(../images/load.gif);background-size:cover;}*/
+
+}
+
+@media screen and (min-width:380px) and (max-width:460px){
+.new_list li .tt h2{padding-top:13px;}
+
+}
+@media screen and (min-width:460px) and (max-width:540px){
+.new_list li .tt h2{padding-top:16px;}
+}
+
+@media screen and (min-width:540px) and (max-width:620px){
+.new_list li .tt h2{padding-top:18px;}
+}
+
+
+
+
+/*相关新闻结束*/

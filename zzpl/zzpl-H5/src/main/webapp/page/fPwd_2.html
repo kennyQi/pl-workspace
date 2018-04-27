@@ -1,0 +1,103 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport" />
+<title>手机验证</title>
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/global.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/findPwd.css" rel="stylesheet" />
+  <script src="${contextPath}/resources/js/libs/jquery-2.1.4.min.js" language="javascript"></script>
+<script type="text/javascript">
+  // 倒计时
+  var wait = 60;
+  function timer(obj){
+      obj.html(wait+"s后重发");
+      wait--;
+      if(wait==-1){
+    	  obj.html("重新获取").click(function(){
+    		  history.back();
+    	  });
+    	  return;
+      }
+      setTimeout(function(){
+        timer(obj)
+      },1000);
+  }
+  // 获取手机动态密码
+  $(function(){
+    timer($('#btn_getCode'));
+    /* $('#btn_getCode').on('click',function(){
+    	$("#djs").html("<input type='text' id='btn_getCode' value='60s后重发'>");
+	      timer($(this));
+    }) */
+  })
+</script>
+<script type="text/javascript">
+function formsubmit(){
+	 if(checkbh()){
+		var html="<div class='loading_bg'></div>";
+		$("body").append(html);
+		$("#myform").submit();
+	 }
+}
+function checkbh() {
+	var mynamediv = document.getElementById("smsvalid");
+	var str;
+	if (mynamediv) {
+		str = mynamediv.value;
+	}
+	if (str.length == 0) {
+		alertMsg("验证码不为空！");
+		return false;
+	}
+
+	return true;
+
+}
+if("${message}"){
+	alertMsg("${message}")
+}
+function alertMsg(msg) {
+	alert(msg);
+}
+</script>
+</head>
+
+<body>
+<div class="bg1_header">
+  <header class="header box">
+    <a href="${contextPath}/login" class="back_iconfont iconfont">&#xe606;</a>
+    <h1>手机验证</h1>
+  </header>
+</div>
+<section class="content_form">
+  <form action="${contextPath}/login/checkSMSValid" id="myform">
+  <input type="hidden" name="sagaID" value="${sagaID}"/>
+  <input type="hidden" name="mobile" value="${mobile}"/>
+    <div class="input_wrap input_wrap_2">
+      <dl>
+        <dt>手机号码</dt>
+        <dd>
+          <input type="text" value="${mobile}" readonly="readonly">
+          <div class="btn_valid_wrap" id="djs">
+            <a href='javascript:' id='btn_getCode' >60s后重发</a>
+          </div>
+        </dd>
+      </dl>
+      <dl>
+        <dt>验证码</dt>
+        <dd>
+          <input type="text" placeholder="请输入手机验证码" name="smsValid" id="smsvalid">
+        </dd>
+      </dl>
+    </div>
+    <p class="tip">验证码已发送到你的手机，15分钟内输入有效</p>
+    <div class="btn_wrap">
+      <input type="button" class="btn_submit" value="下一步，设置新密码" onclick="formsubmit()">
+    </div>
+  </form>
+</section>
+</body>
+</html>

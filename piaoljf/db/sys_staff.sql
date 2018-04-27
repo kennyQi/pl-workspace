@@ -1,0 +1,1 @@
+INSERT INTO `sys_staff` VALUES ('034cef04b50a4d8da92e336535a04089', NULL, NULL, 'admin', NULL);

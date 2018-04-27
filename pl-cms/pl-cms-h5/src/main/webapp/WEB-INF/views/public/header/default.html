@@ -1,0 +1,32 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div id="sitenav">
+	<div class="sitenavBd">
+		<div class="sitenavL">
+			<div class="login" id="J_sitenav_login">
+				<div class="login_N"></div>
+				<div class="login_Y"></div>
+			</div>
+		</div>
+		<div class="sitenavr R">
+			<#if user!=null>
+			<ul id="J_SiteNavBdR" class="L">
+				<li><a href="${contextPath}/company/main" onclick="">欢迎您，${(user.authInfo.loginName)!}
+				</a></li>
+			</ul>
+			<ul id="J_SiteNavBdR" class="L">
+				<li><a href="${contextPath}/exist" onclick="">注销</a></li>
+			</ul>
+			<#else>
+			<ul id="J_SiteNavBdR" class="L">
+				<li><a href="${contextPath}/user/register">注册</a></li>
+			</ul>
+			</#if>
+			<div class="s_phone">
+				<i></i><b>0571-23288372</b>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end顶部-->
+<!--头部-->

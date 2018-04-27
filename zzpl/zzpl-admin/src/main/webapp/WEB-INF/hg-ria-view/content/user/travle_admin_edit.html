@@ -1,0 +1,91 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;编辑差旅管理员
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/user/travleModify" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="userID" value="${(user.id)!''}" />
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员名称：</label>
+									<div class="col-md-4">
+										<input type="text" name="name" class="form-control required isSpec chinese" placeholder="人员名称" maxlength="40" value="${(user.name)!''}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">管理公司：</label>
+									<div class="col-md-4">
+										<#list companies as list>
+											<input value="${list.id}" name="companyID" type="checkbox"
+											<#list companyIDs as companyID>
+											<#if companyID==list.id>checked="checked"</#if>
+											</#list>
+											>${list.companyName}
+										</#list>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员性别：</label>
+									<div class="col-md-4">
+										<input type="radio" name="gender" value="1" <#if user.gender==1>checked="checked"</#if>/>男
+										<input type="radio" name="gender" value="0" <#if user.gender==0>checked="checked"</#if>/>女
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员身份证：</label>
+									<div class="col-md-4">
+										<input type="text" name="idCardNO" class="form-control isSpec idcard" placeholder="人员身份证" maxlength="18" value="${user.idCardNO!""}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员生日：</label>
+									<div class="col-md-4">
+										<#if user.birthday??>
+											<input type="date" name="birthday" class="form-control required date" placeholder="人员生日" maxlength="19" value="${user.birthday?substring(0,10)}"/>
+										<#else>
+											<input type="date" name="birthday" class="form-control required date" placeholder="人员生日" maxlength="19" value=""/>
+										</#if>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员电话：</label>
+									<div class="col-md-4">
+										<input type="text" name="linkMobile" class="form-control required tel" placeholder="人员电话" maxlength="40" value="${user.linkMobile!""}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">人员邮箱：</label>
+									<div class="col-md-4">
+										<input type="text" name="linkEmail" class="form-control email" placeholder="人员邮箱" maxlength="40" value="${user.linkEmail!""}"/>
+									</div>
+								</div>
+								<!-- <div class="form-group">
+									<label class="col-md-3 control-label">人员地址：</label>
+									<div class="col-md-4">
+										<input type="text" name="provinceID" class="form-control" placeholder="省份" maxlength="40" value="${user.provinceID!""}"/>
+										<input type="text" name="cityID" class="form-control" placeholder="城市地区" maxlength="40" value="${user.cityID!""}"/>
+									</div>
+								</div> -->
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn yellow" target="submit">提交</a>
+									<a class="btn yellow" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

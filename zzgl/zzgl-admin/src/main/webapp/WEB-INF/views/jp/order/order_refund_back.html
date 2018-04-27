@@ -1,0 +1,51 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" action="${contextPath}/jp//order/refund?op=2" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="id" value="${(id)!}" />
+		<input type="hidden" name="orderType" value="${(orderType)!}" />
+		
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<span>*请选择退票人</span>
+			</div>
+			<div class="unit">
+				<#if (jpOrder.passengers?size > 0)>
+			   	 <#list jpOrder.passengers as psg>
+			   	  <input type="checkbox" value="${psg.passengerName},${psg.airId}" name="jpOrderPassengerNames" /> ${psg.passengerName}<br>
+			     </#list>
+			   <#else>
+			                 没有可以退票的乘客
+			   </#if>
+			</div>
+			<div class="unit">
+				<span>*退票种类</span>
+			</div>
+			<div class="unit">
+				<select name="refundType" id="refundType" class="required"  style="width:50%">
+					<option value="1">当日作废</option>
+					<option value="2">自愿退票</option>
+					<option value="3">非自愿退票</option>
+					<option value="4">差错退款</option>
+					<option value="5">其他</option>
+					
+				</select>
+			</div>
+			
+			<div class="unit">
+				<span>*请填写退票原因</span>
+			</div>
+			<div class="unit">
+				<textarea name="refundMemo" class="required" style="width:95%;height:75px" class="required"></textarea>
+			</div>
+			
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+</div>
+

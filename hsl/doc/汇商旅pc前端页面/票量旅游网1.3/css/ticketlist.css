@@ -1,0 +1,106 @@
+/* CSS Document */
+.t_city_icon { background: url(../img/jp_icon.png) no-repeat }
+.ticket_hd h2 i, .t_city_search .t_city_input input, .t_time .t_time_input input { background: url(../img/jp_icon.png) no-repeat }
+.ki i{ background:url(../img/base_icon.png) no-repeat}
+.k_p_title .k_p_time .k_p_t_r p strong i,.t_r p,.pop_p i,.page a i{ background:url(../img/k_icon.png) no-repeat}
+.column { width: 930px; }
+
+
+/****分类搜索****/
+#search-bar { background: #fff; width: 100%; float: left }
+#search-bar ul { padding: 15px; float: left }
+#search-bar ul li { float: left }
+#search-bar .t_city_search { float: left; margin-right: 10px; }
+#search-bar .t_city_search label { float: left; margin-right: 5px; line-height: 45px; font-size: 16px; }
+#search-bar .t_city_input { float: left }
+#search-bar .t_city_input input { margin-top: 5px; width: 115px; border: #ddd 2px solid; height:35px;}
+#search-bar .t_city_icon { float: left; width: 58px; height: 26px; background-position: 0 -153px; margin: 10px 10px 0 0; cursor: pointer; }
+#search-bar .t_city_search .t_city_input input { background-position: 85px -64px; }
+#search-bar .t_time .t_time_input input { background-position: 210px -98px; }
+#search-bar.t_city_search .t_city_input input, .t_time .t_time_input input { height: 35px; }
+#J_DepDate { background: none }
+#search-bar .bth { float: left }
+#search-bar .bth input { padding: 0 15px; cursor: pointer; margin-top: 2px }
+
+.sidebar .bar_search .t_city_search{ margin-right:0px!important}
+.bar_search .t_city_search label{ width:80px}
+.bar_search .bth input{ width:210px; margin-top:10px!important}
+
+
+#changect { background: #74a900; color: #fff; font-size: 16px; padding: 7px; }
+.ct input { width: 120px; height: 30px; border: 2px solid #d9d9d9; }
+#changect a, .search a { color: #fff; font-size: 16px; }
+.changehb { height: 55px; line-height: 55px; font-size: 16px; font-weight: bold; float:left; width:100% }
+
+/*****机票日期*******/
+.k_list { background: #fff; float:left; width:100%}
+.Date_seacrh{ float:left; width:100%; position:relative}
+.Date_seacrh .ki{ float:left; border:#ddd 1px solid; width:50px; height:60px; background:#fff; position:absolute; cursor:pointer;top:20px}
+.Date_seacrh .ki i{ width:11px; height:24px; float:left; background-position:0 -68px;left: 15px;top: 15px;position: absolute;}
+.Date_seacrh .ki1{ left:30px;}
+.Date_seacrh .ki2{right:30px;}
+.Date_seacrh .ki2 i{ background-position:-11px -68px; left:20px}
+.K_date {height: 60px; margin:20px 110px;}
+.K_date ul{border-top:#ddd 1px solid;border-left:#ddd 1px solid; float:left}
+.K_date ul li{float: left; text-align: center; border-bottom:#ddd 1px solid;border-right:#ddd 1px solid;}
+.K_date ul li.sel{ height:65px; position:relative;margin-top:-6px;left:-1px; background:#fff; border-bottom:none;border-top:#f30 2px solid;border-left:#ddd 1px solid;}
+.K_date ul li.sel span{ font-weight:bold; color:#333}
+.K_date ul li a{width: 100px; height: 60px; float:left}
+.K_date ul li a span{ height:30px; line-height:30px}
+.K_date ul li a .money { color: #ff6600; font-weight: bold; font-size:16px;}
+
+
+/****分类排序***/
+.k_saix { display:inline-block;}
+.k_saix  span{ margin-left:30px;}
+.k_saix select { border:#ddd 1px solid; padding:5px 10px;}
+.k_saix input { margin-left: 20px; padding: 0px 10px; width: 100px; }
+
+
+/******机票列表*******/
+.k_p{ padding:0 20px; margin-top:30px;}
+.k_p_list{ border-bottom:#d9d9d9 1px solid; padding:30px 0 20px 0; overflow:hidden;  }
+.k_p_title{cursor:pointer}
+.k_p_title li{ float:left}
+.k_p_title .p_img{ position:relative; padding-left:30px; width:100px;}
+.k_p_title .p_img span{ position:absolute;left:0; color:#333}
+.k_p_title .k_p_time{ float:left; width:500px; }
+.k_p_title .k_p_time .k_P_t{width:150px; float:left}
+.k_p_title .k_p_time .k_P_t p strong{ font-size:25px; position:relative }
+.k_p_title .k_p_time .k_P_t span{ display:block; line-height:20px;}
+.k_p_title .k_p_time .k_p_t_l{ text-align:right }
+.k_p_title .k_p_time .k_p_t_r p strong{ padding-right:20px}
+.k_p_title .k_p_time .k_p_t_r p strong i{ width:20px; height:16px; position:absolute;right:0; float:right; background-position:0 -14px}
+.t_r { margin:0 15px; float:left; _display:inline; width:130px;text-align:center}
+.t_r p{ height:10px; float:left; width:100%}
+.k_p_price{ float:left; width:150px;}
+.k_p_price p{ font-size:24px; color:#f30; position:relative; font-family:"微软雅黑"}
+.k_p_price p i{ position: absolute;padding: 2px 3px;background: #f30;font-size: 12px;color: #fff;border-radius: 2px;top: 7px;width:60px}
+.k_p_price span{ color:#999; height:20px; line-height:20px;}
+.operate{ height:40px; float:left}
+.operate a{ padding:10px 35px; height:25px; line-height:25px; display:inline-block }
+
+.show .pop_p{ display:block}
+.show .hide01{ display:none}
+.pop_p{ float:left; width:100%;position:relative; margin:10px 0; display:none}
+.pop_p i{ position:absolute; width:16px; height:9px; background-position:0 -39px;top:-7px; right:50px} 
+.pop_p .close{ border:#ddd 1px solid; width:19px; height:19px; overflow:hidden; text-indent:-9999px; cursor:pointer; position:absolute; right:20px;top:10px; background:url(../img/icon-close.png)}
+.pop_p ul{ border:#ddd 2px solid; float:left; padding:50px 40px 40px 40px;}
+.pop_p ul li{ float:left; width:800px; margin-bottom:20px;}
+.pop_p ul li div{ float:left; width:160px; height:26px; line-height:26px;position:relative} 
+.pop_p ul li div.pop_pr{ font-size:20px; color:#f30; font-weight:bold;}
+.pop_p ul li div.pop_bth a{ padding:10px 20px; color:#fff; background:#74a900; clear:both; width:50px}
+
+.x_yuding{ position:absolute; right:250px;top:10px}
+.x_yuding em{ float:left; width:110px; font-size:12px; font-weight:normal; position:absolute; top:0px; background:#f30; color:#fff; margin-left:10px; padding:5px 3px 7px 3px; text-align:center; border-radius:2px;}
+.x_yuding em u{ color:#f30; position:absolute;left:50%; margin-left:-6px; font-size:14px; bottom:-7px}
+
+
+.page{ float:right; margin:20px 0;}
+.page a{ padding:10px; border:#ddd 1px solid; float:left; margin-right:10px}
+.page a i{ width:4px; height:7px;  margin-top:3px; }
+.page a.pv i{ float:left;background-position:0 -51px;margin-right:5px }
+.page a.next{ color:#999; border:#ddd 1px solid}
+.page a.next:hover{color:#333; border:#999 1px solid}
+.page a.next:hover i{background-position:-4px -51px}
+.page a.next i{ float:right;background-position:-12px -51px;margin-left:5px}

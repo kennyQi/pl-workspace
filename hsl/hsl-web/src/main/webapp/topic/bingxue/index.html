@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>炫精彩</title>
+		<style type="text/css">
+        	*{padding:0;margin:0;border:0;}
+        	map,map area{outline:none;}
+        	.container{width:100%;overflow:hidden;background:url(images/bg.jpg) no-repeat top center;}
+        	.content{width:1192px;overflow:hidden;margin:0 auto;padding:807px 0 200px 0;}
+        	.cont1{width:100%;height:982px;margin-bottom:342px;}
+        	.sideNav{width:160px;height:306px;background:url(images/sideNav.png);position:fixed;top:100px;right:10px;}
+        	.sideNav a{display:block;width:122px;height:40px;}
+        	.btn_more{display:block;width:374px;height:105px;background:url(images/btn_more.png) no-repeat center;margin:47px auto 0 auto;}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+		    <div class="content">
+			<div class="cont1">
+				<img src="images/cont1.jpg" usemap="#productmap1">
+                <map name="productmap1">
+                  <area shape="rect" coords="1,2,391,292" href="http://www.ply365.com/line/detail?id=84859b125ed64b75adf1e5c6ff6b0e6b" target="_blank">
+                  <area shape="rect" coords="401,2,791,292" href="http://www.ply365.com/line/detail?id=0341fa13891e421e95d754c5161b1083" target="_blank">
+                  <area shape="rect" coords="802,2,1190,292" href="http://www.ply365.com/line/detail?id=8b17be8a3fc9480a834ae216d1ddcf0d" target="_blank">
+                  <area shape="rect" coords="1,352,391,642" href="http://www.ply365.com/line/detail?id=2da6549257504016b70577e707b20f52" target="_blank">
+                  <area shape="rect" coords="400,352,791,642" href="http://www.ply365.com/line/detail?id=2fbb4e964bea486e94c5bb58265fdfcc" target="_blank">
+                  <area shape="rect" coords="801,352,1190,641" href="http://www.ply365.com/line/detail?id=353d68fd7ee347a09663fb9c46be4e26" target="_blank">
+                  <area shape="rect" coords="1,692,391,981" href="http://www.ply365.com/line/detail?id=3d1fadfe01b946708b5d69c437624f61" target="_blank">
+                  <area shape="rect" coords="400,691,791,981" href="http://www.ply365.com/line/detail?id=69c4ead9be144956bcaa2ee019ed5942" target="_blank">
+                  <area shape="rect" coords="801,692,1190,981" href="http://www.ply365.com/line/detail?id=f7500377d62f4718a886d0c0367f29bb" target="_blank">
+                </map>
+			</div>
+			<div class="cont2">
+				<img src="images/cont2.jpg" usemap="#productmap2">
+                <map name="productmap2">
+                  <area shape="rect" coords="2,66,391,356" href="http://www.ply365.com/line/detail?id=f0558dff65444c459a87c269adf14d38" target="_blank">
+                  <area shape="rect" coords="402,66,792,356" href="http://www.ply365.com/line/detail?id=629bcd3d10ea49678c47289bfc2c7b73" target="_blank">
+                  <area shape="rect" coords="802,66,1191,356" href="http://www.ply365.com/line/detail?id=2318595705414a14b77d5b6c6b114cc7" target="_blank">
+                  <area shape="rect" coords="2,465,392,756" href="http://www.ply365.com/line/detail?id=cc3aa4c0a89e4598897743834ec556d2" target="_blank">
+                  <area shape="rect" coords="402,465,792,756" href="http://www.ply365.com/line/detail?id=a509e2a1f0024edfaa561189fbeab038" target="_blank">
+                  <area shape="rect" coords="802,465,1191,756" href="http://www.ply365.com/line/detail?id=c6cd51988db1429d9c1d95fc9c12f86c" target="_blank">
+                </map>
+			</div>
+			<a href="http://www.ply365.com/line/list" target="_blank" class="btn_more"></a>
+			</div>
+		</div>
+		<div class="sideNav">
+			<a href="javascript:;" style="position:absolute;top:163px;left:20px;"></a>
+			<a href="javascript:;" style="position:absolute;top:226px;left:20px;"></a>
+		</div>
+		<script type="text/javascript">
+			$(function(){
+				var $sideNav_a = $('.sideNav a');
+				$sideNav_a.eq(0).click(function(){
+					$('html,body').animate({scrollTop:'610px'},300);
+				});
+				$sideNav_a.eq(1).click(function(){
+					$('html,body').animate({scrollTop:'1899px'},300);
+				});
+			})
+		</script>
+	</body>
+</html>

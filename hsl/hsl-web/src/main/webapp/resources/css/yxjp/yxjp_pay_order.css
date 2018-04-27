@@ -1,0 +1,177 @@
+@charset "utf-8";
+input,button,select,textarea{outline:none} /*去除浏览器默认边框*/
+.box{background:#f5f5f5;}
+.fly_orderBox{  width:1160px; padding:20px 20px 100px 20px;overflow: hidden;}
+/*左侧内容*/
+.fly_orderBox .orderBox_left{ width:823px;  background:#fff;padding-bottom: 83px;}
+/*支付进程*/
+.fly_orderBox .orderBox_left .pay_process{width:823px;}
+.fly_orderBox .orderBox_left .pay_process ul{ height:32px; margin:35px 0 85px 125px;}
+.fly_orderBox .orderBox_left .pay_process ul li{ float:left; width:220px;}
+.fly_orderBox .orderBox_left .pay_process ul li .ic{ width:37px; height:32px; background:url(../../images/regScript_bg.png) 0 -36px; text-align:right; line-height:32px; padding-right:12px; color:#999;}
+.fly_orderBox .orderBox_left .pay_process ul li span{ color:#ccc; line-height:32px; margin-left:10px;}
+
+.fly_orderBox .orderBox_left .pay_process ul .fly_on .ic{background:url(../../images/regScript_bg.png) 0 0; color:#fff;}
+.fly_orderBox .orderBox_left .pay_process ul .fly_on span{color:#3ebdb6; font-weight:bold;}
+/*支付进程*/
+.fly_orderBox .orderBox_left .left_box{clear:both; padding:0 45px 0px 30px; *margin-top:85px;}
+.fly_orderBox .orderBox_left .left_box .fly_bt{ height:16px; margin-left:17px; border-left:4px solid #dcdcdc; padding-left:10px; line-height:16px; clear:both; width:120px;}
+.fly_orderBox .orderBox_left .left_box .line{height:0; border:1px solid #dcdcdc; margin-top:10px;}
+.fly_orderBox .orderBox_left .left_box .opportunity{ clear:both; width:550px; margin:10px 0 55px 30px;}
+.fly_orderBox .orderBox_left .left_box .opportunity li{float:left; width:550px; height:30px; margin-top:10px;}
+.fly_orderBox .orderBox_left .left_box .opportunity li .cla{line-height:30px;}
+.fly_orderBox .orderBox_left .left_box .opportunity li .texta{width:220px;height:30px; background:url(../../images/input_script.png) 0 -34px; float:left; margin-left:10px; border:0; padding:0 10px; line-height:30px;}
+.fly_orderBox .orderBox_left .left_box .opportunity li .select{ background:url(../../images/input_script.png) 0 -164px;}
+.radio{width:16px;height:16px; float:left; background:url(../../images/payScript.png) -216px -157px; margin:8px 5px 0 10px;}
+.radio_click{ background:url(../images/payScript.png) 0 -157px;}
+.fly_orderBox .orderBox_left .left_box .policy{ clear:both; width:425px; margin:0 0 0 30px; padding-top:15px;}
+.fly_orderBox .orderBox_left .left_box .policy .policys{ width:430px; margin-top:5px;}
+.fly_orderBox .orderBox_left .left_box .createOrder{ clear:both; width:240px;height:30px; background:url(../../images/regScript_bg.png) 0 -97px; line-height:30px; color:#fff; margin:70px 0 0 100px;}
+
+/*下拉列表*/
+.selectNav{ float:left; width:240px; position:absolute; z-index:999; background:#f2f2f2; border-top:0; margin-top:29px; margin-left:69px; display:none; *margin-left:-240px;}
+.selectNav .l{ float:left; width:220px !important; height:28px; margin:0 !important; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.selectNav .l:hover{ background:#e5e5e5;}
+/*下拉列表*/
+/*左侧内容*/
+/*右侧内容*/
+.fly_orderBox .orderBox_right{width:337px; height:838px; background:url(../../images/fly_rightBg.png);}
+.fly_orderBox .orderBox_right .flight{ font-size:17px; width:189px; height:42px; background:url(../../images/regScript_bg.png) 0 -136px; line-height:42px; margin-top:20px;}
+.fly_orderBox .orderBox_right .flight_mess{margin:0 20px;height:100px; width:295px;}
+.fly_orderBox .orderBox_right .flight_mess .flight_com{ line-height:20px; margin-top:47px;}
+.fly_orderBox .orderBox_right .flight_mess .flight_com i{ float:left; width:27px;height:20px;  margin: 0 13px 0 6px;}
+.fly_orderBox .orderBox_right .flight_mess .voyage{ border-top:1px solid #cbe0de; margin-top:11px;}
+.fly_orderBox .orderBox_right .flight_mess .voyage .voyage_left{ width:42px; height:169px; margin-top:25px;}
+.fly_orderBox .orderBox_right .flight_mess .voyage .voyage_left i{ float:left; width:14px;height:71px; background:url(../../images/regScript_bg.png) 0 -207px; margin:10px 0 0 12px;}
+.fly_orderBox .orderBox_right .flight_mess .voyage .voyage_right{ width:200px; height:169px; margin-top:25px;}
+.fly_orderBox .orderBox_right .flight_mess .voyage .voyage_right .citys{width:275px;}
+.fly_orderBox .orderBox_right .flight_mess .voyage .voyage_right .citys .time{ font-weight:bold; font-size:26px; color:#333; line-height:26px;}
+.fly_orderBox .orderBox_right .flight_mess .voyage .voyage_right .citys .place{ margin:10px 0 0 28px;}
+.fly_orderBox .orderBox_right .flight_mess .charge{ clear:both; border-top:1px solid #cbe0de; padding:25px 0;}
+.fly_orderBox .orderBox_right .flight_mess .charge span{margin-left:42px;}
+.fly_orderBox .orderBox_right .flight_mess .price{clear:both; border-top:1px solid #cbe0de; }
+.fly_orderBox .orderBox_right .flight_mess .price span{ margin:30px 0 0 42px;}
+.fly_orderBox .orderBox_right .flight_mess .price span b{ font-size:26px; color:#3ebdb6;}
+/*右侧内容*/
+
+
+/*公司订单部分*/
+.companyLink{width:188px; height:28px; border:1px solid #cbe0de; background:#f5fefd; line-height:28px; margin-left:10px;}
+.companyLink:hover{color:#3ebdb6;}
+.companyEmployee{width:427px;height:473px; position:absolute; z-index:999; background:url(../../images/regScript_bg.png) 0 -285px; margin-left:250px; margin-top:195px; *margin-top:125px; display:none;}
+.companyEmployee .com_top{ height:30px; margin:7px 0 0 0;}
+.companyEmployee .com_top span{ margin:7px 0 0 150px; color:#fff;}
+.companyEmployee .com_top a{width:20px;height:20px; background:url(../../images/regScript_bg.png) 0 -760px; margin:5px 0 0 110px;}
+.companyEmployee .com_list{ width:350px; height:164px; margin:23px 0 10px 40px; color:#666;}
+.companyEmployee .com_list li{ width:290px; height:30px;  margin-bottom:10px; *margin-bottom:6px;}
+.companyEmployee .com_list li span{ line-height:30px;}
+.companyEmployee .com_list li .comSelect{width:180px;height:30px; background:url(../../images/input_script.png) 0 -206px; padding:0 10px;}
+.companyEmployee .employeeMess{ width:375px; height:130px; border-top:1px solid #cbe0de; margin:0 0 0 25px;}
+.companyEmployee .employeeMess ul{ margin:20px 0 0 10px;}
+.companyEmployee .employeeMess ul li{margin-bottom:10px;}
+.companyEmployee .employeeMess ul li span{ margin-right:8px;}
+.companyEmployee .com_tj{ width:200px; height:30px; background:#3ebdb6; line-height:30px; color:#fff; margin:30px 0 0 115px;}
+
+/*下拉列表*/
+.companyEmployee .selectNav{ float:left; width:200px; position:absolute; z-index:999; background:#f2f2f2; border-top:0; margin-top:29px; margin-left:84px; display:none; *margin-left:-200px;}
+.companyEmployee .selectNav .l{ float:left; height:28px; margin:0 !important; color:#333; font-size:14px; font-family:"微软雅黑"; padding:0 10px; line-height:28px;}
+.companyEmployee .selectNav .l:hover{ width:180px;}
+/*下拉列表*/
+
+
+/*机票支付*/
+.fly_pay_box{ clear:both; width:750px;}
+.fly_pay_box .fly_pasInf{ height:30px; line-height:30px; margin:15px 0 0 31px;}
+.fly_pay_box .fly_pasInf i{width:30px;height:30px; background:url(../../images/fly_script2.png) 0 -160px; margin-right:20px;text-align:center;color:#fff;font-size:16px;line-height:30px;
+	font-weight:bold;}
+.fly_pay_box .fly_pasInf .fly_payBt{ margin:0 10px 0 0;}
+.fly_pay_box .fly_pasInf .ids{ margin-left:80px;}
+.fly_pay_box .fly_pasInf .pays{ margin-left:50px;}
+.fly_pay_box .fly_payOrder{padding-left:50px; margin-bottom:50px;}
+.fly_pay_box .fly_sale{ margin:20px 0 0 30px;}
+.fly_pay_box .fly_saleSel{ margin:20px 0 0 28px; width:700px; line-height:16px; height:16px; }
+.fly_pay_box .fly_saleSel i{width:16px;height:16px; margin-right:5px; float:left; background:url(../../images/fly_script2.png) 0 -197px;}
+.fly_pay_box .fly_saleSel .fly_pay_cli{background:url(../../images/fly_script2.png) -25px -197px;}
+.fly_pay_box .Triangle{width:8px;height:6px; float:left; background:url(../../images/fly_script2.png) 0 -251px; position:absolute; margin:-16px 0 0 20px;}
+.fly_pay_box .fly_sales{ width:606px;height:auto; border:1px solid #e5e5e5; padding:10px; margin:13px 0 0 28px; -webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-box-shadow: #f3f3f3 0px 4px 10px;
+	-moz-box-shadow: #f3f3f3 0px 4px 10px;
+	box-shadow: #f3f3f3 4px 4px 10px;}
+.car_money{margin-top:40px;}
+.fly_pay_box .fly_sales li{height:30px; line-height:30px;}
+.fly_pay_box .fly_sales  li i{width:16px;height:16px; float:left; background:url(../../images/fly_script2.png) 0 -225px; margin:6px 10px 0 3px;}
+.fly_pay_box .fly_sales #cashcoupon li i{width:16px;height:16px; float:left; background:url(../../images/fly_script2.png) 0 -225px; margin:6px 10px 0 3px;}
+.fly_pay_box .fly_sales li .VouchersClick{ background:url(../../images/fly_script2.png) -25px -225px !important;}
+.fly_pay_box .fly_sales li span{ float:left;}
+.fly_pay_box .fly_sales li .companySelect{width:150px;height:30px; background:url(../../images/input_script2.png) 0 -421px; line-height:30px; padding-left:10px; margin:0 0 0 29px;}
+.fly_pay_box .fly_sales li .selectNav{width:160px; overflow-y:auto;max-height:150px; margin:25px 0 0 118px; *margin:25px 0 0 -388px;}
+.fly_pay_box .fly_sales li .selectNav li{ height:30px; line-height:30px; font-size:12px;width:120px !important;}
+.fly_pay_box .fly_sales li .fly_payTs{ margin-left:12px;}
+.fly_pay_box .fly_sales li .tips{ margin-left:12px; color:#D25353;}
+/**支付**/
+.fly_pay_box .fly_payBox{ width:743px; height:142px; border:2px solid #cbe0de; background:#f5fefd; margin:60px 0 0 0;}
+.fly_pay_box .fly_payBox .fly_payMethod{ margin:14px 0 9px 30px;}
+.fly_pay_box .fly_payBox .fly_payPlatform{ border-top:1px solid #cbe0de; clear:both;}
+.fly_pay_box .fly_payBox .fly_payPlatform span{ margin:38px 0 0 30px;}
+.fly_pay_box .fly_payBox .fly_payPlatform i{width:16px;height:16px; background:url(../../images/fly_script2.png) 0 -197px; margin:40px 0 0 30px;}
+.fly_pay_box .fly_payBox .fly_payPlatform .alipay{background:url(../../images/fly_script2.png) -25px -197px;}
+.fly_pay_box .fly_payBox .fly_payPlatform img{ margin:20px 0 0 15px;}
+.fly_pay_box .fly_Clause{margin:52px 0 0 510px; height:16px; line-height:16px;}
+.fly_pay_box .fly_Clause i{width:16px;height:16px; background:url(../../images/fly_script2.png) 0 -225px; margin-right:10px;}
+.fly_pay_box .fly_Clause .Agreement{background:url(../../images/fly_script2.png) -25px -225px;}
+.fly_pay_box .fly_payFor{ width:745px; height:74px; border:1px solid #3ebdb6; background:#f5fefd; margin:15px 0 100px 0;}
+.fly_pay_box .fly_payFor span{ height:28px; line-height:28px; margin-left:20px;}
+.fly_pay_box .fly_payFor .fly_payCard{ margin:25px 0 0 25px;}
+.fly_pay_box .fly_payFor .fly_payMon{ margin-top:19px; *margin-top:21px;}
+.fly_pay_box .fly_payFor a{ width:168px; height:74px; background:#3ebdb6; color:#fff; line-height:74px;}
+.fly_pay_box .fly_payFor a:hover{background:#7ed5d1;}
+
+.fly_car_money{height:50px;line-height:58px;}
+.fly_car_money i.checkbox{width:16px;height:16px; cursor:pointer; float:left; background:url(../../images/fly_script2.png) 0 -225px; margin:21px 10px 0 30px;}
+.fly_car_money i.checkboxClick{background:url(../../images/fly_script2.png) -25px -225px !important;}
+.fly_car_pay{color:#FC8F14;display:inline;margin-left:50px;line-height:50px;}
+.fly_car_pay span{color:red;font-size:24px;line-height:50px;}
+/*机票支付*/
+
+/*弹出层*/
+.fly_loadWait{position:fixed;left:0px;top:0px;width:100%;display:none;z-index:20}
+.fly_loadWait .loadbg{background:#000;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;width:100%;position:absolute;left:0px;top:0px;height:100%;}
+.fly_loadWait .loadIcon{background:url("../../images/loading3.gif") center 16px no-repeat #fff;width:360px;margin:auto;margin:auto;height:140px;padding-bottom:20px;
+	border:3px solid #cdcdcd;line-height:254px;text-align:center;position:relative;margin-top:200px;}
+
+
+
+
+/*航空公司标志*/
+.fly_bg{background-image: url("../../images/fly_company.png");background-repeat: no-repeat;}
+.flight_com .icon{width:35px;height:35px;background-position: 0px 0px;margin-top:-5px;}
+.flight_com .fly_MU{background-position:0px 0px;}
+.flight_com .fly_ZH{background-position:-35px 0px;}
+.flight_com .fly_CZ{background-position:-70px 0px;}
+.flight_com .fly_CA{background-position:-105px 0px;}
+.flight_com .fly_3U{background-position:-140px 0px;}
+.flight_com .fly_BK{background-position:-175px 0px;}
+.flight_com .fly_NS{background-position:-210px 0px;}
+.flight_com .fly_JD{background-position:-245px 0px;}
+.flight_com .fly_SC{background-position:0px -35px;}
+.flight_com .fly_TV{background-position:-35px -35px;}
+.flight_com .fly_UQ{background-position:-105px -35px;}
+.flight_com .fly_G5{background-position:-140px -35px;}
+.flight_com .fly_HU{background-position:-175px -35px;}
+.flight_com .fly_KN{background-position:-212px -35px;}
+.flight_com .fly_JR{background-position:-245px -35px;}
+.flight_com .fly_MF{background-position:-70px -35px;}
+.flight_com .fly_GJ{background-position:0px -70px;}
+.flight_com .fly_QW{background-position:-35px -70px;}
+.flight_com .fly_FU{background-position:-70px -70px;}
+.flight_com .fly_DR{background-position:-105px -70px;}
+.flight_com .fly_DZ{background-position:140px -70px;}
+.flight_com .fly_FM{background-position:-175px -70px;}
+.flight_com .fly_EU{background-position:-210px -70px;}
+.flight_com .fly_HO{background-position:-245px -70px;}
+.flight_com .fly_GS{background-position:0px -105px;}
+.flight_com .fly_8L{background-position:-35px -105px;}
+.flight_com .fly_YI{background-position:-70px -105px;}
+.flight_com .fly_KY{background-position:-105px -105px;}
+.flight_com .fly_PN{background-position:-140px 105px;}

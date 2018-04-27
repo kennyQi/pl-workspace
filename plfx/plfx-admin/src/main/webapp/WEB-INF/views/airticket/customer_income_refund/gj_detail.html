@@ -1,0 +1,198 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent sortDrag" selector="h1" layoutH="42">
+ 
+   <div class="panel collapse" defH="120">
+       <h1>订单信息</h1>
+       <div>
+           <table class="" width="98%">
+               <thead style="background-color: gray;">
+                   <tr style="text-align: center;" height="20px;">
+                       <th width="60">订单状态</th>
+                       <th width="40">PNR</th>
+                       <th width="120">平台订单号</th>
+                       <th width="120">供应商订单号</th>
+                       <th width="120">经销商订单号</th>
+                       <th width="70">支付金额</th>
+                       <th width="70">返点/佣金</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr style="text-align: center;" height="30px;">
+                       <td>
+                       		<#--	<#list ORDER_STATUS?keys as key>
+                       				${ORDER_STATUS[5]}
+                       			</#list>
+							-->
+                       </td>
+                       <td>${gjjpOrder.baseInfo.pnr}</td>
+                       <td >${gjjpOrder.id}</td>
+                       <td >${gjjpOrder.baseInfo.supplierOrderId}</td>
+                       <td >${gjjpOrder.baseInfo.dealerOrderId}</td>
+                       <td>
+                       <#if gjjpOrder.status.currentValue == '38' || gjjpOrder.status.currentValue == '39' || gjjpOrder.status.currentValue == '40'>
+							${(gjjpOrder.payInfo.totalPrice)?string('0.00')}
+						<#else>
+							0.00
+						</#if>
+                      </td> 
+                       <td> ${gjjpOrder.payInfo.supplierDisc?string('0.00')}/${gjjpOrder.payInfo.commAmount?string('0.00')}</td>
+                   </tr>
+               </tbody>
+           </table>
+           <span>
+               政策备注:<br/><br/>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<#if gjjpOrder.baseInfo.remark??>${gjjpOrder.baseInfo.remark}</#if>
+           </span>
+       </div>
+   </div>
+ 
+   <div class="panel collapse" defH="220">
+       <h1>机票信息</h1>
+       <div>
+           <table class="" width="98%">
+               <thead style="background-color: gray;">
+                   <tr style="text-align: center;" height="20px;">
+                       <th width="60" >行程</th>
+                       <th width="60">起飞</th>
+                       <th width="60">抵达    </th>
+                       <th width="60">航班信息</th>
+                       <th width="50" >舱位</th>
+                   </tr>
+               </thead>
+               <tbody>
+                    <!-- 去程 -->
+						<#if gjjpOrder.segmentInfo.takeoffFlights ??>
+						<#list gjjpOrder.segmentInfo.takeoffFlights as cabin>
+						<tr style="text-align: center;background-color: #9FE6CF;"height="20px">
+							<td>
+								<p>${dataTransService.getAirportName(cabin.orgCity)!''} - ${dataTransService.getAirportName(cabin.dstCity)!''}</p>
+							</td>
+							<td>
+								${cabin.startTime}
+							</td>
+							<td>
+								${cabin.endTime}
+							</td>
+							<td>
+								<p>${(cabin.marketingAirline)!''}</p>
+								<p>${(cabin.flightNo)!''}</p> 
+								
+							</td>
+							<!-- 舱位等级 -->
+							<td>
+								${(cabin.cabinClass)!''}
+							</td>
+						</tr>
+						</#list>
+						</#if>
+						<!-- 回程 -->
+						<#if gjjpOrder.segmentInfo.backFlights ??>
+						<#list gjjpOrder.segmentInfo.backFlights as cabin>
+						<tr style="text-align: center;"height="20px">
+							<td>
+								<p>${dataTransService.getAirportName(cabin.orgCity)!''} - ${dataTransService.getAirportName(cabin.dstCity)!''}</p>
+							</td>
+							<td>
+								${cabin.startTime}
+							</td>
+							<td>
+								${cabin.endTime}
+							</td>
+							<td>
+								<p>${(cabin.marketingAirline)!''}</p>
+								<p>${(cabin.flightNo)!''}</p>
+							</td>
+							<!-- 舱位等级 -->
+							<td>
+								${(cabin.cabinClass)!''}
+							</td>
+						</tr>
+						</#list>
+						</#if>
+               </tbody>
+           </table>
+           <br/>
+           <table class="" width="98%">
+               <thead style="background-color: gray;">
+                   <tr style="text-align: center;" height="20px;">
+                       <th width="60" >旅客姓名</th>
+                       <th width="60">证件类型</th>
+                       <th width="60">证件号码</th>
+                       <th width="60">票号</th>
+                       <th width="60">票面价</th>
+                       <th width="60">税费</th>
+                       <th width="60">单张合计</th>
+                       <th width="60">退座记录</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <#if gjjpOrder.passengers ??> 
+						<#list gjjpOrder.passengers as passenger>
+							<tr style="text-align: center;" height="20px;">
+								<td>${(passenger.baseInfo.passengerName)!''}</td>
+								<td>
+								<#if ID_TYPE_MAP??> 
+								<#--	<#list ID_TYPE_MAP?keys as key> 
+										<#if key==passenger.baseInfo.idType>
+											${ID_TYPE_MAP[key]} 
+										</#if> 
+									</#list> -->
+								</#if>
+								</td>
+								<td>
+									${(passenger.baseInfo.idNo)!''}
+								</td>
+								<td>
+									<#if passenger.tickets??>
+										<#list passenger.tickets as ticket>
+											<p>${ticket.ticketNo}</p>
+										</#list>
+									</#if>
+								</td>
+								<!-- 票面价 -->
+								<td>
+									${(passenger.ticketPriceDetail.parValue)!''}
+								</td>
+								<td>${passenger.ticketPriceDetail.supplierTax}</td>
+								<td>${passenger.ticketPriceDetail.parValue+passenger.ticketPriceDetail.supplierTax+passenger.ticketPriceDetail.supplierOutTickMoney}</td>
+								<td></td>
+							</tr>
+						</#list>
+					</#if>
+               </tbody>
+           </table>
+       </div>
+   </div>
+   
+   <div class="panel collapse" defH="220">
+   	   <h1>操作日志</h1>
+   	   <div>
+   	   <table class="" width="98%">
+	   	   <thead style="background-color: gray;">
+	                   <tr style="text-align: center;" height="20px;">
+	                       <th width="115" >时间</th>
+	                       <th width="100">操作</th>
+	                       <th width="120">操作人</th>
+	                       <th width="200">操作信息</th>
+	                   </tr>
+	       </thead>
+   	   	   <tbody>
+   	   	     <#list LOGS as log>
+					<tr style="text-align: center;" height="20px;">
+						<td>
+							<#if log.logDate ??>
+						 		${log.logDate!?string("yyyy-MM-dd HH:mm:ss")} 
+						 	</#if>
+						 </td>
+						<td>${log.logName}</td>
+						<td>${log.logWorker}</td>
+						<td>${log.logInfo}</td>
+					</tr>
+					</#list>
+   	   	   </tbody>
+   	   </table>
+   	   </div>
+   </div>
+
+</div>
+

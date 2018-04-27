@@ -1,0 +1,79 @@
+#companyInfo,#companyInfo_edit{
+	width:901px;
+	background: #fff;
+	margin-top:20px;
+	overflow: hidden;
+}
+.content_wrap{
+    width:861px;
+    padding:20px 20px 30px 20px;
+    border-bottom:3px solid #ccc;
+}
+.sub_title{
+	font-size:20px;
+	font-weight:normal;
+	color:#333;
+	line-height:40px;
+	border-bottom:1px solid #cccccc;
+	padding-bottom:5px;
+}
+table{
+    margin-top:5px;
+    margin-bottom: 15px;
+}
+.td_l{
+    width:70px;
+    text-align: right;
+    font-size: 14px;
+    font-weight: normal;
+    color:#999;
+    line-height: 40px;
+}
+.td_r{
+	width:312px;
+	padding-left:20px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: normal;
+    color:#333;
+    line-height: 40px;
+}
+.td_r input{
+	width:226px;
+    color:#333;
+    height:30px;
+    line-height: 30px;
+    border:1px solid #cccccc;
+    padding-left:10px;
+    color:#333;
+}
+#companyDiscription,#companyDiscription_edit{
+    width:849px;
+    height:272px;
+	padding:20px 5px;
+	font-size:14px;
+	color:#333;
+	line-height:24px;
+	text-indent:24px;
+	margin-top:20px;
+	background:#fff;
+    +margin-left:-24px;
+    outline: none;
+}
+#companyDiscription{
+    border:0;
+}
+#companyDiscription_edit{
+    border:1px solid #ccc;
+}
+.sub_btn{
+	display:block;
+	width:106px;
+    height:42px;
+    border:0;
+    line-height:42px;
+    background:#ff9c00;
+    color:#fff;
+    margin:30px auto;
+    cursor: pointer;
+}

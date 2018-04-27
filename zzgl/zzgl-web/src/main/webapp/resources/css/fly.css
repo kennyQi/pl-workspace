@@ -1,0 +1,167 @@
+@charset "utf-8";
+
+.Bg{background-image:url(../images/fly_script.png);background-repeat:no-repeat;}
+
+.g_bd{width:100%;z-index:120;min-width:1200px;background:#f5f5f5;}
+.g_bd *{font-family:"Microsoft YaHei","微软雅黑";}
+.g_bd .m_search{width:100%;min-width:1100px;height:420px;z-index:100;background: url("../images/fly_bn.jpg") no-repeat center top;}
+.g_bd .m_search .m_search_c{width:1100px;margin:auto;}
+
+/*搜索框*/
+.m_select{width:1100px;margin:auto;height:160px;margin-top:245px;background: url("../images/fly_bg1.png");border-radius: 8px;box-shadow: 1px 1px 3px #fff;}
+.m_select .select_cont{z-index:2;padding:25px 0px 0px 15px;}
+.m_select .select_cont .input{outline:none;width:153px;height:38px;border-radius:4px;background-color:#fff;border:1px solid #c8c8c8;padding:0px 40px 0px 5px; float:left;display:block;color:#333333;line-height:38px;}
+
+.m_select .select_cont .city{background-position:161px -91px;}
+.m_select .select_cont .time{padding-left:84px;width:174px;background: #f1f1f1;}
+.m_select .day{padding-left:40px;width:310px;}
+.m_select .select_cont .time_tt{left:10px;top:8px;width:64px;height:24px;line-height:24px;}
+.m_select .day .time_tt{left:50px;}
+.m_select .change{width:26px;height:16px;background-position: -83px -11px;margin:12px 12px 0px 12px;cursor: pointer;}
+.m_select .change:hover{background-color:#3ebdb6;border:7px solid #3ebdb6;margin:5px 5px 0px 5px;background-position: -150px -11px;}
+.m_select .icon1{width:33px;height:23px;background-position: 0px -32px;right:25px;top:8px;}
+.m_select .icon2{width:33px;height:23px;background-position: -38px -34px;right:25px;top:8px;}
+.m_select .icon3{width:29px;height:29px;background-position: -71px -32px;right:25px;top:5px;}
+.m_select .select_cont .s_btn{width:204px;height:32px;background-position:0px -115px;text-indent: -9999px;bottom: -141px;left:411px;}
+
+/*内容*/
+.g_cont{width:1110px;margin:auto;}
+.m_left{width:880px;margin:60px 20px 0px 0px;}
+.m_left .m_title{font-size:18px;color:#666666;font-weight: normal;}
+.m_date{width:876px;height:81px;border:2px solid #e6e6e6;background: #fff;margin-top:25px;}
+.m_date .turn_l{width:28px;height:81px;background:#fcfcfc;border-right:1px solid #e6e6e6;}
+.m_date .turn_l .icon{width:12px;height:23px;background-position:0px -60px;margin:27px 0px 0px 7px;}
+.m_date .turn_l:hover .icon{background-position:0px -84px;}
+.m_date .turn_r{width:28px;height:81px;background:#fcfcfc;}
+.m_date .turn_r .icon{width:12px;height:23px;background-position:-16px -60px;margin:27px 0px 0px 7px;}
+.m_date .turn_r:hover .icon{background-position:-16px -84px;}
+.m_date .day{width:819px;height:81px;}
+.m_date .day li{float: left;}
+.m_date .day li.off a{color:#bcbcbc;}
+.m_date .day li a{color:#666666;font-size:14px;text-align: center;line-height:80px;width:116px;height:81px;float: left;border-right:1px solid #e6e6e6;display: block;overflow: hidden;}
+.m_date .day li a:hover,.m_date .day li a.on{background: #7fd5d0;color:#fff;padding-top:15px;margin-top: -14px;}
+
+.m_tiao{height:31px;margin-top:23px;}
+.m_tiao .lab{color:#666;font-size: 14px;line-height:29px;}
+.m_html_sel{width:138px;height:29px;border:1px solid #e6e6e6;background-color: #ffffff;line-height: 29px;padding-left: 10px;margin-right:30px;z-index: 10;font-size:14px;color:#666666;}
+.m_html_sel .icon{right:0px;top:0px;height:29px;width:20px;background-position:-33px -58px; }
+.m_html_sel .icon:hover{background-position: -55px -64px;}
+.m_html_sel .op{top:-1px;width:146px;left:-1px;background: #fff;display: none;border:2px solid #e6e6e6;}
+.m_html_sel .op span{display: block;padding-left: 10px;cursor: pointer;}
+.m_html_sel .op span:hover{color:#666666;background-color: #e6e6e6;}
+
+
+/*机票信息*/
+.fly_bg{background-image: url("../images/fly_company.png");background-repeat: no-repeat;}
+.m_list{width:876px;border:2px solid #e6e6e6;border-bottom-width:1px;background: #fff;margin-top:20px;}
+.m_list .fly_box{width: 100%;}
+.m_list .found{width:100%;border-bottom:1px solid #e6e6e6;height:130px;}
+.m_list .found span{float: left;}
+.m_list .found .company{height:33px;width: 170px;margin:50px 0px 0px 20px;overflow: hidden;padding-left: 40px;}
+.m_list .found .company .icon{width:35px;height:35px;background-position: 0px 0px;position: absolute;left:0px;top:0px;}
+.m_list .found .company .i{color:#333333;font-size:14px;width:100%;line-height: 15px;}
+.m_list .found .company .c{color:#666666;width:100%;line-height: 18px;font-size:14px;}
+.m_list .found .time{width:86px;height:44px;margin-top:40px;}
+.m_list .found .time .i{color:#333333;font-size:22px;text-align: center;width:100%;display: block;font-weight: bold;}
+.m_list .found .time .c{color:#333333;font-size:12px;text-align: center;width:100%;display: block;}
+.m_list .found .cross{width:173px;height:64px;margin:35px 0px 0px 00px;overflow: hidden;}
+.m_list .found .cross .t{width:100%;color:#999999;font-size:12px;text-align: center;}
+.m_list .found .cross .icon{width:100%;height:10px;background-position: 0px 0px;}
+.m_list .found .cross .tim{margin-left:35px;padding-left: 27px;width: 111px;margin-top: 5px;}
+.m_list .found .cross .tim .z{width:17px;height:17px;background-position: -66px -10px;left: 0px;top:7px;}
+.m_list .found .cross .tim .x{color:#3ebcb5;font-size:12px;display: block;}
+.m_list .found .cross .tim .ti{color:#999999;font-size:12px;display: block;}
+.m_list .found .other{margin:50px 0px 0px 51px;width:80px;color:#999;font-size:12px;}
+.m_list .found .price_on,.m_list .found .price:hover{border-left:1px dashed #cbe0de;background: #f5fefd;}
+.m_list .found .price{width:169px;height:100px;padding: 30px 0px 0px 0px;border-left:1px dashed #fff;cursor: pointer;}
+.m_list .found .price .i{color:#3fbeb7;font-size: 26px;word-spacing: -4.5px;
+    width:95px;text-align: center; float: left;margin-left:30px;text-decoration: line-through;}
+.m_list .found .price i{color:#999999;font-size: 12px;text-decoration: line-through;}
+.m_list .found .price e{color:#3fbeb7;font-size: 18px;text-decoration: line-through;}
+.m_list .found .look_detail{width:123px;height:40px;text-align: center;line-height: 31px;color:#fff;font-size:14px;
+    background:url("../images/fly_order_btn.png");float: left;border-radius: 3px;margin-top:5px;margin-left:10px;}
+.m_list .found .price .xiab{width:16px;height:9px;background-position: -114px -11px;bottom: -1px;  left:65px;display:none;}
+
+/*航空公司标志*/
+.m_list .found .company .fly_MU{background-position:0px 0px;}
+.m_list .found .company .fly_ZH{background-position:-35px 0px;}
+.m_list .found .company .fly_CZ{background-position:-70px 0px;}
+.m_list .found .company .fly_CA{background-position:-105px 0px;}
+.m_list .found .company .fly_3U{background-position:-140px 0px;}
+.m_list .found .company .fly_BK{background-position:-175px 0px;}
+.m_list .found .company .fly_NS{background-position:-210px 0px;}
+.m_list .found .company .fly_JD{background-position:-245px 0px;}
+.m_list .found .company .fly_SC{background-position:0px -35px;}
+.m_list .found .company .fly_TV{background-position:-35px -35px;}
+.m_list .found .company .fly_UQ{background-position:-105px -35px;}
+.m_list .found .company .fly_G5{background-position:-140px -35px;}
+.m_list .found .company .fly_HU{background-position:-175px -35px;}
+.m_list .found .company .fly_KN{background-position:-212px -35px;}
+.m_list .found .company .fly_JR{background-position:-245px -35px;}
+.m_list .found .company .fly_MF{background-position:-70px -35px;}
+.m_list .found .company .fly_GJ{background-position:0px -70px;}
+.m_list .found .company .fly_QW{background-position:-35px -70px;}
+.m_list .found .company .fly_FU{background-position:-70px -70px;}
+.m_list .found .company .fly_DR{background-position:-105px -70px;}
+.m_list .found .company .fly_DZ{background-position:140px -70px;}
+.m_list .found .company .fly_FM{background-position:-175px -70px;}
+.m_list .found .company .fly_EU{background-position:-210px -70px;}
+.m_list .found .company .fly_HO{background-position:-245px -70px;}
+.m_list .found .company .fly_GS{background-position:0px -105px;}
+.m_list .found .company .fly_8L{background-position:-35px -105px;}
+.m_list .found .company .fly_YI{background-position:-70px -105px;}
+.m_list .found .company .fly_KY{background-position:-105px -105px;}
+.m_list .found .company .fly_PN{background-position:-140px 105px;}
+
+
+.m_list .fly_none{width:876px;height:320px;background:url("../images/fly_none.png") no-repeat 365px 50px;color:#666666;font-size:14px;text-align: center;line-height: 380px;}
+.m_list .fly_load{width:876px;height:320px;background:url("../images/loading.gif") no-repeat 295px 70px;}
+/*票务*/
+.m_list .ticket{border:1px solid #ededed;overflow: hidden;background: #f8f8f8;border-top:0px;border-bottom: 0px;display: none;}
+.m_list .ticket li{height:36px;border-bottom: 1px solid #ededed;width: 100%;display: block;overflow: hidden;}
+.m_list .ticket li:hover{background: #fbfbfb;}
+.m_list .ticket li span{float: left;line-height:36px;font-size:12px;}
+.m_list .ticket .type{width:22px;height:22px;background-position: -44px -10px;margin:7px 0px 0px  29px;}
+.m_list .ticket .sw{width:22px;height:22px;background-position: 0px -10px;margin:7px 0px 0px  29px;}
+.m_list .ticket .td{width:22px;height:22px;background-position: -22px -10px;margin:7px 0px 0px  29px;}
+.m_list .ticket .name{color:#3fbeb7;margin-left: 5px;width:90px;}
+.m_list .ticket .off{color:#999999;margin-left: 96px;width:45px;text-align: left;}
+.m_list .ticket .tips{color:#999999;margin-left: 102px;width:50px;text-align: left;}
+.m_list .ticket .tipsUnder{color:#999999;margin-left: 65px;width:50px;text-align: left;}
+.m_list .ticket .price{color:#3fbeb7;margin-left: 78px;font-size:18px;font-weight:bold;width:98px;text-align: left;text-decoration: line-through;}
+.m_list .ticket .price i{font-size: 12px;color:#999;font-weight:normal;text-decoration: none;}
+.m_list .ticket .sub{float: left;width:101px;height:35px;color:#fff;
+    background:url("../images/fly_order_btn_sm.png");border-radius: 3px;margin:0px 0px 0px 0px;text-align: center;line-height: 25px;font-size:12px;}
+/*.m_list .ticket .sub:hover{background:#7fd5d0;}*/
+.m_list .ticket .toggle{float: right;padding-right:20px;margin-right: 38px;position: relative;cursor:pointer;}
+.m_list .ticket .toggle i{width:9px;height:5px;background-position: -133px -10px;position:absolute;right:0px;top:15px;}
+
+.m_page{width:880px;margin-top: 50px;padding-bottom: 70px;}
+.m_page .turn{background:#fff;margin-left:20px;padding:0px 14px;line-height:32px;color:#999999; font-size: 14px;}
+.m_page .turn:hover{color:#3ebdb6;text-decoration: underline;}
+/*右侧*/
+.m_right{width:210px;margin-top:100px;}
+.m_right .pinc{background:#fff;padding:20px;margin-top:10px;}
+.m_right .pinc .city{border:1px solid #e6e6e6;padding:0px 8px;height:29px;line-height: 29px;width:152px;outline: none;}
+.m_right .pinc .search{width:170px;text-align: center;line-height:30px;margin-top:10px;background: #6fbf4d;color:#fff;font-size:14px;}
+.m_right .pinc .jd{color:#6fbf4d;font-size:14px;margin-top:20px;font-weight: normal;}
+.m_right .pinc .hotLink{line-height:24px;}
+.m_right .pinc .hotLink a{font-size:12px;color:#666666;}
+.m_right .pinc .hotLink a:hover{text-decoration: underline;}
+
+
+
+/*弹出层*/
+.fly_loadError{position:fixed;left:0px;top:0px;width:100%;display:none;z-index:20}
+.fly_loadError .loadbg{background:#000;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;width:100%;position:absolute;left:0px;top:0px;}
+.fly_loadError .loadIcon{background:url(../images/fly_fail_icon.png) center 16px no-repeat #fff;background-size:30%;width:360px;margin:auto;margin:auto;height:140px;padding-bottom:20px;
+border:3px solid #cdcdcd;line-height:254px;text-align:center;position:relative;color:red;}
+
+
+/*弹出层*/
+.fly_loadWait{position:fixed;left:0px;top:0px;width:100%;display:none;z-index:20}
+.fly_loadWait .loadbg{background:#000;filter:alpha(opacity=50);-moz-opacity:0.5;opacity:0.5;width:100%;position:absolute;left:0px;top:0px;}
+.fly_loadWait .loadIcon{background:url("../images/loading3.gif") center 16px no-repeat #fff;width:360px;margin:auto;margin:auto;height:140px;padding-bottom:20px;
+border:3px solid #cdcdcd;line-height:254px;text-align:center;position:relative;}
+
+

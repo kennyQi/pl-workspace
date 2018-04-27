@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- meta信息，可维护 -->
+<meta charset="UTF-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+ <!-- 公共样式 -->
+<link rel="stylesheet" href="css/base.2.0.css" />
+<link rel="stylesheet" type="text/css" href="css/ticket.css">
+<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+<script src="js/iscroll.js" type="text/javascript"></script>
+<script type="text/javascript">
+  var myScroll;
+
+  function loaded() {
+    myScroll = new iScroll('wrapper', {
+    snap: true,
+    momentum: false,
+    hScrollbar: false,
+    onScrollEnd: function () {
+    document.querySelector('#indicator > li.active').className = '';
+    document.querySelector('#indicator > li:nth-child(' + (this.currPageX+1) + ')').className = 'active';
+    }
+     });
+
+  }
+  document.addEventListener('DOMContentLoaded', loaded, false);
+  document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+  WeixinJSBridge.call('hideToolbar');
+  });
+
+ 
+</script>
+
+ </head>
+<body id="bf">
+		<div class="banner" style="margin:0px; padding:0px;">
+    <div style="overflow: hidden;" id="wrapper">
+      <div  id="scroller">
+        <ul id="thelist">
+          <li><a href="#" >
+            <h3>杭州西湖</h3>
+             <img src="img/banner.jpg"></a></li>
+          <li><a href="#" >
+            <h3>杭州西湖</h3>
+          <img src="img/banner.jpg"></a></li>  
+          <li><a href="#" >
+            <h3>杭州西湖</h3>
+          <img src="img/banner.jpg"></a></li>  
+          <li><a href="#" >
+            <h3>杭州西湖</h3>
+          <img src="img/banner.jpg"></a></li>     
+        </ul>
+      </div>
+    </div>
+    <div id="nav">
+      <ul id="indicator">
+        <li class="">1</li>
+        <li class="active">2</li>    
+        <li class="">2</li>
+        <li class="">3</li>
+        <li class="">4</li>     
+      </ul>
+    </div>
+  </div>
+  <!-- 页面内容 -->
+	<section class="content " id="index">
+     	<!--start 头部-->
+    	<div class="enter_hd">
+            <div class="enter">
+            <a  href="javascript:;"><div class="plane"><i class="i_01"></i><span>国内机票</span></div></a>
+            <a  href="javascript:;"><div class="plane"><i class="i_02"></i><span>景区门票</span></div></a>
+            <a  href="javascript:;"><div class="plane"><i class="i_03"></i><span>个人中心</span></div></a>
+            </div>
+        </div>
+      <!--end 头部-->
+        <!--start 景点门票列表-->
+      <div class="hot_ticket uktg">
+      	<div class="hot_t_hd">
+          <i class="hot_online"></i>
+          <div class="hot_info"><i></i>热门推荐 >></div>
+        </div>		
+        <div class="hot_ticket_list pb60">
+        		<ul>
+            	<li>
+                	<a href="touristSearch.html">
+                        <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                        <p><span>嘉兴南湖</span></p>
+                    </a>
+                </li>
+                <li>
+                	<a href="touristSearch.html">
+                        <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                        <p><span>嘉兴南湖</span></p>
+                    </a>
+                </li>
+                <li>
+                	<a href="touristSearch.html">
+                        <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                        <p><span>嘉兴南湖</span></p>
+                    </a>
+                </li>
+                <li>
+                	<a href="touristSearch.html">
+                        <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                        <p><span>嘉兴南湖</span></p>
+                    </a>
+                </li>
+                <li>
+                	<a href="touristSearch.html">
+                        <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                       <p><span>嘉兴南湖</span></p>
+                    </a>
+                </li>
+                <li>
+                	<a href="touristSearch.html">
+                        <img  src="img/11d9b444e06fbe03e1749c53ed6750e8.jpg_r_550x550_c24b1de7.jpg">
+                       <p><span>嘉兴南湖</span></p>
+                    </a>
+                </li>
+             </ul> 
+         </div>
+       </div>
+         <!--end 门票列表-->  
+     </section>
+     
+     <footer class="index_f">
+       <div class="f_nav">
+       	<a href="login.html">登陆</a>
+        <a href="registration.html">注册</a>
+        <a id="J_phone">客服电话</a>
+       </div>
+       <p>©2014 plyou 365 票量旅游服务中心</p>
+  </footer>
+  <section id="f_tel" style="display:none">
+    <div class="f_tel_title">
+      <div class="f_tel_hd">
+       <a href="tel:0571-854246">0571-854246</a>
+       <a id="J_hide">取消</a>
+       </div>
+     </div>
+   </section>
+    <script type="text/javascript">
+	var count = document.getElementById("thelist").getElementsByTagName("img").length;	
+	var count2 = document.getElementsByClassName("menuimg").length;
+		for(i=0;i<count;i++){
+ 			document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:"+document.body.clientWidth+"px";
+ 			<!--document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " height:"+(document.body.clientHeight) / 4+"px";-->
+			}
+		document.getElementById("scroller").style.cssText = " width:"+document.body.clientWidth*count+"px";
+		 setInterval(function(){
+		myScroll.scrollToPage('next', 0,400,count);
+		},3500 );
+		window.onresize = function(){ 
+	for(i=0;i<count;i++){
+		document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " width:"+document.body.clientWidth+"px";
+	<!--document.getElementById("thelist").getElementsByTagName("img").item(i).style.cssText = " height:"+(document.body.offsetHeight) / 4+"px";-->
+	}
+	 document.getElementById("scroller").style.cssText = " width:"+document.body.clientWidth*count+"px";
+	} 
+		 
+		 
+ 	$(window).load(function(){     
+ 		$("#J_hide").on("click",function(ev){
+		  $("#f_tel").hide();
+		  $("body").removeClass("f_tel"); 
+			$("#f_tel").removecss();     
+
+ 		});
+
+ 		$("#J_phone").click(function(ev){
+      ev.preventDefault();
+    	var dh = $("#bf").scrollTop()
+ 		 	 $("#f_tel").show();
+		   $("body").addClass("f_tel");
+			 $("#f_tel").css({"top":dh,"position":"absolute"});     
+ 		});
+ 		})
+ 	</script>  
+    
+</body>
+</html>

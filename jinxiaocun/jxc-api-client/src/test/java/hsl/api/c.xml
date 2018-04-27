@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<OrderFlight_2_0>
+	<Flights>
+		<Flight>
+			<ID />
+			<FlightID />
+			<ElementNo />
+			<Type />
+			<TypeCode />
+			<ActionCode />
+			<Farebasis />
+			<Carrier>CA</Carrier>
+			<FlightNo>8906</FlightNo>
+			<ShareCarrier />
+			<ShareFlight />
+			<FromCity>PEK</FromCity>
+			<ArriveCity>DLC</ArriveCity>
+			<Mileage>579</Mileage>
+			<ClassCode>F</ClassCode>
+			<ClassRebate>400</ClassRebate>
+			<ClassPrice>2840.0</ClassPrice>
+			<BasePrice />
+			<YPrice>710.0</YPrice>
+			<FuelSurTax>70.0</FuelSurTax>
+			<AirportTax>50.0</AirportTax>
+			<DepartureDate>2014-08-30</DepartureDate>
+			<DepartureTime>16:35</DepartureTime>
+			<ArrivalDate>2014-08-30</ArrivalDate>
+			<ArrivalTime>18:05</ArrivalTime>
+			<Aircraft>73C</Aircraft>
+			<Meal />
+			<ViaPort />
+			<ETicket />
+			<OverstepPriceReason />
+			<BoardPointAT />
+			<OffPointAT />
+			<MinPrice />
+			<CarrierCustomerNo />
+			<Group />
+		</Flight>
+	</Flights>
+	<Passengers>
+		<Passenger>
+			<ElementNo />
+			<PsgID>1</PsgID>
+			<Name>QU/HONGYUN</Name>
+			<PsgType>ADT</PsgType>
+			<IdentityType>NI</IdentityType>
+			<CardType>NI</CardType>
+			<CardNo>330481198504230014</CardNo>
+			<BirthDay>1985-04-23</BirthDay>
+			<CarrierPsgID />
+			<Country></Country>
+			<MobilePhone>13757193676</MobilePhone>
+			<InsueSum />
+			<InsueFee />
+			<CarrierCard />
+			<CardValidDate />
+			<Gender />
+			<ServiceFee />
+		</Passenger>
+	</Passengers>
+	<Prices>
+		<Price>
+			<PriceID>0</PriceID>
+			<Z />
+			<Y />
+			<TktOffice>BJS280</TktOffice>
+			<PsgType>ADT</PsgType>
+			<PsgID />
+			<YPrice>710.0</YPrice>
+			<Fare>280.0</Fare>
+			<TaxAmount>0.0</TaxAmount>
+			<FuelSurTax>0.0</FuelSurTax>
+			<AirportTax>0.0</AirportTax>
+			<SalePrice>280.0</SalePrice>
+			<Group />
+			<PriceType />
+		</Price>
+	</Prices>
+	<OrderInfo>
+		<Address></Address>
+		<Linker>tou/shi</Linker>
+		<Telephone></Telephone>
+		<IsDomc>D</IsDomc>
+		<TicketLimitDate></TicketLimitDate>
+		<TicketLimitTime></TicketLimitTime>
+		<PayPlatform></PayPlatform>
+		<BankCode></BankCode>
+		<NotifyURL></NotifyURL>
+		<NotifyType></NotifyType>
+		<Remark></Remark>
+		<BalanceMoney>280.0</BalanceMoney>
+		<PlatformCode>OTR</PlatformCode>
+		<LocalOrder>Y</LocalOrder>
+		<ReqOrderNo></ReqOrderNo>
+		<SPID></SPID>
+		<AuthOffices></AuthOffices>
+	</OrderInfo>
+	<LinkerInfo>
+		<IsETiket>Y</IsETiket>
+		<PayType />
+		<Address />
+		<LinkerName>kang/yang</LinkerName>
+		<Zip />
+		<Telphone></Telphone>
+		<MobilePhone>13757193676</MobilePhone>
+		<SendTime />
+		<LinkerEmail />
+		<NeedInvoices />
+		<InvoicesSendType />
+		<Remark />
+		<SendTktsTypeCode />
+		<IsPrintSerial>Y</IsPrintSerial>
+	</LinkerInfo>
+	<InsuranceInfo>
+		<InsuranceId />
+		<ShouldGath />
+		<ShouldPay />
+		<RetMoney />
+		<Gain />
+		<InsuranceCount />
+		<InsuranceSummary />
+	</InsuranceInfo>
+</OrderFlight_2_0>

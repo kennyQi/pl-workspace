@@ -1,0 +1,15 @@
+{
+  "buildFee":50,
+  "is_success":"T",
+  "message":"成功",
+  "oilFee":0,
+  "pricesGNDTO":{
+	"encryptString":"79fccac98f164687dca80708da85c12f55b2e6cbe12f015e56de1d3350b399fcd7628fccaa041fc40a8a3338004685acd372a62864712256d6af4b7d6f5d4f4022b7d7c817c2cb5b9dafef3c3b7c01163d00f8c6f27c33908c14385a58ff53536e11c3448419ecfaf239bda80d330bdd5238ff4760fd6aff28473e92539435e81b82304ca184667125c3730d24545eb7",
+	"ibePrice":1350,
+	"memo":"此客票类型为B2B。优质供应商政策,自愿退款周期:5天,非自愿退款周期:10天。",
+	"plcid":52464556,
+	"singlePlatTotalPrice":1007,
+	"singleTotalPrice":995
+  },
+  "result":"1"
+}

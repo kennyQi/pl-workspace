@@ -1,0 +1,80 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<style>
+.pageFormContent p {
+	height: inherit;
+	line-height: 20px
+}
+</style>
+<div class="pageContent">
+
+	<div class="pageFormContent" layoutH="58">
+		<h3>1、基本信息</h3>
+		<table style="width: 100%;height: 45%">
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">昵称：</td>
+				<td style="width: 75%">${lxsUser.baseInfo.nickName}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">性别：</td>
+				<td style="width: 75%"><#if lxsUser.baseInfo.gender==1>男<#else>女</#if></td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">手机号：</td>
+				<td style="width: 75%">${lxsUser.contactInfo.mobile}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">生日：</td>
+				<td style="width: 75%">${lxsUser.baseInfo.birthday}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">邮箱：</td>
+				<td style="width: 75%">${lxsUser.contactInfo.email}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+		</table>
+		<br>
+		<h3>2、交易信息</h3>
+		<br>
+		<table style="width: 100%;height: 45%">
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">注册时间：</td>
+				<td style="width: 75%">${lxsUser.baseInfo.createTime}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">首次购买时间：</td>
+				<td style="width: 75%">${firstOrderDate}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">首次购买金额：</td>
+				<td style="width: 75%">${salePrice}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">购买次数：</td>
+				<td style="width: 75%">${orderTimes}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+			<tr height="25px;">
+				<td style="width: 5%">&nbsp;</td>
+				<td style="width: 25%">购买金额：</td>
+				<td style="width: 75%">${tradingVolume}</td>
+				<td style="width: 5%">&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</div>

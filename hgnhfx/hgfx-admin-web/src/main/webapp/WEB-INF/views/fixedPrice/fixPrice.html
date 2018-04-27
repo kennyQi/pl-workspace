@@ -1,0 +1,111 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageHeader">
+<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/fixedPrice/view" method="post">
+        <input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize?c}" />
+		<input type="hidden" name="distributorID" value="${distributorID!''}" id="distributorID"/>
+</form>
+<table style="width: 100%;" border="0">
+	<!-- <tr height="30px;">
+		<td style="width: 1%"></td>
+		<td style="width: 98%;text-align: left;" colspan="5">返利模式/定价模式</td>
+		<td style="width: 1%"></td>
+	</tr> -->
+	<tr height="30px;">
+		<td style="width: 1%"></td>
+		<td style="width: 10%;text-align: left;">
+		<select style="width: 150px;">
+		<#list products as product>
+		<option value="${product.id!''}">${product.prodName!''}</option>
+		</#list>
+		</select> 
+		</td>
+		<td style="width: 15%;text-align: left;"><a style="color: blue;" href="${contextPath}/fixedPrice/view?datetype=now" target="navTab" rel="dingjia" >本月定价标准</a></td>
+		<td style="width: 43%"></td>
+		<td style="width: 15%;text-align: right;"><a target="dialog" ref="getFixedPriceInterval" href="${contextPath}/fixedPrice/getFixedPriceInterval?pid=${productID!''}&datetype=now" width="500" height="250" style="color: blue">本月的定价区间</a></td>
+		<td style="width: 15%;text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp; <a target="dialog" ref="getFixedPriceInterval" href="${contextPath}/fixedPrice/editFixedPriceInterval?pid=${productID!''}&datetype=next&fixedPriceIntervalID=${fixedPriceIntervalID!''}" width="500" height="250" style="color: blue"><button>修改区间定价</button></a></td>
+		<td style="width: 1%"></td>
+	</tr>
+	<tr height="30px;">
+		<td style="width: 1%"></td>
+		<td style="width: 98%;text-align: left;" colspan="5">商户名：&nbsp;&nbsp;&nbsp;&nbsp;
+		<select style="width: 150px;" onchange="change()" id="disName">
+		<option value="all">全部</option>
+		<#list distributors as distributor>
+		<#if (distributorID)??&&distributorID==distributor.id>
+		<option selected="selected" value="${distributor.id!''}">${distributor.name!''}</option>
+		<#else>
+		<option value="${distributor.id!''}">${distributor.name!''}</option>
+		</#if>
+		</#list>
+		</select>
+		</td>
+		<td style="width: 1%"></td>
+	</tr>
+</table>
+</div>
+<div class="pageContent" >
+	<#include "/public/pagination/pagination.html">
+    <div class="panelBar">
+        <ul class="toolBar">
+            <li><span style="padding: 0">次月定价设置</span>
+            </li>
+        </ul>
+    </div>
+ <table class="table" width="100%" layoutH="138">
+        <thead>
+        <tr>
+            <th width="20%">商户公司</th>
+            <th width="20%">账户ID</th>
+            <th width="20%">区间</th>
+            <th width="20%">定价</th>
+            <th width="20%">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list fixedPriceSets as fixedPriceSet>
+        <tr>
+            <td>
+            ${fixedPriceSet.distributor.name!''}
+            </td>
+            <td>
+            ${fixedPriceSet.loginName!''}
+            </td>
+            <td>
+            <#if !(fixedPriceSet.id)??>
+            0
+            <#else>
+            ${fixedPriceSet.modifiedInterval!''}
+			</#if>
+            </td>
+            <td>
+            <#if !(fixedPriceSet.id)??>
+            1
+            <#else>
+            ${fixedPriceSet.modifiedPercent!''}
+			</#if>
+            </td>
+            <td  class="a_button2" >
+             <#if !(fixedPriceSet.id)??>
+            <a target="dialog" ref="edit" href="${contextPath}/fixedPrice/edit?did=${fixedPriceSet.distributor.id!''}&pid=${productID!''}&datetype=next&loginname=${fixedPriceSet.loginName!''}&fixedPriceIntervalID=${fixedPriceIntervalID!''}" width="500" height="250" style="color: blue">编辑</a>
+            <#elseif fixedPriceSet.checkStatus!=0>
+            <a target="dialog" ref="edit" href="${contextPath}/fixedPrice/edit?did=${fixedPriceSet.distributor.id!''}&pid=${productID!''}&datetype=next&fpsid=${fixedPriceSet.id!''}&fixedPriceIntervalID=${fixedPriceIntervalID!''}" width="500" height="250" style="color: blue">编辑</a>
+            <#elseif fixedPriceSet.checkStatus==0>
+            	审核中
+			</#if>
+            </td>
+            </#list>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+function change(){
+	if($("#disName").val()=="all"){
+		$("#distributorID").attr("value","");
+	}else{
+		$("#distributorID").attr("value",$("#disName").val());
+	}
+	$("#pagerForm").submit();
+}
+</script>

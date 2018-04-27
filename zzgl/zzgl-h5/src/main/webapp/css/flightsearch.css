@@ -1,0 +1,455 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	width: 100%;
+	overflow-x: hidden;
+	position: relative;
+	background-color: #f2f2f2
+}
+.content {
+	min-height: 300px
+}
+span {
+	display: inline-block
+}
+.b_padd {
+	padding: 10px
+}
+.loading {
+	line-height: 40px;
+	height: 40px;
+	text-align: center
+}
+.gray_b {
+	background-color: White
+}
+.blue-border {
+	border: 1px solid #c8dff5
+}
+.gray-border {
+	border: 1px solid #b3b3b3
+}
+p.date {
+	margin: 10px 0 10px 0;
+	line-height: 25px;
+	padding: 10px;
+	position: relative;
+	border: 1px solid #c7d2dc
+}
+.width_1 {
+	padding-right: 0
+}
+table.city {
+	width: 100%;
+	border: 1px solid #c7d2dc
+}
+table.city tr {
+	height: 48px;
+	line-height: 45px
+}
+table.city tr td p.city {
+	position: relative;
+	margin-right: 71px
+}
+.mr5 {
+	margin-right: 5px;
+	position: relative;
+	overflow: hidden
+}
+table.city tr td p .in {
+	display: inline-block;
+	overflow: hidden;
+	height: 36px;
+	vertical-align: middle;
+	background-color: White;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	margin-left: 5px;
+	border-radius: 5px;
+	border: 1px solid #c7d2dc
+}
+table.city tr td p, td.pic_change {
+	padding: 0 10px
+}
+table.city tr td p input {
+	width: 100%;
+	border: 0;
+	line-height: 22px;
+	margin-top: -10px;
+	outline: 0;
+	vertical-align: middle;
+	padding-left: 5px
+}
+.pic_change {
+	width: 30px
+}
+.f-info h5 .icon-right {
+	top: 10px
+}
+.tra_left {
+	display: inline-block;
+	width: 9px;
+	height: 13px;
+	overflow: hidden;
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	background-size: 9px 13px;
+	background-image: url(../img/airplane/icon_you.png);
+	background-repeat: no-repeat;
+}
+.tra_left02 {
+	display: inline-block;
+	width: 32px;
+	height: 29px;
+	overflow: hidden;
+	position: absolute;
+	right: 3px;
+	top: 3px
+}
+.search {
+	display: block;
+	margin:0 auto;
+	line-height: 44px;
+	height: 44px;
+	color: #fff;
+	font-size: 18px;
+	width: 100%;
+	background: #f60;
+	border: 0
+}
+.lianxikefu {
+	display: block;
+	line-height: 44px;
+	height: 44px;
+	color: black;
+	font-size: 18px;
+	text-align: center;
+	width: 100%;
+	background: #ffffff;
+	border: 0
+}
+p.guoji {
+	text-align: left;
+	line-height: 50px;
+	margin-top: 0;
+	font-size: 12px
+}
+p.hx {
+	text-align: center;
+	color: #3989e2;
+	line-height: 100px
+}
+.blueFont {
+	color: #3989e2
+}
+.img_change {
+	background: url(../img/airplane/icon_arrow.png) no-repeat center;
+	display: block;
+	height: 60px;
+	background-size: 100% 100%;
+	width: 100%
+}
+.img_gj {
+	background: url(../img/airplane/icon_fish.png) no-repeat center;
+	display: inline-block;
+	height: 32px;
+	background-size: 100% 100%;
+	width: 22px;
+	margin-right: 7px;
+	vertical-align: middle
+}
+.hx_bg {
+	background: url(../img/airplane/zx.png) no-repeat;
+	display: inline-block;
+	height: 28px;
+	background-size: 100% 100%;
+	width: 25px;
+	margin-right: 7px;
+	vertical-align: middle
+}
+#calDiv {
+	position: absolute;
+	top: 43px;
+	right: 0;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	z-index: 9;
+	-webkit-transition-duration: 300ms;
+	-moz-transition-duration: 300ms;
+	background-color: White;
+	min-height: 300px
+}
+#citys {
+	position: absolute;
+	top: 43px;
+	right: 0;
+	margin: auto;
+	width: 100%;
+	z-index: 59;
+	-webkit-transition-duration: 300ms;
+	-moz-transition-duration: 300ms;
+	-webkit-transition-property: all;
+	transition-property: all;
+	margin: 0;
+	padding: 0;
+	background-color: White
+}
+#calTable td .everyday span.sp_time {
+	line-height: 36px
+}
+.translate3d_1 {
+	-webkit-transform: translate(-100%);
+	-moz-transform: translate(-100%)
+}
+.poper {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background: #000;
+	z-index: 90;
+	opacity: .3
+}
+#poper {
+	display: none
+}
+.img_zx {
+	position: absolute;
+	z-index: 100;
+	width: 100%;
+	top: 80px
+}
+.img_zx img {
+	margin: auto;
+	max-width: 400px;
+	display: table
+}
+#citys p.title {
+	line-height: 45px;
+	height: 45px;
+	background-color: #eee;
+	border-bottom: 1px solid #c8c8c5;
+	border-top: 1px solid white;
+	padding-left: 10px
+}
+#citys ul {
+	padding: 0 10px
+}
+#citys ul li {
+	line-height: 40px;
+	height: 40px;
+	position: relative;
+	list-style: none;
+	width: 33%;
+	text-align: left
+}
+#searchCitys ul li {
+	width: 99%
+}
+div.d_search {
+	background-color: #eee;
+	padding: 9px 10px;
+	border-bottom: 1px solid #c8c8c5
+}
+#citys p.p_search {
+	background-color: White;
+	height: 35px;
+	position: relative
+}
+#citys p.p_search span.input_span {
+	display: block;
+	overflow: hidden;
+	position: relative
+}
+#searchCitys {
+	min-height: 320px
+}
+#citys p.p_search input {
+	height: 35px;
+	box-shadow: none;
+	width: 100%;
+	position: relative;
+	border: 0;
+	-webkit-appearance: none;
+	background-color: White;
+	outline: 0
+}
+.search-span {
+	width: 10px;
+	height: 35px;
+	float: left;
+	display: inline-block;
+	background-size: 25px 25px;
+	vertical-align: middle
+}
+#citys ul li s {
+	width: 18px;
+	height: 14px;
+	display: inline-block;
+	background: url(../img/airplane/selectedIcon.png) no-repeat;
+	background-size: 18px 14px;
+	margin-left: 10px;
+	vertical-align: middle;
+	margin-top: -2px
+}
+.cal_back {
+	background-color: #0f7feb
+}
+.g_Color {
+	color: #a9a9a9;
+	font-size: 14px
+}
+.select_city {
+	font-size: 17px;
+	color: Black
+}
+.myflight {
+	color: White;
+	padding: 0 5px
+}
+.dropList {
+	position: absolute;
+	z-index: 5;
+}
+.viewOuter {
+	border: 1px solid #ccd5dd;
+	margin-left: -1px
+}
+.dropList .oneOuter a {
+	color: #333;
+	display: block;
+	background: #fff;
+	height: 30px;
+	font-size: 12px;
+	line-height: 30px;
+	padding-left: 10px
+}
+.dropList .oneOuter a.hover {
+	background: #d7ebff
+}
+.dropList .listH {
+	font-size: 12px;
+	line-height: 30px;
+	padding-left: 10px;
+	height: 30px;
+	border-bottom: 1px solid #ccd5dd;
+	background-color: #eaf0f5
+}
+.dropList .listH .close {
+	margin: 5px 5px;
+	float: right;
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: url(../img/airplane/fork.png);
+	background-repeat: no-repeat;
+	background-size: 20px 20px;
+	-moz-background-size: 20px 20px;
+	-o-background-size: 20px 20px;
+	-webkit-background-size: 20px 20px
+}
+#cityLeter p.title:after {
+	content: "";
+	width: 9px;
+	height: 13px;
+	margin: 15px 10px 0 0;
+	float: right !important;
+	background: url(../img/public/icon_you.png) 50% 50% no-repeat;
+	background-size: 9px 13px
+}
+.rotate90:after {
+	-moz-transform: rotate(90deg);
+	-moz-transform-origin: 50% 50%;
+	-webkit-transform: rotate(90deg);
+	-webkit-transform-origin: 50% 50%;
+	-o-transform: rotate(90deg);
+	-o-transform-origin: 50% 50%;
+	transform: rotate(90deg);
+	transform-origin: 50% 50%
+}
+.hotCity_list {
+	padding-top: 0;
+	display: block;
+	overflow: hidden
+}
+.hotCity_list li {
+	float: left;
+	height: 22px;
+	line-height: 22px
+}
+.err {
+	margin: 10px 10px 0 10px;
+	background-color: #fff4ed;
+	padding: 3px;
+	display: block;
+	color: #f60;
+	border: 1px solid #ffac75;
+	font-size: 12px;
+	min-height: 20px
+}
+.zx {
+	padding: 20px 10px;
+	color: #afb6bc;
+	font-size: 12px
+}
+.zx li {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	text-align: left;
+	border-right: 2px #dce1e5 solid;
+	width: 33%;
+	height: 27px;
+	float: left;
+	line-height: 13px
+}
+.zx li:last-child {
+	border-right: 0
+}
+.zx li em {
+	float: left;
+	display: inline-block;
+	height: 27px;
+	width: 27px;
+	background: url(../img/airplane/zx_flight.png) no-repeat;
+	background-size: 89px 26px;
+	margin: 0 8px
+}
+.zx li em.lose {
+	background-position: -30px 0
+}
+.zx li em.time {
+	background-position: -62px 0
+}
+.linebox {
+	margin-top: 10px;
+	position: relative;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	z-index: 1;
+}
+.linebox p {
+	height: 1px;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	left: 0;
+	background-image: -webkit-gradient(linear, left top, right top, #fff 0, #dce1e5 35%, #dce1e5 65%, #fff 100%);
+	background-image: -webkit-linear-gradient(left, #fff 0, #dce1e5 15%, #dce1e5 85%, #fff 100%);
+	background-image: -moz-linear-gradient(to left, #fff 0, #dce1e5 15%, #dce1e5 85%, #fff 100%);
+	background-image: -ms-linear-gradient(to left, #fff 0, #dce1e5 15%, #dce1e5 85%, #fff 100%);
+	background-image: -o-linear-gradient(to left, #fff 0, #dce1e5 15%, #dce1e5 85%, #fff 100%);
+	background-image: linear-gradient(to left, #fff 0, #dce1e5 15%, #dce1e5 85%, #fff 100%);
+	z-index: 9
+}
+.linebox span {
+	position: relative;
+	z-index: 11;
+	display: inline-block;
+	background: #f2f2f2;
+	padding: 0 10px
+}

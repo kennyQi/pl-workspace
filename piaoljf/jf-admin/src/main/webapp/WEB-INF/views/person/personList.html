@@ -1,0 +1,70 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);"
+		action="${contextPath}/person/person/list" method="post">
+
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" /> 
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						<label>姓名：</label>
+						<input type="text" name="name" value="${personQO.name}" />
+					</td>
+					<td>
+						<label>性别：</label>
+						<select class="combox" name="gender">
+							<option value="">所有</option>
+							<option value="1" <#if personQO.gender == 1> selected </#if> >男</option>
+							<option value="2" <#if personQO.gender == 2> selected </#if> >女</option>
+						</select>
+					</td>
+					<td>
+						<label>证件号：</label>
+						<input type="text" name="number" value="${personQO.number}" />
+					</td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="40">姓名</th>
+				<th width="70">姓别</th>
+				<th width="20">生日</th>
+				<th width="20">证件类型</th>
+				<th width="40">证件号</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list pagination.list as person>
+				<tr target="personId" rel="${person.id}">
+					<td>${person.name!?html}</td>
+					<td><#if person.gender == 1>男</#if><#if person.gender == 2>女</#if></td>
+					<td>${person.birthday!?html}</td>
+					<td><#if person.certificate><#if person.certificate.type == 1>身份证</#if></#if></td>
+					<td><#if person.certificate>${person.certificate.number!?html}</#if></td>
+				</tr>
+			</#list>
+		</tbody>
+	</table>
+
+	<#include "/public/pagination/pagination.html">
+</div>

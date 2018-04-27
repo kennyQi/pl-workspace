@@ -1,0 +1,29 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="g_banner disb">
+	<div class="m_banner_c wd12 ma">
+		<span class="pic fl ov pl"> 
+		<img id="headImage"
+			<#if user.baseInfo.image != null> 
+				src="${user.baseInfo.image}" 
+			<#elseif user.baseInfo.type==1>
+					src="${contextPath}/resources/img/defaultHeadImage_person.png"
+			<#elseif user.baseInfo.type==2>
+					src="${contextPath}/resources/img/defaultHeadImage_company.png"
+			</#if> 
+			 class="user" > 
+			<i class="icon Bg pa"></i> 
+			<i class="hoverIcon Bg pa curp"></i>
+		</span> <span class="word fl h4">
+			<h2 class="welc fl wd">尊敬的" 
+			<!-- <#if user.baseInfo.name?? >
+				${(user.baseInfo.name)!} <#else> ${(user.authInfo.loginName)!}
+			</#if>  -->
+			 ${(user.authInfo.loginName)!}
+			"，欢迎来到您的账户中心</h2> <span class="phone fl ">绑定手机：<#if user.contactInfo.mobile?? && user.contactInfo.mobile?length &gt;= 11>
+			${(user.contactInfo.mobile?substring(0,4))!}****${(user.contactInfo.mobile?substring(8))!}<#else>未绑定</#if></span>
+			<#if user.contactInfo.mobile?? && user.contactInfo.mobile?length &gt;= 11>
+				<a href="${contextPath}/company/infoManage" class="changePhone fl curp">[更换手机号码]</a>
+			</#if>
+		</span>
+	</div>
+</div>

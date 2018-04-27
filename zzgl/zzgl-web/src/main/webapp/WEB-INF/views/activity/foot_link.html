@@ -1,0 +1,90 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "友情链接">
+
+<link href="${contextPath}/resources/css/foot_about.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+</@frame.head>
+<@frame.main "default" 6>
+<body>
+<!--头部-->
+<!--锚点-->
+<a name="top"></a>
+<!--导航-->
+    <!--快速回顶部-->    
+    <div class="g_totop bg_cmd curp">
+    </div>
+<!--头部-->
+<!--内容-->
+<div class="g_bd wd ov">
+    <div class="foot_link ma">
+        <div class="top_nav h4 color8 fl">
+             您的位置：<a href="${contextPath}/home" class="color6 top_nav1">中智票量首页</a> > <a class="color3">友情链接</a>
+        </div>
+        <span class="bt yahei fl">友情链接</span>
+        <div class="foot_linkBoxTop fl">
+            <div class="foot_pictureLink fl wd">
+                <span class="yahei h2 fl">图片链接</span>
+                <#if friendshipic??>
+	                <#list friendshipic as friendshilist>
+	                	<a href="${(friendshilist.adBaseInfo.url)!}"><img class="fl disb" src="${(friendshilist.adBaseInfo.imagePath)!}" width="120px" height="70px"/></a>
+	                </#list>
+                </#if>
+            </div>
+            <div class="foot_fontLink fl wd">
+                <span class="yahei h2 fl">文字链接</span>
+                <div class="fl">
+                  <#if friendshihc??>
+	                <#list friendshihc as friendshilist>
+	                    <a href="${(friendshilist.adBaseInfo.url)!}">${(friendshilist.adBaseInfo.title)!}</a>
+	                </#list>
+                </#if>
+                </div>
+            </div>
+            <div class="foot_links fl wd color6">
+                <ul class="foot_linksLeft fl yahei h2">
+                    <li><i >链接名称：</i><a href="javascript:;">中智票量</a></li>
+                    <li><i >链接地址：</i><a href="javascript:;">zzpl.ply365.com</a></li>
+                    <li><i >Email：</i><span>ply365@ply365.com</span></li>
+                    <li><i >联系QQ：</i><span>2851181023（申请时请备注“友情链接”）</span></li>
+                </ul>
+                <div class="foot_linksRight fr yahei h2 color6">
+                    <i class="fl">申请条件</i>
+                    <p class="fl clear">
+                        1、我们欢迎与旅游网站，摄影网站，户外运动网站，时尚网站或其他类型相关网站与本站交换链接。<br/>
+                        2、请把贵站的链接信息发至邮箱ply365@ply365.com申请链接，我们审核后，您的链接立即生效。<br/>
+                        3、请在申请之前确认贵网站已添加票量游友情链接。<br/>
+                        4、本站欢迎与各企业或个人合法网站交换链接。本站谢绝一切反动、色情、赌博等不良内容或提供不良内容链接的网站。<br/>
+                        5、欢迎全球排名10万以内，PR≥5的网站与本站建立友情链接。<br/>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="foot_linkBoxBottom yahei fl h2">
+            <div class="box1 fl">
+                <span class="fl">01 零距离接触世界</span>
+                <p class="fl clear">局限于办公室里的单一，节奏的加快让人喘不过气，出来放放风吧！我们与您一起零距离接触世界，探索那一份份未知的惊喜。</p>
+            </div>
+            <div class="box2 fl">
+                <span class="fl">02 精彩旅程</span>
+                <p class="fl clear">说走就走的冲动需要一场精彩的旅行来充实。您的每次旅程都经过严格的产品筛选标准，从内容到性价比皆体现着高品质的享受，让您真正体验到旅行的乐趣。</p>
+            </div>
+            <div class="box3 fl">
+                <span class="fl">03 贴心管家</span>
+                <p class="fl clear">我们是您的目的地旅行贴心管家，为您提供专业的一站式消费，阳关价格、阳光行程，让您能找到自己喜欢的旅游方式。</p>
+            </div>
+            <div class="box4 fl">
+                <span class="fl">我们专注于高品质旅游</span>
+                <p class="fl clear">我们向您提供以目的地旅游为核心的产品服务，包括全国所有航线的机票、境内外品质旅游等的预订，覆盖中国各省级及直辖市、欧洲、大洋洲、非洲、中东、美洲、亚洲、南北极等全球主要目的地国家和地区。<br>
+                    我们坚持以产品为核心，以服务为导向，不断探索和发展一条品质与享受相结合的专业旅游服务道路，坚持将客户感受和体验放在第一位。不断锐意进取的中智票量将为广大消费者提供更优质、更专业、更经济、更便捷的产品和服务，成为您可信赖的旅游服务平台。
+            </div>
+        </div>
+    </div>
+</div>
+<!--内容-->
+ <@frame.end "default"> </@frame.end>
+ </@frame.main> 
+ </body>
+</html>

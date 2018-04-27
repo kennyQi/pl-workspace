@@ -1,0 +1,228 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	function checkTimeStr(){
+		
+		if($("#BeginTimeStr", navTab.getCurrentPanel()).val()=="" && $("#EndTimeStr", navTab.getCurrentPanel()).val()!=""){
+		
+			alert("不能只有出票开始日期或结束日期!");
+			return false
+		}else if($("#BeginTimeStr", navTab.getCurrentPanel()).val()!="" && $("#EndTimeStr", navTab.getCurrentPanel()).val()==""){
+			
+			alert("不能只有出票开始日期或结束日期!");
+			return false
+		}if($("#BeginTimeStr", navTab.getCurrentPanel()).val()>$("#EndTimeStr", navTab.getCurrentPanel()).val()){
+			
+			alert("出票开始时间不能大于出票结束时间!");
+			return false
+		}else{
+			return true;
+		}
+	}
+
+</script>
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/report/finance/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+ 					<td> 
+ 						景 区 名 称 ：<input type="text" id="scenicSpotName" name="scenicSpotName" value="${pagination.condition.scenicSpotName}" size="25"/>
+ 					</td> 
+ 					<td>
+ 						产品编号：<input type="text" name="policyNo" value="${pagination.condition.policyNo}" size="25" />
+ 					</td>
+ 					<td>
+ 						 &nbsp;票&nbsp;务&nbsp;名&nbsp;称：<input type="text" name="policyName" value="${pagination.condition.policyName}" size="25"/>
+ 					</td>
+					<td>
+					订&nbsp;单&nbsp;状&nbsp;态&nbsp;：
+					<select name="status">
+						<option value="">全部</option>
+						<option value="0"  <#if pagination.condition.status==0>selected="selected"</#if>>等待支付</option>
+						<option value="1"  <#if pagination.condition.status==1>selected="selected"</#if>>支付成功</option>
+						<option value="2"  <#if pagination.condition.status==2>selected="selected"</#if>>出票成功</option>
+						<option value="3"  <#if pagination.condition.status==3>selected="selected"</#if>>交易成功</option>
+						<option value="4"  <#if pagination.condition.status==4>selected="selected"</#if>>交易关闭</option>
+					</select>
+					</td>
+ 				</tr>
+ 				<tr>
+ 				    <td>
+ 						 经销商名称：<input type="text" name="dealerName" value="${pagination.condition.dealerName}" size="25" />
+ 					</td>
+					<td>
+ 						 订单编号：<input type="text" name="orderId" value="${pagination.condition.orderId}" size="25" />
+ 					</td>
+ 					<td>
+					景&nbsp;区&nbsp;状&nbsp;态&nbsp;：
+					<select name="scenicSpotStatus">
+						<option value="">全部</option>
+						<option value="0"  <#if pagination.condition.scenicSpotStatus==0>selected="selected"</#if>>待激活</option>
+						<option value="1"  <#if pagination.condition.scenicSpotStatus==1>selected="selected"</#if>>待游玩</option>
+						<option value="2"  <#if pagination.condition.scenicSpotStatus==2>selected="selected"</#if>>已游玩</option>
+						<option value="4"  <#if pagination.condition.scenicSpotStatus==4>selected="selected"</#if>>已失效</option>
+						<option value="5"  <#if pagination.condition.scenicSpotStatus==5>selected="selected"</#if>>待退款</option>
+						<option value="6"  <#if pagination.condition.scenicSpotStatus==6>selected="selected"</#if>>无须退款</option>
+						<option value="7"  <#if pagination.condition.scenicSpotStatus==7>selected="selected"</#if>>已退款</option>
+						<option value="8"  <#if pagination.condition.scenicSpotStatus==8>selected="selected"</#if>>已结算</option>
+					</select>
+					</td>
+ 					<td>
+						出票时间：
+						<input type="text" id="BeginTimeStr" name="BeginTimeStr" value="${BeginTimeStr}" class="date" readonly="true"/>-
+						<input type="text" id="EndTimeStr" name="EndTimeStr" value="${EndTimeStr}" class="date" readonly="true" />
+					</td>
+					<td >
+					<ul>
+						<li style="display:inline-block;">
+							<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkTimeStr()">查询</button></div></div>
+						</li>
+					</ul>
+					</td>
+ 				</tr>
+			</table>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" href="${contextPath}/report/finance/export" target="dwzExport"><span>导出报表</span></a>
+			</li>
+		</ul>
+	</div>
+	<div class="panelBar">
+		<ul>
+		    <li style="line-height:25px;margin: 0px 15px;">出票时间：${(pagination.condition.dateBegin?string("yyyy-MM-dd"))!""} 至${(pagination.condition.dateEnd?string("yyyy-MM-dd"))!""}</li>
+			<li style="line-height:25px;margin: 0px 15px;">经销商结算：¥${(pagination.list[0].totalDealerAmount)!0} </li>
+            <li style="line-height:25px;margin: 0px 15px;">景区结算：¥${(pagination.list[0].totalScenicAmount)!0} </li>
+			<li style="line-height:25px;margin: 0px 15px;">经销商结算手续费：¥${(pagination.list[0].totalDealerFee)!0}</li>
+		    <li style="line-height:25px;margin: 0px 15px;">景区结算手续费：¥${(pagination.list[0].totalScenicFee)!0}</li>
+			<li style="line-height:25px;margin: 0px 15px;">退款金额：¥${(pagination.list[0].refundAmmount)!0}</li>
+			<li style="line-height:25px;margin: 0px 15px;">平台收益：¥${(pagination.list[0].platformIncome)!0}</li>
+		</ul>
+		
+	</div>
+	
+	<table class="table" width="200%" layoutH="190" id="table_caiwu" style="overflow:auto;">
+		<thead>
+			<tr>
+				<th width="130px;">订单编号</th>
+				<th width="120px;">票务编号</th>
+				<th width="120px;">产品编码</th>
+				<th width="150px;">产品名称</th>
+				<th width="150px;">所属单位</th>
+				<th width="100px;">订票人</th>
+				<th width="100px;">游玩人</th>
+				<th width="150px;">下单时间</th>
+				<th width="150px;">出票时间</th>
+				<th width="150px;">经销商</th>
+				<th width="115px;">经销商结算价(元)</th>
+				<th width="100px;">经销商结算方式</th>
+				<th width="220px;">支付流水号</th>
+				<th width="100px;">景区结算价(元)</th>
+				<th width="100px;">景区手续费(元)</th>
+				<th width="150px;">结算时间</th>
+				<th width="190px;">退款账号</th>
+				<th width="150px;">退款批次号</th>
+				<th width="90px;">退款金额(元)</th>
+				<th width="150px;">退款时间</th>
+				<th width="80px;">订单状态</th>
+				<th width="80px;">景区状态</th>
+				<th width="100px;">操作</th>
+			</tr>
+		</thead>
+		<#list pagination.list as t>
+			<tr>
+				<td>${t.orderId}</td>
+				<td>${t.ticketNo}</td>
+				<td>${t.policyNo}</td>
+				<td>${t.policyName}</td>
+				<td>${t.scenicSpotNameStr}</td>
+				<td>${t.linkMan}</td>
+				<td>${t.touristName}</td>
+				<td>${t.createDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<td>${(t.ticketDate?string("yyyy-MM-dd HH:mm:ss"))!''}</td>
+				<td>${t.dealerName}</td>
+				<td>${t.dealerAmount}</td>
+				<td>
+					<#if t.dealerAccountType==1>
+						汇金宝
+					</#if>
+					<#if t.dealerAccountType==2>
+						支付宝
+					</#if>
+				</td>
+				<td>${t.payTradeNo}</td>
+				<td>
+					<#if t.scenicStatus==2||t.scenicStatus==8>${t.settlementPrice}</#if>
+				</td>
+				<td>${(t.settlementFee)!0}</td>
+				<td>
+					<#if t.scenicStatus==8>${(t.settleDate?string("yyyy-MM-dd HH:mm:ss"))!"--"}</#if>
+				</td>
+				<td>${t.dealerAccountNumber}</td>
+				<td>${t.refundBatchNo}</td>
+				<td>
+					<#if t.scenicStatus==7>${t.dealerAmount}</#if>
+				</td>
+				<td>${(t.refundTime?string("yyyy-MM-dd HH:mm:ss"))!""}</td>
+				<td>
+					<#if t.status==0>
+						等待支付
+					</#if>
+					<#if t.status==1>
+						支付成功
+					</#if>
+					<#if t.status==2>
+						出票成功
+					</#if>
+					<#if t.status==3>
+						交易成功
+					</#if>
+					<#if t.status==4>
+						交易关闭
+					</#if>
+				</td>
+				<td><#if t.scenicStatus==0>
+						待激活
+					</#if>
+					<#if t.scenicStatus==1>
+						待游玩
+					</#if>
+					<#if t.scenicStatus==2>
+						已游玩
+					</#if>
+					<#if t.scenicStatus==4>
+						已失效
+					</#if>
+					<#if t.scenicStatus==5>
+						待退款
+					</#if>
+					<#if t.scenicStatus==6>
+						无须退款
+					</#if>
+					<#if t.scenicStatus==7>
+						已退款
+					</#if>
+					<#if t.scenicStatus==8>
+						已结算
+					</#if>
+				</td>
+				<td>
+					<#if t.scenicStatus==2 &&(t.useDateEnd lt nowDate?string("yyyy-MM-dd HH:mm:ss"))>
+						<a title="确定要结算?" href="${contextPath}/order/ticketOrder/settle?singleTicketId=${t.singleTicketId}&navTabId=financeReport" style="color: blue" target="ajaxTodo" >结算</a>
+					</#if>
+				</td>
+			</tr>
+		</#list>
+	</table>
+	<#include "/public/pagination/pagination.html">
+
+</div>

@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+
+body,html{background:#fff;height:100%;width: 100%;}
+.body{height: 100%;width: 100%;position: relative;-webkit-overflow-scrolling:touch;overflow: scroll;}
+.content{padding-bottom:63px;position: relative;}
+
+.m_addPerson{background:#fff;border-bottom:0px solid #f2f2f2;}
+.m_addPerson h4{font-size:12px;color:#565656;line-height:14px;}
+
+.content .m_person_list{border:0px;border-bottom:1px solid #f2f2f2;width:100%;overflow:hidden;}
+.content .m_person_list .ui-border-t:first-child,.content .m_person_list .ui-border-t{margin-left:0px;padding:6px 0px 6px 0px;border:0px;border-top:1px solid #f2f2f2;background:#fff;}
+.content .m_person_list .ui-border-t:after{display: none;}
+.m_person_list .choose{display:inline-block;height:88px;width:62px;vertical-align: middle;text-align: center;line-height: 88px;font-size:24px;color:#46b9ff;}
+.m_person_list .choose i{width:21px;height:21px;vertical-align: middle;font-size:24px;color:#46b9ff;line-height:24px;display:none;}
+.m_person_list .choose i.gou{display: inline-block;}
+.m_person_list .on i{display: inline-block;}
+.m_person_list .on i.gou{display:none;}
+.m_person_list h4{width:auto;-webkit-box-flex:1;box-flex:1;}
+
+
+/*添加游玩人*/
+.g_addPerson{width:100%;}
+.g_addPerson .m_input{background:#fff;border-top:1px solid #f2f2f2;border-bottom:1px solid #f2f2f2;margin-top:10px;}
+.g_addPerson .m_input input{padding-left:85px;}
+.g_addPerson .m_input input::-webkit-input-placeholder{color:#bbbaba;}
+.g_addPerson .m_input input::-moz-placeholder{color:#bbbaba;}
+.g_addPerson .m_input input::-ms-input-placeholder{color:#bbbaba;}
+.g_addPerson .m_input .select{padding-left:80px;color:#656565;width:100%;}
+.g_addPerson .m_select:after{background: url(http://i.gtimg.cn/vipstyle/frozenui/1.2.0/img/icon.png?_bid=306) no-repeat 0 -75px;
+  -webkit-background-size: 150px auto;
+  content: "";
+  display: block;
+  width: 9px;
+  height: 15px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -7px;}
+.g_addPerson  .m_btn{width:100%;height:44px;line-height:44px;text-align:center;color:#fff;font-size:18px;background:#ffcb3a;margin-top:20px;}
+/**/
+
+
+
+/*弹出提示框*/
+.g_msg{position:fixed;left:0px;top:0px;width:135px;height:120px;z-index:100000;display:none;}
+.g_msg span{color:#fff;font-size:15px;z-index:11;position:relative;width:100%;margin-top:75px;text-align:center;display:block}
+.g_msg:after{content:"";background:#1c1c1c;width:135px;height:120px;opacity:0.8;border-radius:15px;position:absolute;left:0px;top:0px;}
+.g_msg:before{content:"";background:url("../images/msg.png");background-size:cover;width:42px;height:42px;position:absolute;left:45px;top:20px;z-index:10}
+
+/*弹出确认框*/
+.g_confirm{position:fixed;left:0px;top:0px;z-index:1000;width:100%;}
+.g_confirm .bg{content:"";background:#0b0b0b;opacity: 0.5;width:100%;height:1000px;position:fixed;top:0px;left:0px;z-index:1;}
+.g_confirm .confirm_box{width:274px;height:162px;background:#fff;border-radius:4px;margin:auto;z-index:2;position:relative;}
+.g_confirm .confirm_box .msg{width:100%;height:121px;display:block;color:#1d1d1d;font-size:18px;line-height:121px;text-align:center;font-weight:normal;}
+.g_confirm .confirm_box .btn{width:100%;border-top:1px solid #b2b2b2;height:40px;overflow:hidden;}
+.g_confirm .confirm_box .btn span{width:136px;height:40px;float: left;text-align: center;font-size:18px;color:#ff0018;line-height:40px;}
+.g_confirm .confirm_box .btn span.yes{border-right:1px solid #b2b2b2;}
+
+/*新增*/
+.ui-list-text .ui-list-info{padding:0px;}
+.ui-list-info h4{text-align: center;line-height: 52px;vertical-align:middle;font-size:16px;}
+.ui-list-info h4 i{width:20px;height:20px;line-height:20px;font-size:24px;color:#46b9ff;display: inline-block;vertical-align:middle;margin-right:15px;}
+.fixedBtn{width: 100%;position:fixed;bottom:0px;left:0px;}
+.fixedBtn .next-btn{height: 63px;line-height: 63px;width: 135px;color:#fff;text-align: center;background: #ffcb3a;font-size:20px; }
+.fixedBtn .leftBtn{-webkit-box-flex:1;box-flex:1;background: #46b9ff;line-height: 63px;color:#fff;text-align: center;text-align: center;font-size:20px;}
+.fixedBtn .leftBtn i{font-size:20px;}
+.di{line-height: 29px;font-size:14px;}
+.editor{width: 75px;background: #46b9ff;height:100%;line-height:109px;display: block;right: -75px;top:0px;vertical-align: middle;text-align: center;color:#fff;font-size:17px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

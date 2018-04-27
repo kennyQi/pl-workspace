@@ -1,0 +1,35 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame /> 
+
+<!-- 内容出现在html head标记结束之前 -->
+<@frame.head "首页">
+
+</@frame.head>
+
+<!-- 内容出现在html 主体 -->
+<@frame.main "default" "default">
+<div id="container">
+			<div id="navTab" class="tabsPage">
+				<div class="tabsPageHeader">
+					<div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
+						<ul class="navTab-tab">
+							<li tabid="main" class="main"><a href="javascript:;"><span><span class="home_icon">我的主页</span></span></a></li>
+						</ul>
+					</div>
+					<div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
+					<div class="tabsRight">right</div><!-- 禁用只需要添加一个样式 class="tabsRight tabsRightDisabled" -->
+					<div class="tabsMore">more</div>
+				</div>
+				<div class="navTab-panel tabsPageContent layoutBox">
+					<div class="page unitBox">
+					</div>
+					
+				</div>
+			</div>
+		</div>
+</@frame.main>
+
+<!-- 内容出现在html body标记结束之前 -->
+<@frame.end "default">
+
+</@frame.end>

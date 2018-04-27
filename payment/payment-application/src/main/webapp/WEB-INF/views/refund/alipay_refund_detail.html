@@ -1,0 +1,73 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="pageContent">
+	<form method="post" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58" >
+			<#list refundList as refund>
+			   <div class="unit">
+				  <label>退款记录编号：</label>
+				  ${refund.id!?html}
+				</div>
+				<div class="unit">
+				  <label>平台订单编号：</label>
+				  ${refund.payOrder.id!?html}
+				</div>
+				<div class="unit">
+				  <label>商户订单编号：</label>
+				  ${refund.payOrder.clientTradeNo!?html}
+				</div>
+				<div class="unit">
+				  <label>支付宝交易订单号：</label>
+				   ${refund.payOrder.thirdPartyTradeNo!?html}
+				</div>
+				<div class="unit">
+				  <label>退款批次号：</label>
+				   ${refund.refundBatchNo!?html}
+				</div>
+				<div class="unit">
+				  <label>退款金额：</label>
+				   ${refund.amount!?html}
+				</div>
+				<div class="unit">
+				  <label>退款理由：</label>
+				   ${refund.refundMessage!?html}
+				</div>
+				<div class="unit">
+				  <label>退款帐号：</label>
+				   ${refund.refundAccount!?html}
+				</div>
+				<div class="unit">
+				  <label>退款收取的服务费：</label>
+				   ${refund.serviceCharge!?html}
+				</div>
+				<div class="unit">
+				  <label>退款备注：</label>
+				   ${refund.refundRemark!?html}
+				</div>
+				<div class="unit">
+				  <label>退款时间：</label>
+				   ${refund.refundDate!?html}
+				</div>
+				<div class="unit">
+				  <label>退款状态：</label>
+				   ${refundStatusList[refund_index]}
+				</div>
+				<div class="unit">
+				  <label>通知状态：</label>
+				   ${notifyStatusList[refund_index]}
+				</div>
+				<br/>
+				<hr/>
+				<br/>
+			</#list>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">确定</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+

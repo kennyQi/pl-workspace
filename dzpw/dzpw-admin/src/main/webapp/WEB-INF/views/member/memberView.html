@@ -1,0 +1,74 @@
+<style>
+	.inputInfo {
+		color: #999;
+	}
+</style>
+<div class="pageContent">
+	<div class="pageFormContent" layoutH="58">
+		<#if puser??>
+			<div class="divider" />
+			<p>
+				<label>用户名：</label>
+				<span class="inputInfo"><#if puser.authInfo??>${puser.authInfo.loginName!?html}</#if></span>
+			</p>
+			<div class="divider" />
+			<p>
+				<label>邮箱：</label>
+				<span class="inputInfo">
+				<#if puser.contactInfo??>${puser.contactInfo.email!?html}
+					<#if puser.status??&&puser.contactInfo.email??&&!puser.status.bindEmail><span style="color: red;">&nbsp;&nbsp;&nbsp;邮箱未验证</span></#if>
+				</#if>
+				
+				</span>
+			</p>
+			
+			<div class="divider" />
+			<p>
+				<label>昵称：</label>
+				<span class="inputInfo"><#if puser.baseInfo??>${puser.baseInfo.nickName!?html}</#if></span>
+			</p>
+		
+			<div class="divider" />
+			<p>
+				<label>性别：</label>
+				<span class="inputInfo">
+					<#if puser.baseInfo??>
+					<#if puser.baseInfo.gender == 2>女</#if><#if puser.baseInfo.gender == 1>男</#if>
+					</#if>
+				</span>
+			</p>
+			
+			<div class="divider" />
+			<p>
+				<label>所在地：</label>
+				<span class="inputInfo">
+				<#if puser.contactInfo??>
+				${puser.contactInfo.provinceName!?html}&nbsp;&nbsp;&nbsp;
+				${puser.contactInfo.cityName!?html}
+				</#if>
+				</span>
+			</p>
+			
+			<div class="divider" />
+			<p>
+				<label>真实姓名：</label>
+				<span class="inputInfo"><#if puser.baseInfo??>${puser.baseInfo.name!?html}</#if></span>
+			</p>
+			<div class="divider" />
+			<p>
+				<label>生日：</label>
+				<span class="inputInfo">
+				<#if puser.baseInfo??&&puser.baseInfo.birthday??>${puser.baseInfo.birthday?string('yyyy-MM-dd')}</#if>
+				</span>
+			</p>
+			<div class="divider" />
+			<p>
+				<label>绑定手机：</label>
+				<span class="inputInfo">
+				<#if puser.contactInfo??>${puser.contactInfo.mobile!?html}</#if>
+				<#if puser.contactInfo.mobile??&&puser.status??&&!puser.status.bindMobile><span style="color: red;">&nbsp;&nbsp;&nbsp;手机未验证</span></#if>
+				</span>
+			</p>
+		</#if>
+	</div>
+</div>

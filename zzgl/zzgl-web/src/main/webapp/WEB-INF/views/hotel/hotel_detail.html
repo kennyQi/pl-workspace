@@ -1,0 +1,342 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<#import "/public/frame/default.html" as frame />
+<@frame.head "酒店详情">
+<link href="${contextPath}/resources/css/common.css" rel="stylesheet" />
+<link href="${contextPath}/resources/css/hotel/hotel_detail.css" rel="stylesheet" />
+<script src="${contextPath}/resources/js/jquery-1.11.1.min.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/common.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/hotel/hotel_detail.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/hotel/hotel_detailOne.js" language="javascript"></script>
+<script src="${contextPath}/resources/js/hotel/albums.js" language="javascript"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=50ZppqwTq1PxZEA0M4KNkUhe"></script>
+</@frame.head>
+<body>
+<@frame.main "default" 5>
+<body>
+<!--导航-->
+    <!--快速回顶部-->    
+    <a class="g_totop bg_cmd curp" href="#top">
+    </a>
+<!--头部-->
+<div id="tepm" style="display:none;">
+	<#if hotelDTO.images??>
+	  <#list (hotelDTO.images) as image>
+		   <#list (image.locations) as location>
+		   		<#if (location.sizeType)?number==1>
+	       		<li class="on"><img src="${(location.url)}" class="img" /></li>
+	       		</#if>
+	       	</#list>
+      	</#list>
+	</#if>
+	
+</div>
+<!--内容-->
+	<div class="g_bd disb ov pl">
+     	<div class="m_load  color6 simsun"><label class="color8">您的位置：</label><a href="#" class="color6">酒店</a> > <span  class="color3">酒店详情</span></div>
+        <!--头部预览-->
+        <div class="m_prv disb wd12 ma">
+       		<div class="m_word disb ov">
+            	<div class="le fl">
+                    <span class="disb wd ov">
+                		<h1 class="disb fl color3 tt normal">${(hotelDTO.detail.hotelName)!}</h1>
+                    	<label class="Bg fl icon"></label>
+                        <!--星星-->
+                    	 <#if hotelDTO.detail.category??>
+                             <#if hotelDTO.detail.category==3>
+                            <label class="Bg star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                             <label class="Bg  star fl">&nbsp;</label>
+                             <#elseif hotelDTO.detail.category==4>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                             <#elseif hotelDTO.detail.category==5>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            <label class="Bg  star fl">&nbsp;</label>
+                            </#if>
+                          </#if>
+                        <!--星星-->
+                    </span>
+                    <span class="disb wd ov">
+                    	<label class="Bg fl adress color8 h4">${(hotelDTO.detail.address)!}</label>
+                    	<label class="Bg fl serc h3 linkC">搜索附近其他酒店</label>
+                    	<label class="Bg fl live bold h3">促销活动中</label>
+                    </span>
+                </div>
+                <div class="ri fr pl h3 tc curp" style="display:none;">
+                	<i class="icon Bg pa"></i>
+                 	   收&nbsp;藏
+                </div>
+            </div>
+            <div class="m_pic disb wd12">
+            	<!--左侧图片部分-->
+            	<div class="le fl pl" id="hotel_img">
+                	<span class="picL fl curp ov pl">
+					   <img src="${(hotelDTO.detail.thumbNailUrl)!}" class="pic">
+                    	<span class="textTm pa">
+                        	<span class="bg pa"></span>
+                        	<span class="ct pl h3 fr">共${hotelDTO.images?size}张图片</span>
+                        </span>
+                    </span>
+                    <#if hotelDTO.images??>
+	            	  <#list (hotelDTO.images) as image>
+	            	   <#if image_index lt 6>
+	            	   <#list (image.locations) as location>
+	            	   <#if (location.sizeType)?number==3>
+		                	<span class="picR fl">
+		                    	<img src="${location.url}" class="pic">
+		                    	<span class="textTm pa">
+		                        	<span class="bg pa"></span>
+		                        	<span class="ct pa">客房</span>
+		                        </span>
+		                   	</span>
+		                   	</#if>
+	                   	</#list>
+	                   	<#else>
+	                   	<#break>
+	                   	</#if>
+                   	</#list>
+				</#if>
+                </div>
+                <!--左侧图片部分-->
+                <div class="ri fr pl">
+                	<span class="iconList disb wd tc">
+                        <#if (hotelDTO.facilities)??>
+                            <#list (hotelDTO.facilities)?split(",") as facilities>
+                            	<#if facilities==1>
+                            	<label class="icon Bg wf">&nbsp;</label>
+                            	<#elseif facilities==3>
+                            	<label class="icon Bg pc">&nbsp;</label>
+                            	<#elseif facilities==5>
+                            	<label class="icon Bg pk">&nbsp;</label>
+                            	<#elseif facilities==7>
+                            	<label class="icon Bg fly">&nbsp;</label>
+                            	<#elseif facilities==9>
+                            	<label class="icon Bg sw">&nbsp;</label>
+                            	<#elseif facilities==11>
+                            	<label class="icon Bg ex">&nbsp;</label>
+                            	<#elseif facilities==12>
+                            	<label class="icon Bg pt">&nbsp;</label>
+                            	<#elseif facilities==13>
+                            	<label class="icon Bg mt">&nbsp;</label>
+                            	<#elseif facilities==14>
+                            	<label class="icon Bg dn">&nbsp;</label>
+                            	</#if>
+                            </#list>
+                         </#if>
+                    </span>
+                    <span class="map disb curp">
+                    	<span  id="allmap" class="mapDiv" ></span>
+                        <a href="#map"><span  class="look pa h3">查看位置和路线</span></a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!--头部预览-->
+        <!--酒店详情-->
+        <div class="g_de wd ov pl" id="needHistory">
+        	<!--右侧浏览记录-->
+                <div class=" pa g_hist">
+                	<div class="g_list_bg"></div>
+                	<h3 class="tt pl color6 h3 yahei">
+                    	您的浏览记录
+                    </h3>
+                    	<i class="pa Bg curp closed"  b="#ffffff" a="#6b6b6a" id="closeHist"></i>
+                    <ul class="hist_list">
+                    	<li>
+                        	<a href="#">
+                        	<img src="${contextPath}/resources/images/list_ad2.jpg" class="pic"><!--尺寸是160*116-->
+                            	<span class="detail h4 color6 disb"><海南5日游>漫步分界洲，呼吸呀诺达</span>
+                                <span class="price disb h2 yahei">￥1959 起</span>
+                            </a>
+                        </li>
+                    	<li>
+                        	<a href="#">
+                        	<img src="${contextPath}/resources/images/list_ad2.jpg" class="pic"><!--尺寸是160*116-->
+                            	<span class="detail h4 color6 disb"><海南5日游>漫步分界洲，呼吸呀诺达</span>
+                                <span class="price disb h2 yahei">￥1959 起</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            <!--右侧浏览记录-->
+            <div class="m_detail wd12 disb ov ma" id="anchor_house" >
+                 <div class="m_subNav wd pa"  id="m_subNav">
+                 	<ul class="nav yahei fl ov">
+                        <li><a rel="anchor_house" href="javascript:;" class="on">房型预定</a></li>
+                        <li><a rel="anchor_server" href="javascript:;">酒店服务</a></li>
+                        <li><a rel="anchor_jianjie" href="javascript:;">酒店简介</a></li>
+                        <li><a rel="anchor_traffic" href="javascript:;">交通服务</a></li>
+                        <li><a rel="anchor_commant" href="javascript:;">用户点评</a></li>
+                        <li>
+                        	<span class="bg pa" href="javascript:;" id="subNav_bg">
+                            	<i class="icon pa Bg"></i>
+                        	</span>
+                       	</li>
+                    </ul>
+                 </div>
+                 <div class="m_chooseTime ov">
+                 	 <span class="pl fl disb ov">
+                        <label class="pa time_tt h2 color8">入住</label>
+                        <input class="laydate-icon input Bg time"  onClick="laydate()" name="layTime" id="arrivalTime"/>
+                    </span>
+                    <span class="pl fl disb ov">
+                        <label class="pa time_tt h2 color8">退房</label>
+                        <input  class="laydate-icon input Bg time" onClick="laydate()" name="layTime" id="departureTime" />
+                    </span>
+                    <span class="sure fl h2 curp" onclick="select()">确&nbsp;定</span>
+                     <script src="${contextPath}/resources/js/laydate/laydate.js" language="javascript"></script>
+					  <script>
+                        ;!function(){
+                        
+                        laydate.skin('dahong');
+                        
+                        laydate({
+                           elem: '#demo'
+                        })
+                        
+                        }();
+                        </script>
+                 </div>
+                 <!--选择房型-->
+                 <div class="m_house">
+                 		<div class="th ov linkC">
+                        	<span class="fl hs mtb">房型</span>
+                        	<span class="fl dt mtb">&nbsp;</span>
+                        	<span class="fl bd mtb">床型</span>
+                        	<span class="fl bf mtb">早餐</span>
+                        	<span class="fl wf mtb">宽带</span>
+                        	<span class="fl pr mtb">&nbsp;</span>
+                        	<span class="fl bt mtb">&nbsp;</span>
+                        </div>
+                        <!--房型框-->
+                        <div id="hotelRooms">
+                        </div>
+                        
+                 </div>
+                 <!--选择房型-->
+            </div>
+            
+            <div class="m_intro wd12 ov ma" id="anchor_server" >
+            	<div class="title wd ov disb">
+                	<h3 class="tt h1 Bg linkC">酒店服务</h3>
+                </div>
+                <div class="server wd ov disb">
+                	<table border="0" cellspacing="0" cellpadding="0" class="server_tb">
+                      <tr class="fir">
+                        <td class="t">酒店电话：</td>
+                        <td class="con">${(hotelDTO.detail.phone)!}</td>
+                      </tr>
+                      <tr>
+                        <td class="t">开业时间：</td>
+                        <td class="con">xxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                      </tr>
+                      <tr>
+                        <td class="t">上网服务：</td>
+                        <td class="con">xxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                      </tr>
+                      <tr>
+                        <td class="t">特色服务：</td>
+                        <td class="con">${(hotelDTO.detail.features)!}</td>
+                      </tr>
+                      <tr>
+                        <td class="t">设施服务：</td>
+                        <td class="con">${(hotelDTO.detail.generalAmenities)!}</td>
+                      </tr>
+                      <tr>
+                        <td class="t">可接受的信用卡：</td>
+                        <td class="con">xxxxxxxxxxxxxxxxx</td>
+                      </tr>
+                    </table>
+                </div>
+            	<div class="title wd ov disb"  id="anchor_jianjie" >
+                	<h3 class="tt h1 Bg linkC">酒店简介</h3>
+                </div>
+                <div class="intro disb ov color3 h3">
+                	<p><strong>${(hotelDTO.detail.hotelName)!}</strong>
+                		xxxxxxxxxxxxxxxxxxxxxxxx
+                	</p>　
+                </div>
+            	<div class="title wd ov disb" id="anchor_traffic">
+                	<h3 class="tt h1 Bg linkC jt">交通服务</h3>
+                </div>
+                <div class="map disb ov color3 h3">
+                	<div class="de fl">
+                    	<div class="disb wd sums">酒店位于${(hotelDTO.detail.address)!}</div>
+                        <dl class="list wd">
+                        	${(hotelDTO.detail.traffic)!}
+                        </dl>
+                    </div>
+                	<div class=" fr curp">
+                		<div id="map" class="mapImg"></div>
+                    	<!-- <span class="pa look">点击放大查看</span> -->
+                    </div>
+                </div>
+            	<div class="title wd ov disb" id="anchor_commant">
+                	<h3 class="tt h1 Bg linkC dp">用户点评</h3>
+                </div>
+                <div class="comment disb ov">
+                	<h2 class="subtitle disb wd h2 color3 normal">以下点评来自真实入住的客人</h2>
+                    <div class="total  disb wd ov">
+                    	<div class="le fl bold">${(hotelDTO.detail.review.score)!}入住后推荐</div>
+                    	<div class="ri fl ov h3 color3">
+                        	<span class="good Bg disb fl wd subtotal">（<i class="linkC">${(hotelDTO.detail.review.good)!}</i>）位客人觉得好</span>
+                        	<span class="bad Bg disb fl wd subtotal">（<i class="linkC" >${(hotelDTO.detail.review.poor)!}</i>）位客人觉得一般</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>	
+        <!--酒店详情-->
+    
+     
+	</div>
+ <!--弹出相册-->
+
+ <!--弹出相册-->
+<!--内容-->
+<!--页脚-->
+ <@frame.end "default"> </@frame.end>
+</@frame.main>
+<!--页脚-->
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var longitude=${hotelDTO.detail.longitude};
+	var latitude=${hotelDTO.detail.latitude};
+ 	var point = new BMap.Point(longitude,latitude);
+ 	var marker = new BMap.Marker(point);// 创建标注
+	
+ 	var map = new BMap.Map("allmap");
+ 	map.centerAndZoom(point,11);
+ 	map.addOverlay(marker); 
+ 	map.enableScrollWheelZoom(true);
+	//下面的map1
+	var point1 = new BMap.Point(longitude,latitude);
+	var map1 = new BMap.Map("map");
+	var marker1 = new BMap.Marker(point1);// 创建标注
+	var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+	var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+	var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
+	map1.addControl(top_left_control);        
+	map1.addControl(top_left_navigation);     
+	map1.addControl(top_right_navigation); 
+	map1.centerAndZoom(point1,11);
+	map1.addOverlay(marker1); 
+	map1.enableScrollWheelZoom(true);
+	
+	   
+	// 将标注添加到地图中
+	marker.disableDragging();
+	/* var new_point = new BMap.Point(document.getElementById("longitude").value,document.getElementById("latitude").value);
+	var marker = new BMap.Marker(new_point);  
+	map.addOverlay(marker);              
+	map.panTo(new_point);   
+	alert(11); */
+</script>

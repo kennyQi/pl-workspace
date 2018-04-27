@@ -1,0 +1,135 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<link rel="stylesheet" href="${contextPath}/resources/js/trumbowyg/design/css/trumbowyg.css">
+<div class="pageContent" style="text-align:left;">
+	<form method="post" enctype="multipart/form-data" action="${contextPath}/couponActivity/addCoupon" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit">
+				<label>*活动优先级：${(couponActivityDTO.issueConditionInfo.priority)!}</label>
+			</div>
+			<div class="unit">
+				<label>*活动名称：${(couponActivityDTO.baseInfo.name)!}</label>
+			</div>
+			<div class="unit">
+				<label>*活动编号：${(couponActivityDTO.id)!}</label>
+			</div>
+			<!-- 两个日期需要做关联限制 -->
+			<div class="unit">
+				<label>*活动有效期：</label><label>${(couponActivityDTO.issueConditionInfo.issueBeginDate?string("yyyy-MM-dd HH:mm:ss"))!''}</label><label>————</label><label>${(couponActivityDTO.issueConditionInfo.issueEndDate?string("yyyy-MM-dd HH:mm:ss"))!''}</label>
+			</div>
+			<div class="unit">
+				<label>卡券类别：${(couponTypeMap[couponActivityDTO.baseInfo.couponType?c])!}</label>
+			</div>
+			<div class="unit">
+				<label>发放渠道：${(issueWayMap[couponActivityDTO.issueConditionInfo.issueWay?c])!}</label>
+				<#if ((couponActivityDTO.issueConditionInfo.issueWay)!0)?c==2>
+				<label>满${(couponActivityDTO.issueConditionInfo.issueNumLine)!}元</label>
+				</#if>
+			</div>
+			<div class="unit">
+				<label>*面值：${(couponActivityDTO.baseInfo.faceValue)!}元</label>
+			</div>
+			<div class="unit">
+				<label>*每人发放数量：${(couponActivityDTO.issueConditionInfo.perIssueNumber)!}</label>
+			</div>
+			<div class="unit">
+			<#if ((nolimit)!0==1)>
+				<label>不限</label>
+			<#else>
+				<label>*发放数量：${(couponActivityDTO.issueConditionInfo.issueNumber)!}</label>
+			</#if>
+			</div>
+			<div class="unit">
+			<label class="userKind"></label>
+			</div>
+			
+			<#if couponActivityDTO.baseInfo.couponType??&&couponActivityDTO.baseInfo.couponType=2>
+				<div class="unit">
+					<label>*是否参与转赠活动：</label>
+					<#if couponActivityDTO.sendConditionInfo.isSend==true>
+					可以转赠
+					<#elseif couponActivityDTO.sendConditionInfo.isSend==false>
+						不可以转赠
+					</#if>
+					
+				</div>
+			</#if>
+			<div class="unit">
+				<label>*使用条件：
+				</label>
+				${(conditionMap[couponActivityDTO.useConditionInfo.condition?c])!}<#if (((couponActivityDTO.useConditionInfo.condition)!)?c==1)>${(couponActivityDTO.useConditionInfo.minOrderPrice)!}可以使用</#if>
+			</div>
+			
+			<#if couponActivityDTO.baseInfo.couponType??&&couponActivityDTO.baseInfo.couponType=2>
+			<div class="unit">
+				<label>优惠同享：</label>
+				同类别<#if couponActivityDTO.useConditionInfo.isShareSameKind==true>
+					可以叠加
+				<#elseif couponActivityDTO.useConditionInfo.isShareSameKind==false>
+					不可以叠加
+				</#if>
+				<br>
+				不同类别<#if couponActivityDTO.useConditionInfo.isShareNotSameType==true>
+					可以和代金券叠加
+				<#elseif couponActivityDTO.useConditionInfo.isShareNotSameType==false>
+					不可以叠加
+				</#if>
+			  </div>
+			</#if>
+			<div class="unit">
+				<label>*使用有效期：</label><label>${(couponActivityDTO.useConditionInfo.beginDate?string("yyyy-MM-dd HH:mm:ss"))!''}</label><label>————</label><label>${(couponActivityDTO.useConditionInfo.endDate?string("yyyy-MM-dd HH:mm:ss"))!''}</label>
+			</div>
+			<div class="unit">
+				<label>*使用规则：</label>
+				<textarea id="simple-editor" name="ruleIntro" >
+                    ${(couponActivityDTO.baseInfo.ruleIntro)!}
+                </textarea>
+			</div>
+		</div>
+	</form>
+</div>
+		<script src="${contextPath}/resources/js/trumbowyg/trumbowyg.js"></script>
+        <script src="${contextPath}/resources/js/trumbowyg/langs/zh.js"></script>
+        <script src="${contextPath}/resources/js/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
+        <script src="${contextPath}/resources/js/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
+<script>
+//全屏提示错误信息的方法
+//alertMsg.error("xxxx");
+$(function(){
+	var userKind = '${(couponActivityDTO.useConditionInfo.usedKind)!""}';
+	if(userKind!=""){
+		var kinds = userKind.split(",");
+		var str = "使用品类:  ";
+		for(var x in kinds){
+			if(kinds[x]==1){
+				str =str+ "机票";
+			}else if(kinds[x]==2){
+				str = str + "门票";
+			}else if(kinds[x]==3){
+				str = str + "线路";
+			}
+		}
+		$(".userKind").text(str);
+	}
+	
+	$("#simple-editor").trumbowyg({
+		fullscreenable:false,
+	    lang: 'zh',
+	    closable: false,
+	    btns: ['viewHTML',
+	           '|', 'formatting',
+	           '|', 'bold',
+	           '|', 'italic',
+	           '|', 'strikethrough',
+	           '|', 'underline',
+	           '|', 'justifyLeft',
+	           '|', 'justifyCenter',
+	           '|', 'justifyRight',
+	           '|', 'justifyFull',
+	           '|', 'unorderedList',
+	           '|', 'orderedList',
+	           '|', 'horizontalRule']
+	});
+});
+
+
+</script>

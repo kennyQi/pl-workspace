@@ -1,0 +1,251 @@
+table.gridtable {
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+
+table.gridtable th {
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+.tabs_span_fix {
+	width: 153px;
+	text-align: center;
+}
+
+table.gridtable td {
+	border-width: 1px;
+	padding: 8px;
+	width: 140px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+.blur_effect {	
+    -webkit-filter: blur(1px);
+       -moz-filter: blur(1px);
+        -ms-filter: blur(1px);    
+            filter: blur(1px);
+}
+
+
+ul.myul li {
+	min-width: 70px;
+}
+
+div.dwz_query_box input {
+	width: 110px;
+	padding-right: 5px;
+}
+
+div.dwz_query_box td {
+	width: 90px;
+	height: 25px;
+	padding: 0 0 0 0;
+	padding-right: 5px;
+}
+
+div.dwz_query_box div[class='select'] {
+	min-width: 100px;
+}
+
+div.dwz_query_box div[class='select']>a {
+	min-width: 72px;
+}
+
+[class~='buttonContent'] button {
+	padding: 0px;
+	width: 70px;
+}
+
+[class~="buttonActive"] span {
+	width: 55px;
+	text-align: center;
+}
+
+div.page_box2 {
+	height: 55px;
+}
+
+td.a_button2 a[target] {
+	color: #0066CC;
+}
+
+td.a_button3 a {
+	color: #0066CC;
+}
+
+div.b_button2 b[onclick] {
+	color: #0066CC;
+}
+
+div.page_header_fix {
+	overflow: hidden;
+}
+
+table.linkman_table td {
+	width: 70px;
+	height: 30px;
+	padding-left: 10px;
+}
+
+table.linkman_table {
+	border: 0;
+}
+
+table.supplier_bi_table td {
+	width: 100px;
+	height: 33px;
+	padding-left: 10px;
+}
+
+table.supplier_bi_table {
+	border: 0;
+}
+
+.supplier_bi_table_td_fix {
+	width: 300px;
+}
+
+table.pic_view img {
+	padding: 10px 10px 10px 10px;
+}
+
+td.operate_box a {
+	color: #0066CC;
+	display: inline-block;
+	padding-right: 10px;
+}
+
+table.table_a td {
+	padding-bottom: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 3px;
+	border-width: 1px;
+	border-style: solid;
+}
+
+table.table_a label {
+	width: 50px;
+	display: inline-block;
+}
+
+has {
+	display: none;
+}
+
+has2 {
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	border: 0;
+}
+
+table.my_form {
+}
+/* 兼容 dwz validate显示*/
+table.my_form span {
+	top: auto;
+	height: 23px;
+	border-radius: 2px;
+}
+
+table.my_form td {
+	height: 29px;
+	width: 114px;
+}
+
+table.my_form textarea {
+	border-radius: 3px;
+	width: 244px;
+	height: 71px;
+	background-color: #FFF;
+}
+/* fix for textarea --> padding: 8px 0px 8px 0px; */
+table.my_form input {
+	width: 184px;
+	height: 18px;
+	border-radius: 3px;
+	background-color: #FFF;
+}
+
+table.my_form select {
+	border-radius: 3px;
+	height: 24px;
+	width: 190px;
+	background-color: #FFF;
+}
+
+div.dwz_query_box2 input {
+	border-radius: 3px;
+	background-color: #FFF;
+	width: 113px;
+}
+
+div.dwz_query_box2 select {
+	background-color: #FFF;
+	border-radius: 3px;
+	height: 21px;
+	width: 119px;
+}
+
+div.dwz_query_box2 div[class='select'] {
+	width: 119px;
+}
+
+div.dwz_query_box2 div[class='select'] a {
+	width: 91px;
+}
+
+div.dwz_query_box2 td {
+	padding: 0 7px 0 3px !important;
+}
+
+.table_a {
+	border-color: #b8d0d6;
+	width: 50%;
+	
+	padding-bottom: 20px;
+}
+
+.table_a select {
+	width: 90px;
+}
+
+.table_a tbody,table.table_a td {
+	border-color: #b8d0d6;
+}
+
+table.spec_sel_table {
+	padding: 10px;
+	width: 50%;
+}
+
+table.spec_sel_table label {
+	width: 60px;
+	display: inline-block;
+}
+
+table.spec_sel_table td {
+	padding: 0px 0px 5px 0px;
+}
+
+table.spec_sel_table div {
+	clear: both;
+	border-bottom: dashed 1px #999;
+	margin-bottom: 10px;
+	height: 7px;
+}
+
+table.spec_sel_table a {
+	display: inline-block;
+	width: 70px;
+}

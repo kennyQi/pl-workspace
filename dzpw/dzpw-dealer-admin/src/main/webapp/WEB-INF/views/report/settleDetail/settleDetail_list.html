@@ -1,0 +1,138 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	function checkTimeStr(){
+		
+		if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()=="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()!=""){
+		
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}else if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()!="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()==""){
+			
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()>$("#saleEndTimeStr", navTab.getCurrentPanel()).val()){
+			
+			alert("销售开始时间不能大于销售结束时间!");
+			return false
+		}else{
+			return true;
+		}
+	}
+
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/report/settleDetail/list" method="post">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+<!-- 					<td> 
+ 						产品名称：<input type="text" id="name" name="name" value="${name}" size="25"/>
+ 					</td> 
+					<td>
+						产品类型：
+						<select name="ticketPolicyType">
+							<option value="">全部</option>
+							<option value="2" <#if ticketPolicyType=='2' >selected="selected"</#if> > 联票 </option>
+							<option value="1" <#if ticketPolicyType=='1' >selected="selected"</#if> > 单票 </option>
+						</select>
+					</td>
+ -->					<td>
+					票务类型：
+					<select name="">
+						<option value="">全部</option>
+						<option value="">单票</option>
+						<option value="">联票</option>
+					</select>
+					</td>
+					<td>
+						结算日期：
+						<input type="text" id="settleBeginTimeStr" name="settleBeginTimeStr" value="${settleBeginTimeStr}" class="date" readonly="true"/>-
+						<input type="text" id="settleEndTimeStr" name="settleEndTimeStr" value="${settleEndTimeStr}" class="date" readonly="true" />
+					</td>
+<!-- 					<td>
+						<span onclick="getYesteday()" style="cursor: pointer;">昨天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getToday()" style="cursor: pointer;">今天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getLastWeek()" style="cursor: pointer;">上周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentWeek()" style="cursor: pointer;">本周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getPreviousMonth()" style="cursor: pointer;">上月</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentMonth()" style="cursor: pointer;">本月</span>
+					</td>
+ -->				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkTimeStr()">查询</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" href="${contextPath}/settleDetail/export" target="dwzExport"><span>导出EXCEL</span></a>
+			</li>
+		</ul>
+	</div>
+	<div class="panelBar">
+		<ul>
+			<li style="line-height:25px;margin: 0px 15px;">起止时间：2015.01.01 至2015.01.31</li>
+			<li style="line-height:25px;margin: 0px 15px;">总计票价：¥500 </li>
+			<li style="line-height:25px;margin: 0px 15px;">手续费：¥50</li>
+			<li style="line-height:25px;margin: 0px 15px;">实际结算：¥450</li>
+		</ul>
+		
+	</div>
+	
+	<table class="table" width="100%" layoutH="185" id="table_caiwu">
+		<thead>
+			<tr>
+				<th width="50px;">序号</th>
+				<th width="150px;">产品名称</th>
+				<th width="70px;">票务编号</th>
+				<th width="70px;">票务类型</th>
+				<th width="150px;">游客信息</th>
+				<th width="150px;">订单编号</th>
+				<th width="70px;">景区结算价（元）</th>
+				<th width="70px;">手续费（元）</th>
+				<th width="100px;">结算日期</th>
+				<th width="100px;">操作</th>
+			</tr>
+		</thead>
+		<#list pagination.list as t>
+			<tr>
+				<td>序号</td>
+				<td>${t.scenicSpotName!?html}</td>
+				<td>票务编号</td>
+				<td>
+					<#if t.ticketPolicyType==1>
+						单票
+					</#if>
+					<#if t.ticketPolicyType==2>
+						联票
+					</#if>
+				</td>
+				<td>游客信息</td>
+				<td>订单编号</td>
+				<td>景区结算价</td>
+				<td>手续费</td>
+				<td>结算日期</td>
+				<td>
+					<a href="${contextPath}/report/enter_scenicspot_count/detail_list?scenicSpotId=${t.scenicSpotId}&saleBeginTimeStr=${saleBeginTimeStr}&saleEndTimeStr=${saleEndTimeStr}&ticketPolicyType=${t.ticketPolicyType}" 
+					   target="dialog" height="650" width="1100" style="color: blue">用户明细</a>
+				</td>
+			</tr>
+		</#list>
+	</table>
+	<#include "/public/pagination/pagination.html">
+
+</div>

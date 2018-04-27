@@ -1,0 +1,122 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<script src='${contextPath}/resources/js/jquery.autocomplete.js'></script>
+<link href='${contextPath}/resources/css/jquery.autocomplete.css'
+	rel='stylesheet' />
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm"
+		onsubmit="return navTabSearch(this);"
+		action="${contextPath}/ticket/ticketList" method="post">
+
+		<input type="hidden" name="pageNum" value="${pagination.pageNo?c}" />
+		<input type="hidden" name="numPerPage"
+			value="${pagination.pageSize?c}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td style="text-align: left">景区名称：</td>
+					<td><input type="text" name="name" value="${scenicSpotQO.name}"></td>
+					<td style="text-align: left">显示状态：</td>
+					<td><select name="localStatus">
+							<option value="">全部</option>
+							<option value="0" <#if scenicSpotQO.localStatus==0>selected="selected"</#if>>显示</option>
+							<option value="1" <#if scenicSpotQO.localStatus==1>selected="selected"</#if>>隐藏</option>
+					</select></td>
+					<td>
+						主题类型：
+					</td>
+					<td><select name="theme">  
+							<option value="">全部</option>
+							<option value="滑雪" <#if scenicSpotQO.theme=='滑雪'>selected="selected"</#if>>滑雪</option>
+							<option value="古镇" <#if scenicSpotQO.theme=='古镇'>selected="selected"</#if>>古镇</option>
+							<option value="展览" <#if scenicSpotQO.theme=='展览'>selected="selected"</#if>>展览</option>
+							<option value="温泉" <#if scenicSpotQO.theme=='温泉'>selected="selected"</#if>>温泉</option>
+							<option value="城市观光" <#if scenicSpotQO.theme=='城市观光'>selected="selected"</#if>>城市观光</option>
+							<option value="影视基地" <#if scenicSpotQO.theme=='影视基地'>selected="selected"</#if>>影视基地</option>
+							<option value="博物馆" <#if scenicSpotQO.theme=='博物馆'>selected="selected"</#if>>博物馆 </option>
+							<option value="科技馆" <#if scenicSpotQO.theme=='科技馆'>selected="selected"</#if>>科技馆</option>
+					</select></td>
+				</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+							<!-- <div class="buttonActive"><div class="buttonContent" ></div></div> -->
+								<button><span>查询</span></button>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="buttonActive">
+							<div class="buttonContent">
+								<a target="ajaxTodo" href="${contextPath}/ticket/SyncScenicSpot"><span>同步景区门票</span></a>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="150">
+		<thead>
+			<tr>
+				<th width="100">景区名称</th>
+				<th width="100">景区主题</th>
+				<th width="100">包含票务</th>
+				<th width="100">显示状态</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<#if (pagination.list?size>0)> <#list scenicSpotList as scenicSpot>
+			<tr>
+				<td>${scenicSpot.baseInfo.name}</td>
+				<td align="left">${scenicSpot.baseInfo.theme}</td>
+				<td>${scenicSpot.policySUM!}</td>
+				<td><#if scenicSpot.localStatus==0>显示<#elseif scenicSpot.localStatus==1>隐藏<#elseif scenicSpot.localStatus==2>删除</#if></td>
+				<td><table style="height: 100%;width: 100%" border="0">
+						 
+						<tr style="height: 50%">
+							<td style="width: 50%">
+								<#if scenicSpot.scenicSpotSelective!"">
+								<a title="确定取消精选线路吗？" target="ajaxTodo" href="${contextPath}/ticket/deleteScenicSpotSelective?id=${scenicSpot.selectiveLine.id}" style="color: blue">取消精选</a><br/>
+								<#else>
+									<a title="确定设置为精选线路吗？" target="ajaxTodo" href="${contextPath}/ticket/selective?id=${scenicSpot.id}" style="color: blue">设置精选</a><br/>
+								</#if>
+							</td>
+							<td style="width: 50%"><a target="ajaxTodo" 
+								href="${contextPath}/ticket/editStatus?id=${scenicSpot.id}"
+								mask="true" style="color:blue;" height="800" width="800">
+							<#if scenicSpot.localStatus==1>显示<#elseif scenicSpot.localStatus==0>隐藏</#if>
+							</a></td>
+						</tr>
+						<tr style="height: 50%">
+							<td style="width: 50%">
+							<#if scenicSpot.sort==0>
+							<a target="ajaxTodo"
+								href="${contextPath}/ticket/stickit?id=${scenicSpot.id}&status=set"
+								style="color: blue">置顶</a>
+							<#else>	
+							<a target="ajaxTodo"
+								href="${contextPath}/ticket/stickit?id=${scenicSpot.id}&status=unset"
+								style="color: blue">取消置顶</a></#if>
+							</td>
+							<td style="width: 50%"><a target="dialog" width="700" height="400"
+								href="${contextPath}/ticket/queryDatail?id=${scenicSpot.id}"
+								style="color: blue">详情</a></td>
+						</tr>
+						<tr style="height: 50%">
+							<td style="width: 50%"><a target="ajaxTodo"
+								href="${contextPath}/recommend/changeStatus?recommendID=${scenicSpot.id}"
+								style="color: blue"></a></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			</#list></#if>
+		</tbody>
+	</table>
+	<#include "/public/pagination/pagination.html">
+</div>

@@ -1,0 +1,52 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2>
+			<span>Folder</span>旅游线路管理
+		</h2>
+	</div>
+	
+	<div class="accordionContent">
+		<ul class="tree">
+			
+			<li>
+				<a href="${contextPath}/traveline/line/list" target="navTab" rel="line">
+				旅游线路资源维护
+				</a>
+			</li>
+			
+			<li>
+				<a href="${contextPath}/traveline/order/list" target="navTab" rel="lineorder">
+				线路订单
+				</a>
+			</li>
+				
+			<li>
+				<a href="${contextPath}/traveline/salepolicy/list" target="navTab" rel="salepolicy">
+				价格管理
+				</a>
+			</li>
+			
+			<li>
+				<a href="${contextPath}/traveline/finance/list" target="navTab" rel="supplier">
+				财务管理
+				</a>
+			</li>
+				
+			<li>
+				<a href="${contextPath}/traveline/linesupplier/list" target="navTab" rel="supplier">
+				线路供应商维护
+				</a>
+			</li>
+			<li>
+				<a href="${contextPath}/traveline/dealer/list" target="navTab" rel="xldealer">
+				线路经销商维护
+				</a>
+			</li>
+		
+		</ul>
+	</div>
+</div>
+
+
+

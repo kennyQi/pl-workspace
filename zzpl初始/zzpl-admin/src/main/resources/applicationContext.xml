@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+	http://www.springframework.org/schema/jee 
+	http://www.springframework.org/schema/jee/spring-jee-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
+	default-autowire="byName">
+
+	<context:annotation-config />
+	<context:component-scan base-package="hg,zzpl" />
+
+	<!-- 强制SPRING使用CGLIB动态代理，不使用JDK代理。 -->
+	<aop:config proxy-target-class="true" />
+	<!-- 远程配置 -->
+	<bean id="propertyConfigurer" class="hg.common.component.RemoteConfigurer">
+		<property name="remoteConfigUrl" value="${remoteConfigUrl}" />
+		<property name="projectId" value="ZZPL_ADMIN" />
+		<property name="environmentName" value="${environmentName}" />
+		<property name="loadConfigTimeOut" value="30000" />
+	</bean>
+
+<!-- 	<bean id="slfxApiClient" class="slfx.api.base.SlfxApiClient">
+		<constructor-arg name="url" value="${slfx_api_client_url}" />
+		<constructor-arg name="clientKey" value="hsl" />
+		<constructor-arg name="secretKey" value="abc" />
+	</bean> -->
+	<!-- CC日志配置 -->
+	<bean id="hgLogger" class="hg.log.util.HgLogger">
+		<constructor-arg name="projectId" value="ZZPL" />
+		<constructor-arg name="envId" value="${environmentName}" />
+		<constructor-arg name="logRepository" ref="logRepository" />
+	</bean>
+	<!-- 邮件配置 -->
+	<bean id="mailUtil" class="hg.system.common.util.MailUtil">
+		<constructor-arg name="repos" ref="mailRepository" />
+		<constructor-arg name="temSer" ref="mailTemplateServiceImpl" />
+	</bean>
+
+	<bean id="smsUtil" class="hg.common.util.SMSUtils">
+		<constructor-arg name="smsAddress" value="${sms_address}" />
+		<constructor-arg name="smsUser" value="${sms_user}" />
+		<constructor-arg name="smsPassword" value="${sms_password}" />
+	</bean>
+	
+
+	<!-- 验证码 -->
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">blue</prop>
+						<prop key="kaptcha.image.width">80</prop>
+						<prop key="kaptcha.textproducer.font.size">26</prop>
+						<prop key="kaptcha.image.height">32</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+						<prop key="kaptcha.noise.impl">com.google.code.kaptcha.impl.NoNoise</prop>
+						<prop key="kaptcha.obscurificator.impl">zzpl.admin.common.NoWater</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	<import resource="classpath:spring/spring-hibernate-common.xml" />
+	<import resource="classpath:spring/spring-shiro-config.xml" />
+	<import resource="classpath:spring/spring-redis.xml" />
+	<import resource="classpath:spring/spring-mongodb.xml" />
+	<!-- <import resource="classpath:spring/amqp-consumer.xml" />
+	<import resource="classpath:spring/dubbo-consumer.xml" /> -->
+</beans>

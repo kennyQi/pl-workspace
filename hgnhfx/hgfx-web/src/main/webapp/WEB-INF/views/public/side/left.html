@@ -1,0 +1,73 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="left-banner line">
+
+	<div src1="url(${contextPath}/resources/img/order/order-icon.png) no-repeat"  src2="url(${contextPath}/resources/img/order/order-icon1.png)  36px 14px no-repeat" class="select-item line select-item1">
+	<div class="select-item-wrap" id="orderManage">
+		订单管理<img class="other other1" src="${contextPath}/resources/img/order/d-l.png">
+		<img style="display:none;" class="other other2" src="${contextPath}/resources/img/order/r-l.png">
+	</div></div>
+	<div class="select-item-sub">
+		<div data-index=0 class="select-item-sub-li  selected" ref="${contextPath}/orderManage/orderList">订单列表<div   class="light"></div><div style="display:none;"  class="light2"></div></div>
+		<div data-index=1 class="select-item-sub-li " ref="${contextPath}/mileOrder/newOrderView">新建订单<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+		<div data-index=2 class="select-item-sub-li " ref="${contextPath}/importHistory/importHistoryList">历史导入<div style="display:none;"  class="light"></div><div style="display:none;" class="light2"></div></div>
+		<div class="parent-light"></div>
+	</div>
+	
+	<#if _SESSION_USER_.status==1>
+	<div src1="url(${contextPath}/resources/img/order/user.png) no-repeat" src2="url(${contextPath}/resources/img/order/user1.png) 36px 14px no-repeat" class="select-item line select-item2">
+		<div class="select-item-wrap" id="userManage">
+		用户管理<img style="display:none;" class="other other1" src="${contextPath}/resources/img/order/d-l.png">
+		<img   class="other other2" src="${contextPath}/resources/img/order/r-l.png">
+	</div></div>
+	
+	<div class="select-item-sub" style="display:none;">
+		<div data-index=0 class="select-item-sub-li " ref="${contextPath}/userManager/staffList">用户管理<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+		<div class="parent-light" style="display:none;"></div>
+	</div>
+	</#if>
+	<div src1="url(${contextPath}/resources/img/order/personal.png) no-repeat" src2="url(${contextPath}/resources/img/order/personal1.png) 36px 14px no-repeat" class="select-item line select-item3">
+	<div class="select-item-wrap" id="accountManage">
+		个人管理<img class="other other2" src="${contextPath}/resources/img/order/r-l.png">
+		<img style="display:none;" class="other other1" src="${contextPath}/resources/img/order/d-l.png">
+	</div></div>
+		<div class="select-item-sub" style="display:none;">
+		<div data-index=0 class="select-item-sub-li " ref="${contextPath}/account/accountManageOperate">账号管理<div style="display:none;" class="light"></div><div style="display:none;" class="light2"></div></div>
+		<div class="parent-light" style="display:none;"></div>
+		</div>
+</div>
+<script>
+$(function(){
+	var nav = "${side}";
+	if(nav =="orderList"){
+		leftNavSelected(0,0);
+		var imgUrl=$("#orderManage").parent().attr("src2");
+		$("#orderManage").attr("style","background:"+imgUrl)
+	}else if(nav =="createOrder"){
+		leftNavSelected(0,1);
+		var imgUrl=$("#orderManage").parent().attr("src2");
+		$("#orderManage").attr("style","background:"+imgUrl)
+	}else if(nav =="importHistory"){
+		leftNavSelected(0,2);
+		var imgUrl=$("#orderManage").parent().attr("src2");
+		$("#orderManage").attr("style","background:"+imgUrl)
+	}else if(nav =="userManage"){
+		leftNavSelected(1,0);
+		var imgUrl=$("#userManage").parent().attr("src2");
+		$("#userManage").attr("style","background:"+imgUrl)
+	}else if(nav =="accountManage"){
+	    var type = '${_SESSION_USER_.status}'; //获取主账号类型
+	    if(type=='1')
+		leftNavSelected(2,0);
+		else if(type=='2')
+		leftNavSelected(1,0);
+		var imgUrl=$("#accountManage").parent().attr("src2");
+		$("#accountManage").attr("style","background:"+imgUrl)
+	}else{
+		leftNavSelected(0,0);
+		var imgUrl=$("#orderManage").parent().attr("src2");
+		$("#orderManage").attr("style","background:"+imgUrl)
+	}
+});
+</script>
+
+

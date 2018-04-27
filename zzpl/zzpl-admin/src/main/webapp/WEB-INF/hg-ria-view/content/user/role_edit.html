@@ -1,0 +1,60 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							&nbsp;编辑角色
+						</div>
+					</div>
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/role/roleedit" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="roleID" value="${(role.id)!''}" />
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">角色名称：</label>
+									<div class="col-md-4">
+										<input type="text" name="roleName" class="form-control required isSpec" placeholder="角色名称" maxlength="40" value="${(role.roleName)!''}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">角色简介：</label>
+									<div class="col-md-4">
+										<textarea name="description" class="form-control" placeholder="角色简介" maxlength="200">${(role.description)!''}</textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">角色权限菜单：</label>
+									<div class="col-md-4">
+									
+										<#list menuList as list>
+											<#if list.menuName!="公司管理">
+										        <#if role.roleMenus??>                 
+										               <input type="checkbox" name="menuID" value="${list.id}"                 
+											               <#list role.roleMenus as menu>
+											                     <#if menu.menu.id==list.id>checked="checked"</#if>
+											               </#list>
+										               />${list.menuName}
+										          </#if>
+											</#if>
+										</#list>
+									</div>
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn yellow" target="submit">提交</a>
+									<a class="btn yellow" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,77 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="portlet light bordered">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-cogs font-red-sunglo"></i>
+					<span class="caption-subject font-red-sunglo bold uppercase">用途列表</span>
+				</div>
+				<div class="actions">
+					<a href="${contextPath}/hg/spiUseType/spiUseType/del" 
+						class="btn btn-default btn-sm" title="确定删除？" target="selectedTodo" rel="useTypeIds"> <i
+						class="fa fa-minus"></i> 批量删除
+					</a>
+					<a href="${contextPath}/hg/spiUseType/spiUseType/add" org-href="${contextPath}/hg/spiUseType/spiUseType/add" 
+						class="btn btn-default btn-sm" target="hgTab" id="addBtn"> <i
+						class="fa fa-plus"></i> 添加
+					</a>
+				</div>
+			</div>
+			<div class="portlet-body">
+				<div class="row">
+					<div class="col-md-4">
+						<label>
+							用途名称：
+							<input class="form-control input-small input-inline" name="title" id="title">
+						</label>
+					</div>
+					<div class="col-md-8 text-right">
+						<button class="btn btn-sm yellow filter-submit margin-bottom" target="search"
+							data-ref="#useTypeGrid" data-ref-param="{title: $('#title').val()}">
+								<i class="fa fa-search"></i> 查询 </button>
+					</div>
+				</div>
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th class="table-checkbox"><input type="checkbox" group="useTypeIds"
+								class="checkboxCtrl"/></th>
+							<th>用途ID</th>
+							<th>用途名称</th>
+							<th>备注</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody id="useTypeGrid" target="grid" data-url="${contextPath}/hg/spiUseType/spiUseType/useTypelist">
+						<tr class="odd gradeX">
+							<td>
+								<input type="checkbox" name="useTypeIds" 
+									class="checkboxes" target="checkbox" value="{id}"/>
+							</td>
+							<td>
+								{id}
+							</td>
+							<td>
+								{title}
+							</td>
+							<td>
+								{remark}
+							</td>
+							<td class="text-center">
+								<a title="确认删除？" href="${contextPath}/hg/spiUseType/spiUseType/del?useTypeIds={id}"
+									class="btn default btn-xs red" target="ajaxTodo">
+									<i class="fa fa-trash-o"></i> 删除
+								</a>
+								<a class="btn default btn-xs blue" href="${contextPath}/hg/spiUseType/spiUseType/edit?id={id}"
+									class="btn btn-default btn-sm" target="hgTab">
+									<i class="fa fa-edit"></i> 编辑
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

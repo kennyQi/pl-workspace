@@ -1,0 +1,163 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+
+<script type="text/javascript">
+
+	function checkTimeStr(){
+		if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()==""||$("#saleEndTimeStr", navTab.getCurrentPanel()).val()=="")
+		{
+		alert("请输入销售开始日期和结束日期!");
+			return false
+		}
+		/* if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()=="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()!=""){
+			
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		}else if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()!="" && $("#saleEndTimeStr", navTab.getCurrentPanel()).val()==""){
+			
+			alert("不能只有销售开始日期或结束日期!");
+			return false
+		} */else if($("#saleBeginTimeStr", navTab.getCurrentPanel()).val()>$("#saleEndTimeStr", navTab.getCurrentPanel()).val()){
+			
+			alert("销售开始时间不能大于销售结束时间!");
+			return false
+		}else{
+			return true;
+		}
+	}
+
+</script>
+
+<div class="pageHeader">
+	<form id="pagerForm" rel="pagerForm" onsubmit="return navTabSearch(this);" action="${contextPath}/report/ticket_sale_count" method="post" date_form="form1">
+		<input type="hidden" name="pageNum" value="${pagination.pageNo}" />
+		<input type="hidden" name="numPerPage" value="${pagination.pageSize}" />
+		<div class="searchBar">
+			<table class="searchContent">
+				<tr>
+					<td>
+						产品名称：<input type="text" name="name" value="${name}" size="25"/>
+					</td>
+					<td>
+						所属景区：<input type="text" name="scenicSpotName" value="${scenicSpotName}" size="25"/>
+					</td>
+					<td>
+						经销商名称：<input type="text" name="dealerName" value="${dealerName}" size="25"/>
+					</td>
+					<td>
+						销售时间：
+						<input type="text" id="saleBeginTimeStr" name="saleBeginTimeStr" value="${saleBeginTimeStr}" class="date" readonly="true"/>-
+						<input type="text" id="saleEndTimeStr" name="saleEndTimeStr" value="${saleEndTimeStr}" class="date" readonly="true" />
+					</td>
+					</tr>
+					<tr>
+					<td>
+					订单状态：
+					<select name="status">
+						<option value="">全部</option>
+						<option value="1"  <#if pagination.condition.status==1>selected="selected"</#if>>支付成功</option>
+						<option value="2"  <#if pagination.condition.status==2>selected="selected"</#if>>出票成功</option>
+						<option value="3"  <#if pagination.condition.status==3>selected="selected"</#if>>交易成功</option>
+						<option value="4"  <#if pagination.condition.status==4>selected="selected"</#if>>交易关闭</option>
+					</select>
+					</td>
+					
+					<!-- <td>
+						<span onclick="getYesteday()" style="cursor: pointer;">昨天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getToday()" style="cursor: pointer;">今天</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getLastWeek()" style="cursor: pointer;">上周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentWeek()" style="cursor: pointer;">本周</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getPreviousMonth()" style="cursor: pointer;">上月</span>&nbsp;&nbsp;&nbsp;
+						<span onclick="getCurrentMonth()" style="cursor: pointer;">本月</span>
+					</td> -->
+<!--					<td>
+						排序方式：
+						<select name="sortMethod">
+							<option value="1" <#if sortMethod=='1' >selected="selected"</#if> > 按销量 </option>
+							<option value="2" <#if sortMethod=='2' >selected="selected"</#if> > 按销售额 </option>
+						</select>
+					</td>
+	-->			</tr>
+			</table>
+			<div class="subBar">
+				<ul>
+					<li>
+						<div class="buttonActive"><div class="buttonContent"> <button type="submit" onclick="return checkTimeStr()">查询</button></div></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li>
+				<a class="icon" target="dwzExport" targetType="navTab" href="${contextPath}/report/ticket_sale_count/export/"><span>导出EXCEL</span></a>
+			</li>
+		</ul>
+	</div>
+	<div class="panelBar">
+		<ul>
+			<li style="line-height:25px;margin: 0px 15px;">起止时间：${pagination.condition.orderDateBegin?string("yyyy-MM-dd")} 至 ${pagination.condition.orderDateEnd?string("yyyy-MM-dd")}</li>
+			<li style="line-height:25px;margin: 0px 15px;">门票总计：<#if (pagination.list?size>0)>${pagination.list[0].saleTicketTotalCount}<#else>0</#if>张 </li>
+			<li style="line-height:25px;margin: 0px 15px;">日均：<#if (pagination.list?size>0)>${pagination.list[0].saleTicketDayCount}<#else>0</#if>张</li>
+			<li style="line-height:25px;margin: 0px 15px;">销售总额：¥<#if (pagination.list?size>0)>${pagination.list[0].saleTotalAmount}<#else>0.00</#if></li>
+		</ul>
+		
+	</div>
+	
+	<table class="table" width="100%" layoutH="185" id="table_caiwu">
+		<thead>
+			<tr>
+				<!-- <th width="50px;">排名</th> -->
+				<th width="150px;">产品名称</th>
+				<th width="100px;">所属景区</th>
+				<th width="150px;">经销商</th>
+				<th width="100px;">销售时间</th>
+				<th width="150px;">订单编号</th>
+				<th width="150px;">票务编号</th>
+				<th width="100px;">销售价格</th>
+				<th width="100px;">订单状态</th>
+			</tr>
+		</thead>
+		<#list pagination.list as d>
+			<tr>
+				<!-- 产品名称 -->
+				<td>${d.ticketPolicyName}</td>
+				<!-- 所属景区 -->
+				<td>
+					${d.scenicSpotName}
+				</td>
+				<!-- 经销商名 -->
+				<td>${d.dealerName}</td>
+				<!-- 销售时间 -->
+				<td>${d.createOrderDate?string("yyyy-MM-dd HH:mm:ss")}</td>
+				<!-- 订单编号 -->
+				<td>${d.orderId}</td>
+				<!-- 票务编号 -->
+				<td>${d.ticketNo}</td>
+				<!-- 销售价格 -->
+				<td>
+					￥${d.settlementAmount}
+				</td>
+				<td>
+				<#if d.status==1>
+				支付成功
+				</#if>
+				<#if d.status==2>
+				出票成功
+				</#if>
+				<#if d.status==3>
+				交易成功
+				</#if>
+				<#if d.status==4>
+				交易关闭
+				</#if>
+				</td>
+			</tr>
+		</#list>
+	</table>
+	<#include "/public/pagination/pagination.html">
+
+</div>

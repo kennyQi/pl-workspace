@@ -1,0 +1,10 @@
+ 1.{0} {1}                                                                
+ 2.  {2} {3}   {4}  {5} HK1   {6} {7}          E T2--                 
+ 3.SHA/T SHA/T021-62277798/SHANGHAI EVER BRIGHT TOWN INT'L TRAVEL SERVICE CO.,LTD ABCDEFG                                                            
+ 4.END                                                                          
+ 5.TL/{8}/{9}/SHA255                                                         
+ 6.SSR FOID {10} HK1 NI12345678932165478/P1                                       
+ 7.SSR ADTK 1E BY SHA{11}/{12} OR CXL {13} {14}                          
+ 8.RMK AO/ABE/KH-104220941001/OP-NN ADMIN/DT-20121205142736                     
+ 9.RMK CA/MXNT4G                                                                
+10.BJS280

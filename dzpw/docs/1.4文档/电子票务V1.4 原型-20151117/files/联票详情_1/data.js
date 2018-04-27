@@ -1,0 +1,36 @@
+﻿$axure.loadCurrentPage({
+  "url":"联票详情_1.html",
+  "generationDate":new Date(1447738911632.04),
+  "isCanvasEnabled":false,
+  "variables":["isLeftOpen"],
+  "page":{
+    "packageId":"4111427e27f045e7a59435907c49a419",
+    "type":"Axure:Page",
+    "name":"联票详情",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[]}},
+  "masters":{
+},
+  "objectPaths":{
+}});

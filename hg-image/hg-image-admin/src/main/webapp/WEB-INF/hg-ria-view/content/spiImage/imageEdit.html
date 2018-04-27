@@ -1,0 +1,84 @@
+<#assign contextPath=springMacroRequestContext.getContextPath() />
+<div class="row">
+	<div class="col-md-12">
+		<div class="tab-content">
+			<div class="tab-pane active">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-gift"></i>图片编辑
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+							<a href="#portlet-config" data-toggle="modal" class="config">
+							</a>
+							<a href="javascript:;" class="reload">
+							</a>
+							<a href="javascript:;" class="remove">
+							</a>
+						</div>
+					</div> 
+					<div class="portlet-body form">
+						<form method="post" action="${contextPath}/hg/spiAlbum/spiImage/update" 
+							class="form-horizontal pageForm required-validate" 
+							onsubmit="return validateCallback(this, hgTabAjaxDone)">
+							<input type="hidden" name="imageId" value="${image.id}"/>
+							<div class="form-body">
+								<div class="form-group">
+									<label class="col-md-3 control-label">图片标题：</label>
+									<div class="col-md-4">
+										<input type="text" name="title" value="${image.title}" 
+											class="form-control required isSpec" 
+											placeholder="图片标题" minlength="2" maxlength="64"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">备注：</label>
+									<div class="col-md-4">
+										<input type="text" name="remark" value="${image.remark}" 
+											class="form-control" placeholder="备注" maxlength="100"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 control-label">所属相册：</label>
+									<div class="col-md-4">
+										<select class="form-control select2me required" target="dropDown" 
+											name="albumId" data-live-search="true">
+											<#list albumList as album>
+												<option value="${album.id!0}"
+												<#if image.album && album.id == image.album.id>
+													selected="selected"
+												</#if>> ${album.title!?html}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+								<!-- <div class="form-group">
+									<label class="col-md-3 control-label">图片用途：</label>
+									<div class="col-md-4">
+										<select class="form-control select2me" target="dropDown" name="imageSpecKeyUseTypeId" data-live-search="true">
+											<#list useTypeList as useType>
+												<option value="${useType.id!0}"
+													<#if useType.id == image.useType.id>
+													selected="selected"
+												</#if>> ${useType.title!?html}</option>
+											</#list>
+										</select>
+									</div>
+								</div>
+								 -->
+							</div>
+							<div class="form-actions">
+								<div class="btn-set col-md-offset-3 col-md-9">
+									<a class="btn green" target="submit">提交</a>
+									<a class="btn blue" target="cancel">取消</a>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,455 @@
+/* CSS Document */
+/****首页登录*****/
+.content{
+	width:1200px;
+	margin:0 auto;
+	}
+.pic{
+	width:860px;
+	height:440px;
+   }	
+.loginbar{
+	float:right;
+	background:#fff;
+	width:330px;
+	height:440px;
+	margin-top:-440px; overflow:hidden
+	}	
+.loginbar .user	{
+	color:#949494;
+	padding:20px 0px;
+	font-size:18px;
+	}
+.loginbar .user	span{
+	padding:20px 40px;
+	letter-spacing:2px;
+	}	
+.movebar{
+	width:160px;
+	height:3px;
+	background:#74a900;
+	}	
+.loginbar .tab{ float:left}	
+#normaltab{ float:left;
+	width:330px;
+	height:60px; overflow:hidden}
+#normaltab li{ float:left; width:165px;
+	height:60px;
+	font-size:16px;}
+#normaltab li a{ height:60px; line-height:60px;
+	width:150px;
+	color:#333;
+	font-weight:bold;
+	font-size:16px;}			
+.spanf{
+	border-right:3px solid #dedede;
+	}	
+.tabccn{ float:left;
+	margin-top:0px;}	
+.loginbar input{
+	height:40px;
+	width:280px;
+	border:2px solid #999;
+	color:#999;
+	font-size:16px;
+	margin-bottom:20px;
+	}
+#yz{width:130px;}
+.dly{
+	font-size:16px;
+	width:280px;
+	margin-left:20px;
+	}	
+.dly .w150{ width:150px}	
+.dly span a{color:#666;}		
+.dly span a:hover{text-decoration:underline;}	
+
+
+#forg{padding:20px 30px; margin-top:20px;}
+#forg span{margin:30px 20px 50px 20px;}
+#J_table_p{ position:relative; cursor:pointer;}
+.mask{ position:absolute;top:0; float:left; width:330px; height:375px; }
+.mask .mask_bg{ background:#fff; opacity:0.5; width:100%; height:100%; z-index:1}
+.mask .mask_txt{ position:absolute;top:40%;left:30%; z-index:999; font-size:30px; color:#000; letter-spacing:5px;}	
+/*****end 首页登录 *******/	
+/*****end 首页登录 *******/	
+/*****首页 忘记密码*****/	
+.contpic{
+	width:1200px;
+	margin:0 auto;
+	background:#fff;
+ 	font-size:16px;
+	}
+ .contpic .wj{
+	 margin:0px 30px;
+	 color:#333;
+	 font-size:16px;
+	 font-weight:bold;
+	padding:10px 0px ;
+    border-bottom:2px solid #d9d9d9;
+	 }
+.mid{
+	margin:80px auto;
+	width:700px;}
+.mid .newnm{
+	padding:10px 55px ;
+	color:#666;}
+.midd{
+	margin:70px auto;
+	width:800px;}
+	
+.midd.newnm	{
+	color:#666;
+	}
+.dp{ width:100%;
+	margin-left:70px;
+	margin-top:20px;}	
+#dp{ margin-left:20px;}		
+.ttj {
+	margin-left:70px;
+	margin-top:40px;}
+.ttj a{
+	background:#74a900;
+    padding:10px 150px;
+	color:#fff;
+	letter-spacing:10px;
+	font-weight:bold;}	
+input{
+	color:#999;
+	font-size:16px;}
+.red{
+	color:#f00;
+	font-size:12px;}
+.iph{
+	margin-left:20px;}
+.change{
+	margin-left:20px;}	
+.change a:hover{
+	text-decoration:underline;}		
+.yznum{
+	margin-left:20px;
+	color:#999;line-height:35px;
+	font-size:12px;}			
+.kung{
+	height:40px;
+	width:360px;
+	}
+.kunm{
+	height:40px;
+	width:100px;}				 
+/***** end首页 忘记密码*****/
+/******重置密码******/
+.newnm{
+	margin-left:70px;}
+.newnm span{
+	padding-left:30px;
+	}	
+.newnm input{
+	width:360px;
+	height:40px;}	
+.pd{
+	margin-left:20px;
+	margin-top:20px;
+	}
+	
+.ztjao{
+	margin-left:110px;}	
+/******end 重置密码******/
+
+/**********找回密码**********/
+.fp_hd{float:left}
+.fp_hd input{float:none!important;vertical-align: middle;}
+.moble_v{height:30px;padding:5px 10px;width:200px}
+.fp_tel_input{ margin-right:15px}
+
+
+/****注册成功*****/	
+.contppc{
+	text-align:center;
+	width:630px;
+	margin:0 auto;
+	padding:100px 0px;}
+.contppc h2{ font-size:30px; line-height:50px; font-family:"微软雅黑"; font-weight:normal}	
+.contppc .txt14{ font-size:12px; margin-bottom:10px;}
+.egmail{ margin:50px 0}
+.egmail .bth1 a{ width:200px; display:inline-block}
+.txt_info p{ font-size:12px;  margin-bottom:15px; color:#999}
+	
+.size24{
+	font-size:24px;
+	color:#666;}
+.size14{
+	margin-top:20px;
+	font-size:14px;
+	color:#666;}
+.gern{
+	color:#74a900;
+	font-size:12px;}			
+/****end 注册成功*****/
+/****首页-注册页*****/
+#contpic{
+ 	width:1200px;
+	}
+#contpic .tab{
+	width:600px;
+	height:40px;}
+#contpic #tab ul{
+    width:1200px;
+	height:60px;
+}
+#contpic .tab li{ text-align:center; line-height:60px;font-size:18px; cursor:pointer;
+	color:#333;
+	font-weight:bold;
+	float:left;
+	margin-right:10px;}	
+ #contpic .tab li a:hover{
+}	
+
+.hang{
+	margin-left:200px;
+	padding:10px;
+	}
+#hah{
+	width:100px;
+	text-align:right;
+	float:left;
+	line-height:40px;
+	padding-right:10px;}		
+.hang .int{
+	left:20px;
+	width:370px;
+	height:40px;
+	text-align:left;
+	font-size:16px;
+	color:#999;
+	}
+#int{
+	width:100px;}
+#dly {
+	margin-top:20px;
+}	
+#dly a{ background:#74a900;
+letter-spacing:5px;
+padding:10px 115px;
+text-align:center;
+color:#fff;
+font-size:16px;
+font-weight:bold;}		
+			
+#hang {
+	margin-left:305px;
+	width:360px;
+	height:50px;
+	margin-top:20px;}
+.tjiao{
+	margin-left:105px;}	
+.tjiao a{
+	color:#fff;
+	font-weight:bold;
+	background:#74a900;
+	padding:10px 150px;}
+
+
+.tabbtn{
+	height:63px;background:#f9f9f9;
+	border-left:solid 1px #f9f9f9;
+	border-right:solid 1px #f9f9f9;
+	width:1200px;
+   }
+.tabbtn li{
+	float:left;
+	position:relative;
+	margin:0 0 0 -1px;}
+.tabbtn li a
+   {display:block;
+   float:left;
+   overflow:hidden;
+   text-align:center;
+   font-size:12px;
+   cursor:pointer;
+   }
+.tabbtn li.cur  {border-top:solid 2px #74a900;
+   background:#fff;
+  }
+ 
+
+		
+/****end首页-注册页*****/
+.form label, .form input, .form select, .form textarea, .form button, .form .label{float:left;font-size:12px;}
+.fl{float:left;}
+.fr{float:right;}
+.fn{float:none;}
+.hide{display:none;}
+.invisible{visibility:hidden;}
+.overflow{overflow:hidden;}
+.clear{
+	display:block;
+	clear:both;
+	height:0;
+	overflow:hidden;
+	}
+body{font:12px;}
+/* yellow_button */
+
+#registsubmit.disabled{
+	background-position:0 -36px;
+	cursor:default!important;}
+.red{color:#ff0000;font-weight:normal;}
+/* formbox */
+a:link,a:visited{ text-decoration:none;}
+#formbox{
+	padding:20px;
+	margin:20px auto;
+	}
+#formbox h3{
+	font-size:16px;
+	height:32px;
+	color:#3366cc;
+	font-weight:800;
+	border-bottom:solid 1px #D1D1D1;
+	margin:0 0 20px 0;
+	padding:0 10px;
+	}
+#formbox .item{position: relative;
+	overflow:hidden;
+	 font-size:12px; 
+	 margin-top:20px;
+	 }
+#formbox .item a:link,#formbox .item a:visited{text-decoration:underline;}
+#formbox .label{
+	width:300px;
+	text-align:right;
+	font-size:16px;
+	 height:40px; 
+	 line-height:40px; 
+	 padding-right:20px;
+	 }
+#formbox .span-150{width:150px;}
+#formbox .text{
+	width:360px;
+	height:40px; 
+	line-height:40px;
+	border:1px solid #bbb;
+	font-size:14px;}
+#formbox .txt2{ width:200px}	
+#J_mo{ border:#333 1px solid; color:#333; background:#fff; border-radius:2px; height:40px; margin-left:10px; padding:0 10px; cursor:pointer}
+#formbox .text-1{width:100px;}
+#formbox .blank{
+	width:16px;
+	height:16px;
+	margin:2px 5px 0;
+	}
+#formbox .img img
+        {height:26px;
+        margin:0 5px;
+         }
+
+#formbox .yellow_button
+             {font-size:14px;
+			 font-weight:bold;
+			 color:#fff;
+			 border:none;
+			 cursor:pointer;
+			 }
+#username_error{ line-height:40px;}
+
+#formbox .highlight1{
+	border:1px solid #EFA100;
+	outline:2px solid #74a900;
+	*border:2px solid #ffcc66;
+	*padding:3px 2px;}
+#formbox .highlight2{
+	border:1px solid #f00;
+	outline:1px solid #FFC1C1;
+	color:#f00;
+	}
+#formbox .pwdbg{
+	background:#FFF8EB;
+	}
+#label{
+	margin-left:245px; 
+	float:left;
+	 margin-top:5px; 
+	 line-height:40px;
+	  font-size:16px;
+	   height:40px;}
+#f1{ margin-left:20px; }
+.f1{height:45px;}
+.ff{ height:40px;}
+.fouces{ margin-top:20px;}
+.error{
+	height:40px;
+ line-height:40px;}
+#mail_succeed,pwd_succeed,pwd2_succeed{
+	height:40px;
+	 line-height:40px;
+	 }
+.lal a:link, .lal a:visited{ text-decoration:none;}
+
+
+/*******-add*************/
+ 
+.content .order{
+	height:100px;
+	overflow:hidden;
+	width:930px;
+	margin:0 auto;
+	font-size:16px;
+	}
+.content .order-f{
+	background:url(../img/bordernum.png) no-repeat;
+	background-position:-5px 45px ;
+	padding:30px 120px ;
+	width:230px;
+	}
+.content .order-t{
+	background:url(../img/bordernum.png) no-repeat;
+	background-position:-3px -30px ;
+	padding:30px 120px;
+	width:230px;
+	}
+.content .order-th{
+	background:url(../img/bordernum.png) no-repeat;
+	background-position:-4px -91px ;
+	padding:30px 120px;
+	color:#74a900;
+	width:230px;
+	}	
+.zf-f{
+	font-size:18px;
+	color:#666;}
+.order-num{
+	font-size:18px;
+	color:#ff6600;
+	}
+	
+/*****#mail_error******/	
+#mobile_error,#validCode_error{ float:left; margin-left:10px;line-height:40px}
+#mobile_reg .m_teg{ float:left; line-height:40px;}
+.ok{ color:#060}
+.wrong{ color:#f30}
+.c_eorr{ position:absolute;right:0; bottom:0; color:#f30}
+.C_regform .dly{ position:relative;}
+
+/**********/
+.dp_con{ display:inline-block}
+.dp_tel{ float:left;margin-bottom:15px}
+.dp label{ float:left; vertical-align:middle; margin-top:8px; margin-right:15px}
+.click_yz{float:left; width:130px; height:35px; text-align:center; border:#999 1px solid; padding:5px 10px;color:#333;cursor: pointer;border-radius: 3px;}
+.mod_mm{}
+.mod_mm ul{}
+.mod_mm ul li{ width:100%; margin-bottom:15px; float:left}
+.mod_mm ul li label{ float:left; width:100px; text-align:right; line-height:40px;}
+.mod_mm ul li input.inputtxt{ float:left; width:300px; height:30px; padding:5px 10px; border:#ddd 1px solid}
+.mod_mm ul li input.iph,.mm_p_input{float:left}
+
+.mod_mm ul li span{ float:left}
+.mm_p_tel{margin:8px 10px 0 0}
+#cz_save{width:320px; height:40px; border:none; background:#74a900; color:#fff; font-size:14px;}
+
+.zf_seec,.zf-f,.zf-th{ text-align:center}
+.zf_seec{ font-size:30px;color:#74a900}
+.zf-f{ line-height:40px;}
+.mid_hd{margin:80px auto 20px auto!important}
+.mod_mm_hd{width:700px;margin:0 auto}
+.mod_mm_hd ul li span{line-height: 40px;padding-left: 5px;height: 40px;float: left;}

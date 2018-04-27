@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wxmenu>
+
+	<!-- 配置说明：系统URL用${system}代替 -->
+	
+	<p_menu sub="true" name="协会动态">
+		<s_menu name="时政要闻" type="view" url="${system}/article/list?showChannelId=1"/>
+		<s_menu name="名人到访" type="view" url="${system}/article/list?showChannelId=2" />
+		<s_menu name="重大活动" type="view" url="${system}/article/list?showChannelId=3" />
+	</p_menu>
+	<p_menu sub="true" name="风景名胜">
+		<s_menu name="自然风光" type="view" url="${system}/article/list?showChannelId=4"/>
+		<s_menu name="文化传承" type="view" url="${system}/article/list?showChannelId=5" />
+		<s_menu name="文化主题" type="view" url="${system}/article/list?showChannelId=6" />
+	</p_menu>
+	<p_menu sub="true" name="了解协会">
+		<s_menu name="微官网" type="view" url="${system}/index"/>
+		<s_menu name="呵护名胜" type="view" url="${system}/scenic/index" />
+		<s_menu name="关于协会" type="view" url="${system}/about" />
+	</p_menu>
+
+</wxmenu>
